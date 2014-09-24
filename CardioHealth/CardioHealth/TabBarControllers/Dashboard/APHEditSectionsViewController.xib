@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="APHEditSectionsViewController">
+            <connections>
+                <outlet property="headerView" destination="Lik-dK-tEQ" id="FBP-qX-JGC"/>
+                <outlet property="sectionNamesTableView" destination="Ex9-sh-B3c" id="Rmf-Rg-u4C"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="IQX-sg-N7S"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Ex9-sh-B3c">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="p02-F7-cS8"/>
+                        <outlet property="delegate" destination="-1" id="cwh-4d-dXf"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Ex9-sh-B3c" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="MBH-ow-l8f"/>
+                <constraint firstAttribute="bottom" secondItem="Ex9-sh-B3c" secondAttribute="bottom" id="hcT-Ed-MKb"/>
+                <constraint firstItem="Ex9-sh-B3c" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="igd-jW-PYN"/>
+                <constraint firstAttribute="trailing" secondItem="Ex9-sh-B3c" secondAttribute="trailing" id="u5S-Z7-Rw8"/>
+            </constraints>
+            <point key="canvasLocation" x="691" y="384"/>
+        </view>
+        <view contentMode="scaleToFill" id="Lik-dK-tEQ">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Drag to rearrange your dashboard" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T4L-8b-okW">
+                    <rect key="frame" x="8" y="11" width="584" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="T4L-8b-okW" firstAttribute="top" secondItem="Lik-dK-tEQ" secondAttribute="top" constant="11" id="Mht-F7-0R7"/>
+                <constraint firstAttribute="bottom" secondItem="T4L-8b-okW" secondAttribute="bottom" constant="12" id="VSB-W3-oI4"/>
+                <constraint firstItem="T4L-8b-okW" firstAttribute="leading" secondItem="Lik-dK-tEQ" secondAttribute="leading" constant="8" id="kMZ-TQ-98b"/>
+                <constraint firstAttribute="trailing" secondItem="T4L-8b-okW" secondAttribute="trailing" constant="8" id="ydI-oC-aCv"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="919" y="347"/>
+        </view>
+    </objects>
+</document>

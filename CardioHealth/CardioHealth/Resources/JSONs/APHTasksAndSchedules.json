@@ -1,0 +1,19 @@
+{
+    "tasks": [
+              {
+              "taskTitle" : "Sleep Survey",              
+              "taskID": "APHCustomizableSurvey-70D101B0-8135-4E47-8D2A-F810BE28D995",
+              "taskType": "APHCustomizableSurvey",
+              "fileName": "sleepSurvey",
+              "taskClassName" : "APHSpecialSurveyTaskViewController"
+              }
+              ],
+    "schedules": [
+                  {
+                  "type": "REPEATING",
+                  "href": "appleparkinson:",
+                  "schedule": "1:1",
+                  "taskID": "APHCustomizableSurvey-70D101B0-8135-4E47-8D2A-F810BE28D995"
+                  }
+                  ]
+}
