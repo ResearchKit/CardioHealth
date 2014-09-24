@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F54AB72C19D36DC400986B52 /* APCAppleCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5F6453819D35C8D004CFBB2 /* APCAppleCore.framework */; };
+		F54AB72D19D36DC400986B52 /* APCAppleCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F5F6453819D35C8D004CFBB2 /* APCAppleCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F55BBE5719D362D0003CA0F9 /* NSString+CustomMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = F55BBDDB19D362D0003CA0F9 /* NSString+CustomMethods.m */; };
 		F55BBE5819D362D0003CA0F9 /* RKStep+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = F55BBDDD19D362D0003CA0F9 /* RKStep+Description.m */; };
 		F55BBE5919D362D0003CA0F9 /* UIColor+CardioHealth.m in Sources */ = {isa = PBXBuildFile; fileRef = F55BBDDF19D362D0003CA0F9 /* UIColor+CardioHealth.m */; };
@@ -47,19 +49,22 @@
 		F55BBE8C19D362D0003CA0F9 /* APHSpecialSurveyTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F55BBE4419D362D0003CA0F9 /* APHSpecialSurveyTaskViewController.m */; };
 		F5F644FF19D35BA2004CFBB2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F5F644FE19D35BA2004CFBB2 /* main.m */; };
 		F5F6450A19D35BA2004CFBB2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F5F6450919D35BA2004CFBB2 /* Images.xcassets */; };
-		F5F6452519D35C41004CFBB2 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5F6452419D35C41004CFBB2 /* HealthKit.framework */; };
 		F5F6452719D35C49004CFBB2 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5F6452619D35C49004CFBB2 /* CoreData.framework */; };
 		F5F6452919D35C4F004CFBB2 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5F6452819D35C4F004CFBB2 /* AVFoundation.framework */; };
 		F5F6452B19D35C57004CFBB2 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5F6452A19D35C57004CFBB2 /* Security.framework */; };
 		F5F6452D19D35C5D004CFBB2 /* libbz2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F5F6452C19D35C5D004CFBB2 /* libbz2.dylib */; };
 		F5F6452F19D35C65004CFBB2 /* libarchive.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F5F6452E19D35C65004CFBB2 /* libarchive.dylib */; };
 		F5F6453119D35C7D004CFBB2 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F5F6453019D35C7D004CFBB2 /* libz.dylib */; };
-		F5F6453C19D35CA4004CFBB2 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5F6453B19D35CA4004CFBB2 /* ResearchKit.framework */; };
-		F5F6453D19D35CB2004CFBB2 /* APCAppleCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5F6453819D35C8D004CFBB2 /* APCAppleCore.framework */; };
-		F5F6453E19D35CB2004CFBB2 /* APCAppleCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F5F6453819D35C8D004CFBB2 /* APCAppleCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		F54AB72E19D36DC400986B52 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F5F6453219D35C8D004CFBB2 /* APCAppleCore.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = F5179B2819D09128001DCCB7;
+			remoteInfo = APCAppleCore;
+		};
 		F5F6453719D35C8D004CFBB2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F5F6453219D35C8D004CFBB2 /* APCAppleCore.xcodeproj */;
@@ -74,23 +79,16 @@
 			remoteGlobalIDString = F5179B3419D09128001DCCB7;
 			remoteInfo = APCAppleCoreTests;
 		};
-		F5F6453F19D35CB2004CFBB2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F5F6453219D35C8D004CFBB2 /* APCAppleCore.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = F5179B2819D09128001DCCB7;
-			remoteInfo = APCAppleCore;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		F5F6454119D35CB3004CFBB2 /* Embed Frameworks */ = {
+		F54AB73019D36DC400986B52 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				F5F6453E19D35CB2004CFBB2 /* APCAppleCore.framework in Embed Frameworks */,
+				F54AB72D19D36DC400986B52 /* APCAppleCore.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -184,12 +182,10 @@
 				F5F6453119D35C7D004CFBB2 /* libz.dylib in Frameworks */,
 				F5F6452F19D35C65004CFBB2 /* libarchive.dylib in Frameworks */,
 				F5F6452D19D35C5D004CFBB2 /* libbz2.dylib in Frameworks */,
+				F54AB72C19D36DC400986B52 /* APCAppleCore.framework in Frameworks */,
 				F5F6452B19D35C57004CFBB2 /* Security.framework in Frameworks */,
 				F5F6452919D35C4F004CFBB2 /* AVFoundation.framework in Frameworks */,
-				F5F6453D19D35CB2004CFBB2 /* APCAppleCore.framework in Frameworks */,
 				F5F6452719D35C49004CFBB2 /* CoreData.framework in Frameworks */,
-				F5F6453C19D35CA4004CFBB2 /* ResearchKit.framework in Frameworks */,
-				F5F6452519D35C41004CFBB2 /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -458,12 +454,12 @@
 				F5F644F519D35BA2004CFBB2 /* Sources */,
 				F5F644F619D35BA2004CFBB2 /* Frameworks */,
 				F5F644F719D35BA2004CFBB2 /* Resources */,
-				F5F6454119D35CB3004CFBB2 /* Embed Frameworks */,
+				F54AB73019D36DC400986B52 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				F5F6454019D35CB2004CFBB2 /* PBXTargetDependency */,
+				F54AB72F19D36DC400986B52 /* PBXTargetDependency */,
 			);
 			name = CardioHealth;
 			productName = CardioHealth;
@@ -595,10 +591,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		F5F6454019D35CB2004CFBB2 /* PBXTargetDependency */ = {
+		F54AB72F19D36DC400986B52 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = APCAppleCore;
-			targetProxy = F5F6453F19D35CB2004CFBB2 /* PBXContainerItemProxy */;
+			targetProxy = F54AB72E19D36DC400986B52 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
