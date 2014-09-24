@@ -441,6 +441,7 @@
 				F5F6451E19D35BA2004CFBB2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
