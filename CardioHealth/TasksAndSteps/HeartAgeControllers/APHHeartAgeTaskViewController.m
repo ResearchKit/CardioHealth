@@ -199,11 +199,13 @@ static NSString *kHeartAgeSummary = @"HeartAgeSummary";
 //    return  YES;
 //}
 
-//- (void)taskViewController:(RKTaskViewController *)taskViewController willPresentStepViewController:(RKStepViewController *)stepViewController
-//{
-//    stepViewController.cancelButton = nil;
-//    stepViewController.backButton = nil;
-//}
+- (void)taskViewController:(RKTaskViewController *)taskViewController willPresentStepViewController:(RKStepViewController *)stepViewController
+{
+    if ([stepViewController.step.identifier isEqualToString:kHeartAgeSummary]) {
+        stepViewController.cancelButton = nil;
+        stepViewController.backButton = nil;
+    }
+}
 
 - (RKStepViewController *)taskViewController:(RKTaskViewController *)taskViewController viewControllerForStep:(RKStep *)step
 {
