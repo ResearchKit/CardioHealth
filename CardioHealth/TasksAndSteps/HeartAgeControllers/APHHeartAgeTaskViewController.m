@@ -21,7 +21,7 @@ static NSString *kHeartAgeQuestion10 = @"HeartAgeQuestion10";
 static NSString *kHeartAgeQuestion11 = @"HeartAgeQuestion11";
 static NSString *kHeartAgeQuestion12 = @"HeartAgeQuestion12";
 static NSString *kHeartAgeQuestion13 = @"HeartAgeQuestion13";
-static NSString *kHeartAgeQuestion14 = @"HeartAgeQuestion14";
+static NSString *kHeartAgeSummary = @"HeartAgeSummary";
 
 @interface APHHeartAgeTaskViewController ()
 
@@ -152,7 +152,7 @@ static NSString *kHeartAgeQuestion14 = @"HeartAgeQuestion14";
     }
     
     {
-        RKQuestionStep *step = [RKQuestionStep questionStepWithIdentifier:kHeartAgeQuestion14
+        RKQuestionStep *step = [RKQuestionStep questionStepWithIdentifier:kHeartAgeSummary
                                                                      name:@"FinalStep"
                                                                  question:@"I should not see this!"
                                                                    answer:[RKBooleanAnswerFormat new]];
@@ -207,8 +207,8 @@ static NSString *kHeartAgeQuestion14 = @"HeartAgeQuestion14";
 
 - (RKStepViewController *)taskViewController:(RKTaskViewController *)taskViewController viewControllerForStep:(RKStep *)step
 {
-    if ([step.identifier isEqualToString:kHeartAgeQuestion14]) {
-        NSDictionary  *controllers = @{kHeartAgeQuestion14: [APHHeartAgeFinalStepViewController class]};
+    if ([step.identifier isEqualToString:kHeartAgeSummary]) {
+        NSDictionary  *controllers = @{kHeartAgeSummary: [APHHeartAgeFinalStepViewController class]};
         
         Class  aClass = [controllers objectForKey:step.identifier];
         
