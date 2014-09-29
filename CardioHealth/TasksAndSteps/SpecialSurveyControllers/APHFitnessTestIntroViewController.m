@@ -7,9 +7,13 @@
 //
 
 #import "APHFitnessTestIntroViewController.h"
+#import "APHImportantDetailsViewController.h"
 
 @interface APHFitnessTestIntroViewController ()
+@property (weak, nonatomic) IBOutlet UIButton *getStartedButton;
+- (IBAction)getStarted:(id)sender;
 
+- (IBAction)viewImportantDetails:(id)sender;
 @end
 
 @implementation APHFitnessTestIntroViewController
@@ -34,4 +38,18 @@
 }
 */
 
+- (IBAction)getStarted:(id)sender {
+    if (self.delegate != nil) {
+        if ([self.delegate respondsToSelector:@selector(stepViewControllerDidFinish:navigationDirection:)] == YES) {
+            [self.delegate stepViewControllerDidFinish:self navigationDirection:RKStepViewControllerNavigationDirectionForward];
+        }
+    }
+}
+
+- (IBAction)viewImportantDetails:(id)sender {
+    APHImportantDetailsViewController *importantDetailsVC = [[APHImportantDetailsViewController alloc] init];
+    [self presentViewController:importantDetailsVC animated:YES completion:^{
+        NSLog(@"Presented");
+    }];
+}
 @end

@@ -10,6 +10,8 @@
 		7B3E191119D9DBF60065A96A /* APHFitnessTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B3E191019D9DBF60065A96A /* APHFitnessTaskViewController.m */; };
 		7B3E191719D9DD340065A96A /* APHFitnessTestIntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B3E191519D9DD340065A96A /* APHFitnessTestIntroViewController.m */; };
 		7B3E191819D9DD340065A96A /* APHFitnessTestIntroViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B3E191619D9DD340065A96A /* APHFitnessTestIntroViewController.xib */; };
+		7BEBC4AF19DA13BC009FE17F /* APHImportantDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BEBC4AD19DA13BC009FE17F /* APHImportantDetailsViewController.m */; };
+		7BEBC4B019DA13BC009FE17F /* APHImportantDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BEBC4AE19DA13BC009FE17F /* APHImportantDetailsViewController.xib */; };
 		F55BBE5719D362D0003CA0F9 /* NSString+CustomMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = F55BBDDB19D362D0003CA0F9 /* NSString+CustomMethods.m */; };
 		F55BBE5819D362D0003CA0F9 /* RKStep+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = F55BBDDD19D362D0003CA0F9 /* RKStep+Description.m */; };
 		F55BBE5919D362D0003CA0F9 /* UIColor+CardioHealth.m in Sources */ = {isa = PBXBuildFile; fileRef = F55BBDDF19D362D0003CA0F9 /* UIColor+CardioHealth.m */; };
@@ -105,6 +107,9 @@
 		7B3E191419D9DD340065A96A /* APHFitnessTestIntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHFitnessTestIntroViewController.h; sourceTree = "<group>"; };
 		7B3E191519D9DD340065A96A /* APHFitnessTestIntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHFitnessTestIntroViewController.m; sourceTree = "<group>"; };
 		7B3E191619D9DD340065A96A /* APHFitnessTestIntroViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = APHFitnessTestIntroViewController.xib; sourceTree = "<group>"; };
+		7BEBC4AC19DA13BC009FE17F /* APHImportantDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHImportantDetailsViewController.h; sourceTree = "<group>"; };
+		7BEBC4AD19DA13BC009FE17F /* APHImportantDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHImportantDetailsViewController.m; sourceTree = "<group>"; };
+		7BEBC4AE19DA13BC009FE17F /* APHImportantDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = APHImportantDetailsViewController.xib; sourceTree = "<group>"; };
 		F55BBDDA19D362D0003CA0F9 /* NSString+CustomMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CustomMethods.h"; sourceTree = "<group>"; };
 		F55BBDDB19D362D0003CA0F9 /* NSString+CustomMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CustomMethods.m"; sourceTree = "<group>"; };
 		F55BBDDC19D362D0003CA0F9 /* RKStep+Description.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RKStep+Description.h"; sourceTree = "<group>"; };
@@ -210,6 +215,9 @@
 				7B3E191419D9DD340065A96A /* APHFitnessTestIntroViewController.h */,
 				7B3E191519D9DD340065A96A /* APHFitnessTestIntroViewController.m */,
 				7B3E191619D9DD340065A96A /* APHFitnessTestIntroViewController.xib */,
+				7BEBC4AC19DA13BC009FE17F /* APHImportantDetailsViewController.h */,
+				7BEBC4AD19DA13BC009FE17F /* APHImportantDetailsViewController.m */,
+				7BEBC4AE19DA13BC009FE17F /* APHImportantDetailsViewController.xib */,
 			);
 			name = FitnessTest;
 			sourceTree = "<group>";
@@ -568,6 +576,7 @@
 			files = (
 				F55BBE6819D362D0003CA0F9 /* APHActivities.storyboard in Resources */,
 				F55BBE7319D362D0003CA0F9 /* APHLearnDetailViewController.xib in Resources */,
+				7BEBC4B019DA13BC009FE17F /* APHImportantDetailsViewController.xib in Resources */,
 				F55BBE7A19D362D0003CA0F9 /* APHSettingsTableFooterView.xib in Resources */,
 				F55BBE6719D362D0003CA0F9 /* Main.storyboard in Resources */,
 				7B3E191819D9DD340065A96A /* APHFitnessTestIntroViewController.xib in Resources */,
@@ -593,6 +602,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BEBC4AF19DA13BC009FE17F /* APHImportantDetailsViewController.m in Sources */,
 				F55BBE7519D362D0003CA0F9 /* APHLearnDetailViewCell.m in Sources */,
 				F55BBE7819D362D0003CA0F9 /* APHLearnResourceViewCell.m in Sources */,
 				F55BBE5D19D362D0003CA0F9 /* APHSignUpMedicalInfoViewController.m in Sources */,
