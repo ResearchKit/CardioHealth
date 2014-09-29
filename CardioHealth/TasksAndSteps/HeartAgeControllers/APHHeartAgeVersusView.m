@@ -61,13 +61,13 @@
                                                               endAngle:endAngle
                                                              clockwise:YES];
     CGContextSaveGState(context);
-    
     [fillColor setFill];
-    [versusCircle]
+    [versusCircle fill];
     [[UIColor colorWithRed:0 green:0 blue:0 alpha:0.1] set];
     [versusCircle stroke];
-    
     CGContextRestoreGState(context);
+    
+    NSString *versusCaption = NSLocalizedString(@"vs", @"Abbreviation for the word 'Versus'.");
     
     NSString *yourAgeCaption = NSLocalizedString(@"Your Age", @"Your age.");
     NSString *yourHeartAgeCaption = NSLocalizedString(@"Your Heart Age", @"Your heart age.");
@@ -76,6 +76,8 @@
     NSString *heartAge = [NSString stringWithFormat:@"%lu", self.heartAge];
     
     // Text drawing
+    CGRect versusCaptionRect = CGRectMake(rect.size.width/2 - 7, rect.size.height/2 + 11, radius, radius);
+    
     CGRect yourAgeCaptionRect = CGRectMake(0, 14, 140, 21);
     CGRect ageTextRect = CGRectMake(0, 29, 140, 86);
     
@@ -86,6 +88,12 @@
     paragraphStyle.alignment = NSTextAlignmentCenter;
     
     CGContextSaveGState(context);
+    
+    [versusCaption drawInRect:versusCaptionRect
+               withAttributes:@{
+                                NSFontAttributeName: [UIFont systemFontOfSize:14.0],
+                                NSParagraphStyleAttributeName: paragraphStyle
+                               }];
     
     [yourAgeCaption drawInRect:yourAgeCaptionRect
                 withAttributes:@{
