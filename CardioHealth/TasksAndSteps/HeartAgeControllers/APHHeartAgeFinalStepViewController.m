@@ -16,19 +16,34 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view from its nib.
     [self.circularProgress setProgress:0.6 animated:YES];
     
     self.ageVersusHeartAge.age = 39;
     self.ageVersusHeartAge.heartAge = 30;
-    
-//    self.ageVersusHeartAge.layer.borderWidth = 1.0;
-//    self.ageVersusHeartAge.layer.borderColor = [[UIColor orangeColor] CGColor];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                                           target:self action:@selector(doneButtonTapped:)];
+}
+
+#pragma mark - Actions
+
+- (void)doneButtonTapped:(id)sender
+{
+    if ([self.delegate respondsToSelector:@selector(stepViewControllerDidFinish:navigationDirection:)] == YES) {
+        [self.delegate stepViewControllerDidFinish:self navigationDirection:RKStepViewControllerNavigationDirectionForward];
+    }
 }
 
 @end
