@@ -13,5 +13,7 @@
 
 @property (weak, nonatomic) IBOutlet APCCircularProgressView *circularProgress;
 @property (weak, nonatomic) IBOutlet APHHeartAgeVersusView *ageVersusHeartAge;
+@property (weak, nonatomic) IBOutlet UILabel *tenYearRiskText;
+@property (weak, nonatomic) IBOutlet UILabel *improvementText;
 
 @end
