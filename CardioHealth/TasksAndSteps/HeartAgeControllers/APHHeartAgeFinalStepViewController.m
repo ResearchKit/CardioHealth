@@ -17,7 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.circularProgress.progressValue = 0.6;
+    [self.circularProgress setProgress:0.6 animated:YES];
     
     self.ageVersusHeartAge.age = 39;
     self.ageVersusHeartAge.heartAge = 30;
