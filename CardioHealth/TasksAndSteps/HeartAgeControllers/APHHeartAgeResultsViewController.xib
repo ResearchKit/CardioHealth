@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="14A361c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="APHHeartAgeResultsViewController">
+            <connections>
+                <outlet property="ageVersusHeartAge" destination="HoL-qp-Mpn" id="7nx-JB-phd"/>
+                <outlet property="circularProgress" destination="ppY-os-KQf" id="8GP-yS-0ql"/>
+                <outlet property="improvementText" destination="qpZ-8E-jLF" id="ySW-UV-Yii"/>
+                <outlet property="tenYearRiskText" destination="5lE-0v-UHo" id="sZk-Pm-sq8"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Survey Completed" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="od0-TU-9hi">
+                    <rect key="frame" x="20" y="86" width="280" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ppY-os-KQf" customClass="APCCircularProgressView">
+                    <rect key="frame" x="125" y="8" width="70" height="70"/>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Your Heart Age Estimate" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7VW-XV-f9g">
+                    <rect key="frame" x="20" y="128" width="280" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HoL-qp-Mpn" customClass="APHHeartAgeVersusView">
+                    <rect key="frame" x="20" y="157" width="280" height="130"/>
+                    <color key="backgroundColor" red="0.050980396570000003" green="0.45098042490000001" blue="0.70980393890000004" alpha="1" colorSpace="deviceRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="280" id="SGF-gR-BtM"/>
+                        <constraint firstAttribute="height" constant="130" id="rY6-6b-QmR"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="10 Year Risk" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ACa-oz-ro3">
+                    <rect key="frame" x="20" y="307" width="280" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor." lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qpZ-8E-jLF">
+                    <rect key="frame" x="20" y="431" width="280" height="65"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor." lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5lE-0v-UHo">
+                    <rect key="frame" x="20" y="334" width="280" height="65"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Some Room for Improvement" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X4B-nC-cAK">
+                    <rect key="frame" x="20" y="407" width="280" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="qpZ-8E-jLF" secondAttribute="trailing" constant="20" id="0BG-um-wdh"/>
+                <constraint firstAttribute="trailing" secondItem="7VW-XV-f9g" secondAttribute="trailing" constant="20" id="1uj-zv-Nbo"/>
+                <constraint firstAttribute="trailing" secondItem="ppY-os-KQf" secondAttribute="trailing" constant="125" id="3UN-TH-eBz"/>
+                <constraint firstAttribute="trailing" secondItem="5lE-0v-UHo" secondAttribute="trailing" constant="20" id="Avj-6u-bdG"/>
+                <constraint firstItem="HoL-qp-Mpn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="Dv1-z2-zzs"/>
+                <constraint firstItem="7VW-XV-f9g" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="DvW-1i-5gC"/>
+                <constraint firstAttribute="trailing" secondItem="HoL-qp-Mpn" secondAttribute="trailing" constant="20" id="HJ8-oW-eRH"/>
+                <constraint firstAttribute="trailing" secondItem="ACa-oz-ro3" secondAttribute="trailing" constant="20" id="IPp-D6-LMH"/>
+                <constraint firstAttribute="trailing" secondItem="X4B-nC-cAK" secondAttribute="trailing" constant="20" id="IaF-L8-h1N"/>
+                <constraint firstItem="ppY-os-KQf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="125" id="J2A-E2-bUj"/>
+                <constraint firstItem="5lE-0v-UHo" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="NI9-X9-HvP"/>
+                <constraint firstItem="ppY-os-KQf" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="8" id="Pxn-cY-oCX"/>
+                <constraint firstItem="od0-TU-9hi" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="RLH-9j-Po1"/>
+                <constraint firstAttribute="trailing" secondItem="od0-TU-9hi" secondAttribute="trailing" constant="20" id="S2E-7c-KEY"/>
+                <constraint firstItem="ACa-oz-ro3" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="ra9-NV-6rK"/>
+                <constraint firstItem="X4B-nC-cAK" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="ug1-Vy-CXf"/>
+                <constraint firstItem="qpZ-8E-jLF" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="y2n-3j-z8S"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+        </view>
+    </objects>
+</document>

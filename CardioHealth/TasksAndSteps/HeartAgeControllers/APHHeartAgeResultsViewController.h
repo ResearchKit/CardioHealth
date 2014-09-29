@@ -9,7 +9,7 @@
 #import <APCAppleCore/APCAppleCore.h>
 #import "APHHeartAgeVersusView.h"
 
-@interface APHHeartAgeFinalStepViewController : APCStepViewController
+@interface APHHeartAgeResultsViewController : APCStepViewController
 
 @property (weak, nonatomic) IBOutlet APCCircularProgressView *circularProgress;
 @property (weak, nonatomic) IBOutlet APHHeartAgeVersusView *ageVersusHeartAge;

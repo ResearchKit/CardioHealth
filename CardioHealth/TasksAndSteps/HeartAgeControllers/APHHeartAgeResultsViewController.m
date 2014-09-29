@@ -6,13 +6,13 @@
 //  Copyright (c) 2014 Y Media Labs. All rights reserved.
 //
 
-#import "APHHeartAgeFinalStepViewController.h"
+#import "APHHeartAgeResultsViewController.h"
 
-@interface APHHeartAgeFinalStepViewController ()
+@interface APHHeartAgeResultsViewController ()
 
 @end
 
-@implementation APHHeartAgeFinalStepViewController
+@implementation APHHeartAgeResultsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -45,5 +45,6 @@
         [self.delegate stepViewControllerDidFinish:self navigationDirection:RKStepViewControllerNavigationDirectionForward];
     }
 }
+
 
 @end

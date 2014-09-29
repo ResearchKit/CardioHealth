@@ -6,8 +6,9 @@
 //  Copyright (c) 2014 Y Media Labs. All rights reserved.
 //
 #import "APHHeartAgeTaskViewController.h"
-#import "APHHeartAgeFinalStepViewController.h"
+#import "APHHeartAgeResultsViewController.h"
 
+static NSString *kHeartAgeIntroduction = @"HeartAgeIntroduction";
 static NSString *kHeartAgeQuestion1 = @"HeartAgeQuestion1";
 static NSString *kHeartAgeQuestion2 = @"HeartAgeQuestion2";
 static NSString *kHeartAgeQuestion3 = @"HeartAgeQuestion3";
@@ -20,8 +21,7 @@ static NSString *kHeartAgeQuestion9 = @"HeartAgeQuestion9";
 static NSString *kHeartAgeQuestion10 = @"HeartAgeQuestion10";
 static NSString *kHeartAgeQuestion11 = @"HeartAgeQuestion11";
 static NSString *kHeartAgeQuestion12 = @"HeartAgeQuestion12";
-static NSString *kHeartAgeQuestion13 = @"HeartAgeQuestion13";
-static NSString *kHeartAgeSummary = @"HeartAgeSummary";
+static NSString *kHeartAgeResults = @"HeartAgeResults";
 
 @interface APHHeartAgeTaskViewController ()
 
@@ -36,7 +36,7 @@ static NSString *kHeartAgeSummary = @"HeartAgeSummary";
     NSMutableArray *steps = [NSMutableArray array];
     
     {
-        RKIntroductionStep *step = [[RKIntroductionStep alloc] initWithIdentifier:kHeartAgeQuestion1
+        RKIntroductionStep *step = [[RKIntroductionStep alloc] initWithIdentifier:kHeartAgeIntroduction
                                                                              name:NSLocalizedString(@"Heart Age Test",
                                                                                                     @"Heart Age Test")];
         step.caption = NSLocalizedString(@"Heart Age Test", @"");
@@ -152,7 +152,7 @@ static NSString *kHeartAgeSummary = @"HeartAgeSummary";
     }
     
     {
-        RKQuestionStep *step = [RKQuestionStep questionStepWithIdentifier:kHeartAgeSummary
+        RKQuestionStep *step = [RKQuestionStep questionStepWithIdentifier:kHeartAgeResults
                                                                      name:@"FinalStep"
                                                                  question:@"I should not see this!"
                                                                    answer:[RKBooleanAnswerFormat new]];
@@ -201,7 +201,7 @@ static NSString *kHeartAgeSummary = @"HeartAgeSummary";
 
 - (void)taskViewController:(RKTaskViewController *)taskViewController willPresentStepViewController:(RKStepViewController *)stepViewController
 {
-    if ([stepViewController.step.identifier isEqualToString:kHeartAgeSummary]) {
+    if ([stepViewController.step.identifier isEqualToString:kHeartAgeResults]) {
         stepViewController.cancelButton = nil;
         stepViewController.backButton = nil;
     }
@@ -209,8 +209,8 @@ static NSString *kHeartAgeSummary = @"HeartAgeSummary";
 
 - (RKStepViewController *)taskViewController:(RKTaskViewController *)taskViewController viewControllerForStep:(RKStep *)step
 {
-    if ([step.identifier isEqualToString:kHeartAgeSummary]) {
-        NSDictionary  *controllers = @{kHeartAgeSummary: [APHHeartAgeFinalStepViewController class]};
+    if ([step.identifier isEqualToString:kHeartAgeResults]) {
+        NSDictionary  *controllers = @{kHeartAgeResults: [APHHeartAgeResultsViewController class]};
         
         Class  aClass = [controllers objectForKey:step.identifier];
         
