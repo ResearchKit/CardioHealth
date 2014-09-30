@@ -173,12 +173,9 @@ static NSString *kHeartAgeQuestionFamilyHeart = @"HeartAgeQuestion8";
 //    return  YES;
 //}
 
-- (void)taskViewController:(RKTaskViewController *)taskViewController willPresentStepViewController:(RKStepViewController *)stepViewController
+- (void)taskViewControllerDidComplete:(RKTaskViewController *)taskViewController
 {
-    if ([stepViewController.step.identifier isEqualToString:kHeartAgeResults]) {
-        stepViewController.cancelButton = nil;
-        stepViewController.backButton = nil;
-    }
+    NSLog(@"Task Did Complete: triggered");
 }
 
 - (RKStepViewController *)taskViewController:(RKTaskViewController *)taskViewController viewControllerForStep:(RKStep *)step
