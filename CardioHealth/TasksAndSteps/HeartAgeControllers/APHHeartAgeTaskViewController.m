@@ -166,45 +166,39 @@ static NSString *kHeartAgeQuestionFamilyHeart = @"HeartAgeQuestion8";
 }
 
 
-#pragma  mark  -  Task View Controller Delegate Methods
+#pragma mark - StepViewController Delegate Methods
 
-//- (BOOL)taskViewController:(RKTaskViewController *)taskViewController shouldPresentStepViewController:(RKStepViewController *)stepViewController
-//{
-//    return  YES;
-//}
+- (void)stepViewControllerWillBePresented:(RKStepViewController *)viewController
+{
+    NSLog(@"Step: %@ (%@)", viewController.step.name, viewController.step.identifier);
+    
+    APCAppDelegate *apcAppDelegate = [[UIApplication sharedApplication] delegate];
+    
+    if ([viewController.step.identifier isEqualToString:kHeartAgeQuestionAge]) {
+        // Check if we have the date of birth available via HealthKit
+        if (apcAppDelegate.dataSubstrate.currentUser.consented) {
+            NSDate *dateOfBirth = apcAppDelegate.dataSubstrate.currentUser.birthDate;
+            
+            // Compute the age of the user.
+            NSDateComponents *ageComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitYear
+                                                                              fromDate:dateOfBirth
+                                                                                toDate:[NSDate date] // today
+                                                                               options:NSCalendarWrapComponents];
+            
+            NSUInteger usersAge = [ageComponents year];
+            
+            NSLog(@"Your Age: %lu", usersAge);
+        }
+    }
+}
+
+
+#pragma  mark  -  Task View Controller Delegate Methods
 
 - (void)taskViewControllerDidComplete:(RKTaskViewController *)taskViewController
 {
     NSLog(@"Task Did Complete: triggered");
 }
-
-//- (void)taskViewController:(RKTaskViewController *)taskViewController willPresentStepViewController:(RKStepViewController *)stepViewController
-//{
-//    if ([stepViewController.step.identifier isEqualToString:kHeartAgeResults]) {
-//        stepViewController.cancelButton = nil;
-//        stepViewController.backButton = nil;
-//    }
-//}
-
-//- (RKStepViewController *)taskViewController:(RKTaskViewController *)taskViewController viewControllerForStep:(RKStep *)step
-//{
-//    if ([step.identifier isEqualToString:kHeartAgeResults]) {
-//        NSDictionary  *controllers = @{kHeartAgeResults: [APHHeartAgeResultsViewController class]};
-//        
-//        Class  aClass = [controllers objectForKey:step.identifier];
-//        
-//        APCStepViewController  *controller = [[aClass alloc] initWithNibName:nil bundle:nil];
-//        controller.resultCollector = self;
-//        controller.delegate = self;
-//        controller.title = NSLocalizedString(@"Heart Age Test", @"Heart Age Test");
-//        controller.continueButtonOnToolbar = NO;
-//        controller.step = step;
-//        
-//        return  controller;
-//    } else {
-//        return nil;
-//    }
-//}
 
 - (void)taskViewController:(RKTaskViewController *)taskViewController didProduceResult:(RKResult *)result
 {
