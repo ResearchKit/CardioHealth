@@ -49,7 +49,7 @@ static NSString *kHeartAgeQuestionFamilyHeart = @"HeartAgeQuestion8";
         
         RKQuestionStep* step = [RKQuestionStep questionStepWithIdentifier:kHeartAgeQuestionAge
                                                                      name:@"YourAge"
-                                                                 question:@"What is your age?"
+                                                                 question:NSLocalizedString(@"What is your age?", @"What is your age?")
                                                                    answer:format];
         step.optional = NO;
         
@@ -73,7 +73,7 @@ static NSString *kHeartAgeQuestionFamilyHeart = @"HeartAgeQuestion8";
 
         RKQuestionStep *step = [RKQuestionStep questionStepWithIdentifier:kHeartAgeQuestionTotalCholesterol
                                                                      name:@"TotalCholesterol"
-                                                                 question:@"What is your Total Cholesterol?"
+                                                                 question:NSLocalizedString(@"What is your Total Cholesterol?", @"What is your Total Cholesterol?")
                                                                    answer:format];
         step.optional = NO;
 
@@ -86,7 +86,7 @@ static NSString *kHeartAgeQuestionFamilyHeart = @"HeartAgeQuestion8";
 
         RKQuestionStep* step = [RKQuestionStep questionStepWithIdentifier:kHeartAgeQuestionHDL
                                                                      name:@"HDLCholesterol"
-                                                                 question:@"What is your HDL Cholesterol?"
+                                                                 question:NSLocalizedString(@"What is your HDL Cholesterol?", @"What is your HDL Cholesterol?")
                                                                    answer:format];
         step.optional = NO;
         
@@ -99,7 +99,7 @@ static NSString *kHeartAgeQuestionFamilyHeart = @"HeartAgeQuestion8";
         
         RKQuestionStep* step = [RKQuestionStep questionStepWithIdentifier:kHeartAgeQuestionSystolicBP
                                                                      name:@"SystolicBP"
-                                                                 question:@"What is your Systolic Blood Pressure?"
+                                                                 question:NSLocalizedString(@"What is your Systolic Blood Pressure?", @"What is your Systolic Blood Pressure?")
                                                                    answer:format];
         step.optional = NO;
         
@@ -109,7 +109,7 @@ static NSString *kHeartAgeQuestionFamilyHeart = @"HeartAgeQuestion8";
     {
         RKQuestionStep *step = [RKQuestionStep questionStepWithIdentifier:kHeartAgeQuestionSmoke
                                                                      name:@"SmokeA"
-                                                                 question:@"Have you ever smoked?"
+                                                                 question:NSLocalizedString(@"Have you ever smoked?", @"Have you ever smoked?")
                                                                    answer:[RKBooleanAnswerFormat new]];
         step.optional = NO;
         
@@ -119,7 +119,7 @@ static NSString *kHeartAgeQuestionFamilyHeart = @"HeartAgeQuestion8";
     {
         RKQuestionStep *step = [RKQuestionStep questionStepWithIdentifier:kHeartAgeQuestionDiabetes
                                                                      name:@"MedicalConditions"
-                                                                 question:@"Do you have the Diabetes?"
+                                                                 question:NSLocalizedString(@"Do you have the Diabetes?", @"Do you have the Diabetes?")
                                                                    answer:[RKBooleanAnswerFormat new]];
         step.optional = NO;
         
@@ -129,7 +129,7 @@ static NSString *kHeartAgeQuestionFamilyHeart = @"HeartAgeQuestion8";
     {
         RKQuestionStep *step = [RKQuestionStep questionStepWithIdentifier:kHeartAgeQuestionFamilyDiabetes
                                                                      name:@"FamilyHistory"
-                                                                 question:@"Does Diabetes run in your family?"
+                                                                 question:NSLocalizedString(@"Does Diabetes run in your family?", @"Does Diabetes run in your family?")
                                                                    answer:[RKBooleanAnswerFormat new]];
         step.optional = NO;
         
@@ -139,7 +139,7 @@ static NSString *kHeartAgeQuestionFamilyHeart = @"HeartAgeQuestion8";
     {
         RKQuestionStep *step = [RKQuestionStep questionStepWithIdentifier:kHeartAgeQuestionFamilyHeart
                                                                      name:@"ParentHistory"
-                                                                 question:@"Have either of your parents had heart problems?"
+                                                                 question:NSLocalizedString(@"Have either of your parents had heart problems?", @"Have either of your parents had heart problems?")
                                                                    answer:[RKBooleanAnswerFormat new]];
         step.optional = NO;
         
