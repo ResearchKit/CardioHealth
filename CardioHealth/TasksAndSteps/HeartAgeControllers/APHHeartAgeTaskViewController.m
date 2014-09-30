@@ -36,7 +36,7 @@ static NSString *kHeartAgeQuestionEthnicity = @"HeartAgeQuestion9";
                                                                              name:NSLocalizedString(@"Heart Age Test",
                                                                                                     @"Heart Age Test")];
         step.caption = NSLocalizedString(@"Heart Age Test", @"");
-        step.explanation = NSLocalizedString(@"The following few details about you we will be used to calculate your heart age.",
+        step.explanation = NSLocalizedString(@"The following few details about you will be used to calculate your heart age.",
                                              @"Requesting user to provide information to calculate their heart age.");
         step.instruction = nil;
         
