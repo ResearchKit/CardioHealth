@@ -207,10 +207,10 @@ static NSString *kHeartAgeQuestionFamilyHeart = @"HeartAgeQuestion8";
     NSLog(@"didProduceResult = %@", result);
     
     if ([result isKindOfClass:[RKSurveyResult class]]) {
-        RKSurveyResult* surveyResult = (RKSurveyResult*)result;
+        RKSurveyResult *surveyResult = (RKSurveyResult *)result;
         NSUInteger personAge = 0;
         
-        for (RKQuestionResult* questionResult in surveyResult.surveyResults) {
+        for (RKQuestionResult *questionResult in surveyResult.surveyResults) {
             NSLog(@"%@ = [%@] %@ ", [[questionResult itemIdentifier] stringValue], questionResult.answer.class, questionResult.answer);
             if ([[[questionResult itemIdentifier] stringValue] isEqualToString:kHeartAgeQuestionAge]) {
                 personAge = [(NSString *)questionResult.answer integerValue];
