@@ -9,11 +9,12 @@
 #import <APCAppleCore/APCAppleCore.h>
 #import "APHHeartAgeVersusView.h"
 
-@interface APHHeartAgeResultsViewController : APCStepViewController
+@interface APHHeartAgeResultsViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet APCCircularProgressView *circularProgress;
-@property (weak, nonatomic) IBOutlet APHHeartAgeVersusView *ageVersusHeartAge;
-@property (weak, nonatomic) IBOutlet UILabel *tenYearRiskText;
-@property (weak, nonatomic) IBOutlet UILabel *improvementText;
+@property (nonatomic) CGFloat taskProgress;
+@property (nonatomic) NSUInteger actualAge;
+@property (nonatomic) NSUInteger heartAge;
+@property (nonatomic, strong) NSString *tenYearRisk;
+@property (nonatomic, strong) NSString *someImprovement;
 
 @end
