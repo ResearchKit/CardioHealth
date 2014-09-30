@@ -178,7 +178,33 @@ static NSString *kHeartAgeQuestionFamilyHeart = @"HeartAgeQuestion8";
     NSLog(@"Task Did Complete: triggered");
 }
 
-- (RKStepViewController *)taskViewController:(RKTaskViewController *)taskViewController viewControllerForStep:(RKStep *)step
+//- (void)taskViewController:(RKTaskViewController *)taskViewController willPresentStepViewController:(RKStepViewController *)stepViewController
+//{
+//    if ([stepViewController.step.identifier isEqualToString:kHeartAgeResults]) {
+//        stepViewController.cancelButton = nil;
+//        stepViewController.backButton = nil;
+//    }
+//}
+
+//- (RKStepViewController *)taskViewController:(RKTaskViewController *)taskViewController viewControllerForStep:(RKStep *)step
+//{
+//    if ([step.identifier isEqualToString:kHeartAgeResults]) {
+//        NSDictionary  *controllers = @{kHeartAgeResults: [APHHeartAgeResultsViewController class]};
+//        
+//        Class  aClass = [controllers objectForKey:step.identifier];
+//        
+//        APCStepViewController  *controller = [[aClass alloc] initWithNibName:nil bundle:nil];
+//        controller.resultCollector = self;
+//        controller.delegate = self;
+//        controller.title = NSLocalizedString(@"Heart Age Test", @"Heart Age Test");
+//        controller.continueButtonOnToolbar = NO;
+//        controller.step = step;
+//        
+//        return  controller;
+//    } else {
+//        return nil;
+//    }
+//}
 {
     if ([step.identifier isEqualToString:kHeartAgeResults]) {
         NSDictionary  *controllers = @{kHeartAgeResults: [APHHeartAgeResultsViewController class]};
