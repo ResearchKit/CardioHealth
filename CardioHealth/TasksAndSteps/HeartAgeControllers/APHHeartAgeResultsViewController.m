@@ -10,6 +10,12 @@
 
 @interface APHHeartAgeResultsViewController ()
 
+@property (weak, nonatomic) IBOutlet UINavigationBar *heartAgeResultsNavBar;
+@property (weak, nonatomic) IBOutlet APCCircularProgressView *circularProgress;
+@property (weak, nonatomic) IBOutlet APHHeartAgeVersusView *ageVersusHeartAge;
+@property (weak, nonatomic) IBOutlet UILabel *tenYearRiskText;
+@property (weak, nonatomic) IBOutlet UILabel *improvementText;
+
 @end
 
 @implementation APHHeartAgeResultsViewController
@@ -17,33 +23,35 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Do any additional setup after loading the view from its nib.
-    [self.circularProgress setProgress:0.6 animated:YES];
+    self.navigationItem.title = @"Heart Age Test";
+    self.navigationItem.hidesBackButton = YES;
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                                           target:self
+                                                                                           action:@selector(doneButtonTapped:)];
     
-    self.ageVersusHeartAge.age = 39;
-    self.ageVersusHeartAge.heartAge = 30;
+    [self.circularProgress setProgress:self.taskProgress animated:YES];
+    
+    self.ageVersusHeartAge.age = self.actualAge;
+    self.ageVersusHeartAge.heartAge = self.heartAge;
+    
+    self.tenYearRiskText.text = self.tenYearRisk;
+    self.improvementText.text = self.someImprovement;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                                                           target:self action:@selector(doneButtonTapped:)];
 }
 
 #pragma mark - Actions
 
-- (void)doneButtonTapped:(id)sender
+- (IBAction)doneButtonTapped:(UIBarButtonItem *)sender
 {
-    if ([self.delegate respondsToSelector:@selector(stepViewControllerDidFinish:navigationDirection:)] == YES) {
-        [self.delegate stepViewControllerDidFinish:self navigationDirection:RKStepViewControllerNavigationDirectionForward];
-    }
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 
