@@ -205,22 +205,32 @@ static NSString *kHeartAgeQuestionFamilyHeart = @"HeartAgeQuestion8";
 //        return nil;
 //    }
 //}
+
+- (void)taskViewController:(RKTaskViewController *)taskViewController didProduceResult:(RKResult *)result
 {
-    if ([step.identifier isEqualToString:kHeartAgeResults]) {
-        NSDictionary  *controllers = @{kHeartAgeResults: [APHHeartAgeResultsViewController class]};
+    //[super taskViewController:taskViewController didProduceResult:result];
+    
+    NSLog(@"didProduceResult = %@", result);
+    
+    if ([result isKindOfClass:[RKSurveyResult class]]) {
+        RKSurveyResult* surveyResult = (RKSurveyResult*)result;
+        NSUInteger personAge = 0;
         
-        Class  aClass = [controllers objectForKey:step.identifier];
+        for (RKQuestionResult* questionResult in surveyResult.surveyResults) {
+            NSLog(@"%@ = [%@] %@ ", [[questionResult itemIdentifier] stringValue], questionResult.answer.class, questionResult.answer);
+            if ([[[questionResult itemIdentifier] stringValue] isEqualToString:kHeartAgeQuestionAge]) {
+                personAge = [(NSString *)questionResult.answer integerValue];
+            }
+        }
         
-        APCStepViewController  *controller = [[aClass alloc] initWithNibName:nil bundle:nil];
-        controller.resultCollector = self;
-        controller.delegate = self;
-        controller.title = NSLocalizedString(@"Heart Age Test", @"Heart Age Test");
-        controller.continueButtonOnToolbar = NO;
-        controller.step = step;
+        APHHeartAgeResultsViewController *heartAgeResultsVC = [[APHHeartAgeResultsViewController alloc] init];
+        heartAgeResultsVC.taskProgress = 0.65;
+        heartAgeResultsVC.actualAge = personAge;
+        heartAgeResultsVC.heartAge = [self calculateHeartAge:surveyResult];
+        heartAgeResultsVC.tenYearRisk = @"Your 10-Year risk assesment.";
+        heartAgeResultsVC.someImprovement = @"Here are some suggestions to improve your heart age.";
         
-        return  controller;
-    } else {
-        return nil;
+        [self pushViewController:heartAgeResultsVC animated:YES];
     }
 }
 
