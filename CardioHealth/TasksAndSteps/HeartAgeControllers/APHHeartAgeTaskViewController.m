@@ -17,6 +17,7 @@ static NSString *kHeartAgeQuestionSmoke = @"HeartAgeQuestion5";
 static NSString *kHeartAgeQuestionDiabetes = @"HeartAgeQuestion6";
 static NSString *kHeartAgeQuestionFamilyDiabetes = @"HeartAgeQuestion7";
 static NSString *kHeartAgeQuestionFamilyHeart = @"HeartAgeQuestion8";
+static NSString *kHeartAgeQuestionEthnicity = @"HeartAgeQuestion9";
 
 @interface APHHeartAgeTaskViewController ()
 
@@ -56,16 +57,16 @@ static NSString *kHeartAgeQuestionFamilyHeart = @"HeartAgeQuestion8";
         [steps addObject:step];
     }
     
-//    {
-//        RKAnswerFormat *format = [RKChoiceAnswerFormat choiceAnswerWithOptions:@[@"African American", @"Caucasian"]
-//                                                                         style:RKChoiceAnswerStyleMultipleChoice];
-//
-//        RKQuestionStep *step = [RKQuestionStep questionStepWithIdentifier:kHeartAgeQuestion10
-//                                                                     name:@"Ethnicity"
-//                                                                 question:@"What is your ethnic group?"
-//                                                                   answer:format];
-//        [steps addObject:step];
-//    }
+    {
+        RKAnswerFormat *format = [RKChoiceAnswerFormat choiceAnswerWithOptions:@[@"African American", @"Caucasian"]
+                                                                         style:RKChoiceAnswerStyleMultipleChoice];
+
+        RKQuestionStep *step = [RKQuestionStep questionStepWithIdentifier:kHeartAgeQuestionEthnicity
+                                                                     name:@"Ethnicity"
+                                                                 question:@"What is your ethnic group?"
+                                                                   answer:format];
+        [steps addObject:step];
+    }
     
     {
         RKNumericAnswerFormat *format = [RKNumericAnswerFormat integerAnswerWithUnit:nil];
