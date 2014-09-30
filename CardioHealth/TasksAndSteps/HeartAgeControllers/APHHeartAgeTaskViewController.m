@@ -227,8 +227,8 @@ static NSString *kHeartAgeQuestionFamilyHeart = @"HeartAgeQuestion8";
         heartAgeResultsVC.taskProgress = 0.65;
         heartAgeResultsVC.actualAge = personAge;
         heartAgeResultsVC.heartAge = [self calculateHeartAge:surveyResult];
-        heartAgeResultsVC.tenYearRisk = @"Your 10-Year risk assesment.";
-        heartAgeResultsVC.someImprovement = @"Here are some suggestions to improve your heart age.";
+        heartAgeResultsVC.tenYearRisk = @"Your 10-Year risk assessment.";
+        heartAgeResultsVC.someImprovement = @"Some suggestions to improve your heart age.";
         
         [self pushViewController:heartAgeResultsVC animated:YES];
     }
