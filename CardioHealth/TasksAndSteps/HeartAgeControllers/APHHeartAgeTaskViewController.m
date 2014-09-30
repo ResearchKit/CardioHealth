@@ -43,40 +43,11 @@ static NSString *kHeartAgeQuestionFamilyHeart = @"HeartAgeQuestion8";
     }
     
     {
-        RKNumericAnswerFormat *format = [RKNumericAnswerFormat decimalAnswerWithUnit:nil];
-        format.minimum = @(0);
-        format.minimumFractionDigits = @(2);
-        format.maximumFractionDigits = @(2);
-        
-        RKQuestionStep *step = [RKQuestionStep questionStepWithIdentifier:kHeartAgeQuestion2
-                                                                     name:@"YourHeight"
-                                                                 question:@"What is your height?"
-                                                                   answer:format];
-        step.optional = NO;
-        
-        [steps addObject:step];
-    }
-    
-    {
-        RKNumericAnswerFormat *format = [RKNumericAnswerFormat integerAnswerWithUnit:@"lbs"];
-        format.minimum = @(0);
-        format.minimumFractionDigits = @(2);
-        format.maximumFractionDigits = @(2);
-        
-        RKQuestionStep* step = [RKQuestionStep questionStepWithIdentifier:kHeartAgeQuestion3
-                                                                     name:@"YourWeight"
-                                                                 question:@"How much do you weigh?"
-                                                                   answer:format];
-        step.optional = NO;
-        
-        [steps addObject:step];
-    }
-    
-    {
         RKNumericAnswerFormat *format = [RKNumericAnswerFormat integerAnswerWithUnit:nil];
-        format.minimum = @(18);
+        format.minimum = @(17);
+        format.maximum = @(99);
         
-        RKQuestionStep* step = [RKQuestionStep questionStepWithIdentifier:kHeartAgeQuestion4
+        RKQuestionStep* step = [RKQuestionStep questionStepWithIdentifier:kHeartAgeQuestionAge
                                                                      name:@"YourAge"
                                                                  question:@"What is your age?"
                                                                    answer:format];
@@ -86,10 +57,10 @@ static NSString *kHeartAgeQuestionFamilyHeart = @"HeartAgeQuestion8";
     }
     
 //    {
-//        RKAnswerFormat *format = [RKChoiceAnswerFormat choiceAnswerWithOptions:@[@"African American", @"Caucasian", @"Asian", @"Hispanic"]
+//        RKAnswerFormat *format = [RKChoiceAnswerFormat choiceAnswerWithOptions:@[@"African American", @"Caucasian"]
 //                                                                         style:RKChoiceAnswerStyleMultipleChoice];
-//        
-//        RKQuestionStep *step = [RKQuestionStep questionStepWithIdentifier:kHeartAgeQuestion5
+//
+//        RKQuestionStep *step = [RKQuestionStep questionStepWithIdentifier:kHeartAgeQuestion10
 //                                                                     name:@"Ethnicity"
 //                                                                 question:@"What is your ethnic group?"
 //                                                                   answer:format];
@@ -97,7 +68,46 @@ static NSString *kHeartAgeQuestionFamilyHeart = @"HeartAgeQuestion8";
 //    }
     
     {
-        RKQuestionStep *step = [RKQuestionStep questionStepWithIdentifier:kHeartAgeQuestion6
+        RKNumericAnswerFormat *format = [RKNumericAnswerFormat integerAnswerWithUnit:nil];
+        format.minimum = @(0);
+
+        RKQuestionStep *step = [RKQuestionStep questionStepWithIdentifier:kHeartAgeQuestionTotalCholesterol
+                                                                     name:@"TotalCholesterol"
+                                                                 question:@"What is your Total Cholesterol?"
+                                                                   answer:format];
+        step.optional = NO;
+
+        [steps addObject:step];
+    }
+
+    {
+        RKNumericAnswerFormat *format = [RKNumericAnswerFormat integerAnswerWithUnit:nil];
+        format.minimum = @(0);
+
+        RKQuestionStep* step = [RKQuestionStep questionStepWithIdentifier:kHeartAgeQuestionHDL
+                                                                     name:@"HDLCholesterol"
+                                                                 question:@"What is your HDL Cholesterol?"
+                                                                   answer:format];
+        step.optional = NO;
+        
+        [steps addObject:step];
+    }
+    
+    {
+        RKNumericAnswerFormat *format = [RKNumericAnswerFormat integerAnswerWithUnit:nil];
+        format.minimum = @(0);
+        
+        RKQuestionStep* step = [RKQuestionStep questionStepWithIdentifier:kHeartAgeQuestionSystolicBP
+                                                                     name:@"SystolicBP"
+                                                                 question:@"What is your Systolic Blood Pressure?"
+                                                                   answer:format];
+        step.optional = NO;
+        
+        [steps addObject:step];
+    }
+    
+    {
+        RKQuestionStep *step = [RKQuestionStep questionStepWithIdentifier:kHeartAgeQuestionSmoke
                                                                      name:@"SmokeA"
                                                                  question:@"Have you ever smoked?"
                                                                    answer:[RKBooleanAnswerFormat new]];
@@ -107,19 +117,9 @@ static NSString *kHeartAgeQuestionFamilyHeart = @"HeartAgeQuestion8";
     }
     
     {
-        RKQuestionStep *step = [RKQuestionStep questionStepWithIdentifier:kHeartAgeQuestion7
-                                                                     name:@"SmokeB"
-                                                                 question:@"Do you still smoke?"
-                                                                   answer:[RKBooleanAnswerFormat new]];
-        step.optional = NO;
-        
-        [steps addObject:step];
-    }
-    
-    {
-        RKQuestionStep *step = [RKQuestionStep questionStepWithIdentifier:kHeartAgeQuestion8
+        RKQuestionStep *step = [RKQuestionStep questionStepWithIdentifier:kHeartAgeQuestionDiabetes
                                                                      name:@"MedicalConditions"
-                                                                 question:@"Do you have the following medical conditions?\nHeart attack, Stoke, Rheumatoid Arthritis, Chronic Kidney Disease, Atrial Fibrillation or Diabetes"
+                                                                 question:@"Do you have the Diabetes?"
                                                                    answer:[RKBooleanAnswerFormat new]];
         step.optional = NO;
         
@@ -127,9 +127,9 @@ static NSString *kHeartAgeQuestionFamilyHeart = @"HeartAgeQuestion8";
     }
     
     {
-        RKQuestionStep *step = [RKQuestionStep questionStepWithIdentifier:kHeartAgeQuestion9
+        RKQuestionStep *step = [RKQuestionStep questionStepWithIdentifier:kHeartAgeQuestionFamilyDiabetes
                                                                      name:@"FamilyHistory"
-                                                                 question:@"Do the previous conditions run in your family?\nHeart attack, Stoke, Rheumatoid Arthritis, Chronic Kidney Disease, Atrial Fibrillation or Diabetes"
+                                                                 question:@"Does Diabetes run in your family?"
                                                                    answer:[RKBooleanAnswerFormat new]];
         step.optional = NO;
         
@@ -137,20 +137,11 @@ static NSString *kHeartAgeQuestionFamilyHeart = @"HeartAgeQuestion8";
     }
     
     {
-        RKQuestionStep *step = [RKQuestionStep questionStepWithIdentifier:kHeartAgeQuestion10
+        RKQuestionStep *step = [RKQuestionStep questionStepWithIdentifier:kHeartAgeQuestionFamilyHeart
                                                                      name:@"ParentHistory"
                                                                  question:@"Have either of your parents had heart problems?"
                                                                    answer:[RKBooleanAnswerFormat new]];
         step.optional = NO;
-        
-        [steps addObject:step];
-    }
-    
-    {
-        RKQuestionStep *step = [RKQuestionStep questionStepWithIdentifier:kHeartAgeResults
-                                                                     name:@"FinalStep"
-                                                                 question:@"I should not see this!"
-                                                                   answer:[RKBooleanAnswerFormat new]];
         
         [steps addObject:step];
     }
