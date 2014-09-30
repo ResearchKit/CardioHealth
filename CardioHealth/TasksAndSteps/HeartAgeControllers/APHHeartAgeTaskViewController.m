@@ -9,19 +9,14 @@
 #import "APHHeartAgeResultsViewController.h"
 
 static NSString *kHeartAgeIntroduction = @"HeartAgeIntroduction";
-static NSString *kHeartAgeQuestion1 = @"HeartAgeQuestion1";
-static NSString *kHeartAgeQuestion2 = @"HeartAgeQuestion2";
-static NSString *kHeartAgeQuestion3 = @"HeartAgeQuestion3";
-static NSString *kHeartAgeQuestion4 = @"HeartAgeQuestion4";
-static NSString *kHeartAgeQuestion5 = @"HeartAgeQuestion5";
-static NSString *kHeartAgeQuestion6 = @"HeartAgeQuestion6";
-static NSString *kHeartAgeQuestion7 = @"HeartAgeQuestion7";
-static NSString *kHeartAgeQuestion8 = @"HeartAgeQuestion8";
-static NSString *kHeartAgeQuestion9 = @"HeartAgeQuestion9";
-static NSString *kHeartAgeQuestion10 = @"HeartAgeQuestion10";
-static NSString *kHeartAgeQuestion11 = @"HeartAgeQuestion11";
-static NSString *kHeartAgeQuestion12 = @"HeartAgeQuestion12";
-static NSString *kHeartAgeResults = @"HeartAgeResults";
+static NSString *kHeartAgeQuestionAge = @"HeartAgeQuestion1";
+static NSString *kHeartAgeQuestionTotalCholesterol = @"HeartAgeQuestion2";
+static NSString *kHeartAgeQuestionHDL = @"HeartAgeQuestion3";
+static NSString *kHeartAgeQuestionSystolicBP = @"HeartAgeQuestion4";
+static NSString *kHeartAgeQuestionSmoke = @"HeartAgeQuestion5";
+static NSString *kHeartAgeQuestionDiabetes = @"HeartAgeQuestion6";
+static NSString *kHeartAgeQuestionFamilyDiabetes = @"HeartAgeQuestion7";
+static NSString *kHeartAgeQuestionFamilyHeart = @"HeartAgeQuestion8";
 
 @interface APHHeartAgeTaskViewController ()
 
