@@ -213,7 +213,7 @@ static NSString *kHeartAgeQuestionFamilyHeart = @"HeartAgeQuestion8";
         for (RKQuestionResult *questionResult in surveyResult.surveyResults) {
             NSLog(@"%@ = [%@] %@ ", [[questionResult itemIdentifier] stringValue], questionResult.answer.class, questionResult.answer);
             if ([[[questionResult itemIdentifier] stringValue] isEqualToString:kHeartAgeQuestionAge]) {
-                personAge = [(NSString *)questionResult.answer integerValue];
+                personAge = [(NSNumber *)questionResult.answer integerValue];
             }
         }
         
