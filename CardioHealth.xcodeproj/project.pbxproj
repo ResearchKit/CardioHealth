@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		082AD72219D9B9F20090E255 /* APHHeartAgeVersusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 082AD72119D9B9F20090E255 /* APHHeartAgeVersusView.m */; };
 		0847943E19D49513009805AD /* APHHeartAgeTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0847943D19D49513009805AD /* APHHeartAgeTaskViewController.m */; };
-		0847944719D4E94A009805AD /* HeartAgeQuestions.json in Resources */ = {isa = PBXBuildFile; fileRef = 0847944519D4E94A009805AD /* HeartAgeQuestions.json */; };
 		08A9F37F19D62C4100D97FF7 /* APHHeartAgeResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08A9F37D19D62C4100D97FF7 /* APHHeartAgeResultsViewController.m */; };
 		08A9F38019D62C4100D97FF7 /* APHHeartAgeResultsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08A9F37E19D62C4100D97FF7 /* APHHeartAgeResultsViewController.xib */; };
 		F55BBE5719D362D0003CA0F9 /* NSString+CustomMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = F55BBDDB19D362D0003CA0F9 /* NSString+CustomMethods.m */; };
@@ -105,7 +104,6 @@
 		082AD72119D9B9F20090E255 /* APHHeartAgeVersusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APHHeartAgeVersusView.m; path = HeartAgeControllers/APHHeartAgeVersusView.m; sourceTree = "<group>"; };
 		0847943C19D49513009805AD /* APHHeartAgeTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APHHeartAgeTaskViewController.h; path = HeartAgeControllers/APHHeartAgeTaskViewController.h; sourceTree = "<group>"; };
 		0847943D19D49513009805AD /* APHHeartAgeTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APHHeartAgeTaskViewController.m; path = HeartAgeControllers/APHHeartAgeTaskViewController.m; sourceTree = "<group>"; };
-		0847944519D4E94A009805AD /* HeartAgeQuestions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = HeartAgeQuestions.json; sourceTree = "<group>"; };
 		08A9F37C19D62C4100D97FF7 /* APHHeartAgeResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APHHeartAgeResultsViewController.h; path = HeartAgeControllers/APHHeartAgeResultsViewController.h; sourceTree = "<group>"; };
 		08A9F37D19D62C4100D97FF7 /* APHHeartAgeResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APHHeartAgeResultsViewController.m; path = HeartAgeControllers/APHHeartAgeResultsViewController.m; sourceTree = "<group>"; };
 		08A9F37E19D62C4100D97FF7 /* APHHeartAgeResultsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = APHHeartAgeResultsViewController.xib; path = HeartAgeControllers/APHHeartAgeResultsViewController.xib; sourceTree = "<group>"; };
@@ -275,7 +273,6 @@
 				F55BBDF119D362D0003CA0F9 /* APHTasksAndSchedules.json */,
 				F55BBDF219D362D0003CA0F9 /* JSON_READ_ME */,
 				F55BBDF319D362D0003CA0F9 /* sleepSurvey.json */,
-				0847944519D4E94A009805AD /* HeartAgeQuestions.json */,
 			);
 			path = JSONs;
 			sourceTree = "<group>";
@@ -570,7 +567,6 @@
 				F55BBE7119D362D0003CA0F9 /* APHLearn.storyboard in Resources */,
 				F55BBE6D19D362D0003CA0F9 /* APHEditSectionsViewController.xib in Resources */,
 				F55BBE6A19D362D0003CA0F9 /* APHDashboard.storyboard in Resources */,
-				0847944719D4E94A009805AD /* HeartAgeQuestions.json in Resources */,
 				F55BBE5F19D362D0003CA0F9 /* APHSignupOptionsViewController.xib in Resources */,
 				F55BBE6419D362D0003CA0F9 /* intro.m4v in Resources */,
 				F55BBE6119D362D0003CA0F9 /* APHTasksAndSchedules.json in Resources */,
