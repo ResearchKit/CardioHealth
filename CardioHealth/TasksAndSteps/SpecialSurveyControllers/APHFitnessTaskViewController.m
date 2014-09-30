@@ -9,7 +9,7 @@
 #import "APHFitnessTaskViewController.h"
 
 #import "APHFitnessTestIntroViewController.h"
-//#import "APHIntervalTappingStepsViewController.h"
+#import "APHFitnessTestWalkingViewController.h"
 //#import "APHIntervalTappingResultsViewController.h"
 
 //#import "APHCustomRecorder.h"
@@ -44,12 +44,22 @@ static  NSString  *kIntervalTappingStep103 = @"IntervalTappingStep103";
     
     {
         RKIntroductionStep *step = [[RKIntroductionStep alloc] initWithIdentifier:kIntervalTappingStep101 name:@"Fitness Test Intro"];
-        step.caption = @"Tests Bradykinesia";
+        step.caption = @"Measure Heart Rate";
         step.explanation = @"";
         step.instruction = @"";
         [steps addObject:step];
     }
-        
+    
+    {
+        RKActiveStep* step = [[RKActiveStep alloc] initWithIdentifier:kIntervalTappingStep102 name:@"6 Minute Walk"];
+        step.caption = NSLocalizedString(@"6 Minute Walk", @"");
+        step.text = NSLocalizedString(@"Now please turn 180 degrees, and walk back to your starting point.", @"");
+        step.buzz = YES;
+        step.vibration = YES;
+        step.countDown = 360.0;
+        [steps addObject:step];
+    }
+    
     RKTask  *task = [[RKTask alloc] initWithName:@"Interval Touches" identifier:@"Tapping Task" steps:steps];
     
     return  task;
@@ -83,8 +93,8 @@ static  NSString  *kIntervalTappingStep103 = @"IntervalTappingStep103";
 - (RKStepViewController *)taskViewController:(RKTaskViewController *)taskViewController viewControllerForStep:(RKStep *)step
 {
     NSDictionary  *controllers = @{
-                                   kIntervalTappingStep101 : [APHFitnessTestIntroViewController   class]
-//                                   kIntervalTappingStep102 : [APHIntervalTappingStepsViewController   class],
+                                   kIntervalTappingStep101 : [APHFitnessTestIntroViewController   class],
+                                   kIntervalTappingStep102 : [APHFitnessTestWalkingViewController   class]
 //                                   kIntervalTappingStep103 : [APHIntervalTappingResultsViewController class]
                                    };
     Class  aClass = [controllers objectForKey:step.identifier];
