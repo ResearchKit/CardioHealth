@@ -224,4 +224,9 @@ static NSString *kHeartAgeQuestionFamilyHeart = @"HeartAgeQuestion8";
     }
 }
 
+- (NSUInteger)calculateHeartAge:(RKSurveyResult *)results
+{
+    return 25;
+}
+
 @end
