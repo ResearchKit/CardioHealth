@@ -157,25 +157,13 @@ static NSString *kHeartAgeQuestionFamilyHeart = @"HeartAgeQuestion8";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.showsProgressInNavigationBar = NO;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
-
-#pragma  mark  -  Navigation Bar Button Action Methods
-
-//- (void)cancelButtonTapped:(UIBarButtonItem *)sender
-//{
-//    [self.presentingViewController dismissViewControllerAnimated:YES completion:^{ } ];
-//}
-
-//- (void)doneButtonTapped:(UIBarButtonItem *)sender
-//{
-//    [self.presentingViewController dismissViewControllerAnimated:YES completion:^{ } ];
-//}
 
 
 #pragma  mark  -  Task View Controller Delegate Methods
