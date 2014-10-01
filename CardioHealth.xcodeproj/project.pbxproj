@@ -7,13 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7B3E191119D9DBF60065A96A /* APHFitnessTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B3E191019D9DBF60065A96A /* APHFitnessTaskViewController.m */; };
-		7B3E191719D9DD340065A96A /* APHFitnessTestIntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B3E191519D9DD340065A96A /* APHFitnessTestIntroViewController.m */; };
-		7B3E191819D9DD340065A96A /* APHFitnessTestIntroViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B3E191619D9DD340065A96A /* APHFitnessTestIntroViewController.xib */; };
-		7BEBC4AF19DA13BC009FE17F /* APHImportantDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BEBC4AD19DA13BC009FE17F /* APHImportantDetailsViewController.m */; };
-		7BEBC4B019DA13BC009FE17F /* APHImportantDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BEBC4AE19DA13BC009FE17F /* APHImportantDetailsViewController.xib */; };
-		7BEBC4B419DA2511009FE17F /* APHFitnessTestWalkingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BEBC4B219DA2511009FE17F /* APHFitnessTestWalkingViewController.m */; };
-		7BEBC4B519DA2511009FE17F /* APHFitnessTestWalkingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BEBC4B319DA2511009FE17F /* APHFitnessTestWalkingViewController.xib */; };
+		7B22FFB619DB4DD100C8C915 /* APHFitnessTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B22FFA919DB4DD100C8C915 /* APHFitnessTaskViewController.m */; };
+		7B22FFB719DB4DD100C8C915 /* APHFitnessTestIntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B22FFAB19DB4DD100C8C915 /* APHFitnessTestIntroViewController.m */; };
+		7B22FFB819DB4DD100C8C915 /* APHFitnessTestIntroViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B22FFAC19DB4DD100C8C915 /* APHFitnessTestIntroViewController.xib */; };
+		7B22FFB919DB4DD100C8C915 /* APHFitnessTestWalkingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B22FFAE19DB4DD100C8C915 /* APHFitnessTestWalkingViewController.m */; };
+		7B22FFBA19DB4DD100C8C915 /* APHFitnessTestWalkingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B22FFAF19DB4DD100C8C915 /* APHFitnessTestWalkingViewController.xib */; };
+		7B22FFBB19DB4DD100C8C915 /* APHImportantDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B22FFB119DB4DD100C8C915 /* APHImportantDetailsViewController.m */; };
+		7B22FFBC19DB4DD100C8C915 /* APHImportantDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B22FFB219DB4DD100C8C915 /* APHImportantDetailsViewController.xib */; };
+		7B22FFBD19DB4DD100C8C915 /* APHFitnessTestDistanceTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B22FFB519DB4DD100C8C915 /* APHFitnessTestDistanceTracker.m */; };
+		7B22FFBF19DB4DF200C8C915 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B22FFBE19DB4DF200C8C915 /* CoreLocation.framework */; };
+		7BBEE01219DB73F800C585E2 /* APCParameters.json in Resources */ = {isa = PBXBuildFile; fileRef = 7BBEE00E19DB73F800C585E2 /* APCParameters.json */; };
+		7BBEE01319DB73F800C585E2 /* APHTasksAndSchedules.json in Resources */ = {isa = PBXBuildFile; fileRef = 7BBEE00F19DB73F800C585E2 /* APHTasksAndSchedules.json */; };
+		7BBEE01419DB73F800C585E2 /* JSON_READ_ME in Resources */ = {isa = PBXBuildFile; fileRef = 7BBEE01019DB73F800C585E2 /* JSON_READ_ME */; };
+		7BBEE01519DB73F800C585E2 /* sleepSurvey.json in Resources */ = {isa = PBXBuildFile; fileRef = 7BBEE01119DB73F800C585E2 /* sleepSurvey.json */; };
 		F55BBE5719D362D0003CA0F9 /* NSString+CustomMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = F55BBDDB19D362D0003CA0F9 /* NSString+CustomMethods.m */; };
 		F55BBE5819D362D0003CA0F9 /* RKStep+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = F55BBDDD19D362D0003CA0F9 /* RKStep+Description.m */; };
 		F55BBE5919D362D0003CA0F9 /* UIColor+CardioHealth.m in Sources */ = {isa = PBXBuildFile; fileRef = F55BBDDF19D362D0003CA0F9 /* UIColor+CardioHealth.m */; };
@@ -104,17 +110,24 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		7B3E190F19D9DBF60065A96A /* APHFitnessTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHFitnessTaskViewController.h; sourceTree = "<group>"; };
-		7B3E191019D9DBF60065A96A /* APHFitnessTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHFitnessTaskViewController.m; sourceTree = "<group>"; };
-		7B3E191419D9DD340065A96A /* APHFitnessTestIntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHFitnessTestIntroViewController.h; sourceTree = "<group>"; };
-		7B3E191519D9DD340065A96A /* APHFitnessTestIntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHFitnessTestIntroViewController.m; sourceTree = "<group>"; };
-		7B3E191619D9DD340065A96A /* APHFitnessTestIntroViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = APHFitnessTestIntroViewController.xib; sourceTree = "<group>"; };
-		7BEBC4AC19DA13BC009FE17F /* APHImportantDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHImportantDetailsViewController.h; sourceTree = "<group>"; };
-		7BEBC4AD19DA13BC009FE17F /* APHImportantDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHImportantDetailsViewController.m; sourceTree = "<group>"; };
-		7BEBC4AE19DA13BC009FE17F /* APHImportantDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = APHImportantDetailsViewController.xib; sourceTree = "<group>"; };
-		7BEBC4B119DA2511009FE17F /* APHFitnessTestWalkingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHFitnessTestWalkingViewController.h; sourceTree = "<group>"; };
-		7BEBC4B219DA2511009FE17F /* APHFitnessTestWalkingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHFitnessTestWalkingViewController.m; sourceTree = "<group>"; };
-		7BEBC4B319DA2511009FE17F /* APHFitnessTestWalkingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = APHFitnessTestWalkingViewController.xib; sourceTree = "<group>"; };
+		7B22FFA819DB4DD100C8C915 /* APHFitnessTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHFitnessTaskViewController.h; sourceTree = "<group>"; };
+		7B22FFA919DB4DD100C8C915 /* APHFitnessTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHFitnessTaskViewController.m; sourceTree = "<group>"; };
+		7B22FFAA19DB4DD100C8C915 /* APHFitnessTestIntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHFitnessTestIntroViewController.h; sourceTree = "<group>"; };
+		7B22FFAB19DB4DD100C8C915 /* APHFitnessTestIntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHFitnessTestIntroViewController.m; sourceTree = "<group>"; };
+		7B22FFAC19DB4DD100C8C915 /* APHFitnessTestIntroViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = APHFitnessTestIntroViewController.xib; sourceTree = "<group>"; };
+		7B22FFAD19DB4DD100C8C915 /* APHFitnessTestWalkingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHFitnessTestWalkingViewController.h; sourceTree = "<group>"; };
+		7B22FFAE19DB4DD100C8C915 /* APHFitnessTestWalkingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHFitnessTestWalkingViewController.m; sourceTree = "<group>"; };
+		7B22FFAF19DB4DD100C8C915 /* APHFitnessTestWalkingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = APHFitnessTestWalkingViewController.xib; sourceTree = "<group>"; };
+		7B22FFB019DB4DD100C8C915 /* APHImportantDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHImportantDetailsViewController.h; sourceTree = "<group>"; };
+		7B22FFB119DB4DD100C8C915 /* APHImportantDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHImportantDetailsViewController.m; sourceTree = "<group>"; };
+		7B22FFB219DB4DD100C8C915 /* APHImportantDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = APHImportantDetailsViewController.xib; sourceTree = "<group>"; };
+		7B22FFB419DB4DD100C8C915 /* APHFitnessTestDistanceTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHFitnessTestDistanceTracker.h; sourceTree = "<group>"; };
+		7B22FFB519DB4DD100C8C915 /* APHFitnessTestDistanceTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHFitnessTestDistanceTracker.m; sourceTree = "<group>"; };
+		7B22FFBE19DB4DF200C8C915 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		7BBEE00E19DB73F800C585E2 /* APCParameters.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = APCParameters.json; sourceTree = "<group>"; };
+		7BBEE00F19DB73F800C585E2 /* APHTasksAndSchedules.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = APHTasksAndSchedules.json; sourceTree = "<group>"; };
+		7BBEE01019DB73F800C585E2 /* JSON_READ_ME */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = JSON_READ_ME; sourceTree = "<group>"; };
+		7BBEE01119DB73F800C585E2 /* sleepSurvey.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sleepSurvey.json; sourceTree = "<group>"; };
 		F55BBDDA19D362D0003CA0F9 /* NSString+CustomMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CustomMethods.h"; sourceTree = "<group>"; };
 		F55BBDDB19D362D0003CA0F9 /* NSString+CustomMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CustomMethods.m"; sourceTree = "<group>"; };
 		F55BBDDC19D362D0003CA0F9 /* RKStep+Description.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RKStep+Description.h"; sourceTree = "<group>"; };
@@ -198,6 +211,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B22FFBF19DB4DF200C8C915 /* CoreLocation.framework in Frameworks */,
 				F5F6453119D35C7D004CFBB2 /* libz.dylib in Frameworks */,
 				F5F6452F19D35C65004CFBB2 /* libarchive.dylib in Frameworks */,
 				F5F6452D19D35C5D004CFBB2 /* libbz2.dylib in Frameworks */,
@@ -212,22 +226,53 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7B22FFA719DB4DD100C8C915 /* APHFitnessTest */ = {
+			isa = PBXGroup;
+			children = (
+				7B22FFA819DB4DD100C8C915 /* APHFitnessTaskViewController.h */,
+				7B22FFA919DB4DD100C8C915 /* APHFitnessTaskViewController.m */,
+				7B22FFAA19DB4DD100C8C915 /* APHFitnessTestIntroViewController.h */,
+				7B22FFAB19DB4DD100C8C915 /* APHFitnessTestIntroViewController.m */,
+				7B22FFAC19DB4DD100C8C915 /* APHFitnessTestIntroViewController.xib */,
+				7B22FFAD19DB4DD100C8C915 /* APHFitnessTestWalkingViewController.h */,
+				7B22FFAE19DB4DD100C8C915 /* APHFitnessTestWalkingViewController.m */,
+				7B22FFAF19DB4DD100C8C915 /* APHFitnessTestWalkingViewController.xib */,
+				7B22FFB019DB4DD100C8C915 /* APHImportantDetailsViewController.h */,
+				7B22FFB119DB4DD100C8C915 /* APHImportantDetailsViewController.m */,
+				7B22FFB219DB4DD100C8C915 /* APHImportantDetailsViewController.xib */,
+				7B22FFB319DB4DD100C8C915 /* WalkingTestComponents */,
+			);
+			name = APHFitnessTest;
+			path = CardioHealth/TasksAndSteps/APHFitnessTest;
+			sourceTree = SOURCE_ROOT;
+		};
+		7B22FFB319DB4DD100C8C915 /* WalkingTestComponents */ = {
+			isa = PBXGroup;
+			children = (
+				7B22FFB419DB4DD100C8C915 /* APHFitnessTestDistanceTracker.h */,
+				7B22FFB519DB4DD100C8C915 /* APHFitnessTestDistanceTracker.m */,
+			);
+			path = WalkingTestComponents;
+			sourceTree = "<group>";
+		};
 		7B3E191319D9DCFB0065A96A /* FitnessTest */ = {
 			isa = PBXGroup;
 			children = (
-				7B3E190F19D9DBF60065A96A /* APHFitnessTaskViewController.h */,
-				7B3E191019D9DBF60065A96A /* APHFitnessTaskViewController.m */,
-				7B3E191419D9DD340065A96A /* APHFitnessTestIntroViewController.h */,
-				7B3E191519D9DD340065A96A /* APHFitnessTestIntroViewController.m */,
-				7B3E191619D9DD340065A96A /* APHFitnessTestIntroViewController.xib */,
-				7BEBC4AC19DA13BC009FE17F /* APHImportantDetailsViewController.h */,
-				7BEBC4AD19DA13BC009FE17F /* APHImportantDetailsViewController.m */,
-				7BEBC4AE19DA13BC009FE17F /* APHImportantDetailsViewController.xib */,
-				7BEBC4B119DA2511009FE17F /* APHFitnessTestWalkingViewController.h */,
-				7BEBC4B219DA2511009FE17F /* APHFitnessTestWalkingViewController.m */,
-				7BEBC4B319DA2511009FE17F /* APHFitnessTestWalkingViewController.xib */,
+				7B22FFA719DB4DD100C8C915 /* APHFitnessTest */,
 			);
 			name = FitnessTest;
+			path = SpecialSurveyControllers;
+			sourceTree = "<group>";
+		};
+		7BBEE00D19DB73F800C585E2 /* JSONs */ = {
+			isa = PBXGroup;
+			children = (
+				7BBEE00E19DB73F800C585E2 /* APCParameters.json */,
+				7BBEE00F19DB73F800C585E2 /* APHTasksAndSchedules.json */,
+				7BBEE01019DB73F800C585E2 /* JSON_READ_ME */,
+				7BBEE01119DB73F800C585E2 /* sleepSurvey.json */,
+			);
+			name = JSONs;
 			sourceTree = "<group>";
 		};
 		7BEBC4AA19DA0B10009FE17F /* SpecialSurvey */ = {
@@ -293,6 +338,7 @@
 		F55BBDF019D362D0003CA0F9 /* JSONs */ = {
 			isa = PBXGroup;
 			children = (
+				7BBEE00D19DB73F800C585E2 /* JSONs */,
 				F55BBDF119D362D0003CA0F9 /* APHTasksAndSchedules.json */,
 				F55BBDF219D362D0003CA0F9 /* JSON_READ_ME */,
 				F55BBDF319D362D0003CA0F9 /* sleepSurvey.json */,
@@ -409,6 +455,7 @@
 		F55BBE2219D362D0003CA0F9 /* TasksAndSteps */ = {
 			isa = PBXGroup;
 			children = (
+				7B3E191319D9DCFB0065A96A /* FitnessTest */,
 				F55BBE4219D362D0003CA0F9 /* SpecialSurveyControllers */,
 			);
 			path = TasksAndSteps;
@@ -418,7 +465,6 @@
 			isa = PBXGroup;
 			children = (
 				7BEBC4AA19DA0B10009FE17F /* SpecialSurvey */,
-				7B3E191319D9DCFB0065A96A /* FitnessTest */,
 			);
 			path = SpecialSurveyControllers;
 			sourceTree = "<group>";
@@ -477,6 +523,7 @@
 		F5F6452219D35BE3004CFBB2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7B22FFBE19DB4DF200C8C915 /* CoreLocation.framework */,
 				F56F60F819D37E5B00A0A2E1 /* ResearchKit.framework */,
 				F56F60EB19D37E4A00A0A2E1 /* APCAppleCore.xcodeproj */,
 				F5F6453019D35C7D004CFBB2 /* libz.dylib */,
@@ -582,23 +629,27 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BBEE01419DB73F800C585E2 /* JSON_READ_ME in Resources */,
 				F55BBE6819D362D0003CA0F9 /* APHActivities.storyboard in Resources */,
 				F55BBE7319D362D0003CA0F9 /* APHLearnDetailViewController.xib in Resources */,
-				7BEBC4B019DA13BC009FE17F /* APHImportantDetailsViewController.xib in Resources */,
 				F55BBE7A19D362D0003CA0F9 /* APHSettingsTableFooterView.xib in Resources */,
 				F55BBE6719D362D0003CA0F9 /* Main.storyboard in Resources */,
-				7B3E191819D9DD340065A96A /* APHFitnessTestIntroViewController.xib in Resources */,
+				7B22FFB819DB4DD100C8C915 /* APHFitnessTestIntroViewController.xib in Resources */,
 				F55BBE7619D362D0003CA0F9 /* APHLearnDetailViewCell.xib in Resources */,
+				7BBEE01519DB73F800C585E2 /* sleepSurvey.json in Resources */,
 				F55BBE7119D362D0003CA0F9 /* APHLearn.storyboard in Resources */,
 				F55BBE6D19D362D0003CA0F9 /* APHEditSectionsViewController.xib in Resources */,
 				F55BBE6A19D362D0003CA0F9 /* APHDashboard.storyboard in Resources */,
 				F55BBE5F19D362D0003CA0F9 /* APHSignupOptionsViewController.xib in Resources */,
+				7BBEE01319DB73F800C585E2 /* APHTasksAndSchedules.json in Resources */,
+				7B22FFBC19DB4DD100C8C915 /* APHImportantDetailsViewController.xib in Resources */,
 				F55BBE6419D362D0003CA0F9 /* intro.m4v in Resources */,
 				F55BBE6119D362D0003CA0F9 /* APHTasksAndSchedules.json in Resources */,
 				F55BBE7919D362D0003CA0F9 /* APHHealthProfile.storyboard in Resources */,
+				7BBEE01219DB73F800C585E2 /* APCParameters.json in Resources */,
+				7B22FFBA19DB4DD100C8C915 /* APHFitnessTestWalkingViewController.xib in Resources */,
 				F55BBE6219D362D0003CA0F9 /* JSON_READ_ME in Resources */,
 				F55BBE6319D362D0003CA0F9 /* sleepSurvey.json in Resources */,
-				7BEBC4B519DA2511009FE17F /* APHFitnessTestWalkingViewController.xib in Resources */,
 				F55BBE6619D362D0003CA0F9 /* LaunchScreen.xib in Resources */,
 				F5F6450A19D35BA2004CFBB2 /* Images.xcassets in Resources */,
 			);
@@ -611,7 +662,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7BEBC4AF19DA13BC009FE17F /* APHImportantDetailsViewController.m in Sources */,
+				7B22FFB919DB4DD100C8C915 /* APHFitnessTestWalkingViewController.m in Sources */,
 				F55BBE7519D362D0003CA0F9 /* APHLearnDetailViewCell.m in Sources */,
 				F55BBE7819D362D0003CA0F9 /* APHLearnResourceViewCell.m in Sources */,
 				F55BBE5D19D362D0003CA0F9 /* APHSignUpMedicalInfoViewController.m in Sources */,
@@ -619,10 +670,12 @@
 				F55BBE7719D362D0003CA0F9 /* APHLearnMasterTableViewCell.m in Sources */,
 				F55BBE6019D362D0003CA0F9 /* APHUserInfoCell.m in Sources */,
 				F55BBE5A19D362D0003CA0F9 /* APHIntroVideoViewController.m in Sources */,
+				7B22FFBD19DB4DD100C8C915 /* APHFitnessTestDistanceTracker.m in Sources */,
 				F55BBE7219D362D0003CA0F9 /* APHLearnDetailViewController.m in Sources */,
 				F55BBE7419D362D0003CA0F9 /* APHLearnMasterViewController.m in Sources */,
+				7B22FFBB19DB4DD100C8C915 /* APHImportantDetailsViewController.m in Sources */,
 				F55BBE6519D362D0003CA0F9 /* APHCardioHealthAppDelegate.m in Sources */,
-				7B3E191119D9DBF60065A96A /* APHFitnessTaskViewController.m in Sources */,
+				7B22FFB619DB4DD100C8C915 /* APHFitnessTaskViewController.m in Sources */,
 				F55BBE6919D362D0003CA0F9 /* APHActivitiesViewController.m in Sources */,
 				F5F644FF19D35BA2004CFBB2 /* main.m in Sources */,
 				F55BBE5B19D362D0003CA0F9 /* APHSignInViewController.m in Sources */,
@@ -632,12 +685,11 @@
 				F55BBE6E19D362D0003CA0F9 /* APHDashboardGraphViewCell.m in Sources */,
 				F55BBE7B19D362D0003CA0F9 /* APHSettingsViewController.m in Sources */,
 				F55BBE8C19D362D0003CA0F9 /* APHSpecialSurveyTaskViewController.m in Sources */,
-				7BEBC4B419DA2511009FE17F /* APHFitnessTestWalkingViewController.m in Sources */,
 				F55BBE5C19D362D0003CA0F9 /* APHSignUpGeneralInfoViewController.m in Sources */,
 				F55BBE7019D362D0003CA0F9 /* APHDashboardProgressViewCell.m in Sources */,
 				F55BBE5819D362D0003CA0F9 /* RKStep+Description.m in Sources */,
 				F55BBE5919D362D0003CA0F9 /* UIColor+CardioHealth.m in Sources */,
-				7B3E191719D9DD340065A96A /* APHFitnessTestIntroViewController.m in Sources */,
+				7B22FFB719DB4DD100C8C915 /* APHFitnessTestIntroViewController.m in Sources */,
 				F55BBE6B19D362D0003CA0F9 /* APHDashboardViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
