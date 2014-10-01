@@ -9,10 +9,10 @@
 #import "APHFitnessTestDistanceTracker.h"
 
 
-static const NSUInteger kAPHFitnessTestDistanceFilter = 5;                                // the minimum distance (meters) for which we want to receive location updates (see docs for CLLocationManager.distanceFilter)
-static const float kAPHFitnessTestRequiredHorizontalAccuracy = 20.0;                      // the required accuracy in meters for a location.  if we receive anything above this number, the delegate will be informed that the signal is weak
-static const float kAPHFitnessTestMaximumAcceptableHorizontalAccuracy = 70.0;             // the maximum acceptable accuracy in meters for a location.  anything above this number will be completely ignored
-static const NSUInteger kAPHValidLocationHistoryDeltaInterval = 3;                           // the maximum valid age in seconds of a location stored in the location history
+static const NSUInteger kAPHFitnessTestDistanceFilter = 8.0;                               // the minimum distance (meters) for which we want to receive location updates (see docs for CLLocationManager.distanceFilter)
+static const float kAPHFitnessTestRequiredHorizontalAccuracy = 5.0;                      // the required accuracy in meters for a location.  if we receive anything above this number, the delegate will be informed that the signal is weak
+static const float kAPHFitnessTestMaximumAcceptableHorizontalAccuracy = 10.0;             // the maximum acceptable accuracy in meters for a location.  anything above this number will be completely ignored
+static const NSUInteger kAPHValidLocationHistoryDeltaInterval = 3;                        // the maximum valid age in seconds of a location stored in the location history
 
 //static const NSUInteger kAPHFitnessTestGPSRefinementInterval = 15;                        // the number of seconds at which we will attempt to achieve kRequiredHorizontalAccuracy before giving up and accepting kMaximumAcceptableHorizontalAccuracy
 //static const NSUInteger kAPHFitnessTestValidLocationHistoryDeltaInterval = 3;             // the maximum valid age in seconds of a location stored in the location history
@@ -24,8 +24,10 @@ static const NSUInteger kAPHValidLocationHistoryDeltaInterval = 3;              
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) CLLocation *temporaryLocationPoint;
 @property (assign) CLLocationDistance totalDistance;
-@property (assign) APHLocationManagerGPSSignalStrenght signalStrength;
-@property (assign) BOOL allowMaximumAcceptableAccuracy;
+@property (assign) APHLocationManagerGPSSignalStrength signalStrength;
+
+//TODO decide how to handle poor signal strength
+//@property (assign) BOOL allowMaximumAcceptableAccuracy;
 @property (assign) BOOL startUpdatingDistance;
 
 @property (assign) BOOL prepLocationComplete;
@@ -47,7 +49,7 @@ static const NSUInteger kAPHValidLocationHistoryDeltaInterval = 3;              
             [self.locationManager setDelegate:self];
             [self.locationManager requestAlwaysAuthorization];
             self.locationManager.activityType = CLActivityTypeFitness;
-            [self.locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
+            [self.locationManager setDesiredAccuracy:kCLLocationAccuracyBestForNavigation];
             [self.locationManager setPausesLocationUpdatesAutomatically:YES];
             [self.locationManager setDistanceFilter:kAPHFitnessTestDistanceFilter];
             self.startUpdatingDistance = NO;
@@ -94,15 +96,19 @@ static const NSUInteger kAPHValidLocationHistoryDeltaInterval = 3;              
         
     } else {
         self.signalStrength = APHLocationManagerGPSSignalStrengthWeak;
+        
+        //Send to delegate
+        [self GPSSignalStrength:manager.location.horizontalAccuracy];
     }
     
-    double horizontalAccuracy;
+//    double horizontalAccuracy;
+//    
+//    if (self.allowMaximumAcceptableAccuracy) {
+//        horizontalAccuracy = kAPHFitnessTestMaximumAcceptableHorizontalAccuracy;
+//    } else {
+//        horizontalAccuracy = kAPHFitnessTestRequiredHorizontalAccuracy;
+//    }
     
-    if (self.allowMaximumAcceptableAccuracy) {
-        horizontalAccuracy = kAPHFitnessTestMaximumAcceptableHorizontalAccuracy;
-    } else {
-        horizontalAccuracy = kAPHFitnessTestRequiredHorizontalAccuracy;
-    }
 }
 
 /*********************************************************************************/
@@ -138,12 +144,16 @@ static const NSUInteger kAPHValidLocationHistoryDeltaInterval = 3;              
      (or 4 for a 3D fix). Until that happens CLLocationManager will give you the best it has which is WiFi or Cell tower triangulation results.
      
      */
+    //TODO remove this debug view
+    [self debugView:manager.location.horizontalAccuracy];
 
     [self setGPSSignalStrength:manager];
     
     if (self.prepLocationComplete && self.startUpdatingDistance) {
     
-        if (self.temporaryLocationPoint == nil && manager.location.horizontalAccuracy < 300) {
+
+        
+        if (self.temporaryLocationPoint == nil && manager.location.horizontalAccuracy <= kAPHFitnessTestRequiredHorizontalAccuracy) {
             self.temporaryLocationPoint = manager.location;
             self.totalDistance = 0;
         }
@@ -164,22 +174,20 @@ static const NSUInteger kAPHValidLocationHistoryDeltaInterval = 3;              
                     }
                 }
             }
-            if (bestLocation == nil)
+            if (bestLocation == nil && manager.location.horizontalAccuracy <= kAPHFitnessTestRequiredHorizontalAccuracy)
             {
                 bestLocation = manager.location;
                 
+                CLLocationDistance distance = [bestLocation distanceFromLocation:self.temporaryLocationPoint];
+                
+                self.totalDistance += distance;
+                
+                //Return the updated distance
+                [self didUpdateLocation:self.totalDistance];
+                
+                self.temporaryLocationPoint = bestLocation;
+                
             }
-            
-            CLLocationDistance distance = [bestLocation distanceFromLocation:self.temporaryLocationPoint];
-            
-            self.totalDistance += distance;
-            
-            //Return the updated distance
-            [self didUpdateLocation:self.totalDistance];
-            
-            self.temporaryLocationPoint = bestLocation;
-            
-            NSLog(@"Cummulative distance %f", self.totalDistance);
         }
     }
     else
@@ -196,6 +204,13 @@ static const NSUInteger kAPHValidLocationHistoryDeltaInterval = 3;              
         self.prepLocationComplete = YES;
         [self.delegate locationManager:manager finishedPrepLocation:self.prepLocationComplete];
     }
+    
+    //TODO What to do in the instance GPS signal is weak?
+    /**
+     Estimate using GPS Accuracy, time and some average speed
+     How to account for resting?
+     
+     */
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
@@ -246,6 +261,23 @@ static const NSUInteger kAPHValidLocationHistoryDeltaInterval = 3;              
     if ( [self.delegate respondsToSelector:@selector(fitnessTestDistanceTracker:didUpdateLocations:)] ) {
         
         [self.delegate fitnessTestDistanceTracker:self didUpdateLocations:distance];
+    }
+}
+
+- (void) GPSSignalStrength:(CLLocationAccuracy)accuracy {
+    
+    if ([self.delegate respondsToSelector:@selector(fitnessTestDistanceTracker:weakGPSSignal:)]) {
+        [self.delegate fitnessTestDistanceTracker:self weakGPSSignal: [NSString stringWithFormat:@"Weak GPS Signal %.2f", accuracy]];
+    }
+}
+
+- (void) debugView:(CLLocationDistance)distance
+{
+    //TODO return the total distance traveled
+    
+    if ( [self.delegate respondsToSelector:@selector(fitnessTestDistanceTracker:debugView:)] ) {
+        
+        [self.delegate fitnessTestDistanceTracker:self debugView:distance];
     }
 }
 

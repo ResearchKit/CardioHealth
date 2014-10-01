@@ -55,6 +55,9 @@ int secondsLeft;
     // Dispose of any resources that can be recreated.
 }
 
+/*********************************************************************************/
+#pragma mark - Private Methods
+/*********************************************************************************/
 - (void)updateCounter:(NSTimer *)theTimer {
     if(secondsLeft > 0 ){
         secondsLeft -- ;
@@ -76,9 +79,16 @@ int secondsLeft;
     {
         self.timer = nil;
     }
-
+    
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateCounter:) userInfo:nil repeats:YES];
+    
+}
 
+-(void)dismiss:(UIAlertController*)alert
+{
+    [alert dismissViewControllerAnimated:YES completion:^{
+        NSLog(@"Dismissing gps signal strength");
+    }];
 }
 
 /*********************************************************************************/
@@ -109,10 +119,49 @@ int secondsLeft;
  * @brief Did update locations.
  */
 - (void)fitnessTestDistanceTracker:(APHFitnessTestDistanceTracker *)parameters didUpdateLocations:(CLLocationDistance)distance {
+
+    self.myDistanceLabel.text = [NSString stringWithFormat:@"%.2f Meters", distance];
+}
+
+- (void)locationManager:(CLLocationManager *)locationManager finishedPrepLocation:(BOOL)finishedPrep {
+    if (finishedPrep) {
+        [self.startWalking setEnabled:YES];
+    }
+}
+
+/**
+ * @brief Signal strength changed
+ */
+- (void)locationManager:(CLLocationManager*)locationManager signalStrengthChanged:(CLLocationAccuracy)signalStrength {
+    
+}
+
+/**
+ * @brief GPS is consistently weak
+ */
+- (void)locationManagerSignalConsistentlyWeak:(CLLocationManager*)manager {
+    
+}
+
+- (void)fitnessTestDistanceTracker:(APHFitnessTestDistanceTracker *)distanceTracker weakGPSSignal:(NSString *)message {
+    UIAlertController *alertController = [UIAlertController
+                                          alertControllerWithTitle:@"GPS Signal"
+                                          message:message
+                                          preferredStyle:UIAlertControllerStyleActionSheet];
+
+    [self presentViewController:alertController animated:YES completion:nil];
+
+    [self performSelector:@selector(dismiss:) withObject:alertController afterDelay:4];
+}
+/**
+ * @brief Debug text
+ */
+- (void)fitnessTestDistanceTracker:(APHFitnessTestDistanceTracker *)distanceTracker debugView:(double)object {
 //    UIAlertController *alertController = [UIAlertController
 //                                          alertControllerWithTitle:@"Updates"
-//                                          message:[NSString stringWithFormat:@"%f", location]
-//                                          preferredStyle:UIAlertControllerStyleAlert];
+//                                          message:[NSString stringWithFormat:@"%f", object]
+//                                          preferredStyle:UIAlertControllerStyleActionSheet];
+//    
 //    UIAlertAction *cancelAction = [UIAlertAction
 //                                   actionWithTitle:NSLocalizedString(@"Cancel", @"Cancel action")
 //                                   style:UIAlertActionStyleCancel
@@ -134,35 +183,9 @@ int secondsLeft;
 //    
 //    [self presentViewController:alertController animated:YES completion:nil];
     
-    self.myDistanceLabel.text = [NSString stringWithFormat:@"%.2f Meters", distance];
-}
-
-- (void)locationManager:(CLLocationManager *)locationManager finishedPrepLocation:(BOOL)finishedPrep {
-    if (finishedPrep) {
-        [self.startWalking setEnabled:YES];
-    }
-}
-
-/**
- * @brief Signal strength changed
- */
-- (void)locationManager:(CLLocationManager*)locationManager signalStrengthChanged:(APHLocationManagerGPSSignalStrenght)signalStrength {
     
 }
 
-/**
- * @brief GPS is consistently weak
- */
-- (void)locationManagerSignalConsistentlyWeak:(CLLocationManager*)manager {
-    
-}
-
-/**
- * @brief Debug text
- */
-- (void)locationManager:(CLLocationManager *)locationManager debugText:(NSString *)text {
-    
-}
 
 /*********************************************************************************/
 #pragma mark - IBAction methods

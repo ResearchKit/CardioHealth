@@ -14,7 +14,7 @@
  Fitness test distance tracker is going to be used to judge distance between all geolocation points beginning from start: and ending at stop:.
  
  */
-typedef NS_ENUM(NSInteger, APHLocationManagerGPSSignalStrenght) {
+typedef NS_ENUM(NSInteger, APHLocationManagerGPSSignalStrength) {
     APHLocationManagerGPSSignalStrengthInvalid = 0,
     APHLocationManagerGPSSignalStrengthWeak = 1,
     APHLocationManagerGPSSignalStrengthStrong = 2
@@ -69,27 +69,27 @@ typedef NS_ENUM(NSInteger, APHLocationManagerGPSSignalStrenght) {
 /**
  * @brief Location has failed to update.
  */
-- (void)fitnessTestDistanceTracker:(APHFitnessTestDistanceTracker *)parameters didFailToUpdateLocationWithError:(NSError *)error;
+- (void)fitnessTestDistanceTracker:(APHFitnessTestDistanceTracker *)distanceTracker didFailToUpdateLocationWithError:(NSError *)error;
 
 /**
  * @brief Location updates did pause.
  */
-- (void)fitnessTestDistanceTracker:(APHFitnessTestDistanceTracker *)parameters didPauseLocationTracking:(CLLocationManager *)manager;
+- (void)fitnessTestDistanceTracker:(APHFitnessTestDistanceTracker *)distanceTracker didPauseLocationTracking:(CLLocationManager *)manager;
 
 /**
  * @brief Location updates did resume.
  */
-- (void)fitnessTestDistanceTracker:(APHFitnessTestDistanceTracker *)parameters didResumeLocationTracking:(CLLocationManager *)manager;
+- (void)fitnessTestDistanceTracker:(APHFitnessTestDistanceTracker *)distanceTracker didResumeLocationTracking:(CLLocationManager *)manager;
 
 /**
  * @brief Did update locations.
  */
-- (void)fitnessTestDistanceTracker:(APHFitnessTestDistanceTracker *)parameters didUpdateLocations:(CLLocationDistance)distance;
+- (void)fitnessTestDistanceTracker:(APHFitnessTestDistanceTracker *)distanceTracker didUpdateLocations:(CLLocationDistance)distance;
 
 /**
  * @brief Signal strength changed
  */
-- (void)locationManager:(CLLocationManager*)locationManager signalStrengthChanged:(APHLocationManagerGPSSignalStrenght)signalStrength;
+- (void)locationManager:(CLLocationManager*)locationManager signalStrengthChanged:(CLLocationAccuracy)signalStrength;
 
 /**
  * @brief GPS is consistently weak
@@ -104,6 +104,11 @@ typedef NS_ENUM(NSInteger, APHLocationManagerGPSSignalStrenght) {
 /**
  * @brief Debug text
  */
-- (void)locationManager:(CLLocationManager *)locationManager debugText:(NSString *)text;
+- (void)fitnessTestDistanceTracker:(APHFitnessTestDistanceTracker *)distanceTracker weakGPSSignal:(NSString *)message;
+
+/**
+ * @brief Debug text
+ */
+- (void)fitnessTestDistanceTracker:(APHFitnessTestDistanceTracker *)distanceTracker debugView:(double)object;
 
 @end
