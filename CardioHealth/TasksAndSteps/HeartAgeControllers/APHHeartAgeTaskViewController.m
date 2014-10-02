@@ -204,6 +204,63 @@ static NSString *kHeartAgeQuestionHypertension = @"HeartAgeQuestion12";
     [super viewDidLoad];
     
     self.showsProgressInNavigationBar = NO;
+    
+    // Create the lookup table for the Heart Age
+    self.heartAgeParametersLookUp = @{
+                            kLookupOptimalRiskFactors: @{
+                                    kLookupOptimalRiskFactorTotalCholesterol: @170,
+                                    kLookupOptimalRiskFactorHDL: @50,
+                                    kLookupOptimalRiskFactorSystolicBP: @110
+                                },
+                            kLookupGenderFemale: @{
+                                    kLookupEthnicityAfricanAmerican: @{
+                                            kLookupParameters: @{
+                                                    kLookupPopulationMean: @86.61,
+                                                    kLookupBaseline: @0.9533,
+                                                    kLookupCoefficient1: @61.5776393901894,
+                                                    kLookupCoefficient2: @6.00638641400169,
+                                                    kLookupCoefficient3: @0,
+                                                    kLookupCoefficients: @[@17.1141, @0, @0.9396, @0, @-18.9196, @4.4748,
+                                                                           @29.2907, @-6.4321, @27.8197, @-6.0873, @0.6908, @0, @0.8738]
+                                                }
+                                        },
+                                    kLookupEthnicityOther: @{
+                                            kLookupParameters: @{
+                                                    kLookupPopulationMean: @-29.18,
+                                                    kLookupBaseline: @0.9665,
+                                                    kLookupCoefficient1: @25.6201025458129,
+                                                    kLookupCoefficient2: @-33.4729158888813,
+                                                    kLookupCoefficient3: @4.884,
+                                                    kLookupCoefficients: @[@-29.799, @4.884, @13.54, @-3.114, @-13.578, @3.149,
+                                                                           @2.019, @0, @1.957, @0, @7.574,@-1.665, @0.661]
+                                                }
+                                        }
+                                },
+                            kLookupGenderMale: @{
+                                    kLookupEthnicityAfricanAmerican: @{
+                                            kLookupParameters: @{
+                                                    kLookupPopulationMean: @19.54,
+                                                    kLookupBaseline: @0.8954,
+                                                    kLookupCoefficient1: @8.85318904704122,
+                                                    kLookupCoefficient2: @2.469,
+                                                    kLookupCoefficient3: @0,
+                                                    kLookupCoefficients: @[@2.4690, @0.0000, @0.3020, @0.0000, @-0.3070,
+                                                                           @0.0000, @1.9160, @0.0000, @1.8090, @0.0000, @0.5490, @0.0000, @0.6450]
+                                                    }
+                                            },
+                                    kLookupEthnicityOther: @{
+                                            kLookupParameters: @{
+                                                    kLookupPopulationMean: @-29.18,
+                                                    kLookupBaseline: @0.9665,
+                                                    kLookupCoefficient1: @25.6201025458129,
+                                                    kLookupCoefficient2: @-33.4729158888813,
+                                                    kLookupCoefficient3: @4.884,
+                                                    kLookupCoefficients: @[@12.344, @0, @11.853, @-2.664, @-7.990, @1.769,
+                                                                           @1.797, @0, @1.764, @0, @7.837, @-1.795, @0.658]
+                                                    }
+                                        }
+                                }
+                           };
 }
 
 - (void)didReceiveMemoryWarning {
