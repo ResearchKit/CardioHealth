@@ -26,6 +26,10 @@ static NSString *kHeartAgeQuestionHypertension = @"HeartAgeQuestion12";
 
 @interface APHHeartAgeTaskViewController ()
 
+// This property will hold the parameters that will be used
+// for calculating the heart age, 10 year, and lifetime risk table.
+@property (nonatomic, strong) NSDictionary *heartAgeParametersLookUp;
+
 @end
 
 @implementation APHHeartAgeTaskViewController
