@@ -62,13 +62,28 @@ static NSString *kHeartAgeQuestionHypertension = @"HeartAgeQuestion12";
     }
     
     {
-        RKAnswerFormat *format = [RKChoiceAnswerFormat choiceAnswerWithOptions:@[@"African American", @"Caucasian"]
-                                                                         style:RKChoiceAnswerStyleMultipleChoice];
+        RKAnswerFormat *format = [RKChoiceAnswerFormat choiceAnswerWithOptions:@[@"Female", @"Male"]
+                                                                         style:RKChoiceAnswerStyleSingleChoice];
+        
+        RKQuestionStep *step = [RKQuestionStep questionStepWithIdentifier:kHeartAgeQuestionGender
+                                                                     name:@"Gender"
+                                                                 question:NSLocalizedString(@"What is your biological sex?", @"What is your biological sex?")
+                                                                   answer:format];
+        step.optional = NO;
+        
+        [steps addObject:step];
+    }
+    
+    {
+        RKAnswerFormat *format = [RKChoiceAnswerFormat choiceAnswerWithOptions:@[@"African American", @"Other"]
+                                                                         style:RKChoiceAnswerStyleSingleChoice];
 
         RKQuestionStep *step = [RKQuestionStep questionStepWithIdentifier:kHeartAgeQuestionEthnicity
                                                                      name:@"Ethnicity"
                                                                  question:@"What is your ethnic group?"
                                                                    answer:format];
+        step.optional = NO;
+        
         [steps addObject:step];
     }
     
@@ -122,9 +137,30 @@ static NSString *kHeartAgeQuestionHypertension = @"HeartAgeQuestion12";
     }
     
     {
+        RKQuestionStep *step = [RKQuestionStep questionStepWithIdentifier:kHeartAgeQuestionSmokeB
+                                                                     name:@"SmokeB"
+                                                                 question:NSLocalizedString(@"Do you still smoke?", @"Do you still smoke?")
+                                                                   answer:[RKBooleanAnswerFormat new]];
+        step.optional = NO;
+        
+        [steps addObject:step];
+    }
+    
+    {
         RKQuestionStep *step = [RKQuestionStep questionStepWithIdentifier:kHeartAgeQuestionDiabetes
                                                                      name:@"MedicalConditions"
-                                                                 question:NSLocalizedString(@"Do you have the Diabetes?", @"Do you have the Diabetes?")
+                                                                 question:NSLocalizedString(@"Do you have Diabetes?", @"Do you have Diabetes?")
+                                                                   answer:[RKBooleanAnswerFormat new]];
+        step.optional = NO;
+        
+        [steps addObject:step];
+    }
+    
+    {
+        RKQuestionStep *step = [RKQuestionStep questionStepWithIdentifier:kHeartAgeQuestionHypertension
+                                                                     name:@"Hypertension"
+                                                                 question:NSLocalizedString(@"Are you being treated for Hypertension?",
+                                                                                            @"Are you being treated for Hypertension?")
                                                                    answer:[RKBooleanAnswerFormat new]];
         step.optional = NO;
         
