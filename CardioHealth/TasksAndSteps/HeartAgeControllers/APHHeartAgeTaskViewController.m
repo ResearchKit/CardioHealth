@@ -9,6 +9,7 @@
 #import "APHHeartAgeResultsViewController.h"
 #import <math.h>
 
+// Question Keys
 static NSString *kHeartAgeIntroduction = @"HeartAgeIntroduction";
 static NSString *kHeartAgeQuestionAge = @"HeartAgeQuestion1";
 static NSString *kHeartAgeQuestionTotalCholesterol = @"HeartAgeQuestion2";
@@ -19,6 +20,9 @@ static NSString *kHeartAgeQuestionDiabetes = @"HeartAgeQuestion6";
 static NSString *kHeartAgeQuestionFamilyDiabetes = @"HeartAgeQuestion7";
 static NSString *kHeartAgeQuestionFamilyHeart = @"HeartAgeQuestion8";
 static NSString *kHeartAgeQuestionEthnicity = @"HeartAgeQuestion9";
+static NSString *kHeartAgeQuestionGender = @"HeartAgeQuestion10";
+static NSString *kHeartAgeQuestionSmokeB = @"HeartAgeQuestion11";
+static NSString *kHeartAgeQuestionHypertension = @"HeartAgeQuestion12";
 
 @interface APHHeartAgeTaskViewController ()
 
