@@ -50,8 +50,7 @@ static NSString *kHeartAgeQuestionHypertension = @"HeartAgeQuestion12";
     
     {
         RKNumericAnswerFormat *format = [RKNumericAnswerFormat integerAnswerWithUnit:nil];
-        format.minimum = @(17);
-        format.maximum = @(99);
+        format.minimum = @(1);
         
         RKQuestionStep* step = [RKQuestionStep questionStepWithIdentifier:kHeartAgeQuestionAge
                                                                      name:@"YourAge"
