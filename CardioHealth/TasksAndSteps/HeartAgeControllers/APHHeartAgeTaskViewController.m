@@ -7,6 +7,7 @@
 //
 #import "APHHeartAgeTaskViewController.h"
 #import "APHHeartAgeResultsViewController.h"
+#import <math.h>
 
 static NSString *kHeartAgeIntroduction = @"HeartAgeIntroduction";
 static NSString *kHeartAgeQuestionAge = @"HeartAgeQuestion1";
