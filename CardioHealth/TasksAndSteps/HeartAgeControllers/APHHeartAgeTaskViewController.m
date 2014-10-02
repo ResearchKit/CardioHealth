@@ -249,19 +249,18 @@ static NSString *kHeartAgeQuestionHypertension = @"HeartAgeQuestion12";
     
     if ([result isKindOfClass:[RKSurveyResult class]]) {
         RKSurveyResult *surveyResult = (RKSurveyResult *)result;
-        NSUInteger personAge = 0;
+        //NSUInteger personAge = 0;
+        NSMutableDictionary *surveyResultsDictionary = [NSMutableDictionary dictionary];
         
         for (RKQuestionResult *questionResult in surveyResult.surveyResults) {
             NSLog(@"%@ = [%@] %@ ", [[questionResult itemIdentifier] stringValue], questionResult.answer.class, questionResult.answer);
-            if ([[[questionResult itemIdentifier] stringValue] isEqualToString:kHeartAgeQuestionAge]) {
-                personAge = [(NSNumber *)questionResult.answer integerValue];
-            }
+            [surveyResultsDictionary setObject:(NSNumber *)questionResult.answer forKeyedSubscript:[[questionResult itemIdentifier] stringValue]];
         }
         
         APHHeartAgeResultsViewController *heartAgeResultsVC = [[APHHeartAgeResultsViewController alloc] init];
         heartAgeResultsVC.taskProgress = 0.65;
-        heartAgeResultsVC.actualAge = personAge;
-        heartAgeResultsVC.heartAge = [self calculateHeartAge:surveyResult];
+        heartAgeResultsVC.actualAge = [surveyResultsDictionary[kHeartAgeQuestionAge] integerValue];
+        heartAgeResultsVC.heartAge = [self calculateHeartAge:surveyResultsDictionary];
         heartAgeResultsVC.tenYearRisk = @"Your 10-Year risk assessment.";
         heartAgeResultsVC.someImprovement = @"Some suggestions to improve your heart age.";
         
