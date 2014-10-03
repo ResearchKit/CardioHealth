@@ -34,7 +34,11 @@
     self.ageVersusHeartAge.age = self.actualAge;
     self.ageVersusHeartAge.heartAge = self.heartAge;
     
-    self.tenYearRiskText.text = self.tenYearRisk;
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setNumberStyle:NSNumberFormatterPercentStyle];
+    NSString *tenYearRiskPercentage = [numberFormatter stringFromNumber:self.tenYearRisk];
+    NSString *tenYearRiskCaption = [NSString stringWithFormat:@"You have an estimated %@ 10-y risk of hard Atherosclerotic Cardio Vascular Disease.", tenYearRiskPercentage];
+    self.tenYearRiskText.text = tenYearRiskCaption;
     self.improvementText.text = self.someImprovement;
 }
 
