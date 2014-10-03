@@ -434,6 +434,16 @@ static NSString *kLookupCoefficient3 = @"coefficient-3";
     return @{@"age": [NSNumber numberWithDouble:heartAge], @"tenYearRisk": [NSNumber numberWithDouble:individualEstimatedTenYearRisk]};
 }
 
+/**
+ * @brief   Searches the estimated 10 year risk table that generated for the given gender and ethnicity.
+ * @param   riskValue   A value that will be matched (or nearly matched) in the lookup table.
+ * @param   gender      Gender of the person that is taking the survey.
+ * @param   ethnicity   Ethnicity of the person that is taking the survey.
+ * @return  Returns the heart age as an NSInteger of the person taking the survey.
+ * @note    This method calls the generateHeartAgeLookupTableForGender:ethnicity method to build the lookup
+ *          table for the given gender and ethnicity.
+ * @see     generateHeartAgeLookupTableForGender:ethnicity
+ */
 - (NSInteger)findHeartAgeForRiskValue:(double)riskValue forGender:(NSString *)gender forEthnicity:(NSString *)ethnicity
 {
     
