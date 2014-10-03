@@ -379,17 +379,16 @@ static NSString *kLifetimeRiskFactorMajorGreaterThanEqualToTwo = @"risk-factor-m
  */
 - (NSDictionary *)calculateHeartAgeAndTenYearRisk:(NSDictionary *)results
 {
-    NSUInteger heartAge = 0;
     NSUInteger actualAge = [results[kHeartAgeQuestionAge] integerValue];
     
     NSString *gender = results[kHeartAgeQuestionGender];
     NSString *ethnicity = results[kHeartAgeQuestionEthnicity];
     
     // Coefficients used for computing individual sum.
-    NSArray *coefficients = self.heartAgeParametersLookUp[gender][ethnicity][kLookupParameters][kLookupCoefficients];
+    NSArray *coefficients = self.heartAgeParametersLookup[gender][ethnicity][kLookupParameters][kLookupCoefficients];
     
-    double baseline = [self.heartAgeParametersLookUp[gender][ethnicity][kLookupParameters][kLookupBaseline] doubleValue];
-    double populationMean = [self.heartAgeParametersLookUp[gender][ethnicity][kLookupParameters][kLookupPopulationMean] doubleValue];
+    double baseline = [self.heartAgeParametersLookup[gender][ethnicity][kLookupParameters][kLookupBaseline] doubleValue];
+    double populationMean = [self.heartAgeParametersLookup[gender][ethnicity][kLookupParameters][kLookupPopulationMean] doubleValue];
     
     // Computing log of data that is used in multiple place for computing other coefficients.
     double logActualAge = log(actualAge);
@@ -516,11 +515,11 @@ static NSString *kLifetimeRiskFactorMajorGreaterThanEqualToTwo = @"risk-factor-m
 {
     NSMutableArray *lookup = [NSMutableArray array];
     
-    double baseline = [self.heartAgeParametersLookUp[gender][ethnicity][kLookupParameters][kLookupBaseline] doubleValue];
-    double populationMean = [self.heartAgeParametersLookUp[gender][ethnicity][kLookupParameters][kLookupPopulationMean] doubleValue];
-    double coefficient_1 = [self.heartAgeParametersLookUp[gender][ethnicity][kLookupParameters][kLookupCoefficient1] doubleValue];
-    double coefficient_2 = [self.heartAgeParametersLookUp[gender][ethnicity][kLookupParameters][kLookupCoefficient2] doubleValue];
-    double coefficient_3 = [self.heartAgeParametersLookUp[gender][ethnicity][kLookupParameters][kLookupCoefficient3] doubleValue];
+    double baseline = [self.heartAgeParametersLookup[gender][ethnicity][kLookupParameters][kLookupBaseline] doubleValue];
+    double populationMean = [self.heartAgeParametersLookup[gender][ethnicity][kLookupParameters][kLookupPopulationMean] doubleValue];
+    double coefficient_1 = [self.heartAgeParametersLookup[gender][ethnicity][kLookupParameters][kLookupCoefficient1] doubleValue];
+    double coefficient_2 = [self.heartAgeParametersLookup[gender][ethnicity][kLookupParameters][kLookupCoefficient2] doubleValue];
+    double coefficient_3 = [self.heartAgeParametersLookup[gender][ethnicity][kLookupParameters][kLookupCoefficient3] doubleValue];
     
     for (NSInteger age=17; age <= 100; age++) {
         double coefficientSum =  coefficient_1 + coefficient_2 * log(age) + coefficient_3 * pow(log(age), 2.0);
