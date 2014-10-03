@@ -315,20 +315,12 @@ static NSString *kLookupCoefficient3 = @"coefficient-3";
 
 #pragma  mark  -  Task View Controller Delegate Methods
 
-- (void)taskViewControllerDidComplete:(RKTaskViewController *)taskViewController
-{
-    NSLog(@"Task Did Complete: triggered");
-}
-
 - (void)taskViewController:(RKTaskViewController *)taskViewController didProduceResult:(RKResult *)result
 {
     //[super taskViewController:taskViewController didProduceResult:result];
     
-    NSLog(@"didProduceResult = %@", result);
-    
     if ([result isKindOfClass:[RKSurveyResult class]]) {
         RKSurveyResult *surveyResult = (RKSurveyResult *)result;
-        //NSUInteger personAge = 0;
         NSMutableDictionary *surveyResultsDictionary = [NSMutableDictionary dictionary];
         
         for (RKQuestionResult *questionResult in surveyResult.surveyResults) {
@@ -349,7 +341,6 @@ static NSString *kLookupCoefficient3 = @"coefficient-3";
 
 - (NSUInteger)calculateHeartAge:(RKSurveyResult *)results
 {
-    return 25;
 }
 
 @end
