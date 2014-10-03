@@ -268,11 +268,11 @@ static NSString *kLookupCoefficient3 = @"coefficient-3";
                                             },
                                     kLookupEthnicityOther: @{
                                             kLookupParameters: @{
-                                                    kLookupPopulationMean: @-29.18,
-                                                    kLookupBaseline: @0.9665,
-                                                    kLookupCoefficient1: @25.6201025458129,
-                                                    kLookupCoefficient2: @-33.4729158888813,
-                                                    kLookupCoefficient3: @4.884,
+                                                    kLookupPopulationMean: @61.18,
+                                                    kLookupBaseline: @0.9144,
+                                                    kLookupCoefficient1: @37.9092024262437,
+                                                    kLookupCoefficient2: @5.58260166030049,
+                                                    kLookupCoefficient3: @0,
                                                     kLookupCoefficients: @[@12.344, @0, @11.853, @-2.664, @-7.990, @1.769,
                                                                            @1.797, @0, @1.764, @0, @7.837, @-1.795, @0.658]
                                                     }
