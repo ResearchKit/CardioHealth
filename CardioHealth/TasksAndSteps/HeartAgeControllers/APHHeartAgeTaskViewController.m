@@ -343,8 +343,103 @@ static NSString *kLookupCoefficient3 = @"coefficient-3";
     }
 }
 
-- (NSUInteger)calculateHeartAge:(RKSurveyResult *)results
+/**
+ * @brief  This is the entry point into calculating the heart age and all associated coefficients.
+ * @param  results   an NSDictionary of results collected from the survey.
+ * @return NSDictionary is returned with the keys: 'age' and 'tenYearRisk' whoes value is an NSNumber.
+ * @note   This method relies on the heartAgeLookup property to retrieve constant/precomputed values
+ *         that are needed to perform all of the calculations.
+ */
+- (NSDictionary *)calculateHeartAgeAndTenYearRisk:(NSDictionary *)results
 {
+    NSUInteger heartAge = 0;
+    NSUInteger actualAge = [results[kHeartAgeQuestionAge] integerValue];
+    
+    NSString *gender = results[kHeartAgeQuestionGender];
+    NSString *ethnicity = results[kHeartAgeQuestionEthnicity];
+    
+    // Coefficients used for computing individual sum.
+    NSArray *coefficients = self.heartAgeParametersLookUp[gender][ethnicity][kLookupParameters][kLookupCoefficients];
+    
+    double baseline = [self.heartAgeParametersLookUp[gender][ethnicity][kLookupParameters][kLookupBaseline] doubleValue];
+    double populationMean = [self.heartAgeParametersLookUp[gender][ethnicity][kLookupParameters][kLookupPopulationMean] doubleValue];
+    
+    // Computing log of data that is used in multiple place for computing other coefficients.
+    double logActualAge = log(actualAge);
+    double logTotalCholesterol = log([results[kHeartAgeQuestionTotalCholesterol] doubleValue]);
+    double logHDLC = log([results[kHeartAgeQuestionHDL] doubleValue]);
+    double logTreatedSystolic = log([results[kHeartAgeQuestionSystolicBP] doubleValue]) * [results[kHeartAgeQuestionHypertension] integerValue];
+    double logUnTreatedSystolic = log([results[kHeartAgeQuestionSystolicBP] doubleValue]) * (1 - [results[kHeartAgeQuestionHypertension] integerValue]);
+    
+    double individualSum = 0;
+    
+    // Looping through individual coefficients to compute the individual sum.
+    for (NSNumber *obj in coefficients) {
+        
+        NSUInteger idx = [coefficients indexOfObject:obj];
+        double coefficientTimesValue = 0;
+        
+        switch (idx) {
+            case 0:
+                coefficientTimesValue = logActualAge * [obj doubleValue];
+                break;
+            case 1:
+                coefficientTimesValue = pow(logActualAge, 2) * [obj doubleValue];
+                break;
+            case 2:
+                coefficientTimesValue = logTotalCholesterol * [obj doubleValue];
+                break;
+            case 3:
+                coefficientTimesValue = (logActualAge * logTotalCholesterol) * [obj doubleValue];
+                break;
+            case 4:
+                coefficientTimesValue = logHDLC * [obj doubleValue];
+                break;
+            case 5:
+                coefficientTimesValue = (logActualAge * logHDLC) * [obj doubleValue];
+                break;
+            case 6:
+                coefficientTimesValue = logTreatedSystolic * [obj doubleValue];
+                break;
+            case 7:
+                coefficientTimesValue = (logActualAge * logTreatedSystolic) * [obj doubleValue];
+                break;
+            case 8:
+                coefficientTimesValue = logUnTreatedSystolic * [obj doubleValue];
+                break;
+            case 9:
+                coefficientTimesValue = (logActualAge * logUnTreatedSystolic) * [obj doubleValue];
+                break;
+            case 10:
+                coefficientTimesValue = [results[kHeartAgeQuestionSmokeB] integerValue] * [obj doubleValue];
+                break;
+            case 11:
+                coefficientTimesValue = (logActualAge * [results[kHeartAgeQuestionSmokeB] integerValue]) * [obj doubleValue];
+                break;
+            case 12:
+                coefficientTimesValue = [results[kHeartAgeQuestionDiabetes] integerValue] * [obj doubleValue];
+                break;
+            default:
+                NSAssert(YES, @"You have more objects in the coefficient array.");
+                break;
+        }
+        
+        individualSum += coefficientTimesValue;
+        
+        NSLog(@"Coefficient x Value (%lu): %f", idx, coefficientTimesValue);
+    }
+    
+    NSLog(@"Individual Sum: %f", individualSum);
+    
+    // Estimated 10 year risk with Optimal Risk  Factors for an individual
+    double individualEstimatedTenYearRisk = 1 - pow(baseline, exp(individualSum - populationMean));
+    
+    NSLog(@"Estimated 10-Year Risk of Hard ASCVD: %f", individualEstimatedTenYearRisk);
+    
+    heartAge = [self findHeartAgeForRiskValue:individualEstimatedTenYearRisk forGender:gender forEthnicity:ethnicity];
+    
+    return @{@"age": [NSNumber numberWithDouble:heartAge], @"tenYearRisk": [NSNumber numberWithDouble:individualEstimatedTenYearRisk]};
+}
 }
 
 @end
