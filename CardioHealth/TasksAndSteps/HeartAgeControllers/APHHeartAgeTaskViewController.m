@@ -456,9 +456,15 @@ static NSString *kLifetimeRiskFactorMajorGreaterThanEqualToTwo = @"risk-factor-m
     // Estimated 10 year risk with Optimal Risk  Factors for an individual
     double individualEstimatedTenYearRisk = 1 - pow(baseline, exp(individualSum - populationMean));
     
-    heartAge = [self findHeartAgeForRiskValue:individualEstimatedTenYearRisk forGender:gender forEthnicity:ethnicity];
+    NSUInteger heartAge = [self findHeartAgeForRiskValue:individualEstimatedTenYearRisk forGender:gender forEthnicity:ethnicity];
+    NSUInteger lifetimeRiskFactor = [self lifetimeRisk:results];
     
-    return @{@"age": [NSNumber numberWithDouble:heartAge], @"tenYearRisk": [NSNumber numberWithDouble:individualEstimatedTenYearRisk]};
+    
+    return @{
+             @"age": [NSNumber numberWithDouble:heartAge],
+             @"tenYearRisk": [NSNumber numberWithDouble:individualEstimatedTenYearRisk],
+             @"lifetimeRisk": [NSNumber numberWithInteger:lifetimeRiskFactor]
+             };
 }
 
 /**
@@ -540,6 +546,48 @@ static NSString *kLifetimeRiskFactorMajorGreaterThanEqualToTwo = @"risk-factor-m
     sortedArray = [lookup sortedArrayUsingDescriptors:sortDescriptors];
     
     return sortedArray;
+}
+
+/**
+ * @brief   This method will compute the lifetime risk factor based on the results of the survey.
+ *          Lifetime Risk Factor is essentially a comparison based on the predefined ranges for
+ *          the data points that are provided in the survey (i.e. Systolic BP, Total Cholesterol, etc.).
+ *
+ *          The Atherosclerotic Cardio Vascular Disease is also a predefined, different based on gender,
+ *          constant that is the used to compute the lifetime risk factor for the person taking the survey.
+ *
+ * @param   results A dictionary of results that contain answer to the survey questions.
+ *
+ * @return  Returns the lifetime risk factor (NSInteger).
+ */
+- (NSInteger)lifetimeRisk:(NSDictionary *)results
+{
+    NSString *gender = results[kHeartAgeQuestionGender];
+    NSUInteger totalCholesterol = [results[kHeartAgeQuestionTotalCholesterol] integerValue];
+    NSUInteger systolicBP = [results[kHeartAgeQuestionSystolicBP] integerValue];
+    NSUInteger hypertension = [results[kHeartAgeQuestionHypertension] integerValue];
+    NSUInteger diabetes = [results[kHeartAgeQuestionDiabetes] integerValue];
+    NSUInteger smoker = [results[kHeartAgeQuestionSmoke] integerValue];
+    
+    
+    // The YES and NO are 1 and 0, respectively.
+    NSUInteger riskFactorAllOptimal = (totalCholesterol < 180) + ((systolicBP < 120) && (hypertension == 0));
+    NSUInteger riskFactorNotOptimal = ((totalCholesterol >= 180) && (totalCholesterol < 200)) + ((systolicBP >= 120) && (systolicBP < 140) && (hypertension == 0));
+    NSUInteger riskFactorElevated = ((totalCholesterol >= 200) && (totalCholesterol < 240)) + ((systolicBP >= 140) && (systolicBP < 160) && (hypertension == 0));
+    NSUInteger riskFactorMajor = (totalCholesterol >= 240) + (systolicBP > 160) + ((systolicBP > 160) + hypertension) + diabetes + smoker;
+    
+    NSUInteger personRiskFactorAllOptimal = ((riskFactorAllOptimal == 2) && (riskFactorMajor == 0)) * [self.heartAgeParametersLookup[gender][kLookupLifetimeRiskFactor][kLifetimeRiskFactorOptimal] integerValue];
+    
+    NSUInteger personRiskFactorNotOptimal = ((riskFactorNotOptimal >= 1) && (riskFactorElevated == 0) && (riskFactorMajor == 0)) * [self.heartAgeParametersLookup[gender][kLookupLifetimeRiskFactor][kLifetimeRiskFactorNotOptimal] integerValue];;
+    NSUInteger personRiskFactorElevated = ((riskFactorElevated >= 1) && (riskFactorMajor == 0)) * [self.heartAgeParametersLookup[gender][kLookupLifetimeRiskFactor][kLifetimeRiskFactorElevated] integerValue];;
+    NSUInteger personRiskFactorMajor = (riskFactorMajor == 1) * [self.heartAgeParametersLookup[gender][kLookupLifetimeRiskFactor][kLifetimeRiskFactorMajor] integerValue];;
+    NSUInteger personRiskFactorMajorGreaterThanEqualToTwo = (riskFactorMajor >= 2) * [self.heartAgeParametersLookup[gender][kLookupLifetimeRiskFactor][kLifetimeRiskFactorMajorGreaterThanEqualToTwo] integerValue];;
+    
+    
+    
+    NSUInteger lifetimeRiskFactor = personRiskFactorAllOptimal + personRiskFactorNotOptimal + personRiskFactorElevated + personRiskFactorMajor + personRiskFactorMajorGreaterThanEqualToTwo;
+    
+    return lifetimeRiskFactor;
 }
 
 @end
