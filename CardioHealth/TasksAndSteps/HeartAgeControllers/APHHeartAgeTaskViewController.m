@@ -329,11 +329,14 @@ static NSString *kLookupCoefficient3 = @"coefficient-3";
             [surveyResultsDictionary setObject:(NSNumber *)questionResult.answer forKeyedSubscript:[[questionResult itemIdentifier] stringValue]];
         }
         
+        // Kickoff heart age calculations
+        NSDictionary *heartAgeInfo = [self calculateHeartAgeAndTenYearRisk:surveyResultsDictionary];
+        
         APHHeartAgeResultsViewController *heartAgeResultsVC = [[APHHeartAgeResultsViewController alloc] init];
         heartAgeResultsVC.taskProgress = 0.65;
         heartAgeResultsVC.actualAge = [surveyResultsDictionary[kHeartAgeQuestionAge] integerValue];
-        heartAgeResultsVC.heartAge = [self calculateHeartAge:surveyResultsDictionary];
-        heartAgeResultsVC.tenYearRisk = @"Your 10-Year risk assessment.";
+        heartAgeResultsVC.heartAge = [heartAgeInfo[@"age"] integerValue];
+        heartAgeResultsVC.tenYearRisk = heartAgeInfo[@"tenYearRisk"];
         heartAgeResultsVC.someImprovement = @"Some suggestions to improve your heart age.";
         
         [self pushViewController:heartAgeResultsVC animated:YES];
