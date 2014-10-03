@@ -8,10 +8,10 @@
 
 @import APCAppleCore;
 
-@class APCProfile;
+@class APCUser;
 
 @interface APHSettingsViewController : APCUserInfoViewController
 
-@property (nonatomic, strong) APCProfile *profile;
+@property (nonatomic, strong) APCUser *user;
 
 @end

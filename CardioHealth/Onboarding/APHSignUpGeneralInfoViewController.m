@@ -27,7 +27,7 @@
 {
     self = [super init];
     if (self) {
-        self.profile = [APCProfile new];
+        self.user = [APCUser new];
         self.itemsOrder = [NSMutableArray new];
         
         [self prepareFields];
@@ -44,7 +44,7 @@
         field.style = UITableViewCellStyleValue1;
         field.caption = NSLocalizedString(@"Username", @"");
         field.placeholder = NSLocalizedString(@"Add Username", @"");
-        field.value = self.profile.userName;
+        field.value = self.user.userName;
         field.keyboardType = UIKeyboardTypeDefault;
         field.returnKeyType = UIReturnKeyNext;
         field.clearButtonMode = UITextFieldViewModeWhileEditing;
@@ -60,7 +60,7 @@
         field.style = UITableViewCellStyleValue1;
         field.caption = NSLocalizedString(@"Password", @"");
         field.placeholder = NSLocalizedString(@"Add Password", @"");
-        field.value = self.profile.password;
+        //field.value = self.user.password;
         field.secure = YES;
         field.keyboardType = UIKeyboardTypeDefault;
         field.returnKeyType = UIReturnKeyNext;
@@ -77,7 +77,7 @@
         field.style = UITableViewCellStyleValue1;
         field.caption = NSLocalizedString(@"Email", @"");
         field.placeholder = NSLocalizedString(@"Add Email Address", @"");
-        field.value = self.profile.email;
+        field.value = self.user.email;
         field.keyboardType = UIKeyboardTypeEmailAddress;
         field.returnKeyType = UIReturnKeyNext;
         field.clearButtonMode = UITextFieldViewModeWhileEditing;
@@ -94,7 +94,7 @@
         field.selectionStyle = UITableViewCellSelectionStyleGray;
         field.caption = NSLocalizedString(@"Birthdate", @"");
         field.placeholder = NSLocalizedString(@"MMMM DD, YYYY", @"");
-        field.date = self.profile.dateOfBirth;
+        field.date = self.user.birthDate;
         field.datePickerMode = UIDatePickerModeDate;
         field.identifier = NSStringFromClass([APCTableViewDatePickerItem class]);
         
@@ -106,8 +106,8 @@
     {
         APCTableViewSegmentItem *field = [APCTableViewSegmentItem new];
         field.style = UITableViewCellStyleValue1;
-        field.segments = [APCProfile sexTypesInStringValue];
-        field.selectedIndex = [APCProfile stringIndexFromSexType:self.profile.gender];
+        field.segments = [APCUser sexTypesInStringValue];
+        field.selectedIndex = [APCUser stringIndexFromSexType:self.user.biologicalSex];
         field.identifier = NSStringFromClass([APCTableViewSegmentItem class]);
         
         [items addObject:field];
@@ -321,28 +321,21 @@
         
         switch (order.integerValue) {
             case APCSignUpUserInfoItemUserName:
-                self.profile.userName = [(APCTableViewTextFieldItem *)item value];
+                self.user.userName = [(APCTableViewTextFieldItem *)item value];
                 break;
                 
             case APCSignUpUserInfoItemPassword:
-                self.profile.password = [(APCTableViewTextFieldItem *)item value];
+                //self.user.password = [(APCTableViewTextFieldItem *)item value];
                 break;
                 
             case APCSignUpUserInfoItemEmail:
-                self.profile.email = [(APCTableViewTextFieldItem *)item value];
-                break;
-                
-            case APCSignUpUserInfoItemDateOfBirth:
-                self.profile.dateOfBirth = [(APCTableViewDatePickerItem *)item date];
-                break;
-                
-            case APCSignUpUserInfoItemGender:
-                self.profile.gender = [APCProfile sexTypeFromStringValue:[APCProfile sexTypesInStringValue][[(APCTableViewSegmentItem *)item selectedIndex]]];
+                self.user.email = [(APCTableViewTextFieldItem *)item value];
                 break;
                 
             default:
-//#warning ASSERT_MESSAGE Require
-                NSAssert(NO, @"ASSER_MESSAGE");
+            {
+                //Do nothing for some types as they are readonly attributes
+            }
                 break;
         }
     }
@@ -363,7 +356,7 @@
 
 - (void) next {
     APHSignUpMedicalInfoViewController *medicalInfoViewController = [APHSignUpMedicalInfoViewController new];
-    medicalInfoViewController.profile = self.profile;
+    medicalInfoViewController.user = self.user;
     
     [self.navigationController pushViewController:medicalInfoViewController animated:YES];
 }

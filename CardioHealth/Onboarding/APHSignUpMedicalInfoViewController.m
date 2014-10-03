@@ -39,10 +39,10 @@
         field.selectionStyle = UITableViewCellSelectionStyleGray;
         field.caption = NSLocalizedString(@"Medical Conditions", @"");
         field.detailDiscloserStyle = YES;
-        field.pickerData = @[ [APCProfile medicalConditions] ];
+        field.pickerData = @[ [APCUser medicalConditions] ];
         
-        if (self.profile.medicalCondition) {
-            field.selectedRowIndices = @[ @([field.pickerData[0] indexOfObject:self.profile.medicalCondition]) ];
+        if (self.user.medicalConditions) {
+            field.selectedRowIndices = @[ @([field.pickerData[0] indexOfObject:self.user.medicalConditions]) ];
         }
         else {
             field.selectedRowIndices = @[ @(0) ];
@@ -58,10 +58,10 @@
         field.selectionStyle = UITableViewCellSelectionStyleGray;
         field.caption = NSLocalizedString(@"Medication", @"");
         field.detailDiscloserStyle = YES;
-        field.pickerData = @[ [APCProfile medications] ];
+        field.pickerData = @[ [APCUser medications] ];
         
-        if (self.profile.medication) {
-            field.selectedRowIndices = @[ @([field.pickerData[0] indexOfObject:self.profile.medication]) ];
+        if (self.user.medications) {
+            field.selectedRowIndices = @[ @([field.pickerData[0] indexOfObject:self.user.medications]) ];
         }
         else {
             field.selectedRowIndices = @[ @(0) ];
@@ -77,8 +77,8 @@
         field.selectionStyle = UITableViewCellSelectionStyleGray;
         field.caption = NSLocalizedString(@"Blood Type", @"");
         field.detailDiscloserStyle = YES;
-        field.selectedRowIndices = @[ @(self.profile.bloodType) ];
-        field.pickerData = @[ [APCProfile bloodTypeInStringValues] ];
+        field.selectedRowIndices = @[ @(self.user.bloodType) ];
+        field.pickerData = @[ [APCUser bloodTypeInStringValues] ];
         
         [items addObject:field];
         [itemsOrder addObject:@(APCSignUpUserInfoItemBloodType)];
@@ -90,10 +90,13 @@
         field.selectionStyle = UITableViewCellSelectionStyleGray;
         field.caption = NSLocalizedString(@"Height", @"");
         field.detailDiscloserStyle = YES;
-        field.pickerData = [APCProfile heights];
-        if (self.profile.height) {
-            NSArray *split = [self.profile.height componentsSeparatedByString:@" "];
-            field.selectedRowIndices = @[ @([field.pickerData[0] indexOfObject:split[0]]), @([field.pickerData[1] indexOfObject:split[1]]) ];
+        field.pickerData = [APCUser heights];
+        if (self.user.height) {
+            double heightInInches = [APCUser heightInInches:self.user.height];
+            NSString *feet = [NSString stringWithFormat:@"%d'", (int)heightInInches/12];
+            NSString *inches = [NSString stringWithFormat:@"%d''", (int)heightInInches%12];
+            
+            field.selectedRowIndices = @[ @([field.pickerData[0] indexOfObject:feet]), @([field.pickerData[1] indexOfObject:inches]) ];
         }
         else {
             field.selectedRowIndices = @[ @(2), @(5) ];
@@ -109,7 +112,7 @@
         field.caption = NSLocalizedString(@"Weight", @"");
         field.placeholder = NSLocalizedString(@"lb", @"");
         field.regularExpression = kAPCMedicalInfoItemWeightRegEx;
-        field.value = self.profile.weight.stringValue;
+        field.value = [NSString stringWithFormat:@"%.1f", [APCUser weightInPounds:self.user.weight]];
         field.keyboardType = UIKeyboardTypeNumberPad;
         field.textAlignnment = NSTextAlignmentRight;
         
@@ -128,8 +131,8 @@
         field.dateFormat = kAPCMedicalInfoItemSleepTimeFormate;
         field.detailDiscloserStyle = YES;
         
-        if (self.profile.sleepTime) {
-            field.date = self.profile.sleepTime;
+        if (self.user.sleepTime) {
+            field.date = self.user.sleepTime;
         }
         
         [items addObject:field];
@@ -147,8 +150,8 @@
         field.dateFormat = kAPCMedicalInfoItemSleepTimeFormate;
         field.detailDiscloserStyle = YES;
         
-        if (self.profile.wakeUpTime) {
-            field.date = self.profile.wakeUpTime;
+        if (self.user.wakeUpTime) {
+            field.date = self.user.wakeUpTime;
         }
         
         [items addObject:field];
@@ -213,35 +216,31 @@
         
         switch (order.integerValue) {
             case APCSignUpUserInfoItemMedicalCondition:
-                self.profile.medicalCondition = [(APCTableViewCustomPickerItem *)item stringValue];
+                self.user.medicalConditions = [(APCTableViewCustomPickerItem *)item stringValue];
                 break;
                 
             case APCSignUpUserInfoItemMedication:
-                self.profile.medication = [(APCTableViewCustomPickerItem *)item stringValue];
-                break;
-                
-            case APCSignUpUserInfoItemBloodType:
-                self.profile.bloodType = [APCProfile bloodTypeFromStringValue:[(APCTableViewCustomPickerItem *)item stringValue]];
+                self.user.medications = [(APCTableViewCustomPickerItem *)item stringValue];
                 break;
                 
             case APCSignUpUserInfoItemHeight:
-                self.profile.height = [(APCTableViewCustomPickerItem *)item stringValue];
+                //self.profile.height = [(APCTableViewCustomPickerItem *)item stringValue];
                 break;
                 
             case APCSignUpUserInfoItemWeight:
-                self.profile.weight = @([[(APCTableViewTextFieldItem *)item value] floatValue]);
+                //self.profile.weight = @([[(APCTableViewTextFieldItem *)item value] floatValue]);
                 break;
                 
             case APCSignUpUserInfoItemSleepTime:
-                self.profile.sleepTime = [(APCTableViewDatePickerItem *)item date];
+                self.user.sleepTime = [(APCTableViewDatePickerItem *)item date];
                 break;
                 
             case APCSignUpUserInfoItemWakeUpTime:
-                self.profile.wakeUpTime = [(APCTableViewDatePickerItem *)item date];
+                self.user.wakeUpTime = [(APCTableViewDatePickerItem *)item date];
                 break;
                 
             default:
-//#warning ASSERT_MESSAGE Require
+                //#warning ASSERT_MESSAGE Require
                 NSAssert(order.integerValue <= APCSignUpUserInfoItemWakeUpTime, @"ASSER_MESSAGE");
                 break;
         }
@@ -284,7 +283,7 @@
 
 - (void) next {
     APCSignupTouchIDViewController *touchIDViewController = [[APCSignupTouchIDViewController alloc] initWithNibName:@"APCSignupTouchIDViewController" bundle:[NSBundle appleCoreBundle]];
-    touchIDViewController.profile = self.profile;
+    touchIDViewController.user = self.user;
     [self.navigationController pushViewController:touchIDViewController animated:YES];
 }
 
