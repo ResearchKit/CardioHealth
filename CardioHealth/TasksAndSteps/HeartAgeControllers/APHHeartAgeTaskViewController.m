@@ -317,7 +317,7 @@ static NSString *kLookupCoefficient3 = @"coefficient-3";
 
 - (void)taskViewController:(RKTaskViewController *)taskViewController didProduceResult:(RKResult *)result
 {
-    //[super taskViewController:taskViewController didProduceResult:result];
+    [super taskViewController:taskViewController didProduceResult:result];
     
     if ([result isKindOfClass:[RKSurveyResult class]]) {
         RKSurveyResult *surveyResult = (RKSurveyResult *)result;
