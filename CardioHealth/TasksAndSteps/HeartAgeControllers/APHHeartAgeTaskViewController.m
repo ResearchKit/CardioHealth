@@ -325,7 +325,6 @@ static NSString *kLookupCoefficient3 = @"coefficient-3";
         
         // Normalize survey results into dictionary.
         for (RKQuestionResult *questionResult in surveyResult.surveyResults) {
-            NSLog(@"%@ = [%@] %@ ", [[questionResult itemIdentifier] stringValue], questionResult.answer.class, questionResult.answer);
             [surveyResultsDictionary setObject:(NSNumber *)questionResult.answer forKeyedSubscript:[[questionResult itemIdentifier] stringValue]];
         }
         
@@ -425,16 +424,10 @@ static NSString *kLookupCoefficient3 = @"coefficient-3";
         }
         
         individualSum += coefficientTimesValue;
-        
-        NSLog(@"Coefficient x Value (%lu): %f", idx, coefficientTimesValue);
     }
-    
-    NSLog(@"Individual Sum: %f", individualSum);
     
     // Estimated 10 year risk with Optimal Risk  Factors for an individual
     double individualEstimatedTenYearRisk = 1 - pow(baseline, exp(individualSum - populationMean));
-    
-    NSLog(@"Estimated 10-Year Risk of Hard ASCVD: %f", individualEstimatedTenYearRisk);
     
     heartAge = [self findHeartAgeForRiskValue:individualEstimatedTenYearRisk forGender:gender forEthnicity:ethnicity];
     
