@@ -223,7 +223,7 @@ static NSString *kLookupCoefficient3 = @"coefficient-3";
     
     self.showsProgressInNavigationBar = NO;
     
-    // Create the lookup table for the Heart Age
+    // Heart age lookup parameters
     self.heartAgeParametersLookUp = @{
                             kLookupOptimalRiskFactors: @{
                                     kLookupOptimalRiskFactorTotalCholesterol: @170,
