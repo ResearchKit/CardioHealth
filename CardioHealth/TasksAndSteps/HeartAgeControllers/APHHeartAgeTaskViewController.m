@@ -323,6 +323,7 @@ static NSString *kLookupCoefficient3 = @"coefficient-3";
         RKSurveyResult *surveyResult = (RKSurveyResult *)result;
         NSMutableDictionary *surveyResultsDictionary = [NSMutableDictionary dictionary];
         
+        // Normalize survey results into dictionary.
         for (RKQuestionResult *questionResult in surveyResult.surveyResults) {
             NSLog(@"%@ = [%@] %@ ", [[questionResult itemIdentifier] stringValue], questionResult.answer.class, questionResult.answer);
             [surveyResultsDictionary setObject:(NSNumber *)questionResult.answer forKeyedSubscript:[[questionResult itemIdentifier] stringValue]];
