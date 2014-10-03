@@ -24,6 +24,24 @@ static NSString *kHeartAgeQuestionGender = @"HeartAgeQuestion10";
 static NSString *kHeartAgeQuestionSmokeB = @"HeartAgeQuestion11";
 static NSString *kHeartAgeQuestionHypertension = @"HeartAgeQuestion12";
 
+// Lookup Keys
+static NSString *kLookupOptimalRiskFactors = @"optimal-risk-factors";
+static NSString *kLookupOptimalRiskFactorTotalCholesterol = @"total-cholesterol";
+static NSString *kLookupOptimalRiskFactorHDL = @"hdl-c";
+static NSString *kLookupOptimalRiskFactorSystolicBP = @"systolic-bp";
+static NSString *kLookupParameters = @"parameters";
+static NSString *kLookupGenderFemale = @"Female";
+static NSString *kLookupGenderMale = @"Male";
+static NSString *kLookupEthnicityAfricanAmerican = @"African-American";
+static NSString *kLookupEthnicityOther = @"Other";
+static NSString *kLookupBaseline = @"baseline-10-year-survival";
+static NSString *kLookupPopulationMean = @"population-mean";
+static NSString *kLookupCoefficients = @"coefficients";
+static NSString *kLookupCoefficient1 = @"coefficient-1";
+static NSString *kLookupCoefficient2 = @"coefficient-2";
+static NSString *kLookupCoefficient3 = @"coefficient-3";
+
+
 @interface APHHeartAgeTaskViewController ()
 
 // This property will hold the parameters that will be used
