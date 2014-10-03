@@ -8,6 +8,7 @@
 
 #import "APHFitnessTestWalkingViewController.h"
 
+static CGFloat APHFitnessTestWalkingDuractionInSeconds = 20;
 
 @interface APHFitnessTestWalkingViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *myCounterLabel;
@@ -18,36 +19,38 @@
 
 @property (strong, nonatomic) NSTimer *timer;
 @property (strong, nonatomic) APHFitnessTestDistanceTracker *distanceTracker;
+@property (strong, nonatomic) APHFitnessTestHeartRateTracker *heartRateTracker;
+@property (strong, nonatomic) APHTimer *countDownTimer;
 
--(void)updateCounter:(NSTimer *)theTimer;
--(void)countdownTimer;
+@property (weak, nonatomic) IBOutlet UILabel *heartRate;
 
 @end
 
 @implementation APHFitnessTestWalkingViewController
-
-int hours, minutes, seconds;
-int secondsLeft;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 
     [self.startWalking setEnabled:NO];
-
-    //setup the timer
-    secondsLeft = 360;
     
-    secondsLeft -- ;
-    hours = secondsLeft / 3600;
-    minutes = (secondsLeft % 3600) / 60;
-    seconds = (secondsLeft %3600) % 60;
-    self.myCounterLabel.text = [NSString stringWithFormat:@"06:00"];
+    //Set the initial text for the counter
+    self.myCounterLabel.text = [NSString stringWithFormat:@"00:20"]; //Change back to 6
     
-    //setup distnace tracker
+    //setup Timer
+    self.countDownTimer = [[APHTimer alloc] initWithTimeInterval:20.0];
+    [self.countDownTimer setDelegate:self];
+    
+    //setup distance tracker
     self.distanceTracker = [[APHFitnessTestDistanceTracker alloc] init];
     [self.distanceTracker setDelegate:self];
     [self.distanceTracker prepLocationUpdates];
+
+    //setup heart rate tracker
+    self.heartRateTracker = [[APHFitnessTestHeartRateTracker alloc] init];
+    [self.heartRateTracker setDelegate:self];
+    [self.heartRateTracker prepHeartRateUpdate];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -58,31 +61,6 @@ int secondsLeft;
 /*********************************************************************************/
 #pragma mark - Private Methods
 /*********************************************************************************/
-- (void)updateCounter:(NSTimer *)theTimer {
-    if(secondsLeft > 0 ){
-        secondsLeft -- ;
-        hours = secondsLeft / 3600;
-        minutes = (secondsLeft % 3600) / 60;
-        seconds = (secondsLeft %3600) % 60;
-        self.myCounterLabel.text = [NSString stringWithFormat:@"%02d:%02d", minutes, seconds];
-    }
-    else{
-        secondsLeft = 0;
-        [self.distanceTracker stop];
-    }
-}
-
--(void)countdownTimer{
-    
-    secondsLeft = hours = minutes = seconds = 360;
-    if([self.timer isValid])
-    {
-        self.timer = nil;
-    }
-    
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateCounter:) userInfo:nil repeats:YES];
-    
-}
 
 -(void)dismiss:(UIAlertController*)alert
 {
@@ -120,7 +98,8 @@ int secondsLeft;
  */
 - (void)fitnessTestDistanceTracker:(APHFitnessTestDistanceTracker *)parameters didUpdateLocations:(CLLocationDistance)distance {
 
-    self.myDistanceLabel.text = [NSString stringWithFormat:@"%.2f Meters", distance];
+    double foo = distance / 1609.34;
+    self.myDistanceLabel.text = [NSString stringWithFormat:@"%.2f Mi", foo];
 }
 
 - (void)locationManager:(CLLocationManager *)locationManager finishedPrepLocation:(BOOL)finishedPrep {
@@ -147,44 +126,40 @@ int secondsLeft;
     UIAlertController *alertController = [UIAlertController
                                           alertControllerWithTitle:@"GPS Signal"
                                           message:message
-                                          preferredStyle:UIAlertControllerStyleActionSheet];
+                                          preferredStyle:UIAlertControllerStyleAlert];
 
     [self presentViewController:alertController animated:YES completion:nil];
 
     [self performSelector:@selector(dismiss:) withObject:alertController afterDelay:4];
 }
-/**
- * @brief Debug text
- */
-- (void)fitnessTestDistanceTracker:(APHFitnessTestDistanceTracker *)distanceTracker debugView:(double)object {
-//    UIAlertController *alertController = [UIAlertController
-//                                          alertControllerWithTitle:@"Updates"
-//                                          message:[NSString stringWithFormat:@"%f", object]
-//                                          preferredStyle:UIAlertControllerStyleActionSheet];
-//    
-//    UIAlertAction *cancelAction = [UIAlertAction
-//                                   actionWithTitle:NSLocalizedString(@"Cancel", @"Cancel action")
-//                                   style:UIAlertActionStyleCancel
-//                                   handler:^(UIAlertAction *action)
-//                                   {
-//                                       NSLog(@"Cancel action");
-//                                   }];
-//    
-//    UIAlertAction *okAction = [UIAlertAction
-//                               actionWithTitle:NSLocalizedString(@"OK", @"OK action")
-//                               style:UIAlertActionStyleDefault
-//                               handler:^(UIAlertAction *action)
-//                               {
-//                                   NSLog(@"OK action");
-//                               }];
-//    
-//    [alertController addAction:cancelAction];
-//    [alertController addAction:okAction];
-//    
-//    [self presentViewController:alertController animated:YES completion:nil];
-    
-    
+
+/*********************************************************************************/
+#pragma mark - APHFitnessTestHeartRateTrackerDelegate delegate methods
+/*********************************************************************************/
+
+- (void)fitnessTestHeartRateTracker:(APHFitnessTestHeartRateTracker *)heartRateTracker didUpdateHeartRate:(NSInteger)heartBPM {
+    self.heartRate.text = [NSString stringWithFormat:@"%ld", (long)heartBPM];
 }
+
+/*********************************************************************************/
+#pragma mark - APHTimer delegate methods
+/*********************************************************************************/
+
+- (void)aphTimer:(APHTimer *)timer didUpdateCountDown:(NSString *)countdown {
+    self.myCounterLabel.text = countdown;
+}
+
+- (void)aphTimer:(APHTimer *)timer didFinishCountingDown:(NSString *)countdown {
+    [self.distanceTracker stop];
+    [self.heartRateTracker stop];
+
+    if (self.delegate != nil) {
+        if ([self.delegate respondsToSelector:@selector(stepViewControllerDidFinish:navigationDirection:)] == YES) {
+            [self.delegate stepViewControllerDidFinish:self navigationDirection:RKStepViewControllerNavigationDirectionForward];
+        }
+    }
+}
+
 
 
 /*********************************************************************************/
@@ -192,9 +167,9 @@ int secondsLeft;
 /*********************************************************************************/
 
 - (IBAction)startWalkingButton:(id)sender {
-    [self countdownTimer];
+    [self.countDownTimer start];
     [self.distanceTracker start];
     
-    self.startWalking.titleLabel.text = @"Stop Walking";
+    [self.startWalking setEnabled:NO];
 }
 @end

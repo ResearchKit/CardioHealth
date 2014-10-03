@@ -10,13 +10,15 @@
 
 #import "APHFitnessTestIntroViewController.h"
 #import "APHFitnessTestWalkingViewController.h"
-//#import "APHIntervalTappingResultsViewController.h"
+#import "APHFitnessTestComfortablePositionViewController.h"
+#import "APHFitnessTestRestViewController.h"
+#import "APHFitnessTestFinishedViewController.h"
 
-//#import "APHCustomRecorder.h"
-
-static  NSString  *kIntervalTappingStep101 = @"IntervalTappingStep101";
-static  NSString  *kIntervalTappingStep102 = @"IntervalTappingStep102";
-static  NSString  *kIntervalTappingStep103 = @"IntervalTappingStep103";
+static  NSString  *kIntervalTappingStep101 = @"FitnessStep101";
+static  NSString  *kIntervalTappingStep102 = @"FitnessStep102";
+static  NSString  *kIntervalTappingStep103 = @"FitnessStep103";
+static  NSString  *kIntervalTappingStep104 = @"FitnessStep104";
+static  NSString  *kIntervalTappingStep105 = @"FitnessStep105";
 
 @interface APHFitnessTaskViewController ()
 
@@ -43,23 +45,42 @@ static  NSString  *kIntervalTappingStep103 = @"IntervalTappingStep103";
     NSMutableArray *steps = [[NSMutableArray alloc] init];
     
     {
+        //Introduction to fitness test
         RKIntroductionStep *step = [[RKIntroductionStep alloc] initWithIdentifier:kIntervalTappingStep101 name:@"Fitness Test Intro"];
-        step.caption = @"Measure Heart Rate";
-        step.explanation = @"";
-        step.instruction = @"";
         [steps addObject:step];
     }
     
     {
+        //Walking 6 minutes
         RKActiveStep* step = [[RKActiveStep alloc] initWithIdentifier:kIntervalTappingStep102 name:@"6 Minute Walk"];
-        step.caption = NSLocalizedString(@"6 Minute Walk", @"");
-        step.text = NSLocalizedString(@"Now please turn 180 degrees, and walk back to your starting point.", @"");
-        step.buzz = YES;
-        step.vibration = YES;
-        step.countDown = 360.0;
+//        step.caption = NSLocalizedString(@"6 Minute Walk", @"");
+//        step.text = NSLocalizedString(@"Walk 6 minutes.", @"");
         [steps addObject:step];
     }
     
+    {
+        //Stop and sit in a comfortable position for 3 minutes
+        RKActiveStep* step = [[RKActiveStep alloc] initWithIdentifier:kIntervalTappingStep103 name:@"3 Minutes in a comfortable Position"];
+//        step.caption = NSLocalizedString(@"3 Minute Rest", @"");
+//        step.text = NSLocalizedString(@"Now rest 3 minutes.", @"");
+        [steps addObject:step];
+    }
+
+    {
+        //Rest for 3 minutes
+        RKActiveStep* step = [[RKActiveStep alloc] initWithIdentifier:kIntervalTappingStep104 name:@"3 Minutes in a resting Position"];
+//        step.caption = NSLocalizedString(@"3 Minute Rest", @"");
+//        step.text = NSLocalizedString(@"Now rest 3 minutes.", @"");
+        [steps addObject:step];
+    }
+    
+    {
+        //Finished
+        RKActiveStep* step = [[RKActiveStep alloc] initWithIdentifier:kIntervalTappingStep105 name:@"Completed"];
+
+        [steps addObject:step];
+    }
+
     RKTask  *task = [[RKTask alloc] initWithName:@"Interval Touches" identifier:@"Tapping Task" steps:steps];
     
     return  task;
@@ -94,9 +115,12 @@ static  NSString  *kIntervalTappingStep103 = @"IntervalTappingStep103";
 {
     NSDictionary  *controllers = @{
                                    kIntervalTappingStep101 : [APHFitnessTestIntroViewController   class],
-                                   kIntervalTappingStep102 : [APHFitnessTestWalkingViewController   class]
-//                                   kIntervalTappingStep103 : [APHIntervalTappingResultsViewController class]
+                                   kIntervalTappingStep102 : [APHFitnessTestWalkingViewController   class],
+                                   kIntervalTappingStep103 : [APHFitnessTestComfortablePositionViewController   class],
+                                   kIntervalTappingStep104 : [APHFitnessTestRestViewController class],
+                                   kIntervalTappingStep105 : [APHFitnessTestFinishedViewController class]
                                    };
+    
     Class  aClass = [controllers objectForKey:step.identifier];
     APCStepViewController  *controller = [[aClass alloc] initWithNibName:nil bundle:nil];
     controller.resultCollector = self;

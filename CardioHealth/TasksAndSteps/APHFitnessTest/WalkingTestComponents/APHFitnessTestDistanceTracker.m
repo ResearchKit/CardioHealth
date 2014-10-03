@@ -11,7 +11,7 @@
 
 static const NSUInteger kAPHFitnessTestDistanceFilter = 8.0;                               // the minimum distance (meters) for which we want to receive location updates (see docs for CLLocationManager.distanceFilter)
 static const float kAPHFitnessTestRequiredHorizontalAccuracy = 5.0;                      // the required accuracy in meters for a location.  if we receive anything above this number, the delegate will be informed that the signal is weak
-static const float kAPHFitnessTestMaximumAcceptableHorizontalAccuracy = 10.0;             // the maximum acceptable accuracy in meters for a location.  anything above this number will be completely ignored
+//static const float kAPHFitnessTestMaximumAcceptableHorizontalAccuracy = 10.0;             // the maximum acceptable accuracy in meters for a location.  anything above this number will be completely ignored
 static const NSUInteger kAPHValidLocationHistoryDeltaInterval = 3;                        // the maximum valid age in seconds of a location stored in the location history
 
 //static const NSUInteger kAPHFitnessTestGPSRefinementInterval = 15;                        // the number of seconds at which we will attempt to achieve kRequiredHorizontalAccuracy before giving up and accepting kMaximumAcceptableHorizontalAccuracy
