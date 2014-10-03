@@ -348,7 +348,12 @@ static NSString *kLifetimeRiskFactorMajorGreaterThanEqualToTwo = @"risk-factor-m
         
         // Normalize survey results into dictionary.
         for (RKQuestionResult *questionResult in surveyResult.surveyResults) {
-            [surveyResultsDictionary setObject:(NSNumber *)questionResult.answer forKeyedSubscript:[[questionResult itemIdentifier] stringValue]];
+            NSString *questionIdentifier = [[questionResult itemIdentifier] stringValue];
+            if ([questionIdentifier isEqualToString:kHeartAgeQuestionEthnicity] || [questionIdentifier isEqualToString:kHeartAgeQuestionGender]) {
+                [surveyResultsDictionary setObject:(NSString *)questionResult.answer forKey:questionIdentifier];
+            } else {
+                [surveyResultsDictionary setObject:(NSNumber *)questionResult.answer forKeyedSubscript:questionIdentifier];
+            }
         }
         
         // Kickoff heart age calculations
