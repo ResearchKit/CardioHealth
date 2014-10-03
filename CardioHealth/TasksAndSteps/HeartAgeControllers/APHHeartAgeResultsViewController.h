@@ -14,7 +14,7 @@
 @property (nonatomic) CGFloat taskProgress;
 @property (nonatomic) NSUInteger actualAge;
 @property (nonatomic) NSUInteger heartAge;
-@property (nonatomic, strong) NSString *tenYearRisk;
+@property (nonatomic, strong) NSNumber *tenYearRisk;
 @property (nonatomic, strong) NSString *someImprovement;
 
 @end
