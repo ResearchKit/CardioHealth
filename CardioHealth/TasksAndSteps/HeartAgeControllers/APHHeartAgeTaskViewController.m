@@ -372,8 +372,11 @@ static NSString *kLifetimeRiskFactorMajorGreaterThanEqualToTwo = @"risk-factor-m
 
 /**
  * @brief  This is the entry point into calculating the heart age and all associated coefficients.
+ *
  * @param  results   an NSDictionary of results collected from the survey.
+ *
  * @return NSDictionary is returned with the keys: 'age' and 'tenYearRisk' whoes value is an NSNumber.
+ *
  * @note   This method relies on the heartAgeLookup property to retrieve constant/precomputed values
  *         that are needed to perform all of the calculations.
  */
@@ -469,13 +472,17 @@ static NSString *kLifetimeRiskFactorMajorGreaterThanEqualToTwo = @"risk-factor-m
 
 /**
  * @brief   Searches the estimated 10 year risk table that generated for the given gender and ethnicity.
+ *
  * @param   riskValue   A value that will be matched (or nearly matched) in the lookup table.
  * @param   gender      Gender of the person that is taking the survey.
  * @param   ethnicity   Ethnicity of the person that is taking the survey.
+ *
  * @return  Returns the heart age as an NSInteger of the person taking the survey.
+ *
  * @note    This method calls the generateHeartAgeLookupTableForGender:ethnicity method to build the lookup
  *          table for the given gender and ethnicity.
- * @see     generateHeartAgeLookupTableForGender:ethnicity
+ *
+ * @see     -generateHeartAgeLookupTableForGender:ethnicity:
  */
 - (NSInteger)findHeartAgeForRiskValue:(double)riskValue forGender:(NSString *)gender forEthnicity:(NSString *)ethnicity
 {
@@ -509,11 +516,14 @@ static NSString *kLifetimeRiskFactorMajorGreaterThanEqualToTwo = @"risk-factor-m
 /**
  * @brief   Generates the lookup table for all heart ages between 17 and 100. The table includes
  *          the heart age and the 10 year risk factor.
+ *
  * @param   gender      Gender of the person taking the survey.
  * @param   ethnicity   Ethnicity of the person taking the survey.
+ *
  * @return  An array of dictionaries. Each dictionary has an 'age' key that corresponds to the Heart Age
  *          and 'risk' key that corresponds to the Estimated 10-Year Risk value. Both key have values
  *          that are of type NSNumber.
+ *
  * @note    This method relies on the heartAgeLookup property to retrieve constant/precomputed values
  *          that are needed to perform all of the calculations.
  */
