@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "APHFitnessTestDistanceTracker.h"
-#import "APHFitnessTestHeartRateTracker.h"
+#import "APHFitnessTestHealthKitSampleTypeTracker.h"
 #import "APHTimer.h"
 
 @import APCAppleCore;
@@ -23,7 +23,7 @@ This step represents a fitness test that requires the user to walk 6 minutes, re
  
  */
 
-@interface APHFitnessTestWalkingViewController : APCStepViewController <APHFitnessTestDistanceTrackerDelegate, APHFitnessTestHeartRateTrackerDelegate, APHTimerDelegate>
+@interface APHFitnessTestWalkingViewController : APCStepViewController <APHFitnessTestDistanceTrackerDelegate, APHFitnessTestHealthKitSampleTypeTrackerDelegate, APHTimerDelegate>
 
 
 @end

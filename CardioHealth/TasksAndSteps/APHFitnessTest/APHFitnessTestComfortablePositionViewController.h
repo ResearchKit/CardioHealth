@@ -8,9 +8,9 @@
 
 #import <APCAppleCore/APCAppleCore.h>
 #import "APHFitnessTestDistanceTracker.h"
-#import "APHFitnessTestHeartRateTracker.h"
+#import "APHFitnessTestHealthKitSampleTypeTracker.h"
 #import "APHTimer.h"
 
-@interface APHFitnessTestComfortablePositionViewController : APCStepViewController <APHFitnessTestDistanceTrackerDelegate, APHFitnessTestHeartRateTrackerDelegate, APHTimerDelegate>
+@interface APHFitnessTestComfortablePositionViewController : APCStepViewController <APHFitnessTestDistanceTrackerDelegate, APHFitnessTestHealthKitSampleTypeTrackerDelegate, APHTimerDelegate>
 
 @end

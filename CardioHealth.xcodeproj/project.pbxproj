@@ -27,7 +27,8 @@
 		7BBEE01319DB73F800C585E2 /* APHTasksAndSchedules.json in Resources */ = {isa = PBXBuildFile; fileRef = 7BBEE00F19DB73F800C585E2 /* APHTasksAndSchedules.json */; };
 		7BBEE01419DB73F800C585E2 /* JSON_READ_ME in Resources */ = {isa = PBXBuildFile; fileRef = 7BBEE01019DB73F800C585E2 /* JSON_READ_ME */; };
 		7BBEE01519DB73F800C585E2 /* sleepSurvey.json in Resources */ = {isa = PBXBuildFile; fileRef = 7BBEE01119DB73F800C585E2 /* sleepSurvey.json */; };
-		7BEE4C2219DCB4BF005228D8 /* APHFitnessTestHeartRateTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BEE4C2119DCB4BF005228D8 /* APHFitnessTestHeartRateTracker.m */; };
+		7BEA17D619DF24C600717D18 /* APHFitnessTestRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BEA17D519DF24C600717D18 /* APHFitnessTestRecorder.m */; };
+		7BEE4C2219DCB4BF005228D8 /* APHFitnessTestHealthKitSampleTypeTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BEE4C2119DCB4BF005228D8 /* APHFitnessTestHealthKitSampleTypeTracker.m */; };
 		7BEE4C2319DDC2BB005228D8 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5F6452419D35C41004CFBB2 /* HealthKit.framework */; };
 		F55BBE5719D362D0003CA0F9 /* NSString+CustomMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = F55BBDDB19D362D0003CA0F9 /* NSString+CustomMethods.m */; };
 		F55BBE5819D362D0003CA0F9 /* RKStep+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = F55BBDDD19D362D0003CA0F9 /* RKStep+Description.m */; };
@@ -148,8 +149,10 @@
 		7BBEE00F19DB73F800C585E2 /* APHTasksAndSchedules.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = APHTasksAndSchedules.json; sourceTree = "<group>"; };
 		7BBEE01019DB73F800C585E2 /* JSON_READ_ME */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = JSON_READ_ME; sourceTree = "<group>"; };
 		7BBEE01119DB73F800C585E2 /* sleepSurvey.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sleepSurvey.json; sourceTree = "<group>"; };
-		7BEE4C2019DCB4BF005228D8 /* APHFitnessTestHeartRateTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHFitnessTestHeartRateTracker.h; sourceTree = "<group>"; };
-		7BEE4C2119DCB4BF005228D8 /* APHFitnessTestHeartRateTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHFitnessTestHeartRateTracker.m; sourceTree = "<group>"; };
+		7BEA17D419DF24C600717D18 /* APHFitnessTestRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHFitnessTestRecorder.h; sourceTree = "<group>"; };
+		7BEA17D519DF24C600717D18 /* APHFitnessTestRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHFitnessTestRecorder.m; sourceTree = "<group>"; };
+		7BEE4C2019DCB4BF005228D8 /* APHFitnessTestHealthKitSampleTypeTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHFitnessTestHealthKitSampleTypeTracker.h; sourceTree = "<group>"; };
+		7BEE4C2119DCB4BF005228D8 /* APHFitnessTestHealthKitSampleTypeTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHFitnessTestHealthKitSampleTypeTracker.m; sourceTree = "<group>"; };
 		F55BBDDA19D362D0003CA0F9 /* NSString+CustomMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CustomMethods.h"; sourceTree = "<group>"; };
 		F55BBDDB19D362D0003CA0F9 /* NSString+CustomMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CustomMethods.m"; sourceTree = "<group>"; };
 		F55BBDDC19D362D0003CA0F9 /* RKStep+Description.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RKStep+Description.h"; sourceTree = "<group>"; };
@@ -266,13 +269,13 @@
 				7BA5C48E19DDF954009002C6 /* APHFitnessTestComfortablePositionViewController.h */,
 				7BA5C48F19DDF954009002C6 /* APHFitnessTestComfortablePositionViewController.m */,
 				7BA5C49019DDF954009002C6 /* APHFitnessTestComfortablePositionViewController.xib */,
-				7B22FFB319DB4DD100C8C915 /* WalkingTestComponents */,
 				7BA5C49719DE0C6D009002C6 /* APHFitnessTestRestViewController.h */,
 				7BA5C49819DE0C6D009002C6 /* APHFitnessTestRestViewController.m */,
 				7BA5C49919DE0C6D009002C6 /* APHFitnessTestRestViewController.xib */,
 				7BA5C49C19DE0E76009002C6 /* APHFitnessTestFinishedViewController.h */,
 				7BA5C49D19DE0E76009002C6 /* APHFitnessTestFinishedViewController.m */,
 				7BA5C49E19DE0E76009002C6 /* APHFitnessTestFinishedViewController.xib */,
+				7B22FFB319DB4DD100C8C915 /* WalkingTestComponents */,
 			);
 			name = APHFitnessTest;
 			path = CardioHealth/TasksAndSteps/APHFitnessTest;
@@ -283,10 +286,12 @@
 			children = (
 				7B22FFB419DB4DD100C8C915 /* APHFitnessTestDistanceTracker.h */,
 				7B22FFB519DB4DD100C8C915 /* APHFitnessTestDistanceTracker.m */,
-				7BEE4C2019DCB4BF005228D8 /* APHFitnessTestHeartRateTracker.h */,
-				7BEE4C2119DCB4BF005228D8 /* APHFitnessTestHeartRateTracker.m */,
+				7BEE4C2019DCB4BF005228D8 /* APHFitnessTestHealthKitSampleTypeTracker.h */,
+				7BEE4C2119DCB4BF005228D8 /* APHFitnessTestHealthKitSampleTypeTracker.m */,
 				7BA5C49419DDFFA9009002C6 /* APHTimer.h */,
 				7BA5C49519DDFFA9009002C6 /* APHTimer.m */,
+				7BEA17D419DF24C600717D18 /* APHFitnessTestRecorder.h */,
+				7BEA17D519DF24C600717D18 /* APHFitnessTestRecorder.m */,
 			);
 			path = WalkingTestComponents;
 			sourceTree = "<group>";
@@ -707,7 +712,7 @@
 				F55BBE7819D362D0003CA0F9 /* APHLearnResourceViewCell.m in Sources */,
 				F55BBE5D19D362D0003CA0F9 /* APHSignUpMedicalInfoViewController.m in Sources */,
 				F55BBE5E19D362D0003CA0F9 /* APHSignupOptionsViewController.m in Sources */,
-				7BEE4C2219DCB4BF005228D8 /* APHFitnessTestHeartRateTracker.m in Sources */,
+				7BEE4C2219DCB4BF005228D8 /* APHFitnessTestHealthKitSampleTypeTracker.m in Sources */,
 				F55BBE7719D362D0003CA0F9 /* APHLearnMasterTableViewCell.m in Sources */,
 				F55BBE6019D362D0003CA0F9 /* APHUserInfoCell.m in Sources */,
 				F55BBE5A19D362D0003CA0F9 /* APHIntroVideoViewController.m in Sources */,
@@ -721,6 +726,7 @@
 				F55BBE6919D362D0003CA0F9 /* APHActivitiesViewController.m in Sources */,
 				F5F644FF19D35BA2004CFBB2 /* main.m in Sources */,
 				F55BBE5B19D362D0003CA0F9 /* APHSignInViewController.m in Sources */,
+				7BEA17D619DF24C600717D18 /* APHFitnessTestRecorder.m in Sources */,
 				F55BBE6C19D362D0003CA0F9 /* APHEditSectionsViewController.m in Sources */,
 				F55BBE6F19D362D0003CA0F9 /* APHDashboardMessageViewCell.m in Sources */,
 				F55BBE5719D362D0003CA0F9 /* NSString+CustomMethods.m in Sources */,

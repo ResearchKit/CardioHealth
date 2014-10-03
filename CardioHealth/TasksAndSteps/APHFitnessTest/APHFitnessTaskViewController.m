@@ -44,6 +44,7 @@ static  NSString  *kIntervalTappingStep105 = @"FitnessStep105";
 {
     NSMutableArray *steps = [[NSMutableArray alloc] init];
     
+    //TODO Commented out code in the steps are intended to be configured at a later date. The recorders are there as a reminder that these steps will require logging. 
     {
         //Introduction to fitness test
         RKIntroductionStep *step = [[RKIntroductionStep alloc] initWithIdentifier:kIntervalTappingStep101 name:@"Fitness Test Intro"];
@@ -53,6 +54,7 @@ static  NSString  *kIntervalTappingStep105 = @"FitnessStep105";
     {
         //Walking 6 minutes
         RKActiveStep* step = [[RKActiveStep alloc] initWithIdentifier:kIntervalTappingStep102 name:@"6 Minute Walk"];
+//        step.recorderConfigurations = [RKRecorder new];
 //        step.caption = NSLocalizedString(@"6 Minute Walk", @"");
 //        step.text = NSLocalizedString(@"Walk 6 minutes.", @"");
         [steps addObject:step];
@@ -61,6 +63,7 @@ static  NSString  *kIntervalTappingStep105 = @"FitnessStep105";
     {
         //Stop and sit in a comfortable position for 3 minutes
         RKActiveStep* step = [[RKActiveStep alloc] initWithIdentifier:kIntervalTappingStep103 name:@"3 Minutes in a comfortable Position"];
+//        step.recorderConfigurations = [RKRecorder new];
 //        step.caption = NSLocalizedString(@"3 Minute Rest", @"");
 //        step.text = NSLocalizedString(@"Now rest 3 minutes.", @"");
         [steps addObject:step];
@@ -69,6 +72,7 @@ static  NSString  *kIntervalTappingStep105 = @"FitnessStep105";
     {
         //Rest for 3 minutes
         RKActiveStep* step = [[RKActiveStep alloc] initWithIdentifier:kIntervalTappingStep104 name:@"3 Minutes in a resting Position"];
+//        step.recorderConfigurations = [RKRecorder new];        
 //        step.caption = NSLocalizedString(@"3 Minute Rest", @"");
 //        step.text = NSLocalizedString(@"Now rest 3 minutes.", @"");
         [steps addObject:step];

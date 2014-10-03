@@ -19,7 +19,7 @@ static CGFloat APHFitnessTestWalkingDuractionInSeconds = 20;
 
 @property (strong, nonatomic) NSTimer *timer;
 @property (strong, nonatomic) APHFitnessTestDistanceTracker *distanceTracker;
-@property (strong, nonatomic) APHFitnessTestHeartRateTracker *heartRateTracker;
+@property (strong, nonatomic) APHFitnessTestHealthKitSampleTypeTracker *heartRateTracker;
 @property (strong, nonatomic) APHTimer *countDownTimer;
 
 @property (weak, nonatomic) IBOutlet UILabel *heartRate;
@@ -47,9 +47,9 @@ static CGFloat APHFitnessTestWalkingDuractionInSeconds = 20;
     [self.distanceTracker prepLocationUpdates];
 
     //setup heart rate tracker
-    self.heartRateTracker = [[APHFitnessTestHeartRateTracker alloc] init];
+    self.heartRateTracker = [[APHFitnessTestHealthKitSampleTypeTracker alloc] init];
     [self.heartRateTracker setDelegate:self];
-    [self.heartRateTracker prepHeartRateUpdate];
+    [self.heartRateTracker startUpdating];
     
 }
 
@@ -123,22 +123,33 @@ static CGFloat APHFitnessTestWalkingDuractionInSeconds = 20;
 }
 
 - (void)fitnessTestDistanceTracker:(APHFitnessTestDistanceTracker *)distanceTracker weakGPSSignal:(NSString *)message {
-    UIAlertController *alertController = [UIAlertController
-                                          alertControllerWithTitle:@"GPS Signal"
-                                          message:message
-                                          preferredStyle:UIAlertControllerStyleAlert];
-
-    [self presentViewController:alertController animated:YES completion:nil];
-
-    [self performSelector:@selector(dismiss:) withObject:alertController afterDelay:4];
+//    UIAlertController *alertController = [UIAlertController
+//                                          alertControllerWithTitle:@"GPS Signal"
+//                                          message:message
+//                                          preferredStyle:UIAlertControllerStyleAlert];
+//
+//    [self presentViewController:alertController animated:YES completion:nil];
+//
+//    [self performSelector:@selector(dismiss:) withObject:alertController afterDelay:4];
 }
 
 /*********************************************************************************/
-#pragma mark - APHFitnessTestHeartRateTrackerDelegate delegate methods
+#pragma mark - APHFitnessTestHealthKitSampleTypeTrackerDelegate delegate methods
 /*********************************************************************************/
 
-- (void)fitnessTestHeartRateTracker:(APHFitnessTestHeartRateTracker *)heartRateTracker didUpdateHeartRate:(NSInteger)heartBPM {
+- (void)fitnessTestHealthKitSampleTypeTracker:(APHFitnessTestHealthKitSampleTypeTracker *)heartRateTracker didUpdateHeartRate:(NSInteger)heartBPM {
     self.heartRate.text = [NSString stringWithFormat:@"%ld", (long)heartBPM];
+}
+
+- (void)fitnessTestHealthKitSampleTypeTracker:(APHFitnessTestHealthKitSampleTypeTracker *)stepCountTracker didUpdateStepCount:(NSInteger)stepCount {
+    UIAlertController *alertController = [UIAlertController
+                                          alertControllerWithTitle:@"GPS Signal"
+                                          message:[NSString stringWithFormat:@"Step Count %ld", (long)stepCount]
+                                          preferredStyle:UIAlertControllerStyleAlert];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+    
+    [self performSelector:@selector(dismiss:) withObject:alertController afterDelay:1];
 }
 
 /*********************************************************************************/

@@ -13,7 +13,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *heartRate;
 
 @property (strong, nonatomic) NSTimer *timer;
-@property (strong, nonatomic) APHFitnessTestHeartRateTracker *heartRateTracker;
+@property (strong, nonatomic) APHFitnessTestHealthKitSampleTypeTracker *heartRateTracker;
 @property (strong, nonatomic) APHTimer *countDownTimer;
 
 @end
@@ -31,9 +31,9 @@
     [self.countDownTimer setDelegate:self];
     
     //setup heart rate tracker
-    self.heartRateTracker = [[APHFitnessTestHeartRateTracker alloc] init];
+    self.heartRateTracker = [[APHFitnessTestHealthKitSampleTypeTracker alloc] init];
     [self.heartRateTracker setDelegate:self];
-    [self.heartRateTracker prepHeartRateUpdate];
+    [self.heartRateTracker startUpdating];
     
     
     [self.countDownTimer start];
@@ -56,10 +56,10 @@
 }
 
 /*********************************************************************************/
-#pragma mark - APHFitnessTestHeartRateTrackerDelegate delegate methods
+#pragma mark - APHFitnessTestHealthKitSampleTypeTrackerDelegate delegate methods
 /*********************************************************************************/
 
-- (void)fitnessTestHeartRateTracker:(APHFitnessTestHeartRateTracker *)heartRateTracker didUpdateHeartRate:(NSInteger)heartBPM {
+- (void)fitnessTestHealthKitSampleTypeTracker:(APHFitnessTestHealthKitSampleTypeTracker *)heartRateTracker didUpdateHeartRate:(NSInteger)heartBPM {
     self.heartRate.text = [NSString stringWithFormat:@"%ld", (long)heartBPM];
 }
 
