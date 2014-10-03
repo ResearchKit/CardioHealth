@@ -338,6 +338,11 @@ static NSString *kLifetimeRiskFactorMajorGreaterThanEqualToTwo = @"risk-factor-m
 
 #pragma  mark  -  Task View Controller Delegate Methods
 
+- (void)taskViewControllerDidComplete:(RKTaskViewController *)taskViewController
+{
+    NSLog(@"Stubbed: Task Completed.");
+}
+
 - (void)taskViewController:(RKTaskViewController *)taskViewController didProduceResult:(RKResult *)result
 {
     [super taskViewController:taskViewController didProduceResult:result];
