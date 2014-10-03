@@ -469,6 +469,38 @@ static NSString *kLookupCoefficient3 = @"coefficient-3";
         return [[heartAgeLookup[index] objectForKey:@"age"] integerValue];
     }
 }
+
+- (NSArray *)generateHeartAgeLookupTableForGender:(NSString *)gender ethnicity:(NSString *)ethnicity
+{
+    NSMutableArray *lookup = [NSMutableArray array];
+    
+    double baseline = [self.heartAgeParametersLookUp[gender][ethnicity][kLookupParameters][kLookupBaseline] doubleValue];
+    double populationMean = [self.heartAgeParametersLookUp[gender][ethnicity][kLookupParameters][kLookupPopulationMean] doubleValue];
+    double coefficient_1 = [self.heartAgeParametersLookUp[gender][ethnicity][kLookupParameters][kLookupCoefficient1] doubleValue];
+    double coefficient_2 = [self.heartAgeParametersLookUp[gender][ethnicity][kLookupParameters][kLookupCoefficient2] doubleValue];
+    double coefficient_3 = [self.heartAgeParametersLookUp[gender][ethnicity][kLookupParameters][kLookupCoefficient3] doubleValue];
+    
+    for (NSInteger age=17; age <= 100; age++) {
+        double coefficientSum =  coefficient_1 + coefficient_2 * log(age) + coefficient_3 * pow(log(age), 2.0);
+        double estimatedTenYearRiskOfHardAscvd = 1 - pow(baseline, exp(coefficientSum - populationMean));
+        
+        [lookup addObject:@{
+                            @"age": [NSNumber numberWithInteger:age],
+                            @"risk": [NSNumber numberWithDouble:estimatedTenYearRiskOfHardAscvd]
+                           }];
+        
+        NSLog(@"Age %lu: %f | %f", age, coefficientSum, estimatedTenYearRiskOfHardAscvd);
+    }
+    
+    // TODO: Convert this using blocks, if and only if there's a performance benefit.
+    NSSortDescriptor *sortDescriptor;
+    sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"risk"
+                                                 ascending:YES];
+    NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+    NSArray *sortedArray;
+    sortedArray = [lookup sortedArrayUsingDescriptors:sortDescriptors];
+    
+    return sortedArray;
 }
 
 @end
