@@ -40,13 +40,20 @@ static NSString *kLookupCoefficients = @"coefficients";
 static NSString *kLookupCoefficient1 = @"coefficient-1";
 static NSString *kLookupCoefficient2 = @"coefficient-2";
 static NSString *kLookupCoefficient3 = @"coefficient-3";
+// Lookup keys for Lifetime Risk Factors
+static NSString *kLookupLifetimeRiskFactor = @"lifetime-risk-factor";
+static NSString *kLifetimeRiskFactorOptimal = @"risk-factor-optimal";
+static NSString *kLifetimeRiskFactorNotOptimal = @"risk-factor-not-optimal";
+static NSString *kLifetimeRiskFactorElevated = @"risk-factor-elevated";
+static NSString *kLifetimeRiskFactorMajor = @"risk-factor-major";
+static NSString *kLifetimeRiskFactorMajorGreaterThanEqualToTwo = @"risk-factor-major-2";
 
 
 @interface APHHeartAgeTaskViewController ()
 
 // This property will hold the parameters that will be used
 // for calculating the heart age, 10 year, and lifetime risk table.
-@property (nonatomic, strong) NSDictionary *heartAgeParametersLookUp;
+@property (nonatomic, strong) NSDictionary *heartAgeParametersLookup;
 
 @end
 
@@ -226,13 +233,20 @@ static NSString *kLookupCoefficient3 = @"coefficient-3";
     self.showsProgressInNavigationBar = YES;
     
     // Heart age lookup parameters
-    self.heartAgeParametersLookUp = @{
+    self.heartAgeParametersLookup = @{
                             kLookupOptimalRiskFactors: @{
                                     kLookupOptimalRiskFactorTotalCholesterol: @170,
                                     kLookupOptimalRiskFactorHDL: @50,
                                     kLookupOptimalRiskFactorSystolicBP: @110
                                 },
                             kLookupGenderFemale: @{
+                                    kLookupLifetimeRiskFactor: @{
+                                            kLifetimeRiskFactorOptimal: @8,
+                                            kLifetimeRiskFactorNotOptimal: @27,
+                                            kLifetimeRiskFactorElevated: @39,
+                                            kLifetimeRiskFactorMajor: @27,
+                                            kLifetimeRiskFactorMajorGreaterThanEqualToTwo: @50
+                                        },
                                     kLookupEthnicityAfricanAmerican: @{
                                             kLookupParameters: @{
                                                     kLookupPopulationMean: @86.61,
@@ -257,6 +271,13 @@ static NSString *kLookupCoefficient3 = @"coefficient-3";
                                         }
                                 },
                             kLookupGenderMale: @{
+                                    kLookupLifetimeRiskFactor: @{
+                                            kLifetimeRiskFactorOptimal: @5,
+                                            kLifetimeRiskFactorNotOptimal: @36,
+                                            kLifetimeRiskFactorElevated: @46,
+                                            kLifetimeRiskFactorMajor: @50,
+                                            kLifetimeRiskFactorMajorGreaterThanEqualToTwo: @69
+                                            },
                                     kLookupEthnicityAfricanAmerican: @{
                                             kLookupParameters: @{
                                                     kLookupPopulationMean: @19.54,
