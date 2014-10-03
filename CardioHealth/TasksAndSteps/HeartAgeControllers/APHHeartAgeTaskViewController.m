@@ -97,7 +97,7 @@ static NSString *kLookupCoefficient3 = @"coefficient-3";
     }
     
     {
-        RKAnswerFormat *format = [RKChoiceAnswerFormat choiceAnswerWithOptions:@[@"African American", @"Other"]
+        RKAnswerFormat *format = [RKChoiceAnswerFormat choiceAnswerWithOptions:@[@"African-American", @"Other"]
                                                                          style:RKChoiceAnswerStyleSingleChoice];
 
         RKQuestionStep *step = [RKQuestionStep questionStepWithIdentifier:kHeartAgeQuestionEthnicity
