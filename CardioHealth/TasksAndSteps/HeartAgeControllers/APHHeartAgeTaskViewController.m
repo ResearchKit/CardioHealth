@@ -473,6 +473,17 @@ static NSString *kLookupCoefficient3 = @"coefficient-3";
     }
 }
 
+/**
+ * @brief   Generates the lookup table for all heart ages between 17 and 100. The table includes
+ *          the heart age and the 10 year risk factor.
+ * @param   gender      Gender of the person taking the survey.
+ * @param   ethnicity   Ethnicity of the person taking the survey.
+ * @return  An array of dictionaries. Each dictionary has an 'age' key that corresponds to the Heart Age
+ *          and 'risk' key that corresponds to the Estimated 10-Year Risk value. Both key have values
+ *          that are of type NSNumber.
+ * @note    This method relies on the heartAgeLookup property to retrieve constant/precomputed values
+ *          that are needed to perform all of the calculations.
+ */
 - (NSArray *)generateHeartAgeLookupTableForGender:(NSString *)gender ethnicity:(NSString *)ethnicity
 {
     NSMutableArray *lookup = [NSMutableArray array];
