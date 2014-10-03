@@ -440,6 +440,35 @@ static NSString *kLookupCoefficient3 = @"coefficient-3";
     
     return @{@"age": [NSNumber numberWithDouble:heartAge], @"tenYearRisk": [NSNumber numberWithDouble:individualEstimatedTenYearRisk]};
 }
+
+- (NSInteger)findHeartAgeForRiskValue:(double)riskValue forGender:(NSString *)gender forEthnicity:(NSString *)ethnicity
+{
+    
+    NSArray *heartAgeLookup = [self generateHeartAgeLookupTableForGender:gender ethnicity:ethnicity];
+    
+    NSUInteger index = [heartAgeLookup indexOfObject:@(riskValue)
+                                       inSortedRange:NSMakeRange(0, heartAgeLookup.count)
+                                             options:NSBinarySearchingFirstEqual | NSBinarySearchingInsertionIndex
+                                     usingComparator:^NSComparisonResult(id a, id b) {
+                                         NSNumber *riskA = [(NSDictionary *)a objectForKey:@"risk"];
+                                         NSNumber *riskB = (NSNumber *)b;
+                                         return [riskA compare:riskB];
+                                     }];
+    if (index == 0) {
+        return [[[heartAgeLookup objectAtIndex:index] objectForKey:@"age"] integerValue];
+    } else if (index == heartAgeLookup.count) {
+        return [[[heartAgeLookup lastObject] objectForKey:@"age"] integerValue];
+    } else {
+        double leftDifference = riskValue - [[heartAgeLookup[index - 1] objectForKey:@"risk" ] doubleValue];
+        double rightDifference = [[heartAgeLookup[index] objectForKey:@"risk" ] doubleValue] - riskValue;
+        
+        if (leftDifference < rightDifference) {
+            --index;
+        }
+        
+        return [[heartAgeLookup[index] objectForKey:@"age"] integerValue];
+    }
+}
 }
 
 @end
