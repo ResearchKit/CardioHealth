@@ -221,7 +221,9 @@ static NSString *kLookupCoefficient3 = @"coefficient-3";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.showsProgressInNavigationBar = NO;
+    // This shows the 'Step 1 of x' in the Navigation bar,
+    // not to be confused with a proper progress bar.
+    self.showsProgressInNavigationBar = YES;
     
     // Heart age lookup parameters
     self.heartAgeParametersLookUp = @{
