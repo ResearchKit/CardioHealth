@@ -502,8 +502,6 @@ static NSString *kLookupCoefficient3 = @"coefficient-3";
                             @"age": [NSNumber numberWithInteger:age],
                             @"risk": [NSNumber numberWithDouble:estimatedTenYearRiskOfHardAscvd]
                            }];
-        
-        NSLog(@"Age %lu: %f | %f", age, coefficientSum, estimatedTenYearRiskOfHardAscvd);
     }
     
     // TODO: Convert this using blocks, if and only if there's a performance benefit.
