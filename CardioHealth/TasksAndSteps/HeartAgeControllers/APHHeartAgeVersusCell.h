@@ -10,4 +10,7 @@
 
 @interface APHHeartAgeVersusCell : UITableViewCell
 
+@property (nonatomic) NSUInteger age;
+@property (nonatomic) NSUInteger heartAge;
+
 @end
