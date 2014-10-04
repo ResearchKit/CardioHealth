@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Y Media Labs. All rights reserved.
 //
 #import "APHHeartAgeTaskViewController.h"
-#import "APHHeartAgeResultsViewController.h"
+#import "APHHeartAgeSummaryViewController.h"
 #import <math.h>
 
 // Question Keys
@@ -364,11 +364,14 @@ static NSString *kLifetimeRiskFactorMajorGreaterThanEqualToTwo = @"risk-factor-m
         // Kickoff heart age calculations
         NSDictionary *heartAgeInfo = [self calculateHeartAgeAndTenYearRisk:surveyResultsDictionary];
         
-        APHHeartAgeResultsViewController *heartAgeResultsVC = [[APHHeartAgeResultsViewController alloc] init];
-        heartAgeResultsVC.taskProgress = 0.65;
+        UIStoryboard *sbHeartAgeSummary = [UIStoryboard storyboardWithName:@"HeartAgeSummary" bundle:nil];
+        APHHeartAgeSummaryViewController *heartAgeResultsVC = [sbHeartAgeSummary instantiateInitialViewController];
+
+        heartAgeResultsVC.taskProgress = 0.25;
         heartAgeResultsVC.actualAge = [surveyResultsDictionary[kHeartAgeQuestionAge] integerValue];
         heartAgeResultsVC.heartAge = [heartAgeInfo[@"age"] integerValue];
         heartAgeResultsVC.tenYearRisk = heartAgeInfo[@"tenYearRisk"];
+        heartAgeResultsVC.lifetimeRisk = heartAgeInfo[@"lifetimeRisk"];
         heartAgeResultsVC.someImprovement = @"Some suggestions to improve your heart age.";
         
         [self pushViewController:heartAgeResultsVC animated:YES];
@@ -471,7 +474,7 @@ static NSString *kLifetimeRiskFactorMajorGreaterThanEqualToTwo = @"risk-factor-m
     return @{
              @"age": [NSNumber numberWithDouble:heartAge],
              @"tenYearRisk": [NSNumber numberWithDouble:individualEstimatedTenYearRisk],
-             @"lifetimeRisk": [NSNumber numberWithInteger:lifetimeRiskFactor]
+             @"lifetimeRisk": [NSNumber numberWithDouble:lifetimeRiskFactor]
              };
 }
 

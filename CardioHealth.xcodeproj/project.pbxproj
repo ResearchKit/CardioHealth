@@ -9,11 +9,12 @@
 /* Begin PBXBuildFile section */
 		081328AC19DF5ADA0008A661 /* APCAppleCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F56F60F119D37E4A00A0A2E1 /* APCAppleCore.framework */; };
 		081328AD19DF5ADA0008A661 /* APCAppleCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F56F60F119D37E4A00A0A2E1 /* APCAppleCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		082AD72219D9B9F20090E255 /* APHHeartAgeVersusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 082AD72119D9B9F20090E255 /* APHHeartAgeVersusView.m */; };
+		081328BB19DF64050008A661 /* APHHeartAgeSummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 081328B919DF64050008A661 /* APHHeartAgeSummaryViewController.m */; };
+		081328BC19DF64050008A661 /* HeartAgeSummary.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 081328BA19DF64050008A661 /* HeartAgeSummary.storyboard */; };
+		081328C219DF70790008A661 /* APHHeartAgeVersusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 081328C119DF70790008A661 /* APHHeartAgeVersusCell.m */; };
+		081328C519E0551F0008A661 /* APHHeartAgeTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 081328C419E0551F0008A661 /* APHHeartAgeTextCell.m */; };
 		0847943E19D49513009805AD /* APHHeartAgeTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0847943D19D49513009805AD /* APHHeartAgeTaskViewController.m */; };
 		08627AEC19DF507600E63EC4 /* APCAppleCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F56F60F119D37E4A00A0A2E1 /* APCAppleCore.framework */; };
-		08A9F37F19D62C4100D97FF7 /* APHHeartAgeResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08A9F37D19D62C4100D97FF7 /* APHHeartAgeResultsViewController.m */; };
-		08A9F38019D62C4100D97FF7 /* APHHeartAgeResultsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08A9F37E19D62C4100D97FF7 /* APHHeartAgeResultsViewController.xib */; };
 		F55BBE5719D362D0003CA0F9 /* NSString+CustomMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = F55BBDDB19D362D0003CA0F9 /* NSString+CustomMethods.m */; };
 		F55BBE5819D362D0003CA0F9 /* RKStep+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = F55BBDDD19D362D0003CA0F9 /* RKStep+Description.m */; };
 		F55BBE5919D362D0003CA0F9 /* UIColor+CardioHealth.m in Sources */ = {isa = PBXBuildFile; fileRef = F55BBDDF19D362D0003CA0F9 /* UIColor+CardioHealth.m */; };
@@ -101,13 +102,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		082AD72019D9B9F20090E255 /* APHHeartAgeVersusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APHHeartAgeVersusView.h; path = HeartAgeControllers/APHHeartAgeVersusView.h; sourceTree = "<group>"; };
-		082AD72119D9B9F20090E255 /* APHHeartAgeVersusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APHHeartAgeVersusView.m; path = HeartAgeControllers/APHHeartAgeVersusView.m; sourceTree = "<group>"; };
+		081328B819DF64050008A661 /* APHHeartAgeSummaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APHHeartAgeSummaryViewController.h; path = HeartAgeControllers/APHHeartAgeSummaryViewController.h; sourceTree = "<group>"; };
+		081328B919DF64050008A661 /* APHHeartAgeSummaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APHHeartAgeSummaryViewController.m; path = HeartAgeControllers/APHHeartAgeSummaryViewController.m; sourceTree = "<group>"; };
+		081328BA19DF64050008A661 /* HeartAgeSummary.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = HeartAgeSummary.storyboard; path = HeartAgeControllers/HeartAgeSummary.storyboard; sourceTree = "<group>"; };
+		081328C019DF70790008A661 /* APHHeartAgeVersusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APHHeartAgeVersusCell.h; path = HeartAgeControllers/APHHeartAgeVersusCell.h; sourceTree = "<group>"; };
+		081328C119DF70790008A661 /* APHHeartAgeVersusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APHHeartAgeVersusCell.m; path = HeartAgeControllers/APHHeartAgeVersusCell.m; sourceTree = "<group>"; };
+		081328C319E0551F0008A661 /* APHHeartAgeTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APHHeartAgeTextCell.h; path = HeartAgeControllers/APHHeartAgeTextCell.h; sourceTree = "<group>"; };
+		081328C419E0551F0008A661 /* APHHeartAgeTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APHHeartAgeTextCell.m; path = HeartAgeControllers/APHHeartAgeTextCell.m; sourceTree = "<group>"; };
 		0847943C19D49513009805AD /* APHHeartAgeTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APHHeartAgeTaskViewController.h; path = HeartAgeControllers/APHHeartAgeTaskViewController.h; sourceTree = "<group>"; };
 		0847943D19D49513009805AD /* APHHeartAgeTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APHHeartAgeTaskViewController.m; path = HeartAgeControllers/APHHeartAgeTaskViewController.m; sourceTree = "<group>"; };
-		08A9F37C19D62C4100D97FF7 /* APHHeartAgeResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APHHeartAgeResultsViewController.h; path = HeartAgeControllers/APHHeartAgeResultsViewController.h; sourceTree = "<group>"; };
-		08A9F37D19D62C4100D97FF7 /* APHHeartAgeResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APHHeartAgeResultsViewController.m; path = HeartAgeControllers/APHHeartAgeResultsViewController.m; sourceTree = "<group>"; };
-		08A9F37E19D62C4100D97FF7 /* APHHeartAgeResultsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = APHHeartAgeResultsViewController.xib; path = HeartAgeControllers/APHHeartAgeResultsViewController.xib; sourceTree = "<group>"; };
 		F55BBDDA19D362D0003CA0F9 /* NSString+CustomMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CustomMethods.h"; sourceTree = "<group>"; };
 		F55BBDDB19D362D0003CA0F9 /* NSString+CustomMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CustomMethods.m"; sourceTree = "<group>"; };
 		F55BBDDC19D362D0003CA0F9 /* RKStep+Description.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RKStep+Description.h"; sourceTree = "<group>"; };
@@ -204,16 +207,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		081328B719DF60730008A661 /* Heart Age Summary */ = {
+			isa = PBXGroup;
+			children = (
+				081328B819DF64050008A661 /* APHHeartAgeSummaryViewController.h */,
+				081328B919DF64050008A661 /* APHHeartAgeSummaryViewController.m */,
+				081328BA19DF64050008A661 /* HeartAgeSummary.storyboard */,
+				081328C019DF70790008A661 /* APHHeartAgeVersusCell.h */,
+				081328C119DF70790008A661 /* APHHeartAgeVersusCell.m */,
+				081328C319E0551F0008A661 /* APHHeartAgeTextCell.h */,
+				081328C419E0551F0008A661 /* APHHeartAgeTextCell.m */,
+			);
+			name = "Heart Age Summary";
+			sourceTree = "<group>";
+		};
 		0847943F19D4AB0A009805AD /* HeartAgeControllers */ = {
 			isa = PBXGroup;
 			children = (
 				0847943C19D49513009805AD /* APHHeartAgeTaskViewController.h */,
 				0847943D19D49513009805AD /* APHHeartAgeTaskViewController.m */,
-				08A9F37C19D62C4100D97FF7 /* APHHeartAgeResultsViewController.h */,
-				08A9F37D19D62C4100D97FF7 /* APHHeartAgeResultsViewController.m */,
-				08A9F37E19D62C4100D97FF7 /* APHHeartAgeResultsViewController.xib */,
-				082AD72019D9B9F20090E255 /* APHHeartAgeVersusView.h */,
-				082AD72119D9B9F20090E255 /* APHHeartAgeVersusView.m */,
+				081328B719DF60730008A661 /* Heart Age Summary */,
 			);
 			name = HeartAgeControllers;
 			sourceTree = "<group>";
@@ -571,12 +584,12 @@
 				F55BBE6A19D362D0003CA0F9 /* APHDashboard.storyboard in Resources */,
 				F55BBE5F19D362D0003CA0F9 /* APHSignupOptionsViewController.xib in Resources */,
 				F55BBE6419D362D0003CA0F9 /* intro.m4v in Resources */,
+				081328BC19DF64050008A661 /* HeartAgeSummary.storyboard in Resources */,
 				F55BBE6119D362D0003CA0F9 /* APHTasksAndSchedules.json in Resources */,
 				F55BBE7919D362D0003CA0F9 /* APHHealthProfile.storyboard in Resources */,
 				F55BBE6219D362D0003CA0F9 /* JSON_READ_ME in Resources */,
 				F55BBE6319D362D0003CA0F9 /* sleepSurvey.json in Resources */,
 				F55BBE6619D362D0003CA0F9 /* LaunchScreen.xib in Resources */,
-				08A9F38019D62C4100D97FF7 /* APHHeartAgeResultsViewController.xib in Resources */,
 				F5F6450A19D35BA2004CFBB2 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -601,17 +614,18 @@
 				0847943E19D49513009805AD /* APHHeartAgeTaskViewController.m in Sources */,
 				F55BBE6919D362D0003CA0F9 /* APHActivitiesViewController.m in Sources */,
 				F5F644FF19D35BA2004CFBB2 /* main.m in Sources */,
+				081328C519E0551F0008A661 /* APHHeartAgeTextCell.m in Sources */,
 				F55BBE5B19D362D0003CA0F9 /* APHSignInViewController.m in Sources */,
 				F55BBE6C19D362D0003CA0F9 /* APHEditSectionsViewController.m in Sources */,
 				F55BBE6F19D362D0003CA0F9 /* APHDashboardMessageViewCell.m in Sources */,
 				F55BBE5719D362D0003CA0F9 /* NSString+CustomMethods.m in Sources */,
-				08A9F37F19D62C4100D97FF7 /* APHHeartAgeResultsViewController.m in Sources */,
 				F55BBE6E19D362D0003CA0F9 /* APHDashboardGraphViewCell.m in Sources */,
 				F55BBE7B19D362D0003CA0F9 /* APHSettingsViewController.m in Sources */,
+				081328BB19DF64050008A661 /* APHHeartAgeSummaryViewController.m in Sources */,
 				F55BBE8C19D362D0003CA0F9 /* APHSpecialSurveyTaskViewController.m in Sources */,
 				F55BBE5C19D362D0003CA0F9 /* APHSignUpGeneralInfoViewController.m in Sources */,
-				082AD72219D9B9F20090E255 /* APHHeartAgeVersusView.m in Sources */,
 				F55BBE7019D362D0003CA0F9 /* APHDashboardProgressViewCell.m in Sources */,
+				081328C219DF70790008A661 /* APHHeartAgeVersusCell.m in Sources */,
 				F55BBE5819D362D0003CA0F9 /* RKStep+Description.m in Sources */,
 				F55BBE5919D362D0003CA0F9 /* UIColor+CardioHealth.m in Sources */,
 				F55BBE6B19D362D0003CA0F9 /* APHDashboardViewController.m in Sources */,
