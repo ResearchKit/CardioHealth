@@ -10,4 +10,7 @@
 
 @interface APHHeartAgeTextCell : UITableViewCell
 
+@property (nonatomic, strong) NSString *cellTitleText;
+@property (nonatomic, strong) NSString *cellDetailText;
+
 @end
