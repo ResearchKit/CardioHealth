@@ -51,7 +51,7 @@ typedef NS_ENUM(NSUInteger, APHHeartAgeAndRiskFactorRows)
     [self.view addSubview:progressBar];
     
     [self.tableView registerClass:[APHHeartAgeVersusCell class] forCellReuseIdentifier:HeartAgeCell];
-    [self.tableView registerClass:[APHHeartAgeTextCell class] forCellReuseIdentifier:RiskCell];
+    [self.tableView registerClass:[APHHeartAgeTextCell class] forCellReuseIdentifier:InformationCell];
 }
 
 - (void)didReceiveMemoryWarning {
