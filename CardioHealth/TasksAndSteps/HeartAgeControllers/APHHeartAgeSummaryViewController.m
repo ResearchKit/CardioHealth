@@ -99,7 +99,7 @@ static NSString *RoomForImprovementCell = @"RoomForImprovementCell";
                 [numberFormatter setNumberStyle:NSNumberFormatterPercentStyle];
                 
                 NSString *tenYearRiskPercentage = [numberFormatter stringFromNumber:self.tenYearRisk];
-                NSString *tenYearRiskCaption = [NSString stringWithFormat:@"You have an estimated %@ 10-y risk of ASCVD. You have an estimated XX 10-y risk of ASCVD.", tenYearRiskPercentage];
+                NSString *tenYearRiskCaption = [NSString stringWithFormat:@"You have an estimated %@ 10-y risk and %lu%% lifetime risk of ASCVD.", tenYearRiskPercentage, [self.lifetimeRisk integerValue]];
                 tenYearRiskCell.cellDetailText = tenYearRiskCaption;
                 
                 return tenYearRiskCell;
