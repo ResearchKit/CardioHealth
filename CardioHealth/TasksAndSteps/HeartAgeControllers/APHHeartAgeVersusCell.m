@@ -33,10 +33,7 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     // Color declarations
-    UIColor *fillColor = [UIColor colorWithRed:1
-                                         green:1
-                                          blue:1
-                                         alpha:1];
+    UIColor *fillColor = [UIColor whiteColor];
     
     // Box that will enclose the Age and Heart Age
     CGFloat lineWidth = 1.0; //change line width here
