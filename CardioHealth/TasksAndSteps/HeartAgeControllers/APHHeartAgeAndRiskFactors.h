@@ -24,6 +24,14 @@ static NSString *kHeartAgekHeartAgeTestDataHypertension = @"heart-age-data-hyper
 
 @interface APHHeartAgeAndRiskFactors : NSObject
 
-- (NSDictionary *)calculateHeartAgeAndTenYearRisk:(NSDictionary *)results;
+/**
+ * @brief  This is the entry point into calculating the heart age and all associated coefficients.
+ *
+ * @param  results   an NSDictionary of results collected from the survey.
+ *
+ * @return returns a dictionary with 3 keys: 'age', 'tenYearRisk', and 'lifetimeRisk' whoes value is an NSNumber.
+ *
+ */
+- (NSDictionary *)calculateHeartAgeAndRiskFactors:(NSDictionary *)results;
 
 @end
