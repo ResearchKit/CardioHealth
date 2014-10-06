@@ -76,7 +76,7 @@ typedef NS_ENUM(NSUInteger, APHHeartAgeAndRiskFactorRows)
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return (section == 0) ? 1 : 3;
+    return (section == kHeartAgeSummarySectionTodaysActivites) ? 1 : 3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -84,18 +84,22 @@ typedef NS_ENUM(NSUInteger, APHHeartAgeAndRiskFactorRows)
     UITableViewCell *cell;
     
     switch (indexPath.section) {
-        case 0:
+        case kHeartAgeSummarySectionTodaysActivites:
+        {
             cell = [tableView dequeueReusableCellWithIdentifier:ActivityCell forIndexPath:indexPath];
+            cell.textLabel.text = NSLocalizedString(@"Today's Activities", @"Today's activities");
+            cell.detailTextLabel.text = NSLocalizedString(@"1/3", @"One of three");
+        }
             break;
         
         default:
-            if (indexPath.row == 0) {
-                APHHeartAgeVersusCell *cell = [tableView dequeueReusableCellWithIdentifier:HeartAgeCell forIndexPath:indexPath];
+            if (indexPath.row == kHeartAgeAndRiskFactorsRowHeartAge) {
+                APHHeartAgeVersusCell *cell = (APHHeartAgeVersusCell *)[tableView dequeueReusableCellWithIdentifier:HeartAgeCell forIndexPath:indexPath];
                 cell.age = self.actualAge;
                 cell.heartAge = self.heartAge;
                 
-            } else if (indexPath.row == 1) {
-                APHHeartAgeTextCell *cell = [tableView dequeueReusableCellWithIdentifier:RiskCell forIndexPath:indexPath];
+            } else if (indexPath.row == kHeartAgeAndRiskFactorsRowRiskFactors) {
+                APHHeartAgeTextCell *cell = (APHHeartAgeTextCell *)[tableView dequeueReusableCellWithIdentifier:InformationCell forIndexPath:indexPath];
                 cell.cellTitleText = NSLocalizedString(@"10 Year Risk Factor", @"10 year risk factor.");
                 
                 NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
@@ -104,12 +108,13 @@ typedef NS_ENUM(NSUInteger, APHHeartAgeAndRiskFactorRows)
                 NSString *tenYearRiskPercentage = [numberFormatter stringFromNumber:self.tenYearRisk];
                 NSString *tenYearRiskCaption = [NSString stringWithFormat:@"You have an estimated %@ 10-y risk and %lu%% lifetime risk of ASCVD.", tenYearRiskPercentage, [self.lifetimeRisk integerValue]];
                 cell.cellDetailText = tenYearRiskCaption;
+                
             } else {
-                APHHeartAgeTextCell *cell = [tableView dequeueReusableCellWithIdentifier:RiskCell forIndexPath:indexPath];
+                APHHeartAgeTextCell *cell = (APHHeartAgeTextCell *)[tableView dequeueReusableCellWithIdentifier:InformationCell forIndexPath:indexPath];
                 cell.cellTitleText = NSLocalizedString(@"Some Room for Improvement", @"Some Room for Improvement.");
                 cell.cellDetailText = NSLocalizedString(@"Yeah, I like animals better than people sometimes... Especially dogs. Dogs are the best.", @"Replace this string with something more informative.");
+                
             }
-            break;
     }
     
     return cell;
