@@ -26,11 +26,9 @@
         
         self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 15, self.frame.size.width, 21)];
         self.titleLabel.textAlignment = NSTextAlignmentCenter;
-        self.titleLabel.backgroundColor = [UIColor orangeColor];
         
         self.contentTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 41, self.frame.size.width, 63)];
         self.contentTextLabel.textColor = [UIColor grayColor];
-        self.contentTextLabel.backgroundColor = [UIColor brownColor];
         self.contentTextLabel.numberOfLines = 3;
         self.contentTextLabel.lineBreakMode = NSLineBreakByWordWrapping;
         
