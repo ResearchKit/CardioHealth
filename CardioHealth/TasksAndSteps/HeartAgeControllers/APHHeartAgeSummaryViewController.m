@@ -64,15 +64,7 @@ static NSString *RoomForImprovementCell = @"RoomForImprovementCell";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    switch (section) {
-        case 0:
-            return 1;
-            break;
-            
-        default:
-            return 3;
-            break;
-    }
+    return (section == 0) ? 1 : 3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -120,50 +112,50 @@ static NSString *RoomForImprovementCell = @"RoomForImprovementCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+     CGFloat rowHeight;
+    
     switch (indexPath.section) {
         case 1:
             switch (indexPath.row) {
                 case 0:
-                    return 220.0;
+                    rowHeight = 220.0;
                     break;
                 case 1:
                 case 2:
-                    return 120.0;
+                    rowHeight =  120.0;
                     break;
                 default:
-                    return self.tableView.rowHeight;
+                    rowHeight = self.tableView.rowHeight;
                     break;
             }
             break;
             
         default:
-            return self.tableView.rowHeight;
+            rowHeight = self.tableView.rowHeight;
             break;
     }
+    
+    return rowHeight;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if (section == 0) {
-        return 64.0;
-    } else {
-        return self.tableView.sectionHeaderHeight;
-    }
+    return (section == 0) ? 64.0 : self.tableView.sectionHeaderHeight;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
+    UILabel *sectionHeader = nil;
+    
     if (section == 0) {
-        UILabel *sectionHeader = [[UILabel alloc] initWithFrame:CGRectMake(20, 0.0, 280.0, 42.0)];
+        sectionHeader = [[UILabel alloc] initWithFrame:CGRectMake(20, 0.0, 280.0, 42.0)];
         [sectionHeader setNumberOfLines:2];
         [sectionHeader setLineBreakMode:NSLineBreakByWordWrapping];
         [sectionHeader setText:@"Completing more activities increases the effectiveness of the study."];
         [sectionHeader setFont:[UIFont fontWithName:@"Helvetica Neue-Thin" size:15.0]];
-        
-        return sectionHeader;
-    } else {
-        return nil;
     }
+    
+    return sectionHeader;
     
 }
 
