@@ -7,7 +7,7 @@
 //
 #import "APHHeartAgeTaskViewController.h"
 #import "APHHeartAgeSummaryViewController.h"
-#import <math.h>
+#import "APHHeartAgeAndRiskFactors.h"
 
 // Question Keys
 static NSString *kHeartAgeIntroduction = @"HeartAgeIntroduction";
@@ -266,7 +266,8 @@ static NSString *kHeartAgeQuestionHypertension = @"HeartAgeQuestion12";
         }
         
         // Kickoff heart age calculations
-        NSDictionary *heartAgeInfo = [self calculateHeartAgeAndTenYearRisk:surveyResultsDictionary];
+        APHHeartAgeAndRiskFactors *heartAgeAndRiskFactors = [[APHHeartAgeAndRiskFactors alloc] init];
+        NSDictionary *heartAgeInfo = [heartAgeAndRiskFactors calculateHeartAgeAndTenYearRisk:surveyResultsDictionary];
         
         UIStoryboard *sbHeartAgeSummary = [UIStoryboard storyboardWithName:@"HeartAgeSummary" bundle:nil];
         APHHeartAgeSummaryViewController *heartAgeResultsVC = [sbHeartAgeSummary instantiateInitialViewController];
