@@ -23,78 +23,171 @@
                 </pageControl>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Measures Exercise Tolerance" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ykB-cB-6Bt">
                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="400" id="927-CN-Xoy"/>
+                        <constraint firstAttribute="height" constant="36" id="vlK-og-OS6"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
-                    <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="7" y="18" width="384" height="21"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="927-CN-Xoy"/>
+                            <exclude reference="vlK-og-OS6"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=regular-widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="927-CN-Xoy"/>
+                            <include reference="vlK-og-OS6"/>
+                        </mask>
                     </variation>
                 </label>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Once you tap Get Started, you will have 5 seconds until this test begins tracking your movements." textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Tgj-St-O8b">
-                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                    <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="54" y="54" width="293" height="83"/>
-                    </variation>
-                </textView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A95-aR-0BF">
                     <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="74" id="w2j-yj-ax2"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
                     <state key="normal" title="View Important Details">
                         <color key="titleColor" red="0.75686281919999998" green="0.094117656349999995" blue="0.1294117719" alpha="1" colorSpace="deviceRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="7" y="145" width="384" height="74"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="w2j-yj-ax2"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=regular-widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="w2j-yj-ax2"/>
+                        </mask>
                     </variation>
                     <connections>
                         <action selector="viewImportantDetails:" destination="-1" eventType="touchUpInside" id="51O-mf-qA8"/>
                     </connections>
                 </button>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cmW-m1-Fon">
-                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                    <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="-1" y="227" width="400" height="235"/>
-                    </variation>
-                </scrollView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xMe-zQ-GBi">
                     <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                    <color key="backgroundColor" red="0.75686281919999998" green="0.094117656349999995" blue="0.1294117719" alpha="1" colorSpace="deviceRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="64" id="UJQ-6r-Nde"/>
+                    </constraints>
                     <state key="normal" title="Get Started">
+                        <color key="titleColor" red="0.98823535439999999" green="0.98431378599999997" blue="0.96470594409999999" alpha="1" colorSpace="deviceRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="7" y="499" width="384" height="45"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="UJQ-6r-Nde"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=regular-widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="UJQ-6r-Nde"/>
+                        </mask>
                     </variation>
                     <connections>
                         <action selector="getStarted:" destination="-1" eventType="touchUpInside" id="POe-zT-yMn"/>
                     </connections>
                 </button>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="syw-VK-1gi">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                </scrollView>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Once you tap Get Started, you will have 5 seconds until this test begins tracking your movements." textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Tgj-St-O8b">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="83" id="UAc-VV-XUs"/>
+                    </constraints>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="UAc-VV-XUs"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=regular-widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="UAc-VV-XUs"/>
+                        </mask>
+                    </variation>
+                </textView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Tgj-St-O8b" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="38" id="0d4-zf-Jnu"/>
+                <constraint firstItem="A95-aR-0BF" firstAttribute="centerX" secondItem="Tgj-St-O8b" secondAttribute="centerX" id="0zV-fy-1Im"/>
+                <constraint firstAttribute="bottom" secondItem="xMe-zQ-GBi" secondAttribute="bottom" id="2ee-Ks-rPm"/>
+                <constraint firstItem="syw-VK-1gi" firstAttribute="trailing" secondItem="A95-aR-0BF" secondAttribute="trailing" id="3LM-dL-d3H"/>
+                <constraint firstItem="syw-VK-1gi" firstAttribute="leading" secondItem="ykB-cB-6Bt" secondAttribute="leading" id="6pv-2s-zfm"/>
+                <constraint firstItem="ykB-cB-6Bt" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="52" id="9Y1-fY-Adb"/>
+                <constraint firstAttribute="centerX" secondItem="ykB-cB-6Bt" secondAttribute="centerX" id="GrI-Od-TO0"/>
+                <constraint firstItem="syw-VK-1gi" firstAttribute="top" secondItem="A95-aR-0BF" secondAttribute="bottom" constant="31" id="P8J-ic-Dzr"/>
+                <constraint firstItem="A95-aR-0BF" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="-2" id="QJe-bz-IHf"/>
+                <constraint firstItem="Tgj-St-O8b" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="77" id="TBP-EX-Nme"/>
+                <constraint firstItem="A95-aR-0BF" firstAttribute="leading" secondItem="xMe-zQ-GBi" secondAttribute="leading" id="Xcy-D9-7RQ"/>
+                <constraint firstItem="A95-aR-0BF" firstAttribute="top" secondItem="ykB-cB-6Bt" secondAttribute="bottom" constant="66" id="imv-cc-NAX"/>
+                <constraint firstItem="xMe-zQ-GBi" firstAttribute="top" secondItem="syw-VK-1gi" secondAttribute="bottom" constant="8" symbolic="YES" id="m4A-My-o27"/>
+                <constraint firstItem="A95-aR-0BF" firstAttribute="trailing" secondItem="ykB-cB-6Bt" secondAttribute="trailing" id="pjG-xJ-2lg"/>
+                <constraint firstItem="syw-VK-1gi" firstAttribute="trailing" secondItem="xMe-zQ-GBi" secondAttribute="trailing" id="wo6-W1-ZQJ"/>
+            </constraints>
             <variation key="default">
                 <mask key="subviews">
                     <exclude reference="hKn-lK-rzX"/>
                     <exclude reference="ykB-cB-6Bt"/>
-                    <exclude reference="Tgj-St-O8b"/>
                     <exclude reference="A95-aR-0BF"/>
-                    <exclude reference="cmW-m1-Fon"/>
                     <exclude reference="xMe-zQ-GBi"/>
+                    <exclude reference="syw-VK-1gi"/>
+                    <exclude reference="Tgj-St-O8b"/>
+                </mask>
+                <mask key="constraints">
+                    <exclude reference="9Y1-fY-Adb"/>
+                    <exclude reference="GrI-Od-TO0"/>
+                    <exclude reference="0d4-zf-Jnu"/>
+                    <exclude reference="TBP-EX-Nme"/>
+                    <exclude reference="0zV-fy-1Im"/>
+                    <exclude reference="QJe-bz-IHf"/>
+                    <exclude reference="Xcy-D9-7RQ"/>
+                    <exclude reference="imv-cc-NAX"/>
+                    <exclude reference="pjG-xJ-2lg"/>
+                    <exclude reference="3LM-dL-d3H"/>
+                    <exclude reference="6pv-2s-zfm"/>
+                    <exclude reference="P8J-ic-Dzr"/>
+                    <exclude reference="wo6-W1-ZQJ"/>
+                    <exclude reference="2ee-Ks-rPm"/>
+                    <exclude reference="m4A-My-o27"/>
                 </mask>
             </variation>
             <variation key="heightClass=regular-widthClass=compact">
                 <mask key="subviews">
                     <include reference="hKn-lK-rzX"/>
                     <include reference="ykB-cB-6Bt"/>
-                    <include reference="Tgj-St-O8b"/>
                     <include reference="A95-aR-0BF"/>
-                    <include reference="cmW-m1-Fon"/>
                     <include reference="xMe-zQ-GBi"/>
+                    <include reference="syw-VK-1gi"/>
+                    <include reference="Tgj-St-O8b"/>
+                </mask>
+                <mask key="constraints">
+                    <include reference="9Y1-fY-Adb"/>
+                    <include reference="GrI-Od-TO0"/>
+                    <include reference="0d4-zf-Jnu"/>
+                    <include reference="TBP-EX-Nme"/>
+                    <include reference="0zV-fy-1Im"/>
+                    <include reference="QJe-bz-IHf"/>
+                    <include reference="Xcy-D9-7RQ"/>
+                    <include reference="imv-cc-NAX"/>
+                    <include reference="pjG-xJ-2lg"/>
+                    <include reference="3LM-dL-d3H"/>
+                    <include reference="6pv-2s-zfm"/>
+                    <include reference="P8J-ic-Dzr"/>
+                    <include reference="wo6-W1-ZQJ"/>
+                    <include reference="2ee-Ks-rPm"/>
+                    <include reference="m4A-My-o27"/>
                 </mask>
             </variation>
+            <point key="canvasLocation" x="82" y="431"/>
         </view>
     </objects>
 </document>

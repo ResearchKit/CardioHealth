@@ -91,6 +91,8 @@
 
 - (void)sendStopString:(NSString*)countDownMessage {
     
+    [self.timer invalidate];
+    
     if ([self.delegate respondsToSelector:@selector(aphTimer:didFinishCountingDown:)]) {
         [self.delegate aphTimer:self didFinishCountingDown:countDownMessage];
     }

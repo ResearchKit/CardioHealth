@@ -13,6 +13,8 @@
 #import "APHFitnessTestComfortablePositionViewController.h"
 #import "APHFitnessTestRestViewController.h"
 #import "APHFitnessTestFinishedViewController.h"
+#import "APHFitnessTestRecorder.h"
+
 
 static  NSString  *kIntervalTappingStep101 = @"FitnessStep101";
 static  NSString  *kIntervalTappingStep102 = @"FitnessStep102";
@@ -54,7 +56,7 @@ static  NSString  *kIntervalTappingStep105 = @"FitnessStep105";
     {
         //Walking 6 minutes
         RKActiveStep* step = [[RKActiveStep alloc] initWithIdentifier:kIntervalTappingStep102 name:@"6 Minute Walk"];
-//        step.recorderConfigurations = [RKRecorder new];
+        step.recorderConfigurations = @[[APHFitnessTestCustomRecorderConfiguration new]];
 //        step.caption = NSLocalizedString(@"6 Minute Walk", @"");
 //        step.text = NSLocalizedString(@"Walk 6 minutes.", @"");
         [steps addObject:step];

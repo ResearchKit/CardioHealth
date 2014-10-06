@@ -16,6 +16,7 @@
 		7B22FFBC19DB4DD100C8C915 /* APHImportantDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B22FFB219DB4DD100C8C915 /* APHImportantDetailsViewController.xib */; };
 		7B22FFBD19DB4DD100C8C915 /* APHFitnessTestDistanceTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B22FFB519DB4DD100C8C915 /* APHFitnessTestDistanceTracker.m */; };
 		7B22FFBF19DB4DF200C8C915 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B22FFBE19DB4DF200C8C915 /* CoreLocation.framework */; };
+		7B4782B919E2F0B1005D5B54 /* APHFitnessTestResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B4782B819E2F0B1005D5B54 /* APHFitnessTestResult.m */; };
 		7BA5C49119DDF954009002C6 /* APHFitnessTestComfortablePositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA5C48F19DDF954009002C6 /* APHFitnessTestComfortablePositionViewController.m */; };
 		7BA5C49219DDF954009002C6 /* APHFitnessTestComfortablePositionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BA5C49019DDF954009002C6 /* APHFitnessTestComfortablePositionViewController.xib */; };
 		7BA5C49619DDFFA9009002C6 /* APHTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA5C49519DDFFA9009002C6 /* APHTimer.m */; };
@@ -134,6 +135,8 @@
 		7B22FFB419DB4DD100C8C915 /* APHFitnessTestDistanceTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHFitnessTestDistanceTracker.h; sourceTree = "<group>"; };
 		7B22FFB519DB4DD100C8C915 /* APHFitnessTestDistanceTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHFitnessTestDistanceTracker.m; sourceTree = "<group>"; };
 		7B22FFBE19DB4DF200C8C915 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		7B4782B719E2F0B1005D5B54 /* APHFitnessTestResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHFitnessTestResult.h; sourceTree = "<group>"; };
+		7B4782B819E2F0B1005D5B54 /* APHFitnessTestResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHFitnessTestResult.m; sourceTree = "<group>"; };
 		7BA5C48E19DDF954009002C6 /* APHFitnessTestComfortablePositionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHFitnessTestComfortablePositionViewController.h; sourceTree = "<group>"; };
 		7BA5C48F19DDF954009002C6 /* APHFitnessTestComfortablePositionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHFitnessTestComfortablePositionViewController.m; sourceTree = "<group>"; };
 		7BA5C49019DDF954009002C6 /* APHFitnessTestComfortablePositionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = APHFitnessTestComfortablePositionViewController.xib; sourceTree = "<group>"; };
@@ -292,6 +295,8 @@
 				7BA5C49519DDFFA9009002C6 /* APHTimer.m */,
 				7BEA17D419DF24C600717D18 /* APHFitnessTestRecorder.h */,
 				7BEA17D519DF24C600717D18 /* APHFitnessTestRecorder.m */,
+				7B4782B719E2F0B1005D5B54 /* APHFitnessTestResult.h */,
+				7B4782B819E2F0B1005D5B54 /* APHFitnessTestResult.m */,
 			);
 			path = WalkingTestComponents;
 			sourceTree = "<group>";
@@ -731,6 +736,7 @@
 				F55BBE6F19D362D0003CA0F9 /* APHDashboardMessageViewCell.m in Sources */,
 				F55BBE5719D362D0003CA0F9 /* NSString+CustomMethods.m in Sources */,
 				F55BBE6E19D362D0003CA0F9 /* APHDashboardGraphViewCell.m in Sources */,
+				7B4782B919E2F0B1005D5B54 /* APHFitnessTestResult.m in Sources */,
 				F55BBE7B19D362D0003CA0F9 /* APHSettingsViewController.m in Sources */,
 				F55BBE8C19D362D0003CA0F9 /* APHSpecialSurveyTaskViewController.m in Sources */,
 				F55BBE5C19D362D0003CA0F9 /* APHSignUpGeneralInfoViewController.m in Sources */,
