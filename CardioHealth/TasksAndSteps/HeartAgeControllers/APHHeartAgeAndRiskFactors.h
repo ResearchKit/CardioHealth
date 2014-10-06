@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <math.h>
 
-@interface HeartAgeAndRiskFactors : NSObject
+@interface APHHeartAgeAndRiskFactors : NSObject
+
+- (NSDictionary *)calculateHeartAgeAndTenYearRisk:(NSDictionary *)results;
 
 @end

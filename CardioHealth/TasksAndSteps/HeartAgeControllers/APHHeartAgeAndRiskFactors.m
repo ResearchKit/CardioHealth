@@ -9,5 +9,6 @@
 #import "HeartAgeAndRiskFactors.h"
 
 @implementation HeartAgeAndRiskFactors
+ * @brief   This method will compute the lifetime risk factor based on the results of the survey.
 
 @end
