@@ -23,8 +23,8 @@ typedef NS_ENUM(NSUInteger, APHHeartAgeSummarySections)
 typedef NS_ENUM(NSUInteger, APHHeartAgeAndRiskFactorRows)
 {
     kHeartAgeAndRiskFactorsRowHeartAge,
-    kHeartAgeAndRiskFactorsRowRiskFactors,
-    kHeartAgeAndRiskFactorsRowRoomForImprovement
+    kHeartAgeAndRiskFactorsRowTenYearRiskFactor,
+    kHeartAgeAndRiskFactorsRowLifetimeRiskFactor
 };
 
 @interface APHHeartAgeSummaryViewController ()
