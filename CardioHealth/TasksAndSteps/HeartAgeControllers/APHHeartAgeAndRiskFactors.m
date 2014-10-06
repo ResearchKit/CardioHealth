@@ -47,7 +47,7 @@ static NSString *kLifetimeRiskFactorMajorGreaterThanEqualToTwo = @"risk-factor-m
     
     if (self) {
         // Heart age lookup parameters
-        self.heartAgeParametersLookup = @{
+        _heartAgeParametersLookup = @{
                                           kLookupOptimalRiskFactors: @{
                                                   kLookupOptimalRiskFactorTotalCholesterol: @170,
                                                   kLookupOptimalRiskFactorHDL: @50,
