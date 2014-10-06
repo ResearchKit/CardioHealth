@@ -12,8 +12,20 @@
 
 static NSString *ActivityCell = @"ActivityProgressCell";
 static NSString *HeartAgeCell = @"HeartAgeCell";
-static NSString *RiskCell = @"RiskCell";
-static NSString *RoomForImprovementCell = @"RoomForImprovementCell";
+static NSString *InformationCell = @"InformationCell";
+
+typedef NS_ENUM(NSUInteger, APHHeartAgeSummarySections)
+{
+    kHeartAgeSummarySectionTodaysActivites,
+    kHeartAgeSummarySectionHeartAgeAndRiskFactors
+};
+
+typedef NS_ENUM(NSUInteger, APHHeartAgeAndRiskFactorRows)
+{
+    kHeartAgeAndRiskFactorsRowHeartAge,
+    kHeartAgeAndRiskFactorsRowRiskFactors,
+    kHeartAgeAndRiskFactorsRowRoomForImprovement
+};
 
 @interface APHHeartAgeSummaryViewController ()
 
