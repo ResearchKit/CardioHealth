@@ -78,29 +78,24 @@ static NSString *RoomForImprovementCell = @"RoomForImprovementCell";
         
         default:
             if (indexPath.row == 0) {
-                APHHeartAgeVersusCell *versusCell = [tableView dequeueReusableCellWithIdentifier:HeartAgeCell forIndexPath:indexPath];
-                versusCell.age = self.actualAge;
-                versusCell.heartAge = self.heartAge;
+                APHHeartAgeVersusCell *cell = [tableView dequeueReusableCellWithIdentifier:HeartAgeCell forIndexPath:indexPath];
+                cell.age = self.actualAge;
+                cell.heartAge = self.heartAge;
                 
-                return versusCell;
             } else if (indexPath.row == 1) {
-                APHHeartAgeTextCell *tenYearRiskCell = [tableView dequeueReusableCellWithIdentifier:RiskCell forIndexPath:indexPath];
-                tenYearRiskCell.cellTitleText = NSLocalizedString(@"10 Year Risk Factor", @"10 year risk factor.");
+                APHHeartAgeTextCell *cell = [tableView dequeueReusableCellWithIdentifier:RiskCell forIndexPath:indexPath];
+                cell.cellTitleText = NSLocalizedString(@"10 Year Risk Factor", @"10 year risk factor.");
                 
                 NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
                 [numberFormatter setNumberStyle:NSNumberFormatterPercentStyle];
                 
                 NSString *tenYearRiskPercentage = [numberFormatter stringFromNumber:self.tenYearRisk];
                 NSString *tenYearRiskCaption = [NSString stringWithFormat:@"You have an estimated %@ 10-y risk and %lu%% lifetime risk of ASCVD.", tenYearRiskPercentage, [self.lifetimeRisk integerValue]];
-                tenYearRiskCell.cellDetailText = tenYearRiskCaption;
-                
-                return tenYearRiskCell;
+                cell.cellDetailText = tenYearRiskCaption;
             } else {
-                APHHeartAgeTextCell *roomForImprovementCell = [tableView dequeueReusableCellWithIdentifier:RiskCell forIndexPath:indexPath];
-                roomForImprovementCell.cellTitleText = NSLocalizedString(@"Some Room for Improvement", @"Some Room for Improvement.");
-                roomForImprovementCell.cellDetailText = NSLocalizedString(@"Yeah, I like animals better than people sometimes... Especially dogs. Dogs are the best.", @"Replace this string with something more informative.");
-                
-                return roomForImprovementCell;
+                APHHeartAgeTextCell *cell = [tableView dequeueReusableCellWithIdentifier:RiskCell forIndexPath:indexPath];
+                cell.cellTitleText = NSLocalizedString(@"Some Room for Improvement", @"Some Room for Improvement.");
+                cell.cellDetailText = NSLocalizedString(@"Yeah, I like animals better than people sometimes... Especially dogs. Dogs are the best.", @"Replace this string with something more informative.");
             }
             break;
     }
