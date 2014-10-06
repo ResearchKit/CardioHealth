@@ -93,28 +93,35 @@ typedef NS_ENUM(NSUInteger, APHHeartAgeAndRiskFactorRows)
             break;
         
         default:
+        {
             if (indexPath.row == kHeartAgeAndRiskFactorsRowHeartAge) {
-                APHHeartAgeVersusCell *cell = (APHHeartAgeVersusCell *)[tableView dequeueReusableCellWithIdentifier:HeartAgeCell forIndexPath:indexPath];
-                cell.age = self.actualAge;
-                cell.heartAge = self.heartAge;
+                APHHeartAgeVersusCell *versusCell;
                 
-            } else if (indexPath.row == kHeartAgeAndRiskFactorsRowRiskFactors) {
-                APHHeartAgeTextCell *cell = (APHHeartAgeTextCell *)[tableView dequeueReusableCellWithIdentifier:InformationCell forIndexPath:indexPath];
-                cell.cellTitleText = NSLocalizedString(@"10 Year Risk Factor", @"10 year risk factor.");
+                versusCell = (APHHeartAgeVersusCell *)[tableView dequeueReusableCellWithIdentifier:HeartAgeCell forIndexPath:indexPath];
+                versusCell.age = self.actualAge;
+                versusCell.heartAge = self.heartAge;
+                cell = versusCell;
+            } else if (indexPath.row == kHeartAgeAndRiskFactorsRowTenYearRiskFactor) {
+                APHHeartAgeTextCell *tenYearRiskCell;
+                tenYearRiskCell = (APHHeartAgeTextCell *)[tableView dequeueReusableCellWithIdentifier:InformationCell forIndexPath:indexPath];
+                tenYearRiskCell.cellTitleText = NSLocalizedString(@"10 Year Risk Factor", @"10 year risk factor.");
                 
                 NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
                 [numberFormatter setNumberStyle:NSNumberFormatterPercentStyle];
                 
                 NSString *tenYearRiskPercentage = [numberFormatter stringFromNumber:self.tenYearRisk];
-                NSString *tenYearRiskCaption = [NSString stringWithFormat:@"You have an estimated %@ 10-y risk and %lu%% lifetime risk of ASCVD.", tenYearRiskPercentage, [self.lifetimeRisk integerValue]];
-                cell.cellDetailText = tenYearRiskCaption;
-                
+                NSString *tenYearRiskCaption = [NSString stringWithFormat:@"You have an estimated %@ 10-year risk of ASCVD.", tenYearRiskPercentage];
+                tenYearRiskCell.cellDetailText = tenYearRiskCaption;
+                cell = tenYearRiskCell;
             } else {
-                APHHeartAgeTextCell *cell = (APHHeartAgeTextCell *)[tableView dequeueReusableCellWithIdentifier:InformationCell forIndexPath:indexPath];
-                cell.cellTitleText = NSLocalizedString(@"Some Room for Improvement", @"Some Room for Improvement.");
-                cell.cellDetailText = NSLocalizedString(@"Yeah, I like animals better than people sometimes... Especially dogs. Dogs are the best.", @"Replace this string with something more informative.");
+                APHHeartAgeTextCell *lifetimeRiskCell;
                 
+                lifetimeRiskCell = (APHHeartAgeTextCell *)[tableView dequeueReusableCellWithIdentifier:InformationCell forIndexPath:indexPath];
+                lifetimeRiskCell.cellTitleText = NSLocalizedString(@"Lifetime Risk Factor", @"Lifetime Risk Factor");
+                lifetimeRiskCell.cellDetailText = [NSString stringWithFormat:@"You have an estimated %lu%% lifetime risk of ASCVD.", [self.lifetimeRisk integerValue]];
+                cell = lifetimeRiskCell;
             }
+        }
     }
     
     return cell;
