@@ -15,7 +15,7 @@
 /*********************************************************************************/
 #pragma mark - Initializations Options
 /*********************************************************************************/
-static NSString *const kParkinsonIdentifier = @"com.ymedialabs.aph.parkinsons";
+static NSString *const kCardioHealthIdentifier = @"com.ymedialabs.aph.cardiohealth";
 static NSString *const kAppPrefix = @"pd"; //TODO: Change this the correct prefix for Cardio
 static NSString *const kBaseURL = @"https://bridge-uat.herokuapp.com";
 static NSString *const kDataSubstrateClassName = @"APHDataSubstrate";
@@ -43,7 +43,7 @@ static NSString *const kHealthProfileStoryBoardKey = @"APHHealthProfile";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.initializationOptions = @{
-                                   kStudyIdentifierKey                  : kParkinsonIdentifier,
+                                   kStudyIdentifierKey                  : kCardioHealthIdentifier,
                                    kAppPrefixKey                        : kAppPrefix,
                                    kBaseURLKey                          : kBaseURL,
                                    kDatabaseNameKey                     : kDatabaseName,
