@@ -6,15 +6,17 @@
 //  Copyright (c) 2014 Y Media Labs. All rights reserved.
 //
 
-@import APCAppleCore;
 #import "APHSignUpGeneralInfoViewController.h"
 #import "APHSignUpMedicalInfoViewController.h"
 #import "APHUserInfoCell.h"
 
-#define DEMO 1
+#define DEMO 0
 
 
 @interface APHSignUpGeneralInfoViewController ()
+
+@property (nonatomic, strong) APCPermissionsManager *permissionManager;
+@property (nonatomic) BOOL permissionGranted;
 
 @end
 
@@ -27,7 +29,7 @@
 {
     self = [super init];
     if (self) {
-        self.profile = [APCProfile new];
+        self.user = ((APCAppDelegate*) [UIApplication sharedApplication].delegate).dataSubstrate.currentUser;
         self.itemsOrder = [NSMutableArray new];
         
         [self prepareFields];
@@ -44,7 +46,6 @@
         field.style = UITableViewCellStyleValue1;
         field.caption = NSLocalizedString(@"Username", @"");
         field.placeholder = NSLocalizedString(@"Add Username", @"");
-        field.value = self.profile.userName;
         field.keyboardType = UIKeyboardTypeDefault;
         field.returnKeyType = UIReturnKeyNext;
         field.clearButtonMode = UITextFieldViewModeWhileEditing;
@@ -60,7 +61,6 @@
         field.style = UITableViewCellStyleValue1;
         field.caption = NSLocalizedString(@"Password", @"");
         field.placeholder = NSLocalizedString(@"Add Password", @"");
-        field.value = self.profile.password;
         field.secure = YES;
         field.keyboardType = UIKeyboardTypeDefault;
         field.returnKeyType = UIReturnKeyNext;
@@ -77,7 +77,6 @@
         field.style = UITableViewCellStyleValue1;
         field.caption = NSLocalizedString(@"Email", @"");
         field.placeholder = NSLocalizedString(@"Add Email Address", @"");
-        field.value = self.profile.email;
         field.keyboardType = UIKeyboardTypeEmailAddress;
         field.returnKeyType = UIReturnKeyNext;
         field.clearButtonMode = UITextFieldViewModeWhileEditing;
@@ -94,7 +93,9 @@
         field.selectionStyle = UITableViewCellSelectionStyleGray;
         field.caption = NSLocalizedString(@"Birthdate", @"");
         field.placeholder = NSLocalizedString(@"MMMM DD, YYYY", @"");
-        field.date = self.profile.dateOfBirth;
+        if (self.permissionGranted) {
+            field.date = self.user.birthDate;
+        }
         field.datePickerMode = UIDatePickerModeDate;
         field.identifier = NSStringFromClass([APCTableViewDatePickerItem class]);
         
@@ -106,8 +107,10 @@
     {
         APCTableViewSegmentItem *field = [APCTableViewSegmentItem new];
         field.style = UITableViewCellStyleValue1;
-        field.segments = [APCProfile sexTypesInStringValue];
-        field.selectedIndex = [APCProfile stringIndexFromSexType:self.profile.gender];
+        field.segments = [APCUser sexTypesInStringValue];
+        if (self.permissionGranted) {
+            field.selectedIndex = [APCUser stringIndexFromSexType:self.user.biologicalSex];
+        }
         field.identifier = NSStringFromClass([APCTableViewSegmentItem class]);
         
         [items addObject:field];
@@ -130,20 +133,41 @@
     [self addHeaderView];
     [self addFooterView];
     [self setupProgressBar];
+    
+
+    //TODO: This permission request is temporary. Remove later.
+    self.permissionManager = [[APCPermissionsManager alloc] init];
+    [self.permissionManager requestForPermissionForType:kSignUpPermissionsTypeHealthKit withCompletion:^(BOOL granted, NSError *error) {
+        if (granted) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.permissionGranted = YES;
+                [self prepareFields];
+                [self.tableView reloadData];
+            });
+        }
+    }];
+
 }
 
+- (UIRectEdge)edgesForExtendedLayout
+{
+    return UIRectEdgeNone;
+}
 
 #pragma mark - UI Methods
 
 - (void) addNavigationItems {
-    self.title = NSLocalizedString(@"General Information", @"");
     
     UIBarButtonItem *nextBarButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Next", @"") style:UIBarButtonItemStylePlain target:self action:@selector(validateContent)];
     nextBarButton.enabled = [self isContentValid:nil];
-    self.navigationItem.rightBarButtonItem = nextBarButton;
+    //TODO: Remove secret button for production
+    UIBarButtonItem *secretBarButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@" ", @"") style:UIBarButtonItemStylePlain target:self action:@selector(secretButton)];
+    self.navigationItem.rightBarButtonItems = @[nextBarButton, secretBarButton];
+    
 }
 
 - (void) setupProgressBar {
+    [self setStepNumber:1 title:NSLocalizedString(@"General Information", @"")];
     self.stepProgressBar.rightLabel.text = NSLocalizedString(@"Mandatory", @"");
 }
 
@@ -193,7 +217,7 @@
 - (void) configurableCell:(APCUserInfoCell *)cell switchValueChanged:(BOOL)isOn {
     [super configurableCell:cell switchValueChanged:isOn];
     
-#ifdef DEMO
+#if DEMO
     self.navigationItem.rightBarButtonItem.enabled = YES;
 #else
     self.navigationItem.rightBarButtonItem.enabled = [self isContentValid:nil];
@@ -203,7 +227,7 @@
 - (void) configurableCell:(APCUserInfoCell *)cell segmentIndexChanged:(NSUInteger)index {
     [super configurableCell:cell segmentIndexChanged:index];
     
-#ifdef DEMO
+#if DEMO
     self.navigationItem.rightBarButtonItem.enabled = YES;
 #else
     self.navigationItem.rightBarButtonItem.enabled = [self isContentValid:nil];
@@ -213,7 +237,7 @@
 - (void) configurableCell:(APCUserInfoCell *)cell dateValueChanged:(NSDate *)date {
     [super configurableCell:cell dateValueChanged:date];
     
-#ifdef DEMO
+#if DEMO
     self.navigationItem.rightBarButtonItem.enabled = YES;
 #else
     self.navigationItem.rightBarButtonItem.enabled = [self isContentValid:nil];
@@ -222,7 +246,7 @@
 
 - (void) configurableCell:(APCUserInfoCell *)cell customPickerValueChanged:(NSArray *)selectedRowIndices {
     [super configurableCell:cell customPickerValueChanged:selectedRowIndices];
-#ifdef DEMO
+#if DEMO
     self.navigationItem.rightBarButtonItem.enabled = YES;
 #else
     self.navigationItem.rightBarButtonItem.enabled = [self isContentValid:nil];
@@ -242,7 +266,7 @@
 
 - (BOOL) isContentValid:(NSString **)errorMessage {
 
-#ifdef DEMO
+#if DEMO
     return YES;
 #else
     BOOL isContentValid = [super isContentValid:errorMessage];
@@ -255,12 +279,15 @@
             APCTableViewItem *item = self.items[i];
             
             switch (order.integerValue) {
+                    //TODO: Enable it for production
+                    /*
                 case APCSignUpUserInfoItemUserName:
                     isContentValid = [[(APCTableViewTextFieldItem *)item value] isValidForRegex:kAPCGeneralInfoItemUserNameRegEx];
                     if (errorMessage) {
                         *errorMessage = NSLocalizedString(@"Please give a valid Username", @"");
                     }
                     break;
+                     */
                     
                 case APCSignUpUserInfoItemPassword:
                     if ([[(APCTableViewTextFieldItem *)item value] length] == 0) {
@@ -287,14 +314,6 @@
                     }
                     break;
                     
-                case APCSignUpUserInfoItemDateOfBirth:
-                    isContentValid = ([(APCTableViewDatePickerItem *)item date] != nil);
-                    
-                    if (errorMessage) {
-                        *errorMessage = NSLocalizedString(@"Please give your Date of Birth", @"");
-                    }
-                    break;
-                    
                 default:
 //#warning ASSERT_MESSAGE Require
                     NSAssert(order.integerValue <= APCSignUpUserInfoItemWakeUpTime, @"ASSER_MESSAGE");
@@ -314,6 +333,12 @@
 }
 
 - (void) loadProfileValuesInModel {
+    
+    if (self.tableView.tableHeaderView) {
+        self.user.firstName = self.firstNameTextField.text;
+        self.user.lastName = self.lastNameTextField.text;
+    }
+    
     for (int i = 0; i < self.itemsOrder.count; i++) {
         NSNumber *order = self.itemsOrder[i];
         
@@ -321,28 +346,21 @@
         
         switch (order.integerValue) {
             case APCSignUpUserInfoItemUserName:
-                self.profile.userName = [(APCTableViewTextFieldItem *)item value];
+                self.user.userName = [(APCTableViewTextFieldItem *)item value];
                 break;
                 
             case APCSignUpUserInfoItemPassword:
-                self.profile.password = [(APCTableViewTextFieldItem *)item value];
+                self.user.password = [(APCTableViewTextFieldItem *)item value];
                 break;
                 
             case APCSignUpUserInfoItemEmail:
-                self.profile.email = [(APCTableViewTextFieldItem *)item value];
-                break;
-                
-            case APCSignUpUserInfoItemDateOfBirth:
-                self.profile.dateOfBirth = [(APCTableViewDatePickerItem *)item date];
-                break;
-                
-            case APCSignUpUserInfoItemGender:
-                self.profile.gender = [APCProfile sexTypeFromStringValue:[APCProfile sexTypesInStringValue][[(APCTableViewSegmentItem *)item selectedIndex]]];
+                self.user.email = [(APCTableViewTextFieldItem *)item value];
                 break;
                 
             default:
-//#warning ASSERT_MESSAGE Require
-                NSAssert(NO, @"ASSER_MESSAGE");
+            {
+                //Do nothing for some types as they are readonly attributes
+            }
                 break;
         }
     }
@@ -361,9 +379,44 @@
     }
 }
 
+- (void) secretButton
+{
+    NSUInteger randomInteger = arc4random();
+    self.firstNameTextField.text = @"Test";
+    self.lastNameTextField.text = [NSString stringWithFormat:@"%@", @(randomInteger)];
+    
+    for (int i = 0; i < self.itemsOrder.count; i++) {
+        NSNumber *order = self.itemsOrder[i];
+        
+        APCTableViewTextFieldItem *item = self.items[i];
+        
+        switch (order.integerValue) {
+            case APCSignUpUserInfoItemUserName:
+                item.value = [NSString stringWithFormat:@"test_%@", @(randomInteger)];
+                break;
+                
+            case APCSignUpUserInfoItemPassword:
+                item.value = @"Password123";
+                break;
+                
+            case APCSignUpUserInfoItemEmail:
+                item.value = [NSString stringWithFormat:@"dhanush.balachandran+%@@ymedialabs.com", @(randomInteger)];
+                break;
+                
+            default:
+            {
+                //Do nothing for some types
+            }
+                break;
+        }
+        [self.tableView reloadData];
+        self.navigationItem.rightBarButtonItem.enabled = [self isContentValid:nil];
+    }
+}
+
 - (void) next {
     APHSignUpMedicalInfoViewController *medicalInfoViewController = [APHSignUpMedicalInfoViewController new];
-    medicalInfoViewController.profile = self.profile;
+    medicalInfoViewController.user = self.user;
     
     [self.navigationController pushViewController:medicalInfoViewController animated:YES];
 }

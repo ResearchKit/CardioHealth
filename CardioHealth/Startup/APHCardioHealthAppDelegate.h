@@ -1,5 +1,5 @@
 //
-//  APHParkinsonAppDelegate.h
+//  APHCardioHealthAppDelegate.h
 
 //
 //  Created by Henry McGilton on 8/20/14.

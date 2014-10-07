@@ -8,13 +8,24 @@
 
 @import APCAppleCore;
 #import "APHCardioHealthAppDelegate.h"
+#import "APHDataSubstrate.h"
+#import "APHStudyOverviewViewController.h"
 #import "APHIntroVideoViewController.h"
 
-static NSString *const kDatabaseName = @"db.sqlite";
+/*********************************************************************************/
+#pragma mark - Initializations Options
+/*********************************************************************************/
 static NSString *const kParkinsonIdentifier = @"com.ymedialabs.aph.parkinsons";
-static NSString *const kBaseURL = @"http://pd-staging.sagebridge.org/api/v1/";
+static NSString *const kAppPrefix = @"pd"; //TODO: Change this the correct prefix for Cardio
+static NSString *const kBaseURL = @"https://bridge-uat.herokuapp.com";
+static NSString *const kDataSubstrateClassName = @"APHDataSubstrate";
+static NSString *const kDatabaseName = @"db.sqlite";
 static NSString *const kTasksAndSchedulesJSONFileName = @"APHTasksAndSchedules";
-static NSString *const kLoggedInKey = @"LoggedIn";
+
+/*********************************************************************************/
+#pragma mark - App Specific Constants
+/*********************************************************************************/
+static NSString *const kVideoShownKey = @"VideoShown";
 
 static NSString *const kDashBoardStoryBoardKey     = @"APHDashboard";
 static NSString *const kLearnStoryBoardKey         = @"APHLearn";
@@ -29,8 +40,77 @@ static NSString *const kHealthProfileStoryBoardKey = @"APHHealthProfile";
 
 @implementation APHCardioHealthAppDelegate
 
-#pragma  mark  -  Initialisation Methods for Story Board Switching
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    self.initializationOptions = @{
+                                   kStudyIdentifierKey                  : kParkinsonIdentifier,
+                                   kAppPrefixKey                        : kAppPrefix,
+                                   kBaseURLKey                          : kBaseURL,
+                                   kDatabaseNameKey                     : kDatabaseName,
+                                   kTasksAndSchedulesJSONFileNameKey    : kTasksAndSchedulesJSONFileName,
+                                   kDataSubstrateClassNameKey           : kDataSubstrateClassName
+                                   };
+    //Give chance for super to initialize AppleCore before doing app specific stuff
+    BOOL returnValue = [super application:application didFinishLaunchingWithOptions:launchOptions];
+    
+    if (self.dataSubstrate.currentUser.isSignedIn) {
+        [self showTabBarController];
+    }
+    else if (self.dataSubstrate.currentUser.isSignedUp)
+    {
+        [self showVerifyEmailViewController];
+    }
+    else
+    {
+        [self showOnBoardingProcess];
+    }
+    
+    return returnValue;
+}
 
+/*********************************************************************************/
+#pragma mark - Private Methods
+/*********************************************************************************/
+- (void) showOnBoardingProcess
+{
+    if ([self isVideoShown]) {
+        [self showStudyOverview];
+    }
+    else
+    {
+        NSURL *introFileURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"intro" ofType:@"m4v"]];
+        APHIntroVideoViewController *introVideoController = [[APHIntroVideoViewController alloc] initWithContentURL:introFileURL];
+        [self setUpRootViewController:introVideoController];
+    }
+}
+
+- (void) showStudyOverview
+{
+    APHStudyOverviewViewController *studyController = [APHStudyOverviewViewController new];
+    [self setUpRootViewController:studyController];
+}
+
+- (void) showVerifyEmailViewController
+{
+    APCEmailVerifyViewController * viewController = (APCEmailVerifyViewController*)[[UIStoryboard storyboardWithName:@"APCEmailVerify" bundle:[NSBundle appleCoreBundle]] instantiateInitialViewController];
+    [self setUpRootViewController:viewController];
+}
+
+- (void) setUpRootViewController: (UIViewController*) viewController
+{
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    navController.navigationBar.translucent = NO;
+    self.window.rootViewController = navController;
+}
+
+- (BOOL) isVideoShown
+{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:kVideoShownKey];
+}
+
+/*********************************************************************************/
+#pragma mark - Tab Bar Stuff
+/*********************************************************************************/
 - (NSArray *)storyboardIdInfo
 {
     if (!_storyboardIdInfo) {
@@ -44,7 +124,7 @@ static NSString *const kHealthProfileStoryBoardKey = @"APHHealthProfile";
     return _storyboardIdInfo;
 }
 
-- (void)setUpTabBarController
+- (void)showTabBarController
 {
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"TabBar" bundle:[NSBundle appleCoreBundle]];
     
@@ -64,33 +144,14 @@ static NSString *const kHealthProfileStoryBoardKey = @"APHHealthProfile";
     [self tabBarController:tabBarController didSelectViewController:controllers[selectedItemIndex]];
 }
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    [self initializeAppleCoreStack];
-    [self loadStaticTasksAndSchedulesIfNecessary];
-    [self registerNotifications];
-    
-    if (![self isLoggedIn]) {
-        [self startOnBoardingProcess];
-    } else {
-        [self setUpTabBarController];
-    }
-    
-    return [super application:application didFinishLaunchingWithOptions:launchOptions];
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
-    [super applicationDidBecomeActive:application];
-}
-
-/*********************************************************************************/
-#pragma mark - UITab Bar Controller Delegate Methods
-/*********************************************************************************/
-
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
 {
+    UITabBarController  *tabster = (UITabBarController  *)self.window.rootViewController;
+    NSArray  *deselectedImageNames = @[ @"tab_dashboard",          @"tab_learn",          @"tab_activities",          @"tab_profile" ];
+    NSArray  *selectedImageNames   = @[ @"tab_dashboard_selected", @"tab_learn_selected", @"tab_activities_selected", @"tab_profile_selected" ];
+    
     if ([viewController isMemberOfClass: [UIViewController class]] == YES) {
+        
         NSMutableArray  *controllers = [tabBarController.viewControllers mutableCopy];
         NSUInteger  controllerIndex = [controllers indexOfObject:viewController];
         
@@ -99,83 +160,33 @@ static NSString *const kHealthProfileStoryBoardKey = @"APHHealthProfile";
         UIViewController  *controller = [storyboard instantiateInitialViewController];
         [controllers replaceObjectAtIndex:controllerIndex withObject:controller];
         
-        UITabBarController  *tabster = (UITabBarController  *)self.window.rootViewController;
         [tabster setViewControllers:controllers animated:NO];
+        tabster.tabBar.tintColor = [UIColor colorWithRed:0.083 green:0.651 blue:0.949 alpha:1.000]; //Magic constant to match the blue color in the icons
+        UITabBarItem  *item = tabster.tabBar.selectedItem;
+        item.image = [UIImage imageNamed:deselectedImageNames[controllerIndex] inBundle:[NSBundle appleCoreBundle] compatibleWithTraitCollection:nil];
+        item.selectedImage = [[UIImage imageNamed:selectedImageNames[controllerIndex] inBundle:[NSBundle appleCoreBundle] compatibleWithTraitCollection:nil] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     }
 }
 
 /*********************************************************************************/
-#pragma mark - Helpers
+#pragma mark - Overridden Notification Methods
 /*********************************************************************************/
-
-- (void) initializeAppleCoreStack
+- (void) signedUpNotification: (NSNotification*) notification
 {
-    self.networkManager = [[APCSageNetworkManager alloc] initWithBaseURL:kBaseURL];
-    self.dataSubstrate = [[APCDataSubstrate alloc] initWithPersistentStorePath:[[self applicationDocumentsDirectory] stringByAppendingPathComponent:kDatabaseName] additionalModels: nil studyIdentifier:kParkinsonIdentifier];
-    self.scheduler = [[APCScheduler alloc] initWithDataSubstrate:self.dataSubstrate];
-    self.dataMonitor = [[APCDataMonitor alloc] initWithDataSubstrate:self.dataSubstrate networkManager:(APCSageNetworkManager*)self.networkManager scheduler:self.scheduler];
+    [super signedUpNotification:notification];
+    [self showVerifyEmailViewController];
 }
 
-- (void)loadStaticTasksAndSchedulesIfNecessary
+- (void) signedInNotification:(NSNotification*) notification
 {
-    if (![APCDBStatus isSeedLoadedWithContext:self.dataSubstrate.persistentContext]) {
-        [APCDBStatus setSeedLoadedWithContext:self.dataSubstrate.persistentContext];
-        NSString *resource = [[NSBundle mainBundle] pathForResource:kTasksAndSchedulesJSONFileName ofType:@"json"];
-        NSData *jsonData = [NSData dataWithContentsOfFile:resource];
-        NSError * error;
-        NSDictionary * dictionary = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&error];
-        [error handle];
-        [self.dataSubstrate loadStaticTasksAndSchedules:dictionary];
-#ifdef TARGET_IPHONE_SIMULATOR
-        [self clearNSUserDefaults];
-#endif
-    }
+    [super signedInNotification:notification];
+    [self showTabBarController];
 }
 
-- (NSString *) applicationDocumentsDirectory
+- (void) logOutNotification:(NSNotification*) notification
 {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *basePath = ([paths count] > 0) ? paths[0] : nil;
-    return basePath;
-}
-
-
-#pragma mark - Private Methods
-
-- (void) registerNotifications {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginNotification:) name:(NSString *)APCUserLoginNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logOutNotification:) name:(NSString *)APCUserLogOutNotification object:nil];
-}
-
-- (void) startOnBoardingProcess {
-    NSURL *introFileURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"intro" ofType:@"m4v"]];
-    
-    APHIntroVideoViewController *introVideoController = [[APHIntroVideoViewController alloc] initWithContentURL:introFileURL];
-    
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:introVideoController];
-    self.window.rootViewController = navController;
-}
-
-- (BOOL) isLoggedIn
-{
-    return [[NSUserDefaults standardUserDefaults] boolForKey:kLoggedInKey];
-}
-
-
-#pragma mark - Notifications
-- (void) loginNotification:(NSNotification *)notification {
-    [self setUpTabBarController];
-}
-
-- (void) logOutNotification:(NSNotification *)notification {
-    [self clearNSUserDefaults];
-    [self startOnBoardingProcess];
-}
-
-- (void) clearNSUserDefaults
-{
-    NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
-    [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+    [super logOutNotification:notification];
+    [self showOnBoardingProcess];
 }
 
 @end
