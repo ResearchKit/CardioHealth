@@ -91,12 +91,12 @@ static NSString * const kAPHMedicalInfoItemSleepTimeFormate         = @"HH:mm a"
 
 #pragma mark - Getter Methods
 
-- (APCProfile *) profile {
-    if (!_profile) {
-        _profile = [APCProfile new];
+- (APCUser *) user {
+    if (!_user) {
+        _user = [APCUser new];
     }
     
-    return _profile;
+    return _user;
 }
 
 
@@ -111,7 +111,7 @@ static NSString * const kAPHMedicalInfoItemSleepTimeFormate         = @"HH:mm a"
         field.style = UITableViewCellStyleValue1;
         field.caption = NSLocalizedString(@"Username", @"");
         field.placeholder = NSLocalizedString(@"Add Username", @"");
-        field.value = self.profile.userName;
+        field.value = self.user.userName;
         field.keyboardType = UIKeyboardTypeDefault;
         field.regularExpression = kAPHGeneralInfoItemUserNameRegEx;
         field.identifier = NSStringFromClass([APCTableViewTextFieldItem class]);
@@ -125,7 +125,7 @@ static NSString * const kAPHMedicalInfoItemSleepTimeFormate         = @"HH:mm a"
         field.style = UITableViewCellStyleValue1;
         field.caption = NSLocalizedString(@"Password", @"");
         field.placeholder = NSLocalizedString(@"Add Password", @"");
-        field.value = self.profile.password;
+        //field.value = self.user.password;
         field.secure = YES;
         field.keyboardType = UIKeyboardTypeDefault;
         field.identifier = NSStringFromClass([APCTableViewTextFieldItem class]);
@@ -140,7 +140,7 @@ static NSString * const kAPHMedicalInfoItemSleepTimeFormate         = @"HH:mm a"
         field.style = UITableViewCellStyleValue1;
         field.caption = NSLocalizedString(@"Email", @"");
         field.placeholder = NSLocalizedString(@"Add Email Address", @"");
-        field.value = self.profile.email;
+        field.value = self.user.email;
         field.keyboardType = UIKeyboardTypeEmailAddress;
         field.identifier = NSStringFromClass([APCTableViewTextFieldItem class]);
         
@@ -155,7 +155,7 @@ static NSString * const kAPHMedicalInfoItemSleepTimeFormate         = @"HH:mm a"
         field.selectionStyle = UITableViewCellSelectionStyleGray;
         field.caption = NSLocalizedString(@"Birthdate", @"");
         field.placeholder = NSLocalizedString(@"MMMM DD, YYYY", @"");
-        field.date = self.profile.dateOfBirth;
+        field.date = self.user.birthDate;
         field.identifier = NSStringFromClass([APCTableViewDatePickerItem class]);
         
         [items addObject:field];
@@ -166,8 +166,8 @@ static NSString * const kAPHMedicalInfoItemSleepTimeFormate         = @"HH:mm a"
     {
         APCTableViewSegmentItem *field = [APCTableViewSegmentItem new];
         field.style = UITableViewCellStyleValue1;
-        field.segments = [APCProfile sexTypesInStringValue];
-        field.selectedIndex = [APCProfile stringIndexFromSexType:self.profile.gender];
+        field.segments = [APCUser sexTypesInStringValue];
+        field.selectedIndex = [APCUser stringIndexFromSexType:self.user.biologicalSex];
         field.identifier = NSStringFromClass([APCTableViewSegmentItem class]);
         
         [items addObject:field];
@@ -181,10 +181,10 @@ static NSString * const kAPHMedicalInfoItemSleepTimeFormate         = @"HH:mm a"
         field.selectionStyle = UITableViewCellSelectionStyleGray;
         field.caption = NSLocalizedString(@"Medical Conditions", @"");
         field.detailDiscloserStyle = YES;
-        field.pickerData = @[ [APCProfile medicalConditions] ];
+        field.pickerData = @[ [APCUser medicalConditions] ];
         
-        if (self.profile.medicalCondition) {
-            field.selectedRowIndices = @[ @([field.pickerData[0] indexOfObject:self.profile.medicalCondition]) ];
+        if (self.user.medicalConditions) {
+            field.selectedRowIndices = @[ @([field.pickerData[0] indexOfObject:self.user.medicalConditions]) ];
         }
         else {
             field.selectedRowIndices = @[ @(0) ];
@@ -200,10 +200,10 @@ static NSString * const kAPHMedicalInfoItemSleepTimeFormate         = @"HH:mm a"
         field.selectionStyle = UITableViewCellSelectionStyleGray;
         field.caption = NSLocalizedString(@"Medication", @"");
         field.detailDiscloserStyle = YES;
-        field.pickerData = @[ [APCProfile medications] ];
+        field.pickerData = @[ [APCUser medications] ];
         
-        if (self.profile.medication) {
-            field.selectedRowIndices = @[ @([field.pickerData[0] indexOfObject:self.profile.medication]) ];
+        if (self.user.medications) {
+            field.selectedRowIndices = @[ @([field.pickerData[0] indexOfObject:self.user.medications]) ];
         }
         else {
             field.selectedRowIndices = @[ @(0) ];
@@ -219,8 +219,8 @@ static NSString * const kAPHMedicalInfoItemSleepTimeFormate         = @"HH:mm a"
         field.selectionStyle = UITableViewCellSelectionStyleGray;
         field.caption = NSLocalizedString(@"Blood Type", @"");
         field.detailDiscloserStyle = YES;
-        field.selectedRowIndices = @[ @(self.profile.bloodType) ];
-        field.pickerData = @[ [APCProfile bloodTypeInStringValues] ];
+        field.selectedRowIndices = @[ @(self.user.bloodType) ];
+        field.pickerData = @[ [APCUser bloodTypeInStringValues] ];
         
         [items addObject:field];
         [itemsOrder addObject:@(APCSignUpUserInfoItemBloodType)];
@@ -232,10 +232,13 @@ static NSString * const kAPHMedicalInfoItemSleepTimeFormate         = @"HH:mm a"
         field.selectionStyle = UITableViewCellSelectionStyleGray;
         field.caption = NSLocalizedString(@"Height", @"");
         field.detailDiscloserStyle = YES;
-        field.pickerData = [APCProfile heights];
-        if (self.profile.height) {
-            NSArray *split = [self.profile.height componentsSeparatedByString:@" "];
-            field.selectedRowIndices = @[ @([field.pickerData[0] indexOfObject:split[0]]), @([field.pickerData[1] indexOfObject:split[1]]) ];
+        field.pickerData = [APCUser heights];
+        if (self.user.height) {
+            double heightInInches = [APCUser heightInInches:self.user.height];
+            NSString *feet = [NSString stringWithFormat:@"%d'", (int)heightInInches/12];
+            NSString *inches = [NSString stringWithFormat:@"%d''", (int)heightInInches%12];
+            
+            field.selectedRowIndices = @[ @([field.pickerData[0] indexOfObject:feet]), @([field.pickerData[1] indexOfObject:inches]) ];
         }
         else {
             field.selectedRowIndices = @[ @(2), @(5) ];
@@ -251,7 +254,7 @@ static NSString * const kAPHMedicalInfoItemSleepTimeFormate         = @"HH:mm a"
         field.caption = NSLocalizedString(@"Weight", @"");
         field.placeholder = NSLocalizedString(@"lb", @"");
         field.regularExpression = kAPHMedicalInfoItemWeightRegEx;
-        field.value = self.profile.weight.stringValue;
+        field.value = [NSString stringWithFormat:@"%.1f", [APCUser weightInPounds:self.user.weight]];
         field.keyboardType = UIKeyboardTypeNumberPad;
         field.textAlignnment = NSTextAlignmentRight;
         
@@ -270,8 +273,8 @@ static NSString * const kAPHMedicalInfoItemSleepTimeFormate         = @"HH:mm a"
         field.dateFormat = @"HH:mm a";
         field.detailDiscloserStyle = YES;
         
-        if (self.profile.sleepTime) {
-            field.date = self.profile.sleepTime;
+        if (self.user.sleepTime) {
+            field.date = self.user.sleepTime;
         }
         
         [items addObject:field];
@@ -289,8 +292,8 @@ static NSString * const kAPHMedicalInfoItemSleepTimeFormate         = @"HH:mm a"
         field.dateFormat = @"HH:mm a";
         field.detailDiscloserStyle = YES;
         
-        if (self.profile.wakeUpTime) {
-            field.date = self.profile.wakeUpTime;
+        if (self.user.wakeUpTime) {
+            field.date = self.user.wakeUpTime;
         }
         
         [items addObject:field];
