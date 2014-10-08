@@ -10,8 +10,4 @@
 
 @interface APHFitnessTestRestComfortablyView : UIView
 
-@property (weak, nonatomic) IBOutlet UILabel *heartRateBPMLbl;
-@property (weak, nonatomic) IBOutlet UILabel *distanceTrackerLbl;
-@property (weak, nonatomic) IBOutlet UILabel *stepCountLbl;
-
 @end

@@ -12,7 +12,5 @@
  This custom view is for the active task of ...resting. Currently not being used since both this view and the rest in a comfortable position view essentially look the same. I'm leaving this here in case there are further customizations necessary. 
  */
 @interface APHFitnessTestRestView : UIView
-@property (weak, nonatomic) IBOutlet UILabel *heartRateBPMLabel;
-@property (weak, nonatomic) IBOutlet UILabel *stepCountLabel;
 
 @end

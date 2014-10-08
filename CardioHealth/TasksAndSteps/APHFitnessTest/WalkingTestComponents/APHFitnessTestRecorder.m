@@ -111,11 +111,7 @@ static  NSString  *kFitnessTestStep105 = @"FitnessStep105";
     self.heartRateRecords = [NSMutableArray array];
     self.stepCountRecords = [NSMutableArray array];
     
-    //This timer is unrelated to the one that is running by ResearchKit. However, I can use the values to add to records.
-    [self.timer invalidate];
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerFired:) userInfo:nil repeats:YES];
-    
-    //TODO Apple was thinking about using code like this to delay the beginning of the countdown. I'm keeping this around to remind myself to ask Ed about this functionality.
+    //TODO Apple was thinking about using code like this to delay the beginning of the countdown. I'm keeping this around to remind myself to ask Ed about this functionality. This timer is unrelated to the one that is running by ResearchKit. However, I can use the values to add to records.
 //    double delayInSeconds = 5.0;
 //    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
 //    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
@@ -174,24 +170,6 @@ static  NSString  *kFitnessTestStep105 = @"FitnessStep105";
     return didStart;
 }
 
-- (IBAction)timerFired:(id)sender{
-    
-//    NSDictionary* dictionary = @{@"event": _button.hidden? @"buttonHide": @"buttonShow",
-//                                 @"time": @([[NSDate date] timeIntervalSinceReferenceDate])};
-//    
-//    [_records addObject:dictionary];
-    
-}
-
-- (IBAction)buttonTapped:(id)sender{
-    
-//    NSDictionary* dictionary = @{@"event": @"userTouchDown",
-//                                 @"time": @([[NSDate date] timeIntervalSinceReferenceDate])};
-//    
-//    [_records addObject:dictionary];
-    
-}
-
 - (BOOL)stop:(NSError *__autoreleasing *)error{
     BOOL didStop = [super stop:error];
     
@@ -204,7 +182,6 @@ static  NSString  *kFitnessTestStep105 = @"FitnessStep105";
     self.dictionaryRecord[@"stepCount"] = self.stepCountRecords;
     
     if (self.dictionaryRecord) {
-    
         
         NSLog(@"%@", self.dictionaryRecord);
         
@@ -235,12 +212,11 @@ static  NSString  *kFitnessTestStep105 = @"FitnessStep105";
         didStop = NO;
     }
     
-    
     return didStop;
 }
 
 - (NSString*)dataType{
-    return @"tapTheButton";
+    return @"fitnessTest";
 }
 
 - (NSString*)mimeType{
@@ -248,7 +224,7 @@ static  NSString  *kFitnessTestStep105 = @"FitnessStep105";
 }
 
 - (NSString*)fileName{
-    return @"tapTheButton.json";
+    return @"fitnessTest.json";
 }
 
 @end

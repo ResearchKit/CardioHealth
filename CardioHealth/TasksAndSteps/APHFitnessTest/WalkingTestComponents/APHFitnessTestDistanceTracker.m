@@ -7,8 +7,7 @@
 //
 
 #import "APHFitnessTestDistanceTracker.h"
-
-//TODO comments are here for doing more complex horizontal accuracy 
+ 
 static const NSUInteger kAPHFitnessTestDistanceFilter = 5.0;           // the minimum distance (meters) for which we want to receive location updates (see docs for CLLocationManager.distanceFilter)
 static const float kAPHFitnessTestRequiredHorizontalAccuracy = 5.0;    // the required accuracy in meters for a location.
 static const NSUInteger kAPHValidLocationHistoryDeltaInterval = 3;     // the maximum valid age in seconds of a location stored in the location history

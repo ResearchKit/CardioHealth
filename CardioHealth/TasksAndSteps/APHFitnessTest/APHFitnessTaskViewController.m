@@ -8,8 +8,6 @@
 
 #import "APHFitnessTaskViewController.h"
 
-#import "APHFitnessSixMinuteFitnessTestView.h"
-
 static  NSString  *kFitnessTestStep101 = @"FitnessStep101";
 static  NSString  *kFitnessTestStep102 = @"FitnessStep102";
 static  NSString  *kFitnessTestStep103 = @"FitnessStep103";
@@ -31,7 +29,7 @@ static  NSString  *kFitnessTestStep105 = @"FitnessStep105";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.navigationItem.title = @"Fitness Test";
+    self.navigationItem.title = NSLocalizedString(@"Fitness Test", @"");
     
     //setup heart rate tracker
     self.healthKitSampleTracker = [[APHFitnessTestHealthKitSampleTypeTracker alloc] init];
@@ -46,7 +44,6 @@ static  NSString  *kFitnessTestStep105 = @"FitnessStep105";
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    self.navigationItem.title = @"Fitness Test";
 }
 
 + (RKTask *)createTask:(APCScheduledTask *)scheduledTask
@@ -110,12 +107,12 @@ static  NSString  *kFitnessTestStep105 = @"FitnessStep105";
 
 - (void)cancelButtonTapped:(id)sender
 {
-    [self.presentingViewController dismissViewControllerAnimated:YES completion:^{ } ];
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)doneButtonTapped:(id)sender
 {
-    [self.presentingViewController dismissViewControllerAnimated:YES completion:^{ } ];
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 /*********************************************************************************/
@@ -124,18 +121,18 @@ static  NSString  *kFitnessTestStep105 = @"FitnessStep105";
 
 - (void)fitnessTestHealthKitSampleTypeTracker:(APHFitnessTestHealthKitSampleTypeTracker *)heartRateTracker didUpdateHeartRate:(NSInteger)heartBPM {
     
-    NSDictionary* dictionary = @{@"heartBPM": [NSNumber numberWithInteger:heartBPM],
+    NSDictionary* heartBPMDictionary = @{@"heartBPM": [NSNumber numberWithInteger:heartBPM],
                                  @"time": @([[NSDate date] timeIntervalSinceReferenceDate])};
 
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"APHFitnessHeartRateBPMUpdated" object:self userInfo:dictionary];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"APHFitnessHeartRateBPMUpdated" object:self userInfo:heartBPMDictionary];
 }
 
 - (void)fitnessTestHealthKitSampleTypeTracker:(APHFitnessTestHealthKitSampleTypeTracker *)stepCountTracker didUpdateStepCount:(NSInteger)stepCount {
     
-    NSDictionary* dictionary = @{@"stepCount": [NSNumber numberWithInteger:stepCount],
+    NSDictionary* stepCountDictionary = @{@"stepCount": [NSNumber numberWithInteger:stepCount],
                                      @"time": @([[NSDate date] timeIntervalSinceReferenceDate])};
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"APHFitnessStepCountUpdated" object:self userInfo:dictionary];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"APHFitnessStepCountUpdated" object:self userInfo:stepCountDictionary];
 }
 
 /*********************************************************************************/
@@ -172,14 +169,6 @@ static  NSString  *kFitnessTestStep105 = @"FitnessStep105";
 }
 
 - (void)fitnessTestDistanceTracker:(APHFitnessTestDistanceTracker *)distanceTracker weakGPSSignal:(NSString *)message {
-    //    UIAlertController *alertController = [UIAlertController
-    //                                          alertControllerWithTitle:@"GPS Signal"
-    //                                          message:message
-    //                                          preferredStyle:UIAlertControllerStyleAlert];
-    //
-    //    [self presentViewController:alertController animated:YES completion:nil];
-    //
-    //    [self performSelector:@selector(dismiss:) withObject:alertController afterDelay:4];
 }
 
 

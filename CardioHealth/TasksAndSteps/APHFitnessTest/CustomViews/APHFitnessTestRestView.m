@@ -8,6 +8,13 @@
 
 #import "APHFitnessTestRestView.h"
 
+@interface APHFitnessTestRestView ()
+
+@property (weak, nonatomic) IBOutlet UILabel *heartRateBPMLabel;
+@property (weak, nonatomic) IBOutlet UILabel *stepCountLabel;
+
+@end
+
 @implementation APHFitnessTestRestView
 
 - (void)commonInit

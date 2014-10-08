@@ -9,6 +9,10 @@
 #import "APHFitnessTestRestComfortablyView.h"
 @interface APHFitnessTestRestComfortablyView ()
 
+@property (weak, nonatomic) IBOutlet UILabel *heartRateBPMLbl;
+@property (weak, nonatomic) IBOutlet UILabel *distanceTrackerLbl;
+@property (weak, nonatomic) IBOutlet UILabel *stepCountLbl;
+
 @end
 
 @implementation APHFitnessTestRestComfortablyView

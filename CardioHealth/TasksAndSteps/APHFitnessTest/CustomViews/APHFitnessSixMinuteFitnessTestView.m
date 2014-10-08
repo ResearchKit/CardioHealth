@@ -12,6 +12,11 @@
 static CGFloat kAPHFitnessTestMetersToMilesConversion = 1609.34;
 
 @interface APHFitnessSixMinuteFitnessTestView ()
+@property (weak, nonatomic) IBOutlet UILabel *heartRateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *stepCountLabel;
+@property (weak, nonatomic) IBOutlet UILabel *distanceTotalLabel;
+
+
 @property (assign) CLLocationDistance totalDistance;
 @end
 
@@ -42,8 +47,6 @@ static CGFloat kAPHFitnessTestMetersToMilesConversion = 1609.34;
     [self.stepCountLabel setBackgroundColor:[UIColor yellowColor]];
     [self addSubview:self.stepCountLabel];
     
-    
-    self.distanceTotalLabel.text = @"0 Mi";
     [self.distanceTotalLabel setBackgroundColor:[UIColor yellowColor]];
     [self addSubview:self.distanceTotalLabel];
     
@@ -81,25 +84,19 @@ static CGFloat kAPHFitnessTestMetersToMilesConversion = 1609.34;
 
 - (void)receiveHeartBPMNotification:(NSNotification *)notification {
     NSDictionary *heartBeatInfo = notification.userInfo;
-    //NSLog(@"Custom View Heart Beat Info %@", heartBeatInfo);
-    
     
     self.heartRateLabel.text = [NSString stringWithFormat:@"%@", [heartBeatInfo objectForKey:@"heartBPM"]];
 }
 
 - (void)receiveStepCountNotification:(NSNotification *)notification {
     NSDictionary *stepCountInfo = notification.userInfo;
-    //NSLog(@"Custom View Step Count Info %@", stepCountInfo);
-    
-    
+
     self.stepCountLabel.text = [NSString stringWithFormat:@"%@", [stepCountInfo objectForKey:@"stepCount"]];
 }
 
 - (void)receiveUpdatedLocationNotification:(NSNotification *)notification {
     
     NSMutableDictionary *distanceUpdatedInfo = [notification.userInfo mutableCopy];
-
-    NSLog(@"Custom View Distance Total Info %@", distanceUpdatedInfo);
     
     CLLocationDistance distance = [[distanceUpdatedInfo objectForKey:@"distance"] doubleValue];
     

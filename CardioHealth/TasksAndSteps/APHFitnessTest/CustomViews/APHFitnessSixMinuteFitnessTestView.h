@@ -9,8 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface APHFitnessSixMinuteFitnessTestView : UIView
-@property (weak, nonatomic) IBOutlet UILabel *heartRateLabel;
-@property (weak, nonatomic) IBOutlet UILabel *stepCountLabel;
-@property (weak, nonatomic) IBOutlet UILabel *distanceTotalLabel;
 
 @end
