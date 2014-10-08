@@ -218,6 +218,8 @@ static NSString *kHeartAgeSummary = @"HeartAgeSummary";
 {
     NSLog(@"Step: %@ (%@)", viewController.step.name, viewController.step.identifier);
     
+    viewController.skipButton = nil;
+    
     APCAppDelegate *apcAppDelegate = [[UIApplication sharedApplication] delegate];
     
     if ([viewController.step.identifier isEqualToString:kHeartAgeTestDataAge]) {
