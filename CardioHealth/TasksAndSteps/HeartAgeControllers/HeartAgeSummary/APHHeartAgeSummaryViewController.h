@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <APCAppleCore/APCAppleCore.h>
 
-@interface APHHeartAgeSummaryViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@import APCAppleCore;
+
+@interface APHHeartAgeSummaryViewController : APCStepViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic) CGFloat taskProgress;
 @property (nonatomic) NSUInteger actualAge;
