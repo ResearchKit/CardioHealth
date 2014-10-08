@@ -95,6 +95,12 @@ typedef NS_ENUM(NSUInteger, APHHeartAgeAndRiskFactorRows)
             cell = [tableView dequeueReusableCellWithIdentifier:ActivityCell forIndexPath:indexPath];
             cell.textLabel.text = NSLocalizedString(@"Today's Activities", @"Today's activities");
             cell.detailTextLabel.text = NSLocalizedString(@"1/3", @"One of three");
+            
+            APCCircularProgressView *circularProgress = [[APCCircularProgressView alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
+            circularProgress.hidesProgressValue = YES;
+            [circularProgress setProgress:0.33];
+            
+            cell.accessoryView = circularProgress;
         }
             break;
         
