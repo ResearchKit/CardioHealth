@@ -182,7 +182,7 @@ static NSString *kHeartAgeSummary = @"HeartAgeSummary";
     
     {
         RKQuestionStep *step = [RKQuestionStep questionStepWithIdentifier:kHeartAgeSummary
-                                                                     name:@"Heart Age Summary"
+                                                                     name:NSLocalizedString(@"Heart Age Summary", @"Heart age summary")
                                                                  question:@"No question"
                                                                    answer:[RKBooleanAnswerFormat new]];
         step.optional = NO;
@@ -252,6 +252,8 @@ static NSString *kHeartAgeSummary = @"HeartAgeSummary";
 - (RKStepViewController *)taskViewController:(RKTaskViewController *)taskViewController viewControllerForStep:(RKStep *)step
 {
     
+    RKStepViewController *stepVC = nil;
+    
     if ([step.identifier isEqualToString:kHeartAgeSummary]) {
         
         NSMutableDictionary *surveyResultsDictionary = [NSMutableDictionary dictionary];
@@ -283,10 +285,10 @@ static NSString *kHeartAgeSummary = @"HeartAgeSummary";
         heartAgeResultsVC.lifetimeRisk = heartAgeInfo[@"lifetimeRisk"];
         heartAgeResultsVC.someImprovement = @"Some suggestions to improve your heart age.";
         
-        return heartAgeResultsVC;
-    } else {
-        return nil;
+        stepVC = heartAgeResultsVC;
     }
+    
+    return stepVC;
 }
 
 @end

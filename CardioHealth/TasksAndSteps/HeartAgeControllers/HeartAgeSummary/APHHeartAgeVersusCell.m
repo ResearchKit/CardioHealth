@@ -38,7 +38,7 @@
     // Box that will enclose the Age and Heart Age
     CGFloat lineWidth = 1.0; //change line width here
     
-    UIBezierPath *bgRect = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:0];
+    UIBezierPath *bgRect = [UIBezierPath bezierPathWithRect:rect];
     CGContextSaveGState(context);
     CGContextSetLineWidth(context, lineWidth);
     [fillColor setFill];
