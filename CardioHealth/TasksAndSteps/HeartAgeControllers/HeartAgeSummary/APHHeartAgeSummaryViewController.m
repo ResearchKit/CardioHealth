@@ -65,7 +65,11 @@ typedef NS_ENUM(NSUInteger, APHHeartAgeAndRiskFactorRows)
 
 - (void)doneButtonTapped:(UIBarButtonItem *)sender
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if (self.delegate != nil) {
+        if ([self.delegate respondsToSelector:@selector(stepViewControllerDidFinish:navigationDirection:)] == YES) {
+            [self.delegate stepViewControllerDidFinish:self navigationDirection:RKStepViewControllerNavigationDirectionForward];
+        }
+    }
 }
 
 #pragma mark - TableView
