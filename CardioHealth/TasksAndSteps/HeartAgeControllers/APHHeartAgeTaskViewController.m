@@ -11,6 +11,7 @@
 
 // Introduction Step Key
 static NSString *kHeartAgeIntroduction = @"HeartAgeIntroduction";
+static NSString *kHeartAgeSummary = @"HeartAgeSummary";
 
 @interface APHHeartAgeTaskViewController ()
 
@@ -179,6 +180,16 @@ static NSString *kHeartAgeIntroduction = @"HeartAgeIntroduction";
         [steps addObject:step];
     }
     
+    {
+        RKQuestionStep *step = [RKQuestionStep questionStepWithIdentifier:kHeartAgeSummary
+                                                                     name:NSLocalizedString(@"Heart Age Summary", @"Heart age summary")
+                                                                 question:@"No question"
+                                                                   answer:[RKBooleanAnswerFormat new]];
+        step.optional = NO;
+        
+        [steps addObject:step];
+    }
+    
     RKTask *task = [[RKTask alloc] initWithName:NSLocalizedString(@"Heart Age Test", @"Heart Age Test")
                                      identifier:@"Heart Age Test"
                                           steps:steps];
@@ -207,6 +218,8 @@ static NSString *kHeartAgeIntroduction = @"HeartAgeIntroduction";
 {
     NSLog(@"Step: %@ (%@)", viewController.step.name, viewController.step.identifier);
     
+    viewController.skipButton = nil;
+    
     APCAppDelegate *apcAppDelegate = [[UIApplication sharedApplication] delegate];
     
     if ([viewController.step.identifier isEqualToString:kHeartAgeTestDataAge]) {
@@ -227,24 +240,26 @@ static NSString *kHeartAgeIntroduction = @"HeartAgeIntroduction";
     }
 }
 
-
-#pragma  mark  -  Task View Controller Delegate Methods
-
-- (void)taskViewControllerDidComplete:(RKTaskViewController *)taskViewController
+- (void)stepViewControllerDidFinish:(RKStepViewController *)stepViewController navigationDirection:(RKStepViewControllerNavigationDirection)direction
 {
-    NSLog(@"Stubbed: Task Completed.");
+    [super stepViewControllerDidFinish:stepViewController navigationDirection:direction];
+    
+    NSLog(@"Finished Step: %@", stepViewController.step.identifier);
 }
 
-- (void)taskViewController:(RKTaskViewController *)taskViewController didProduceResult:(RKResult *)result
+
+#pragma  mark  -  Task View Controller Delegate Methods
+- (RKStepViewController *)taskViewController:(RKTaskViewController *)taskViewController viewControllerForStep:(RKStep *)step
 {
-    [super taskViewController:taskViewController didProduceResult:result];
     
-    if ([result isKindOfClass:[RKSurveyResult class]]) {
-        RKSurveyResult *surveyResult = (RKSurveyResult *)result;
+    RKStepViewController *stepVC = nil;
+    
+    if ([step.identifier isEqualToString:kHeartAgeSummary]) {
+        
         NSMutableDictionary *surveyResultsDictionary = [NSMutableDictionary dictionary];
         
         // Normalize survey results into dictionary.
-        for (RKQuestionResult *questionResult in surveyResult.surveyResults) {
+        for (RKQuestionResult *questionResult in taskViewController.surveyResults) {
             NSString *questionIdentifier = [[questionResult itemIdentifier] stringValue];
             if ([questionIdentifier isEqualToString:kHeartAgekHeartAgeTestDataEthnicity] || [questionIdentifier isEqualToString:kHeartAgekHeartAgeTestDataGender]) {
                 [surveyResultsDictionary setObject:(NSString *)questionResult.answer forKey:questionIdentifier];
@@ -259,7 +274,10 @@ static NSString *kHeartAgeIntroduction = @"HeartAgeIntroduction";
         
         UIStoryboard *sbHeartAgeSummary = [UIStoryboard storyboardWithName:@"HeartAgeSummary" bundle:nil];
         APHHeartAgeSummaryViewController *heartAgeResultsVC = [sbHeartAgeSummary instantiateInitialViewController];
-
+        
+        heartAgeResultsVC.resultCollector = self;
+        heartAgeResultsVC.delegate = self;
+        heartAgeResultsVC.step = step;
         heartAgeResultsVC.taskProgress = 0.25;
         heartAgeResultsVC.actualAge = [surveyResultsDictionary[kHeartAgeTestDataAge] integerValue];
         heartAgeResultsVC.heartAge = [heartAgeInfo[@"age"] integerValue];
@@ -267,8 +285,10 @@ static NSString *kHeartAgeIntroduction = @"HeartAgeIntroduction";
         heartAgeResultsVC.lifetimeRisk = heartAgeInfo[@"lifetimeRisk"];
         heartAgeResultsVC.someImprovement = @"Some suggestions to improve your heart age.";
         
-        [self pushViewController:heartAgeResultsVC animated:YES];
+        stepVC = heartAgeResultsVC;
     }
+    
+    return stepVC;
 }
 
 @end

@@ -14,6 +14,11 @@ static NSString *ActivityCell = @"ActivityProgressCell";
 static NSString *HeartAgeCell = @"HeartAgeCell";
 static NSString *InformationCell = @"InformationCell";
 
+static CGFloat kVersusCellHeight = 220.0;
+static CGFloat kInfomationCellHeight = 110.0;
+static CGFloat kProgressBarHeight = 10.0;
+static CGFloat kHeaderHeightForFirstSection = 42.0;
+
 typedef NS_ENUM(NSUInteger, APHHeartAgeSummarySections)
 {
     kHeartAgeSummarySectionTodaysActivites,
@@ -37,17 +42,19 @@ typedef NS_ENUM(NSUInteger, APHHeartAgeAndRiskFactorRows)
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"Survey Complete";
+    self.navigationItem.title = NSLocalizedString(@"Survey Complete", @"Survey Complete");
+    self.navigationItem.leftBarButtonItem = nil;
     self.navigationItem.hidesBackButton = YES;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                                            target:self
                                                                                            action:@selector(doneButtonTapped:)];
     
 
-    APCStepProgressBar *progressBar = [[APCStepProgressBar alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 10)
+    APCStepProgressBar *progressBar = [[APCStepProgressBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, kProgressBarHeight)
                                                                           style:APCStepProgressBarStyleOnlyProgressView];
     progressBar.numberOfSteps = 4;
     [progressBar setCompletedSteps:4 animation:YES];
+    
     [self.view addSubview:progressBar];
     
     [self.tableView registerClass:[APHHeartAgeVersusCell class] forCellReuseIdentifier:HeartAgeCell];
@@ -63,7 +70,11 @@ typedef NS_ENUM(NSUInteger, APHHeartAgeAndRiskFactorRows)
 
 - (void)doneButtonTapped:(UIBarButtonItem *)sender
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if (self.delegate != nil) {
+        if ([self.delegate respondsToSelector:@selector(stepViewControllerDidFinish:navigationDirection:)] == YES) {
+            [self.delegate stepViewControllerDidFinish:self navigationDirection:RKStepViewControllerNavigationDirectionForward];
+        }
+    }
 }
 
 #pragma mark - TableView
@@ -89,6 +100,12 @@ typedef NS_ENUM(NSUInteger, APHHeartAgeAndRiskFactorRows)
             cell = [tableView dequeueReusableCellWithIdentifier:ActivityCell forIndexPath:indexPath];
             cell.textLabel.text = NSLocalizedString(@"Today's Activities", @"Today's activities");
             cell.detailTextLabel.text = NSLocalizedString(@"1/3", @"One of three");
+            
+            APCCircularProgressView *circularProgress = [[APCCircularProgressView alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
+            circularProgress.hidesProgressValue = YES;
+            [circularProgress setProgress:0.33];
+            
+            cell.accessoryView = circularProgress;
         }
             break;
         
@@ -137,11 +154,11 @@ typedef NS_ENUM(NSUInteger, APHHeartAgeAndRiskFactorRows)
         case 1:
             switch (indexPath.row) {
                 case 0:
-                    rowHeight = 220.0;
+                    rowHeight = kVersusCellHeight;
                     break;
                 case 1:
                 case 2:
-                    rowHeight =  120.0;
+                    rowHeight =  kInfomationCellHeight;
                     break;
                 default:
                     rowHeight = self.tableView.rowHeight;
@@ -167,11 +184,12 @@ typedef NS_ENUM(NSUInteger, APHHeartAgeAndRiskFactorRows)
     UILabel *sectionHeader = nil;
     
     if (section == 0) {
-        sectionHeader = [[UILabel alloc] initWithFrame:CGRectMake(20, 0.0, 280.0, 42.0)];
+        sectionHeader = [[UILabel alloc] initWithFrame:CGRectMake(20, 0.0, tableView.frame.size.width, kHeaderHeightForFirstSection)];
         [sectionHeader setNumberOfLines:2];
         [sectionHeader setLineBreakMode:NSLineBreakByWordWrapping];
-        [sectionHeader setText:@"Completing more activities increases the effectiveness of the study."];
-        [sectionHeader setFont:[UIFont fontWithName:@"Helvetica Neue-Thin" size:15.0]];
+        [sectionHeader setText:NSLocalizedString(@"Completing more activities increases the effectiveness of the study.",
+                                                 @"Completing more activities increases the effectiveness of the study.")];
+        [sectionHeader setFont:[UIFont systemFontOfSize:15.0]];
     }
     
     return sectionHeader;
