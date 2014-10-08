@@ -1,16 +1,13 @@
 //
 //  APHSignInViewController.m
-
+//  Parkinson
 //
 //  Created by Karthik Keyan on 9/15/14.
 //  Copyright (c) 2014 Y Media Labs. All rights reserved.
 //
 
-@import APCAppleCore;
 #import "APHCardioHealthAppDelegate.h"
 #import "APHSignInViewController.h"
-
-static NSString *const kLoggedInKey = @"LoggedIn";
 
 @interface APHSignInViewController ()
 
@@ -58,31 +55,49 @@ static NSString *const kLoggedInKey = @"LoggedIn";
         APCSpinnerViewController *spinnerController = [[APCSpinnerViewController alloc] init];
         [self presentViewController:spinnerController animated:YES completion:nil];
         
-        APCSageNetworkManager *networkManager = (APCSageNetworkManager *)[(APHCardioHealthAppDelegate *)[[UIApplication sharedApplication] delegate] networkManager];
+        APCAppDelegate * appDelegate = (APCAppDelegate*) [UIApplication sharedApplication].delegate;
+        APCUser * user = appDelegate.dataSubstrate.currentUser;
         
-        [networkManager signIn:self.userHandleTextField.text password:self.passwordTextField.text success:^(NSURLSessionDataTask *task, id responseObject) {
-            [NSObject performInMainThread:^{
-                [spinnerController dismissViewControllerAnimated:YES completion:nil];
-                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kLoggedInKey];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-                [[NSNotificationCenter defaultCenter] postNotificationName:(NSString *)APCUserLoginNotification object:nil];
+        if (!user.userName) {
+            user.userName = self.userHandleTextField.text;
+            user.password = self.passwordTextField.text;
+            [user signInOnCompletion:^(NSError *error) {
+                [spinnerController dismissViewControllerAnimated:YES completion:^{
+                    if (error) {
+                        [UIAlertView showSimpleAlertWithTitle:NSLocalizedString(@"Sign In", @"") message:error.message];
+                    }
+                    else
+                    {
+                        user.signedIn = YES;
+                    }
+                }];
+                
             }];
-        } failure:^(NSURLSessionDataTask *task, NSError *error) {
-             [NSObject performInMainThread:^{
-                [spinnerController dismissViewControllerAnimated:YES completion:nil];
-                 
-                 if (error.code == kAPCServerPreconditionNotMet) {
-                     [[NSNotificationCenter defaultCenter] postNotificationName:(NSString *)APCUserLoginNotification object:nil];
-                 }
-                 else {
-                     [UIAlertView showSimpleAlertWithTitle:NSLocalizedString(@"Sign In", @"") message:error.message];
-                 }
-             }];
-        }];
+            
+        }
+        else if ([self.userHandleTextField.text isEqualToString:user.userName]) {
+            [user signInOnCompletion:^(NSError *error) {
+                [spinnerController dismissViewControllerAnimated:YES completion:^{
+                    if (error) {
+                        [UIAlertView showSimpleAlertWithTitle:NSLocalizedString(@"Sign In", @"") message:error.message];
+                    }
+                    else
+                    {
+                        user.signedIn = YES;
+                    }
+                }];
+                
+            }];
+        }
+        else
+        {
+            [UIAlertView showSimpleAlertWithTitle:NSLocalizedString(@"Sign In", @"") message:NSLocalizedString(@"Username does not match the existing username. Please delete the app to login as new user.", @"")];
+        }
     }
     else {
         [UIAlertView showSimpleAlertWithTitle:NSLocalizedString(@"Sign In", @"") message:errorMessage];
     }
 }
+
 
 @end

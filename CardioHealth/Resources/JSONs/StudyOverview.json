@@ -1,0 +1,32 @@
+{
+  "disease_name":"Parkinson",
+  "from_date":"",
+  "to_date":"",
+  "questions":
+              [
+                {
+                  "title":"What is this study about?",
+                  "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vel turpis id fringilla. Nam pharetra gravida enim consectetur rutrum."
+                },
+                {
+                  "title":"How this study works?",
+                  "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vel turpis id fringilla. Nam pharetra gravida enim consectetur rutrum."
+                },
+                {
+                  "title":"What is this study about?",
+                  "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vel turpis id fringilla. Nam pharetra gravida enim consectetur rutrum."
+                },
+                {
+                  "title":"Who is running this study?",
+                  "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vel turpis id fringilla. Nam pharetra gravida enim consectetur rutrum."
+                },
+                {
+                  "title":"Who is eligible to participate?",
+                  "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vel turpis id fringilla. Nam pharetra gravida enim consectetur rutrum."
+                },
+                {
+                  "title":"Length of study",
+                  "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vel turpis id fringilla. Nam pharetra gravida enim consectetur rutrum."
+                }
+              ]
+}

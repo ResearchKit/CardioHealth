@@ -1,7 +1,7 @@
 {
     "tasks": [
               {
-              "taskTitle" : "Sleep Survey",              
+              "taskTitle" : "Sleep Survey",
               "taskID": "APHCustomizableSurvey-70D101B0-8135-4E47-8D2A-F810BE28D995",
               "taskType": "APHCustomizableSurvey",
               "fileName": "sleepSurvey",
@@ -9,7 +9,7 @@
               },
               {
               "taskTitle" : "Heart Age Test",
-              "taskID": "APHHeartAgeTest-71111111-1111-1111-1111-F810BE28D995",
+              "taskID": "APHHeartAge-7259AC18-D711-47A6-ADBD-6CFCECDED1DF",
               "taskType": "APHHeartAge",
               "taskClassName" : "APHHeartAgeTaskViewController"
               },
@@ -23,7 +23,7 @@
     "schedules": [
                   {
                   "type": "REPEATING",
-                  "href": "appleparkinson:",
+                  "href": "applecardio",
                   "schedule": "1:1",
                   "taskID": "APHCustomizableSurvey-70D101B0-8135-4E47-8D2A-F810BE28D995"
                   },
@@ -31,7 +31,7 @@
                   "type": "REPEATING",
                   "href": "appleparkinson:",
                   "schedule": "1:2",
-                  "taskID": "APHHeartAgeTest-71111111-1111-1111-1111-F810BE28D995"
+                  "taskID": "APHHeartAge-7259AC18-D711-47A6-ADBD-6CFCECDED1DF"
                   },
                   {
                   "type": "REPEATING",
