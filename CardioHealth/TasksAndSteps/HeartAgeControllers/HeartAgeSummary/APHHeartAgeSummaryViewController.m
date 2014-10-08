@@ -38,6 +38,7 @@ typedef NS_ENUM(NSUInteger, APHHeartAgeAndRiskFactorRows)
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"Survey Complete";
+    self.navigationItem.leftBarButtonItem = nil;
     self.navigationItem.hidesBackButton = YES;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                                            target:self
