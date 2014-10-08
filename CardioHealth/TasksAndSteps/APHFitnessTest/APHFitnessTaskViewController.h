@@ -7,7 +7,13 @@
 //
 
 @import APCAppleCore;
+#import "APHFitnessTestHealthKitSampleTypeTracker.h"
+#import "APHFitnessTestDistanceTracker.h"
+#import "APHFitnessTestRecorder.h"
+#import "APHFitnessTestRestComfortablyView.h"
+#import "APHFitnessTestRestView.h"
+#import <CoreLocation/CoreLocation.h>
 
-@interface APHFitnessTaskViewController : APCSetupTaskViewController
+@interface APHFitnessTaskViewController : APCSetupTaskViewController <APHFitnessTestHealthKitSampleTypeTrackerDelegate, APHFitnessTestDistanceTrackerDelegate>
 
 @end

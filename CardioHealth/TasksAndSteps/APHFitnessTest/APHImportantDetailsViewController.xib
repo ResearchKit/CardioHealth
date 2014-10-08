@@ -90,11 +90,11 @@
                         </mask>
                         <mask key="constraints">
                             <exclude reference="1JA-rm-q5S"/>
-                            <exclude reference="mdT-3l-XhY"/>
                             <exclude reference="2G2-v4-FND"/>
                             <exclude reference="F1i-u5-Tze"/>
                             <exclude reference="dWK-g8-NRg"/>
                             <exclude reference="eLj-LD-qv4"/>
+                            <exclude reference="mdT-3l-XhY"/>
                         </mask>
                     </variation>
                     <variation key="heightClass=regular-widthClass=compact">
@@ -104,11 +104,11 @@
                         </mask>
                         <mask key="constraints">
                             <include reference="1JA-rm-q5S"/>
-                            <include reference="mdT-3l-XhY"/>
                             <include reference="2G2-v4-FND"/>
                             <include reference="F1i-u5-Tze"/>
                             <include reference="dWK-g8-NRg"/>
                             <include reference="eLj-LD-qv4"/>
+                            <include reference="mdT-3l-XhY"/>
                         </mask>
                     </variation>
                 </scrollView>

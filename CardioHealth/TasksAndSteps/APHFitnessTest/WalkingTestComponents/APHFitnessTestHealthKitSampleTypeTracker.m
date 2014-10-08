@@ -14,7 +14,7 @@
 @property (strong, nonatomic) HKObserverQuery *observerQuery;
 @property (strong, nonatomic) HKObserverQuery *stepObserverQuery;
 
-@property (assign) __block double stepCountSum;
+@property (assign) __block double stepCount;
 @end
 
 @implementation APHFitnessTestHealthKitSampleTypeTracker
@@ -82,9 +82,9 @@
                 [self.healthStore mostRecentQuantitySampleOfType:stepsCountType predicate:nil completion:^(HKQuantity *mostRecentQuantity, NSError *error) {
                     
                     HKUnit * stepCountUnit = [HKUnit countUnit];
-                    self.stepCountSum += [mostRecentQuantity doubleValueForUnit:stepCountUnit];
+                    self.stepCount = [mostRecentQuantity doubleValueForUnit:stepCountUnit];
                     
-                    dispatch_async(dispatch_get_main_queue(), ^{ [self stepCountDidChange:self.stepCountSum]; });
+                    dispatch_async(dispatch_get_main_queue(), ^{ [self stepCountDidChange:self.stepCount]; });
                     
                 }];
 

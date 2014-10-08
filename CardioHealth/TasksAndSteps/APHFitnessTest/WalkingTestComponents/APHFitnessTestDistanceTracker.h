@@ -48,7 +48,7 @@ typedef NS_ENUM(NSInteger, APHLocationManagerGPSSignalStrength) {
  *  @return A CLLocationDistance Type used to represent a distance in meters
  */
 
-- (CLLocationDistance) stop;
+- (void) stop;
 
 /**
  *  Delegate conforms to APHFitnessTestDistanceTrackerDelegate.
