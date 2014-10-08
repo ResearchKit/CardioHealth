@@ -49,7 +49,8 @@ static  NSString  *kFitnessTestStep105 = @"FitnessStep105";
 
 - (void)viewController:(UIViewController*)viewController willStartStepWithView:(UIView*)view{
     [super viewController:viewController willStartStepWithView:view];
-
+    
+    
     self.containerView = view;
     
     //If the step collects distance
@@ -59,17 +60,39 @@ static  NSString  *kFitnessTestStep105 = @"FitnessStep105";
                                                      name:@"APHFitnessDistanceUpdated"
                                                    object:nil];
         
-        self.containerView.frame = CGRectMake(view.frame.origin.x, view.frame.origin.y, 320.0, view.frame.size.height);
         UINib *nib = [UINib nibWithNibName:@"APHFitnessSixMinuteFitnessTestView" bundle:nil];
         APHFitnessSixMinuteFitnessTestView *updatedView = [[nib instantiateWithOwner:self options:nil] objectAtIndex:0];
-        [self.containerView addSubview:updatedView];
+        [updatedView setTranslatesAutoresizingMaskIntoConstraints:NO];
+        
+        NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[c(>=160)]" options:0 metrics:nil views:@{@"c":updatedView}];
+        
+        for (NSLayoutConstraint *constraint in verticalConstraints) {
+            constraint.priority = UILayoutPriorityFittingSizeLevel;
+        }
+        
+        [updatedView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[c(>=280)]" options:0 metrics:nil views:@{@"c":updatedView}]];
+        
+        [updatedView addConstraints:verticalConstraints];
+        
+        [(RKActiveStepViewController *)viewController setCustomView:updatedView];
 
     } else {
 
-        self.containerView.frame = CGRectMake(view.frame.origin.x, view.frame.origin.y, 320.0, view.frame.size.height);
         UINib *nib = [UINib nibWithNibName:@"APHFitnessTestRestComfortablyView" bundle:nil];
         APHFitnessTestRestComfortablyView *updatedView = [[nib instantiateWithOwner:self options:nil] objectAtIndex:0];
-        [self.containerView addSubview:updatedView];
+        [updatedView setTranslatesAutoresizingMaskIntoConstraints:NO];
+        
+        NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[c(>=160)]" options:0 metrics:nil views:@{@"c":updatedView}];
+        
+        for (NSLayoutConstraint *constraint in verticalConstraints) {
+            constraint.priority = UILayoutPriorityFittingSizeLevel;
+        }
+        
+        [updatedView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[c(>=280)]" options:0 metrics:nil views:@{@"c":updatedView}]];
+        
+        [updatedView addConstraints:verticalConstraints];
+        
+        [(RKActiveStepViewController *)viewController setCustomView:updatedView];
     }
     
     [[NSNotificationCenter defaultCenter] addObserver:self
