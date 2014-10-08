@@ -254,11 +254,7 @@ static  NSString  *kFitnessTestStep105 = @"FitnessStep105";
 
 - (NSDictionary*)dictionaryValue{
     
-    NSMutableDictionary* dict = [NSMutableDictionary new];
-    
-    dict[@"_class"] = NSStringFromClass([self class]);
-    
-    return dict;
+    return @{ @"_class" : NSStringFromClass([self class]) };
 }
 
 @end
