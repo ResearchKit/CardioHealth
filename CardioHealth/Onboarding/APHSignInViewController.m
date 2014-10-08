@@ -58,7 +58,24 @@
         APCAppDelegate * appDelegate = (APCAppDelegate*) [UIApplication sharedApplication].delegate;
         APCUser * user = appDelegate.dataSubstrate.currentUser;
         
-        if ([self.userHandleTextField.text isEqualToString:user.userName]) {
+        if (!user.userName) {
+            user.userName = self.userHandleTextField.text;
+            user.password = self.passwordTextField.text;
+            [user signInOnCompletion:^(NSError *error) {
+                [spinnerController dismissViewControllerAnimated:YES completion:^{
+                    if (error) {
+                        [UIAlertView showSimpleAlertWithTitle:NSLocalizedString(@"Sign In", @"") message:error.message];
+                    }
+                    else
+                    {
+                        user.signedIn = YES;
+                    }
+                }];
+                
+            }];
+            
+        }
+        else if ([self.userHandleTextField.text isEqualToString:user.userName]) {
             [user signInOnCompletion:^(NSError *error) {
                 [spinnerController dismissViewControllerAnimated:YES completion:^{
                     if (error) {
@@ -81,5 +98,6 @@
         [UIAlertView showSimpleAlertWithTitle:NSLocalizedString(@"Sign In", @"") message:errorMessage];
     }
 }
+
 
 @end
