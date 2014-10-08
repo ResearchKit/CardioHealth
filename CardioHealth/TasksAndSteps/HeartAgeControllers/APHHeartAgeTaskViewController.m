@@ -11,6 +11,7 @@
 
 // Introduction Step Key
 static NSString *kHeartAgeIntroduction = @"HeartAgeIntroduction";
+static NSString *kHeartAgeSummary = @"HeartAgeSummary";
 
 @interface APHHeartAgeTaskViewController ()
 
@@ -173,6 +174,16 @@ static NSString *kHeartAgeIntroduction = @"HeartAgeIntroduction";
         RKQuestionStep *step = [RKQuestionStep questionStepWithIdentifier:kHeartAgekHeartAgeTestDataFamilyHeart
                                                                      name:@"ParentHistory"
                                                                  question:NSLocalizedString(@"Have either of your parents had heart problems?", @"Have either of your parents had heart problems?")
+                                                                   answer:[RKBooleanAnswerFormat new]];
+        step.optional = NO;
+        
+        [steps addObject:step];
+    }
+    
+    {
+        RKQuestionStep *step = [RKQuestionStep questionStepWithIdentifier:kHeartAgeSummary
+                                                                     name:@"Heart Age Summary"
+                                                                 question:@"No question"
                                                                    answer:[RKBooleanAnswerFormat new]];
         step.optional = NO;
         
