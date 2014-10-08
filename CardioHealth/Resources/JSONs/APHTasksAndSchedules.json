@@ -12,6 +12,12 @@
               "taskID": "APHHeartAge-7259AC18-D711-47A6-ADBD-6CFCECDED1DF",
               "taskType": "APHHeartAge",
               "taskClassName" : "APHHeartAgeTaskViewController"
+              },
+              {
+              "taskTitle" : "Fitness Test",
+              "taskID": "APHFitnessTest-00000000-1111-1111-1111-F810BE28D995",
+              "taskType": "APHFitnessTest",
+              "taskClassName" : "APHFitnessTaskViewController"
               }
               ],
     "schedules": [
@@ -19,7 +25,19 @@
                   "type": "REPEATING",
                   "href": "applecardio",
                   "schedule": "1:1",
-                  "taskID": "APHHeartAge-7259AC18-D711-47A6-ADBD-6CFCECDED1DF",
+                  "taskID": "APHCustomizableSurvey-70D101B0-8135-4E47-8D2A-F810BE28D995"
+                  },
+                  {
+                  "type": "REPEATING",
+                  "href": "appleparkinson:",
+                  "schedule": "1:2",
+                  "taskID": "APHHeartAge-7259AC18-D711-47A6-ADBD-6CFCECDED1DF"
+                  },
+                  {
+                  "type": "REPEATING",
+                  "href": "appleparkinson:",
+                  "schedule": "1:3",
+                  "taskID": "APHFitnessTest-00000000-1111-1111-1111-F810BE28D995"
                   }
                   ]
 }

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="14A361c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="APHFitnessTestRestView">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BPM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pwW-fO-HI0">
+                    <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="MYn-kg-qI2"/>
+                        <constraint firstAttribute="width" constant="100" id="qAo-PE-2VV"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="MYn-kg-qI2"/>
+                            <exclude reference="qAo-PE-2VV"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=regular-widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="MYn-kg-qI2"/>
+                            <include reference="qAo-PE-2VV"/>
+                        </mask>
+                    </variation>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Z6-Kd-6Nx">
+                    <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="iGq-dw-kIh"/>
+                        <constraint firstAttribute="width" constant="100" id="jJq-Bh-bfM"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="iGq-dw-kIh"/>
+                            <exclude reference="jJq-Bh-bfM"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=regular-widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="iGq-dw-kIh"/>
+                            <include reference="jJq-Bh-bfM"/>
+                        </mask>
+                    </variation>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Step Count" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vkl-ao-yTb">
+                    <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                    <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                        <rect key="frame" x="8" y="77" width="100" height="21"/>
+                    </variation>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xk3-ek-yrf">
+                    <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="100" id="2lZ-nO-XyU"/>
+                        <constraint firstAttribute="height" constant="21" id="TBe-fq-kjP"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="2lZ-nO-XyU"/>
+                            <exclude reference="TBe-fq-kjP"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=regular-widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="2lZ-nO-XyU"/>
+                            <include reference="TBe-fq-kjP"/>
+                        </mask>
+                    </variation>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="pwW-fO-HI0" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="30" id="6a6-yQ-MSC"/>
+                <constraint firstItem="xk3-ek-yrf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="116" id="9NO-j4-52K"/>
+                <constraint firstItem="pwW-fO-HI0" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="dIx-Wv-PPT"/>
+                <constraint firstItem="7Z6-Kd-6Nx" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="29" id="dzY-MB-Kqz"/>
+                <constraint firstItem="xk3-ek-yrf" firstAttribute="top" secondItem="7Z6-Kd-6Nx" secondAttribute="bottom" constant="27" id="hey-Eb-llV"/>
+                <constraint firstItem="7Z6-Kd-6Nx" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="116" id="kTJ-ie-Ewk"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="subviews">
+                    <exclude reference="pwW-fO-HI0"/>
+                    <exclude reference="7Z6-Kd-6Nx"/>
+                    <exclude reference="Vkl-ao-yTb"/>
+                    <exclude reference="xk3-ek-yrf"/>
+                </mask>
+                <mask key="constraints">
+                    <exclude reference="dzY-MB-Kqz"/>
+                    <exclude reference="kTJ-ie-Ewk"/>
+                    <exclude reference="6a6-yQ-MSC"/>
+                    <exclude reference="dIx-Wv-PPT"/>
+                    <exclude reference="9NO-j4-52K"/>
+                    <exclude reference="hey-Eb-llV"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=regular-widthClass=compact">
+                <mask key="subviews">
+                    <include reference="pwW-fO-HI0"/>
+                    <include reference="7Z6-Kd-6Nx"/>
+                    <include reference="Vkl-ao-yTb"/>
+                    <include reference="xk3-ek-yrf"/>
+                </mask>
+                <mask key="constraints">
+                    <include reference="dzY-MB-Kqz"/>
+                    <include reference="kTJ-ie-Ewk"/>
+                    <include reference="6a6-yQ-MSC"/>
+                    <include reference="dIx-Wv-PPT"/>
+                    <include reference="9NO-j4-52K"/>
+                    <include reference="hey-Eb-llV"/>
+                </mask>
+            </variation>
+            <connections>
+                <outlet property="heartRateBPMLabel" destination="7Z6-Kd-6Nx" id="LUY-m1-B1K"/>
+                <outlet property="stepCountLabel" destination="xk3-ek-yrf" id="2mC-T3-bsd"/>
+            </connections>
+        </view>
+    </objects>
+</document>
