@@ -108,24 +108,6 @@ static  NSString  *kFitnessTestStep105 = @"FitnessStep105";
 #pragma  mark  -  Navigation Bar Button Action Methods
 /*********************************************************************************/
 
-- (void)taskViewController:(RKTaskViewController *)taskViewController willPresentStepViewController:(RKStepViewController *)stepViewController {
- 
-    if([stepViewController.step.identifier isEqualToString: kFitnessTestStep102] ) {
-//        UINib *nib = [UINib nibWithNibName:@"APHFitnessSixMinuteFitnessTestView" bundle:nil];
-//        APHFitnessSixMinuteFitnessTestView *updatedView = [[nib instantiateWithOwner:self options:nil] objectAtIndex:0];
-//        //[stepViewController.view addSubview:updatedView];
-//        
-//        UIView *aView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 280, 160)];
-//        [aView setTranslatesAutoresizingMaskIntoConstraints:NO];
-//        [aView setBackgroundColor:[UIColor orangeColor]];
-//        [(RKActiveStepViewController*)stepViewController setCustomView:aView];
-    }
-}
-
-/*********************************************************************************/
-#pragma  mark  -  Navigation Bar Button Action Methods
-/*********************************************************************************/
-
 - (void)cancelButtonTapped:(id)sender
 {
     [self.presentingViewController dismissViewControllerAnimated:YES completion:^{ } ];
