@@ -45,10 +45,11 @@ typedef NS_ENUM(NSUInteger, APHHeartAgeAndRiskFactorRows)
                                                                                            action:@selector(doneButtonTapped:)];
     
 
-    APCStepProgressBar *progressBar = [[APCStepProgressBar alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 10)
+    APCStepProgressBar *progressBar = [[APCStepProgressBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 10)
                                                                           style:APCStepProgressBarStyleOnlyProgressView];
     progressBar.numberOfSteps = 4;
     [progressBar setCompletedSteps:4 animation:YES];
+    
     [self.view addSubview:progressBar];
     
     [self.tableView registerClass:[APHHeartAgeVersusCell class] forCellReuseIdentifier:HeartAgeCell];
