@@ -53,6 +53,34 @@ static NSTimeInterval LOCATION_COLLECTION_INTERVAL = 5 * 60.0 * 60.0;
                 [self.studyStore removeStudy:self.study error:nil];
                 goto errReturn;
             }
+
+            //Collectors below added specifically for the cardio health application.
+            HKQuantityType *flightsClimbedQuantityType = (HKQuantityType*)[HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierFlightsClimbed];
+            RKHealthCollector *flightsClimbedHealthCollector = [self.study addHealthCollectorWithSampleType:flightsClimbedQuantityType unit:[HKUnit countUnit] startDate:nil error:&error];
+            if (!flightsClimbedHealthCollector)
+            {
+                NSLog(@"Error creating flights climbed health collector: %@", error);
+                [self.studyStore removeStudy:self.study error:nil];
+                goto errReturn;
+            }
+            
+            HKQuantityType *distanceWalkingRunningQuantityType = (HKQuantityType*)[HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierDistanceWalkingRunning];
+            RKHealthCollector *distanceWalkingRunningHealthCollector = [self.study addHealthCollectorWithSampleType:distanceWalkingRunningQuantityType unit:[HKUnit countUnit] startDate:nil error:&error];
+            if (!distanceWalkingRunningHealthCollector)
+            {
+                NSLog(@"Error creating flights climbed health collector: %@", error);
+                [self.studyStore removeStudy:self.study error:nil];
+                goto errReturn;
+            }
+
+            HKQuantityType *cyclingQuantityType = (HKQuantityType*)[HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierDistanceCycling];
+            RKHealthCollector *cyclingHealthCollector = [self.study addHealthCollectorWithSampleType:cyclingQuantityType unit:[HKUnit countUnit] startDate:nil error:&error];
+            if (!cyclingHealthCollector)
+            {
+                NSLog(@"Error creating flights climbed health collector: %@", error);
+                [self.studyStore removeStudy:self.study error:nil];
+                goto errReturn;
+            }
             
             //Set Up Passive Location Collection
             self.passiveLocationTracking = [[APCPassiveLocationTracking alloc] initWithTimeInterval:LOCATION_COLLECTION_INTERVAL];
