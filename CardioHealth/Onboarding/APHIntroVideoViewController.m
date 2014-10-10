@@ -20,6 +20,12 @@ static NSString *const kVideoShownKey = @"VideoShown";
     // Do any additional setup after loading the view.
 }
 
+-(void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.moviePlayer.scalingMode = MPMovieScalingModeAspectFill;
+}
+
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
