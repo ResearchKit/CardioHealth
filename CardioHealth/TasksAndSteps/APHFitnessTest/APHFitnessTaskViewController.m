@@ -48,6 +48,10 @@ static  NSString  *kFitnessTestStep105 = @"FitnessStep105";
 
 + (RKTask *)createTask:(APCScheduledTask *)scheduledTask
 {
+    APCAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    APCParameters *parameters = appDelegate.dataSubstrate.parameters;
+    
+    
     NSMutableArray *steps = [[NSMutableArray alloc] init];
 
     {
@@ -60,7 +64,7 @@ static  NSString  *kFitnessTestStep105 = @"FitnessStep105";
         //Walking 6 minutes
         RKActiveStep* step = [[RKActiveStep alloc] initWithIdentifier:kFitnessTestStep102 name:@"6 Minute Walk"];
         step.recorderConfigurations = @[[APHFitnessTestCustomRecorderConfiguration new]];
-        step.countDown = 10.0;
+        step.countDown = [[parameters numberForKey:@"FT6Min"] doubleValue];
         step.caption = NSLocalizedString(@"6 Minute Walk", @"");
         step.text = NSLocalizedString(@"Walk 6 minutes.", @"");
         [steps addObject:step];
@@ -70,7 +74,7 @@ static  NSString  *kFitnessTestStep105 = @"FitnessStep105";
         //Stop and sit in a comfortable position for 3 minutes
         RKActiveStep* step = [[RKActiveStep alloc] initWithIdentifier:kFitnessTestStep103 name:@"3 Minutes in a comfortable Position"];
         step.recorderConfigurations = @[[APHFitnessTestCustomRecorderConfiguration new]];
-        step.countDown = 10.0;
+        step.countDown = [[parameters numberForKey:@"FT3MinComfPos"] doubleValue];
         step.caption = NSLocalizedString(@"3 Minute Comfortable Position", @"");
         step.text = NSLocalizedString(@"3 minutes Comfortable Position", @"");
         [steps addObject:step];
@@ -80,7 +84,7 @@ static  NSString  *kFitnessTestStep105 = @"FitnessStep105";
         //Rest for 3 minutes
         RKActiveStep* step = [[RKActiveStep alloc] initWithIdentifier:kFitnessTestStep104 name:@"3 Minutes in a resting Position"];
         step.recorderConfigurations = @[[APHFitnessTestCustomRecorderConfiguration new]];
-        step.countDown = 10.0;
+        step.countDown = [[parameters numberForKey:@"FT3MinRest"] doubleValue];
         step.caption = NSLocalizedString(@"3 Minute Rest", @"");
         step.text = NSLocalizedString(@"Now rest 3 minutes.", @"");
         [steps addObject:step];
