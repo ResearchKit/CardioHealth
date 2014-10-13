@@ -125,8 +125,8 @@ static  NSString  *kFitnessTestStep105 = @"FitnessStep105";
 /*********************************************************************************/
 - (void)receiveHeartBPMNotification:(NSNotification *)notification {
     NSMutableDictionary *heartBeatInfo = [notification.userInfo mutableCopy];
-    NSTimeInterval numberOfSeconds = [[NSDate date] timeIntervalSinceDate:self.timer.fireDate];
-    heartBeatInfo[@"timer"] = [[NSNumber alloc] initWithDouble:numberOfSeconds];
+//    NSTimeInterval numberOfSeconds = [[NSDate date] timeIntervalSinceDate:self.timer.fireDate];
+//    heartBeatInfo[@"timer"] = [[NSNumber alloc] initWithDouble:numberOfSeconds];
     
     //NSLog(@"Recorder Heart Beat Info %@", heartBeatInfo);
     
@@ -135,8 +135,8 @@ static  NSString  *kFitnessTestStep105 = @"FitnessStep105";
 
 - (void)receiveStepCountNotification:(NSNotification *)notification {
     NSMutableDictionary *stepCountInfo = [notification.userInfo mutableCopy];
-    NSTimeInterval numberOfSeconds = [[NSDate date] timeIntervalSinceDate:self.timer.fireDate];
-    stepCountInfo[@"timer"] = [[NSNumber alloc] initWithDouble:numberOfSeconds];
+//    NSTimeInterval numberOfSeconds = [[NSDate date] timeIntervalSinceDate:self.timer.fireDate];
+//    stepCountInfo[@"timer"] = [[NSNumber alloc] initWithDouble:numberOfSeconds];
     
     //NSLog(@"Custom View Step Count Info %@", stepCountInfo);
     
@@ -145,8 +145,8 @@ static  NSString  *kFitnessTestStep105 = @"FitnessStep105";
 
 - (void)receiveUpdatedLocationNotification:(NSNotification *)notification {
     NSMutableDictionary *distanceUpdatedInfo = [notification.userInfo mutableCopy];
-    NSTimeInterval numberOfSeconds = [[NSDate date] timeIntervalSinceDate:self.timer.fireDate];
-    distanceUpdatedInfo[@"timer"] = [[NSNumber alloc] initWithDouble:numberOfSeconds];
+//    NSTimeInterval numberOfSeconds = [[NSDate date] timeIntervalSinceDate:self.timer.fireDate];
+//    distanceUpdatedInfo[@"timer"] = [[NSNumber alloc] initWithDouble:numberOfSeconds];
     
     CLLocationDistance distance = [[distanceUpdatedInfo objectForKey:@"distance"] doubleValue];
     self.totalDistance += distance;
