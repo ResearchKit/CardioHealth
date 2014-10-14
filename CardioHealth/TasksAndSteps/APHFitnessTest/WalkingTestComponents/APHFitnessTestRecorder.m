@@ -202,7 +202,7 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
                 }
                 return NO;
             }
-            
+
             result.filename = self.fileName;
             [localDelegate recorder:self didCompleteWithResult:result];
             self.dictionaryRecord = nil;
@@ -229,7 +229,20 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
 }
 
 - (NSString*)fileName{
-    return @"fitnessTest.json";
+
+    NSString *filesName;
+    
+    if (self.step.identifier == kFitnessTestStep103) {
+     
+        filesName = @"6MinuteFitnessTest";
+    } else if (self.step.identifier == kFitnessTestStep104) {
+        
+        filesName = @"3MinuteComfortablePosition";
+    } else if (self.step.identifier == kFitnessTestStep105) {
+        
+        filesName = @"3MinuteRest";
+    }
+    return filesName;
 }
 
 @end
