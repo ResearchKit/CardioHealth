@@ -19,6 +19,7 @@ static  NSString  *kFitnessTestStep102 = @"FitnessStep102";
 static  NSString  *kFitnessTestStep103 = @"FitnessStep103";
 static  NSString  *kFitnessTestStep104 = @"FitnessStep104";
 static  NSString  *kFitnessTestStep105 = @"FitnessStep105";
+static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
 
 @interface APHFitnessTestRecorder ()
 @property (nonatomic, strong) UIView* containerView;
@@ -26,7 +27,7 @@ static  NSString  *kFitnessTestStep105 = @"FitnessStep105";
 @property (nonatomic, strong) NSMutableArray* distanceRecords;
 @property (nonatomic, strong) NSMutableArray* heartRateRecords;
 @property (nonatomic, strong) NSMutableArray* stepCountRecords;
-@property (nonatomic, strong) NSTimer* timer;
+//@property (nonatomic, strong) NSTimer* timer;
 
 @property (assign) CLLocationDistance totalDistance;
 @end
@@ -47,14 +48,14 @@ static  NSString  *kFitnessTestStep105 = @"FitnessStep105";
 #pragma mark - Delegate methods
 /*********************************************************************************/
 
+
 - (void)viewController:(UIViewController*)viewController willStartStepWithView:(UIView*)view{
     [super viewController:viewController willStartStepWithView:view];
     
-    
     self.containerView = view;
-    
+   
     //If the step collects distance
-    if (self.step.identifier == kFitnessTestStep102) {
+    if (self.step.identifier == kFitnessTestStep103) {
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(receiveUpdatedLocationNotification:)
                                                      name:@"APHFitnessDistanceUpdated"
@@ -75,7 +76,7 @@ static  NSString  *kFitnessTestStep105 = @"FitnessStep105";
         [updatedView addConstraints:verticalConstraints];
         
         [(RKActiveStepViewController *)viewController setCustomView:updatedView];
-
+        
     } else {
 
         UINib *nib = [UINib nibWithNibName:@"APHFitnessTestRestComfortablyView" bundle:nil];
@@ -93,6 +94,7 @@ static  NSString  *kFitnessTestStep105 = @"FitnessStep105";
         [updatedView addConstraints:verticalConstraints];
         
         [(RKActiveStepViewController *)viewController setCustomView:updatedView];
+    
     }
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -110,14 +112,16 @@ static  NSString  *kFitnessTestStep105 = @"FitnessStep105";
     self.distanceRecords = [NSMutableArray array];
     self.heartRateRecords = [NSMutableArray array];
     self.stepCountRecords = [NSMutableArray array];
+
+}
+
+/*********************************************************************************/
+#pragma mark - Private methods
+/*********************************************************************************/
+
+- (void)timerFired:(id)sender {
     
-    //TODO Apple was thinking about using code like this to delay the beginning of the countdown. I'm keeping this around to remind myself to ask Ed about this functionality. This timer is unrelated to the one that is running by ResearchKit. However, I can use the values to add to records.
-//    double delayInSeconds = 5.0;
-//    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-//    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-//        self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerFired:) userInfo:nil repeats:YES];
-//    });
-    
+//    self.timer;
 }
 
 /*********************************************************************************/
@@ -174,7 +178,7 @@ static  NSString  *kFitnessTestStep105 = @"FitnessStep105";
     BOOL didStop = [super stop:error];
     
     //If the step collects distance
-    if (self.step.identifier == kFitnessTestStep102) {
+    if (self.step.identifier == kFitnessTestStep103) {
         self.dictionaryRecord[@"distance"] = self.distanceRecords;
     }
     
@@ -205,9 +209,10 @@ static  NSString  *kFitnessTestStep105 = @"FitnessStep105";
         }
     }else{
         if (error) {
-            *error = [NSError errorWithDomain:RKErrorDomain
-                                         code:RKErrorObjectNotFound
-                                     userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(@"Records object is nil.", nil)}];
+            //TODO uncomment this because it should work.
+//            *error = [NSError errorWithDomain:RKErrorDomain
+//                                         code:RKErrorObjectNotFound
+//                                     userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(@"Records object is nil.", nil)}];
         }
         didStop = NO;
     }
