@@ -109,9 +109,8 @@ static NSString *kHeartAgeSummary = @"HeartAgeSummary";
     {
         RKNumericAnswerFormat *format = [RKNumericAnswerFormat integerAnswerWithUnit:nil];
         format.minimum = @(0);
-        
-        RKQuestionStep* step = [RKQuestionStep questionStepWithIdentifier:kHeartAgekHeartAgeTestDataSystolicBP
-                                                                     name:@"SystolicBP"
+        RKQuestionStep* step = [RKQuestionStep questionStepWithIdentifier:kHeartAgekHeartAgeTestDataSystolicBloodPressure
+                                                                     name:@"SystolicBloodPressure"
                                                                  question:NSLocalizedString(@"What is your Systolic Blood Pressure?", @"What is your Systolic Blood Pressure?")
                                                                    answer:format];
         step.optional = NO;
