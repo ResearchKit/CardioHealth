@@ -12,7 +12,7 @@
 static NSString *kHeartAgeTestDataAge = @"heart-age-data-age";
 static NSString *kHeartAgekHeartAgeTestDataTotalCholesterol = @"heart-age-data-total-cholesterol";
 static NSString *kHeartAgekHeartAgeTestDataHDL = @"heart-age-data-hdl";
-static NSString *kHeartAgekHeartAgeTestDataSystolicBP = @"heart-age-data-systolicBP";
+static NSString *kHeartAgekHeartAgeTestDataSystolicBP = @"heart-age-data-systolic-blood-pressure";
 static NSString *kHeartAgekHeartAgeTestDataSmoke = @"heart-age-data-smoke";
 static NSString *kHeartAgekHeartAgeTestDataDiabetes = @"heart-age-data-diabetes";
 static NSString *kHeartAgekHeartAgeTestDataFamilyDiabetes = @"heart-age-data-family-diabetes";
