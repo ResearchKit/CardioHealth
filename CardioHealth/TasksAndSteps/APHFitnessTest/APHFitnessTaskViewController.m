@@ -300,8 +300,14 @@ willPresentStepViewController:(RKStepViewController *)stepViewController{
     [results enumerateObjectsUsingBlock:^(APCDataResult * result, NSUInteger idx, BOOL *stop) {
         dictionary[result.rkItemIdentifier] = [NSJSONSerialization JSONObjectWithData:result.data options:0 error:NULL];
     }];
-    NSLog(@"Dictionary: %@", dictionary);
-    result.data = [NSJSONSerialization dataWithJSONObject:dictionary options:(NSJSONWritingOptions)0 error:NULL];
+
+    
+    NSMutableDictionary *wrapperDictionary = [NSMutableDictionary dictionary];
+    wrapperDictionary[@"fitnessTest"] = dictionary;
+    
+    NSLog(@"Dictionary: %@", wrapperDictionary);
+    
+    result.data = [NSJSONSerialization dataWithJSONObject:wrapperDictionary options:(NSJSONWritingOptions)0 error:NULL];
     [result addToArchive:self.taskArchive error:NULL];
     
     NSError *err = nil;
