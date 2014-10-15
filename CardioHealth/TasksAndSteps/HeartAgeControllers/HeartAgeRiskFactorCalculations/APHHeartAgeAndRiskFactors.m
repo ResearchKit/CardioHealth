@@ -138,8 +138,8 @@ static NSString *kLifetimeRiskFactorMajorGreaterThanEqualToTwo = @"risk-factor-m
     double logActualAge = log(actualAge);
     double logTotalCholesterol = log([results[kHeartAgekHeartAgeTestDataTotalCholesterol] doubleValue]);
     double logHDLC = log([results[kHeartAgekHeartAgeTestDataHDL] doubleValue]);
-    double logTreatedSystolic = log([results[kHeartAgekHeartAgeTestDataSystolicBP] doubleValue]) * [results[kHeartAgekHeartAgeTestDataHypertension] integerValue];
-    double logUnTreatedSystolic = log([results[kHeartAgekHeartAgeTestDataSystolicBP] doubleValue]) * (1 - [results[kHeartAgekHeartAgeTestDataHypertension] integerValue]);
+    double logTreatedSystolic = log([results[kHeartAgekHeartAgeTestDataSystolicBloodPressure] doubleValue]) * [results[kHeartAgekHeartAgeTestDataHypertension] integerValue];
+    double logUnTreatedSystolic = log([results[kHeartAgekHeartAgeTestDataSystolicBloodPressure] doubleValue]) * (1 - [results[kHeartAgekHeartAgeTestDataHypertension] integerValue]);
     
     double individualSum = 0;
     
@@ -319,7 +319,7 @@ static NSString *kLifetimeRiskFactorMajorGreaterThanEqualToTwo = @"risk-factor-m
 {
     NSString *gender = results[kHeartAgekHeartAgeTestDataGender];
     NSUInteger totalCholesterol = [results[kHeartAgekHeartAgeTestDataTotalCholesterol] integerValue];
-    NSUInteger systolicBP = [results[kHeartAgekHeartAgeTestDataSystolicBP] integerValue];
+    NSUInteger systolicBP = [results[kHeartAgekHeartAgeTestDataSystolicBloodPressure] integerValue];
     NSUInteger hypertension = [results[kHeartAgekHeartAgeTestDataHypertension] integerValue];
     NSUInteger diabetes = [results[kHeartAgekHeartAgeTestDataDiabetes] integerValue];
     NSUInteger smoker = [results[kHeartAgekHeartAgeTestDataSmoke] integerValue];
