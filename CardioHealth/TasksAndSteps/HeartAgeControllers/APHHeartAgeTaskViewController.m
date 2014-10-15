@@ -9,7 +9,7 @@
 #import "APHHeartAgeSummaryViewController.h"
 #import "APHHeartAgeAndRiskFactors.h"
 
-static NSString *MainStudyIdentifier = @"com.ymedialabs.heartAgeTest";
+static NSString *MainStudyIdentifier = @"com.cardiovascular.heartAgeTest";
 
 // Introduction Step Key
 static NSString *kHeartAgeIntroduction = @"HeartAgeIntroduction";
@@ -22,6 +22,7 @@ static NSString *kHeartAgeSummary = @"HeartAgeSummary";
 @property (nonatomic, strong) NSDictionary *heartAgeParametersLookup;
 
 @property (strong, nonatomic) RKDataArchive *taskArchive;
+@property (strong, nonatomic) NSDictionary *heartAgeInfo;
 
 @end
 
@@ -263,9 +264,19 @@ static NSString *kHeartAgeSummary = @"HeartAgeSummary";
 /*********************************************************************************/
 #pragma  mark  - TaskViewController delegates
 /*********************************************************************************/
-- (void)taskViewController:(RKTaskViewController *)taskViewController didProduceResult:(RKResult *)result {
+- (void)taskViewController:(RKTaskViewController *)taskViewController didProduceResult:(RKSurveyResult *)result {
     
     NSLog(@"didProduceResult = %@", result);
+    NSMutableArray *surveyStuff = [result.surveyResults mutableCopy];
+    
+    RKQuestionResult *questionResult = [[RKQuestionResult alloc] initWithStep:[[RKStep alloc] initWithIdentifier:kHeartAgeSummary name:kHeartAgeSummary]];
+    questionResult.answer = self.heartAgeInfo;
+    
+    //TODO question type is not appropriate.
+    questionResult.questionType = RKSurveyQuestionTypeSingleChoice;
+    [surveyStuff addObject:questionResult];
+    
+    result.surveyResults = surveyStuff;
     
     if ([result isKindOfClass:[RKSurveyResult class]]) {
         RKSurveyResult* sresult = (RKSurveyResult*)result;
@@ -349,7 +360,7 @@ static NSString *kHeartAgeSummary = @"HeartAgeSummary";
         
         // Kickoff heart age calculations
         APHHeartAgeAndRiskFactors *heartAgeAndRiskFactors = [[APHHeartAgeAndRiskFactors alloc] init];
-        NSDictionary *heartAgeInfo = [heartAgeAndRiskFactors calculateHeartAgeAndRiskFactors:surveyResultsDictionary];
+        self.heartAgeInfo = [heartAgeAndRiskFactors calculateHeartAgeAndRiskFactors:surveyResultsDictionary];
         
         UIStoryboard *sbHeartAgeSummary = [UIStoryboard storyboardWithName:@"HeartAgeSummary" bundle:nil];
         APHHeartAgeSummaryViewController *heartAgeResultsVC = [sbHeartAgeSummary instantiateInitialViewController];
@@ -359,9 +370,9 @@ static NSString *kHeartAgeSummary = @"HeartAgeSummary";
         heartAgeResultsVC.step = step;
         heartAgeResultsVC.taskProgress = 0.25;
         heartAgeResultsVC.actualAge = [surveyResultsDictionary[kHeartAgeTestDataAge] integerValue];
-        heartAgeResultsVC.heartAge = [heartAgeInfo[@"age"] integerValue];
-        heartAgeResultsVC.tenYearRisk = heartAgeInfo[@"tenYearRisk"];
-        heartAgeResultsVC.lifetimeRisk = heartAgeInfo[@"lifetimeRisk"];
+        heartAgeResultsVC.heartAge = [self.heartAgeInfo[@"age"] integerValue];
+        heartAgeResultsVC.tenYearRisk = self.heartAgeInfo[@"tenYearRisk"];
+        heartAgeResultsVC.lifetimeRisk = self.heartAgeInfo[@"lifetimeRisk"];
         heartAgeResultsVC.someImprovement = @"Some suggestions to improve your heart age.";
         
         stepVC = heartAgeResultsVC;
@@ -377,28 +388,9 @@ static NSString *kHeartAgeSummary = @"HeartAgeSummary";
 
 - (void)stepViewControllerWillBePresented:(RKStepViewController *)viewController
 {
-    NSLog(@"Step: %@ (%@)", viewController.step.name, viewController.step.identifier);
     
     viewController.skipButton = nil;
     
-    APCAppDelegate *apcAppDelegate = [[UIApplication sharedApplication] delegate];
-    
-    if ([viewController.step.identifier isEqualToString:kHeartAgeTestDataAge]) {
-        // Check if we have the date of birth available via HealthKit
-        if (apcAppDelegate.dataSubstrate.currentUser.consented) {
-            NSDate *dateOfBirth = apcAppDelegate.dataSubstrate.currentUser.birthDate;
-            
-            // Compute the age of the user.
-            NSDateComponents *ageComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitYear
-                                                                              fromDate:dateOfBirth
-                                                                                toDate:[NSDate date] // today
-                                                                               options:NSCalendarWrapComponents];
-            
-            NSUInteger usersAge = [ageComponents year];
-            
-            NSLog(@"Your Age: %lu", usersAge);
-        }
-    }
 }
 
 - (void)stepViewControllerDidFinish:(RKStepViewController *)stepViewController navigationDirection:(RKStepViewControllerNavigationDirection)direction
