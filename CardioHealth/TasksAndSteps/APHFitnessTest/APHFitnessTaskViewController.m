@@ -170,6 +170,17 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
 }
 
 /*********************************************************************************/
+#pragma mark - StepViewController Delegate Methods
+/*********************************************************************************/
+
+- (void)stepViewControllerDidFinish:(RKStepViewController *)stepViewController navigationDirection:(RKStepViewControllerNavigationDirection)direction
+{
+    [super stepViewControllerDidFinish:stepViewController navigationDirection:direction];
+    
+    NSLog(@"Finished Step: %@", stepViewController.step.identifier);
+}
+
+/*********************************************************************************/
 #pragma  mark  - TaskViewController delegates
 /*********************************************************************************/
 - (void)taskViewController:(RKTaskViewController *)taskViewController
@@ -241,8 +252,10 @@ willPresentStepViewController:(RKStepViewController *)stepViewController{
 }
 
 - (void)taskViewController:(RKTaskViewController *)taskViewController didProduceResult:(RKDataResult *)result {
+
     NSLog(@"didProduceResult = %@", result.data);
     
+
     if ([result isKindOfClass:[RKSurveyResult class]]) {
         RKSurveyResult* sresult = (RKSurveyResult*)result;
         
@@ -250,9 +263,10 @@ willPresentStepViewController:(RKStepViewController *)stepViewController{
             NSLog(@"%@ = [%@] %@ ", [[qr itemIdentifier] stringValue], [qr.answer class], qr.answer);
         }
     }
-    
-    
+
     [self sendResult:result];
+
+    [super taskViewController:taskViewController didProduceResult:result];
 }
 
 - (void)taskViewControllerDidFail: (RKTaskViewController *)taskViewController withError:(NSError*)error{
@@ -296,16 +310,27 @@ willPresentStepViewController:(RKStepViewController *)stepViewController{
             [[NSFileManager defaultManager] removeItemAtURL:archiveFileURL error:nil];
         }
     }
-    
-    
-    
+
     [self dismissViewControllerAnimated:YES completion:nil];
     
+    [super taskViewControllerDidComplete:taskViewController];
 }
 
 /*********************************************************************************/
 #pragma mark - Helpers
 /*********************************************************************************/
+
+-(void)sendCompleteResult:(RKDataResult*)result
+{
+    // In a real application, consider adding to the archive on a concurrent queue.
+    NSError *err = nil;
+    if (![result addToArchive:self.taskArchive error:&err])
+    {
+        // Error adding the result to the archive; archive may be invalid. Tell
+        // the user there's been a problem and stop the task.
+        NSLog(@"Error adding %@ to archive: %@", result, err);
+    }
+}
 
 -(void)sendResult:(RKDataResult*)result
 {
@@ -318,23 +343,6 @@ willPresentStepViewController:(RKStepViewController *)stepViewController{
         NSLog(@"Error adding %@ to archive: %@", result, err);
     }
 }
-
-/*********************************************************************************/
-#pragma  mark  -  Navigation Bar Button Action Methods
-/*********************************************************************************/
-
-//- (void)cancelButtonTapped:(id)sender
-//{
-//    
-//    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-//}
-
-- (void)doneButtonTapped:(id)sender
-{
-    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-}
-
-
 
 /*********************************************************************************/
 #pragma mark - APHFitnessTestHealthKitSampleTypeTrackerDelegate delegate methods

@@ -47,8 +47,6 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
 /*********************************************************************************/
 #pragma mark - Delegate methods
 /*********************************************************************************/
-
-
 - (void)viewController:(UIViewController*)viewController willStartStepWithView:(UIView*)view{
     [super viewController:viewController willStartStepWithView:view];
     

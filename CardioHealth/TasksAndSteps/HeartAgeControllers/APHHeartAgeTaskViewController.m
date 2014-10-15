@@ -263,75 +263,8 @@ static NSString *kHeartAgeSummary = @"HeartAgeSummary";
 /*********************************************************************************/
 #pragma  mark  - TaskViewController delegates
 /*********************************************************************************/
-- (void)taskViewController:(RKTaskViewController *)taskViewController
-willPresentStepViewController:(RKStepViewController *)stepViewController{
-    
-    //    if ([stepViewController.step.identifier isEqualToString:kFitnessTestStep101]) {
-    //        UIView* customView = [UIView new];
-    //        customView.backgroundColor = [UIColor cyanColor];
-    //
-    //        // Have the custom view request the space it needs.
-    //        // A little tricky because we need to let it size to fit if there's not enough space.
-    //        [customView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    //        NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[c(>=160)]" options:0 metrics:nil views:@{@"c":customView}];
-    //        for (NSLayoutConstraint *constraint in verticalConstraints)
-    //        {
-    //            constraint.priority = UILayoutPriorityFittingSizeLevel;
-    //        }
-    //        [customView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[c(>=280)]" options:0 metrics:nil views:@{@"c":customView}]];
-    //        [customView addConstraints:verticalConstraints];
-    //
-    //        [(RKActiveStepViewController*)stepViewController setCustomView:customView];
-    //
-    //        // Set custom button on navi bar
-    //        stepViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Custom button"
-    //                                                                                               style:UIBarButtonItemStylePlain
-    //                                                                                              target:nil
-    //                                                                                              action:nil];
-    //
-    //
-    //
-    //        stepViewController.learnMoreButton =[[UIBarButtonItem alloc] initWithTitle:@"View Important Details" style:stepViewController.continueButton.style target:self action:@selector(importantDetails:)];
-    //
-    //
-    //
-    //
-    //
-    //        stepViewController.continueButton = [[UIBarButtonItem alloc] initWithTitle:@"Get Started" style:stepViewController.continueButton.style target:stepViewController.continueButton.target action:stepViewController.continueButton.action];
-    //
-    //        //        [stepViewController.continueButton.tintColor = UIColor colorWithRed:0.83 green:0.43 blue:0.57 alpha:1];
-    //
-    //
-    //        stepViewController.skipButton = nil;
-    //
-    //    }else if ([stepViewController.step.identifier isEqualToString:kFitnessTestStep102]) {
-    //
-    //        stepViewController.continueButton = nil;
-    //        stepViewController.skipButton = nil;
-    //
-    //    }else if ([stepViewController.step.identifier isEqualToString:kFitnessTestStep103]) {
-    //
-    //        stepViewController.continueButton = nil;
-    //        stepViewController.skipButton = nil;
-    //
-    //    }else if ([stepViewController.step.identifier isEqualToString:kFitnessTestStep104]) {
-    //
-    //        stepViewController.continueButton = nil;
-    //        stepViewController.skipButton = nil;
-    //
-    //    }else if ([stepViewController.step.identifier isEqualToString:kFitnessTestStep105]) {
-    //
-    //        stepViewController.continueButton = nil;
-    //        stepViewController.skipButton = nil;
-    //
-    //    }else if ([stepViewController.step.identifier isEqualToString:kFitnessTestStep106]) {
-    //
-    //        stepViewController.continueButton = [[UIBarButtonItem alloc] initWithTitle:@"Well done!" style:stepViewController.continueButton.style target:stepViewController.continueButton.target action:stepViewController.continueButton.action];
-    //
-    //    }
-}
-
 - (void)taskViewController:(RKTaskViewController *)taskViewController didProduceResult:(RKResult *)result {
+    
     NSLog(@"didProduceResult = %@", result);
     
     if ([result isKindOfClass:[RKSurveyResult class]]) {
@@ -342,8 +275,9 @@ willPresentStepViewController:(RKStepViewController *)stepViewController{
         }
     }
     
-    
     [self sendResult:result];
+    
+    [super taskViewController:taskViewController didProduceResult:result];
 }
 
 - (void)taskViewControllerDidFail: (RKTaskViewController *)taskViewController withError:(NSError*)error{
@@ -388,9 +322,9 @@ willPresentStepViewController:(RKStepViewController *)stepViewController{
         }
     }
     
-    
-    
     [self dismissViewControllerAnimated:YES completion:nil];
+    
+    [super taskViewControllerDidComplete:taskViewController];
     
 }
 
