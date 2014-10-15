@@ -190,6 +190,7 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
         id<RKRecorderDelegate> localDelegate = self.delegate;
         if (localDelegate && [localDelegate respondsToSelector:@selector(recorder:didCompleteWithResult:)]) {
             RKDataResult* result = [[RKDataResult alloc] initWithStep:self.step];
+            result.taskInstanceUUID = self.taskInstanceUUID;
             result.contentType = [self mimeType];
             NSError* err;
             result.data = [NSJSONSerialization dataWithJSONObject:self.dictionaryRecord options:(NSJSONWritingOptions)0 error:&err];

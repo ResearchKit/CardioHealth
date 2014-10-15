@@ -264,8 +264,6 @@ willPresentStepViewController:(RKStepViewController *)stepViewController{
         }
     }
 
-    [self sendResult:result];
-
     [super taskViewController:taskViewController didProduceResult:result];
 }
 
@@ -286,9 +284,25 @@ willPresentStepViewController:(RKStepViewController *)stepViewController{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)taskViewControllerDidComplete: (RKTaskViewController *)taskViewController{
+- (void)taskViewControllerDidComplete: (RKTaskViewController *)taskViewController
+{
+    NSFetchRequest * request = [APCResult request];
+    request.predicate = [NSPredicate predicateWithFormat:@"scheduledTask == %@ AND rkTaskInstanceUUID == %@", self.scheduledTask, self.taskInstanceUUID.UUIDString];
+
+    APCAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    NSArray * results = [appDelegate.dataSubstrate.mainContext executeFetchRequest:request error:NULL];
     
-    [taskViewController suspend];
+    RKStep * dummyStep = [[RKStep alloc] initWithIdentifier:@"Dummy" name:@"name"];
+    RKDataResult * result = [[RKDataResult alloc] initWithStep:dummyStep];
+    result.filename = @"FitnessTestResult.json";
+    result.contentType = @"application/json";
+    NSMutableDictionary * dictionary = [NSMutableDictionary dictionary];
+    [results enumerateObjectsUsingBlock:^(APCDataResult * result, NSUInteger idx, BOOL *stop) {
+        dictionary[result.rkItemIdentifier] = [NSJSONSerialization JSONObjectWithData:result.data options:0 error:NULL];
+    }];
+    NSLog(@"Dictionary: %@", dictionary);
+    result.data = [NSJSONSerialization dataWithJSONObject:dictionary options:(NSJSONWritingOptions)0 error:NULL];
+    [result addToArchive:self.taskArchive error:NULL];
     
     NSError *err = nil;
     NSURL *archiveFileURL = [self.taskArchive archiveURLWithError:&err];
@@ -310,8 +324,6 @@ willPresentStepViewController:(RKStepViewController *)stepViewController{
             [[NSFileManager defaultManager] removeItemAtURL:archiveFileURL error:nil];
         }
     }
-
-    [self dismissViewControllerAnimated:YES completion:nil];
     
     [super taskViewControllerDidComplete:taskViewController];
 }
