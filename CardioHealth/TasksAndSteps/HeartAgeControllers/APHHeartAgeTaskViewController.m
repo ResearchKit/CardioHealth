@@ -263,32 +263,6 @@ static NSString *kHeartAgeSummary = @"HeartAgeSummary";
 /*********************************************************************************/
 #pragma  mark  - TaskViewController delegates
 /*********************************************************************************/
-- (void)taskViewController:(RKTaskViewController *)taskViewController didProduceResult:(RKSurveyResult *)result {
-    
-    NSLog(@"didProduceResult = %@", result);
-    NSMutableArray *surveyStuff = [result.surveyResults mutableCopy];
-    
-    RKQuestionResult *questionResult = [[RKQuestionResult alloc] initWithStep:[[RKStep alloc] initWithIdentifier:kHeartAgeSummary name:kHeartAgeSummary]];
-    questionResult.answer = self.heartAgeInfo;
-    
-    //TODO question type is not appropriate.
-    questionResult.questionType = RKSurveyQuestionTypeSingleChoice;
-    [surveyStuff addObject:questionResult];
-    
-    result.surveyResults = surveyStuff;
-    
-    if ([result isKindOfClass:[RKSurveyResult class]]) {
-        RKSurveyResult* sresult = (RKSurveyResult*)result;
-        
-        for (RKQuestionResult* qr in sresult.surveyResults) {
-            NSLog(@"%@ = [%@] %@ ", [[qr itemIdentifier] stringValue], [qr.answer class], qr.answer);
-        }
-    }
-    
-    [self sendResult:result];
-    
-    [super taskViewController:taskViewController didProduceResult:result];
-}
 
 - (void)stepViewControllerDidFinish:(RKStepViewController *)stepViewController navigationDirection:(RKStepViewControllerNavigationDirection)direction
 {
@@ -421,6 +395,17 @@ static NSString *kHeartAgeSummary = @"HeartAgeSummary";
     
     result.surveyResults = surveyQuestions;
     
+    
+    if ([result isKindOfClass:[RKSurveyResult class]]) {
+        RKSurveyResult* sresult = (RKSurveyResult*)result;
+        
+        for (RKQuestionResult* qr in sresult.surveyResults) {
+            NSLog(@"%@ = [%@] %@ ", [[qr itemIdentifier] stringValue], [qr.answer class], qr.answer);
+        }
+    }
+    
+    [self sendResult:result];
+
     [super taskViewController:taskViewController didProduceResult:result];
 }
 
