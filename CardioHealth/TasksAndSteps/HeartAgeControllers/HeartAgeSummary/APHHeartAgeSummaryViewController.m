@@ -63,7 +63,6 @@ typedef NS_ENUM(NSUInteger, APHHeartAgeAndRiskFactorRows)
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Actions
