@@ -81,6 +81,7 @@ static NSString *kHeartAgeSummary = @"HeartAgeSummary";
     {
         RKNumericAnswerFormat *format = [RKNumericAnswerFormat integerAnswerWithUnit:nil];
         format.minimum = @(0);
+        format.maximum = @(240);
 
         RKQuestionStep *step = [RKQuestionStep questionStepWithIdentifier:kHeartAgekHeartAgeTestDataTotalCholesterol
                                                                      name:@"TotalCholesterol"
@@ -93,7 +94,7 @@ static NSString *kHeartAgeSummary = @"HeartAgeSummary";
 
     {
         RKNumericAnswerFormat *format = [RKNumericAnswerFormat integerAnswerWithUnit:nil];
-        format.minimum = @(0);
+        format.minimum = @(40);
 
         RKQuestionStep* step = [RKQuestionStep questionStepWithIdentifier:kHeartAgekHeartAgeTestDataHDL
                                                                      name:@"HDLCholesterol"
@@ -107,6 +108,7 @@ static NSString *kHeartAgeSummary = @"HeartAgeSummary";
     {
         RKNumericAnswerFormat *format = [RKNumericAnswerFormat integerAnswerWithUnit:nil];
         format.minimum = @(0);
+        format.maximum = @(180);
         RKQuestionStep* step = [RKQuestionStep questionStepWithIdentifier:kHeartAgekHeartAgeTestDataSystolicBloodPressure
                                                                      name:@"SystolicBloodPressure"
                                                                  question:NSLocalizedString(@"What is your Systolic Blood Pressure?", @"What is your Systolic Blood Pressure?")
