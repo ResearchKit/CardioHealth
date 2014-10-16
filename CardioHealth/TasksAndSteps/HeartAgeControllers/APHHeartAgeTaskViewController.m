@@ -249,7 +249,7 @@ static NSString *kHeartAgeSummary = @"HeartAgeSummary";
         
         // Kickoff heart age calculations
         APHHeartAgeAndRiskFactors *heartAgeAndRiskFactors = [[APHHeartAgeAndRiskFactors alloc] init];
-        NSDictionary *heartAgeInfo = [heartAgeAndRiskFactors calculateHeartAgeAndRiskFactors:surveyResultsDictionary];
+        self.heartAgeInfo = [heartAgeAndRiskFactors calculateHeartAgeAndRiskFactors:surveyResultsDictionary];
         
         UIStoryboard *sbHeartAgeSummary = [UIStoryboard storyboardWithName:@"HeartAgeSummary" bundle:nil];
         APHHeartAgeSummaryViewController *heartAgeResultsVC = [sbHeartAgeSummary instantiateInitialViewController];
