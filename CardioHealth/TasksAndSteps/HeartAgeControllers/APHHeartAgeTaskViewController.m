@@ -261,32 +261,6 @@ static NSString *kHeartAgeSummary = @"HeartAgeSummary";
 /*********************************************************************************/
 #pragma  mark  - TaskViewController delegates
 /*********************************************************************************/
-- (void)taskViewController:(RKTaskViewController *)taskViewController didProduceResult:(RKSurveyResult *)result {
-    
-    NSLog(@"didProduceResult = %@", result);
-    NSMutableArray *surveyStuff = [result.surveyResults mutableCopy];
-    
-    RKQuestionResult *questionResult = [[RKQuestionResult alloc] initWithStep:[[RKStep alloc] initWithIdentifier:kHeartAgeSummary name:kHeartAgeSummary]];
-    questionResult.answer = self.heartAgeInfo;
-    
-    //TODO question type is not appropriate.
-    questionResult.questionType = RKSurveyQuestionTypeSingleChoice;
-    [surveyStuff addObject:questionResult];
-    
-    result.surveyResults = surveyStuff;
-    
-    if ([result isKindOfClass:[RKSurveyResult class]]) {
-        RKSurveyResult* sresult = (RKSurveyResult*)result;
-        
-        for (RKQuestionResult* qr in sresult.surveyResults) {
-            NSLog(@"%@ = [%@] %@ ", [[qr itemIdentifier] stringValue], [qr.answer class], qr.answer);
-        }
-    }
-    
-    [self sendResult:result];
-    
-    [super taskViewController:taskViewController didProduceResult:result];
-}
 
 - (void)taskViewControllerDidFail: (RKTaskViewController *)taskViewController withError:(NSError*)error{
     
@@ -389,12 +363,51 @@ static NSString *kHeartAgeSummary = @"HeartAgeSummary";
     
 }
 
-- (void)stepViewControllerDidFinish:(RKStepViewController *)stepViewController navigationDirection:(RKStepViewControllerNavigationDirection)direction
+
+- (void)taskViewController:(RKTaskViewController *)taskViewController didProduceResult:(RKSurveyResult *)result
 {
-    [super stepViewControllerDidFinish:stepViewController navigationDirection:direction];
+    // We need to create three question results that will hold the value of Heart Age,
+    // Ten Year Risk, and Lifetime Risk factors. Ideally we would like to simply
+    // amend the self.headerAgeInfo dictionary to the results, but an appropriate
+    // RKSurveyQuestionType is not available for adding dictionary to the result;
+    // thus we create separate question results for each of these data points.
     
-    NSLog(@"Finished Step: %@", stepViewController.step.identifier);
+    NSMutableArray *surveyQuestions = [result.surveyResults mutableCopy];
+    
+    RKQuestionResult *qrHeartAge = [[RKQuestionResult alloc] initWithStep:[[RKStep alloc] initWithIdentifier:kSummaryHeartAge
+                                                                                                        name:kSummaryHeartAge]];
+    qrHeartAge.questionType = RKSurveyQuestionTypeInteger;
+    qrHeartAge.answer = self.heartAgeInfo[kSummaryHeartAge];
+    
+    [surveyQuestions addObject:qrHeartAge];
+    
+    RKQuestionResult *qrTenYearRisk = [[RKQuestionResult alloc] initWithStep:[[RKStep alloc] initWithIdentifier:kSummaryTenYearRisk
+                                                                                                           name:kSummaryTenYearRisk]];
+    qrTenYearRisk.questionType = RKSurveyQuestionTypeDecimal;
+    qrTenYearRisk.answer = self.heartAgeInfo[kSummaryTenYearRisk];
+    
+    [surveyQuestions addObject:qrTenYearRisk];
+    
+    RKQuestionResult *qrLifetimeRisk = [[RKQuestionResult alloc] initWithStep:[[RKStep alloc] initWithIdentifier:kSummaryLifetimeRisk
+                                                                                                            name:kSummaryLifetimeRisk]];
+    qrLifetimeRisk.questionType = RKSurveyQuestionTypeDecimal;
+    qrLifetimeRisk.answer = self.heartAgeInfo[kSummaryLifetimeRisk];
+    
+    [surveyQuestions addObject:qrLifetimeRisk];
+    
+    result.surveyResults = surveyQuestions;
+    
+    
+    if ([result isKindOfClass:[RKSurveyResult class]]) {
+        RKSurveyResult* sresult = (RKSurveyResult*)result;
+        
+        for (RKQuestionResult* qr in sresult.surveyResults) {
+            NSLog(@"%@ = [%@] %@ ", [[qr itemIdentifier] stringValue], [qr.answer class], qr.answer);
+        }
+    }
+    
+    [self sendResult:result];
+
+    [super taskViewController:taskViewController didProduceResult:result];
 }
-
-
 @end
