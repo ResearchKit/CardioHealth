@@ -18,9 +18,7 @@ static NSString *kHeartAgeSummary = @"HeartAgeSummary";
 @interface APHHeartAgeTaskViewController ()
 
 @property (nonatomic, strong) NSDictionary *heartAgeInfo;
-
 @property (strong, nonatomic) RKDataArchive *taskArchive;
-@property (strong, nonatomic) NSDictionary *heartAgeInfo;
 
 @end
 
