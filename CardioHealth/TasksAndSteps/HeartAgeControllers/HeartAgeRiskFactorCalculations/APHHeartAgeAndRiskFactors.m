@@ -205,9 +205,9 @@ static NSString *kLifetimeRiskFactorMajorGreaterThanEqualToTwo = @"risk-factor-m
     
     
     return @{
-             @"age": [NSNumber numberWithDouble:heartAge],
-             @"tenYearRisk": [NSNumber numberWithDouble:individualEstimatedTenYearRisk],
-             @"lifetimeRisk": [NSNumber numberWithDouble:lifetimeRiskFactor]
+             kSummaryHeartAge: [NSNumber numberWithDouble:heartAge],
+             kSummaryTenYearRisk: [NSNumber numberWithDouble:individualEstimatedTenYearRisk],
+             kSummaryLifetimeRisk: [NSNumber numberWithDouble:lifetimeRiskFactor]
              };
 }
 
