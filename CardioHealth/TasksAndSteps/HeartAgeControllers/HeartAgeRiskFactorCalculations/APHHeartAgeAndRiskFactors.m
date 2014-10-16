@@ -33,6 +33,25 @@ static NSString *kLifetimeRiskFactorElevated = @"risk-factor-elevated";
 static NSString *kLifetimeRiskFactorMajor = @"risk-factor-major";
 static NSString *kLifetimeRiskFactorMajorGreaterThanEqualToTwo = @"risk-factor-major-2";
 
+// Keys for data that is collected in the survey
+NSString *const kHeartAgeTestDataAge = @"heartAgeDataAge";
+NSString *const kHeartAgekHeartAgeTestDataTotalCholesterol = @"heartAgeDataTotalCholesterol";
+NSString *const kHeartAgekHeartAgeTestDataHDL = @"heartAgeDataHdl";
+NSString *const kHeartAgekHeartAgeTestDataSystolicBloodPressure = @"heartAgeDataSystolicBloodPressure";
+NSString *const kHeartAgekHeartAgeTestDataSmoke = @"heartAgeDataSmoke";
+NSString *const kHeartAgekHeartAgeTestDataDiabetes = @"heartAgeDataDiabetes";
+NSString *const kHeartAgekHeartAgeTestDataFamilyDiabetes = @"heartAgeDataFamilyDiabetes";
+NSString *const kHeartAgekHeartAgeTestDataFamilyHeart = @"heartAgeDataFamilyHeart";
+NSString *const kHeartAgekHeartAgeTestDataEthnicity = @"heartAgeDataEthnicity";
+NSString *const kHeartAgekHeartAgeTestDataGender = @"heartAgeDataGender";
+NSString *const kHeartAgekHeartAgeTestDataCurrentlySmoke = @"heartAgeDataCurrentlySmoke";
+NSString *const kHeartAgekHeartAgeTestDataHypertension = @"heartAgeDataHypertension";
+
+// Summary data keys
+NSString *const kSummaryHeartAge = @"heartAge";
+NSString *const kSummaryTenYearRisk = @"tenYearRisk";
+NSString *const kSummaryLifetimeRisk = @"lifetimeRisk";
+
 @interface APHHeartAgeAndRiskFactors()
 
 @property (nonatomic, strong) NSDictionary *heartAgeParametersLookup;
@@ -138,8 +157,8 @@ static NSString *kLifetimeRiskFactorMajorGreaterThanEqualToTwo = @"risk-factor-m
     double logActualAge = log(actualAge);
     double logTotalCholesterol = log([results[kHeartAgekHeartAgeTestDataTotalCholesterol] doubleValue]);
     double logHDLC = log([results[kHeartAgekHeartAgeTestDataHDL] doubleValue]);
-    double logTreatedSystolic = log([results[kHeartAgekHeartAgeTestDataSystolicBP] doubleValue]) * [results[kHeartAgekHeartAgeTestDataHypertension] integerValue];
-    double logUnTreatedSystolic = log([results[kHeartAgekHeartAgeTestDataSystolicBP] doubleValue]) * (1 - [results[kHeartAgekHeartAgeTestDataHypertension] integerValue]);
+    double logTreatedSystolic = log([results[kHeartAgekHeartAgeTestDataSystolicBloodPressure] doubleValue]) * [results[kHeartAgekHeartAgeTestDataHypertension] integerValue];
+    double logUnTreatedSystolic = log([results[kHeartAgekHeartAgeTestDataSystolicBloodPressure] doubleValue]) * (1 - [results[kHeartAgekHeartAgeTestDataHypertension] integerValue]);
     
     double individualSum = 0;
     
@@ -205,9 +224,9 @@ static NSString *kLifetimeRiskFactorMajorGreaterThanEqualToTwo = @"risk-factor-m
     
     
     return @{
-             @"age": [NSNumber numberWithDouble:heartAge],
-             @"tenYearRisk": [NSNumber numberWithDouble:individualEstimatedTenYearRisk],
-             @"lifetimeRisk": [NSNumber numberWithDouble:lifetimeRiskFactor]
+             kSummaryHeartAge: [NSNumber numberWithDouble:heartAge],
+             kSummaryTenYearRisk: [NSNumber numberWithDouble:individualEstimatedTenYearRisk],
+             kSummaryLifetimeRisk: [NSNumber numberWithDouble:lifetimeRiskFactor]
              };
 }
 
@@ -319,7 +338,7 @@ static NSString *kLifetimeRiskFactorMajorGreaterThanEqualToTwo = @"risk-factor-m
 {
     NSString *gender = results[kHeartAgekHeartAgeTestDataGender];
     NSUInteger totalCholesterol = [results[kHeartAgekHeartAgeTestDataTotalCholesterol] integerValue];
-    NSUInteger systolicBP = [results[kHeartAgekHeartAgeTestDataSystolicBP] integerValue];
+    NSUInteger systolicBP = [results[kHeartAgekHeartAgeTestDataSystolicBloodPressure] integerValue];
     NSUInteger hypertension = [results[kHeartAgekHeartAgeTestDataHypertension] integerValue];
     NSUInteger diabetes = [results[kHeartAgekHeartAgeTestDataDiabetes] integerValue];
     NSUInteger smoker = [results[kHeartAgekHeartAgeTestDataSmoke] integerValue];
