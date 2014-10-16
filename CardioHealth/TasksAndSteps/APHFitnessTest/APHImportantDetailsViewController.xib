@@ -2,6 +2,8 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="14A361c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="APHImportantDetailsViewController">
@@ -17,7 +19,7 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SeX-ef-1OC">
                     <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="46" id="rrs-f5-lrK"/>
+                        <constraint firstAttribute="width" constant="46" id="TlT-XM-Smo"/>
                     </constraints>
                     <state key="normal" title="Close">
                         <color key="titleColor" red="0.98823535439999999" green="0.98431378599999997" blue="0.96470594409999999" alpha="1" colorSpace="deviceRGB"/>
@@ -25,12 +27,12 @@
                     </state>
                     <variation key="default">
                         <mask key="constraints">
-                            <exclude reference="rrs-f5-lrK"/>
+                            <exclude reference="TlT-XM-Smo"/>
                         </mask>
                     </variation>
                     <variation key="heightClass=regular-widthClass=compact">
                         <mask key="constraints">
-                            <include reference="rrs-f5-lrK"/>
+                            <include reference="TlT-XM-Smo"/>
                         </mask>
                     </variation>
                     <connections>
@@ -43,45 +45,59 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Purpose" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ddQ-zz-rWH">
                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="174" id="WQr-LF-NDA"/>
-                                <constraint firstAttribute="height" constant="43" id="dI0-5O-GXB"/>
+                                <constraint firstAttribute="width" constant="174" id="GlX-t1-1iY"/>
+                                <constraint firstAttribute="height" constant="43" id="vL5-g5-2M8"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                             <variation key="default">
                                 <mask key="constraints">
-                                    <exclude reference="WQr-LF-NDA"/>
-                                    <exclude reference="dI0-5O-GXB"/>
+                                    <exclude reference="GlX-t1-1iY"/>
+                                    <exclude reference="vL5-g5-2M8"/>
                                 </mask>
                             </variation>
                             <variation key="heightClass=regular-widthClass=compact">
                                 <mask key="constraints">
-                                    <include reference="WQr-LF-NDA"/>
-                                    <include reference="dI0-5O-GXB"/>
+                                    <include reference="GlX-t1-1iY"/>
+                                    <include reference="vL5-g5-2M8"/>
                                 </mask>
                             </variation>
                         </label>
                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="892-Kr-7Vm">
                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="128" id="G70-i7-F2H"/>
+                                <constraint firstAttribute="width" constant="516" id="HlE-hc-fIh"/>
+                            </constraints>
                             <string key="text">This 6 minute walk will measure the maximum distance you are able to cover at a quick walk pace, while monitoring your heart rate.
 </string>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
-                                <rect key="frame" x="29" y="64" width="316" height="128"/>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="G70-i7-F2H"/>
+                                    <exclude reference="HlE-hc-fIh"/>
+                                </mask>
+                            </variation>
+                            <variation key="heightClass=regular-widthClass=compact">
+                                <mask key="constraints">
+                                    <include reference="G70-i7-F2H"/>
+                                    <include reference="HlE-hc-fIh"/>
+                                </mask>
                             </variation>
                         </textView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="375" id="1JA-rm-q5S"/>
-                        <constraint firstItem="ddQ-zz-rWH" firstAttribute="centerX" secondItem="vPE-Kc-Xyt" secondAttribute="centerX" id="2G2-v4-FND"/>
-                        <constraint firstAttribute="bottom" secondItem="ddQ-zz-rWH" secondAttribute="bottom" constant="475" id="F1i-u5-Tze"/>
-                        <constraint firstAttribute="trailing" secondItem="ddQ-zz-rWH" secondAttribute="trailing" constant="101" id="dWK-g8-NRg"/>
-                        <constraint firstItem="ddQ-zz-rWH" firstAttribute="top" secondItem="vPE-Kc-Xyt" secondAttribute="top" constant="18" id="eLj-LD-qv4"/>
-                        <constraint firstItem="892-Kr-7Vm" firstAttribute="top" secondItem="ddQ-zz-rWH" secondAttribute="bottom" constant="3" id="mdT-3l-XhY"/>
+                        <constraint firstAttribute="bottom" secondItem="892-Kr-7Vm" secondAttribute="bottom" constant="288" id="6Ye-ZH-Zpg"/>
+                        <constraint firstItem="ddQ-zz-rWH" firstAttribute="top" secondItem="vPE-Kc-Xyt" secondAttribute="top" constant="18" id="DnJ-PP-nzY"/>
+                        <constraint firstItem="892-Kr-7Vm" firstAttribute="top" secondItem="ddQ-zz-rWH" secondAttribute="bottom" constant="3" id="Ogl-gk-FiP"/>
+                        <constraint firstAttribute="trailing" secondItem="ddQ-zz-rWH" secondAttribute="trailing" constant="100" id="ilo-PI-rEZ"/>
+                        <constraint firstItem="892-Kr-7Vm" firstAttribute="leading" secondItem="vPE-Kc-Xyt" secondAttribute="leading" constant="29" id="lBS-fL-Khh"/>
+                        <constraint firstItem="ddQ-zz-rWH" firstAttribute="leading" secondItem="vPE-Kc-Xyt" secondAttribute="leading" constant="101" id="vTm-FE-anH"/>
                     </constraints>
                     <variation key="default">
                         <mask key="subviews">
@@ -90,11 +106,12 @@
                         </mask>
                         <mask key="constraints">
                             <exclude reference="1JA-rm-q5S"/>
-                            <exclude reference="2G2-v4-FND"/>
-                            <exclude reference="F1i-u5-Tze"/>
-                            <exclude reference="dWK-g8-NRg"/>
-                            <exclude reference="eLj-LD-qv4"/>
-                            <exclude reference="mdT-3l-XhY"/>
+                            <exclude reference="DnJ-PP-nzY"/>
+                            <exclude reference="ilo-PI-rEZ"/>
+                            <exclude reference="vTm-FE-anH"/>
+                            <exclude reference="6Ye-ZH-Zpg"/>
+                            <exclude reference="Ogl-gk-FiP"/>
+                            <exclude reference="lBS-fL-Khh"/>
                         </mask>
                     </variation>
                     <variation key="heightClass=regular-widthClass=compact">
@@ -103,25 +120,25 @@
                             <include reference="892-Kr-7Vm"/>
                         </mask>
                         <mask key="constraints">
-                            <include reference="1JA-rm-q5S"/>
-                            <include reference="2G2-v4-FND"/>
-                            <include reference="F1i-u5-Tze"/>
-                            <include reference="dWK-g8-NRg"/>
-                            <include reference="eLj-LD-qv4"/>
-                            <include reference="mdT-3l-XhY"/>
+                            <exclude reference="1JA-rm-q5S"/>
+                            <include reference="DnJ-PP-nzY"/>
+                            <include reference="ilo-PI-rEZ"/>
+                            <include reference="vTm-FE-anH"/>
+                            <include reference="6Ye-ZH-Zpg"/>
+                            <include reference="Ogl-gk-FiP"/>
+                            <include reference="lBS-fL-Khh"/>
                         </mask>
                     </variation>
                 </scrollView>
             </subviews>
             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="vPE-Kc-Xyt" secondAttribute="bottom" constant="69" id="6TA-fD-FtL"/>
-                <constraint firstAttribute="trailing" secondItem="vPE-Kc-Xyt" secondAttribute="trailing" constant="12" id="IKv-kI-tj1"/>
-                <constraint firstItem="vPE-Kc-Xyt" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="JHy-EE-Bzz"/>
-                <constraint firstItem="vPE-Kc-Xyt" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="13" id="NBW-Ko-WSL"/>
-                <constraint firstItem="SeX-ef-1OC" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="QN9-wg-Iny"/>
-                <constraint firstItem="SeX-ef-1OC" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="13" id="jJF-yK-c3D"/>
-                <constraint firstItem="vPE-Kc-Xyt" firstAttribute="top" secondItem="SeX-ef-1OC" secondAttribute="bottom" constant="8" symbolic="YES" id="mtp-DT-TI6"/>
+                <constraint firstItem="vPE-Kc-Xyt" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="13" id="3gh-Dy-nHN"/>
+                <constraint firstItem="SeX-ef-1OC" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="13" id="5xo-37-Duw"/>
+                <constraint firstAttribute="bottom" secondItem="vPE-Kc-Xyt" secondAttribute="bottom" constant="69" id="d6o-Ab-jEw"/>
+                <constraint firstAttribute="trailing" secondItem="vPE-Kc-Xyt" secondAttribute="trailing" constant="212" id="ieO-UT-BS6"/>
+                <constraint firstItem="SeX-ef-1OC" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leadingMargin" id="sNo-GP-Cr8"/>
+                <constraint firstItem="vPE-Kc-Xyt" firstAttribute="top" secondItem="SeX-ef-1OC" secondAttribute="bottom" constant="8" symbolic="YES" id="u5y-0b-39S"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <variation key="default">
@@ -130,13 +147,12 @@
                     <exclude reference="vPE-Kc-Xyt"/>
                 </mask>
                 <mask key="constraints">
-                    <exclude reference="QN9-wg-Iny"/>
-                    <exclude reference="jJF-yK-c3D"/>
-                    <exclude reference="6TA-fD-FtL"/>
-                    <exclude reference="IKv-kI-tj1"/>
-                    <exclude reference="JHy-EE-Bzz"/>
-                    <exclude reference="NBW-Ko-WSL"/>
-                    <exclude reference="mtp-DT-TI6"/>
+                    <exclude reference="5xo-37-Duw"/>
+                    <exclude reference="sNo-GP-Cr8"/>
+                    <exclude reference="3gh-Dy-nHN"/>
+                    <exclude reference="d6o-Ab-jEw"/>
+                    <exclude reference="ieO-UT-BS6"/>
+                    <exclude reference="u5y-0b-39S"/>
                 </mask>
             </variation>
             <variation key="heightClass=regular-widthClass=compact">
@@ -145,13 +161,12 @@
                     <include reference="vPE-Kc-Xyt"/>
                 </mask>
                 <mask key="constraints">
-                    <include reference="QN9-wg-Iny"/>
-                    <include reference="jJF-yK-c3D"/>
-                    <include reference="6TA-fD-FtL"/>
-                    <include reference="IKv-kI-tj1"/>
-                    <include reference="JHy-EE-Bzz"/>
-                    <include reference="NBW-Ko-WSL"/>
-                    <include reference="mtp-DT-TI6"/>
+                    <include reference="5xo-37-Duw"/>
+                    <include reference="sNo-GP-Cr8"/>
+                    <include reference="3gh-Dy-nHN"/>
+                    <include reference="d6o-Ab-jEw"/>
+                    <include reference="ieO-UT-BS6"/>
+                    <include reference="u5y-0b-39S"/>
                 </mask>
             </variation>
             <point key="canvasLocation" x="11" y="568"/>

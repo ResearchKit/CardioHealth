@@ -9,7 +9,6 @@
 #import "APHFitnessTestDistanceTracker.h"
  
 static const NSUInteger kAPHFitnessTestDistanceFilter = 5.0;           // the minimum distance (meters) for which we want to receive location updates (see docs for CLLocationManager.distanceFilter)
-static const float kAPHFitnessTestRequiredHorizontalAccuracy = 5.0;    // the required accuracy in meters for a location.
 static const NSUInteger kAPHValidLocationHistoryDeltaInterval = 3;     // the maximum valid age in seconds of a location stored in the location history
 
 @interface APHFitnessTestDistanceTracker ()
@@ -21,8 +20,9 @@ static const NSUInteger kAPHValidLocationHistoryDeltaInterval = 3;     // the ma
 //TODO decide how to handle poor signal strength
 //@property (assign) BOOL allowMaximumAcceptableAccuracy;
 @property (assign) BOOL startUpdatingDistance;
-
 @property (assign) BOOL prepLocationComplete;
+
+@property (assign) CLLocationAccuracy horizontalAccuracy;
 
 @end
 
@@ -48,7 +48,9 @@ static const NSUInteger kAPHValidLocationHistoryDeltaInterval = 3;     // the ma
         self.startUpdatingDistance = NO;
         self.prepLocationComplete = NO;
 //        }
-
+        APCAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+        APCParameters *parameters = appDelegate.dataSubstrate.parameters;
+        self.horizontalAccuracy = [[parameters numberForKey:@"FTrackerHorizonalAccuracy"] doubleValue];
     }
     
     return self;
@@ -84,7 +86,7 @@ static const NSUInteger kAPHValidLocationHistoryDeltaInterval = 3;     // the ma
 
 - (void)setGPSSignalStrength:(CLLocationManager*)manager {
 
-    if (manager.location.horizontalAccuracy <= kAPHFitnessTestRequiredHorizontalAccuracy) {
+    if (manager.location.horizontalAccuracy <= self.horizontalAccuracy) {
         self.signalStrength = APHLocationManagerGPSSignalStrengthStrong;
         
     } else {
@@ -138,19 +140,18 @@ static const NSUInteger kAPHValidLocationHistoryDeltaInterval = 3;     // the ma
      
      */
 
-
     [self setGPSSignalStrength:manager];
         
-    if (self.temporaryLocationPoint == nil && manager.location.horizontalAccuracy <= kAPHFitnessTestRequiredHorizontalAccuracy) {
+    if (self.temporaryLocationPoint == nil && manager.location.horizontalAccuracy <= self.horizontalAccuracy) {
         
         NSLog(@"Temporary location set and horizontal Accuracy good");
         self.temporaryLocationPoint = manager.location;
     }
-    else if (manager.location.horizontalAccuracy <= kAPHFitnessTestRequiredHorizontalAccuracy)
+    else if (manager.location.horizontalAccuracy <= self.horizontalAccuracy)
     {
         CLLocation *bestLocation = nil;
         
-        float bestAccuracy = kAPHFitnessTestRequiredHorizontalAccuracy;
+        float bestAccuracy = self.horizontalAccuracy;
         
         for (CLLocation *location in locations) {
             NSTimeInterval differenceInTime = [NSDate timeIntervalSinceReferenceDate] - [location.timestamp timeIntervalSinceReferenceDate];
@@ -164,7 +165,7 @@ static const NSUInteger kAPHValidLocationHistoryDeltaInterval = 3;     // the ma
             }
         }
         
-        if (bestLocation == nil && manager.location.horizontalAccuracy <= kAPHFitnessTestRequiredHorizontalAccuracy)
+        if (bestLocation == nil && manager.location.horizontalAccuracy <= self.horizontalAccuracy)
         {
             bestLocation = manager.location;
         }

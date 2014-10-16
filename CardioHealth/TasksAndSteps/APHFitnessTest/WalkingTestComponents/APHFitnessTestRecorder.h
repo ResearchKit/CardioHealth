@@ -7,6 +7,7 @@
 //
 
 #import <ResearchKit/ResearchKit.h>
+@import APCAppleCore;
 
 @interface APHFitnessTestRecorder : RKRecorder
 

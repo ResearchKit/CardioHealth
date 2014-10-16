@@ -1,6 +1,6 @@
 {
-    "Step Count": 30,
-    "Tap Count": 80,
-    "URL": "http://localhost",
-    "knob": 30.1535
+    "FTrackerHorizonalAccuracy": 5,
+    "FT6Min": 360,
+    "FT3MinComfPos": 180.0,
+    "FT3MinRest": 180
 }
