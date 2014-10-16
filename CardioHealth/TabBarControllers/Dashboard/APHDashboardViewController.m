@@ -15,7 +15,6 @@
 #import "APHDashboardGraphViewCell.h"
 #import "APHDashboardMessageViewCell.h"
 #import "APHDashboardProgressViewCell.h"
-#import "UIColor+CardioHealth.h"
 
 static NSString * const kDashboardGraphCellIdentifier    = @"DashboardGraphCellIdentifier";
 static NSString * const kDashboardProgressCellIdentifier = @"DashboardProgressCellIdentifier";
@@ -138,9 +137,9 @@ static NSString * const kDashboardMessagesCellIdentifier = @"DashboardMessageCel
                                          [NSValue valueWithCGPoint:CGPointMake(19, 80)]
                                          ];
                 
-                lineChartView.lineLayer.strokeColor = [UIColor parkinsonBlueColor].CGColor;
+                lineChartView.lineLayer.strokeColor = [UIColor appPrimaryColor].CGColor;
                 lineChartView.lineLayer.lineWidth = 1.5;
-                lineChartView.markerColor = [UIColor parkinsonBlueColor];
+                lineChartView.markerColor = [UIColor appPrimaryColor];
                 lineChartView.markerRadius = 3;
                 [graphCell.graphView addSubview:lineChartView];
                 
@@ -171,9 +170,9 @@ static NSString * const kDashboardMessagesCellIdentifier = @"DashboardMessageCel
                 [graphCell.graphView addSubview:timeLineChartView];
                 
                 [timeLineChartView redrawCanvas];
-                [timeLineChartView addBar:[YMLTimeLineChartBarLayer layerWithColor:[UIColor parkinsonBlueColor]] fromUnit:15 toUnit:18 animation:YES];
-                [timeLineChartView addBar:[YMLTimeLineChartBarLayer layerWithColor:[UIColor parkinsonBlueColor]] fromUnit:16 toUnit:19 animation:YES];
-                [timeLineChartView addBar:[YMLTimeLineChartBarLayer layerWithColor:[UIColor parkinsonBlueColor]] fromUnit:15 toUnit:17 animation:YES];
+                [timeLineChartView addBar:[YMLTimeLineChartBarLayer layerWithColor:[UIColor appPrimaryColor]] fromUnit:15 toUnit:18 animation:YES];
+                [timeLineChartView addBar:[YMLTimeLineChartBarLayer layerWithColor:[UIColor appPrimaryColor]] fromUnit:16 toUnit:19 animation:YES];
+                [timeLineChartView addBar:[YMLTimeLineChartBarLayer layerWithColor:[UIColor appPrimaryColor]] fromUnit:15 toUnit:17 animation:YES];
             }
 
             

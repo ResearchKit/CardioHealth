@@ -31,7 +31,6 @@
 		F5481F1419E4820100D84617 /* APHHeartAgeTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5481F0C19E4820100D84617 /* APHHeartAgeTaskViewController.m */; };
 		F55BBE5719D362D0003CA0F9 /* NSString+CustomMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = F55BBDDB19D362D0003CA0F9 /* NSString+CustomMethods.m */; };
 		F55BBE5819D362D0003CA0F9 /* RKStep+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = F55BBDDD19D362D0003CA0F9 /* RKStep+Description.m */; };
-		F55BBE5919D362D0003CA0F9 /* UIColor+CardioHealth.m in Sources */ = {isa = PBXBuildFile; fileRef = F55BBDDF19D362D0003CA0F9 /* UIColor+CardioHealth.m */; };
 		F55BBE6119D362D0003CA0F9 /* APHTasksAndSchedules.json in Resources */ = {isa = PBXBuildFile; fileRef = F55BBDF119D362D0003CA0F9 /* APHTasksAndSchedules.json */; };
 		F55BBE6219D362D0003CA0F9 /* JSON_READ_ME in Resources */ = {isa = PBXBuildFile; fileRef = F55BBDF219D362D0003CA0F9 /* JSON_READ_ME */; };
 		F55BBE6319D362D0003CA0F9 /* sleepSurvey.json in Resources */ = {isa = PBXBuildFile; fileRef = F55BBDF319D362D0003CA0F9 /* sleepSurvey.json */; };
@@ -158,8 +157,6 @@
 		F55BBDDB19D362D0003CA0F9 /* NSString+CustomMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CustomMethods.m"; sourceTree = "<group>"; };
 		F55BBDDC19D362D0003CA0F9 /* RKStep+Description.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RKStep+Description.h"; sourceTree = "<group>"; };
 		F55BBDDD19D362D0003CA0F9 /* RKStep+Description.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RKStep+Description.m"; sourceTree = "<group>"; };
-		F55BBDDE19D362D0003CA0F9 /* UIColor+CardioHealth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+CardioHealth.h"; sourceTree = "<group>"; };
-		F55BBDDF19D362D0003CA0F9 /* UIColor+CardioHealth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+CardioHealth.m"; sourceTree = "<group>"; };
 		F55BBDF119D362D0003CA0F9 /* APHTasksAndSchedules.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = APHTasksAndSchedules.json; sourceTree = "<group>"; };
 		F55BBDF219D362D0003CA0F9 /* JSON_READ_ME */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = JSON_READ_ME; sourceTree = "<group>"; };
 		F55BBDF319D362D0003CA0F9 /* sleepSurvey.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sleepSurvey.json; sourceTree = "<group>"; };
@@ -349,8 +346,6 @@
 				F55BBDDB19D362D0003CA0F9 /* NSString+CustomMethods.m */,
 				F55BBDDC19D362D0003CA0F9 /* RKStep+Description.h */,
 				F55BBDDD19D362D0003CA0F9 /* RKStep+Description.m */,
-				F55BBDDE19D362D0003CA0F9 /* UIColor+CardioHealth.h */,
-				F55BBDDF19D362D0003CA0F9 /* UIColor+CardioHealth.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -759,7 +754,6 @@
 				F5778E7919F0613D0079F1B2 /* APHSignUpPermissionsViewController.m in Sources */,
 				F55BBE5819D362D0003CA0F9 /* RKStep+Description.m in Sources */,
 				F5778E7219F0613D0079F1B2 /* APHInclusionCriteriaViewController.m in Sources */,
-				F55BBE5919D362D0003CA0F9 /* UIColor+CardioHealth.m in Sources */,
 				7B41048F19E5D94F00592B96 /* APHFitnessTestDistanceTracker.m in Sources */,
 				F5778E7619F0613D0079F1B2 /* APHSignInViewController.m in Sources */,
 				F55BBE6B19D362D0003CA0F9 /* APHDashboardViewController.m in Sources */,

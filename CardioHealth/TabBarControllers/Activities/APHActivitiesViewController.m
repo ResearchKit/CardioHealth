@@ -10,7 +10,6 @@
 #import "APHActivitiesViewController.h"
 
 /* Other Classes */
-#import "UIColor+CardioHealth.h"
 #import "APHCardioHealthAppDelegate.h"
 
 @implementation APHActivitiesViewController
@@ -18,7 +17,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UITableViewHeaderFooterView *headerView = (UITableViewHeaderFooterView*) [super tableView:tableView viewForHeaderInSection:section];
-    [headerView.contentView setBackgroundColor:[UIColor parkinsonLightGrayColor]];
+    [headerView.contentView setBackgroundColor:[UIColor appSecondaryColor3]];
     return headerView;
 }
 
