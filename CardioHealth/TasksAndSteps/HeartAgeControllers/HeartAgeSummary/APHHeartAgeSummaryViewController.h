@@ -17,6 +17,5 @@
 @property (nonatomic) NSUInteger heartAge;
 @property (nonatomic, strong) NSNumber *tenYearRisk;
 @property (nonatomic, strong) NSNumber *lifetimeRisk;
-@property (nonatomic, strong) NSString *someImprovement;
 
 @end

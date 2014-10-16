@@ -17,12 +17,10 @@ static NSString *kHeartAgeSummary = @"HeartAgeSummary";
 
 @interface APHHeartAgeTaskViewController ()
 
-// This property will hold the parameters that will be used
-// for calculating the heart age, 10 year, and lifetime risk table.
-@property (nonatomic, strong) NSDictionary *heartAgeParametersLookup;
+@property (nonatomic, strong) NSDictionary *heartAgeInfo;
 
 @property (strong, nonatomic) RKDataArchive *taskArchive;
-@property (strong, nonatomic) NSDictionary *heartAgeInfo;
+
 
 @end
 
@@ -101,6 +99,7 @@ static NSString *kHeartAgeSummary = @"HeartAgeSummary";
     {
         RKNumericAnswerFormat *format = [RKNumericAnswerFormat integerAnswerWithUnit:nil];
         format.minimum = @(0);
+        format.maximum = @(240);
 
         RKQuestionStep *step = [RKQuestionStep questionStepWithIdentifier:kHeartAgekHeartAgeTestDataTotalCholesterol
                                                                      name:@"TotalCholesterol"
@@ -113,7 +112,7 @@ static NSString *kHeartAgeSummary = @"HeartAgeSummary";
 
     {
         RKNumericAnswerFormat *format = [RKNumericAnswerFormat integerAnswerWithUnit:nil];
-        format.minimum = @(0);
+        format.minimum = @(40);
 
         RKQuestionStep* step = [RKQuestionStep questionStepWithIdentifier:kHeartAgekHeartAgeTestDataHDL
                                                                      name:@"HDLCholesterol"
@@ -127,9 +126,9 @@ static NSString *kHeartAgeSummary = @"HeartAgeSummary";
     {
         RKNumericAnswerFormat *format = [RKNumericAnswerFormat integerAnswerWithUnit:nil];
         format.minimum = @(0);
-        
-        RKQuestionStep* step = [RKQuestionStep questionStepWithIdentifier:kHeartAgekHeartAgeTestDataSystolicBP
-                                                                     name:@"SystolicBP"
+        format.maximum = @(180);
+        RKQuestionStep* step = [RKQuestionStep questionStepWithIdentifier:kHeartAgekHeartAgeTestDataSystolicBloodPressure
+                                                                     name:@"SystolicBloodPressure"
                                                                  question:NSLocalizedString(@"What is your Systolic Blood Pressure?", @"What is your Systolic Blood Pressure?")
                                                                    answer:format];
         step.optional = NO;
@@ -291,6 +290,15 @@ static NSString *kHeartAgeSummary = @"HeartAgeSummary";
     [super taskViewController:taskViewController didProduceResult:result];
 }
 
+- (void)stepViewControllerDidFinish:(RKStepViewController *)stepViewController navigationDirection:(RKStepViewControllerNavigationDirection)direction
+{
+    [super stepViewControllerDidFinish:stepViewController navigationDirection:direction];
+    
+    NSLog(@"Finished Step: %@", stepViewController.step.identifier);
+}
+
+
+#pragma  mark  -  Task View Controller Delegate Methods
 - (void)taskViewControllerDidFail: (RKTaskViewController *)taskViewController withError:(NSError*)error{
     
     [self.taskArchive resetContent];
@@ -354,7 +362,7 @@ static NSString *kHeartAgeSummary = @"HeartAgeSummary";
             if ([questionIdentifier isEqualToString:kHeartAgekHeartAgeTestDataEthnicity] || [questionIdentifier isEqualToString:kHeartAgekHeartAgeTestDataGender]) {
                 [surveyResultsDictionary setObject:(NSString *)questionResult.answer forKey:questionIdentifier];
             } else {
-                [surveyResultsDictionary setObject:(NSNumber *)questionResult.answer forKeyedSubscript:questionIdentifier];
+                [surveyResultsDictionary setObject:(NSNumber *)questionResult.answer forKey:questionIdentifier];
             }
         }
         
@@ -370,10 +378,9 @@ static NSString *kHeartAgeSummary = @"HeartAgeSummary";
         heartAgeResultsVC.step = step;
         heartAgeResultsVC.taskProgress = 0.25;
         heartAgeResultsVC.actualAge = [surveyResultsDictionary[kHeartAgeTestDataAge] integerValue];
-        heartAgeResultsVC.heartAge = [self.heartAgeInfo[@"age"] integerValue];
-        heartAgeResultsVC.tenYearRisk = self.heartAgeInfo[@"tenYearRisk"];
-        heartAgeResultsVC.lifetimeRisk = self.heartAgeInfo[@"lifetimeRisk"];
-        heartAgeResultsVC.someImprovement = @"Some suggestions to improve your heart age.";
+        heartAgeResultsVC.heartAge = [self.heartAgeInfo[kSummaryHeartAge] integerValue];
+        heartAgeResultsVC.tenYearRisk = self.heartAgeInfo[kSummaryTenYearRisk];
+        heartAgeResultsVC.lifetimeRisk = self.heartAgeInfo[kSummaryLifetimeRisk];
         
         stepVC = heartAgeResultsVC;
     }
@@ -381,24 +388,40 @@ static NSString *kHeartAgeSummary = @"HeartAgeSummary";
     return stepVC;
 }
 
-
-/*********************************************************************************/
-#pragma mark - StepViewController Delegate Methods
-/*********************************************************************************/
-
-- (void)stepViewControllerWillBePresented:(RKStepViewController *)viewController
+- (void)taskViewController:(RKTaskViewController *)taskViewController didProduceResult:(RKSurveyResult *)result
 {
+    // We need to create three question results that will hold the value of Heart Age,
+    // Ten Year Risk, and Lifetime Risk factors. Ideally we would like to simply
+    // amend the self.headerAgeInfo dictionary to the results, but an appropriate
+    // RKSurveyQuestionType is not available for adding dictionary to the result;
+    // thus we create separate question results for each of these data points.
     
-    viewController.skipButton = nil;
+    NSMutableArray *surveyQuestions = [result.surveyResults mutableCopy];
     
+    RKQuestionResult *qrHeartAge = [[RKQuestionResult alloc] initWithStep:[[RKStep alloc] initWithIdentifier:kSummaryHeartAge
+                                                                                                        name:kSummaryHeartAge]];
+    qrHeartAge.questionType = RKSurveyQuestionTypeInteger;
+    qrHeartAge.answer = self.heartAgeInfo[kSummaryHeartAge];
+    
+    [surveyQuestions addObject:qrHeartAge];
+    
+    RKQuestionResult *qrTenYearRisk = [[RKQuestionResult alloc] initWithStep:[[RKStep alloc] initWithIdentifier:kSummaryTenYearRisk
+                                                                                                           name:kSummaryTenYearRisk]];
+    qrTenYearRisk.questionType = RKSurveyQuestionTypeDecimal;
+    qrTenYearRisk.answer = self.heartAgeInfo[kSummaryTenYearRisk];
+    
+    [surveyQuestions addObject:qrTenYearRisk];
+    
+    RKQuestionResult *qrLifetimeRisk = [[RKQuestionResult alloc] initWithStep:[[RKStep alloc] initWithIdentifier:kSummaryLifetimeRisk
+                                                                                                            name:kSummaryLifetimeRisk]];
+    qrLifetimeRisk.questionType = RKSurveyQuestionTypeDecimal;
+    qrLifetimeRisk.answer = self.heartAgeInfo[kSummaryLifetimeRisk];
+    
+    [surveyQuestions addObject:qrLifetimeRisk];
+    
+    result.surveyResults = surveyQuestions;
+    
+    [super taskViewController:taskViewController didProduceResult:result];
 }
-
-- (void)stepViewControllerDidFinish:(RKStepViewController *)stepViewController navigationDirection:(RKStepViewControllerNavigationDirection)direction
-{
-    [super stepViewControllerDidFinish:stepViewController navigationDirection:direction];
-    
-    NSLog(@"Finished Step: %@", stepViewController.step.identifier);
-}
-
 
 @end

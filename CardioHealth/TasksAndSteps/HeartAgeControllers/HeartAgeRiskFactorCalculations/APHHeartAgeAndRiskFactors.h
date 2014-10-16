@@ -9,18 +9,22 @@
 #import <Foundation/Foundation.h>
 #import <math.h>
 
-static NSString *kHeartAgeTestDataAge = @"heart-age-data-age";
-static NSString *kHeartAgekHeartAgeTestDataTotalCholesterol = @"heart-age-data-total-cholesterol";
-static NSString *kHeartAgekHeartAgeTestDataHDL = @"heart-age-data-hdl";
-static NSString *kHeartAgekHeartAgeTestDataSystolicBP = @"heart-age-data-systolicBP";
-static NSString *kHeartAgekHeartAgeTestDataSmoke = @"heart-age-data-smoke";
-static NSString *kHeartAgekHeartAgeTestDataDiabetes = @"heart-age-data-diabetes";
-static NSString *kHeartAgekHeartAgeTestDataFamilyDiabetes = @"heart-age-data-family-diabetes";
-static NSString *kHeartAgekHeartAgeTestDataFamilyHeart = @"heart-age-data-family-heart";
-static NSString *kHeartAgekHeartAgeTestDataEthnicity = @"heart-age-data-ethnicity";
-static NSString *kHeartAgekHeartAgeTestDataGender = @"heart-age-data-gender";
-static NSString *kHeartAgekHeartAgeTestDataCurrentlySmoke = @"heart-age-data-currently-smoke";
-static NSString *kHeartAgekHeartAgeTestDataHypertension = @"heart-age-data-hypertension";
+extern NSString *const kHeartAgeTestDataAge;
+extern NSString *const kHeartAgekHeartAgeTestDataTotalCholesterol;
+extern NSString *const kHeartAgekHeartAgeTestDataHDL;
+extern NSString *const kHeartAgekHeartAgeTestDataSystolicBloodPressure;
+extern NSString *const kHeartAgekHeartAgeTestDataSmoke;
+extern NSString *const kHeartAgekHeartAgeTestDataDiabetes;
+extern NSString *const kHeartAgekHeartAgeTestDataFamilyDiabetes;
+extern NSString *const kHeartAgekHeartAgeTestDataFamilyHeart;
+extern NSString *const kHeartAgekHeartAgeTestDataEthnicity;
+extern NSString *const kHeartAgekHeartAgeTestDataGender;
+extern NSString *const kHeartAgekHeartAgeTestDataCurrentlySmoke;
+extern NSString *const kHeartAgekHeartAgeTestDataHypertension;
+
+extern NSString *const kSummaryHeartAge;
+extern NSString *const kSummaryTenYearRisk;
+extern NSString *const kSummaryLifetimeRisk;
 
 @interface APHHeartAgeAndRiskFactors : NSObject
 
