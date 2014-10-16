@@ -185,7 +185,7 @@ static NSString *const kHealthProfileStoryBoardKey = @"APHHealthProfile";
         tabster.tabBar.tintColor = [UIColor appPrimaryColor];
         UITabBarItem  *item = tabster.tabBar.selectedItem;
         item.image = [UIImage imageNamed:deselectedImageNames[controllerIndex] inBundle:[NSBundle appleCoreBundle] compatibleWithTraitCollection:nil];
-        item.selectedImage = [[UIImage imageNamed:selectedImageNames[controllerIndex] inBundle:[NSBundle appleCoreBundle] compatibleWithTraitCollection:nil] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        item.selectedImage = [[UIImage imageNamed:selectedImageNames[controllerIndex] inBundle:[NSBundle appleCoreBundle] compatibleWithTraitCollection:nil] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     }
 }
 

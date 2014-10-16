@@ -37,6 +37,10 @@
     
     //TODO: This permission request is temporary. Remove later.
     self.permissionManager = [[APCPermissionsManager alloc] init];
+    
+    [APCPermissionsManager setHealthKitTypesToRead:@[HKQuantityTypeIdentifierBodyMass, HKQuantityTypeIdentifierHeight, HKCharacteristicTypeIdentifierBloodType, HKCharacteristicTypeIdentifierBiologicalSex, HKCharacteristicTypeIdentifierDateOfBirth, HKQuantityTypeIdentifierStepCount, HKQuantityTypeIdentifierHeartRate, HKQuantityTypeIdentifierDistanceWalkingRunning, HKQuantityTypeIdentifierFlightsClimbed, HKQuantityTypeIdentifierDistanceCycling]];
+    [APCPermissionsManager setHealthKitTypesToWrite:@[HKQuantityTypeIdentifierBodyMass, HKQuantityTypeIdentifierHeight]];
+    
     [self.permissionManager requestForPermissionForType:kSignUpPermissionsTypeHealthKit withCompletion:^(BOOL granted, NSError *error) {
         if (granted) {
             dispatch_async(dispatch_get_main_queue(), ^{
