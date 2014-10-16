@@ -9,22 +9,22 @@
 #import <Foundation/Foundation.h>
 #import <math.h>
 
-static NSString *kHeartAgeTestDataAge = @"heartAgeDataAge";
-static NSString *kHeartAgekHeartAgeTestDataTotalCholesterol = @"heartAgeDataTotalCholesterol";
-static NSString *kHeartAgekHeartAgeTestDataHDL = @"heartAgeDataHdl";
-static NSString *kHeartAgekHeartAgeTestDataSystolicBloodPressure = @"heartAgeDataSystolicBloodPressure";
-static NSString *kHeartAgekHeartAgeTestDataSmoke = @"heartAgeDataSmoke";
-static NSString *kHeartAgekHeartAgeTestDataDiabetes = @"heartAgeDataDiabetes";
-static NSString *kHeartAgekHeartAgeTestDataFamilyDiabetes = @"heartAgeDataFamilyDiabetes";
-static NSString *kHeartAgekHeartAgeTestDataFamilyHeart = @"heartAgeDataFamilyHeart";
-static NSString *kHeartAgekHeartAgeTestDataEthnicity = @"heartAgeDataEthnicity";
-static NSString *kHeartAgekHeartAgeTestDataGender = @"heartAgeDataGender";
-static NSString *kHeartAgekHeartAgeTestDataCurrentlySmoke = @"heartAgeDataCurrentlySmoke";
-static NSString *kHeartAgekHeartAgeTestDataHypertension = @"heartAgeDataHypertension";
+extern NSString *const kHeartAgeTestDataAge;
+extern NSString *const kHeartAgekHeartAgeTestDataTotalCholesterol;
+extern NSString *const kHeartAgekHeartAgeTestDataHDL;
+extern NSString *const kHeartAgekHeartAgeTestDataSystolicBloodPressure;
+extern NSString *const kHeartAgekHeartAgeTestDataSmoke;
+extern NSString *const kHeartAgekHeartAgeTestDataDiabetes;
+extern NSString *const kHeartAgekHeartAgeTestDataFamilyDiabetes;
+extern NSString *const kHeartAgekHeartAgeTestDataFamilyHeart;
+extern NSString *const kHeartAgekHeartAgeTestDataEthnicity;
+extern NSString *const kHeartAgekHeartAgeTestDataGender;
+extern NSString *const kHeartAgekHeartAgeTestDataCurrentlySmoke;
+extern NSString *const kHeartAgekHeartAgeTestDataHypertension;
 
-static NSString *kSummaryHeartAge = @"heartAge";
-static NSString *kSummaryTenYearRisk = @"tenYearRisk";
-static NSString *kSummaryLifetimeRisk = @"lifetimeRisk";
+extern NSString *const kSummaryHeartAge;
+extern NSString *const kSummaryTenYearRisk;
+extern NSString *const kSummaryLifetimeRisk;
 
 @interface APHHeartAgeAndRiskFactors : NSObject
 

@@ -33,6 +33,25 @@ static NSString *kLifetimeRiskFactorElevated = @"risk-factor-elevated";
 static NSString *kLifetimeRiskFactorMajor = @"risk-factor-major";
 static NSString *kLifetimeRiskFactorMajorGreaterThanEqualToTwo = @"risk-factor-major-2";
 
+// Keys for data that is collected in the survey
+NSString *const kHeartAgeTestDataAge = @"heartAgeDataAge";
+NSString *const kHeartAgekHeartAgeTestDataTotalCholesterol = @"heartAgeDataTotalCholesterol";
+NSString *const kHeartAgekHeartAgeTestDataHDL = @"heartAgeDataHdl";
+NSString *const kHeartAgekHeartAgeTestDataSystolicBloodPressure = @"heartAgeDataSystolicBloodPressure";
+NSString *const kHeartAgekHeartAgeTestDataSmoke = @"heartAgeDataSmoke";
+NSString *const kHeartAgekHeartAgeTestDataDiabetes = @"heartAgeDataDiabetes";
+NSString *const kHeartAgekHeartAgeTestDataFamilyDiabetes = @"heartAgeDataFamilyDiabetes";
+NSString *const kHeartAgekHeartAgeTestDataFamilyHeart = @"heartAgeDataFamilyHeart";
+NSString *const kHeartAgekHeartAgeTestDataEthnicity = @"heartAgeDataEthnicity";
+NSString *const kHeartAgekHeartAgeTestDataGender = @"heartAgeDataGender";
+NSString *const kHeartAgekHeartAgeTestDataCurrentlySmoke = @"heartAgeDataCurrentlySmoke";
+NSString *const kHeartAgekHeartAgeTestDataHypertension = @"heartAgeDataHypertension";
+
+// Summary data keys
+NSString *const kSummaryHeartAge = @"heartAge";
+NSString *const kSummaryTenYearRisk = @"tenYearRisk";
+NSString *const kSummaryLifetimeRisk = @"lifetimeRisk";
+
 @interface APHHeartAgeAndRiskFactors()
 
 @property (nonatomic, strong) NSDictionary *heartAgeParametersLookup;
