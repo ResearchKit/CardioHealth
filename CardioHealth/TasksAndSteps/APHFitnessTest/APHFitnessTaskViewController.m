@@ -202,26 +202,20 @@ willPresentStepViewController:(RKStepViewController *)stepViewController{
         [customView addConstraints:verticalConstraints];
         
         [(RKActiveStepViewController*)stepViewController setCustomView:customView];
-        
-        // Set custom button on navi bar
-        stepViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Custom button"
-                                                                                               style:UIBarButtonItemStylePlain
-                                                                                              target:nil
-                                                                                              action:nil];
+
+        //TODO Leaving this here as a reference to creating custom bar buttons with ResearchKit
+// Set custom button on navi bar
+//        stepViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Custom button"
+//                                                                                               style:UIBarButtonItemStylePlain
+//                                                                                              target:nil
+//                                                                                              action:nil];
         
         
         
         stepViewController.learnMoreButton =[[UIBarButtonItem alloc] initWithTitle:@"View Important Details" style:stepViewController.continueButton.style target:self action:@selector(importantDetails:)];
         
-        
-        
-        
-        
         stepViewController.continueButton = [[UIBarButtonItem alloc] initWithTitle:@"Get Started" style:stepViewController.continueButton.style target:stepViewController.continueButton.target action:stepViewController.continueButton.action];
-        
-//        [stepViewController.continueButton.tintColor = UIColor colorWithRed:0.83 green:0.43 blue:0.57 alpha:1];
-
-        
+            
         stepViewController.skipButton = nil;
         
     }else if ([stepViewController.step.identifier isEqualToString:kFitnessTestStep102]) {
