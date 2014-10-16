@@ -259,10 +259,9 @@ static NSString *kHeartAgeSummary = @"HeartAgeSummary";
         heartAgeResultsVC.step = step;
         heartAgeResultsVC.taskProgress = 0.25;
         heartAgeResultsVC.actualAge = [surveyResultsDictionary[kHeartAgeTestDataAge] integerValue];
-        heartAgeResultsVC.heartAge = [heartAgeInfo[@"age"] integerValue];
-        heartAgeResultsVC.tenYearRisk = heartAgeInfo[@"tenYearRisk"];
-        heartAgeResultsVC.lifetimeRisk = heartAgeInfo[@"lifetimeRisk"];
-        heartAgeResultsVC.someImprovement = @"Some suggestions to improve your heart age.";
+        heartAgeResultsVC.heartAge = [self.heartAgeInfo[kSummaryHeartAge] integerValue];
+        heartAgeResultsVC.tenYearRisk = self.heartAgeInfo[kSummaryTenYearRisk];
+        heartAgeResultsVC.lifetimeRisk = self.heartAgeInfo[kSummaryLifetimeRisk];
         
         stepVC = heartAgeResultsVC;
     }
