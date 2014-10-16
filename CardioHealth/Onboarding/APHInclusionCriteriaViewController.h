@@ -8,6 +8,6 @@
 
 #import <APCAppleCore/APCAppleCore.h>
 
-@interface APHInclusionCriteriaViewController : APCSignupCriteriaViewController
+@interface APHInclusionCriteriaViewController : APCInclusionCriteriaViewController
 
 @end

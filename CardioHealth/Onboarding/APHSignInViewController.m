@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 Y Media Labs. All rights reserved.
 //
 
-#import "APHCardioHealthAppDelegate.h"
 #import "APHSignInViewController.h"
 
 @interface APHSignInViewController ()
@@ -24,6 +23,7 @@
     
     self.passwordTextField.font = [UITableView textFieldFont];
     self.passwordTextField.textColor = [UITableView textFieldTextColor];
+    
 }
 
 - (void)didReceiveMemoryWarning {

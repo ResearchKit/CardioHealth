@@ -1,32 +1,29 @@
 {
-  "disease_name":"Cardiovascular health",
-  "from_date":"",
-  "to_date":"",
-  "questions":
-              [
-                {
-                  "title":"What is this study about?",
-                  "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vel turpis id fringilla. Nam pharetra gravida enim consectetur rutrum."
-                },
-                {
-                  "title":"How this study works?",
-                  "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vel turpis id fringilla. Nam pharetra gravida enim consectetur rutrum."
-                },
-                {
-                  "title":"What is this study about?",
-                  "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vel turpis id fringilla. Nam pharetra gravida enim consectetur rutrum."
-                },
-                {
-                  "title":"Who is running this study?",
-                  "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vel turpis id fringilla. Nam pharetra gravida enim consectetur rutrum."
-                },
-                {
-                  "title":"Who is eligible to participate?",
-                  "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vel turpis id fringilla. Nam pharetra gravida enim consectetur rutrum."
-                },
-                {
-                  "title":"Length of study",
-                  "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vel turpis id fringilla. Nam pharetra gravida enim consectetur rutrum."
-                }
-              ]
+    "disease_name":"CardioVascular Health",
+    "from_date":"November 2014",
+    "to_date":"October 2015",
+    "logo_name": "logo_research_institute",
+    "questions":
+    [
+     {
+     "title":"About this Study",
+     "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vel turpis id fringilla. Nam pharetra gravida enim consectetur rutrum."
+     },
+     {
+     "title":"How this study works",
+     "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vel turpis id fringilla. Nam pharetra gravida enim consectetur rutrum."
+     },
+     {
+     "title":"Who is running this Study",
+     "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vel turpis id fringilla. Nam pharetra gravida enim consectetur rutrum."
+     },
+     {
+     "title":"Who is eligible to participate",
+     "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vel turpis id fringilla. Nam pharetra gravida enim consectetur rutrum."
+     },
+     {
+     "title":"Length of the Study",
+     "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vel turpis id fringilla. Nam pharetra gravida enim consectetur rutrum."
+     }
+     ]
 }
