@@ -36,7 +36,7 @@
                                                         <constraint firstAttribute="height" constant="80" id="a5l-NJ-YGP"/>
                                                     </constraints>
                                                 </view>
-                                                <imageView userInteractionEnabled="NO" tag="200" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_study_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="Gvi-DL-d4V">
+                                                <imageView userInteractionEnabled="NO" tag="200" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Gvi-DL-d4V">
                                                     <rect key="frame" x="5" y="0.0" width="67" height="80"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="67" id="0Wf-Up-glu"/>
@@ -1000,7 +1000,6 @@ Sure</string>
         </scene>
     </scenes>
     <resources>
-        <image name="img_study_placeholder" width="180" height="222"/>
         <image name="profilePlaceholder" width="76" height="76"/>
     </resources>
 </document>
