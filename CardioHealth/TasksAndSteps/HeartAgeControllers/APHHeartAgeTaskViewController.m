@@ -215,28 +215,7 @@ static NSString *kHeartAgeSummary = @"HeartAgeSummary";
 
 - (void)stepViewControllerWillBePresented:(RKStepViewController *)viewController
 {
-    NSLog(@"Step: %@ (%@)", viewController.step.name, viewController.step.identifier);
-    
     viewController.skipButton = nil;
-    
-    APCAppDelegate *apcAppDelegate = [[UIApplication sharedApplication] delegate];
-    
-    if ([viewController.step.identifier isEqualToString:kHeartAgeTestDataAge]) {
-        // Check if we have the date of birth available via HealthKit
-        if (apcAppDelegate.dataSubstrate.currentUser.consented) {
-            NSDate *dateOfBirth = apcAppDelegate.dataSubstrate.currentUser.birthDate;
-            
-            // Compute the age of the user.
-            NSDateComponents *ageComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitYear
-                                                                              fromDate:dateOfBirth
-                                                                                toDate:[NSDate date] // today
-                                                                               options:NSCalendarWrapComponents];
-            
-            NSUInteger usersAge = [ageComponents year];
-            
-            NSLog(@"Your Age: %lu", usersAge);
-        }
-    }
 }
 
 - (void)stepViewControllerDidFinish:(RKStepViewController *)stepViewController navigationDirection:(RKStepViewControllerNavigationDirection)direction
@@ -248,6 +227,7 @@ static NSString *kHeartAgeSummary = @"HeartAgeSummary";
 
 
 #pragma  mark  -  Task View Controller Delegate Methods
+
 - (RKStepViewController *)taskViewController:(RKTaskViewController *)taskViewController viewControllerForStep:(RKStep *)step
 {
     
