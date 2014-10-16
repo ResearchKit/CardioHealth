@@ -24,16 +24,65 @@
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 15, self.frame.size.width, 21)];
+        self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 21)];
         self.titleLabel.textAlignment = NSTextAlignmentCenter;
+        self.titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
         
-        self.contentTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 41, self.frame.size.width, 63)];
+        self.contentTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 63)];
         self.contentTextLabel.textColor = [UIColor grayColor];
         self.contentTextLabel.numberOfLines = 3;
         self.contentTextLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        self.contentTextLabel.translatesAutoresizingMaskIntoConstraints = NO;
         
         [self.contentView addSubview:self.titleLabel];
         [self.contentView addSubview:self.contentTextLabel];
+        
+        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[title]-10-[text]"
+                                                                                      options:0
+                                                                                      metrics:nil
+                                                                                        views:@{
+                                                                                                @"title": self.titleLabel,
+                                                                                                @"text": self.contentTextLabel
+                                                                                                }]];
+        
+        // Leading/Trailing margins
+        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.contentTextLabel
+                                                                     attribute:NSLayoutAttributeLeadingMargin
+                                                                     relatedBy:NSLayoutRelationEqual
+                                                                        toItem:self.contentView
+                                                                     attribute:NSLayoutAttributeLeadingMargin
+                                                                    multiplier:1.0
+                                                                      constant:20.0]];
+        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.contentView
+                                                                     attribute:NSLayoutAttributeTrailingMargin
+                                                                     relatedBy:NSLayoutRelationEqual
+                                                                        toItem:self.contentTextLabel
+                                                                     attribute:NSLayoutAttributeTrailingMargin
+                                                                    multiplier:1.0
+                                                                      constant:20.0]];
+        // Leading/Trailing margins
+        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.titleLabel
+                                                                     attribute:NSLayoutAttributeLeadingMargin
+                                                                     relatedBy:NSLayoutRelationEqual
+                                                                        toItem:self.contentView
+                                                                     attribute:NSLayoutAttributeLeadingMargin
+                                                                    multiplier:1.0
+                                                                      constant:0.0]];
+        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.titleLabel
+                                                                     attribute:NSLayoutAttributeTrailingMargin
+                                                                     relatedBy:NSLayoutRelationEqual
+                                                                        toItem:self.contentView
+                                                                     attribute:NSLayoutAttributeTrailingMargin
+                                                                    multiplier:1.0
+                                                                      constant:0.0]];
+        // Top constraint
+        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.titleLabel
+                                                                     attribute:NSLayoutAttributeTopMargin
+                                                                     relatedBy:NSLayoutRelationEqual
+                                                                        toItem:self.contentView
+                                                                     attribute:NSLayoutAttributeTopMargin
+                                                                    multiplier:1.0
+                                                                      constant:10.0]];
     }
     
     return self;
