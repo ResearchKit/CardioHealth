@@ -30,7 +30,7 @@ static NSString *const kVideoShownKey = @"VideoShown";
 static NSString *const kDashBoardStoryBoardKey     = @"APHDashboard";
 static NSString *const kLearnStoryBoardKey         = @"APHLearn";
 static NSString *const kActivitiesStoryBoardKey    = @"APHActivities";
-static NSString *const kHealthProfileStoryBoardKey = @"APHHealthProfile";
+static NSString *const kHealthProfileStoryBoardKey = @"APHProfile";
 
 @interface APHCardioHealthAppDelegate  ( )  <UITabBarControllerDelegate>
 
