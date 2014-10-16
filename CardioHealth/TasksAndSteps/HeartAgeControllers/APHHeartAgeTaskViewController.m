@@ -243,7 +243,7 @@ static NSString *kHeartAgeSummary = @"HeartAgeSummary";
             if ([questionIdentifier isEqualToString:kHeartAgekHeartAgeTestDataEthnicity] || [questionIdentifier isEqualToString:kHeartAgekHeartAgeTestDataGender]) {
                 [surveyResultsDictionary setObject:(NSString *)questionResult.answer forKey:questionIdentifier];
             } else {
-                [surveyResultsDictionary setObject:(NSNumber *)questionResult.answer forKeyedSubscript:questionIdentifier];
+                [surveyResultsDictionary setObject:(NSNumber *)questionResult.answer forKey:questionIdentifier];
             }
         }
         
