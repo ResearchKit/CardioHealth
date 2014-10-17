@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @import APCAppleCore;
 
-@interface APHCardioHealthAppDelegate : APCAppDelegate
+@interface APHAppDelegate : APCAppDelegate
 
 @end
 

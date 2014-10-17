@@ -10,7 +10,7 @@
 #import "APHActivitiesViewController.h"
 
 /* Other Classes */
-#import "APHCardioHealthAppDelegate.h"
+#import "APHAppDelegate.h"
 
 @implementation APHActivitiesViewController
 
