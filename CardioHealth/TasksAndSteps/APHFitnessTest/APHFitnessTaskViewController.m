@@ -9,7 +9,8 @@
 #import "APHFitnessTaskViewController.h"
 
 
-static NSString *MainStudyIdentifier = @"com.ymedialabs.fitnessTest";
+static NSString *MainStudyIdentifier = @"com.cardioVascular.fitnessTest";
+static NSString *kdataResultsFileName = @"FitnessTestResult.json";
 
 static  NSString  *kFitnessTestStep101 = @"FitnessStep101";
 static  NSString  *kFitnessTestStep102 = @"FitnessStep102";
@@ -63,8 +64,8 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
     {
         //Introduction to fitness test
         RKActiveStep* step = [[RKActiveStep alloc] initWithIdentifier:kFitnessTestStep101 name:@"active step"];
-        step.caption = @"Fitness Test";
-        step.text = @"Once you tap Get Started, you will have 5 seconds until this test begins tracking your movement.";
+        step.caption = NSLocalizedString(@"Fitness Test", @"");
+        step.text = NSLocalizedString(@"Once you tap Get Started, you will have 5 seconds until this test begins tracking your movement.", @"");
         step.useNextForSkip = NO;
     
         [steps addObject:step];
@@ -73,8 +74,8 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
     {
         //Introduction to fitness test
         RKActiveStep* step = [[RKActiveStep alloc] initWithIdentifier:kFitnessTestStep102 name:@"active step"];
-        step.caption = @"Fitness Test";
-        step.text = @"Get Ready!";
+        step.caption = NSLocalizedString(@"Fitness Test", @"");
+        step.text = NSLocalizedString(@"Get Ready!", @"");
         step.countDown = 5.0;
         step.useNextForSkip = NO;
         
@@ -86,9 +87,6 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
         //Walking 6 minutes
         RKActiveStep* step = [[RKActiveStep alloc] initWithIdentifier:kFitnessTestStep103 name:@"6 Minute Walk"];
         step.recorderConfigurations = @[[APHFitnessTestCustomRecorderConfiguration new]];
-
-        
-
         step.caption = NSLocalizedString(@"6 Minute Walk", @"");
         step.text = NSLocalizedString(@"Walk 6 minutes.", @"");
         step.buzz = YES;
@@ -193,11 +191,19 @@ willPresentStepViewController:(RKStepViewController *)stepViewController{
         // Have the custom view request the space it needs.
         // A little tricky because we need to let it size to fit if there's not enough space.
         [customView setTranslatesAutoresizingMaskIntoConstraints:NO];
+        
         NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[c(>=160)]" options:0 metrics:nil views:@{@"c":customView}];
         for (NSLayoutConstraint *constraint in verticalConstraints)
         {
             constraint.priority = UILayoutPriorityFittingSizeLevel;
         }
+        
+//        [NSLayoutConstraint constraintsWithVisualFormat: @"V: [button]-20-[bottomGuide]"
+//                                                options: 0
+//                                                metrics: nil
+//                                                  views: stepViewController.continueButton]];
+
+        
         [customView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[c(>=280)]" options:0 metrics:nil views:@{@"c":customView}]];
         [customView addConstraints:verticalConstraints];
         
@@ -288,7 +294,7 @@ willPresentStepViewController:(RKStepViewController *)stepViewController{
     
     RKStep * dummyStep = [[RKStep alloc] initWithIdentifier:@"Dummy" name:@"name"];
     RKDataResult * result = [[RKDataResult alloc] initWithStep:dummyStep];
-    result.filename = @"FitnessTestResult.json";
+    result.filename = kdataResultsFileName;
     result.contentType = @"application/json";
     NSMutableDictionary * dictionary = [NSMutableDictionary dictionary];
     [results enumerateObjectsUsingBlock:^(APCDataResult * result, NSUInteger idx, BOOL *stop) {
@@ -298,8 +304,6 @@ willPresentStepViewController:(RKStepViewController *)stepViewController{
     
     NSMutableDictionary *wrapperDictionary = [NSMutableDictionary dictionary];
     wrapperDictionary[@"fitnessTest"] = dictionary;
-    
-    NSLog(@"Dictionary: %@", wrapperDictionary);
     
     result.data = [NSJSONSerialization dataWithJSONObject:wrapperDictionary options:(NSJSONWritingOptions)0 error:NULL];
     [result addToArchive:self.taskArchive error:NULL];

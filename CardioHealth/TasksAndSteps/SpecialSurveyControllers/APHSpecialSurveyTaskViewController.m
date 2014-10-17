@@ -8,7 +8,7 @@
 
 #import "APHSpecialSurveyTaskViewController.h"
 
-static NSString *MainStudyIdentifier = @"com.ymedialabs.sleepSurvey";
+static NSString *MainStudyIdentifier = @"com.specialSurvey.sleepSurvey";
 
 @interface APHSpecialSurveyTaskViewController ()
 @property (strong, nonatomic) RKDataArchive *taskArchive;
