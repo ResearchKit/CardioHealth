@@ -8,6 +8,7 @@
 
 #import "APHSignUpPermissionsViewController.h"
 #import <CoreMotion/CoreMotion.h>
+#import "APHAppDelegate.h"
 
 @interface APHSignUpPermissionsViewController ()
 
@@ -30,37 +31,55 @@
 {
     NSMutableArray *items = [NSMutableArray new];
     
-    {
-        APCTableViewPermissionsItem *item = [APCTableViewPermissionsItem new];
-        item.permissionType = kSignUpPermissionsTypeHealthKit;
-        item.caption = NSLocalizedString(@"Health Kit", @"");
-        item.detailText = NSLocalizedString(@"Lorem ipsum dolor sit amet, etos et ya consectetur adip isicing elit, sed.", @"");
-        [items addObject:item];
-    }
+    NSDictionary *initialOptions = ((APHAppDelegate *)[UIApplication sharedApplication].delegate).initializationOptions;
+    NSArray *servicesArray = initialOptions[kAppServicesListRequiredKey];
     
-    {
-        APCTableViewPermissionsItem *item = [APCTableViewPermissionsItem new];
-        item.permissionType = kSignUpPermissionsTypeLocation;
-        item.caption = NSLocalizedString(@"Location Services", @"");
-        item.detailText = NSLocalizedString(@"Lorem ipsum dolor sit amet, etos et ya consectetur adip isicing elit, sed.", @"");
-        [items addObject:item];
-    }
-    
-    {
-        APCTableViewPermissionsItem *item = [APCTableViewPermissionsItem new];
-        item.permissionType = kSignUpPermissionsTypePushNotifications;
-        item.caption = NSLocalizedString(@"Push Notifications", @"");
-        item.detailText = NSLocalizedString(@"Lorem ipsum dolor sit amet, etos et ya consectetur adip isicing elit, sed.", @"");
-        [items addObject:item];
-    }
-    
-    {
-        if ([CMMotionActivityManager isActivityAvailable]){
-            APCTableViewPermissionsItem *item = [APCTableViewPermissionsItem new];
-            item.permissionType = kSignUpPermissionsTypeCoremotion;
-            item.caption = NSLocalizedString(@"Core Motion", @"");
-            item.detailText = NSLocalizedString(@"Lorem ipsum dolor sit amet, etos et ya consectetur adip isicing elit, sed.", @"");
-            [items addObject:item];
+    for (NSNumber *type in servicesArray) {
+        
+        APCSignUpPermissionsType permissionType = type.integerValue;
+        
+        switch (permissionType) {
+            case kSignUpPermissionsTypeHealthKit:
+            {
+                APCTableViewPermissionsItem *item = [APCTableViewPermissionsItem new];
+                item.permissionType = kSignUpPermissionsTypeHealthKit;
+                item.caption = NSLocalizedString(@"Health Kit", @"");
+                item.detailText = NSLocalizedString(@"Lorem ipsum dolor sit amet, etos et ya consectetur adip isicing elit, sed.", @"");
+                [items addObject:item];
+            }
+                break;
+            case kSignUpPermissionsTypeLocation:
+            {
+                APCTableViewPermissionsItem *item = [APCTableViewPermissionsItem new];
+                item.permissionType = kSignUpPermissionsTypeLocation;
+                item.caption = NSLocalizedString(@"Location Services", @"");
+                item.detailText = NSLocalizedString(@"Lorem ipsum dolor sit amet, etos et ya consectetur adip isicing elit, sed.", @"");
+                [items addObject:item];
+            }
+                break;
+            case kSignUpPermissionsTypeCoremotion:
+            {
+                if ([CMMotionActivityManager isActivityAvailable]){
+                    APCTableViewPermissionsItem *item = [APCTableViewPermissionsItem new];
+                    item.permissionType = kSignUpPermissionsTypeCoremotion;
+                    item.caption = NSLocalizedString(@"Core Motion", @"");
+                    item.detailText = NSLocalizedString(@"Lorem ipsum dolor sit amet, etos et ya consectetur adip isicing elit, sed.", @"");
+                    [items addObject:item];
+                }
+            }
+                break;
+            case kSignUpPermissionsTypePushNotifications:
+            {
+                APCTableViewPermissionsItem *item = [APCTableViewPermissionsItem new];
+                item.permissionType = kSignUpPermissionsTypePushNotifications;
+                item.caption = NSLocalizedString(@"Push Notifications", @"");
+                item.detailText = NSLocalizedString(@"Lorem ipsum dolor sit amet, etos et ya consectetur adip isicing elit, sed.", @"");
+                [items addObject:item];
+            }
+                break;
+                
+            default:
+                break;
         }
     }
     
