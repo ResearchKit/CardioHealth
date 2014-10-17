@@ -270,11 +270,13 @@
             </objects>
             <point key="canvasLocation" x="1287" y="486"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Profile-->
         <scene sceneID="wvb-eI-iA9">
             <objects>
                 <navigationController id="w28-Mt-EQV" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Profile" id="KMJ-VK-MGx"/>
                     <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="568"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="qgd-qc-oo8">
