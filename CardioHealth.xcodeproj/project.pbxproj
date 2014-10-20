@@ -34,7 +34,6 @@
 		F55BBE5819D362D0003CA0F9 /* RKStep+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = F55BBDDD19D362D0003CA0F9 /* RKStep+Description.m */; };
 		F55BBE6119D362D0003CA0F9 /* APHTasksAndSchedules.json in Resources */ = {isa = PBXBuildFile; fileRef = F55BBDF119D362D0003CA0F9 /* APHTasksAndSchedules.json */; };
 		F55BBE6219D362D0003CA0F9 /* JSON_READ_ME in Resources */ = {isa = PBXBuildFile; fileRef = F55BBDF219D362D0003CA0F9 /* JSON_READ_ME */; };
-		F55BBE6319D362D0003CA0F9 /* sleepSurvey.json in Resources */ = {isa = PBXBuildFile; fileRef = F55BBDF319D362D0003CA0F9 /* sleepSurvey.json */; };
 		F55BBE6519D362D0003CA0F9 /* APHAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F55BBDF819D362D0003CA0F9 /* APHAppDelegate.m */; };
 		F55BBE6619D362D0003CA0F9 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F55BBDF919D362D0003CA0F9 /* LaunchScreen.xib */; };
 		F55BBE6719D362D0003CA0F9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F55BBDFA19D362D0003CA0F9 /* Main.storyboard */; };
@@ -161,7 +160,6 @@
 		F55BBDDD19D362D0003CA0F9 /* RKStep+Description.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RKStep+Description.m"; sourceTree = "<group>"; };
 		F55BBDF119D362D0003CA0F9 /* APHTasksAndSchedules.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = APHTasksAndSchedules.json; sourceTree = "<group>"; };
 		F55BBDF219D362D0003CA0F9 /* JSON_READ_ME */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = JSON_READ_ME; sourceTree = "<group>"; };
-		F55BBDF319D362D0003CA0F9 /* sleepSurvey.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sleepSurvey.json; sourceTree = "<group>"; };
 		F55BBDF719D362D0003CA0F9 /* APHAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHAppDelegate.h; sourceTree = "<group>"; };
 		F55BBDF819D362D0003CA0F9 /* APHAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = APHAppDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		F55BBDF919D362D0003CA0F9 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
@@ -368,7 +366,6 @@
 				F573809219E45D62008A8354 /* StudyOverview.json */,
 				F55BBDF119D362D0003CA0F9 /* APHTasksAndSchedules.json */,
 				F55BBDF219D362D0003CA0F9 /* JSON_READ_ME */,
-				F55BBDF319D362D0003CA0F9 /* sleepSurvey.json */,
 			);
 			path = JSONs;
 			sourceTree = "<group>";
@@ -706,7 +703,6 @@
 				5BB6471E19F1C07900AA30AA /* temp.storyboard in Resources */,
 				7B451CC419EC91680015BD76 /* APHImportantDetailsViewController.xib in Resources */,
 				7B41049F19E5E46800592B96 /* APHFitnessSixMinuteFitnessTestView.xib in Resources */,
-				F55BBE6319D362D0003CA0F9 /* sleepSurvey.json in Resources */,
 				F55BBE6619D362D0003CA0F9 /* LaunchScreen.xib in Resources */,
 				7B4104A119E5E46800592B96 /* APHFitnessTestRestComfortablyView.xib in Resources */,
 				F5F6450A19D35BA2004CFBB2 /* Images.xcassets in Resources */,
