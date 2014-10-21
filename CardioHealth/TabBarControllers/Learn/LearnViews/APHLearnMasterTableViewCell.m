@@ -7,7 +7,7 @@
 //
 
 #import "APHLearnMasterTableViewCell.h"
-#import "UIColor+CardioHealth.h"
+@import APCAppleCore;
 
 static CGFloat kReadMoreButtonBorderWidth = 1.0f;
 
@@ -22,12 +22,12 @@ static CGFloat kReadMoreButtonBorderWidth = 1.0f;
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    [self.titleLabel setTextColor:[UIColor parkinsonBlackColor]];
-    [self.descriptionLabel setTextColor:[UIColor parkinsonLightGrayColor]];
+    [self.titleLabel setTextColor:[UIColor appSecondaryColor1]];
+    [self.descriptionLabel setTextColor:[UIColor appSecondaryColor3]];
     
     self.readMoreButton.layer.cornerRadius = CGRectGetHeight(self.readMoreButton.bounds)/2;
     self.readMoreButton.layer.borderWidth = kReadMoreButtonBorderWidth;
-    self.readMoreButton.layer.borderColor = [UIColor parkinsonLightGrayColor].CGColor;
+    self.readMoreButton.layer.borderColor = [UIColor appSecondaryColor3].CGColor;
     
 }
 

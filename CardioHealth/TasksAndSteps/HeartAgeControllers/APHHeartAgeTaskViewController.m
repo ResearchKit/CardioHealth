@@ -18,9 +18,7 @@ static NSString *kHeartAgeSummary = @"HeartAgeSummary";
 @interface APHHeartAgeTaskViewController ()
 
 @property (nonatomic, strong) NSDictionary *heartAgeInfo;
-
 @property (strong, nonatomic) RKDataArchive *taskArchive;
-
 
 @end
 
@@ -264,15 +262,6 @@ static NSString *kHeartAgeSummary = @"HeartAgeSummary";
 #pragma  mark  - TaskViewController delegates
 /*********************************************************************************/
 
-- (void)stepViewControllerDidFinish:(RKStepViewController *)stepViewController navigationDirection:(RKStepViewControllerNavigationDirection)direction
-{
-    [super stepViewControllerDidFinish:stepViewController navigationDirection:direction];
-    
-    NSLog(@"Finished Step: %@", stepViewController.step.identifier);
-}
-
-
-#pragma  mark  -  Task View Controller Delegate Methods
 - (void)taskViewControllerDidFail: (RKTaskViewController *)taskViewController withError:(NSError*)error{
     
     [self.taskArchive resetContent];
@@ -362,6 +351,19 @@ static NSString *kHeartAgeSummary = @"HeartAgeSummary";
     return stepVC;
 }
 
+
+/*********************************************************************************/
+#pragma mark - StepViewController Delegate Methods
+/*********************************************************************************/
+
+- (void)stepViewControllerWillBePresented:(RKStepViewController *)viewController
+{
+    
+    viewController.skipButton = nil;
+    
+}
+
+
 - (void)taskViewController:(RKTaskViewController *)taskViewController didProduceResult:(RKSurveyResult *)result
 {
     // We need to create three question results that will hold the value of Heart Age,
@@ -408,5 +410,4 @@ static NSString *kHeartAgeSummary = @"HeartAgeSummary";
 
     [super taskViewController:taskViewController didProduceResult:result];
 }
-
 @end

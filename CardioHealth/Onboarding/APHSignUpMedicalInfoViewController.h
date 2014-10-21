@@ -8,6 +8,6 @@
 
 @import APCAppleCore;
 
-@interface APHSignUpMedicalInfoViewController : APCSignUpUserInfoViewController
+@interface APHSignUpMedicalInfoViewController : APCSignUpInfoViewController
 
 @end

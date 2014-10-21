@@ -20,12 +20,6 @@ static NSString *const kVideoShownKey = @"VideoShown";
     // Do any additional setup after loading the view.
 }
 
--(void) viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    self.moviePlayer.scalingMode = MPMovieScalingModeAspectFill;
-}
-
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
@@ -34,9 +28,15 @@ static NSString *const kVideoShownKey = @"VideoShown";
     
 }
 
+-(void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.moviePlayer.scalingMode = MPMovieScalingModeAspectFill;
+}
+
 - (void) skip {
-    
-    [self.navigationController pushViewController:[APHStudyOverviewViewController new] animated:YES];
+    APHStudyOverviewViewController * vc = [[UIStoryboard storyboardWithName:@"APHOnboarding" bundle:nil] instantiateViewControllerWithIdentifier:@"StudyOverviewVC"];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

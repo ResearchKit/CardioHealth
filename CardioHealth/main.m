@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "APHCardioHealthAppDelegate.h"
+#import "APHAppDelegate.h"
 
 int main(int argc, char * argv[]) {
     @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([APHCardioHealthAppDelegate class]));
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([APHAppDelegate class]));
     }
 }
