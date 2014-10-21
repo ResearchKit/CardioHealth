@@ -20,14 +20,6 @@
 
 #pragma mark - Init
 
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        [self prepareFields];
-    }
-    return self;
-}
-
 - (void) prepareFields {
     NSMutableArray *items = [NSMutableArray array];
     NSMutableArray *itemsOrder = [NSMutableArray new];
@@ -35,11 +27,11 @@
     {
         APCTableViewCustomPickerItem *field = [APCTableViewCustomPickerItem new];
         field.style = UITableViewCellStyleValue1;
+        field.identifier = kAPCDefaultTableViewCellIdentifier;
         field.selectionStyle = UITableViewCellSelectionStyleGray;
         field.caption = NSLocalizedString(@"Medical Conditions", @"");
         field.detailDiscloserStyle = YES;
         field.pickerData = @[ [APCUser medicalConditions] ];
-        
         if (self.user.medicalConditions) {
             field.selectedRowIndices = @[ @([field.pickerData[0] indexOfObject:self.user.medicalConditions]) ];
         }
@@ -54,6 +46,7 @@
     {
         APCTableViewCustomPickerItem *field = [APCTableViewCustomPickerItem new];
         field.style = UITableViewCellStyleValue1;
+        field.identifier = kAPCDefaultTableViewCellIdentifier;
         field.selectionStyle = UITableViewCellSelectionStyleGray;
         field.caption = NSLocalizedString(@"Medication", @"");
         field.detailDiscloserStyle = YES;
@@ -73,6 +66,7 @@
     {
         APCTableViewCustomPickerItem *field = [APCTableViewCustomPickerItem new];
         field.style = UITableViewCellStyleValue1;
+        field.identifier = kAPCDefaultTableViewCellIdentifier;
         field.selectionStyle = UITableViewCellSelectionStyleGray;
         field.caption = NSLocalizedString(@"Blood Type", @"");
         field.detailDiscloserStyle = YES;
@@ -86,6 +80,7 @@
     {
         APCTableViewCustomPickerItem *field = [APCTableViewCustomPickerItem new];
         field.style = UITableViewCellStyleValue1;
+        field.identifier = kAPCDefaultTableViewCellIdentifier;
         field.selectionStyle = UITableViewCellSelectionStyleGray;
         field.caption = NSLocalizedString(@"Height", @"");
         field.detailDiscloserStyle = YES;
@@ -108,8 +103,9 @@
     {
         APCTableViewTextFieldItem *field = [APCTableViewTextFieldItem new];
         field.style = UITableViewCellStyleValue1;
+        field.identifier = kAPCTextFieldTableViewCellIdentifier;
         field.caption = NSLocalizedString(@"Weight", @"");
-        field.placeholder = NSLocalizedString(@"lb", @"");
+        field.placeholder = NSLocalizedString(@"add weight", @"");
         field.regularExpression = kAPCMedicalInfoItemWeightRegEx;
         field.value = [NSString stringWithFormat:@"%.1f", [APCUser weightInPounds:self.user.weight]];
         field.keyboardType = UIKeyboardTypeNumberPad;
@@ -122,12 +118,12 @@
     {
         APCTableViewDatePickerItem *field = [APCTableViewDatePickerItem new];
         field.style = UITableViewCellStyleValue1;
+        field.identifier = kAPCDefaultTableViewCellIdentifier;
         field.selectionStyle = UITableViewCellSelectionStyleGray;
         field.caption = NSLocalizedString(@"What time do you wake up?", @"");
         field.placeholder = NSLocalizedString(@"7:00 AM", @"");
-        field.identifier = NSStringFromClass([APCTableViewDatePickerItem class]);
         field.datePickerMode = UIDatePickerModeTime;
-        field.dateFormat = kAPCMedicalInfoItemSleepTimeFormate;
+        field.dateFormat = kAPCMedicalInfoItemSleepTimeFormat;
         field.detailDiscloserStyle = YES;
         
         if (self.user.sleepTime) {
@@ -141,12 +137,12 @@
     {
         APCTableViewDatePickerItem *field = [APCTableViewDatePickerItem new];
         field.style = UITableViewCellStyleValue1;
+        field.identifier = kAPCDefaultTableViewCellIdentifier;
         field.selectionStyle = UITableViewCellSelectionStyleGray;
         field.caption = NSLocalizedString(@"What time do you go to sleep?", @"");
         field.placeholder = NSLocalizedString(@"9:30 PM", @"");
-        field.identifier = NSStringFromClass([APCTableViewDatePickerItem class]);
         field.datePickerMode = UIDatePickerModeTime;
-        field.dateFormat = kAPCMedicalInfoItemSleepTimeFormate;
+        field.dateFormat = kAPCMedicalInfoItemSleepTimeFormat;
         field.detailDiscloserStyle = YES;
         
         if (self.user.wakeUpTime) {
@@ -161,7 +157,6 @@
     self.itemsOrder = itemsOrder;
 }
 
-
 #pragma mark - View Life Cycle
 
 - (void)viewDidLoad {
@@ -169,9 +164,8 @@
     
     self.tableView.tableHeaderView = nil;
     
-    [self addNavigationItems];
+    [self prepareFields];
     [self setupProgressBar];
-    [self addFooterView];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -182,27 +176,8 @@
 
 #pragma mark - UIMethods
 
-- (void) addNavigationItems {
-    
-    UIBarButtonItem *nextBarButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Next", @"") style:UIBarButtonItemStylePlain target:self action:@selector(signup)];
-    self.navigationItem.rightBarButtonItem = nextBarButton;
-}
-
 - (void) setupProgressBar {
     [self.stepProgressBar setCompletedSteps:0 animation:NO];
-    
-    [self setStepNumber:2 title:NSLocalizedString(@"Medical Information", @"")];
-    self.stepProgressBar.rightLabel.text = NSLocalizedString(@"optional", @"");
-}
-
-- (void) addFooterView {
-    UILabel *label = [UILabel new];
-    label.frame = CGRectMake(0, 0, self.tableView.width, 44);
-    label.font = [UITableView footerFont];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.textColor = [UITableView footerTextColor];
-    label.text = NSLocalizedString(@"All fields on this screen are optional.", @"");
-    self.tableView.tableFooterView = label;
 }
 
 
@@ -273,10 +248,10 @@
 #endif
 }
 
-- (void) next {
+- (IBAction) next {
     [self loadProfileValuesInModel];
     
-    APCSignupTouchIDViewController *touchIDViewController = [[APCSignupTouchIDViewController alloc] initWithNibName:@"APCSignupTouchIDViewController" bundle:[NSBundle appleCoreBundle]];
+    APCSignupTouchIDViewController *touchIDViewController = [[UIStoryboard storyboardWithName:@"APHOnboarding" bundle:nil] instantiateViewControllerWithIdentifier:@"PasscodeVC"];
     touchIDViewController.user = self.user;
     [self.navigationController pushViewController:touchIDViewController animated:YES];
 }

@@ -18,6 +18,7 @@
     //TODO: Sammple Value. Remove later.
     self.progressView.progress = 0.75;
     self.progressView.progressLabel.textColor = [UIColor blackColor];
+    self.progressView.tintColor = [UIColor appPrimaryColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

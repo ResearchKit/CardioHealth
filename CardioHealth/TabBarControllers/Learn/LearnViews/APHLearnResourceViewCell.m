@@ -7,15 +7,15 @@
 //
 
 #import "APHLearnResourceViewCell.h"
-#import "UIColor+CardioHealth.h"
+@import APCAppleCore;
 
 @implementation APHLearnResourceViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    [self.titleLabel setTextColor:[UIColor parkinsonBlackColor]];
-    [self.descriptionLabel setTextColor:[UIColor parkinsonLightGrayColor]];
+    [self.titleLabel setTextColor:[UIColor appSecondaryColor1]];
+    [self.descriptionLabel setTextColor:[UIColor appSecondaryColor3]];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
