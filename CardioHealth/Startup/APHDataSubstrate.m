@@ -17,34 +17,8 @@ static NSTimeInterval LOCATION_COLLECTION_INTERVAL = 5 * 60.0 * 60.0;
     if (self.currentUser.isConsented) {
         NSError *error = nil;
         {
-            HKQuantityType *quantityType = (HKQuantityType*)[HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierStepCount];
-            RKHealthCollector *healthCollector = [self.study addHealthCollectorWithSampleType:quantityType unit:[HKUnit countUnit] startDate:nil error:&error];
-            if (!healthCollector)
-            {
-                NSLog(@"Error creating health collector: %@", error);
-                [self.studyStore removeStudy:self.study error:nil];
-                goto errReturn;
-            }
-            
-            HKQuantityType *quantityType2 = (HKQuantityType*)[HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierBloodGlucose];
-            HKUnit *unit = [HKUnit unitFromString:@"mg/dL"];
-            RKHealthCollector *glucoseCollector = [self.study addHealthCollectorWithSampleType:quantityType2 unit:unit startDate:nil error:&error];
-            
-            if (!glucoseCollector)
-            {
-                NSLog(@"Error creating glucose collector: %@", error);
-                [self.studyStore removeStudy:self.study error:nil];
-                goto errReturn;
-            }
-            
-            HKCorrelationType *bpType = (HKCorrelationType *)[HKCorrelationType correlationTypeForIdentifier:HKCorrelationTypeIdentifierBloodPressure];
-            RKHealthCorrelationCollector *bpCollector = [self.study addHealthCorrelationCollectorWithCorrelationType:bpType sampleTypes:@[[HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierBloodPressureDiastolic], [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierBloodPressureSystolic]] units:@[[HKUnit unitFromString:@"mmHg"], [HKUnit unitFromString:@"mmHg"]] startDate:nil error:&error];
-            if (!bpCollector)
-            {
-                NSLog(@"Error creating BP collector: %@", error);
-                [self.studyStore removeStudy:self.study error:nil];
-                goto errReturn;
-            }
+            //TODO Need to setup a mechanism to gather sleep data like passive data collection.
+            //           HKCategorySample *sleepSampleType = [HKCategorySample categorySampleWithType:[HKCategoryType categoryTypeForIdentifier:HKCategoryTypeIdentifierSleepAnalysis] value:HKCategoryValueSleepAnalysisAsleep startDate:[NSDate date] endDate:[NSDate date]];
             
             RKMotionActivityCollector *motionCollector = [self.study addMotionActivityCollectorWithStartDate:nil error:&error];
             if (!motionCollector)
@@ -54,6 +28,15 @@ static NSTimeInterval LOCATION_COLLECTION_INTERVAL = 5 * 60.0 * 60.0;
                 goto errReturn;
             }
 
+            HKQuantityType *quantityType = (HKQuantityType*)[HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierStepCount];
+            RKHealthCollector *healthCollector = [self.study addHealthCollectorWithSampleType:quantityType unit:[HKUnit countUnit] startDate:nil error:&error];
+            if (!healthCollector)
+            {
+                NSLog(@"Error creating health collector: %@", error);
+                [self.studyStore removeStudy:self.study error:nil];
+                goto errReturn;
+            }
+            
             //Collectors below added specifically for the cardio health application.
             HKQuantityType *flightsClimbedQuantityType = (HKQuantityType*)[HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierFlightsClimbed];
             RKHealthCollector *flightsClimbedHealthCollector = [self.study addHealthCollectorWithSampleType:flightsClimbedQuantityType unit:[HKUnit countUnit] startDate:nil error:&error];
@@ -81,10 +64,6 @@ static NSTimeInterval LOCATION_COLLECTION_INTERVAL = 5 * 60.0 * 60.0;
                 [self.studyStore removeStudy:self.study error:nil];
                 goto errReturn;
             }
-            
-            //Set Up Passive Location Collection
-            self.passiveLocationTracking = [[APCPassiveLocationTracking alloc] initWithTimeInterval:LOCATION_COLLECTION_INTERVAL];
-            [self.passiveLocationTracking start];
         }
         
     errReturn:
