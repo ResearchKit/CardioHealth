@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 Henry McGilton. All rights reserved.
 //
 
-#import "APHDashboardProgressViewCell.h"
 @import APCAppleCore;
+#import "APHDashboardProgressViewCell.h"
 
 @implementation APHDashboardProgressViewCell
 

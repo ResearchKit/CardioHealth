@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 Henry McGilton. All rights reserved.
 //
 
-#import "APHDashboardGraphViewCell.h"
 @import APCAppleCore;
+#import "APHDashboardGraphViewCell.h"
 
 @implementation APHDashboardGraphViewCell
 

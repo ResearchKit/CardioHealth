@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Y Media Labs. All rights reserved.
 //
 
+@import APCAppleCore;
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
-@import APCAppleCore;
 /**
  
  Fitness test distance tracker is going to be used to judge distance between all geolocation points beginning from start: and ending at stop:.
