@@ -6,12 +6,12 @@
 //  Copyright (c) 2014 Trilithon Software. All rights reserved.
 //
 
+@import APCAppleCore;
 /* Controllers */
 #import "APHDashboardViewController.h"
 #import "APHEditSectionsViewController.h"
 
 /* Views */
-@import APCAppleCore;
 #import "APHDashboardGraphViewCell.h"
 #import "APHDashboardMessageViewCell.h"
 #import "APHDashboardProgressViewCell.h"
