@@ -7,23 +7,27 @@
 //
 
 #import "APHFitnessTaskViewController.h"
-
+#import "APHCommonInstructionalViewController.h"
+#import "APHFitnessTestSummaryViewController.h"
 
 static NSString *MainStudyIdentifier = @"com.cardioVascular.fitnessTest";
 static NSString *kdataResultsFileName = @"FitnessTestResult.json";
-
+static NSInteger kCountDownTimer = 1.0;
 static  NSString  *kFitnessTestStep101 = @"FitnessStep101";
 static  NSString  *kFitnessTestStep102 = @"FitnessStep102";
 static  NSString  *kFitnessTestStep103 = @"FitnessStep103";
 static  NSString  *kFitnessTestStep104 = @"FitnessStep104";
 static  NSString  *kFitnessTestStep105 = @"FitnessStep105";
 static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
+
 @interface APHFitnessTaskViewController ()
 
 @property (strong, nonatomic) APHFitnessTestHealthKitSampleTypeTracker *healthKitSampleTracker;
 @property (strong, nonatomic) APHFitnessTestDistanceTracker *distanceTracker;
 
 @property (strong, nonatomic) RKDataArchive *taskArchive;
+
+@property (strong, nonatomic) APHCommonInstructionalViewController *instructionsController;
 @end
 
 @implementation APHFitnessTaskViewController
@@ -76,7 +80,7 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
         RKActiveStep* step = [[RKActiveStep alloc] initWithIdentifier:kFitnessTestStep102 name:@"active step"];
         step.caption = NSLocalizedString(@"Fitness Test", @"");
         step.text = NSLocalizedString(@"Get Ready!", @"");
-        step.countDown = 5.0;
+        step.countDown = kCountDownTimer;
         step.useNextForSkip = NO;
         
         [steps addObject:step];
@@ -185,18 +189,17 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
 willPresentStepViewController:(RKStepViewController *)stepViewController{
     
     if ([stepViewController.step.identifier isEqualToString:kFitnessTestStep101]) {
-        UIView* customView = [UIView new];
-        customView.backgroundColor = [UIColor cyanColor];
+        UIView* customView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 400.0)];
         
         // Have the custom view request the space it needs.
         // A little tricky because we need to let it size to fit if there's not enough space.
-        [customView setTranslatesAutoresizingMaskIntoConstraints:NO];
-        
-        NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[c(>=160)]" options:0 metrics:nil views:@{@"c":customView}];
-        for (NSLayoutConstraint *constraint in verticalConstraints)
-        {
-            constraint.priority = UILayoutPriorityFittingSizeLevel;
-        }
+//        [customView setTranslatesAutoresizingMaskIntoConstraints:NO];
+//        
+//        NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[c(>=160)]" options:0 metrics:nil views:@{@"c":customView}];
+//        for (NSLayoutConstraint *constraint in verticalConstraints)
+//        {
+//            constraint.priority = UILayoutPriorityFittingSizeLevel;
+//        }
         
 //        [NSLayoutConstraint constraintsWithVisualFormat: @"V: [button]-20-[bottomGuide]"
 //                                                options: 0
@@ -204,8 +207,8 @@ willPresentStepViewController:(RKStepViewController *)stepViewController{
 //                                                  views: stepViewController.continueButton]];
 
         
-        [customView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[c(>=280)]" options:0 metrics:nil views:@{@"c":customView}]];
-        [customView addConstraints:verticalConstraints];
+//        [customView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[c(>=280)]" options:0 metrics:nil views:@{@"c":customView}]];
+//        [customView addConstraints:verticalConstraints];
         
         [(RKActiveStepViewController*)stepViewController setCustomView:customView];
 
@@ -220,7 +223,46 @@ willPresentStepViewController:(RKStepViewController *)stepViewController{
         
         stepViewController.learnMoreButton =[[UIBarButtonItem alloc] initWithTitle:@"View Important Details" style:stepViewController.continueButton.style target:self action:@selector(importantDetails:)];
         
+        
+        
         stepViewController.continueButton = [[UIBarButtonItem alloc] initWithTitle:@"Get Started" style:stepViewController.continueButton.style target:stepViewController.continueButton.target action:stepViewController.continueButton.action];
+
+        
+
+        
+        
+        
+        NSArray  *introImageNames = @[ @"interval.instructions.01@2x", @"interval.instructions.02@2x", @"interval.instructions.03@2x", @"interval.instructions.04@2x" ];
+        
+        NSArray  *paragraphs = @[
+                                 @"For this task, please lay your phone on a flat surface to produce the most accurate results.",
+                                 @"Once you tap “Get Started”, you will have five seconds before the first interval set appears.",
+                                 @"Next, use two fingers on the same hand to alternately tap the buttons for 20 seconds.  Time your taps to be as consistent as possible.",
+                                 @"After the intervals are finished, your results will be visible on the next screen."
+                                 ];
+        
+        //self.introHeadingCaption.text = kIntroHeadingCaption;
+        
+        self.instructionsController = [[APHCommonInstructionalViewController alloc] initWithNibName:nil bundle:nil];
+        [customView addSubview:self.instructionsController.view];
+        [self.instructionsController setupWithInstructionalImages:introImageNames andParagraphs:paragraphs];
+        
+        
+        
+        
+        
+        
+        
+
+       
+        
+        
+        
+        
+        
+        
+        
+        
             
         stepViewController.skipButton = nil;
         
@@ -330,6 +372,25 @@ willPresentStepViewController:(RKStepViewController *)stepViewController{
     }
     
     [super taskViewControllerDidComplete:taskViewController];
+}
+
+- (RKStepViewController *)taskViewController:(RKTaskViewController *)taskViewController viewControllerForStep:(RKStep *)step
+{
+    RKStepViewController *stepVC = nil;
+    
+    if (step.identifier == kFitnessTestStep106) {
+        
+        APHFitnessTestSummaryViewController *summaryViewController = [[APHFitnessTestSummaryViewController alloc] initWithNibName:@"APHFitnessTestSummaryViewController" bundle:nil];
+        
+        summaryViewController.resultCollector = self;
+        summaryViewController.delegate = self;
+        summaryViewController.step = step;
+        summaryViewController.taskProgress = 0.25;
+        
+        stepVC = summaryViewController;
+    }
+    
+    return stepVC;
 }
 
 /*********************************************************************************/

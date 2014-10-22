@@ -72,6 +72,12 @@ static NSString *const kVideoShownKey = @"VideoShown";
                                                             NSFontAttributeName : [UIFont appMediumFontWithSize:17.0f]
                                                             }];
     
+    //Set the appearance for all continue buttons
+    [[RKBoldTextCell appearance] setLabelTextColor:[UIColor whiteColor]];
+    [[RKBoldTextCell appearance] setBackgroundColor:[UIColor appPrimaryColor]];
+    [[RKBoldTextCell appearance] setTextAlignment:NSTextAlignmentCenter];
+    [[RKBoldTextCell appearance] setAccessoryType:UITableViewCellAccessoryNone];
+    
 }
 
 - (void) showOnBoarding
