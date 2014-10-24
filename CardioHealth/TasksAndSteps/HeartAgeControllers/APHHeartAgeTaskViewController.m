@@ -443,15 +443,6 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
     
     result.surveyResults = surveyQuestions;
     
-    
-    if ([result isKindOfClass:[RKSurveyResult class]]) {
-        RKSurveyResult* sresult = (RKSurveyResult*)result;
-        
-        for (RKQuestionResult* qr in sresult.surveyResults) {
-            NSLog(@"%@ = [%@] %@ ", [[qr itemIdentifier] stringValue], [qr.answer class], qr.answer);
-        }
-    }
-    
     [self sendResult:result];
 
     [super taskViewController:taskViewController didProduceResult:result];
