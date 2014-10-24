@@ -208,10 +208,9 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
         }
     }else{
         if (error) {
-            //TODO uncomment this because it should work.
-//            *error = [NSError errorWithDomain:RKErrorDomain
-//                                         code:RKErrorObjectNotFound
-//                                     userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(@"Records object is nil.", nil)}];
+            *error = [NSError errorWithDomain:RKErrorDomain
+                                         code:RKErrorObjectNotFound
+                                     userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(@"Records object is nil.", nil)}];
         }
         didStop = NO;
     }

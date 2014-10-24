@@ -25,10 +25,10 @@
 		7B4104A319E5E46800592B96 /* APHFitnessTestRestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B41049D19E5E46800592B96 /* APHFitnessTestRestView.xib */; };
 		7B451CC319EC91680015BD76 /* APHImportantDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B451CC119EC91680015BD76 /* APHImportantDetailsViewController.m */; };
 		7B451CC419EC91680015BD76 /* APHImportantDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B451CC219EC91680015BD76 /* APHImportantDetailsViewController.xib */; };
+		7B8E912A19F9B5BA0040F77F /* APHFitnessTestIntroStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B8E912819F9B5BA0040F77F /* APHFitnessTestIntroStepViewController.m */; };
+		7B8E912B19F9B5BA0040F77F /* APHFitnessTestIntroStepViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B8E912919F9B5BA0040F77F /* APHFitnessTestIntroStepViewController.xib */; };
 		7BC7213D19F7018700C70956 /* APHCommonInstructionalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC7213B19F7018700C70956 /* APHCommonInstructionalViewController.m */; };
 		7BC7213E19F7018700C70956 /* APHCommonInstructionalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BC7213C19F7018700C70956 /* APHCommonInstructionalViewController.xib */; };
-		7BC7214319F7022700C70956 /* APHIntervalTappingIntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC7214119F7022700C70956 /* APHIntervalTappingIntroViewController.m */; };
-		7BC7214419F7022700C70956 /* APHIntervalTappingIntroViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BC7214219F7022700C70956 /* APHIntervalTappingIntroViewController.xib */; };
 		7BC7214A19F7051600C70956 /* interval.instructions.01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BC7214619F7051600C70956 /* interval.instructions.01@2x.png */; };
 		7BC7214B19F7051600C70956 /* interval.instructions.02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BC7214719F7051600C70956 /* interval.instructions.02@2x.png */; };
 		7BC7214C19F7051600C70956 /* interval.instructions.03@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BC7214819F7051600C70956 /* interval.instructions.03@2x.png */; };
@@ -160,12 +160,12 @@
 		7B451CC019EC91680015BD76 /* APHImportantDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHImportantDetailsViewController.h; sourceTree = "<group>"; };
 		7B451CC119EC91680015BD76 /* APHImportantDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHImportantDetailsViewController.m; sourceTree = "<group>"; };
 		7B451CC219EC91680015BD76 /* APHImportantDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = APHImportantDetailsViewController.xib; sourceTree = "<group>"; };
+		7B8E912719F9B5BA0040F77F /* APHFitnessTestIntroStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHFitnessTestIntroStepViewController.h; sourceTree = "<group>"; };
+		7B8E912819F9B5BA0040F77F /* APHFitnessTestIntroStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHFitnessTestIntroStepViewController.m; sourceTree = "<group>"; };
+		7B8E912919F9B5BA0040F77F /* APHFitnessTestIntroStepViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = APHFitnessTestIntroStepViewController.xib; sourceTree = "<group>"; };
 		7BC7213A19F7018700C70956 /* APHCommonInstructionalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHCommonInstructionalViewController.h; sourceTree = "<group>"; };
 		7BC7213B19F7018700C70956 /* APHCommonInstructionalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHCommonInstructionalViewController.m; sourceTree = "<group>"; };
 		7BC7213C19F7018700C70956 /* APHCommonInstructionalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = APHCommonInstructionalViewController.xib; sourceTree = "<group>"; };
-		7BC7214019F7022700C70956 /* APHIntervalTappingIntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHIntervalTappingIntroViewController.h; sourceTree = "<group>"; };
-		7BC7214119F7022700C70956 /* APHIntervalTappingIntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHIntervalTappingIntroViewController.m; sourceTree = "<group>"; };
-		7BC7214219F7022700C70956 /* APHIntervalTappingIntroViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = APHIntervalTappingIntroViewController.xib; sourceTree = "<group>"; };
 		7BC7214619F7051600C70956 /* interval.instructions.01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "interval.instructions.01@2x.png"; sourceTree = "<group>"; };
 		7BC7214719F7051600C70956 /* interval.instructions.02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "interval.instructions.02@2x.png"; sourceTree = "<group>"; };
 		7BC7214819F7051600C70956 /* interval.instructions.03@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "interval.instructions.03@2x.png"; sourceTree = "<group>"; };
@@ -308,6 +308,7 @@
 				7B451CC019EC91680015BD76 /* APHImportantDetailsViewController.h */,
 				7B451CC119EC91680015BD76 /* APHImportantDetailsViewController.m */,
 				7B451CC219EC91680015BD76 /* APHImportantDetailsViewController.xib */,
+				7B8E912519F9B58D0040F77F /* Intro */,
 				7B41047319E5D94F00592B96 /* WalkingTestComponents */,
 				7B41049419E5E37700592B96 /* CustomViews */,
 				7BC7214E19F716C400C70956 /* Summary */,
@@ -344,6 +345,16 @@
 			name = CustomViews;
 			sourceTree = "<group>";
 		};
+		7B8E912519F9B58D0040F77F /* Intro */ = {
+			isa = PBXGroup;
+			children = (
+				7B8E912719F9B5BA0040F77F /* APHFitnessTestIntroStepViewController.h */,
+				7B8E912819F9B5BA0040F77F /* APHFitnessTestIntroStepViewController.m */,
+				7B8E912919F9B5BA0040F77F /* APHFitnessTestIntroStepViewController.xib */,
+			);
+			path = Intro;
+			sourceTree = "<group>";
+		};
 		7BC7213919F7018700C70956 /* Common Instructional View */ = {
 			isa = PBXGroup;
 			children = (
@@ -353,16 +364,6 @@
 				7BC7213C19F7018700C70956 /* APHCommonInstructionalViewController.xib */,
 			);
 			path = "Common Instructional View";
-			sourceTree = "<group>";
-		};
-		7BC7213F19F7022700C70956 /* ParkArchive2 */ = {
-			isa = PBXGroup;
-			children = (
-				7BC7214019F7022700C70956 /* APHIntervalTappingIntroViewController.h */,
-				7BC7214119F7022700C70956 /* APHIntervalTappingIntroViewController.m */,
-				7BC7214219F7022700C70956 /* APHIntervalTappingIntroViewController.xib */,
-			);
-			path = ParkArchive2;
 			sourceTree = "<group>";
 		};
 		7BC7214519F7051600C70956 /* intervalimages */ = {
@@ -538,7 +539,6 @@
 		F55BBE2219D362D0003CA0F9 /* TasksAndSteps */ = {
 			isa = PBXGroup;
 			children = (
-				7BC7213F19F7022700C70956 /* ParkArchive2 */,
 				7BC7213919F7018700C70956 /* Common Instructional View */,
 				7B41045519E5D94F00592B96 /* APHFitnessTest */,
 				F5481F0619E4820100D84617 /* HeartAgeControllers */,
@@ -765,10 +765,10 @@
 				F55BBE6A19D362D0003CA0F9 /* APHDashboard.storyboard in Resources */,
 				08D3A10619E4A08C00A3D20D /* HeartAgeSummary.storyboard in Resources */,
 				F55BBE6119D362D0003CA0F9 /* APHTasksAndSchedules.json in Resources */,
+				7B8E912B19F9B5BA0040F77F /* APHFitnessTestIntroStepViewController.xib in Resources */,
 				F5778E7519F0613D0079F1B2 /* APHOnboarding.storyboard in Resources */,
 				7BC7215319F7173D00C70956 /* APHFitnessTestSummaryViewController.xib in Resources */,
 				7BC7213E19F7018700C70956 /* APHCommonInstructionalViewController.xib in Resources */,
-				7BC7214419F7022700C70956 /* APHIntervalTappingIntroViewController.xib in Resources */,
 				F573809319E45D62008A8354 /* StudyOverview.json in Resources */,
 				F55BBE6219D362D0003CA0F9 /* JSON_READ_ME in Resources */,
 				7BC7214B19F7051600C70956 /* interval.instructions.02@2x.png in Resources */,
@@ -793,6 +793,7 @@
 			files = (
 				F55BBE7519D362D0003CA0F9 /* APHLearnDetailViewCell.m in Sources */,
 				F55BBE7819D362D0003CA0F9 /* APHLearnResourceViewCell.m in Sources */,
+				7B8E912A19F9B5BA0040F77F /* APHFitnessTestIntroStepViewController.m in Sources */,
 				F5778E8619F061B00079F1B2 /* APHProfieViewController.m in Sources */,
 				F573807419E45A0A008A8354 /* APHDataSubstrate.m in Sources */,
 				F5481F1419E4820100D84617 /* APHHeartAgeTaskViewController.m in Sources */,
@@ -833,7 +834,6 @@
 				F5778E7219F0613D0079F1B2 /* APHInclusionCriteriaViewController.m in Sources */,
 				7B41048F19E5D94F00592B96 /* APHFitnessTestDistanceTracker.m in Sources */,
 				F5778E7619F0613D0079F1B2 /* APHSignInViewController.m in Sources */,
-				7BC7214319F7022700C70956 /* APHIntervalTappingIntroViewController.m in Sources */,
 				F55BBE6B19D362D0003CA0F9 /* APHDashboardViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

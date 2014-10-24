@@ -8,6 +8,9 @@
 
 #import "APHFitnessTaskViewController.h"
 #import "APHCommonInstructionalViewController.h"
+
+#import "APHFitnessTestIntroStepViewController.h"
+
 #import "APHFitnessTestSummaryViewController.h"
 
 static NSString *MainStudyIdentifier = @"com.cardioVascular.fitnessTest";
@@ -66,12 +69,9 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
     NSMutableArray *steps = [[NSMutableArray alloc] init];
 
     {
-        //Introduction to fitness test
-        RKActiveStep* step = [[RKActiveStep alloc] initWithIdentifier:kFitnessTestStep101 name:@"active step"];
+        RKIntroductionStep *step = [[RKIntroductionStep alloc] initWithIdentifier:kFitnessTestStep101 name:@"Tap Intro"];
         step.caption = NSLocalizedString(@"Fitness Test", @"");
-        step.text = NSLocalizedString(@"Once you tap Get Started, you will have 5 seconds until this test begins tracking your movement.", @"");
-        step.useNextForSkip = NO;
-    
+        step.instruction = NSLocalizedString(@"Once you tap Get Started, you will have 5 seconds until this test begins tracking your movement.", @"");
         [steps addObject:step];
     }
     
@@ -91,8 +91,7 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
         //Walking 6 minutes
         RKActiveStep* step = [[RKActiveStep alloc] initWithIdentifier:kFitnessTestStep103 name:@"6 Minute Walk"];
         step.recorderConfigurations = @[[APHFitnessTestCustomRecorderConfiguration new]];
-        step.caption = NSLocalizedString(@"6 Minute Walk", @"");
-        step.text = NSLocalizedString(@"Walk 6 minutes.", @"");
+        step.caption = NSLocalizedString(@"Start Walking", @"");
         step.buzz = YES;
         step.vibration = YES;
         step.voicePrompt = step.text;
@@ -106,8 +105,8 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
         //Stop and sit in a comfortable position for 3 minutes
         RKActiveStep* step = [[RKActiveStep alloc] initWithIdentifier:kFitnessTestStep104 name:@"3 Minutes in a comfortable Position"];
         step.recorderConfigurations = @[[APHFitnessTestCustomRecorderConfiguration new]];
-        step.caption = NSLocalizedString(@"3 Minute Comfortable Position", @"");
-        step.text = NSLocalizedString(@"Rest 3 minutes in a comfortable position", @"");
+        step.caption = NSLocalizedString(@"Good Work!", @"");
+        step.text = NSLocalizedString(@"Stop walking, and sit in a comfortable position for 3 minutes.", @"");
         step.buzz = YES;
         step.vibration = YES;
         step.voicePrompt = step.text;
@@ -122,8 +121,8 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
         RKActiveStep* step = [[RKActiveStep alloc] initWithIdentifier:kFitnessTestStep105 name:@"3 Minutes in a resting Position"];
         step.recorderConfigurations = @[[APHFitnessTestCustomRecorderConfiguration new]];
         step.countDown = [[parameters numberForKey:@"FT3MinRest"] doubleValue];
-        step.caption = NSLocalizedString(@"3 Minute Rest", @"");
-        step.text = NSLocalizedString(@"Now rest 3 minutes.", @"");
+        step.caption = NSLocalizedString(@"Rest", @"");
+        step.text = NSLocalizedString(@"Sit in a comfortable position for 3 minutes.", @"");
         step.buzz = YES;
         step.vibration = YES;
         step.voicePrompt = step.text;
@@ -188,8 +187,8 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
 - (void)taskViewController:(RKTaskViewController *)taskViewController
 willPresentStepViewController:(RKStepViewController *)stepViewController{
     
-    if ([stepViewController.step.identifier isEqualToString:kFitnessTestStep101]) {
-        UIView* customView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 400.0)];
+    if ([stepViewController.step.identifier isEqualToString:@""]) {
+        //UIView* customView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 400.0)];
         
         // Have the custom view request the space it needs.
         // A little tricky because we need to let it size to fit if there's not enough space.
@@ -210,7 +209,7 @@ willPresentStepViewController:(RKStepViewController *)stepViewController{
 //        [customView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[c(>=280)]" options:0 metrics:nil views:@{@"c":customView}]];
 //        [customView addConstraints:verticalConstraints];
         
-        [(RKActiveStepViewController*)stepViewController setCustomView:customView];
+//        [(RKActiveStepViewController*)stepViewController setCustomView:customView];
 
         //TODO Leaving this here as a reference to creating custom bar buttons with ResearchKit
 // Set custom button on navi bar
@@ -232,38 +231,21 @@ willPresentStepViewController:(RKStepViewController *)stepViewController{
         
         
         
-        NSArray  *introImageNames = @[ @"interval.instructions.01@2x", @"interval.instructions.02@2x", @"interval.instructions.03@2x", @"interval.instructions.04@2x" ];
-        
-        NSArray  *paragraphs = @[
-                                 @"For this task, please lay your phone on a flat surface to produce the most accurate results.",
-                                 @"Once you tap “Get Started”, you will have five seconds before the first interval set appears.",
-                                 @"Next, use two fingers on the same hand to alternately tap the buttons for 20 seconds.  Time your taps to be as consistent as possible.",
-                                 @"After the intervals are finished, your results will be visible on the next screen."
-                                 ];
+//        NSArray  *introImageNames = @[ @"interval.instructions.01@2x", @"interval.instructions.02@2x", @"interval.instructions.03@2x", @"interval.instructions.04@2x" ];
+//        
+//        NSArray  *paragraphs = @[
+//                                 @"For this task, please lay your phone on a flat surface to produce the most accurate results.",
+//                                 @"Once you tap “Get Started”, you will have five seconds before the first interval set appears.",
+//                                 @"Next, use two fingers on the same hand to alternately tap the buttons for 20 seconds.  Time your taps to be as consistent as possible.",
+//                                 @"After the intervals are finished, your results will be visible on the next screen."
+//                                 ];
         
         //self.introHeadingCaption.text = kIntroHeadingCaption;
         
-        self.instructionsController = [[APHCommonInstructionalViewController alloc] initWithNibName:nil bundle:nil];
-        [customView addSubview:self.instructionsController.view];
-        [self.instructionsController setupWithInstructionalImages:introImageNames andParagraphs:paragraphs];
+//        self.instructionsController = [[APHCommonInstructionalViewController alloc] initWithNibName:nil bundle:nil];
+//        [customView addSubview:self.instructionsController.view];
+//        [self.instructionsController setupWithInstructionalImages:introImageNames andParagraphs:paragraphs];
         
-        
-        
-        
-        
-        
-        
-
-       
-        
-        
-        
-        
-        
-        
-        
-        
-            
         stepViewController.skipButton = nil;
         
     }else if ([stepViewController.step.identifier isEqualToString:kFitnessTestStep102]) {
@@ -378,7 +360,18 @@ willPresentStepViewController:(RKStepViewController *)stepViewController{
 {
     RKStepViewController *stepVC = nil;
     
-    if (step.identifier == kFitnessTestStep106) {
+    if (step.identifier == kFitnessTestStep101) {
+        NSDictionary  *controllers = @{ kFitnessTestStep101 : [APHFitnessTestIntroStepViewController class] };
+        
+        Class  aClass = [controllers objectForKey:step.identifier];
+//        APCStepViewController  *controller = [[aClass alloc] initWithNibName:nil bundle:nil];
+//        controller.resultCollector = self;
+//        controller.delegate = self;
+//        controller.title = @"Interval Tapping";
+//        controller.step = step;
+//        
+//        stepVC = controller;
+    }   else if (step.identifier == kFitnessTestStep106) {
         
         APHFitnessTestSummaryViewController *summaryViewController = [[APHFitnessTestSummaryViewController alloc] initWithNibName:@"APHFitnessTestSummaryViewController" bundle:nil];
         
