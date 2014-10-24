@@ -342,12 +342,36 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
         NSMutableDictionary *surveyResultsDictionary = [NSMutableDictionary dictionary];
         
         // Normalize survey results into dictionary.
-        for (RKQuestionResult *questionResult in taskViewController.surveyResults) {
-            NSString *questionIdentifier = [[questionResult itemIdentifier] stringValue];
-            if ([questionIdentifier isEqualToString:kHeartAgekHeartAgeTestDataEthnicity] || [questionIdentifier isEqualToString:kHeartAgekHeartAgeTestDataGender]) {
-                [surveyResultsDictionary setObject:(NSString *)questionResult.answer forKey:questionIdentifier];
-            } else {
-                [surveyResultsDictionary setObject:(NSNumber *)questionResult.answer forKey:questionIdentifier];
+        for (RKSurveyResult *survey in taskViewController.surveyResults) {
+            for (RKQuestionResult *questionResult in survey.surveyResults) {
+                // Since we are using form steps and form items, the identifiers
+                // for a question are now in a formStepIdentifier.formItemIdentifier format.
+                NSString *formStepAndFormItemIdentifier = [[questionResult itemIdentifier] stringValue];
+                
+                // we will only use the last part of the identifier, that is the 'formItemIdentifier'
+                // because it is the unique identifier that is provided by the Heart Age Calculations
+                // class and the methods in that class expect this identifier as the element key of the
+                // dictionary that is passed to it.
+                NSString *questionIdentifier = [[formStepAndFormItemIdentifier componentsSeparatedByString:@"."] lastObject];
+                
+                if ([questionIdentifier isEqualToString:kHeartAgeTestDataEthnicity]) {
+                    [surveyResultsDictionary setObject:(NSString *)questionResult.answer forKey:questionIdentifier];
+                } else if ([questionIdentifier isEqualToString:kHeartAgeTestDataGender]) {
+                    [surveyResultsDictionary setObject:((NSInteger)questionResult.answer == HKBiologicalSexFemale) ? kHeartAgeTestDataGenderFemale : kHeartAgeTestDataGenderMale
+                                                forKey:questionIdentifier];
+                } else if ([questionIdentifier isEqualToString:kHeartAgeTestDataAge]) {
+                    NSDate *dateOfBirth = [[NSCalendar currentCalendar] dateFromComponents:(NSDateComponents *)questionResult.answer];
+                    // Compute the age of the user.
+                    NSDateComponents *ageComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitYear
+                                                                                      fromDate:dateOfBirth
+                                                                                        toDate:[NSDate date] // today
+                                                                                       options:NSCalendarWrapComponents];
+                    
+                    NSUInteger usersAge = [ageComponents year];
+                    [surveyResultsDictionary setObject:[NSNumber numberWithInteger:usersAge] forKey:questionIdentifier];
+                } else {
+                    [surveyResultsDictionary setObject:(NSNumber *)questionResult.answer forKey:questionIdentifier];
+                }
             }
         }
         
