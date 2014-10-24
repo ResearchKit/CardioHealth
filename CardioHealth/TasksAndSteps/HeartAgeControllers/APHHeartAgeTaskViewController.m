@@ -418,30 +418,36 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
     // RKSurveyQuestionType is not available for adding dictionary to the result;
     // thus we create separate question results for each of these data points.
     
-    NSMutableArray *surveyQuestions = [result.surveyResults mutableCopy];
+    NSMutableArray *questionResultsForSurvey = [NSMutableArray array];
+    
+    for (RKSurveyResult *miniSurvey in result.surveyResults) {
+        for (RKQuestionResult *surveyQuestionResult in miniSurvey.surveyResults) {
+            [questionResultsForSurvey addObject:surveyQuestionResult];
+        }
+    }
     
     RKQuestionResult *qrHeartAge = [[RKQuestionResult alloc] initWithStep:[[RKStep alloc] initWithIdentifier:kSummaryHeartAge
                                                                                                         name:kSummaryHeartAge]];
     qrHeartAge.questionType = RKSurveyQuestionTypeInteger;
     qrHeartAge.answer = self.heartAgeInfo[kSummaryHeartAge];
     
-    [surveyQuestions addObject:qrHeartAge];
+    [questionResultsForSurvey addObject:qrHeartAge];
     
     RKQuestionResult *qrTenYearRisk = [[RKQuestionResult alloc] initWithStep:[[RKStep alloc] initWithIdentifier:kSummaryTenYearRisk
                                                                                                            name:kSummaryTenYearRisk]];
     qrTenYearRisk.questionType = RKSurveyQuestionTypeDecimal;
     qrTenYearRisk.answer = self.heartAgeInfo[kSummaryTenYearRisk];
     
-    [surveyQuestions addObject:qrTenYearRisk];
+    [questionResultsForSurvey addObject:qrTenYearRisk];
     
     RKQuestionResult *qrLifetimeRisk = [[RKQuestionResult alloc] initWithStep:[[RKStep alloc] initWithIdentifier:kSummaryLifetimeRisk
                                                                                                             name:kSummaryLifetimeRisk]];
     qrLifetimeRisk.questionType = RKSurveyQuestionTypeDecimal;
     qrLifetimeRisk.answer = self.heartAgeInfo[kSummaryLifetimeRisk];
     
-    [surveyQuestions addObject:qrLifetimeRisk];
+    [questionResultsForSurvey addObject:qrLifetimeRisk];
     
-    result.surveyResults = surveyQuestions;
+    result.surveyResults = questionResultsForSurvey;
     
     [self sendResult:result];
 
