@@ -158,14 +158,14 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
         }
         
         {
-            RKNumericAnswerFormat *format = [RKNumericAnswerFormat integerAnswerWithUnit:@"mmHg"];
-            format.minimum = @(0);
-            format.maximum = @(180);
+            RKHealthAnswerFormat *healthFormat = [RKHealthAnswerFormat healthAnswerFormatWithQuantityType:[HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierBloodPressureSystolic]
+                                                                                                     unit:[HKUnit unitFromString:@"mmHg"]
+                                                                                                    style:RKNumericAnswerStyleInteger];
             
             RKFormItem *item = [[RKFormItem alloc] initWithIdentifier:kHeartAgeTestDataSystolicBloodPressure
                                                                  text:NSLocalizedString(@"Systolic Blood Pressure",
                                                                                         @"Systolic Blood Pressure")
-                                                         answerFormat:format];
+                                                         answerFormat:healthFormat];
             [stepQuestions addObject:item];
         }
         
