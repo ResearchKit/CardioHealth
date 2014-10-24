@@ -73,7 +73,7 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
             format.minimum = @(1);
             
             RKFormItem *item = [[RKFormItem alloc] initWithIdentifier:kHeartAgeTestDataAge
-                                                                 text:NSLocalizedString(@"What is your date of birth?", @"What is your date of birth?")
+                                                                 text:NSLocalizedString(@"Date of birth", @"Date of birth")
                                                          answerFormat:[RKHealthAnswerFormat healthAnswerFormatWithCharacteristicType:[HKCharacteristicType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierDateOfBirth]]];
             [stepQuestions addObject:item];
         }
