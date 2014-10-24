@@ -10,17 +10,19 @@
 #import <math.h>
 
 extern NSString *const kHeartAgeTestDataAge;
-extern NSString *const kHeartAgekHeartAgeTestDataTotalCholesterol;
-extern NSString *const kHeartAgekHeartAgeTestDataHDL;
-extern NSString *const kHeartAgekHeartAgeTestDataSystolicBloodPressure;
-extern NSString *const kHeartAgekHeartAgeTestDataSmoke;
-extern NSString *const kHeartAgekHeartAgeTestDataDiabetes;
-extern NSString *const kHeartAgekHeartAgeTestDataFamilyDiabetes;
-extern NSString *const kHeartAgekHeartAgeTestDataFamilyHeart;
-extern NSString *const kHeartAgekHeartAgeTestDataEthnicity;
-extern NSString *const kHeartAgekHeartAgeTestDataGender;
-extern NSString *const kHeartAgekHeartAgeTestDataCurrentlySmoke;
-extern NSString *const kHeartAgekHeartAgeTestDataHypertension;
+extern NSString *const kHeartAgeTestDataTotalCholesterol;
+extern NSString *const kHeartAgeTestDataHDL;
+extern NSString *const kHeartAgeTestDataSystolicBloodPressure;
+extern NSString *const kHeartAgeTestDataSmoke;
+extern NSString *const kHeartAgeTestDataDiabetes;
+extern NSString *const kHeartAgeTestDataFamilyDiabetes;
+extern NSString *const kHeartAgeTestDataFamilyHeart;
+extern NSString *const kHeartAgeTestDataEthnicity;
+extern NSString *const kHeartAgeTestDataGender;
+extern NSString *const kHeartAgeTestDataGenderFemale;
+extern NSString *const kHeartAgeTestDataGenderMale;
+extern NSString *const kHeartAgeTestDataCurrentlySmoke;
+extern NSString *const kHeartAgeTestDataHypertension;
 
 extern NSString *const kSummaryHeartAge;
 extern NSString *const kSummaryTenYearRisk;

@@ -35,17 +35,19 @@ static NSString *kLifetimeRiskFactorMajorGreaterThanEqualToTwo = @"risk-factor-m
 
 // Keys for data that is collected in the survey
 NSString *const kHeartAgeTestDataAge = @"heartAgeDataAge";
-NSString *const kHeartAgekHeartAgeTestDataTotalCholesterol = @"heartAgeDataTotalCholesterol";
-NSString *const kHeartAgekHeartAgeTestDataHDL = @"heartAgeDataHdl";
-NSString *const kHeartAgekHeartAgeTestDataSystolicBloodPressure = @"heartAgeDataSystolicBloodPressure";
-NSString *const kHeartAgekHeartAgeTestDataSmoke = @"heartAgeDataSmoke";
-NSString *const kHeartAgekHeartAgeTestDataDiabetes = @"heartAgeDataDiabetes";
-NSString *const kHeartAgekHeartAgeTestDataFamilyDiabetes = @"heartAgeDataFamilyDiabetes";
-NSString *const kHeartAgekHeartAgeTestDataFamilyHeart = @"heartAgeDataFamilyHeart";
-NSString *const kHeartAgekHeartAgeTestDataEthnicity = @"heartAgeDataEthnicity";
-NSString *const kHeartAgekHeartAgeTestDataGender = @"heartAgeDataGender";
-NSString *const kHeartAgekHeartAgeTestDataCurrentlySmoke = @"heartAgeDataCurrentlySmoke";
-NSString *const kHeartAgekHeartAgeTestDataHypertension = @"heartAgeDataHypertension";
+NSString *const kHeartAgeTestDataTotalCholesterol = @"heartAgeDataTotalCholesterol";
+NSString *const kHeartAgeTestDataHDL = @"heartAgeDataHdl";
+NSString *const kHeartAgeTestDataSystolicBloodPressure = @"heartAgeDataSystolicBloodPressure";
+NSString *const kHeartAgeTestDataSmoke = @"heartAgeDataSmoke";
+NSString *const kHeartAgeTestDataDiabetes = @"heartAgeDataDiabetes";
+NSString *const kHeartAgeTestDataFamilyDiabetes = @"heartAgeDataFamilyDiabetes";
+NSString *const kHeartAgeTestDataFamilyHeart = @"heartAgeDataFamilyHeart";
+NSString *const kHeartAgeTestDataEthnicity = @"heartAgeDataEthnicity";
+NSString *const kHeartAgeTestDataGender = @"heartAgeDataGender";
+NSString *const kHeartAgeTestDataGenderFemale = @"Female";
+NSString *const kHeartAgeTestDataGenderMale = @"Male";
+NSString *const kHeartAgeTestDataCurrentlySmoke = @"heartAgeDataCurrentlySmoke";
+NSString *const kHeartAgeTestDataHypertension = @"heartAgeDataHypertension";
 
 // Summary data keys
 NSString *const kSummaryHeartAge = @"heartAge";
