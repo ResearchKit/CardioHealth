@@ -11,9 +11,15 @@
 
 static NSString *MainStudyIdentifier = @"com.cardiovascular.heartAgeTest";
 
-// Introduction Step Key
+// Introduction Step and Summary Key
 static NSString *kHeartAgeIntroduction = @"HeartAgeIntroduction";
 static NSString *kHeartAgeSummary = @"HeartAgeSummary";
+
+// RKForm keys
+static NSString *kHeartAgeFormStepBiographicAndDemographic = @"biographicAndDemographic";
+static NSString *kHeartAgeFormStepSmokingHistory = @"smokingHistory";
+static NSString *kHeartAgeFormStepCholesterolHdlSystolic = @"cholesterolHdlSystolic";
+static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
 
 @interface APHHeartAgeTaskViewController ()
 
