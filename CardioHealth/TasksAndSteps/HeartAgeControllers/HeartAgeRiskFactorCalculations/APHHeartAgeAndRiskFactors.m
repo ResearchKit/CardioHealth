@@ -146,8 +146,8 @@ NSString *const kSummaryLifetimeRisk = @"lifetimeRisk";
 {
     NSUInteger actualAge = [results[kHeartAgeTestDataAge] integerValue];
     
-    NSString *gender = results[kHeartAgekHeartAgeTestDataGender];
-    NSString *ethnicity = results[kHeartAgekHeartAgeTestDataEthnicity];
+    NSString *gender = results[kHeartAgeTestDataGender];
+    NSString *ethnicity = results[kHeartAgeTestDataEthnicity];
     
     // Coefficients used for computing individual sum.
     NSArray *coefficients = self.heartAgeParametersLookup[gender][ethnicity][kLookupParameters][kLookupCoefficients];
@@ -157,10 +157,10 @@ NSString *const kSummaryLifetimeRisk = @"lifetimeRisk";
     
     // Computing log of data that is used in multiple place for computing other coefficients.
     double logActualAge = log(actualAge);
-    double logTotalCholesterol = log([results[kHeartAgekHeartAgeTestDataTotalCholesterol] doubleValue]);
-    double logHDLC = log([results[kHeartAgekHeartAgeTestDataHDL] doubleValue]);
-    double logTreatedSystolic = log([results[kHeartAgekHeartAgeTestDataSystolicBloodPressure] doubleValue]) * [results[kHeartAgekHeartAgeTestDataHypertension] integerValue];
-    double logUnTreatedSystolic = log([results[kHeartAgekHeartAgeTestDataSystolicBloodPressure] doubleValue]) * (1 - [results[kHeartAgekHeartAgeTestDataHypertension] integerValue]);
+    double logTotalCholesterol = log([results[kHeartAgeTestDataTotalCholesterol] doubleValue]);
+    double logHDLC = log([results[kHeartAgeTestDataHDL] doubleValue]);
+    double logTreatedSystolic = log([results[kHeartAgeTestDataSystolicBloodPressure] doubleValue]) * [results[kHeartAgeTestDataHypertension] integerValue];
+    double logUnTreatedSystolic = log([results[kHeartAgeTestDataSystolicBloodPressure] doubleValue]) * (1 - [results[kHeartAgeTestDataHypertension] integerValue]);
     
     double individualSum = 0;
     
@@ -202,13 +202,13 @@ NSString *const kSummaryLifetimeRisk = @"lifetimeRisk";
                 coefficientTimesValue = (logActualAge * logUnTreatedSystolic) * [obj doubleValue];
                 break;
             case 10:
-                coefficientTimesValue = [results[kHeartAgekHeartAgeTestDataCurrentlySmoke] integerValue] * [obj doubleValue];
+                coefficientTimesValue = [results[kHeartAgeTestDataCurrentlySmoke] integerValue] * [obj doubleValue];
                 break;
             case 11:
-                coefficientTimesValue = (logActualAge * [results[kHeartAgekHeartAgeTestDataCurrentlySmoke] integerValue]) * [obj doubleValue];
+                coefficientTimesValue = (logActualAge * [results[kHeartAgeTestDataCurrentlySmoke] integerValue]) * [obj doubleValue];
                 break;
             case 12:
-                coefficientTimesValue = [results[kHeartAgekHeartAgeTestDataDiabetes] integerValue] * [obj doubleValue];
+                coefficientTimesValue = [results[kHeartAgeTestDataDiabetes] integerValue] * [obj doubleValue];
                 break;
             default:
                 NSAssert(YES, @"You have more objects in the coefficient array.");
@@ -338,12 +338,12 @@ NSString *const kSummaryLifetimeRisk = @"lifetimeRisk";
  */
 - (NSInteger)lifetimeRisk:(NSDictionary *)results
 {
-    NSString *gender = results[kHeartAgekHeartAgeTestDataGender];
-    NSUInteger totalCholesterol = [results[kHeartAgekHeartAgeTestDataTotalCholesterol] integerValue];
-    NSUInteger systolicBP = [results[kHeartAgekHeartAgeTestDataSystolicBloodPressure] integerValue];
-    NSUInteger hypertension = [results[kHeartAgekHeartAgeTestDataHypertension] integerValue];
-    NSUInteger diabetes = [results[kHeartAgekHeartAgeTestDataDiabetes] integerValue];
-    NSUInteger smoker = [results[kHeartAgekHeartAgeTestDataSmoke] integerValue];
+    NSString *gender = results[kHeartAgeTestDataGender];
+    NSUInteger totalCholesterol = [results[kHeartAgeTestDataTotalCholesterol] integerValue];
+    NSUInteger systolicBP = [results[kHeartAgeTestDataSystolicBloodPressure] integerValue];
+    NSUInteger hypertension = [results[kHeartAgeTestDataHypertension] integerValue];
+    NSUInteger diabetes = [results[kHeartAgeTestDataDiabetes] integerValue];
+    NSUInteger smoker = [results[kHeartAgeTestDataSmoke] integerValue];
     
     
     // The YES and NO are 1 and 0, respectively.
