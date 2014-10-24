@@ -364,13 +364,13 @@ willPresentStepViewController:(RKStepViewController *)stepViewController{
         NSDictionary  *controllers = @{ kFitnessTestStep101 : [APHFitnessTestIntroStepViewController class] };
         
         Class  aClass = [controllers objectForKey:step.identifier];
-//        APCStepViewController  *controller = [[aClass alloc] initWithNibName:nil bundle:nil];
-//        controller.resultCollector = self;
-//        controller.delegate = self;
-//        controller.title = @"Interval Tapping";
-//        controller.step = step;
-//        
-//        stepVC = controller;
+        APCStepViewController  *controller = [[aClass alloc] initWithNibName:nil bundle:nil];
+        controller.resultCollector = self;
+        controller.delegate = self;
+        controller.title = @"Interval Tapping";
+        controller.step = step;
+        
+        stepVC = controller;
     }   else if (step.identifier == kFitnessTestStep106) {
         
         APHFitnessTestSummaryViewController *summaryViewController = [[APHFitnessTestSummaryViewController alloc] initWithNibName:@"APHFitnessTestSummaryViewController" bundle:nil];

@@ -75,7 +75,7 @@ static NSString *const kVideoShownKey = @"VideoShown";
     //Set the appearance for all continue buttons
     [[RKBoldTextCell appearance] setLabelTextColor:[UIColor whiteColor]];
     [[RKBoldTextCell appearance] setBackgroundColor:[UIColor appPrimaryColor]];
-    [[RKBoldTextCell appearance] setTextAlignment:NSTextAlignmentCenter];
+    [[RKBoldTextCell appearance].textLabel setTextAlignment:NSTextAlignmentCenter];
     [[RKBoldTextCell appearance] setAccessoryType:UITableViewCellAccessoryNone];
     
 }

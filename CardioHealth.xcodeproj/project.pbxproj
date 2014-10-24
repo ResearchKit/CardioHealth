@@ -27,6 +27,7 @@
 		7B451CC419EC91680015BD76 /* APHImportantDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B451CC219EC91680015BD76 /* APHImportantDetailsViewController.xib */; };
 		7B8E912A19F9B5BA0040F77F /* APHFitnessTestIntroStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B8E912819F9B5BA0040F77F /* APHFitnessTestIntroStepViewController.m */; };
 		7B8E912B19F9B5BA0040F77F /* APHFitnessTestIntroStepViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B8E912919F9B5BA0040F77F /* APHFitnessTestIntroStepViewController.xib */; };
+		7B8E912F19FADA180040F77F /* APHIntroductionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B8E912E19FADA180040F77F /* APHIntroductionViewController.m */; };
 		7BC7213D19F7018700C70956 /* APHCommonInstructionalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC7213B19F7018700C70956 /* APHCommonInstructionalViewController.m */; };
 		7BC7213E19F7018700C70956 /* APHCommonInstructionalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BC7213C19F7018700C70956 /* APHCommonInstructionalViewController.xib */; };
 		7BC7214A19F7051600C70956 /* interval.instructions.01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BC7214619F7051600C70956 /* interval.instructions.01@2x.png */; };
@@ -163,6 +164,8 @@
 		7B8E912719F9B5BA0040F77F /* APHFitnessTestIntroStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHFitnessTestIntroStepViewController.h; sourceTree = "<group>"; };
 		7B8E912819F9B5BA0040F77F /* APHFitnessTestIntroStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHFitnessTestIntroStepViewController.m; sourceTree = "<group>"; };
 		7B8E912919F9B5BA0040F77F /* APHFitnessTestIntroStepViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = APHFitnessTestIntroStepViewController.xib; sourceTree = "<group>"; };
+		7B8E912D19FADA180040F77F /* APHIntroductionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHIntroductionViewController.h; sourceTree = "<group>"; };
+		7B8E912E19FADA180040F77F /* APHIntroductionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHIntroductionViewController.m; sourceTree = "<group>"; };
 		7BC7213A19F7018700C70956 /* APHCommonInstructionalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHCommonInstructionalViewController.h; sourceTree = "<group>"; };
 		7BC7213B19F7018700C70956 /* APHCommonInstructionalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHCommonInstructionalViewController.m; sourceTree = "<group>"; };
 		7BC7213C19F7018700C70956 /* APHCommonInstructionalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = APHCommonInstructionalViewController.xib; sourceTree = "<group>"; };
@@ -539,6 +542,8 @@
 		F55BBE2219D362D0003CA0F9 /* TasksAndSteps */ = {
 			isa = PBXGroup;
 			children = (
+				7B8E912D19FADA180040F77F /* APHIntroductionViewController.h */,
+				7B8E912E19FADA180040F77F /* APHIntroductionViewController.m */,
 				7BC7213919F7018700C70956 /* Common Instructional View */,
 				7B41045519E5D94F00592B96 /* APHFitnessTest */,
 				F5481F0619E4820100D84617 /* HeartAgeControllers */,
@@ -806,6 +811,7 @@
 				08D3A10219E4A08C00A3D20D /* APHHeartAgeAndRiskFactors.m in Sources */,
 				7B41049E19E5E46800592B96 /* APHFitnessSixMinuteFitnessTestView.m in Sources */,
 				7B41049019E5D94F00592B96 /* APHFitnessTestHealthKitSampleTypeTracker.m in Sources */,
+				7B8E912F19FADA180040F77F /* APHIntroductionViewController.m in Sources */,
 				F5778E7319F0613D0079F1B2 /* APHInEligibleViewController.m in Sources */,
 				7B4104A019E5E46800592B96 /* APHFitnessTestRestComfortablyView.m in Sources */,
 				F55BBE6519D362D0003CA0F9 /* APHAppDelegate.m in Sources */,

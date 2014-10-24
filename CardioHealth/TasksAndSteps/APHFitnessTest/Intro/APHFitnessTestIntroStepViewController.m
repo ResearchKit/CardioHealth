@@ -7,6 +7,7 @@
 //
 
 #import "APHFitnessTestIntroStepViewController.h"
+#import "APHIntroductionViewController.h"
 
 static  NSString  *kViewControllerTitle = @"Interval Tapping";
 
@@ -14,7 +15,7 @@ static  NSString  *kIntroHeadingCaption = @"Tests for Bradykinesia";
 
 @interface APHFitnessTestIntroStepViewController ()
 
-@property  (nonatomic, strong)          APCIntroductionViewController  *instructionsController;
+@property  (nonatomic, strong)          APHIntroductionViewController  *instructionsController;
 @property  (nonatomic, weak)  IBOutlet  UILabel  *introHeadingCaption;
 @property  (nonatomic, weak)  IBOutlet  UIView   *instructionsContainer;
 
@@ -22,7 +23,7 @@ static  NSString  *kIntroHeadingCaption = @"Tests for Bradykinesia";
 
 @property  (nonatomic, weak)  IBOutlet  UILabel  *tapGetStarted;
 
-@property (weak, nonatomic) IBOutlet RKBoldTextCell *getStartedView;
+//@property (weak, nonatomic) IBOutlet RKBoldTextCell *getStartedView;
 
 @end
 
@@ -60,19 +61,18 @@ static  NSString  *kIntroHeadingCaption = @"Tests for Bradykinesia";
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     
-    self.getStartedView.translatesAutoresizingMaskIntoConstraints = NO;
+    
 }
+
 
 - (void)viewDidLoad
 {
+
     [super viewDidLoad];
     
     self.title = kViewControllerTitle;
     
-    
-
-    
-    NSArray  *introImageNames = @[ @"interval.instructions.01@2x", @"interval.instructions.02@2x", @"interval.instructions.03@2x", @"interval.instructions.04@2x" ];
+    NSArray  *introImageNames = @[ @"interval.instructions.01", @"interval.instructions.02", @"interval.instructions.03", @"interval.instructions.04" ];
     
     NSArray  *paragraphs = @[
                              @"For this task, please lay your phone on a flat surface to produce the most accurate results.",
@@ -83,9 +83,11 @@ static  NSString  *kIntroHeadingCaption = @"Tests for Bradykinesia";
     
     self.introHeadingCaption.text = kIntroHeadingCaption;
     
-    self.instructionsController = [[APCIntroductionViewController alloc] initWithNibName:nil bundle:[NSBundle appleCoreBundle]];
+    self.instructionsController = [[APHIntroductionViewController alloc] initWithNibName:nil bundle:nil];
     [self.instructionsContainer addSubview:self.instructionsController.view];
     [self.instructionsController setupWithInstructionalImages:introImageNames andParagraphs:paragraphs];
+    
+   
 }
 
 - (void)viewWillAppear:(BOOL)animated
