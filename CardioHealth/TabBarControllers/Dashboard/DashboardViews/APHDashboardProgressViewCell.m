@@ -7,7 +7,7 @@
 //
 
 #import "APHDashboardProgressViewCell.h"
-@import APCAppleCore;
+
 
 @implementation APHDashboardProgressViewCell
 
@@ -15,16 +15,24 @@
     [super awakeFromNib];
     // Initialization code
     
-    //TODO: Sammple Value. Remove later.
-    self.progressView.progress = 0.75;
-    self.progressView.progressLabel.textColor = [UIColor blackColor];
-    self.progressView.tintColor = [UIColor appPrimaryColor];
+    [self setupAppearance];    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void)setupAppearance
+{
+    self.progressView.progress = 0.75;
+    self.progressView.lineWidth = 3.0f;
+    self.progressView.progressLabel.textColor = [UIColor appTertiaryColor1];
+    self.progressView.tintColor = [UIColor appTertiaryColor1];
+    
+    self.titleLabel.font = [UIFont appRegularFontWithSize:14.0f];
+    self.titleLabel.textColor = [UIColor appSecondaryColor2];
 }
 
 @end
