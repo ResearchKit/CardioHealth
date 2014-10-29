@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="APHHeartAgeResultsViewController">
             <connections>
                 <outlet property="actualAgeLabel" destination="wF4-O5-Jfj" id="Lfs-60-mpO"/>
+                <outlet property="circularProgressBar" destination="TgS-dm-dJd" id="RUR-sL-vAa"/>
                 <outlet property="estimatedLifetimeFactorLabel" destination="okj-eJ-Q8i" id="eSy-Dc-zup"/>
                 <outlet property="estimatedTenYearFactorLabel" destination="MaF-vo-Pwt" id="7jq-Oh-A1H"/>
                 <outlet property="heartAgeLabel" destination="TcK-oY-ULa" id="xFQ-I1-hY0"/>
@@ -40,7 +41,6 @@
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TgS-dm-dJd">
                             <rect key="frame" x="272" y="8" width="40" height="40"/>
-                            <color key="backgroundColor" red="0.97647064920000004" green="0.90980398650000005" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="TgS-dm-dJd" secondAttribute="height" multiplier="1:1" id="2fN-9E-azV"/>
                             </constraints>
