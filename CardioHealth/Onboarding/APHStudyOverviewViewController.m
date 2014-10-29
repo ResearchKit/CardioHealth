@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 Y Media Labs. All rights reserved.
 //
 
-@import APCAppleCore;
 #import "APHStudyOverviewViewController.h"
 #import "APHSignInViewController.h"
 #import "APHSignUpGeneralInfoViewController.h"
@@ -149,10 +148,24 @@ static NSString * const kStudyOverviewCellIdentifier = @"kStudyOverviewCellIdent
     [self.tableView setLayoutMargins:UIEdgeInsetsZero];
 }
 
+#pragma mark - UITableViewDelegate methods
+
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [cell setSeparatorInset:UIEdgeInsetsZero];
     [cell setLayoutMargins:UIEdgeInsetsZero];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [super tableView:tableView didSelectRowAtIndexPath:indexPath];
+    
+    APCStudyDetails *studyDetails = self.studyDetailsArray[indexPath.row];
+    
+    APCStudyDetailsViewController *detailsViewController = [[UIStoryboard storyboardWithName:@"APHOnboarding" bundle:nil] instantiateViewControllerWithIdentifier:@"StudyDetailsVC"];
+    detailsViewController.iconImageView.image = [UIImage imageNamed:self.imagesArray[indexPath.row]];
+    detailsViewController.title = studyDetails.title;
+    [self.navigationController pushViewController:detailsViewController animated:YES];
 }
 
 @end

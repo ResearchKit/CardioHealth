@@ -229,7 +229,7 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
                                                                    answer:[RKBooleanAnswerFormat new]];
         step.optional = NO;
         
-        [steps addObject:lastStep];
+        [steps addObject:step];
     }
     
     RKTask *task = [[RKTask alloc] initWithName:NSLocalizedString(@"Heart Age Test", @"Heart Age Test")

@@ -12,7 +12,7 @@
 #define DEMO 0
 
 
-@interface APHSignUpGeneralInfoViewController ()
+@interface APHSignUpGeneralInfoViewController () <APCTermsAndConditionsViewControllerDelegate>
 
 @property (nonatomic, strong) APCPermissionsManager *permissionManager;
 @property (nonatomic) BOOL permissionGranted;
@@ -34,6 +34,8 @@
     
     self.permissionButton.unconfirmedTitle = NSLocalizedString(@"I agree to the Terms and Conditions", @"");
     self.permissionButton.confirmedTitle = NSLocalizedString(@"I agree to the Terms and Conditions", @"");
+    self.permissionButton.attributed = NO;
+    self.permissionButton.alignment = kAPCPermissionButtonAlignmentLeft;
     
     //TODO: This permission request is temporary. Remove later.
     self.permissionManager = [[APCPermissionsManager alloc] init];
@@ -57,9 +59,11 @@
 {
     self.nextBarButton.enabled = NO;
     
+#if DEVELOPMENT
     UIBarButtonItem *hiddenButton = [[UIBarButtonItem alloc] initWithTitle:@"   " style:UIBarButtonItemStylePlain target:self action:@selector(secretButton)];
     
     [self.navigationItem setRightBarButtonItems:@[self.nextBarButton, hiddenButton]];
+#endif
 }
 
 - (void) prepareFields {
@@ -70,7 +74,7 @@
         APCTableViewTextFieldItem *field = [APCTableViewTextFieldItem new];
         field.style = UITableViewCellStyleValue1;
         field.caption = NSLocalizedString(@"Password", @"");
-        field.placeholder = NSLocalizedString(@"Add Password", @"");
+        field.placeholder = NSLocalizedString(@"add password", @"");
         field.secure = YES;
         field.keyboardType = UIKeyboardTypeDefault;
         field.returnKeyType = UIReturnKeyNext;
@@ -86,7 +90,7 @@
         APCTableViewTextFieldItem *field = [APCTableViewTextFieldItem new];
         field.style = UITableViewCellStyleValue1;
         field.caption = NSLocalizedString(@"Email", @"");
-        field.placeholder = NSLocalizedString(@"Add Email Address", @"");
+        field.placeholder = NSLocalizedString(@"add email", @"");
         field.keyboardType = UIKeyboardTypeEmailAddress;
         field.returnKeyType = UIReturnKeyNext;
         field.clearButtonMode = UITextFieldViewModeWhileEditing;
@@ -102,14 +106,15 @@
         field.style = UITableViewCellStyleValue1;
         field.selectionStyle = UITableViewCellSelectionStyleGray;
         field.caption = NSLocalizedString(@"Birthdate", @"");
-        field.placeholder = NSLocalizedString(@"MMMM DD, YYYY", @"");
-        if (self.permissionGranted) {
+        field.placeholder = NSLocalizedString(@"add birthdate", @"");
+        if (self.permissionGranted && self.user.birthDate) {
             field.date = self.user.birthDate;
             field.detailText = [field.date toStringWithFormat:field.dateFormat];
+            field.editable = NO;
         }
         field.datePickerMode = UIDatePickerModeDate;
         field.identifier = kAPCDefaultTableViewCellIdentifier;
-        
+    
         [items addObject:field];
         
         [itemsOrder addObject:@(APCSignUpUserInfoItemDateOfBirth)];
@@ -119,8 +124,9 @@
         APCTableViewSegmentItem *field = [APCTableViewSegmentItem new];
         field.style = UITableViewCellStyleValue1;
         field.segments = [APCUser sexTypesInStringValue];
-        if (self.permissionGranted) {
+        if (self.permissionGranted && self.user.biologicalSex) {
             field.selectedIndex = [APCUser stringIndexFromSexType:self.user.biologicalSex];
+            field.editable = NO;
         }
         field.identifier = kAPCSegmentedTableViewCellIdentifier;
         
@@ -259,6 +265,10 @@
         }
     }
     
+    if (isContentValid) {
+        isContentValid = self.permissionButton.isSelected;
+    }
+    
     return isContentValid;
 }
 
@@ -284,7 +294,7 @@
                 self.user.email = [(APCTableViewTextFieldItem *)item value];
                 break;
             case APCSignUpUserInfoItemGender:{
-                
+                self.user.biologicalSex = [APCUser sexTypeForIndex:((APCTableViewSegmentItem *)item).selectedIndex];
             }
                 break;
                 
@@ -310,11 +320,46 @@
     }
 }
 
+#pragma mark - APCTermsAndConditionsViewControllerDelegate methods
+
+- (void)termsAndConditionsViewControllerDidAgree
+{
+    [self.permissionButton setSelected:YES];
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        [self.nextBarButton setEnabled:[self isContentValid:nil]];
+    }];
+}
+
+- (void)termsAndConditionsViewControllerDidCancel
+{
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+
+- (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    
+    UIImage *image = info[UIImagePickerControllerEditedImage];
+    if (!image) {
+        image = info[UIImagePickerControllerOriginalImage];
+    }
+    
+    [self.profileImageButton setImage:image forState:UIControlStateNormal];
+    
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void) imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark - IBActions
 
 - (IBAction)termsAndConditions:(UIButton *)sender
 {
-    [self.permissionButton setSelected:!sender.selected];
+    APCTermsAndConditionsViewController *termsViewController =  [[UIStoryboard storyboardWithName:@"APHOnboarding" bundle:nil] instantiateViewControllerWithIdentifier:@"TermsVC"];
+    termsViewController.delegate = self;
+    [self.navigationController presentViewController:termsViewController animated:YES completion:nil];
 }
 
 - (void) secretButton
@@ -347,6 +392,9 @@
         }
         [self.tableView reloadData];
     }
+    
+    [self.permissionButton setSelected:YES];
+    
     [self.nextBarButton setEnabled:[self isContentValid:nil]];
 }
 
@@ -373,6 +421,18 @@
     
 }
 
-- (IBAction)changeProfileImage:(id)sender {
+- (IBAction)changeProfileImage:(id)sender
+{
+    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+    imagePickerController.editing = YES;
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+    } else {
+        imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    }
+    imagePickerController.delegate = self;
+    [self presentViewController:imagePickerController animated:YES completion:nil];
+    
 }
+
 @end
