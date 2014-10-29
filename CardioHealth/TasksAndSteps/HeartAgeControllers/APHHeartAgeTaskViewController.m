@@ -15,10 +15,16 @@
 
 static NSString *MainStudyIdentifier = @"com.cardiovascular.heartAgeTest";
 
-// Introduction Step Key
+// Introduction Step and Summary Key
 static NSString *kHeartAgeIntroduction = @"HeartAgeIntroduction";
 static NSString *kHeartAgeSummary = @"HeartAgeSummary";
 static NSString *kHeartAgeResult = @"HeartAgeResult";
+
+// RKForm keys
+static NSString *kHeartAgeFormStepBiographicAndDemographic = @"biographicAndDemographic";
+static NSString *kHeartAgeFormStepSmokingHistory = @"smokingHistory";
+static NSString *kHeartAgeFormStepCholesterolHdlSystolic = @"cholesterolHdlSystolic";
+static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
 
 @interface APHHeartAgeTaskViewController ()
 
@@ -60,142 +66,158 @@ static NSString *kHeartAgeResult = @"HeartAgeResult";
         [steps addObject:step];
     }
     
+    // Biographic and Demogrphic
     {
-        RKNumericAnswerFormat *format = [RKNumericAnswerFormat integerAnswerWithUnit:nil];
-        format.minimum = @(1);
+        NSMutableArray *stepQuestions = [NSMutableArray array];
+        RKFormStep *step = [[RKFormStep alloc] initWithIdentifier:kHeartAgeFormStepBiographicAndDemographic
+                                                             name:@"BioDemo"
+                                                            title:nil
+                                                         subtitle:@"To calculate your heart age, please enter a few details about yourself."];
+        {
+            RKNumericAnswerFormat *format = [RKNumericAnswerFormat integerAnswerWithUnit:nil];
+            format.minimum = @(1);
+            
+            RKFormItem *item = [[RKFormItem alloc] initWithIdentifier:kHeartAgeTestDataAge
+                                                                 text:NSLocalizedString(@"Date of birth", @"Date of birth")
+                                                         answerFormat:[RKHealthAnswerFormat healthAnswerFormatWithCharacteristicType:[HKCharacteristicType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierDateOfBirth]]];
+            [stepQuestions addObject:item];
+        }
         
-        RKQuestionStep* step = [RKQuestionStep questionStepWithIdentifier:kHeartAgeTestDataAge
-                                                                     name:@"YourAge"
-                                                                 question:NSLocalizedString(@"What is your age?", @"What is your age?")
-                                                                   answer:format];
-        step.optional = NO;
+        {
+            RKFormItem *item = [[RKFormItem alloc] initWithIdentifier:kHeartAgeTestDataGender
+                                                                 text:NSLocalizedString(@"Gender", @"Gender")
+                                                         answerFormat:[RKHealthAnswerFormat healthAnswerFormatWithCharacteristicType:[HKCharacteristicType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierBiologicalSex]]];
+            [stepQuestions addObject:item];
+        }
         
-        [steps addObject:step];
-    }
-    
-    {
-        RKAnswerFormat *format = [RKChoiceAnswerFormat choiceAnswerWithOptions:@[@"Female", @"Male"]
-                                                                         style:RKChoiceAnswerStyleSingleChoice];
+        {
+            RKAnswerFormat *format = [RKChoiceAnswerFormat choiceAnswerWithOptions:@[@"African-American", @"Other"]
+                                                                             style:RKChoiceAnswerStyleSingleChoice];
+            
+            RKFormItem *item = [[RKFormItem alloc] initWithIdentifier:kHeartAgeTestDataEthnicity
+                                                                 text:NSLocalizedString(@"Ethnicity", @"Ethnicity")
+                                                         answerFormat:format];
+            [stepQuestions addObject:item];
+        }
         
-        RKQuestionStep *step = [RKQuestionStep questionStepWithIdentifier:kHeartAgekHeartAgeTestDataGender
-                                                                     name:@"Gender"
-                                                                 question:NSLocalizedString(@"What is your biological sex?", @"What is your biological sex?")
-                                                                   answer:format];
-        step.optional = NO;
-        
-        [steps addObject:step];
-    }
-    
-    {
-        RKAnswerFormat *format = [RKChoiceAnswerFormat choiceAnswerWithOptions:@[@"African-American", @"Other"]
-                                                                         style:RKChoiceAnswerStyleSingleChoice];
-
-        RKQuestionStep *step = [RKQuestionStep questionStepWithIdentifier:kHeartAgekHeartAgeTestDataEthnicity
-                                                                     name:@"Ethnicity"
-                                                                 question:@"What is your ethnic group?"
-                                                                   answer:format];
-        step.optional = NO;
-        
-        [steps addObject:step];
-    }
-    
-    {
-        RKNumericAnswerFormat *format = [RKNumericAnswerFormat integerAnswerWithUnit:nil];
-        format.minimum = @(0);
-        format.maximum = @(240);
-
-        RKQuestionStep *step = [RKQuestionStep questionStepWithIdentifier:kHeartAgekHeartAgeTestDataTotalCholesterol
-                                                                     name:@"TotalCholesterol"
-                                                                 question:NSLocalizedString(@"What is your Total Cholesterol?", @"What is your Total Cholesterol?")
-                                                                   answer:format];
-        step.optional = NO;
-
-        [steps addObject:step];
-    }
-
-    {
-        RKNumericAnswerFormat *format = [RKNumericAnswerFormat integerAnswerWithUnit:nil];
-        format.minimum = @(40);
-
-        RKQuestionStep* step = [RKQuestionStep questionStepWithIdentifier:kHeartAgekHeartAgeTestDataHDL
-                                                                     name:@"HDLCholesterol"
-                                                                 question:NSLocalizedString(@"What is your HDL Cholesterol?", @"What is your HDL Cholesterol?")
-                                                                   answer:format];
-        step.optional = NO;
+        [step setFormItems:stepQuestions];
         
         [steps addObject:step];
     }
     
     {
-        RKNumericAnswerFormat *format = [RKNumericAnswerFormat integerAnswerWithUnit:nil];
-        format.minimum = @(0);
-        format.maximum = @(180);
-        RKQuestionStep* step = [RKQuestionStep questionStepWithIdentifier:kHeartAgekHeartAgeTestDataSystolicBloodPressure
-                                                                     name:@"SystolicBloodPressure"
-                                                                 question:NSLocalizedString(@"What is your Systolic Blood Pressure?", @"What is your Systolic Blood Pressure?")
-                                                                   answer:format];
-        step.optional = NO;
+        NSMutableArray *stepQuestions = [NSMutableArray array];
+        RKFormStep *step = [[RKFormStep alloc] initWithIdentifier:kHeartAgeFormStepSmokingHistory
+                                                             name:@"smokingHistory"
+                                                            title:NSLocalizedString(@"Smoking History",
+                                                                                    @"Smoking History")
+                                                         subtitle:nil];
+        {
+            RKFormItem *item = [[RKFormItem alloc] initWithIdentifier:kHeartAgeTestDataSmoke
+                                                                 text:NSLocalizedString(@"Have you ever smoked?",
+                                                                                        @"Have you ever smoked?")
+                                                         answerFormat:[RKBooleanAnswerFormat new]];
+            [stepQuestions addObject:item];
+        }
+        
+        {
+            RKFormItem *item = [[RKFormItem alloc] initWithIdentifier:kHeartAgeTestDataCurrentlySmoke
+                                                                 text:NSLocalizedString(@"Do you still smoke?",
+                                                                                        @"Do you still smoke?")
+                                                         answerFormat:[RKBooleanAnswerFormat new]];
+            [stepQuestions addObject:item];
+        }
+        
+        [step setFormItems:stepQuestions];
         
         [steps addObject:step];
     }
     
     {
-        RKQuestionStep *step = [RKQuestionStep questionStepWithIdentifier:kHeartAgekHeartAgeTestDataSmoke
-                                                                     name:@"SmokeA"
-                                                                 question:NSLocalizedString(@"Have you ever smoked?", @"Have you ever smoked?")
-                                                                   answer:[RKBooleanAnswerFormat new]];
-        step.optional = NO;
+        NSMutableArray *stepQuestions = [NSMutableArray array];
+        RKFormStep *step = [[RKFormStep alloc] initWithIdentifier:kHeartAgeFormStepCholesterolHdlSystolic
+                                                             name:@"cholesterolHdlSystolic"
+                                                            title:nil
+                                                         subtitle:@"Cholesterol & Blood Pressure"];
+        
+        {
+            RKNumericAnswerFormat *format = [RKNumericAnswerFormat integerAnswerWithUnit:@"mg/dl"];
+            format.minimum = @(0);
+            format.maximum = @(240);
+            
+            RKFormItem *item = [[RKFormItem alloc] initWithIdentifier:kHeartAgeTestDataTotalCholesterol
+                                                                 text:NSLocalizedString(@"Total Cholesterol",
+                                                                                        @"Total Cholesterol")
+                                                         answerFormat:format];
+            [stepQuestions addObject:item];
+        }
+        
+        {
+            RKNumericAnswerFormat *format = [RKNumericAnswerFormat integerAnswerWithUnit:@"mg/dl"];
+            format.minimum = @(40);
+            
+            RKFormItem *item = [[RKFormItem alloc] initWithIdentifier:kHeartAgeTestDataHDL
+                                                                 text:NSLocalizedString(@"HDL", @"HDL")
+                                                         answerFormat:format];
+            [stepQuestions addObject:item];
+        }
+        
+        {
+            RKHealthAnswerFormat *healthFormat = [RKHealthAnswerFormat healthAnswerFormatWithQuantityType:[HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierBloodPressureSystolic]
+                                                                                                     unit:[HKUnit unitFromString:@"mmHg"]
+                                                                                                    style:RKNumericAnswerStyleInteger];
+            
+            RKFormItem *item = [[RKFormItem alloc] initWithIdentifier:kHeartAgeTestDataSystolicBloodPressure
+                                                                 text:NSLocalizedString(@"Systolic Blood Pressure",
+                                                                                        @"Systolic Blood Pressure")
+                                                         answerFormat:healthFormat];
+            [stepQuestions addObject:item];
+        }
+        
+        [step setFormItems:stepQuestions];
         
         [steps addObject:step];
     }
     
     {
-        RKQuestionStep *step = [RKQuestionStep questionStepWithIdentifier:kHeartAgekHeartAgeTestDataCurrentlySmoke
-                                                                     name:@"SmokeB"
-                                                                 question:NSLocalizedString(@"Do you still smoke?", @"Do you still smoke?")
-                                                                   answer:[RKBooleanAnswerFormat new]];
-        step.optional = NO;
+        NSMutableArray *stepQuestions = [NSMutableArray array];
+        RKFormStep *step = [[RKFormStep alloc] initWithIdentifier:kHeartAgeFormStepMedicalHistory
+                                                             name:@"medicalHistory"
+                                                            title:nil
+                                                         subtitle:@"Your medical history."];
+        {
+            RKFormItem *item = [[RKFormItem alloc] initWithIdentifier:kHeartAgeTestDataDiabetes
+                                                                 text:NSLocalizedString(@"Do you have Diabetes?",
+                                                                                        @"Do you have Diabetes?")
+                                                         answerFormat:[RKBooleanAnswerFormat new]];
+            [stepQuestions addObject:item];
+        }
         
-        [steps addObject:step];
-    }
-    
-    {
-        RKQuestionStep *step = [RKQuestionStep questionStepWithIdentifier:kHeartAgekHeartAgeTestDataDiabetes
-                                                                     name:@"Diabetes"
-                                                                 question:NSLocalizedString(@"Do you have Diabetes?", @"Do you have Diabetes?")
-                                                                   answer:[RKBooleanAnswerFormat new]];
-        step.optional = NO;
+        {
+            RKFormItem *item = [[RKFormItem alloc] initWithIdentifier:kHeartAgeTestDataHypertension
+                                                                 text:NSLocalizedString(@"Are you being treated for Hypertension?",
+                                                                                        @"Are you being treated for Hypertension?")
+                                                         answerFormat:[RKBooleanAnswerFormat new]];
+            [stepQuestions addObject:item];
+        }
         
-        [steps addObject:step];
-    }
-    
-    {
-        RKQuestionStep *step = [RKQuestionStep questionStepWithIdentifier:kHeartAgekHeartAgeTestDataHypertension
-                                                                     name:@"Hypertension"
-                                                                 question:NSLocalizedString(@"Are you being treated for Hypertension?",
-                                                                                            @"Are you being treated for Hypertension?")
-                                                                   answer:[RKBooleanAnswerFormat new]];
-        step.optional = NO;
+        {
+            RKFormItem *item = [[RKFormItem alloc] initWithIdentifier:kHeartAgeTestDataFamilyDiabetes
+                                                                 text:NSLocalizedString(@"Does Diabetes run in your family?",
+                                                                                        @"Does Diabetes run in your family?")
+                                                         answerFormat:[RKBooleanAnswerFormat new]];
+            [stepQuestions addObject:item];
+        }
         
-        [steps addObject:step];
-    }
-    
-    {
-        RKQuestionStep *step = [RKQuestionStep questionStepWithIdentifier:kHeartAgekHeartAgeTestDataFamilyDiabetes
-                                                                     name:@"FamilyDiabetes"
-                                                                 question:NSLocalizedString(@"Does Diabetes run in your family?", @"Does Diabetes run in your family?")
-                                                                   answer:[RKBooleanAnswerFormat new]];
-        step.optional = NO;
+        {
+            RKFormItem *item = [[RKFormItem alloc] initWithIdentifier:kHeartAgeTestDataFamilyHeart
+                                                                 text:NSLocalizedString(@"Have either of your parents had heart problems?",
+                                                                                        @"Have either of your parents had heart problems?")
+                                                         answerFormat:[RKBooleanAnswerFormat new]];
+            [stepQuestions addObject:item];
+        }
         
-        [steps addObject:step];
-    }
-    
-    {
-        RKQuestionStep *step = [RKQuestionStep questionStepWithIdentifier:kHeartAgekHeartAgeTestDataFamilyHeart
-                                                                     name:@"ParentHistory"
-                                                                 question:NSLocalizedString(@"Have either of your parents had heart problems?", @"Have either of your parents had heart problems?")
-                                                                   answer:[RKBooleanAnswerFormat new]];
-        step.optional = NO;
+        [step setFormItems:stepQuestions];
         
         [steps addObject:step];
     }
@@ -207,7 +229,7 @@ static NSString *kHeartAgeResult = @"HeartAgeResult";
                                                                    answer:[RKBooleanAnswerFormat new]];
         step.optional = NO;
         
-        [steps addObject:step];
+        [steps addObject:lastStep];
     }
     
     RKTask *task = [[RKTask alloc] initWithName:NSLocalizedString(@"Heart Age Test", @"Heart Age Test")
@@ -338,12 +360,36 @@ static NSString *kHeartAgeResult = @"HeartAgeResult";
         NSMutableDictionary *surveyResultsDictionary = [NSMutableDictionary dictionary];
         
         // Normalize survey results into dictionary.
-        for (RKQuestionResult *questionResult in taskViewController.surveyResults) {
-            NSString *questionIdentifier = [[questionResult itemIdentifier] stringValue];
-            if ([questionIdentifier isEqualToString:kHeartAgekHeartAgeTestDataEthnicity] || [questionIdentifier isEqualToString:kHeartAgekHeartAgeTestDataGender]) {
-                [surveyResultsDictionary setObject:(NSString *)questionResult.answer forKey:questionIdentifier];
-            } else {
-                [surveyResultsDictionary setObject:(NSNumber *)questionResult.answer forKey:questionIdentifier];
+        for (RKSurveyResult *survey in taskViewController.surveyResults) {
+            for (RKQuestionResult *questionResult in survey.surveyResults) {
+                // Since we are using form steps and form items, the identifiers
+                // for a question are now in a formStepIdentifier.formItemIdentifier format.
+                NSString *formStepAndFormItemIdentifier = [[questionResult itemIdentifier] stringValue];
+                
+                // we will only use the last part of the identifier, that is the 'formItemIdentifier'
+                // because it is the unique identifier that is provided by the Heart Age Calculations
+                // class and the methods in that class expect this identifier as the element key of the
+                // dictionary that is passed to it.
+                NSString *questionIdentifier = [[formStepAndFormItemIdentifier componentsSeparatedByString:@"."] lastObject];
+                
+                if ([questionIdentifier isEqualToString:kHeartAgeTestDataEthnicity]) {
+                    [surveyResultsDictionary setObject:(NSString *)questionResult.answer forKey:questionIdentifier];
+                } else if ([questionIdentifier isEqualToString:kHeartAgeTestDataGender]) {
+                    [surveyResultsDictionary setObject:((NSInteger)questionResult.answer == HKBiologicalSexFemale) ? kHeartAgeTestDataGenderFemale : kHeartAgeTestDataGenderMale
+                                                forKey:questionIdentifier];
+                } else if ([questionIdentifier isEqualToString:kHeartAgeTestDataAge]) {
+                    NSDate *dateOfBirth = [[NSCalendar currentCalendar] dateFromComponents:(NSDateComponents *)questionResult.answer];
+                    // Compute the age of the user.
+                    NSDateComponents *ageComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitYear
+                                                                                      fromDate:dateOfBirth
+                                                                                        toDate:[NSDate date] // today
+                                                                                       options:NSCalendarWrapComponents];
+                    
+                    NSUInteger usersAge = [ageComponents year];
+                    [surveyResultsDictionary setObject:[NSNumber numberWithInteger:usersAge] forKey:questionIdentifier];
+                } else {
+                    [surveyResultsDictionary setObject:(NSNumber *)questionResult.answer forKey:questionIdentifier];
+                }
             }
         }
         
@@ -389,39 +435,36 @@ static NSString *kHeartAgeResult = @"HeartAgeResult";
     // RKSurveyQuestionType is not available for adding dictionary to the result;
     // thus we create separate question results for each of these data points.
     
-    NSMutableArray *surveyQuestions = [result.surveyResults mutableCopy];
+    NSMutableArray *questionResultsForSurvey = [NSMutableArray array];
+    
+    for (RKSurveyResult *miniSurvey in result.surveyResults) {
+        for (RKQuestionResult *surveyQuestionResult in miniSurvey.surveyResults) {
+            [questionResultsForSurvey addObject:surveyQuestionResult];
+        }
+    }
     
     RKQuestionResult *qrHeartAge = [[RKQuestionResult alloc] initWithStep:[[RKStep alloc] initWithIdentifier:kSummaryHeartAge
                                                                                                         name:kSummaryHeartAge]];
     qrHeartAge.questionType = RKSurveyQuestionTypeInteger;
     qrHeartAge.answer = self.heartAgeInfo[kSummaryHeartAge];
     
-    [surveyQuestions addObject:qrHeartAge];
+    [questionResultsForSurvey addObject:qrHeartAge];
     
     RKQuestionResult *qrTenYearRisk = [[RKQuestionResult alloc] initWithStep:[[RKStep alloc] initWithIdentifier:kSummaryTenYearRisk
                                                                                                            name:kSummaryTenYearRisk]];
     qrTenYearRisk.questionType = RKSurveyQuestionTypeDecimal;
     qrTenYearRisk.answer = self.heartAgeInfo[kSummaryTenYearRisk];
     
-    [surveyQuestions addObject:qrTenYearRisk];
+    [questionResultsForSurvey addObject:qrTenYearRisk];
     
     RKQuestionResult *qrLifetimeRisk = [[RKQuestionResult alloc] initWithStep:[[RKStep alloc] initWithIdentifier:kSummaryLifetimeRisk
                                                                                                             name:kSummaryLifetimeRisk]];
     qrLifetimeRisk.questionType = RKSurveyQuestionTypeDecimal;
     qrLifetimeRisk.answer = self.heartAgeInfo[kSummaryLifetimeRisk];
     
-    [surveyQuestions addObject:qrLifetimeRisk];
+    [questionResultsForSurvey addObject:qrLifetimeRisk];
     
-    result.surveyResults = surveyQuestions;
-    
-    
-    if ([result isKindOfClass:[RKSurveyResult class]]) {
-        RKSurveyResult* sresult = (RKSurveyResult*)result;
-        
-        for (RKQuestionResult* qr in sresult.surveyResults) {
-            NSLog(@"%@ = [%@] %@ ", [[qr itemIdentifier] stringValue], [qr.answer class], qr.answer);
-        }
-    }
+    result.surveyResults = questionResultsForSurvey;
     
     [self sendResult:result];
 
