@@ -7,6 +7,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="APHHeartAgeResultsViewController">
             <connections>
+                <outlet property="actualAgeLabel" destination="wF4-O5-Jfj" id="Lfs-60-mpO"/>
+                <outlet property="estimatedLifetimeFactorLabel" destination="okj-eJ-Q8i" id="eSy-Dc-zup"/>
+                <outlet property="estimatedTenYearFactorLabel" destination="MaF-vo-Pwt" id="7jq-Oh-A1H"/>
+                <outlet property="heartAgeLabel" destination="TcK-oY-ULa" id="xFQ-I1-hY0"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -109,7 +113,7 @@
                                             <color key="textColor" red="0.75686281919999998" green="0.094117656349999995" blue="0.1294117719" alpha="1" colorSpace="deviceRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="44" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wF4-O5-Jfj">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wF4-O5-Jfj">
                                             <rect key="frame" x="8" y="29" width="144" height="91"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="wF4-O5-Jfj" secondAttribute="height" multiplier="144:91" id="Ndz-AP-nnF"/>
@@ -118,13 +122,13 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TcK-oY-ULa">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TcK-oY-ULa">
                                             <rect key="frame" x="169" y="29" width="143" height="91"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="TcK-oY-ULa" secondAttribute="height" multiplier="11:7" id="s1Q-LF-lG7"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="75"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.75686281919999998" green="0.094117656349999995" blue="0.1294117719" alpha="1" colorSpace="deviceRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>

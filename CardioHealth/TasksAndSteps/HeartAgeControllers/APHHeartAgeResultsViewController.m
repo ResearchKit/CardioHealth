@@ -9,6 +9,10 @@
 #import "APHHeartAgeResultsViewController.h"
 
 @interface APHHeartAgeResultsViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *actualAgeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *heartAgeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *estimatedTenYearFactorLabel;
+@property (weak, nonatomic) IBOutlet UILabel *estimatedLifetimeFactorLabel;
 
 @end
 
@@ -26,19 +30,23 @@
     [self.view setBackgroundColor:viewBackgroundColor];
 }
 
+- (void)viewDidLayoutSubviews {
+    self.actualAgeLabel.text = [NSString stringWithFormat:@"%lu", self.actualAge];
+    self.heartAgeLabel.text = [NSString stringWithFormat:@"%lu", self.heartAge];
+    
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setNumberStyle:NSNumberFormatterPercentStyle];
+    
+    NSString *tenYearRiskPercentage = [numberFormatter stringFromNumber:self.tenYearRisk];
+    
+    self.estimatedTenYearFactorLabel.text = [NSString stringWithFormat:@"You have an estimated %@ 10-year risk of ASCVD.", tenYearRiskPercentage];
+    
+    self.estimatedLifetimeFactorLabel.text = [NSString stringWithFormat:@"You have an estimated %lu%% lifetime risk of ASCVD.", [self.lifetimeRisk integerValue]];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
