@@ -25,6 +25,8 @@
 		7B4104A319E5E46800592B96 /* APHFitnessTestRestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B41049D19E5E46800592B96 /* APHFitnessTestRestView.xib */; };
 		7B451CC319EC91680015BD76 /* APHImportantDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B451CC119EC91680015BD76 /* APHImportantDetailsViewController.m */; };
 		7B451CC419EC91680015BD76 /* APHImportantDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B451CC219EC91680015BD76 /* APHImportantDetailsViewController.xib */; };
+		7B6753411A01540E005864E6 /* APHHeartAgeIntroStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B67533F1A01540E005864E6 /* APHHeartAgeIntroStepViewController.m */; };
+		7B6753421A01540E005864E6 /* APHHeartAgeIntroStepViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B6753401A01540E005864E6 /* APHHeartAgeIntroStepViewController.xib */; };
 		7B8E912A19F9B5BA0040F77F /* APHFitnessTestIntroStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B8E912819F9B5BA0040F77F /* APHFitnessTestIntroStepViewController.m */; };
 		7B8E912B19F9B5BA0040F77F /* APHFitnessTestIntroStepViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B8E912919F9B5BA0040F77F /* APHFitnessTestIntroStepViewController.xib */; };
 		7B8E912F19FADA180040F77F /* APHIntroductionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B8E912E19FADA180040F77F /* APHIntroductionViewController.m */; };
@@ -163,6 +165,9 @@
 		7B451CC019EC91680015BD76 /* APHImportantDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHImportantDetailsViewController.h; sourceTree = "<group>"; };
 		7B451CC119EC91680015BD76 /* APHImportantDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHImportantDetailsViewController.m; sourceTree = "<group>"; };
 		7B451CC219EC91680015BD76 /* APHImportantDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = APHImportantDetailsViewController.xib; sourceTree = "<group>"; };
+		7B67533E1A01540E005864E6 /* APHHeartAgeIntroStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHHeartAgeIntroStepViewController.h; sourceTree = "<group>"; };
+		7B67533F1A01540E005864E6 /* APHHeartAgeIntroStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHHeartAgeIntroStepViewController.m; sourceTree = "<group>"; };
+		7B6753401A01540E005864E6 /* APHHeartAgeIntroStepViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = APHHeartAgeIntroStepViewController.xib; sourceTree = "<group>"; };
 		7B8E912719F9B5BA0040F77F /* APHFitnessTestIntroStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHFitnessTestIntroStepViewController.h; sourceTree = "<group>"; };
 		7B8E912819F9B5BA0040F77F /* APHFitnessTestIntroStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHFitnessTestIntroStepViewController.m; sourceTree = "<group>"; };
 		7B8E912919F9B5BA0040F77F /* APHFitnessTestIntroStepViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = APHFitnessTestIntroStepViewController.xib; sourceTree = "<group>"; };
@@ -353,6 +358,16 @@
 			name = CustomViews;
 			sourceTree = "<group>";
 		};
+		7B67533C1A0153DB005864E6 /* Intro */ = {
+			isa = PBXGroup;
+			children = (
+				7B67533E1A01540E005864E6 /* APHHeartAgeIntroStepViewController.h */,
+				7B67533F1A01540E005864E6 /* APHHeartAgeIntroStepViewController.m */,
+				7B6753401A01540E005864E6 /* APHHeartAgeIntroStepViewController.xib */,
+			);
+			path = Intro;
+			sourceTree = "<group>";
+		};
 		7B8E912519F9B58D0040F77F /* Intro */ = {
 			isa = PBXGroup;
 			children = (
@@ -408,6 +423,7 @@
 		F5481F0619E4820100D84617 /* HeartAgeControllers */ = {
 			isa = PBXGroup;
 			children = (
+				7B67533C1A0153DB005864E6 /* Intro */,
 				7BEEFA5B1A003DE8004F6C87 /* Summary */,
 				F5481F0B19E4820100D84617 /* APHHeartAgeTaskViewController.h */,
 				F5481F0C19E4820100D84617 /* APHHeartAgeTaskViewController.m */,
@@ -782,6 +798,7 @@
 				F55BBE7619D362D0003CA0F9 /* APHLearnDetailViewCell.xib in Resources */,
 				7BD73F7B19E8A20600F5DFF3 /* Intro.mp4 in Resources */,
 				F55BBE7119D362D0003CA0F9 /* APHLearn.storyboard in Resources */,
+				7B6753421A01540E005864E6 /* APHHeartAgeIntroStepViewController.xib in Resources */,
 				F55BBE6D19D362D0003CA0F9 /* APHEditSectionsViewController.xib in Resources */,
 				F55BBE6A19D362D0003CA0F9 /* APHDashboard.storyboard in Resources */,
 				08D3A10619E4A08C00A3D20D /* HeartAgeSummary.storyboard in Resources */,
@@ -842,6 +859,7 @@
 				F55BBE6919D362D0003CA0F9 /* APHActivitiesViewController.m in Sources */,
 				F5F644FF19D35BA2004CFBB2 /* main.m in Sources */,
 				F5778E7819F0613D0079F1B2 /* APHSignUpMedicalInfoViewController.m in Sources */,
+				7B6753411A01540E005864E6 /* APHHeartAgeIntroStepViewController.m in Sources */,
 				F55BBE6C19D362D0003CA0F9 /* APHEditSectionsViewController.m in Sources */,
 				F55BBE6F19D362D0003CA0F9 /* APHDashboardMessageViewCell.m in Sources */,
 				7B41047E19E5D94F00592B96 /* APHFitnessTaskViewController.m in Sources */,
