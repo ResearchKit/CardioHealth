@@ -85,20 +85,25 @@
 
 - (void)next
 {
-    //TODO: Remove comments in Dev branch
-#ifdef DEVELOPMENT
+#if DEVELOPMENT
+    if (YES) {
+#else
+    if (((APCAppDelegate*)[UIApplication sharedApplication].delegate).dataSubstrate.parameters.hideConsent) {
+#endif
         APHSignUpGeneralInfoViewController *signUpVC = [[UIStoryboard storyboardWithName:@"APHOnboarding" bundle:nil] instantiateViewControllerWithIdentifier:@"SignUpGeneralInfoVC"];
         [self.navigationController pushViewController:signUpVC animated:YES];
-#else
-    if ([self isEligible]) {
-        
-        [self.navigationController pushViewController:[[UIStoryboard storyboardWithName:@"APHOnboarding" bundle:nil] instantiateViewControllerWithIdentifier:@"EligibleVC"] animated:YES];
     }
     else
     {
-        [self.navigationController pushViewController:[[UIStoryboard storyboardWithName:@"APHOnboarding" bundle:nil] instantiateViewControllerWithIdentifier:@"InEligibleVC"] animated:YES];
+        if ([self isEligible]) {
+            
+            [self.navigationController pushViewController:[[UIStoryboard storyboardWithName:@"APHOnboarding" bundle:nil] instantiateViewControllerWithIdentifier:@"EligibleVC"] animated:YES];
+        }
+        else
+        {
+            [self.navigationController pushViewController:[[UIStoryboard storyboardWithName:@"APHOnboarding" bundle:nil] instantiateViewControllerWithIdentifier:@"InEligibleVC"] animated:YES];
+        }
     }
-#endif
 }
 
 - (BOOL) isEligible
