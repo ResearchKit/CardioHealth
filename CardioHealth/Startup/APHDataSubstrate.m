@@ -8,7 +8,8 @@
 
 #import "APHDataSubstrate.h"
 
-static NSTimeInterval LOCATION_COLLECTION_INTERVAL = 5 * 60.0 * 60.0;
+//TODO leaving this here because we may want to support defferred updates for passive location tracking.
+//static NSTimeInterval LOCATION_COLLECTION_INTERVAL = 5 * 60.0 * 60.0;
 
 @implementation APHDataSubstrate
 

@@ -61,17 +61,6 @@ static  NSString  *kIntroHeadingCaption = @"Tests for Bradykinesia";
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     
-    
-}
-
-
-- (void)viewDidLoad
-{
-
-    [super viewDidLoad];
-    
-    self.title = kViewControllerTitle;
-    
     NSArray  *introImageNames = @[ @"interval.instructions.01", @"interval.instructions.02", @"interval.instructions.03", @"interval.instructions.04" ];
     
     NSArray  *paragraphs = @[
@@ -86,6 +75,17 @@ static  NSString  *kIntroHeadingCaption = @"Tests for Bradykinesia";
     self.instructionsController = [[APHIntroductionViewController alloc] initWithNibName:nil bundle:nil];
     [self.instructionsContainer addSubview:self.instructionsController.view];
     [self.instructionsController setupWithInstructionalImages:introImageNames andParagraphs:paragraphs];
+}
+
+
+- (void)viewDidLoad
+{
+
+    [super viewDidLoad];
+    
+    self.title = kViewControllerTitle;
+    
+
     
    
 }

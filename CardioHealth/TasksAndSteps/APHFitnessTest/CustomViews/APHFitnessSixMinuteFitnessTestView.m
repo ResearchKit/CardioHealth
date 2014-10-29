@@ -12,7 +12,7 @@
 static CGFloat kAPHFitnessTestMetersToMilesConversion = 1609.34;
 
 @interface APHFitnessSixMinuteFitnessTestView ()
-@property (weak, nonatomic) IBOutlet UILabel *heartRateLabel UI_APPEARANCE_SELECTOR;
+@property (weak, nonatomic) IBOutlet UILabel *heartRateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *stepCountLabel UI_APPEARANCE_SELECTOR;
 @property (weak, nonatomic) IBOutlet UILabel *distanceTotalLabel UI_APPEARANCE_SELECTOR;
 

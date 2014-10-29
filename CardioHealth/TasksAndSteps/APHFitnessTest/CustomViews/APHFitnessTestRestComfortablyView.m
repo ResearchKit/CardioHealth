@@ -38,13 +38,13 @@
     [self.heartRateBPMLbl setBackgroundColor:[UIColor yellowColor]];
     [self addSubview:self.heartRateBPMLbl];
     
-    self.stepCountLbl.text = @"--";
-    [self.stepCountLbl setBackgroundColor:[UIColor yellowColor]];
-    [self addSubview:self.stepCountLbl];
-    
-    self.distanceTrackerLbl.text = @"--";
-    [self.distanceTrackerLbl setBackgroundColor:[UIColor yellowColor]];
-    [self addSubview:self.distanceTrackerLbl];
+//    self.stepCountLbl.text = @"--";
+//    [self.stepCountLbl setBackgroundColor:[UIColor yellowColor]];
+//    [self addSubview:self.stepCountLbl];
+//    
+//    self.distanceTrackerLbl.text = @"--";
+//    [self.distanceTrackerLbl setBackgroundColor:[UIColor yellowColor]];
+//    [self addSubview:self.distanceTrackerLbl];
 }
 
 - (id)initWithFrame:(CGRect)aRect

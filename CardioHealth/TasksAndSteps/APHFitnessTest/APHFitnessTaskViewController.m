@@ -187,37 +187,24 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
 - (void)taskViewController:(RKTaskViewController *)taskViewController
 willPresentStepViewController:(RKStepViewController *)stepViewController{
     
+    stepViewController = (RKStepViewController *) stepViewController;
+    
     if ([stepViewController.step.identifier isEqualToString:@""]) {
-        //UIView* customView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 400.0)];
+        UIView* customView = [UIView new];
+        customView.backgroundColor = [UIColor cyanColor];
         
         // Have the custom view request the space it needs.
         // A little tricky because we need to let it size to fit if there's not enough space.
-//        [customView setTranslatesAutoresizingMaskIntoConstraints:NO];
-//        
-//        NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[c(>=160)]" options:0 metrics:nil views:@{@"c":customView}];
-//        for (NSLayoutConstraint *constraint in verticalConstraints)
-//        {
-//            constraint.priority = UILayoutPriorityFittingSizeLevel;
-//        }
+        [customView setTranslatesAutoresizingMaskIntoConstraints:NO];
+        NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[c(>=160)]" options:0 metrics:nil views:@{@"c":customView}];
+        for (NSLayoutConstraint *constraint in verticalConstraints)
+        {
+            constraint.priority = UILayoutPriorityFittingSizeLevel;
+        }
+        [customView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[c(>=280)]" options:0 metrics:nil views:@{@"c":customView}]];
+        [customView addConstraints:verticalConstraints];
         
-//        [NSLayoutConstraint constraintsWithVisualFormat: @"V: [button]-20-[bottomGuide]"
-//                                                options: 0
-//                                                metrics: nil
-//                                                  views: stepViewController.continueButton]];
-
-        
-//        [customView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[c(>=280)]" options:0 metrics:nil views:@{@"c":customView}]];
-//        [customView addConstraints:verticalConstraints];
-        
-//        [(RKActiveStepViewController*)stepViewController setCustomView:customView];
-
-        //TODO Leaving this here as a reference to creating custom bar buttons with ResearchKit
-// Set custom button on navi bar
-//        stepViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Custom button"
-//                                                                                               style:UIBarButtonItemStylePlain
-//                                                                                              target:nil
-//                                                                                              action:nil];
-        
+        [(RKActiveStepViewController*)stepViewController setCustomView:customView];
         
         
         stepViewController.learnMoreButton =[[UIBarButtonItem alloc] initWithTitle:@"View Important Details" style:stepViewController.continueButton.style target:self action:@selector(importantDetails:)];
@@ -225,26 +212,6 @@ willPresentStepViewController:(RKStepViewController *)stepViewController{
         
         
         stepViewController.continueButton = [[UIBarButtonItem alloc] initWithTitle:@"Get Started" style:stepViewController.continueButton.style target:stepViewController.continueButton.target action:stepViewController.continueButton.action];
-
-        
-
-        
-        
-        
-//        NSArray  *introImageNames = @[ @"interval.instructions.01@2x", @"interval.instructions.02@2x", @"interval.instructions.03@2x", @"interval.instructions.04@2x" ];
-//        
-//        NSArray  *paragraphs = @[
-//                                 @"For this task, please lay your phone on a flat surface to produce the most accurate results.",
-//                                 @"Once you tap “Get Started”, you will have five seconds before the first interval set appears.",
-//                                 @"Next, use two fingers on the same hand to alternately tap the buttons for 20 seconds.  Time your taps to be as consistent as possible.",
-//                                 @"After the intervals are finished, your results will be visible on the next screen."
-//                                 ];
-        
-        //self.introHeadingCaption.text = kIntroHeadingCaption;
-        
-//        self.instructionsController = [[APHCommonInstructionalViewController alloc] initWithNibName:nil bundle:nil];
-//        [customView addSubview:self.instructionsController.view];
-//        [self.instructionsController setupWithInstructionalImages:introImageNames andParagraphs:paragraphs];
         
         stepViewController.skipButton = nil;
         

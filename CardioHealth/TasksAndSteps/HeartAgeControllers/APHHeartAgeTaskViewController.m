@@ -9,11 +9,15 @@
 #import "APHHeartAgeSummaryViewController.h"
 #import "APHHeartAgeAndRiskFactors.h"
 
+//TODO added by Justin
+#import "APHHeartAgeResultsViewController.h"
+
 static NSString *MainStudyIdentifier = @"com.cardiovascular.heartAgeTest";
 
 // Introduction Step Key
 static NSString *kHeartAgeIntroduction = @"HeartAgeIntroduction";
 static NSString *kHeartAgeSummary = @"HeartAgeSummary";
+static NSString *kHeartAgeResult = @"HeartAgeResult";
 
 @interface APHHeartAgeTaskViewController ()
 
@@ -196,7 +200,7 @@ static NSString *kHeartAgeSummary = @"HeartAgeSummary";
     }
     
     {
-        RKQuestionStep *step = [RKQuestionStep questionStepWithIdentifier:kHeartAgeSummary
+        RKQuestionStep *step = [RKQuestionStep questionStepWithIdentifier:kHeartAgeResult
                                                                      name:NSLocalizedString(@"Heart Age Summary", @"Heart age summary")
                                                                  question:@"No question"
                                                                    answer:[RKBooleanAnswerFormat new]];
@@ -335,6 +339,36 @@ static NSString *kHeartAgeSummary = @"HeartAgeSummary";
         
         UIStoryboard *sbHeartAgeSummary = [UIStoryboard storyboardWithName:@"HeartAgeSummary" bundle:nil];
         APHHeartAgeSummaryViewController *heartAgeResultsVC = [sbHeartAgeSummary instantiateInitialViewController];
+        
+        heartAgeResultsVC.resultCollector = self;
+        heartAgeResultsVC.delegate = self;
+        heartAgeResultsVC.step = step;
+        heartAgeResultsVC.taskProgress = 0.25;
+        heartAgeResultsVC.actualAge = [surveyResultsDictionary[kHeartAgeTestDataAge] integerValue];
+        heartAgeResultsVC.heartAge = [self.heartAgeInfo[kSummaryHeartAge] integerValue];
+        heartAgeResultsVC.tenYearRisk = self.heartAgeInfo[kSummaryTenYearRisk];
+        heartAgeResultsVC.lifetimeRisk = self.heartAgeInfo[kSummaryLifetimeRisk];
+        
+        stepVC = heartAgeResultsVC;
+    } else if ([step.identifier isEqualToString:kHeartAgeResult]) {
+        
+        NSMutableDictionary *surveyResultsDictionary = [NSMutableDictionary dictionary];
+        
+        // Normalize survey results into dictionary.
+        for (RKQuestionResult *questionResult in taskViewController.surveyResults) {
+            NSString *questionIdentifier = [[questionResult itemIdentifier] stringValue];
+            if ([questionIdentifier isEqualToString:kHeartAgekHeartAgeTestDataEthnicity] || [questionIdentifier isEqualToString:kHeartAgekHeartAgeTestDataGender]) {
+                [surveyResultsDictionary setObject:(NSString *)questionResult.answer forKey:questionIdentifier];
+            } else {
+                [surveyResultsDictionary setObject:(NSNumber *)questionResult.answer forKey:questionIdentifier];
+            }
+        }
+        
+        // Kickoff heart age calculations
+        APHHeartAgeAndRiskFactors *heartAgeAndRiskFactors = [[APHHeartAgeAndRiskFactors alloc] init];
+        self.heartAgeInfo = [heartAgeAndRiskFactors calculateHeartAgeAndRiskFactors:surveyResultsDictionary];
+        
+        APHHeartAgeResultsViewController *heartAgeResultsVC = [[APHHeartAgeResultsViewController alloc] initWithNibName:@"APHHeartAgeResultsViewController" bundle:nil];
         
         heartAgeResultsVC.resultCollector = self;
         heartAgeResultsVC.delegate = self;
