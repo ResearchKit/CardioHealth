@@ -25,6 +25,9 @@ static CGFloat kProgressBarHeight = 10.0;
     self.progressBar.numberOfSteps = 14;
     
     [self.view addSubview:self.progressBar];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonTapped:)];
+
 
     
 }
@@ -45,6 +48,15 @@ static CGFloat kProgressBarHeight = 10.0;
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)cancelButtonTapped:(id)sender
+{
+    if (self.delegate != nil) {
+        if ([self.delegate respondsToSelector:@selector(stepViewControllerDidCancel:)] == YES) {
+            [self.delegate stepViewControllerDidCancel:self];
+        }
+    }
 }
 
 - (IBAction)getStartedWasTapped:(id)sender
