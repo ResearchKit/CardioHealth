@@ -73,6 +73,7 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
                                                              name:@"BioDemo"
                                                             title:nil
                                                          subtitle:@"To calculate your heart age, please enter a few details about yourself."];
+        step.optional = NO;
         {
             RKNumericAnswerFormat *format = [RKNumericAnswerFormat integerAnswerWithUnit:nil];
             format.minimum = @(1);
@@ -112,6 +113,7 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
                                                             title:NSLocalizedString(@"Smoking History",
                                                                                     @"Smoking History")
                                                          subtitle:nil];
+        step.optional = NO;
         {
             RKFormItem *item = [[RKFormItem alloc] initWithIdentifier:kHeartAgeTestDataSmoke
                                                                  text:NSLocalizedString(@"Have you ever smoked?",
@@ -139,6 +141,7 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
                                                              name:@"cholesterolHdlSystolic"
                                                             title:nil
                                                          subtitle:@"Cholesterol & Blood Pressure"];
+        step.optional = NO;
         
         {
             RKNumericAnswerFormat *format = [RKNumericAnswerFormat integerAnswerWithUnit:@"mg/dl"];
@@ -185,6 +188,7 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
                                                              name:@"medicalHistory"
                                                             title:nil
                                                          subtitle:@"Your medical history."];
+        step.optional = NO;
         {
             RKFormItem *item = [[RKFormItem alloc] initWithIdentifier:kHeartAgeTestDataDiabetes
                                                                  text:NSLocalizedString(@"Do you have Diabetes?",
@@ -414,19 +418,6 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
     return stepVC;
 }
 
-
-/*********************************************************************************/
-#pragma mark - StepViewController Delegate Methods
-/*********************************************************************************/
-
-- (void)stepViewControllerWillBePresented:(RKStepViewController *)viewController
-{
-    
-    viewController.skipButton = nil;
-    
-}
-
-
 - (void)taskViewController:(RKTaskViewController *)taskViewController didProduceResult:(RKSurveyResult *)result
 {
     // We need to create three question results that will hold the value of Heart Age,
@@ -467,7 +458,18 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
     result.surveyResults = questionResultsForSurvey;
     
     [self sendResult:result];
-
+    
     [super taskViewController:taskViewController didProduceResult:result];
 }
+
+/*********************************************************************************/
+#pragma mark - StepViewController Delegate Methods
+/*********************************************************************************/
+
+- (void)stepViewControllerWillBePresented:(RKStepViewController *)viewController
+{
+    viewController.skipButton = nil;
+}
+
+
 @end
