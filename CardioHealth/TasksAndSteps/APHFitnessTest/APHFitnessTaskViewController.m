@@ -7,7 +7,7 @@
 //
 
 #import "APHFitnessTaskViewController.h"
-#import "APHCommonInstructionalViewController.h"
+
 
 #import "APHFitnessTestIntroStepViewController.h"
 
@@ -30,7 +30,6 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
 
 @property (strong, nonatomic) RKDataArchive *taskArchive;
 
-@property (strong, nonatomic) APHCommonInstructionalViewController *instructionsController;
 @end
 
 @implementation APHFitnessTaskViewController
