@@ -355,7 +355,8 @@ static NSString * const kDashboardMessagesCellIdentifier    = @"DashboardMessage
 
 - (NSString *)lineGraph:(APCLineGraphView *)graphView titleForXAxisAtIndex:(NSInteger)pointIndex
 {
-    return @"Sep";
+    NSArray *values = @[@"Nov 8", @"9", @"10", @"11", @"12"];
+    return values[pointIndex];
 }
 
 @end
