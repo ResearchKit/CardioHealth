@@ -208,22 +208,6 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
             [stepQuestions addObject:item];
         }
         
-        {
-            RKFormItem *item = [[RKFormItem alloc] initWithIdentifier:kHeartAgeTestDataFamilyDiabetes
-                                                                 text:NSLocalizedString(@"Does Diabetes run in your family?",
-                                                                                        @"Does Diabetes run in your family?")
-                                                         answerFormat:[RKBooleanAnswerFormat new]];
-            [stepQuestions addObject:item];
-        }
-        
-        {
-            RKFormItem *item = [[RKFormItem alloc] initWithIdentifier:kHeartAgeTestDataFamilyHeart
-                                                                 text:NSLocalizedString(@"Have either of your parents had heart problems?",
-                                                                                        @"Have either of your parents had heart problems?")
-                                                         answerFormat:[RKBooleanAnswerFormat new]];
-            [stepQuestions addObject:item];
-        }
-        
         [step setFormItems:stepQuestions];
         
         [steps addObject:step];
