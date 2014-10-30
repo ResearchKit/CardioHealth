@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Henry McGilton. All rights reserved.
 //
 
+@import APCAppleCore;
+
 #import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSUInteger, APHDashboardMessageViewCellType) {
