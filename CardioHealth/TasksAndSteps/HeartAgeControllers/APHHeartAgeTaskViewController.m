@@ -72,7 +72,8 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
         RKFormStep *step = [[RKFormStep alloc] initWithIdentifier:kHeartAgeFormStepBiographicAndDemographic
                                                              name:@"BioDemo"
                                                             title:nil
-                                                         subtitle:@"To calculate your heart age, please enter a few details about yourself."];
+                                                         subtitle:NSLocalizedString(@"To calculate your heart age, please enter a few details about yourself.",
+                                                                                    @"To calculate your heart age, please enter a few details about yourself.")];
         step.optional = NO;
         {
             RKNumericAnswerFormat *format = [RKNumericAnswerFormat integerAnswerWithUnit:nil];
@@ -140,7 +141,8 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
         RKFormStep *step = [[RKFormStep alloc] initWithIdentifier:kHeartAgeFormStepCholesterolHdlSystolic
                                                              name:@"cholesterolHdlSystolic"
                                                             title:nil
-                                                         subtitle:@"Cholesterol & Blood Pressure"];
+                                                         subtitle:NSLocalizedString(@"Cholesterol & Blood Pressure",
+                                                                                    @"Cholesterol & Blood Pressure")];
         step.optional = NO;
         
         {
@@ -187,7 +189,8 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
         RKFormStep *step = [[RKFormStep alloc] initWithIdentifier:kHeartAgeFormStepMedicalHistory
                                                              name:@"medicalHistory"
                                                             title:nil
-                                                         subtitle:@"Your medical history."];
+                                                         subtitle:NSLocalizedString(@"Your medical history.",
+                                                                                    @"Your medical history.")];
         step.optional = NO;
         {
             RKFormItem *item = [[RKFormItem alloc] initWithIdentifier:kHeartAgeTestDataDiabetes
