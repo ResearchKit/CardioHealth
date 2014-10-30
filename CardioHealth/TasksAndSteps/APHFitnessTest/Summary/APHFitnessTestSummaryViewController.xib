@@ -45,7 +45,6 @@
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="au4-cC-isv">
                             <rect key="frame" x="272" y="8" width="40" height="40"/>
-                            <color key="backgroundColor" red="0.97647064920000004" green="0.90980398650000005" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="au4-cC-isv" secondAttribute="height" multiplier="1:1" id="sFi-Fb-bCl"/>
                             </constraints>
@@ -89,13 +88,6 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3CV-1C-Udc">
                             <rect key="frame" x="0.0" y="100" width="320" height="265"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="olt-zG-qQT">
-                                    <rect key="frame" x="135" y="5" width="50" height="50"/>
-                                    <color key="backgroundColor" red="0.20000000000000001" green="0.20784313730000001" blue="0.21960784310000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" secondItem="olt-zG-qQT" secondAttribute="height" multiplier="1:1" id="w2Z-K1-hTg"/>
-                                    </constraints>
-                                </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your results are being analyzed and you will be notified when they are available." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LVd-bV-L6N" customClass="RKCaption2Label">
                                     <rect key="frame" x="28" y="63" width="264" height="70"/>
                                     <constraints>
@@ -105,6 +97,12 @@
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Completion-Check" translatesAutoresizingMaskIntoConstraints="NO" id="olt-zG-qQT">
+                                    <rect key="frame" x="135" y="5" width="50" height="50"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="olt-zG-qQT" secondAttribute="height" multiplier="1:1" id="w2Z-K1-hTg"/>
+                                    </constraints>
+                                </imageView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             <constraints>
@@ -148,4 +146,7 @@
             <point key="canvasLocation" x="111" y="172"/>
         </view>
     </objects>
+    <resources>
+        <image name="Completion-Check" width="88" height="88"/>
+    </resources>
 </document>

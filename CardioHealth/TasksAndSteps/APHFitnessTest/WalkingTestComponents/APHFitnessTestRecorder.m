@@ -143,7 +143,7 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
         
         RKActiveStepViewController * stepViewController = (RKActiveStepViewController *)viewController;
         
-        UIView *blankView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 280, 360.00)];
+        UIView *blankView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 280, 560.00)];
         [blankView addSubview: updatedView];
         
         [stepViewController setCustomView:blankView];

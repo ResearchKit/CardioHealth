@@ -61,13 +61,13 @@ static  NSString  *kIntroHeadingCaption = @"Tests for Bradykinesia";
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     
-    NSArray  *introImageNames = @[ @"interval.instructions.01", @"interval.instructions.02", @"interval.instructions.03", @"interval.instructions.04" ];
+    NSArray  *introImageNames = @[ @"6minwalk", @"6minwalk-Icon-1", @"6minwalk-Icon-2", @"Data-Analysis-Icon"];
     
     NSArray  *paragraphs = @[
-                             @"For this task, please lay your phone on a flat surface to produce the most accurate results.",
-                             @"Once you tap “Get Started”, you will have five seconds before the first interval set appears.",
-                             @"Next, use two fingers on the same hand to alternately tap the buttons for 20 seconds.  Time your taps to be as consistent as possible.",
-                             @"After the intervals are finished, your results will be visible on the next screen."
+                             @"Once you tap Get Started, you will have 5 seconds until this test begins tracking your movements.",
+                             @"Begin walking at your fastest possible pace for 6 minutes.",
+                             @"After 6 minutes expires, sit down and rest for 3 minutes.",
+                             @"After the test is finished, your results will be analyzed and available on the dashboard. You will be notified when analysis is ready."
                              ];
     
     self.introHeadingCaption.text = kIntroHeadingCaption;
