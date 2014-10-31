@@ -12,7 +12,7 @@
 #import <CoreLocation/CoreLocation.h>
 
 
-static CGFloat kAPHFitnessTestMetersToMilesConversion = 1609.34;
+static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
 
 static  NSString  *kFitnessTestStep101 = @"FitnessStep101";
 static  NSString  *kFitnessTestStep102 = @"FitnessStep102";
@@ -223,35 +223,25 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
 /*********************************************************************************/
 - (void)receiveHeartBPMNotification:(NSNotification *)notification {
     NSMutableDictionary *heartBeatInfo = [notification.userInfo mutableCopy];
-//    NSTimeInterval numberOfSeconds = [[NSDate date] timeIntervalSinceDate:self.timer.fireDate];
-//    heartBeatInfo[@"timer"] = [[NSNumber alloc] initWithDouble:numberOfSeconds];
-    
-    //NSLog(@"Recorder Heart Beat Info %@", heartBeatInfo);
     
     [self.heartRateRecords addObject:heartBeatInfo];
 }
 
 - (void)receiveStepCountNotification:(NSNotification *)notification {
     NSMutableDictionary *stepCountInfo = [notification.userInfo mutableCopy];
-//    NSTimeInterval numberOfSeconds = [[NSDate date] timeIntervalSinceDate:self.timer.fireDate];
-//    stepCountInfo[@"timer"] = [[NSNumber alloc] initWithDouble:numberOfSeconds];
-    
-    //NSLog(@"Custom View Step Count Info %@", stepCountInfo);
     
     [self.stepCountRecords addObject:stepCountInfo];
 }
 
 - (void)receiveUpdatedLocationNotification:(NSNotification *)notification {
     NSMutableDictionary *distanceUpdatedInfo = [notification.userInfo mutableCopy];
-//    NSTimeInterval numberOfSeconds = [[NSDate date] timeIntervalSinceDate:self.timer.fireDate];
-//    distanceUpdatedInfo[@"timer"] = [[NSNumber alloc] initWithDouble:numberOfSeconds];
     
     CLLocationDistance distance = [[distanceUpdatedInfo objectForKey:@"distance"] doubleValue];
     self.totalDistance += distance;
-    CLLocationDistance distanceInMiles = self.totalDistance/kAPHFitnessTestMetersToMilesConversion;
-    distanceUpdatedInfo[@"totalDistanceInMiles"] = [[NSNumber alloc] initWithDouble:distanceInMiles];
     
-    //NSLog(@"Custom View Distance Total Info %@", distanceUpdatedInfo);
+    CLLocationDistance distanceInFeet = self.totalDistance * kAPHFitnessTestMetersToFeetConversion;
+    
+    distanceUpdatedInfo[@"totalDistanceInFeet"] = [[NSNumber alloc] initWithDouble:distanceInFeet];
     
     [self.distanceRecords addObject:distanceUpdatedInfo];
 }
