@@ -69,7 +69,7 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
 
     {
         RKIntroductionStep *step = [[RKIntroductionStep alloc] initWithIdentifier:kFitnessTestStep101 name:@"Tap Intro"];
-        step.caption = NSLocalizedString(@"Fitness Test", @"");
+        step.caption = NSLocalizedString(@"Measure Excercise Tolerance", @"");
         step.instruction = NSLocalizedString(@"Once you tap Get Started, you will have 5 seconds until this test begins tracking your movement.", @"");
         [steps addObject:step];
     }
@@ -150,13 +150,6 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
 /*********************************************************************************/
 #pragma  mark  - Private methods
 /*********************************************************************************/
-
-- (void) importantDetails:(id)sender {
-    APHImportantDetailsViewController *detailsVC = [APHImportantDetailsViewController new];
-    [self presentViewController:detailsVC animated:YES completion:^{
-        NSLog(@"Present details view");
-    }];
-}
 
 - (void)beginTask
 {
