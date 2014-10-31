@@ -37,9 +37,7 @@
 
 - (IBAction)closeButton:(id)sender {
     NSLog(@"CLick");
-    [self dismissViewControllerAnimated:YES completion:^{
-
-    }];
+    [self dismissViewControllerAnimated:YES completion:nil];
 
 }
 @end

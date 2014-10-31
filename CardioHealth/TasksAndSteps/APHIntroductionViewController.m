@@ -37,10 +37,10 @@ static  NSString  *kSuperClassName = @"APCIntroductionViewController";
     [button setTitle:@"View Important Details" forState:UIControlStateNormal];
     [button setTitleColor:[UIColor appPrimaryColor] forState:UIControlStateNormal];
     
-    [button addTarget:self action:@selector(viewImportantDetailButton) forControlEvents:UIControlEventTouchUpInside];
+    [button addTarget:self action:@selector(viewImportantDetailButtonTapped) forControlEvents:UIControlEventTouchUpInside];
 }
 
-- (void)viewImportantDetailButton {
+- (void)viewImportantDetailButtonTapped {
     if ([self.delegate respondsToSelector:@selector(viewImportantDetailsSelected:)] ) {
         [self.delegate viewImportantDetailsSelected:self];
     }
