@@ -152,13 +152,6 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
 #pragma  mark  - Private methods
 /*********************************************************************************/
 
-- (void) importantDetails:(id)sender {
-    APHImportantDetailsViewController *detailsVC = [APHImportantDetailsViewController new];
-    [self presentViewController:detailsVC animated:YES completion:^{
-        NSLog(@"Present details view");
-    }];
-}
-
 - (void)beginTask
 {
     if (self.taskArchive)

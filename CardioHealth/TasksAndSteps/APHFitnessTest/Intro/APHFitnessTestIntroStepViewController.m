@@ -7,7 +7,6 @@
 //
 
 #import "APHFitnessTestIntroStepViewController.h"
-#import "APHIntroductionViewController.h"
 
 static  NSString  *kViewControllerTitle = @"Interval Tapping";
 
@@ -75,6 +74,8 @@ static  NSString  *kIntroHeadingCaption = @"Tests for Bradykinesia";
     self.instructionsController = [[APHIntroductionViewController alloc] initWithNibName:nil bundle:nil];
     [self.instructionsContainer addSubview:self.instructionsController.view];
     [self.instructionsController setupWithInstructionalImages:introImageNames andParagraphs:paragraphs];
+    [self.instructionsController setDelegate:self];
+
 }
 
 
@@ -84,10 +85,6 @@ static  NSString  *kIntroHeadingCaption = @"Tests for Bradykinesia";
     [super viewDidLoad];
     
     self.title = kViewControllerTitle;
-    
-
-    
-   
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -108,6 +105,15 @@ static  NSString  *kIntroHeadingCaption = @"Tests for Bradykinesia";
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+}
+
+- (void)viewImportantDetailsSelected:(APHIntroductionViewController *)introductionViewController {
+    NSLog(@"clicky");
+    
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"APHImportantDetailsTableViewController" bundle:nil];
+    UITableViewController *vc = [sb instantiateViewControllerWithIdentifier:@"APHImportantDetailsTableViewController"];
+    vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    [self presentViewController:vc animated:YES completion:NULL];
 }
 
 @end

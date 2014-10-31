@@ -13,7 +13,6 @@
 #import "APHFitnessTestRestComfortablyView.h"
 #import "APHFitnessTestRestView.h"
 #import <CoreLocation/CoreLocation.h>
-#import "APHImportantDetailsViewController.h"
 
 @interface APHFitnessTaskViewController : APCSetupTaskViewController <APHFitnessTestHealthKitSampleTypeTrackerDelegate, APHFitnessTestDistanceTrackerDelegate>
 
