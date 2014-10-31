@@ -10,7 +10,7 @@
         <scene sceneID="HUy-fj-Ljr">
             <objects>
                 <tableViewController id="ADt-lG-Uqh" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="AkX-Cz-HT8">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="AkX-Cz-HT8">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="1300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -58,10 +58,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Do not attempt if any of the following has ever applied to you." lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bJF-IF-npP">
-                                                    <rect key="frame" x="8" y="0.0" width="304" height="80"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" secondItem="bJF-IF-npP" secondAttribute="height" multiplier="19:5" id="dEJ-P9-xSz"/>
-                                                    </constraints>
+                                                    <rect key="frame" x="8" y="10" width="304" height="60"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -69,9 +66,10 @@
                                             </subviews>
                                             <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
-                                                <constraint firstItem="bJF-IF-npP" firstAttribute="leading" secondItem="4af-mu-sq1" secondAttribute="leadingMargin" id="Dgw-jX-qpa"/>
-                                                <constraint firstItem="bJF-IF-npP" firstAttribute="trailing" secondItem="4af-mu-sq1" secondAttribute="trailingMargin" id="I9h-6Z-lHS"/>
-                                                <constraint firstItem="bJF-IF-npP" firstAttribute="top" secondItem="4af-mu-sq1" secondAttribute="topMargin" constant="-8" id="xuU-DH-iR4"/>
+                                                <constraint firstItem="bJF-IF-npP" firstAttribute="trailing" secondItem="4af-mu-sq1" secondAttribute="trailingMargin" id="CJP-KC-1tq"/>
+                                                <constraint firstItem="bJF-IF-npP" firstAttribute="top" secondItem="4af-mu-sq1" secondAttribute="topMargin" constant="2" id="E62-Am-7uO"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="bJF-IF-npP" secondAttribute="bottom" constant="2" id="fnd-9i-p8O"/>
+                                                <constraint firstItem="bJF-IF-npP" firstAttribute="leading" secondItem="4af-mu-sq1" secondAttribute="leadingMargin" id="jxh-w7-cS8"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
