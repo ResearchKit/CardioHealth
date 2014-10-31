@@ -173,13 +173,6 @@
 		7B96D7411A02E4DB006D93C1 /* APHImportantDetailsTableViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = APHImportantDetailsTableViewController.storyboard; sourceTree = "<group>"; };
 		7B96D7461A0300D8006D93C1 /* APHImportantDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHImportantDetailsViewController.h; sourceTree = "<group>"; };
 		7B96D7471A0300D8006D93C1 /* APHImportantDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHImportantDetailsViewController.m; sourceTree = "<group>"; };
-		7BC7213A19F7018700C70956 /* APHCommonInstructionalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHCommonInstructionalViewController.h; sourceTree = "<group>"; };
-		7BC7213B19F7018700C70956 /* APHCommonInstructionalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHCommonInstructionalViewController.m; sourceTree = "<group>"; };
-		7BC7213C19F7018700C70956 /* APHCommonInstructionalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = APHCommonInstructionalViewController.xib; sourceTree = "<group>"; };
-		7BC7214619F7051600C70956 /* interval.instructions.01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "interval.instructions.01@2x.png"; sourceTree = "<group>"; };
-		7BC7214719F7051600C70956 /* interval.instructions.02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "interval.instructions.02@2x.png"; sourceTree = "<group>"; };
-		7BC7214819F7051600C70956 /* interval.instructions.03@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "interval.instructions.03@2x.png"; sourceTree = "<group>"; };
-		7BC7214919F7051600C70956 /* interval.instructions.04@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "interval.instructions.04@2x.png"; sourceTree = "<group>"; };
 		7BC7214F19F7173D00C70956 /* APHFitnessTestSummaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHFitnessTestSummaryViewController.h; sourceTree = "<group>"; };
 		7BC7215019F7173D00C70956 /* APHFitnessTestSummaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHFitnessTestSummaryViewController.m; sourceTree = "<group>"; };
 		7BC7215119F7173D00C70956 /* APHFitnessTestSummaryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = APHFitnessTestSummaryViewController.xib; sourceTree = "<group>"; };
@@ -382,9 +375,6 @@
 			isa = PBXGroup;
 			children = (
 				7BC7214519F7051600C70956 /* intervalimages */,
-				7BC7213A19F7018700C70956 /* APHCommonInstructionalViewController.h */,
-				7BC7213B19F7018700C70956 /* APHCommonInstructionalViewController.m */,
-				7BC7213C19F7018700C70956 /* APHCommonInstructionalViewController.xib */,
 			);
 			path = "Common Instructional View";
 			sourceTree = "<group>";
@@ -392,10 +382,6 @@
 		7BC7214519F7051600C70956 /* intervalimages */ = {
 			isa = PBXGroup;
 			children = (
-				7BC7214619F7051600C70956 /* interval.instructions.01@2x.png */,
-				7BC7214719F7051600C70956 /* interval.instructions.02@2x.png */,
-				7BC7214819F7051600C70956 /* interval.instructions.03@2x.png */,
-				7BC7214919F7051600C70956 /* interval.instructions.04@2x.png */,
 			);
 			path = intervalimages;
 			sourceTree = "<group>";
