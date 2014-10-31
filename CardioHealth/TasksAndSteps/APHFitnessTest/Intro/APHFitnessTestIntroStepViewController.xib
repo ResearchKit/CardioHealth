@@ -18,7 +18,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0SX-WE-cMJ" customClass="RKCaption1Label">
-                    <rect key="frame" x="20" y="5" width="280" height="21"/>
+                    <rect key="frame" x="20" y="20" width="280" height="21"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="0SX-WE-cMJ" secondAttribute="height" multiplier="40:3" id="awy-Ww-Eyx"/>
                     </constraints>
@@ -27,11 +27,10 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fIS-Re-7Fl">
-                    <rect key="frame" x="16" y="40" width="288" height="420"/>
+                    <rect key="frame" x="22" y="55" width="278" height="405"/>
                     <color key="backgroundColor" red="0.97647064920000004" green="0.90980398650000005" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="420" id="Nqd-DM-KPw"/>
-                        <constraint firstAttribute="width" constant="288" id="yIP-ah-7Kk"/>
+                        <constraint firstAttribute="width" secondItem="fIS-Re-7Fl" secondAttribute="height" multiplier="24:35" id="zTt-5z-xrG"/>
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E1y-Bp-4si">
@@ -51,14 +50,15 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="fIS-Re-7Fl" firstAttribute="top" secondItem="0SX-WE-cMJ" secondAttribute="bottom" constant="14" id="5Hi-19-lzS"/>
                 <constraint firstAttribute="trailing" secondItem="E1y-Bp-4si" secondAttribute="trailing" id="Drj-iX-duk"/>
                 <constraint firstItem="E1y-Bp-4si" firstAttribute="top" secondItem="fIS-Re-7Fl" secondAttribute="bottom" constant="4" id="E74-SK-VFV"/>
+                <constraint firstItem="0SX-WE-cMJ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="EHg-Ja-gtF"/>
                 <constraint firstItem="E1y-Bp-4si" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Lrb-lg-3cX"/>
                 <constraint firstItem="0SX-WE-cMJ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="OA1-GW-q93"/>
                 <constraint firstAttribute="trailing" secondItem="0SX-WE-cMJ" secondAttribute="trailing" constant="20" id="Oay-yX-Wia"/>
                 <constraint firstAttribute="bottom" secondItem="E1y-Bp-4si" secondAttribute="bottom" id="Rs3-hz-gXH"/>
-                <constraint firstItem="fIS-Re-7Fl" firstAttribute="top" secondItem="0SX-WE-cMJ" secondAttribute="bottom" constant="14" id="a9V-WM-llI"/>
-                <constraint firstAttribute="centerX" secondItem="fIS-Re-7Fl" secondAttribute="centerX" id="ju8-qO-Zk9"/>
+                <constraint firstAttribute="centerX" secondItem="fIS-Re-7Fl" secondAttribute="centerX" constant="-1" id="ju8-qO-Zk9"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
