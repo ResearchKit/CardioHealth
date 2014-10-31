@@ -12,7 +12,7 @@
 #define DEMO 0
 
 
-@interface APHSignUpGeneralInfoViewController () <APCTermsAndConditionsViewControllerDelegate>
+@interface APHSignUpGeneralInfoViewController () <APCTermsAndConditionsViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (nonatomic, strong) APCPermissionsManager *permissionManager;
 @property (nonatomic) BOOL permissionGranted;
