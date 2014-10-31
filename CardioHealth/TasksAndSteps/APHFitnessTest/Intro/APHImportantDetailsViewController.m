@@ -9,7 +9,7 @@
 #import "APHImportantDetailsViewController.h"
 
 @interface APHImportantDetailsViewController ()
-- (IBAction)closeButton:(id)sender;
+- (IBAction)dismissModalView:(id)sender;
 
 @end
 
@@ -35,7 +35,7 @@
 }
 */
 
-- (IBAction)closeButton:(id)sender {
+- (IBAction)dismissModalView:(id)sender {
     NSLog(@"CLick");
     [self dismissViewControllerAnimated:YES completion:nil];
 
