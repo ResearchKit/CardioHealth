@@ -32,7 +32,7 @@ static  NSString  *kIntroHeadingCaption = @"Tests for Bradykinesia";
 
 + (void)initialize
 {
-    kIntroHeadingCaption = NSLocalizedString(@"Fitness Test", nil);
+    kIntroHeadingCaption = NSLocalizedString(@"Measure Excercise Tolerance", nil);
 }
 
 #pragma  mark  -  Button Action Methods
@@ -60,7 +60,7 @@ static  NSString  *kIntroHeadingCaption = @"Tests for Bradykinesia";
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     
-    NSArray  *introImageNames = @[ @"6minwalk", @"6minwalk-Icon-1", @"6minwalk-Icon-2", @"Data-Analysis-Icon"];
+    NSArray  *introImageNames = @[ @"6minwalk", @"6minwalk-Icon-1", @"6minwalk-Icon-2", @"Updated-Data-Cardio"];
     
     NSArray  *paragraphs = @[
                              @"Once you tap Get Started, you will have 5 seconds until this test begins tracking your movements.",
@@ -72,10 +72,12 @@ static  NSString  *kIntroHeadingCaption = @"Tests for Bradykinesia";
     self.introHeadingCaption.text = kIntroHeadingCaption;
     
     self.instructionsController = [[APHIntroductionViewController alloc] initWithNibName:nil bundle:nil];
+    [self.instructionsController.view setFrame:self.instructionsContainer.bounds];
     [self.instructionsContainer addSubview:self.instructionsController.view];
-    [self.instructionsController setupWithInstructionalImages:introImageNames andParagraphs:paragraphs];
     [self.instructionsController setDelegate:self];
 
+    [self.instructionsController.view layoutIfNeeded];
+    [self.instructionsController setupWithInstructionalImages:introImageNames andParagraphs:paragraphs];
 }
 
 
