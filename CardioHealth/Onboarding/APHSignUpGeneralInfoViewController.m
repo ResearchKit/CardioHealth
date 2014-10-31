@@ -12,7 +12,7 @@
 #define DEMO 0
 
 
-@interface APHSignUpGeneralInfoViewController () <APCTermsAndConditionsViewControllerDelegate>
+@interface APHSignUpGeneralInfoViewController () <APCTermsAndConditionsViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (nonatomic, strong) APCPermissionsManager *permissionManager;
 @property (nonatomic) BOOL permissionGranted;
@@ -151,6 +151,14 @@
     return YES;
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    return [super textField:textField shouldChangeCharactersInRange:range replacementString:string];
+}
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    [self.nextBarButton setEnabled:[self isContentValid:nil]];
+}
 
 #pragma mark - APCPickerTableViewCellDelegate methods
 
@@ -166,9 +174,18 @@
 
 #pragma mark - APCTextFieldTableViewCellDelegate methods
 
-- (void)textFieldTableViewCellDidBecomeFirstResponder:(APCTextFieldTableViewCell *)cell
+- (void)textFieldTableViewCellDidEndEditing:(APCTextFieldTableViewCell *)cell
 {
-    [super textFieldTableViewCellDidBecomeFirstResponder:cell];
+    [super textFieldTableViewCellDidEndEditing:cell];
+    
+    self.nextBarButton.enabled = [self isContentValid:nil];
+}
+
+- (void)textFieldTableViewCell:(APCTextFieldTableViewCell *)cell shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    [super textFieldTableViewCell:cell shouldChangeCharactersInRange:range replacementString:string];
+    
+    self.nextBarButton.enabled = [self isContentValid:nil];
 }
 
 - (void)textFieldTableViewCellDidReturn:(APCTextFieldTableViewCell *)cell
@@ -180,17 +197,19 @@
     APCTableViewTextFieldItem *item = self.items[indexPath.row];
     if ([self.itemsOrder[indexPath.row] integerValue] == APCSignUpUserInfoItemPassword) {
         if ([[(APCTableViewTextFieldItem *)item value] length] == 0) {
-            [UIAlertView showSimpleAlertWithTitle:NSLocalizedString(@"General Information", @"") message:NSLocalizedString(@"Please give a valid Password", @"")];
+            UIAlertController *alert = [UIAlertController simpleAlertWithTitle:NSLocalizedString(@"General Information", @"") message:@"Please give a valid Password"];
+            [self presentViewController:alert animated:YES completion:nil];
         }
         else if ([[(APCTableViewTextFieldItem *)item value] length] < 6) {
-            [UIAlertView showSimpleAlertWithTitle:NSLocalizedString(@"General Information", @"") message:NSLocalizedString(@"Password should be at least 6 characters", @"")];
+            UIAlertController *alert = [UIAlertController simpleAlertWithTitle:NSLocalizedString(@"General Information", @"") message:@"Password should be at least 6 characters"];
+            [self presentViewController:alert animated:YES completion:nil];
         }
     }
     else if ([self.itemsOrder[indexPath.row] integerValue] == APCSignUpUserInfoItemEmail) {
         if (![item.value isValidForRegex:kAPCGeneralInfoItemEmailRegEx]) {
-            [UIAlertView showSimpleAlertWithTitle:NSLocalizedString(@"General Information", @"") message:NSLocalizedString(@"Please give a valid email address", @"")];
+            UIAlertController *alert = [UIAlertController simpleAlertWithTitle:NSLocalizedString(@"General Information", @"") message:@"Please give a valid email address"];
+            [self presentViewController:alert animated:YES completion:nil];
         }
-        
     }
     
     self.nextBarButton.enabled = [self isContentValid:nil];
@@ -316,7 +335,8 @@
         [self next];
     }
     else {
-        [UIAlertView showSimpleAlertWithTitle:NSLocalizedString(@"General Information", @"") message:message];
+        UIAlertController *alert = [UIAlertController simpleAlertWithTitle:NSLocalizedString(@"General Information", @"") message:message];
+        [self presentViewController:alert animated:YES completion:nil];
     }
 }
 
@@ -411,7 +431,8 @@
         
         [self.navigationController pushViewController:medicalInfoViewController animated:YES];
     } else{
-        [UIAlertView showSimpleAlertWithTitle:NSLocalizedString(@"General Information", @"") message:error];
+        UIAlertController *alert = [UIAlertController simpleAlertWithTitle:NSLocalizedString(@"General Information", @"") message:error];
+        [self presentViewController:alert animated:YES completion:nil];
     }
     
 }
@@ -423,16 +444,33 @@
 
 - (IBAction)changeProfileImage:(id)sender
 {
-    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-    imagePickerController.editing = YES;
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *cameraAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Take Photo", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+        imagePickerController.editing = YES;
         imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-    } else {
-        imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        imagePickerController.delegate = self;
+        [self presentViewController:imagePickerController animated:YES completion:nil];
+    }];
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        [alertController addAction:cameraAction];
     }
-    imagePickerController.delegate = self;
-    [self presentViewController:imagePickerController animated:YES completion:nil];
     
+    UIAlertAction *libraryAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Choose from Library", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+        imagePickerController.editing = YES;
+        imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        imagePickerController.delegate = self;
+        [self presentViewController:imagePickerController animated:YES completion:nil];
+    }];
+    [alertController addAction:libraryAction];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        
+    }];
+    [alertController addAction:cancelAction];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 @end

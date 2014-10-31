@@ -254,7 +254,8 @@
     [self.user signUpOnCompletion:^(NSError *error) {
         if (error) {
             [spinnerController dismissViewControllerAnimated:NO completion:^{
-                [UIAlertView showSimpleAlertWithTitle:NSLocalizedString(@"Sign Up", @"") message:error.message];
+                UIAlertController *alert = [UIAlertController simpleAlertWithTitle:NSLocalizedString(@"Sign Up", @"") message:error.message];
+                [self presentViewController:alert animated:YES completion:nil];
             }];
         }
         else
