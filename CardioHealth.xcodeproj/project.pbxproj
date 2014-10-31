@@ -30,12 +30,6 @@
 		7B8E912F19FADA180040F77F /* APHIntroductionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B8E912E19FADA180040F77F /* APHIntroductionViewController.m */; };
 		7B96D7421A02E4DB006D93C1 /* APHImportantDetailsTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B96D7411A02E4DB006D93C1 /* APHImportantDetailsTableViewController.storyboard */; };
 		7B96D7481A0300D8006D93C1 /* APHImportantDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B96D7471A0300D8006D93C1 /* APHImportantDetailsViewController.m */; };
-		7BC7213D19F7018700C70956 /* APHCommonInstructionalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC7213B19F7018700C70956 /* APHCommonInstructionalViewController.m */; };
-		7BC7213E19F7018700C70956 /* APHCommonInstructionalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BC7213C19F7018700C70956 /* APHCommonInstructionalViewController.xib */; };
-		7BC7214A19F7051600C70956 /* interval.instructions.01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BC7214619F7051600C70956 /* interval.instructions.01@2x.png */; };
-		7BC7214B19F7051600C70956 /* interval.instructions.02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BC7214719F7051600C70956 /* interval.instructions.02@2x.png */; };
-		7BC7214C19F7051600C70956 /* interval.instructions.03@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BC7214819F7051600C70956 /* interval.instructions.03@2x.png */; };
-		7BC7214D19F7051600C70956 /* interval.instructions.04@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BC7214919F7051600C70956 /* interval.instructions.04@2x.png */; };
 		7BC7215219F7173D00C70956 /* APHFitnessTestSummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC7215019F7173D00C70956 /* APHFitnessTestSummaryViewController.m */; };
 		7BC7215319F7173D00C70956 /* APHFitnessTestSummaryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BC7215119F7173D00C70956 /* APHFitnessTestSummaryViewController.xib */; };
 		7BD73F7B19E8A20600F5DFF3 /* Intro.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 7BD73F7A19E8A20600F5DFF3 /* Intro.mp4 */; };
@@ -371,21 +365,6 @@
 			path = Intro;
 			sourceTree = "<group>";
 		};
-		7BC7213919F7018700C70956 /* Common Instructional View */ = {
-			isa = PBXGroup;
-			children = (
-				7BC7214519F7051600C70956 /* intervalimages */,
-			);
-			path = "Common Instructional View";
-			sourceTree = "<group>";
-		};
-		7BC7214519F7051600C70956 /* intervalimages */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = intervalimages;
-			sourceTree = "<group>";
-		};
 		7BC7214E19F716C400C70956 /* Summary */ = {
 			isa = PBXGroup;
 			children = (
@@ -562,7 +541,6 @@
 			children = (
 				7B8E912D19FADA180040F77F /* APHIntroductionViewController.h */,
 				7B8E912E19FADA180040F77F /* APHIntroductionViewController.m */,
-				7BC7213919F7018700C70956 /* Common Instructional View */,
 				7B41045519E5D94F00592B96 /* APHFitnessTest */,
 				F5481F0619E4820100D84617 /* HeartAgeControllers */,
 				F55BBE4219D362D0003CA0F9 /* SpecialSurveyControllers */,
@@ -777,7 +755,6 @@
 			files = (
 				F55BBE6819D362D0003CA0F9 /* APHActivities.storyboard in Resources */,
 				F55BBE7319D362D0003CA0F9 /* APHLearnDetailViewController.xib in Resources */,
-				7BC7214A19F7051600C70956 /* interval.instructions.01@2x.png in Resources */,
 				F5778E8719F061B00079F1B2 /* APHProfile.storyboard in Resources */,
 				7B96D7421A02E4DB006D93C1 /* APHImportantDetailsTableViewController.storyboard in Resources */,
 				F5165E7A19E86581003836CA /* APCParameters.json in Resources */,
@@ -793,17 +770,13 @@
 				7B8E912B19F9B5BA0040F77F /* APHFitnessTestIntroStepViewController.xib in Resources */,
 				F5778E7519F0613D0079F1B2 /* APHOnboarding.storyboard in Resources */,
 				7BC7215319F7173D00C70956 /* APHFitnessTestSummaryViewController.xib in Resources */,
-				7BC7213E19F7018700C70956 /* APHCommonInstructionalViewController.xib in Resources */,
 				F573809319E45D62008A8354 /* StudyOverview.json in Resources */,
 				F55BBE6219D362D0003CA0F9 /* JSON_READ_ME in Resources */,
-				7BC7214B19F7051600C70956 /* interval.instructions.02@2x.png in Resources */,
 				7B4104A319E5E46800592B96 /* APHFitnessTestRestView.xib in Resources */,
 				5BB6471E19F1C07900AA30AA /* temp.storyboard in Resources */,
 				7BEEFA611A003E04004F6C87 /* APHHeartAgeResultsViewController.xib in Resources */,
-				7BC7214D19F7051600C70956 /* interval.instructions.04@2x.png in Resources */,
 				7B41049F19E5E46800592B96 /* APHFitnessSixMinuteFitnessTestView.xib in Resources */,
 				F55BBE6619D362D0003CA0F9 /* LaunchScreen.xib in Resources */,
-				7BC7214C19F7051600C70956 /* interval.instructions.03@2x.png in Resources */,
 				7B4104A119E5E46800592B96 /* APHFitnessTestRestComfortablyView.xib in Resources */,
 				F5F6450A19D35BA2004CFBB2 /* Images.xcassets in Resources */,
 			);
@@ -825,7 +798,6 @@
 				F55BBE7719D362D0003CA0F9 /* APHLearnMasterTableViewCell.m in Sources */,
 				7BC7215219F7173D00C70956 /* APHFitnessTestSummaryViewController.m in Sources */,
 				F5778E7119F0613D0079F1B2 /* APHEligibleViewController.m in Sources */,
-				7BC7213D19F7018700C70956 /* APHCommonInstructionalViewController.m in Sources */,
 				F55BBE7219D362D0003CA0F9 /* APHLearnDetailViewController.m in Sources */,
 				F55BBE7419D362D0003CA0F9 /* APHLearnMasterViewController.m in Sources */,
 				08D3A10219E4A08C00A3D20D /* APHHeartAgeAndRiskFactors.m in Sources */,
