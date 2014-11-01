@@ -241,7 +241,7 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
     
     CLLocationDistance distanceInFeet = self.totalDistance * kAPHFitnessTestMetersToFeetConversion;
     
-    distanceUpdatedInfo[@"totalDistanceInFeet"] = [[NSNumber alloc] initWithDouble:distanceInFeet];
+    distanceUpdatedInfo[@"totalDistanceInFeet"] = @(distanceInFeet);
     
     [self.distanceRecords addObject:distanceUpdatedInfo];
 }
