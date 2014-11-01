@@ -10,7 +10,6 @@
         <!--Inclusion Criteria View Controller-->
         <scene sceneID="COj-6s-aGi">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sOt-kv-4Ub" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController storyboardIdentifier="InclusionCriteriaVC" id="tHX-VY-BZp" customClass="APHInclusionCriteriaViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="200" sectionHeaderHeight="22" sectionFooterHeight="22" id="YY4-VA-7RP">
                         <rect key="frame" x="0.0" y="64" width="320" height="568"/>
@@ -187,6 +186,7 @@
                         <outlet property="question2Option2" destination="dEJ-vR-V6G" id="SLl-Id-Xwx"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sOt-kv-4Ub" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-156" y="1043"/>
         </scene>
