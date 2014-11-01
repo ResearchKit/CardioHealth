@@ -89,7 +89,7 @@
                             <rect key="frame" x="0.0" y="100" width="320" height="265"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your results are being analyzed and you will be notified when they are available." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LVd-bV-L6N" customClass="RKCaption2Label">
-                                    <rect key="frame" x="28" y="63" width="264" height="70"/>
+                                    <rect key="frame" x="28" y="64" width="264" height="70"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="LVd-bV-L6N" secondAttribute="height" multiplier="132:35" id="HZj-d1-v7L"/>
                                     </constraints>
@@ -97,22 +97,18 @@
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Completion-Check" translatesAutoresizingMaskIntoConstraints="NO" id="olt-zG-qQT">
-                                    <rect key="frame" x="135" y="5" width="50" height="50"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" secondItem="olt-zG-qQT" secondAttribute="height" multiplier="1:1" id="w2Z-K1-hTg"/>
-                                    </constraints>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Completion-Check" translatesAutoresizingMaskIntoConstraints="NO" id="olt-zG-qQT">
+                                    <rect key="frame" x="135" y="6" width="50" height="58"/>
                                 </imageView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="trailing" secondItem="olt-zG-qQT" secondAttribute="trailing" constant="135" id="NZt-Og-QoP"/>
+                                <constraint firstAttribute="centerX" secondItem="olt-zG-qQT" secondAttribute="centerX" id="2A5-Ma-Ady"/>
                                 <constraint firstAttribute="trailing" secondItem="LVd-bV-L6N" secondAttribute="trailing" constant="28" id="P0a-Zp-i4H"/>
-                                <constraint firstItem="olt-zG-qQT" firstAttribute="top" secondItem="3CV-1C-Udc" secondAttribute="top" constant="5" id="YQw-CQ-3sN"/>
-                                <constraint firstItem="LVd-bV-L6N" firstAttribute="top" secondItem="olt-zG-qQT" secondAttribute="bottom" constant="8" id="i7H-Qo-A7M"/>
+                                <constraint firstItem="LVd-bV-L6N" firstAttribute="top" secondItem="olt-zG-qQT" secondAttribute="bottom" id="Z0N-Su-yJH"/>
                                 <constraint firstItem="LVd-bV-L6N" firstAttribute="leading" secondItem="3CV-1C-Udc" secondAttribute="leading" constant="28" id="ij2-lF-SIO"/>
+                                <constraint firstAttribute="bottom" secondItem="LVd-bV-L6N" secondAttribute="bottom" constant="131" id="lnN-tl-H8z"/>
                                 <constraint firstAttribute="width" secondItem="3CV-1C-Udc" secondAttribute="height" multiplier="64:53" id="mKO-qA-Mfd"/>
-                                <constraint firstItem="olt-zG-qQT" firstAttribute="leading" secondItem="3CV-1C-Udc" secondAttribute="leading" constant="135" id="nPo-fN-Zgd"/>
                             </constraints>
                         </view>
                     </subviews>
@@ -121,7 +117,7 @@
                         <constraint firstAttribute="trailing" secondItem="3CV-1C-Udc" secondAttribute="trailing" id="4NR-Xt-vJT"/>
                         <constraint firstAttribute="trailing" secondItem="qUF-6z-e5c" secondAttribute="trailing" constant="20" id="79x-Wl-PhI"/>
                         <constraint firstItem="3CV-1C-Udc" firstAttribute="top" secondItem="qUF-6z-e5c" secondAttribute="bottom" id="9Cc-Jd-pom"/>
-                        <constraint firstItem="olt-zG-qQT" firstAttribute="top" secondItem="qUF-6z-e5c" secondAttribute="bottom" constant="5" id="c3E-Zm-u5b"/>
+                        <constraint firstItem="olt-zG-qQT" firstAttribute="top" secondItem="qUF-6z-e5c" secondAttribute="bottom" constant="6" id="9k3-pt-Hp7"/>
                         <constraint firstItem="3CV-1C-Udc" firstAttribute="leading" secondItem="5fR-Pw-oic" secondAttribute="leading" id="hzq-OI-0kb"/>
                         <constraint firstItem="qUF-6z-e5c" firstAttribute="leading" secondItem="5fR-Pw-oic" secondAttribute="leading" constant="20" id="kt2-kg-Unk"/>
                         <constraint firstItem="qUF-6z-e5c" firstAttribute="top" secondItem="5fR-Pw-oic" secondAttribute="top" constant="50" id="pcJ-gU-KYa"/>
@@ -131,6 +127,7 @@
             <color key="backgroundColor" red="0.96470594409999999" green="0.96862751250000001" blue="0.87843143940000001" alpha="1" colorSpace="deviceRGB"/>
             <constraints>
                 <constraint firstItem="5fR-Pw-oic" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="2li-IW-vuM"/>
+                <constraint firstItem="olt-zG-qQT" firstAttribute="width" secondItem="au4-cC-isv" secondAttribute="width" constant="10" id="3Pb-eT-VpL"/>
                 <constraint firstItem="hsR-VW-WPf" firstAttribute="top" secondItem="7At-o6-pZw" secondAttribute="bottom" constant="10" id="EvO-W6-vVG"/>
                 <constraint firstItem="hsR-VW-WPf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Tv3-le-PhY"/>
                 <constraint firstItem="7At-o6-pZw" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="Wxu-Fv-W52"/>
