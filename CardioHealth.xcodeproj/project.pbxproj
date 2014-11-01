@@ -365,6 +365,21 @@
 			path = Intro;
 			sourceTree = "<group>";
 		};
+		7BC7213919F7018700C70956 /* Common Instructional View */ = {
+			isa = PBXGroup;
+			children = (
+				7BC7214519F7051600C70956 /* intervalimages */,
+			);
+			path = "Common Instructional View";
+			sourceTree = "<group>";
+		};
+		7BC7214519F7051600C70956 /* intervalimages */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = intervalimages;
+			sourceTree = "<group>";
+		};
 		7BC7214E19F716C400C70956 /* Summary */ = {
 			isa = PBXGroup;
 			children = (
@@ -541,6 +556,7 @@
 			children = (
 				7B8E912D19FADA180040F77F /* APHIntroductionViewController.h */,
 				7B8E912E19FADA180040F77F /* APHIntroductionViewController.m */,
+				7BC7213919F7018700C70956 /* Common Instructional View */,
 				7B41045519E5D94F00592B96 /* APHFitnessTest */,
 				F5481F0619E4820100D84617 /* HeartAgeControllers */,
 				F55BBE4219D362D0003CA0F9 /* SpecialSurveyControllers */,
