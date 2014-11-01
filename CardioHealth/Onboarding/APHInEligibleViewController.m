@@ -21,10 +21,10 @@
     self.title = NSLocalizedString(@"Eligibility", @"");
 }
 
-- (IBAction)okayButtonPressed:(id)sender {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+- (IBAction)next:(id)sender
+{
+    APCShareViewController *shareViewController = [[UIStoryboard storyboardWithName:@"APHOnboarding" bundle:nil] instantiateViewControllerWithIdentifier:@"ShareVC"];
+    [self.navigationController pushViewController:shareViewController animated:YES];
 }
-
-
 
 @end
