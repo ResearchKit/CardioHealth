@@ -7,7 +7,8 @@
 //
 
 #import <APCAppleCore/APCAppleCore.h>
+#import "APHIntroductionViewController.h"
 
-@interface APHFitnessTestIntroStepViewController : APCStepViewController
+@interface APHFitnessTestIntroStepViewController : APCStepViewController <APHIntroductionViewControllerDelegate>
 
 @end
