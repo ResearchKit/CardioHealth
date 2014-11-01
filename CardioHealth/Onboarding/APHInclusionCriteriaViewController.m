@@ -104,6 +104,12 @@
 
 - (void)next
 {
+#if DEVELOPMENT
+    
+    APHSignUpGeneralInfoViewController *signUpVC = [[UIStoryboard storyboardWithName:@"APHOnboarding" bundle:nil] instantiateViewControllerWithIdentifier:@"SignUpGeneralInfoVC"];
+    [self.navigationController pushViewController:signUpVC animated:YES];
+    
+#else
     if (((APCAppDelegate*)[UIApplication sharedApplication].delegate).dataSubstrate.parameters.hideConsent) {
         APHSignUpGeneralInfoViewController *signUpVC = [[UIStoryboard storyboardWithName:@"APHOnboarding" bundle:nil] instantiateViewControllerWithIdentifier:@"SignUpGeneralInfoVC"];
         [self.navigationController pushViewController:signUpVC animated:YES];
@@ -119,6 +125,7 @@
             [self.navigationController pushViewController:[[UIStoryboard storyboardWithName:@"APHOnboarding" bundle:nil] instantiateViewControllerWithIdentifier:@"InEligibleVC"] animated:YES];
         }
     }
+#endif
 }
 
 - (BOOL) isEligible
