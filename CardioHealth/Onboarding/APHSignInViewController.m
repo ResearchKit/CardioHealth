@@ -31,5 +31,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - IBActions
+
+- (IBAction)forgotPassword
+{
+    APCForgotPasswordViewController *forgotPasswordViewController = [[UIStoryboard storyboardWithName:@"APHOnboarding" bundle:nil] instantiateViewControllerWithIdentifier:@"ForgotPasswordVC"];
+    [self.navigationController pushViewController:forgotPasswordViewController animated:YES];
+    
+}
 
 @end
