@@ -46,7 +46,26 @@
 - (void) setUpAppearance
 {
     self.question1Label.textColor = [UIColor appSecondaryColor1];
+    self.question1Label.font = [UIFont appRegularFontWithSize:19.0f];
+    
     self.question2Label.textColor = [UIColor appSecondaryColor1];
+    self.question2Label.font = [UIFont appRegularFontWithSize:19.0f];
+    
+    [self.question1Option1 setTitleColor:[UIColor appSecondaryColor3] forState:UIControlStateNormal];
+    [self.question1Option1 setTitleColor:[UIColor appPrimaryColor] forState:UIControlStateSelected];
+    [self.question1Option1.titleLabel setFont:[UIFont appRegularFontWithSize:16.0]];
+    
+    [self.question1Option2 setTitleColor:[UIColor appSecondaryColor3] forState:UIControlStateNormal];
+    [self.question1Option2 setTitleColor:[UIColor appPrimaryColor] forState:UIControlStateSelected];
+    [self.question1Option2.titleLabel setFont:[UIFont appRegularFontWithSize:16.0]];
+    
+    [self.question2Option1 setTitleColor:[UIColor appSecondaryColor3] forState:UIControlStateNormal];
+    [self.question2Option1 setTitleColor:[UIColor appPrimaryColor] forState:UIControlStateSelected];
+    [self.question2Option1.titleLabel setFont:[UIFont appRegularFontWithSize:44.0]];
+    
+    [self.question2Option2 setTitleColor:[UIColor appSecondaryColor3] forState:UIControlStateNormal];
+    [self.question2Option2 setTitleColor:[UIColor appPrimaryColor] forState:UIControlStateSelected];
+    [self.question2Option2.titleLabel setFont:[UIFont appRegularFontWithSize:44.0]];
 }
 
 - (void)startSignUp
@@ -85,11 +104,7 @@
 
 - (void)next
 {
-#if DEVELOPMENT
-    if (YES) {
-#else
     if (((APCAppDelegate*)[UIApplication sharedApplication].delegate).dataSubstrate.parameters.hideConsent) {
-#endif
         APHSignUpGeneralInfoViewController *signUpVC = [[UIStoryboard storyboardWithName:@"APHOnboarding" bundle:nil] instantiateViewControllerWithIdentifier:@"SignUpGeneralInfoVC"];
         [self.navigationController pushViewController:signUpVC animated:YES];
     }
