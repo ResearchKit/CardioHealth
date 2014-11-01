@@ -20,6 +20,8 @@
     
     [self prepareFields];
     [self.tableView reloadData];
+    
+    self.diseaseLabel.text = NSLocalizedString(@"Cardiovascular Health", nil);
 }
 
 - (void)didReceiveMemoryWarning {
