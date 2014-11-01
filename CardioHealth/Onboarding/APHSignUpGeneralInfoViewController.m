@@ -294,8 +294,8 @@
 - (void) loadProfileValuesInModel {
     
     if (self.tableView.tableHeaderView) {
-        self.user.name = self.nameTextField.text;
-        self.user.userName = self.userNameTextField.text;
+        self.user.firstName = self.firstNameTextField.text;
+        self.user.lastName = self.lastNameTextField.text;
     }
     
     for (int i = 0; i < self.itemsOrder.count; i++) {
@@ -384,11 +384,10 @@
 
 - (void) secretButton
 {
-    self.nameTextField.text = @"John Appleseed";
+    self.firstNameTextField.text = @"John";
+    self.lastNameTextField.text = @"Appleseed";
     
     NSUInteger randomInteger = arc4random();
-    
-    self.userNameTextField.text = [NSString stringWithFormat:@"test_%@", @(randomInteger)];
     
     for (int i = 0; i < self.itemsOrder.count; i++) {
         NSNumber *order = self.itemsOrder[i];

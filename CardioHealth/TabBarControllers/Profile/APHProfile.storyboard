@@ -46,7 +46,7 @@
                                         <constraint firstAttribute="height" constant="1" id="efr-Pm-dXj"/>
                                     </constraints>
                                 </view>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Johnny Appleseed" placeholder="Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="syY-uL-lu7">
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Johnny" placeholder="Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="syY-uL-lu7">
                                     <rect key="frame" x="110" y="17" width="202" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="30" id="c3q-nt-vZK"/>
@@ -54,15 +54,6 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="jAppleseed123" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lGr-PO-sfv">
-                                    <rect key="frame" x="110" y="80" width="202" height="30"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="30" id="dZL-Lz-YfN"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
                                 <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QqY-8n-ETm">
                                     <rect key="frame" x="31" y="98" width="49" height="21"/>
                                     <constraints>
@@ -73,6 +64,14 @@
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Appleseed" placeholder="Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="K3a-vc-OyO">
+                                    <rect key="frame" x="110" y="80" width="202" height="30"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="30" id="1gu-Oi-YQd"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </textField>
                             </subviews>
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="QqY-8n-ETm" secondAttribute="bottom" constant="8" id="AoP-Qm-yxQ"/>
@@ -81,23 +80,21 @@
                                 <constraint firstAttribute="trailing" secondItem="dmh-5T-mEu" secondAttribute="trailing" id="MJz-84-6bK"/>
                                 <constraint firstItem="syY-uL-lu7" firstAttribute="leading" secondItem="gWP-rS-8vz" secondAttribute="leading" constant="110" id="Opg-H0-L2x"/>
                                 <constraint firstAttribute="centerY" secondItem="5OO-kY-iTa" secondAttribute="centerY" id="P96-xp-8di"/>
-                                <constraint firstItem="5OO-kY-iTa" firstAttribute="leading" secondItem="lGr-PO-sfv" secondAttribute="leading" constant="-93" id="Tjb-Fa-44h"/>
+                                <constraint firstItem="5OO-kY-iTa" firstAttribute="leading" secondItem="K3a-vc-OyO" secondAttribute="leading" constant="-93" id="QrR-6h-gmX"/>
                                 <constraint firstAttribute="trailing" secondItem="Jod-6H-GRN" secondAttribute="trailing" id="VPE-Bf-svQ"/>
                                 <constraint firstItem="QqY-8n-ETm" firstAttribute="centerX" secondItem="5OO-kY-iTa" secondAttribute="centerX" id="VoW-VQ-bxC"/>
+                                <constraint firstAttribute="trailing" secondItem="K3a-vc-OyO" secondAttribute="trailing" constant="8" id="XQO-B7-uec"/>
                                 <constraint firstAttribute="centerY" secondItem="syY-uL-lu7" secondAttribute="centerY" constant="31.5" id="YaN-aD-a6u"/>
-                                <constraint firstItem="lGr-PO-sfv" firstAttribute="leading" secondItem="gWP-rS-8vz" secondAttribute="leading" constant="110" id="Z97-y3-4GK"/>
                                 <constraint firstItem="syY-uL-lu7" firstAttribute="leading" secondItem="5OO-kY-iTa" secondAttribute="leading" constant="93" id="ZqR-xA-zQ7"/>
+                                <constraint firstAttribute="centerY" secondItem="K3a-vc-OyO" secondAttribute="centerY" constant="-31.5" id="Zrb-r2-PVV"/>
                                 <constraint firstItem="5OO-kY-iTa" firstAttribute="leading" secondItem="gWP-rS-8vz" secondAttribute="leading" constant="17" id="gth-0C-e2f"/>
-                                <constraint firstAttribute="centerY" secondItem="lGr-PO-sfv" secondAttribute="centerY" constant="-31.5" id="lOT-PE-EDF"/>
                                 <constraint firstItem="Jod-6H-GRN" firstAttribute="leading" secondItem="gWP-rS-8vz" secondAttribute="leading" id="pax-Sl-2WD"/>
                                 <constraint firstAttribute="trailing" secondItem="syY-uL-lu7" secondAttribute="trailing" constant="8" id="uQ7-CY-UF3"/>
-                                <constraint firstAttribute="trailing" secondItem="lGr-PO-sfv" secondAttribute="trailing" constant="8" id="ugH-6s-3e9"/>
                                 <constraint firstAttribute="centerY" secondItem="dmh-5T-mEu" secondAttribute="centerY" id="z9o-iv-20d"/>
                             </constraints>
                             <variation key="default">
                                 <mask key="constraints">
                                     <exclude reference="Opg-H0-L2x"/>
-                                    <exclude reference="Z97-y3-4GK"/>
                                 </mask>
                             </variation>
                         </view>
@@ -347,16 +344,16 @@
                         <outlet property="dateRangeLabel" destination="zJL-bp-TQa" id="KgI-T5-I2Z"/>
                         <outlet property="diseaseLabel" destination="nHP-zB-QKb" id="B2V-Tc-nQd"/>
                         <outlet property="editLabel" destination="QqY-8n-ETm" id="Qiw-02-bLr"/>
+                        <outlet property="firstNameTextField" destination="syY-uL-lu7" id="GDq-CB-lh6"/>
                         <outlet property="footerTitleLabel" destination="bf4-sW-Pzo" id="lNp-vT-mLS"/>
                         <outlet property="footerView" destination="Y4L-7g-Sui" id="YEE-2j-Dcq"/>
                         <outlet property="headerView" destination="gWP-rS-8vz" id="c4n-sP-634"/>
+                        <outlet property="lastNameTextField" destination="K3a-vc-OyO" id="CZI-jI-ELa"/>
                         <outlet property="leaveStudyButton" destination="tyV-CG-jBW" id="ErX-S5-7v4"/>
-                        <outlet property="nameTextField" destination="syY-uL-lu7" id="9U1-4X-3eZ"/>
                         <outlet property="profileImageButton" destination="5OO-kY-iTa" id="AYP-6e-72F"/>
                         <outlet property="reviewConsentButton" destination="dzV-Zz-fEh" id="vBc-QK-AB9"/>
                         <outlet property="rightBarButton" destination="ZR8-Yo-nVe" id="O8m-aP-v7L"/>
                         <outlet property="signOutButton" destination="WyR-pr-jY3" id="63V-TN-xYX"/>
-                        <outlet property="usernameLabel" destination="lGr-PO-sfv" id="E1x-XQ-aj7"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CeL-K5-D4X" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -385,6 +382,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="profilePlaceholder" width="76" height="76"/>
+        <image name="profilePlaceholder" width="150" height="150"/>
     </resources>
 </document>
