@@ -91,6 +91,7 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
         RKActiveStep* step = [[RKActiveStep alloc] initWithIdentifier:kFitnessTestStep103 name:@"6 Minute Walk"];
         step.recorderConfigurations = @[[APHFitnessTestCustomRecorderConfiguration new]];
         step.caption = NSLocalizedString(@"Start Walking", @"");
+        step.text = NSLocalizedString(@"Start Walking", @"");
         step.buzz = YES;
         step.vibration = YES;
         step.voicePrompt = step.text;
