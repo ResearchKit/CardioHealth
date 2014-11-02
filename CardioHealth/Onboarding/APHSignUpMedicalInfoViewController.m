@@ -98,7 +98,7 @@
             field.selectedRowIndices = @[ @([field.pickerData[0] indexOfObject:feet]), @([field.pickerData[1] indexOfObject:inches]) ];
         }
         else {
-            field.selectedRowIndices = @[ @(2), @(5) ];
+            field.selectedRowIndices = @[ @(5), @(0) ];
         }
         
         [items addObject:field];
@@ -110,9 +110,11 @@
         field.style = UITableViewCellStyleValue1;
         field.identifier = kAPCTextFieldTableViewCellIdentifier;
         field.caption = NSLocalizedString(@"Weight", @"");
-        field.placeholder = NSLocalizedString(@"add weight", @"");
+        field.placeholder = NSLocalizedString(@"add weight (lb)", @"");
         field.regularExpression = kAPCMedicalInfoItemWeightRegEx;
-        field.value = [NSString stringWithFormat:@"%.1f", [APCUser weightInPounds:self.user.weight]];
+        if (self.user.weight) {
+            field.value = [NSString stringWithFormat:@"%.0f", [APCUser weightInPounds:self.user.weight]];
+        }
         field.keyboardType = UIKeyboardTypeDecimalPad;
         field.textAlignnment = NSTextAlignmentRight;
         
