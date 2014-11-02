@@ -115,21 +115,6 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
         
         [steps addObject:step];
     }
-
-    {
-        //Rest for 3 minutes
-        RKActiveStep* step = [[RKActiveStep alloc] initWithIdentifier:kFitnessTestStep105 name:@"3 Minutes in a resting Position"];
-        step.recorderConfigurations = @[[APHFitnessTestCustomRecorderConfiguration new]];
-        step.countDown = [[parameters numberForKey:@"FT3MinRest"] doubleValue];
-        step.caption = NSLocalizedString(@"Rest", @"");
-        step.text = NSLocalizedString(@"Sit in a comfortable position for 3 minutes.", @"");
-        step.buzz = YES;
-        step.vibration = YES;
-        step.voicePrompt = step.text;
-        step.useNextForSkip = NO;
-        
-        [steps addObject:step];
-    }
     
     {
         //Finished
