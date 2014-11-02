@@ -9,7 +9,7 @@
 #import "APHFitnessSixMinuteFitnessTestView.h"
 #import <CoreLocation/CoreLocation.h>
 
-static CGFloat kAPHFitnessTestMetersToMilesConversion = 1609.34;
+static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
 
 @interface APHFitnessSixMinuteFitnessTestView ()
 @property (weak, nonatomic) IBOutlet UILabel *heartRateLabel;
@@ -102,9 +102,9 @@ static CGFloat kAPHFitnessTestMetersToMilesConversion = 1609.34;
     
     self.totalDistance += distance;
     
-    CLLocationDistance distanceInMiles = self.totalDistance/kAPHFitnessTestMetersToMilesConversion;
+    CLLocationDistance distanceInFeet = self.totalDistance * kAPHFitnessTestMetersToFeetConversion;
     
-    self.distanceTotalLabel.text = [NSString stringWithFormat:@"%0.2f Mi", distanceInMiles];
+    self.distanceTotalLabel.text = [NSString stringWithFormat:@"%0.2f", distanceInFeet];
 }
 
 @end
