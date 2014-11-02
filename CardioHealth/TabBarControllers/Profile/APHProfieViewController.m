@@ -134,9 +134,9 @@
     {
         APCTableViewTextFieldItem *field = [APCTableViewTextFieldItem new];
         field.caption = NSLocalizedString(@"Weight", @"");
-        field.placeholder = NSLocalizedString(@"lb", @"");
+        field.placeholder = NSLocalizedString(@"add weight (lb)", @"");
         field.regularExpression = kAPCMedicalInfoItemWeightRegEx;
-        field.value = [NSString stringWithFormat:@"%.1f", [APCUser weightInPounds:self.user.weight]];
+        field.value = [NSString stringWithFormat:@"%.0f", [APCUser weightInPounds:self.user.weight]];
         field.keyboardType = UIKeyboardTypeDecimalPad;
         field.textAlignnment = NSTextAlignmentRight;
         field.identifier = kAPCTextFieldTableViewCellIdentifier;
