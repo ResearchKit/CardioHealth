@@ -328,6 +328,61 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
     
 }
 
+- (BOOL)taskViewController:(RKTaskViewController *)taskViewController shouldPresentStep:(RKStep *)step
+{
+    BOOL shouldShowStep = YES;
+    
+    // We need to make sure that every question in a step has an answer.
+    // This method is triggered for every step, so will skip the Introductory step
+    // the presenting of the first step.
+    //
+    // For every step that should be presented, we need to check the surveyResults
+    // which will contain the answers for the current step, and when all answers are
+    // provided, we will present the next step, otherwise prevent it and show an alert
+    // advising the user of the missing information.
+    if (![step.identifier isEqualToString:kHeartAgeIntroduction] && ![step.identifier isEqualToString:kHeartAgeFormStepBiographicAndDemographic]) {
+        NSArray *stepSurveyResults = self.surveyResults;
+        
+        if (stepSurveyResults) {
+            // Since we are using RKFormStep, the actual question results are nested in the surveyResults
+            for (RKSurveyResult *result in stepSurveyResults) {
+                for (RKQuestionResult *stepResult in result.surveyResults) {
+                    if (stepResult.answer == [NSNull null]) {
+                        shouldShowStep = NO;
+                        break;
+                    }
+                }
+                
+                if (!shouldShowStep) {
+                    UIAlertController* alerVC = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Missing Information",
+                                                                                                              @"Missing Information")
+                                                                                    message:NSLocalizedString(@"An answer is required.",
+                                                                                                              @"An answer is required.")
+                                                                             preferredStyle:UIAlertControllerStyleAlert];
+                    
+                    
+                    UIAlertAction* ok = [UIAlertAction
+                                         actionWithTitle:@"OK"
+                                         style:UIAlertActionStyleDefault
+                                         handler:^(UIAlertAction * action) {
+                                             [alerVC dismissViewControllerAnimated:YES completion:nil];
+                                             
+                                         }];
+                    
+                    
+                    [alerVC addAction:ok];
+                    
+                    [taskViewController presentViewController:alerVC animated:NO completion:nil];
+                    break;
+                }
+            }
+            
+        }
+    }
+    
+    return shouldShowStep;
+}
+
 - (RKStepViewController *)taskViewController:(RKTaskViewController *)taskViewController viewControllerForStep:(RKStep *)step
 {
     
