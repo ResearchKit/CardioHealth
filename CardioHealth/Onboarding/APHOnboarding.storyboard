@@ -10,7 +10,6 @@
         <!--Inclusion Criteria View Controller-->
         <scene sceneID="COj-6s-aGi">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sOt-kv-4Ub" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController storyboardIdentifier="InclusionCriteriaVC" id="tHX-VY-BZp" customClass="APHInclusionCriteriaViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="200" sectionHeaderHeight="22" sectionFooterHeight="22" id="YY4-VA-7RP">
                         <rect key="frame" x="0.0" y="64" width="320" height="568"/>
@@ -187,6 +186,7 @@
                         <outlet property="question2Option2" destination="dEJ-vR-V6G" id="SLl-Id-Xwx"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sOt-kv-4Ub" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-156" y="1043"/>
         </scene>
@@ -268,7 +268,7 @@
                                     <constraint firstAttribute="height" constant="58" id="jcu-wN-RK4"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
-                                <state key="normal" title="Login">
+                                <state key="normal" title="Sign In">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -852,7 +852,7 @@
                                         <constraint firstAttribute="height" constant="1" id="Gad-Ea-nNk"/>
                                     </constraints>
                                 </view>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Full Name" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="dD7-aR-iNh">
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First Name" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="dD7-aR-iNh">
                                     <rect key="frame" x="123" y="17" width="189" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="30" id="LNp-PC-z4t"/>
@@ -860,7 +860,7 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                     <textInputTraits key="textInputTraits" keyboardAppearance="alert" returnKeyType="next"/>
                                 </textField>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="4yE-5E-DfF">
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Last Name" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="4yE-5E-DfF">
                                     <rect key="frame" x="123" y="80" width="189" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="30" id="NOo-nc-cJ6"/>
@@ -1129,14 +1129,14 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="firstNameTextField" destination="dD7-aR-iNh" id="nN1-79-NsU"/>
                         <outlet property="footerLabel" destination="xif-gE-ocs" id="Vge-hQ-FIj"/>
                         <outlet property="footerView" destination="SGK-8w-vp8" id="qSE-rj-6nN"/>
                         <outlet property="headerView" destination="kLf-fu-cwb" id="M9R-Zj-OQO"/>
-                        <outlet property="nameTextField" destination="dD7-aR-iNh" id="ik2-lA-O6h"/>
+                        <outlet property="lastNameTextField" destination="4yE-5E-DfF" id="nrR-Qw-iFx"/>
                         <outlet property="nextBarButton" destination="fjw-Cp-HVm" id="LKs-2z-jXb"/>
                         <outlet property="permissionButton" destination="1MK-jc-986" id="4Ip-km-qMH"/>
                         <outlet property="profileImageButton" destination="e0d-NG-EKo" id="X7V-HV-iwc"/>
-                        <outlet property="userNameTextField" destination="4yE-5E-DfF" id="CMy-wQ-PEE"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Yt-pX-ZDy" userLabel="First Responder" sceneMemberID="firstResponder"/>

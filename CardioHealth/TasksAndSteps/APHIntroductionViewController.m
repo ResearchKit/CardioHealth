@@ -26,7 +26,7 @@ static  NSString  *kSuperClassName = @"APCIntroductionViewController";
 {
     [super setupWithInstructionalImages:imageNames andParagraphs:paragraphs];
     
-    UIView *accessoryView = [super accessoryView];
+    UIView *accessoryView = nil;//[super accessoryView];
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     CGRect rect = CGRectMake(0.0, 0.0, CGRectGetWidth(accessoryView.frame), CGRectGetHeight(accessoryView.frame));

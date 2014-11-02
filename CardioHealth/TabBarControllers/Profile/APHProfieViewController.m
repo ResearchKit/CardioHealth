@@ -20,6 +20,14 @@
     
     [self prepareFields];
     [self.tableView reloadData];
+    
+    self.firstNameTextField.text = self.user.firstName;
+    self.firstNameTextField.enabled = NO;
+    
+    self.lastNameTextField.text = self.user.lastName;
+    self.lastNameTextField.enabled = NO;
+    
+    self.diseaseLabel.text = NSLocalizedString(@"Cardiovascular Health", nil);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -150,7 +158,7 @@
         field.detailDiscloserStyle = YES;
         
         if (self.user.sleepTime) {
-            field.date = self.user.sleepTime;
+            field.date = self.user.wakeUpTime;
             field.detailText = [field.date toStringWithFormat:kAPCMedicalInfoItemSleepTimeFormat];
         }
         
@@ -171,7 +179,7 @@
         field.detailDiscloserStyle = YES;
         
         if (self.user.wakeUpTime) {
-            field.date = self.user.wakeUpTime;
+            field.date = self.user.sleepTime;
             field.detailText = [field.date toStringWithFormat:kAPCMedicalInfoItemSleepTimeFormat];
         }
         
@@ -185,7 +193,8 @@
 
 - (void)loadProfileValuesInModel
 {
-    self.user.name = self.nameTextField.text;
+    self.user.firstName = self.firstNameTextField.text;
+    self.user.lastName = self.lastNameTextField.text;
     
     for (int i = 0; i < self.itemsOrder.count; i++) {
         NSNumber *order = self.itemsOrder[i];
