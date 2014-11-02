@@ -419,6 +419,9 @@
                                 <state key="normal" title="Start Consent">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="startConsentTapped:" destination="4pQ-Fj-bLi" eventType="touchUpInside" id="fk5-RI-BX3"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap the button below to begin the consent process" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jaY-GU-ouk">
                                 <rect key="frame" x="40" y="275" width="240" height="56"/>
