@@ -27,6 +27,9 @@
     self.lastNameTextField.text = self.user.lastName;
     self.lastNameTextField.enabled = NO;
     
+    self.profileImage = [UIImage imageWithData:self.user.profileImage];
+    [self.profileImageButton setImage:self.profileImage forState:UIControlStateNormal];
+    
     self.diseaseLabel.text = NSLocalizedString(@"Cardiovascular Health", nil);
 }
 
@@ -197,6 +200,10 @@
 {
     self.user.firstName = self.firstNameTextField.text;
     self.user.lastName = self.lastNameTextField.text;
+    
+    if (self.profileImage) {
+        self.user.profileImage = UIImageJPEGRepresentation(self.profileImage, 1.0);
+    }
     
     for (int i = 0; i < self.itemsOrder.count; i++) {
         NSNumber *order = self.itemsOrder[i];
