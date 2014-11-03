@@ -19,8 +19,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = NSLocalizedString(@"Eligibility", @"");
-    
-    [self.consentButton addTarget:self action:@selector(showConsent) forControlEvents:UIControlEventTouchUpInside];
 
 }
 
@@ -28,6 +26,15 @@
 {
     APHSignUpGeneralInfoViewController *signUpVC = [[UIStoryboard storyboardWithName:@"APHOnboarding" bundle:nil] instantiateViewControllerWithIdentifier:@"SignUpGeneralInfoVC"];
     [self.navigationController pushViewController:signUpVC animated:YES];
+}
+
+- (IBAction)startConsentTapped:(id)sender
+{
+    if (((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.parameters.hideConsent) {
+        [self startSignUp];
+    } else {
+        [self showConsent];
+    }
 }
 
 @end

@@ -113,6 +113,14 @@
             field.editable = NO;
         }
         field.datePickerMode = UIDatePickerModeDate;
+        
+        NSCalendar * gregorian = [[NSCalendar alloc] initWithCalendarIdentifier: NSCalendarIdentifierGregorian];
+        NSDate * currentDate = [NSDate date];
+        NSDateComponents * comps = [[NSDateComponents alloc] init];
+        [comps setYear: -18];
+        NSDate * maxDate = [gregorian dateByAddingComponents: comps toDate: currentDate options: 0];
+        field.maximumDate = maxDate;
+        
         field.identifier = kAPCDefaultTableViewCellIdentifier;
     
         [items addObject:field];

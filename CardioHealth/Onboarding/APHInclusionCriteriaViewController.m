@@ -41,6 +41,8 @@
         obj.delegate = self;
     }];
     [self setUpAppearance];
+    
+    self.navigationItem.rightBarButtonItem.enabled = NO;
 }
 
 - (void) setUpAppearance
@@ -104,28 +106,14 @@
 
 - (void)next
 {
-#if DEVELOPMENT
-    
-    APHSignUpGeneralInfoViewController *signUpVC = [[UIStoryboard storyboardWithName:@"APHOnboarding" bundle:nil] instantiateViewControllerWithIdentifier:@"SignUpGeneralInfoVC"];
-    [self.navigationController pushViewController:signUpVC animated:YES];
-    
-#else
-    if (((APCAppDelegate*)[UIApplication sharedApplication].delegate).dataSubstrate.parameters.hideConsent) {
-        APHSignUpGeneralInfoViewController *signUpVC = [[UIStoryboard storyboardWithName:@"APHOnboarding" bundle:nil] instantiateViewControllerWithIdentifier:@"SignUpGeneralInfoVC"];
-        [self.navigationController pushViewController:signUpVC animated:YES];
+    if ([self isEligible]) {
+        
+        [self.navigationController pushViewController:[[UIStoryboard storyboardWithName:@"APHOnboarding" bundle:nil] instantiateViewControllerWithIdentifier:@"EligibleVC"] animated:YES];
     }
     else
     {
-        if ([self isEligible]) {
-            
-            [self.navigationController pushViewController:[[UIStoryboard storyboardWithName:@"APHOnboarding" bundle:nil] instantiateViewControllerWithIdentifier:@"EligibleVC"] animated:YES];
-        }
-        else
-        {
-            [self.navigationController pushViewController:[[UIStoryboard storyboardWithName:@"APHOnboarding" bundle:nil] instantiateViewControllerWithIdentifier:@"InEligibleVC"] animated:YES];
-        }
+        [self.navigationController pushViewController:[[UIStoryboard storyboardWithName:@"APHOnboarding" bundle:nil] instantiateViewControllerWithIdentifier:@"InEligibleVC"] animated:YES];
     }
-#endif
 }
 
 - (BOOL) isEligible
@@ -140,9 +128,9 @@
 
 - (BOOL)isContentValid
 {
-#ifdef DEVELOPMENT
-    return YES;
-#else
+//#ifdef DEVELOPMENT
+//    return YES;
+//#else
     __block BOOL retValue = YES;
     [self.questions enumerateObjectsUsingBlock:^(APCSegmentedButton* obj, NSUInteger idx, BOOL *stop) {
         if (obj.selectedIndex == -1) {
@@ -151,7 +139,7 @@
         }
     }];
     return retValue;
-#endif
+//#endif
 }
 
 @end
