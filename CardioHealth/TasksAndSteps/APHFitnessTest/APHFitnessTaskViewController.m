@@ -15,7 +15,7 @@
 
 static NSString *MainStudyIdentifier = @"com.cardioVascular.fitnessTest";
 static NSString *kdataResultsFileName = @"FitnessTestResult.json";
-static NSInteger kCountDownTimer = 1.0;
+static NSInteger kCountDownTimer = 5;
 static  NSString  *kFitnessTestStep101 = @"FitnessStep101";
 static  NSString  *kFitnessTestStep102 = @"FitnessStep102";
 static  NSString  *kFitnessTestStep103 = @"FitnessStep103";
@@ -23,8 +23,10 @@ static  NSString  *kFitnessTestStep104 = @"FitnessStep104";
 static  NSString  *kFitnessTestStep105 = @"FitnessStep105";
 static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
 
-@interface APHFitnessTaskViewController ()
+static  CGFloat  kAPCStepProgressBarHeight = 10.0;
 
+@interface APHFitnessTaskViewController ()
+@property  (nonatomic, strong)  APCStepProgressBar  *progressor;
 @property (strong, nonatomic) APHFitnessTestHealthKitSampleTypeTracker *healthKitSampleTracker;
 @property (strong, nonatomic) APHFitnessTestDistanceTracker *distanceTracker;
 
@@ -37,6 +39,24 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
 /*********************************************************************************/
 #pragma  mark  -  Initialisation
 /*********************************************************************************/
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    CGRect  navigationBarFrame = self.navigationBar.frame;
+    CGRect  progressorFrame = CGRectMake(0.0, CGRectGetHeight(navigationBarFrame) - kAPCStepProgressBarHeight, CGRectGetWidth(navigationBarFrame), kAPCStepProgressBarHeight);
+    
+    self.progressor = [[APCStepProgressBar alloc] initWithFrame:progressorFrame style:APCStepProgressBarStyleOnlyProgressView];
+    
+    RKTask  *task = self.task;
+    NSArray  *steps = task.steps;
+    self.progressor.numberOfSteps = [steps count];
+    [self.progressor setCompletedSteps: 1 animation:NO];
+    //    self.progressor.progressTintColor = [UIColor appTertiaryColor1];
+    self.progressor.backgroundColor = [UIColor appTertiaryColor1];
+    [self.navigationBar addSubview:self.progressor];
+}
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -155,6 +175,11 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
 - (void)stepViewControllerDidFinish:(RKStepViewController *)stepViewController navigationDirection:(RKStepViewControllerNavigationDirection)direction
 {
     [super stepViewControllerDidFinish:stepViewController navigationDirection:direction];
+    
+    NSInteger  completedSteps = self.progressor.completedSteps;
+    completedSteps = completedSteps + 1;
+    [self.progressor setCompletedSteps:completedSteps animation:YES];
+
     
     NSLog(@"Finished Step: %@", stepViewController.step.identifier);
 }

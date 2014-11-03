@@ -19,6 +19,9 @@
 @property (weak, nonatomic) IBOutlet APCPermissionButton *permissionButton;
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *nextBarButton;
+
+@property (nonatomic, strong) UIImage *profileImage;
+
 @end
 
 @implementation APHSignUpGeneralInfoViewController
@@ -113,6 +116,14 @@
             field.editable = NO;
         }
         field.datePickerMode = UIDatePickerModeDate;
+        
+        NSCalendar * gregorian = [[NSCalendar alloc] initWithCalendarIdentifier: NSCalendarIdentifierGregorian];
+        NSDate * currentDate = [NSDate date];
+        NSDateComponents * comps = [[NSDateComponents alloc] init];
+        [comps setYear: -18];
+        NSDate * maxDate = [gregorian dateByAddingComponents: comps toDate: currentDate options: 0];
+        field.maximumDate = maxDate;
+        
         field.identifier = kAPCDefaultTableViewCellIdentifier;
     
         [items addObject:field];
@@ -296,6 +307,10 @@
     if (self.tableView.tableHeaderView) {
         self.user.firstName = self.firstNameTextField.text;
         self.user.lastName = self.lastNameTextField.text;
+        
+        if (self.profileImage) {
+            self.user.profileImage = UIImageJPEGRepresentation(self.profileImage, 1.0);
+        }
     }
     
     for (int i = 0; i < self.itemsOrder.count; i++) {
@@ -363,6 +378,8 @@
     if (!image) {
         image = info[UIImagePickerControllerOriginalImage];
     }
+    
+    self.profileImage = image;
     
     [self.profileImageButton setImage:image forState:UIControlStateNormal];
     
