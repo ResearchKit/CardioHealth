@@ -11,7 +11,7 @@
 static CGFloat kProgressBarHeight = 10.0;
 
 @interface APHHeartAgeIntroStepViewController ()
-@property (nonatomic, strong) APCStepProgressBar *progressBar;
+
 @end
 
 @implementation APHHeartAgeIntroStepViewController
@@ -19,30 +19,15 @@ static CGFloat kProgressBarHeight = 10.0;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    CGRect progressBarFrame = CGRectMake(0, 0, self.view.frame.size.width, kProgressBarHeight);
-    self.progressBar = [[APCStepProgressBar alloc] initWithFrame:progressBarFrame
-                                                           style:APCStepProgressBarStyleOnlyProgressView];
-    self.progressBar.numberOfSteps = 14;
-    
-    [self.view addSubview:self.progressBar];
-    
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonTapped:)];
-
-
-    
 }
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    
-    CGRect progressBarRect = CGRectMake(0, 0, self.view.frame.size.width, kProgressBarHeight);
-    [self.progressBar setFrame:progressBarRect];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
-    [self.progressBar setCompletedSteps:1 animation:YES];
 }
 
 - (void)didReceiveMemoryWarning {

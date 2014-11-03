@@ -6,10 +6,7 @@
 //  Copyright (c) 2014 Y Media Labs. All rights reserved.
 //
 #import "APHHeartAgeTaskViewController.h"
-#import "APHHeartAgeSummaryViewController.h"
 #import "APHHeartAgeAndRiskFactors.h"
-
-//TODO added by Justin
 #import "APHHeartAgeResultsViewController.h"
 #import "APHHeartAgeIntroStepViewController.h"
 
@@ -26,7 +23,11 @@ static NSString *kHeartAgeFormStepSmokingHistory = @"smokingHistory";
 static NSString *kHeartAgeFormStepCholesterolHdlSystolic = @"cholesterolHdlSystolic";
 static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
 
+static  CGFloat  kAPCStepProgressBarHeight = 10.0;
+
 @interface APHHeartAgeTaskViewController ()
+
+@property  (nonatomic, strong)  APCStepProgressBar  *progressor;
 
 @property (nonatomic, strong) NSDictionary *heartAgeInfo;
 @property (strong, nonatomic) RKDataArchive *taskArchive;
@@ -238,6 +239,20 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
     // This shows the 'Step 1 of x' in the Navigation bar,
     // not to be confused with a proper progress bar.
     self.showsProgressInNavigationBar = YES;
+    
+    CGRect  navigationBarFrame = self.navigationBar.frame;
+    CGRect  progressorFrame = CGRectMake(0.0, CGRectGetHeight(navigationBarFrame) - kAPCStepProgressBarHeight, CGRectGetWidth(navigationBarFrame), kAPCStepProgressBarHeight);
+    
+    self.progressor = [[APCStepProgressBar alloc] initWithFrame:progressorFrame style:APCStepProgressBarStyleOnlyProgressView];
+    
+    RKTask  *task = self.task;
+    NSArray  *steps = task.steps;
+    self.progressor.numberOfSteps = [steps count];
+    [self.progressor setCompletedSteps: 1 animation:NO];
+    //    self.progressor.progressTintColor = [UIColor appTertiaryColor1];
+    self.progressor.backgroundColor = [UIColor appTertiaryColor1];
+    [self.navigationBar addSubview:self.progressor];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -513,5 +528,14 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
     viewController.skipButton = nil;
 }
 
+- (void)stepViewControllerDidFinish:(RKStepViewController *)stepViewController navigationDirection:(RKStepViewControllerNavigationDirection)direction
+{
+    [super stepViewControllerDidFinish:stepViewController navigationDirection:direction];
+    NSInteger  completedSteps = self.progressor.completedSteps;
+    completedSteps = completedSteps + 1;
+    [self.progressor setCompletedSteps:completedSteps animation:YES];
+    
+    NSLog(@"Finished Step: %@", stepViewController.step.identifier);
+}
 
 @end
