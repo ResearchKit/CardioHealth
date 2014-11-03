@@ -25,7 +25,6 @@ static CGFloat kProgressBarHeight = 10.0;
 @property (weak, nonatomic) IBOutlet UIView *circularProgressBar;
 
 @property (nonatomic, strong) APCCircularProgressView *circularProgress;
-@property (nonatomic, strong) APCStepProgressBar *progressBar;
 @end
 
 @implementation APHFitnessTestSummaryViewController
@@ -60,13 +59,6 @@ static CGFloat kProgressBarHeight = 10.0;
                                                                                            target:self
                                                                                            action:@selector(doneButtonTapped:)];
     
-    CGRect progressBarFrame = CGRectMake(0, 0, self.view.frame.size.width, kProgressBarHeight);
-    self.progressBar = [[APCStepProgressBar alloc] initWithFrame:progressBarFrame
-                                                                          style:APCStepProgressBarStyleOnlyProgressView];
-    self.progressBar.numberOfSteps = 6;
-    
-    [self.view addSubview:self.progressBar];
-    
     self.circularProgress = [[APCCircularProgressView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.circularProgressBar.frame), CGRectGetHeight(self.circularProgressBar.frame))];
     self.circularProgress.hidesProgressValue = YES;
     [self.circularProgress setProgress:0.33];
@@ -79,16 +71,11 @@ static CGFloat kProgressBarHeight = 10.0;
 
     CGRect rect = CGRectMake(0, 0, CGRectGetWidth(self.circularProgressBar.frame), CGRectGetHeight(self.circularProgressBar.frame));
     [self.circularProgress setFrame:rect];
-    
-    CGRect progressBarRect = CGRectMake(0, 0, self.view.frame.size.width, kProgressBarHeight);
-    [self.progressBar setFrame:progressBarRect];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
-    [self.progressBar setCompletedSteps:6 animation:YES];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
