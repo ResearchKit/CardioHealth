@@ -30,7 +30,11 @@
 
 - (IBAction)startConsentTapped:(id)sender
 {
-    if (((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.parameters.hideConsent) {
+#if DEVELOPMENT
+    if (YES) {
+#else
+        if (((APCAppDelegate*)[UIApplication sharedApplication].delegate).dataSubstrate.parameters.hideConsent) {
+#endif
         [self startSignUp];
     } else {
         [self showConsent];
