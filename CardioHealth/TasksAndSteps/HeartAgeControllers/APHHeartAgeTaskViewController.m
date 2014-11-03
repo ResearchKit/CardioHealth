@@ -27,7 +27,7 @@ static  CGFloat  kAPCStepProgressBarHeight = 10.0;
 
 @interface APHHeartAgeTaskViewController ()
 
-@property  (nonatomic, strong)  APCStepProgressBar  *progressor;
+@property  (nonatomic, weak)  APCStepProgressBar  *progressor;
 
 @property (nonatomic, strong) NSDictionary *heartAgeInfo;
 @property (strong, nonatomic) RKDataArchive *taskArchive;
@@ -243,15 +243,15 @@ static  CGFloat  kAPCStepProgressBarHeight = 10.0;
     CGRect  navigationBarFrame = self.navigationBar.frame;
     CGRect  progressorFrame = CGRectMake(0.0, CGRectGetHeight(navigationBarFrame) - kAPCStepProgressBarHeight, CGRectGetWidth(navigationBarFrame), kAPCStepProgressBarHeight);
     
-    self.progressor = [[APCStepProgressBar alloc] initWithFrame:progressorFrame style:APCStepProgressBarStyleOnlyProgressView];
+    APCStepProgressBar  *tempProgressor = [[APCStepProgressBar alloc] initWithFrame:progressorFrame style:APCStepProgressBarStyleOnlyProgressView];
     
     RKTask  *task = self.task;
     NSArray  *steps = task.steps;
-    self.progressor.numberOfSteps = [steps count];
-    [self.progressor setCompletedSteps: 1 animation:NO];
-    //    self.progressor.progressTintColor = [UIColor appTertiaryColor1];
-    self.progressor.backgroundColor = [UIColor appTertiaryColor1];
-    [self.navigationBar addSubview:self.progressor];
+    tempProgressor.numberOfSteps = [steps count];
+    [tempProgressor setCompletedSteps: 1 animation:NO];
+    self.progressor.progressTintColor = [UIColor appTertiaryColor1];
+    [self.navigationBar addSubview:tempProgressor];
+    self.progressor = tempProgressor;
 
 }
 
@@ -532,7 +532,11 @@ static  CGFloat  kAPCStepProgressBarHeight = 10.0;
 {
     [super stepViewControllerDidFinish:stepViewController navigationDirection:direction];
     NSInteger  completedSteps = self.progressor.completedSteps;
-    completedSteps = completedSteps + 1;
+    if (direction == RKStepViewControllerNavigationDirectionForward) {
+        completedSteps = completedSteps + 1;
+    } else {
+        completedSteps = completedSteps - 1;
+    }
     [self.progressor setCompletedSteps:completedSteps animation:YES];
     
     NSLog(@"Finished Step: %@", stepViewController.step.identifier);
