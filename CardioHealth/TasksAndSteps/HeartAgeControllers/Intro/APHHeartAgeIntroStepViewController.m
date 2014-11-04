@@ -11,6 +11,7 @@
 static CGFloat kProgressBarHeight = 10.0;
 
 @interface APHHeartAgeIntroStepViewController ()
+@property (weak, nonatomic) IBOutlet UIButton *getStartedButton;
 
 @end
 
@@ -21,10 +22,11 @@ static CGFloat kProgressBarHeight = 10.0;
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonTapped:)];
     
-    UIColor *viewBackgroundColor = [UIColor colorWithRed:248.0f/255.0f green:248.0f/255.0f blue:248.0f/255.0f alpha:1.000];
+    UIColor *viewBackgroundColor = [UIColor appSecondaryColor4];
     
     [self.view setBackgroundColor:viewBackgroundColor];
 
+  [self.getStartedButton setBackgroundImage:[UIImage imageWithColor:[UIColor appPrimaryColor]] forState:UIControlStateNormal];
 }
 
 - (void)viewDidLayoutSubviews {
