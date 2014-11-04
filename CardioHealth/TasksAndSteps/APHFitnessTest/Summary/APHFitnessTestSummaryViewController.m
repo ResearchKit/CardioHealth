@@ -12,8 +12,6 @@ static NSString *ActivityCell = @"ActivityProgressCell";
 static NSString *HeartAgeCell = @"HeartAgeCell";
 static NSString *InformationCell = @"InformationCell";
 
-static CGFloat kProgressBarHeight = 10.0;
-
 @interface APHFitnessTestSummaryViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *label1;
 @property (weak, nonatomic) IBOutlet UILabel *label2;
@@ -32,10 +30,7 @@ static CGFloat kProgressBarHeight = 10.0;
 - (void)viewDidLoad {
     [super viewDidLoad];
             
-    UIColor *viewBackgroundColor = [UIColor colorWithRed:220.0f/255.0f
-                                                   green:225.0f/255.0f
-                                                    blue:215.0f/255.0f
-                                                   alpha:1.0f];
+    UIColor *viewBackgroundColor = [UIColor colorWithRed:248.0f/255.0f green:248.0f/255.0f blue:248.0f/255.0f alpha:1.000];
     
     [self.view setBackgroundColor:viewBackgroundColor];
     self.navigationItem.title = NSLocalizedString(@"Survey Complete", @"Survey Complete");
