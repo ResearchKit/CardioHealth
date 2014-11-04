@@ -76,6 +76,21 @@
     {
         APCTableViewTextFieldItem *field = [APCTableViewTextFieldItem new];
         field.style = UITableViewCellStyleValue1;
+        field.caption = NSLocalizedString(@"Email", @"");
+        field.placeholder = NSLocalizedString(@"add email", @"");
+        field.keyboardType = UIKeyboardTypeEmailAddress;
+        field.returnKeyType = UIReturnKeyNext;
+        field.clearButtonMode = UITextFieldViewModeWhileEditing;
+        field.identifier = kAPCTextFieldTableViewCellIdentifier;
+        
+        [items addObject:field];
+        
+        [itemsOrder addObject:@(APCSignUpUserInfoItemEmail)];
+    }
+    
+    {
+        APCTableViewTextFieldItem *field = [APCTableViewTextFieldItem new];
+        field.style = UITableViewCellStyleValue1;
         field.caption = NSLocalizedString(@"Password", @"");
         field.placeholder = NSLocalizedString(@"add password", @"");
         field.secure = YES;
@@ -87,21 +102,6 @@
         [items addObject:field];
         
         [itemsOrder addObject:@(APCSignUpUserInfoItemPassword)];
-    }
-    
-    {
-        APCTableViewTextFieldItem *field = [APCTableViewTextFieldItem new];
-        field.style = UITableViewCellStyleValue1;
-        field.caption = NSLocalizedString(@"Email", @"");
-        field.placeholder = NSLocalizedString(@"add email", @"");
-        field.keyboardType = UIKeyboardTypeEmailAddress;
-        field.returnKeyType = UIReturnKeyNext;
-        field.clearButtonMode = UITextFieldViewModeWhileEditing;
-        field.identifier = kAPCTextFieldTableViewCellIdentifier;
-        
-        [items addObject:field];
-        
-        [itemsOrder addObject:@(APCSignUpUserInfoItemEmail)];
     }
     
     {
