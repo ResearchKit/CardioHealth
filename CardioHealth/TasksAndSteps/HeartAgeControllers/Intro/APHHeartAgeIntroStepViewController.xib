@@ -25,10 +25,10 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V4s-bA-fin">
-                    <rect key="frame" x="0.0" y="464" width="320" height="40"/>
+                    <rect key="frame" x="0.0" y="440" width="320" height="64"/>
                     <color key="backgroundColor" red="0.75686281919999998" green="0.094117656349999995" blue="0.1294117719" alpha="1" colorSpace="deviceRGB"/>
                     <constraints>
-                        <constraint firstAttribute="width" secondItem="V4s-bA-fin" secondAttribute="height" multiplier="8:1" id="dpm-pD-txR"/>
+                        <constraint firstAttribute="height" constant="64" id="ezQ-NF-PY7"/>
                     </constraints>
                     <state key="normal" title="Get Started">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

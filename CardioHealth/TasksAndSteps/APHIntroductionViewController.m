@@ -26,18 +26,19 @@ static  NSString  *kSuperClassName = @"APCIntroductionViewController";
 {
     [super setupWithInstructionalImages:imageNames andParagraphs:paragraphs];
     
-    UIView *accessoryView = nil;//[super accessoryView];
+    UIView *accessoryView = [super accessoryView];
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     CGRect rect = CGRectMake(0.0, 0.0, CGRectGetWidth(accessoryView.frame), CGRectGetHeight(accessoryView.frame));
     button.frame = rect;
-    [accessoryView addSubview:button];
     
     button.titleLabel.textAlignment = NSTextAlignmentCenter;
     [button setTitle:@"View Important Details" forState:UIControlStateNormal];
     [button setTitleColor:[UIColor appPrimaryColor] forState:UIControlStateNormal];
     
     [button addTarget:self action:@selector(viewImportantDetailButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+    
+    [accessoryView addSubview:button];
 }
 
 - (void)viewImportantDetailButtonTapped {
