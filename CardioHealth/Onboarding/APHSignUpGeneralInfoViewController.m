@@ -267,11 +267,11 @@
                             *errorMessage = NSLocalizedString(@"Please enter a Password.", @"");
                         }
                     }
-                    else if ([[(APCTableViewTextFieldItem *)item value] length] < 6) {
+                    else if ([[(APCTableViewTextFieldItem *)item value] length] < 2) {
                         isContentValid = NO;
                         
                         if (errorMessage) {
-                            *errorMessage = NSLocalizedString(@"Password should be at least 6 characters.", @"");
+                            *errorMessage = NSLocalizedString(@"Password should be at least 2 characters.", @"");
                         }
                     }
                     break;
