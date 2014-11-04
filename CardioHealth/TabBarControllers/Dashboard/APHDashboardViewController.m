@@ -88,10 +88,6 @@ static NSString * const kDashboardMessagesCellIdentifier    = @"DashboardMessage
     [super didReceiveMemoryWarning];
 }
 
-- (UIRectEdge)edgesForExtendedLayout
-{
-    return UIRectEdgeNone;
-}
 
 #pragma mark - UIGestureRecognizerDelegate methods
 
@@ -260,11 +256,11 @@ static NSString * const kDashboardMessagesCellIdentifier    = @"DashboardMessage
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UITableViewHeaderFooterView *headerView = [[UITableViewHeaderFooterView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(tableView.frame), tableView.sectionHeaderHeight)];
-    headerView.contentView.backgroundColor = [UIColor colorWithWhite:248/255.0f alpha:1.0];
+    headerView.contentView.backgroundColor = [UIColor appSecondaryColor4];
     
     UILabel *headerLabel = [[UILabel alloc] initWithFrame:headerView.bounds];
     headerLabel.font = [UIFont appLightFontWithSize:16.0f];
-    headerLabel.textColor = [UIColor appSecondaryColor2];
+    headerLabel.textColor = [UIColor appSecondaryColor3];
     headerLabel.textAlignment = NSTextAlignmentCenter;
     [headerView addSubview:headerLabel];
     

@@ -8,8 +8,6 @@
 
 #import "APHHeartAgeResultsViewController.h"
 
-static CGFloat kProgressBarHeight = 10.0;
-
 @interface APHHeartAgeResultsViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *actualAgeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *heartAgeLabel;
@@ -27,10 +25,7 @@ static CGFloat kProgressBarHeight = 10.0;
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 
-    UIColor *viewBackgroundColor = [UIColor colorWithRed:220.0f/255.0f
-                                                   green:225.0f/255.0f
-                                                    blue:215.0f/255.0f
-                                                   alpha:1.0f];
+    UIColor *viewBackgroundColor = [UIColor colorWithRed:248.0f/255.0f green:248.0f/255.0f blue:248.0f/255.0f alpha:1.000];
     
     [self.view setBackgroundColor:viewBackgroundColor];
     

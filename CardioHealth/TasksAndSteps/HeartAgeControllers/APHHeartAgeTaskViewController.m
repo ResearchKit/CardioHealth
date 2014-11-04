@@ -23,11 +23,11 @@ static NSString *kHeartAgeFormStepSmokingHistory = @"smokingHistory";
 static NSString *kHeartAgeFormStepCholesterolHdlSystolic = @"cholesterolHdlSystolic";
 static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
 
-static  CGFloat  kAPCStepProgressBarHeight = 10.0;
+static  CGFloat  kAPCStepProgressBarHeight = 8.0;
 
 @interface APHHeartAgeTaskViewController ()
 
-@property  (nonatomic, strong)  APCStepProgressBar  *progressor;
+@property  (nonatomic, weak)  APCStepProgressBar  *progressor;
 
 @property (nonatomic, strong) NSDictionary *heartAgeInfo;
 @property (strong, nonatomic) RKDataArchive *taskArchive;
@@ -243,15 +243,17 @@ static  CGFloat  kAPCStepProgressBarHeight = 10.0;
     CGRect  navigationBarFrame = self.navigationBar.frame;
     CGRect  progressorFrame = CGRectMake(0.0, CGRectGetHeight(navigationBarFrame) - kAPCStepProgressBarHeight, CGRectGetWidth(navigationBarFrame), kAPCStepProgressBarHeight);
     
-    self.progressor = [[APCStepProgressBar alloc] initWithFrame:progressorFrame style:APCStepProgressBarStyleOnlyProgressView];
+    APCStepProgressBar  *tempProgressor = [[APCStepProgressBar alloc] initWithFrame:progressorFrame style:APCStepProgressBarStyleOnlyProgressView];
     
     RKTask  *task = self.task;
     NSArray  *steps = task.steps;
-    self.progressor.numberOfSteps = [steps count];
-    [self.progressor setCompletedSteps: 1 animation:NO];
-    //    self.progressor.progressTintColor = [UIColor appTertiaryColor1];
-    self.progressor.backgroundColor = [UIColor appTertiaryColor1];
-    [self.navigationBar addSubview:self.progressor];
+    tempProgressor.numberOfSteps = [steps count];
+    [tempProgressor setCompletedSteps: 1 animation:NO];
+    self.progressor.progressTintColor = [UIColor appTertiaryColor1];
+    [self.navigationBar addSubview:tempProgressor];
+    self.progressor = tempProgressor;
+    
+    self.showsProgressInNavigationBar = NO;
 
 }
 
@@ -393,6 +395,8 @@ static  CGFloat  kAPCStepProgressBarHeight = 10.0;
             }
             
         }
+    } else if (step.identifier == kHeartAgeIntroduction ) {
+        taskViewController.navigationBar.topItem.title = NSLocalizedString(@"Heart Age Test", @"Heart Age Test");
     }
     
     return shouldShowStep;
@@ -409,9 +413,9 @@ static  CGFloat  kAPCStepProgressBarHeight = 10.0;
         
         Class  aClass = [controllers objectForKey:step.identifier];
         APCStepViewController  *controller = [[aClass alloc] initWithNibName:nil bundle:nil];
+        
         controller.resultCollector = self;
         controller.delegate = self;
-        controller.title = @"Interval Tapping";
         controller.step = step;
         
         stepVC = controller;
@@ -532,7 +536,11 @@ static  CGFloat  kAPCStepProgressBarHeight = 10.0;
 {
     [super stepViewControllerDidFinish:stepViewController navigationDirection:direction];
     NSInteger  completedSteps = self.progressor.completedSteps;
-    completedSteps = completedSteps + 1;
+    if (direction == RKStepViewControllerNavigationDirectionForward) {
+        completedSteps = completedSteps + 1;
+    } else {
+        completedSteps = completedSteps - 1;
+    }
     [self.progressor setCompletedSteps:completedSteps animation:YES];
     
     NSLog(@"Finished Step: %@", stepViewController.step.identifier);

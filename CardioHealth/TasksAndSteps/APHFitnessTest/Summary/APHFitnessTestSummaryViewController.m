@@ -12,8 +12,6 @@ static NSString *ActivityCell = @"ActivityProgressCell";
 static NSString *HeartAgeCell = @"HeartAgeCell";
 static NSString *InformationCell = @"InformationCell";
 
-static CGFloat kProgressBarHeight = 10.0;
-
 @interface APHFitnessTestSummaryViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *label1;
 @property (weak, nonatomic) IBOutlet UILabel *label2;
@@ -31,25 +29,8 @@ static CGFloat kProgressBarHeight = 10.0;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    //If iPhone plus then make the phone larger. Constraints have aspect ratio set.
-    NSArray *labelArray = @[self.label1, self.label2, self.label3, self.label4, self.label5];
-    
-    if ([[UIScreen mainScreen] respondsToSelector:@selector(nativeScale)]){
-        if ([UIScreen mainScreen].nativeScale > 2.1) { // Nativescale is always 3 for iPhone 6 Plus, even when running in scaled mode
-            for (UILabel *label in labelArray) {
-                [label setFont:[UIFont systemFontOfSize:20]];
-            }
             
-        } else if ([UIScreen mainScreen].nativeScale == 2.1) {
-            
-        }
-    }
-        
-    UIColor *viewBackgroundColor = [UIColor colorWithRed:220.0f/255.0f
-                                                   green:225.0f/255.0f
-                                                    blue:215.0f/255.0f
-                                                   alpha:1.0f];
+    UIColor *viewBackgroundColor = [UIColor colorWithRed:248.0f/255.0f green:248.0f/255.0f blue:248.0f/255.0f alpha:1.000];
     
     [self.view setBackgroundColor:viewBackgroundColor];
     self.navigationItem.title = NSLocalizedString(@"Survey Complete", @"Survey Complete");

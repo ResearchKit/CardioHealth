@@ -62,16 +62,31 @@
 {
     self.nextBarButton.enabled = NO;
     
-#if DEVELOPMENT
+//#if DEVELOPMENT
     UIBarButtonItem *hiddenButton = [[UIBarButtonItem alloc] initWithTitle:@"   " style:UIBarButtonItemStylePlain target:self action:@selector(secretButton)];
     
     [self.navigationItem setRightBarButtonItems:@[self.nextBarButton, hiddenButton]];
-#endif
+//#endif
 }
 
 - (void) prepareFields {
     NSMutableArray *items = [NSMutableArray new];
     NSMutableArray *itemsOrder = [NSMutableArray new];
+    
+    {
+        APCTableViewTextFieldItem *field = [APCTableViewTextFieldItem new];
+        field.style = UITableViewCellStyleValue1;
+        field.caption = NSLocalizedString(@"Email", @"");
+        field.placeholder = NSLocalizedString(@"add email", @"");
+        field.keyboardType = UIKeyboardTypeEmailAddress;
+        field.returnKeyType = UIReturnKeyNext;
+        field.clearButtonMode = UITextFieldViewModeWhileEditing;
+        field.identifier = kAPCTextFieldTableViewCellIdentifier;
+        
+        [items addObject:field];
+        
+        [itemsOrder addObject:@(APCSignUpUserInfoItemEmail)];
+    }
     
     {
         APCTableViewTextFieldItem *field = [APCTableViewTextFieldItem new];
@@ -90,31 +105,11 @@
     }
     
     {
-        APCTableViewTextFieldItem *field = [APCTableViewTextFieldItem new];
-        field.style = UITableViewCellStyleValue1;
-        field.caption = NSLocalizedString(@"Email", @"");
-        field.placeholder = NSLocalizedString(@"add email", @"");
-        field.keyboardType = UIKeyboardTypeEmailAddress;
-        field.returnKeyType = UIReturnKeyNext;
-        field.clearButtonMode = UITextFieldViewModeWhileEditing;
-        field.identifier = kAPCTextFieldTableViewCellIdentifier;
-        
-        [items addObject:field];
-        
-        [itemsOrder addObject:@(APCSignUpUserInfoItemEmail)];
-    }
-    
-    {
         APCTableViewDatePickerItem *field = [APCTableViewDatePickerItem new];
         field.style = UITableViewCellStyleValue1;
         field.selectionStyle = UITableViewCellSelectionStyleGray;
         field.caption = NSLocalizedString(@"Birthdate", @"");
         field.placeholder = NSLocalizedString(@"add birthdate", @"");
-        if (self.permissionGranted && self.user.birthDate) {
-            field.date = self.user.birthDate;
-            field.detailText = [field.date toStringWithFormat:field.dateFormat];
-            field.editable = NO;
-        }
         field.datePickerMode = UIDatePickerModeDate;
         
         NSCalendar * gregorian = [[NSCalendar alloc] initWithCalendarIdentifier: NSCalendarIdentifierGregorian];
@@ -123,6 +118,14 @@
         [comps setYear: -18];
         NSDate * maxDate = [gregorian dateByAddingComponents: comps toDate: currentDate options: 0];
         field.maximumDate = maxDate;
+        
+        if (self.permissionGranted && self.user.birthDate) {
+            field.date = self.user.birthDate;
+            field.detailText = [field.date toStringWithFormat:field.dateFormat];
+            field.editable = NO;
+        } else{
+            field.date = maxDate;
+        }
         
         field.identifier = kAPCDefaultTableViewCellIdentifier;
     
@@ -264,11 +267,11 @@
                             *errorMessage = NSLocalizedString(@"Please enter a Password.", @"");
                         }
                     }
-                    else if ([[(APCTableViewTextFieldItem *)item value] length] < 6) {
+                    else if ([[(APCTableViewTextFieldItem *)item value] length] < 2) {
                         isContentValid = NO;
                         
                         if (errorMessage) {
-                            *errorMessage = NSLocalizedString(@"Password should be at least 6 characters.", @"");
+                            *errorMessage = NSLocalizedString(@"Password should be at least 2 characters.", @"");
                         }
                     }
                     break;
