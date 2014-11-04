@@ -88,10 +88,6 @@ static NSString * const kDashboardMessagesCellIdentifier    = @"DashboardMessage
     [super didReceiveMemoryWarning];
 }
 
-- (UIRectEdge)edgesForExtendedLayout
-{
-    return UIRectEdgeNone;
-}
 
 #pragma mark - UIGestureRecognizerDelegate methods
 
