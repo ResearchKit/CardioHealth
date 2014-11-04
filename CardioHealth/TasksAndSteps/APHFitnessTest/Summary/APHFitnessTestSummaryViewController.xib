@@ -22,7 +22,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Completing more activities increases the effectivness of the study." lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7At-o6-pZw" customClass="RKSubheadlineLabel">
-                    <rect key="frame" x="20" y="30" width="280" height="40"/>
+                    <rect key="frame" x="20" y="8" width="280" height="40"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="7At-o6-pZw" secondAttribute="height" multiplier="7:1" id="iHP-yC-eFj"/>
                     </constraints>
@@ -31,7 +31,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hsR-VW-WPf">
-                    <rect key="frame" x="0.0" y="80" width="320" height="56"/>
+                    <rect key="frame" x="0.0" y="58" width="320" height="56"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today's Activities" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XS4-PV-o0g" customClass="RKCaption1Label">
                             <rect key="frame" x="20" y="17" width="152" height="21"/>
@@ -74,7 +74,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5fR-Pw-oic">
-                    <rect key="frame" x="0.0" y="144" width="320" height="365"/>
+                    <rect key="frame" x="0.0" y="122" width="320" height="387"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thank you for your contribution to this study." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="qUF-6z-e5c" customClass="RKCaption1Label">
                             <rect key="frame" x="20" y="50" width="280" height="50"/>
@@ -132,7 +132,7 @@
                 <constraint firstItem="hsR-VW-WPf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Tv3-le-PhY"/>
                 <constraint firstItem="7At-o6-pZw" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="Wxu-Fv-W52"/>
                 <constraint firstAttribute="trailing" secondItem="5fR-Pw-oic" secondAttribute="trailing" id="f41-zX-dkh"/>
-                <constraint firstItem="7At-o6-pZw" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="30" id="jFO-p6-716"/>
+                <constraint firstItem="7At-o6-pZw" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="8" id="jFO-p6-716"/>
                 <constraint firstAttribute="trailing" secondItem="7At-o6-pZw" secondAttribute="trailing" constant="20" id="ng9-Rv-QXh"/>
                 <constraint firstAttribute="trailing" secondItem="hsR-VW-WPf" secondAttribute="trailing" id="pf4-f5-nDK"/>
                 <constraint firstItem="5fR-Pw-oic" firstAttribute="top" secondItem="hsR-VW-WPf" secondAttribute="bottom" constant="8" id="rUu-7j-Xfl"/>

@@ -62,11 +62,11 @@
 {
     self.nextBarButton.enabled = NO;
     
-#if DEVELOPMENT
+//#if DEVELOPMENT
     UIBarButtonItem *hiddenButton = [[UIBarButtonItem alloc] initWithTitle:@"   " style:UIBarButtonItemStylePlain target:self action:@selector(secretButton)];
     
     [self.navigationItem setRightBarButtonItems:@[self.nextBarButton, hiddenButton]];
-#endif
+//#endif
 }
 
 - (void) prepareFields {
