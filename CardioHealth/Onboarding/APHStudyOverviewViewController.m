@@ -58,28 +58,7 @@ static NSString * const kStudyOverviewCellIdentifier = @"kStudyOverviewCellIdent
     
     [self prepareContent];
     self.logoImageView.image = [UIImage imageNamed:@"logo_research_institute"];
-    [self setUpAppearance];
     [self setupTable];
-}
-
-- (void)setUpAppearance
-{
-    //Headerview
-    self.headerView.layer.shadowColor = [UIColor darkGrayColor].CGColor;
-    self.headerView.layer.shadowOffset = CGSizeMake(0, 1);
-    self.headerView.layer.shadowOpacity = 0.6;
-    self.headerView.layer.shadowRadius = 0.5;
-    
-    [self.joinButton setBackgroundImage:[UIImage imageWithColor:[UIColor appPrimaryColor]] forState:UIControlStateNormal];
-    [self.joinButton setTitleColor:[UIColor appSecondaryColor4] forState:UIControlStateNormal];
-    [self.loginButton setBackgroundImage:[UIImage imageWithColor:[UIColor appSecondaryColor2]] forState:UIControlStateNormal];
-    [self.loginButton setTitleColor:[UIColor appSecondaryColor4] forState:UIControlStateNormal];
-    
-    self.diseaseNameLabel.font = [UIFont appMediumFontWithSize:19];
-    self.diseaseNameLabel.textColor = [UIColor appSecondaryColor1];
-    self.dateRangeLabel.font = [UIFont appLightFontWithSize:16];
-    self.dateRangeLabel.textColor = [UIColor appSecondaryColor3];
-
 }
 
 - (void)didReceiveMemoryWarning {

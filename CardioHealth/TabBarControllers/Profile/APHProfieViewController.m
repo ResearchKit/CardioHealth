@@ -30,7 +30,7 @@
     self.profileImage = [UIImage imageWithData:self.user.profileImage];
     [self.profileImageButton setImage:self.profileImage forState:UIControlStateNormal];
     
-    self.diseaseLabel.text = NSLocalizedString(@"Cardiovascular Health", nil);
+    [self setupDataFromJSONFile:@"StudyOverview"];
 }
 
 - (void)didReceiveMemoryWarning {
