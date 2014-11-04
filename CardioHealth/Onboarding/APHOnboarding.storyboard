@@ -436,17 +436,17 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="centerX" secondItem="jaY-GU-ouk" secondAttribute="centerX" id="178-qr-6Ma"/>
-                            <constraint firstAttribute="centerY" secondItem="jaY-GU-ouk" secondAttribute="centerY" constant="-19" id="2MM-nx-ENT"/>
-                            <constraint firstItem="249-q3-9uo" firstAttribute="top" secondItem="dZW-dR-J9a" secondAttribute="bottom" id="2TL-UR-whP"/>
-                            <constraint firstItem="A44-Q8-8gf" firstAttribute="leading" secondItem="6tO-Ot-S0z" secondAttribute="leadingMargin" id="79B-71-Huj"/>
-                            <constraint firstItem="dZW-dR-J9a" firstAttribute="leading" secondItem="6tO-Ot-S0z" secondAttribute="leadingMargin" constant="-16" id="MPj-b1-fky"/>
-                            <constraint firstAttribute="centerX" secondItem="A44-Q8-8gf" secondAttribute="centerX" id="U00-wE-Zun"/>
-                            <constraint firstAttribute="centerX" secondItem="Kvb-j0-Vy2" secondAttribute="centerX" constant="-0.5" id="dWK-gd-MYE"/>
-                            <constraint firstItem="A44-Q8-8gf" firstAttribute="trailing" secondItem="6tO-Ot-S0z" secondAttribute="trailingMargin" id="g0a-x8-o6g"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="dZW-dR-J9a" secondAttribute="trailing" constant="-16" id="lii-Vp-Lnv"/>
-                            <constraint firstAttribute="centerY" secondItem="A44-Q8-8gf" secondAttribute="centerY" constant="33" id="q8k-Cv-vl0"/>
-                            <constraint firstAttribute="centerY" secondItem="Kvb-j0-Vy2" secondAttribute="centerY" constant="79.5" id="xrZ-EP-KdM"/>
+                            <constraint firstItem="249-q3-9uo" firstAttribute="top" secondItem="dZW-dR-J9a" secondAttribute="bottom" id="2ml-VK-PMO"/>
+                            <constraint firstAttribute="centerY" secondItem="jaY-GU-ouk" secondAttribute="centerY" constant="-19" id="8bb-Gq-bAf"/>
+                            <constraint firstItem="A44-Q8-8gf" firstAttribute="trailing" secondItem="6tO-Ot-S0z" secondAttribute="trailingMargin" id="MsP-Wc-Qon"/>
+                            <constraint firstAttribute="centerY" secondItem="Kvb-j0-Vy2" secondAttribute="centerY" constant="79.5" id="cvx-eV-GG1"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="dZW-dR-J9a" secondAttribute="trailing" constant="-16" id="eSS-Sv-BmB"/>
+                            <constraint firstAttribute="centerY" secondItem="A44-Q8-8gf" secondAttribute="centerY" constant="33" id="gFC-rV-As6"/>
+                            <constraint firstItem="A44-Q8-8gf" firstAttribute="leading" secondItem="6tO-Ot-S0z" secondAttribute="leadingMargin" id="heu-3f-zXp"/>
+                            <constraint firstAttribute="centerX" secondItem="A44-Q8-8gf" secondAttribute="centerX" id="ptl-BT-6VH"/>
+                            <constraint firstItem="dZW-dR-J9a" firstAttribute="leading" secondItem="6tO-Ot-S0z" secondAttribute="leadingMargin" constant="-16" id="rf9-hE-Tri"/>
+                            <constraint firstAttribute="centerX" secondItem="jaY-GU-ouk" secondAttribute="centerX" id="yMN-Gn-0pn"/>
+                            <constraint firstAttribute="centerX" secondItem="Kvb-j0-Vy2" secondAttribute="centerX" constant="-0.5" id="ys7-BR-Wn5"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Eligibility" id="fPe-aU-b8O"/>
@@ -1298,7 +1298,7 @@
                             <rect key="frame" x="0.0" y="64" width="320" height="59"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your username or email address in order to reset your Password." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V9Y-tC-jxm">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your email address in order to reset your Password." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V9Y-tC-jxm">
                                     <rect key="frame" x="15" y="8" width="290" height="43"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
@@ -1332,7 +1332,7 @@
                                                         <constraint firstAttribute="height" constant="35" id="9fF-Ur-drJ"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="emailAddress" keyboardAppearance="alert" returnKeyType="next"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="emailAddress" keyboardAppearance="alert" returnKeyType="done"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="kfP-4E-yxe" id="dyd-Om-x5e"/>
                                                     </connections>
