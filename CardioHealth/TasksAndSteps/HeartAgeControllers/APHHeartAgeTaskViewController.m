@@ -396,7 +396,7 @@ static  CGFloat  kAPCStepProgressBarHeight = 10.0;
             
         }
     } else if (step.identifier == kHeartAgeIntroduction ) {
-        taskViewController.navigationBar.topItem.title = @"Heart Age Test";
+        taskViewController.navigationBar.topItem.title = NSLocalizedString(@"Heart Age Test", @"Heart Age Test");
     }
     
     return shouldShowStep;
@@ -416,7 +416,6 @@ static  CGFloat  kAPCStepProgressBarHeight = 10.0;
         
         controller.resultCollector = self;
         controller.delegate = self;
-        controller.title = @"Interval Tapping";
         controller.step = step;
         
         stepVC = controller;
