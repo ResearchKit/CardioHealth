@@ -252,6 +252,8 @@ static  CGFloat  kAPCStepProgressBarHeight = 10.0;
     self.progressor.progressTintColor = [UIColor appTertiaryColor1];
     [self.navigationBar addSubview:tempProgressor];
     self.progressor = tempProgressor;
+    
+    self.showsProgressInNavigationBar = NO;
 
 }
 
@@ -393,6 +395,8 @@ static  CGFloat  kAPCStepProgressBarHeight = 10.0;
             }
             
         }
+    } else if (step.identifier == kHeartAgeIntroduction ) {
+        taskViewController.navigationBar.topItem.title = @"Heart Age Test";
     }
     
     return shouldShowStep;
@@ -409,6 +413,7 @@ static  CGFloat  kAPCStepProgressBarHeight = 10.0;
         
         Class  aClass = [controllers objectForKey:step.identifier];
         APCStepViewController  *controller = [[aClass alloc] initWithNibName:nil bundle:nil];
+        
         controller.resultCollector = self;
         controller.delegate = self;
         controller.title = @"Interval Tapping";

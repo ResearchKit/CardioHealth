@@ -20,6 +20,11 @@ static CGFloat kProgressBarHeight = 10.0;
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonTapped:)];
+    
+    UIColor *viewBackgroundColor = [UIColor colorWithRed:248.0f/255.0f green:248.0f/255.0f blue:248.0f/255.0f alpha:1.000];
+    
+    [self.view setBackgroundColor:viewBackgroundColor];
+
 }
 
 - (void)viewDidLayoutSubviews {
