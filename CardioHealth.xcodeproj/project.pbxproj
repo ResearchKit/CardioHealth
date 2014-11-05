@@ -390,11 +390,11 @@
 		F5481F0619E4820100D84617 /* HeartAgeControllers */ = {
 			isa = PBXGroup;
 			children = (
-				7B67533C1A0153DB005864E6 /* Intro */,
-				7BEEFA5B1A003DE8004F6C87 /* Summary */,
 				F5481F0B19E4820100D84617 /* APHHeartAgeTaskViewController.h */,
 				F5481F0C19E4820100D84617 /* APHHeartAgeTaskViewController.m */,
+				7B67533C1A0153DB005864E6 /* Intro */,
 				08D3A0F819E4A08C00A3D20D /* HeartAgeRiskFactorCalculations */,
+				7BEEFA5B1A003DE8004F6C87 /* Summary */,
 			);
 			path = HeartAgeControllers;
 			sourceTree = "<group>";
