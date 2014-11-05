@@ -131,13 +131,20 @@ static NSString * const kDashboardMessagesCellIdentifier    = @"DashboardMessage
             cell.textLabel.text = NSLocalizedString(@"Activities", nil);
             cell.textLabel.textColor = [UIColor appSecondaryColor1];
             cell.textLabel.font = [UIFont appRegularFontWithSize:14.0f];
-            
-            cell.detailTextLabel.text = @"5/6";
+            NSUInteger allScheduledTasks = ((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.allScheduledTasksForToday;
+            NSUInteger completedScheduledTasks = ((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.completedScheduledTasksForToday;
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%lu/%lu", completedScheduledTasks, allScheduledTasks];
             cell.detailTextLabel.textColor = [UIColor appSecondaryColor3];
             cell.detailTextLabel.font = [UIFont appRegularFontWithSize:17.0f];
             
         } else if (indexPath.row == 1){
             cell = [tableView dequeueReusableCellWithIdentifier:kDashboardProgressCellIdentifier];
+            APHDashboardProgressViewCell * progressCell = (APHDashboardProgressViewCell*) cell;
+            NSUInteger allScheduledTasks = ((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.allScheduledTasksForToday;
+            NSUInteger completedScheduledTasks = ((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.completedScheduledTasksForToday;
+            CGFloat percent = (CGFloat) completedScheduledTasks / (CGFloat) allScheduledTasks;
+            [progressCell.progressView setProgress:percent animated:YES];
+            
         }
     } else {
         NSInteger cellType = ((NSNumber *)[self.sectionsOrder objectAtIndex:indexPath.row]).integerValue;
