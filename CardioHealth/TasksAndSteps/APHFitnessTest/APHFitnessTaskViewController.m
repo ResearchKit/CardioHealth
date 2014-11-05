@@ -251,6 +251,8 @@ willPresentStepViewController:(RKStepViewController *)stepViewController{
         
         stepViewController.continueButton = [[UIBarButtonItem alloc] initWithTitle:@"Well done!" style:stepViewController.continueButton.style target:stepViewController.continueButton.target action:stepViewController.continueButton.action];
         
+        taskViewController.navigationBar.topItem.title = NSLocalizedString(@"Task Complete", @"Task Complete");
+        
     }
 }
 
