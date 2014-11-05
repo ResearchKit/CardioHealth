@@ -57,6 +57,8 @@ static  CGFloat  kAPCStepProgressBarHeight = 8.0;
     self.progressor.progressTintColor = [UIColor appTertiaryColor1];
     [self.navigationBar addSubview:tempProgressor];
     self.progressor = tempProgressor;
+    
+    self.showsProgressInNavigationBar = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -194,6 +196,8 @@ static  CGFloat  kAPCStepProgressBarHeight = 8.0;
 /*********************************************************************************/
 - (void)taskViewController:(RKTaskViewController *)taskViewController
 willPresentStepViewController:(RKStepViewController *)stepViewController{
+    
+    taskViewController.navigationBar.topItem.title = NSLocalizedString(@"6 Minute Walk", @"6 Minute Walk");
     
     stepViewController = (RKStepViewController *) stepViewController;
     
