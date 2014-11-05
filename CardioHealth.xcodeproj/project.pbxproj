@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		087476371A0995A600F9A0A8 /* APHDataPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 087476341A0995A600F9A0A8 /* APHDataPoint.m */; };
+		087476381A0995A600F9A0A8 /* APHScoring.m in Sources */ = {isa = PBXBuildFile; fileRef = 087476361A0995A600F9A0A8 /* APHScoring.m */; };
 		08D3A10219E4A08C00A3D20D /* APHHeartAgeAndRiskFactors.m in Sources */ = {isa = PBXBuildFile; fileRef = 08D3A0FA19E4A08C00A3D20D /* APHHeartAgeAndRiskFactors.m */; };
 		5B55FE321A0553D5009BEE5E /* APHChangePasscodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B55FE311A0553D5009BEE5E /* APHChangePasscodeViewController.m */; };
 		5B55FE3A1A056A4D009BEE5E /* APHSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B55FE391A056A4D009BEE5E /* APHSettingsViewController.m */; };
@@ -127,6 +129,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		087476331A0995A600F9A0A8 /* APHDataPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHDataPoint.h; sourceTree = "<group>"; };
+		087476341A0995A600F9A0A8 /* APHDataPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHDataPoint.m; sourceTree = "<group>"; };
+		087476351A0995A600F9A0A8 /* APHScoring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHScoring.h; sourceTree = "<group>"; };
+		087476361A0995A600F9A0A8 /* APHScoring.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHScoring.m; sourceTree = "<group>"; };
 		08D3A0F919E4A08C00A3D20D /* APHHeartAgeAndRiskFactors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHHeartAgeAndRiskFactors.h; sourceTree = "<group>"; };
 		08D3A0FA19E4A08C00A3D20D /* APHHeartAgeAndRiskFactors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHHeartAgeAndRiskFactors.m; sourceTree = "<group>"; };
 		5B55FE301A0553D5009BEE5E /* APHChangePasscodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHChangePasscodeViewController.h; sourceTree = "<group>"; };
@@ -415,6 +421,10 @@
 		F55BBDEF19D362D0003CA0F9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				087476351A0995A600F9A0A8 /* APHScoring.h */,
+				087476361A0995A600F9A0A8 /* APHScoring.m */,
+				087476331A0995A600F9A0A8 /* APHDataPoint.h */,
+				087476341A0995A600F9A0A8 /* APHDataPoint.m */,
 				F55BBDF019D362D0003CA0F9 /* JSONs */,
 				F584909319E8913E0091A640 /* Video */,
 			);
@@ -820,6 +830,7 @@
 				F55BBE6F19D362D0003CA0F9 /* APHDashboardMessageViewCell.m in Sources */,
 				7B41047E19E5D94F00592B96 /* APHFitnessTaskViewController.m in Sources */,
 				F55BBE5719D362D0003CA0F9 /* NSString+CustomMethods.m in Sources */,
+				087476371A0995A600F9A0A8 /* APHDataPoint.m in Sources */,
 				F5778E7719F0613D0079F1B2 /* APHSignUpGeneralInfoViewController.m in Sources */,
 				F5778E7A19F0613D0079F1B2 /* APHSignupTouchIDViewController.m in Sources */,
 				F55BBE6E19D362D0003CA0F9 /* APHDashboardGraphViewCell.m in Sources */,
@@ -829,6 +840,7 @@
 				5B55FE321A0553D5009BEE5E /* APHChangePasscodeViewController.m in Sources */,
 				F5778E7919F0613D0079F1B2 /* APHSignUpPermissionsViewController.m in Sources */,
 				F55BBE5819D362D0003CA0F9 /* RKStep+Description.m in Sources */,
+				087476381A0995A600F9A0A8 /* APHScoring.m in Sources */,
 				F5778E7219F0613D0079F1B2 /* APHInclusionCriteriaViewController.m in Sources */,
 				7B41048F19E5D94F00592B96 /* APHFitnessTestDistanceTracker.m in Sources */,
 				F5778E7619F0613D0079F1B2 /* APHSignInViewController.m in Sources */,
