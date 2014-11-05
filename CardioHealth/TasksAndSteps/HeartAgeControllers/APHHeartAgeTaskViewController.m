@@ -440,7 +440,9 @@ static  CGFloat  kAPCStepProgressBarHeight = 8.0;
                 if ([questionIdentifier isEqualToString:kHeartAgeTestDataEthnicity]) {
                     [surveyResultsDictionary setObject:(NSString *)questionResult.answer forKey:questionIdentifier];
                 } else if ([questionIdentifier isEqualToString:kHeartAgeTestDataGender]) {
-                    [surveyResultsDictionary setObject:((NSInteger)questionResult.answer == HKBiologicalSexFemale) ? kHeartAgeTestDataGenderFemale : kHeartAgeTestDataGenderMale
+                    NSNumber *numericGender = questionResult.answer;
+                    NSString *selectedGender = ([numericGender integerValue] == HKBiologicalSexFemale) ? kHeartAgeTestDataGenderFemale :kHeartAgeTestDataGenderMale;
+                    [surveyResultsDictionary setObject:selectedGender
                                                 forKey:questionIdentifier];
                 } else if ([questionIdentifier isEqualToString:kHeartAgeTestDataAge]) {
                     NSDate *dateOfBirth = [[NSCalendar currentCalendar] dateFromComponents:(NSDateComponents *)questionResult.answer];
