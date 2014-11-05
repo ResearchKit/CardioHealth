@@ -42,10 +42,8 @@ static NSString * const kDashboardMessagesCellIdentifier    = @"DashboardMessage
         
         if (!_sectionsOrder.count) {
             _sectionsOrder = [[NSMutableArray alloc] initWithArray:@[
-//                                                                     @(kDashboardSectionStudyOverView),
                                                                      @(kDashboardSectionActivity),
                                                                      @(kDashboardSectionBloodCount),
-                                                                     @(kDashboardSectionMedications),
                                                                      @(kDashboardSectionInsights),
                                                                      @(kDashboardSectionAlerts)]];
             
@@ -131,13 +129,20 @@ static NSString * const kDashboardMessagesCellIdentifier    = @"DashboardMessage
             cell.textLabel.text = NSLocalizedString(@"Activities", nil);
             cell.textLabel.textColor = [UIColor appSecondaryColor1];
             cell.textLabel.font = [UIFont appRegularFontWithSize:14.0f];
-            
-            cell.detailTextLabel.text = @"5/6";
+            NSUInteger allScheduledTasks = ((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.allScheduledTasksForToday;
+            NSUInteger completedScheduledTasks = ((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.completedScheduledTasksForToday;
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%lu/%lu", completedScheduledTasks, allScheduledTasks];
             cell.detailTextLabel.textColor = [UIColor appSecondaryColor3];
             cell.detailTextLabel.font = [UIFont appRegularFontWithSize:17.0f];
             
         } else if (indexPath.row == 1){
             cell = [tableView dequeueReusableCellWithIdentifier:kDashboardProgressCellIdentifier];
+            APHDashboardProgressViewCell * progressCell = (APHDashboardProgressViewCell*) cell;
+            NSUInteger allScheduledTasks = ((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.allScheduledTasksForToday;
+            NSUInteger completedScheduledTasks = ((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.completedScheduledTasksForToday;
+            CGFloat percent = (CGFloat) completedScheduledTasks / (CGFloat) allScheduledTasks;
+            [progressCell.progressView setProgress:percent animated:YES];
+            
         }
     } else {
         NSInteger cellType = ((NSNumber *)[self.sectionsOrder objectAtIndex:indexPath.row]).integerValue;
@@ -151,8 +156,9 @@ static NSString * const kDashboardMessagesCellIdentifier    = @"DashboardMessage
                     APCLineGraphView *lineGraphView = [[APCLineGraphView alloc] initWithFrame:graphCell.graphContainerView.frame];
                     lineGraphView.datasource = self;
                     lineGraphView.delegate = self;
-                    lineGraphView.titleLabel.text = @"Interval Tapping";
-                    lineGraphView.subTitleLabel.text = @"Average Score : 20";
+                    lineGraphView.titleLabel.text = NSLocalizedString(@"Distance", @"Distance");
+                    lineGraphView.subTitleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Average : %d",
+                                                                                                    @"Average : {average value}"), 20];
                     lineGraphView.tintColor = [UIColor appPrimaryColor];
                     [graphCell.graphContainerView addSubview:lineGraphView];
                     lineGraphView.panGestureRecognizer.delegate = self;
@@ -168,32 +174,15 @@ static NSString * const kDashboardMessagesCellIdentifier    = @"DashboardMessage
                     APCLineGraphView *lineGraphView = [[APCLineGraphView alloc] initWithFrame:graphCell.graphContainerView.frame];
                     lineGraphView.datasource = self;
                     lineGraphView.delegate = self;
-                    lineGraphView.titleLabel.text = @"Gait";
-                    lineGraphView.subTitleLabel.text = @"Average Score : 20";
+                    lineGraphView.titleLabel.text = NSLocalizedString(@"Heart Rate", @"Heart Rate");
+                    lineGraphView.subTitleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Average : %d",
+                                                                                                    @"Average : {average value}"), 20];
                     [graphCell.graphContainerView addSubview:lineGraphView];
                     lineGraphView.tintColor = [UIColor appPrimaryColor];
                     lineGraphView.panGestureRecognizer.delegate = self;
                     [self.lineCharts addObject:lineGraphView];
                 }
                 
-            }
-                break;
-            case kDashboardSectionMedications:
-            {
-                cell = (APHDashboardGraphViewCell *)[tableView dequeueReusableCellWithIdentifier:kDashboardGraphCellIdentifier forIndexPath:indexPath];
-                APHDashboardGraphViewCell * graphCell = (APHDashboardGraphViewCell *) cell;
-                if (graphCell.graphContainerView.subviews.count == 0) {
-                    APCLineGraphView *lineGraphView = [[APCLineGraphView alloc] initWithFrame:graphCell.graphContainerView.frame];
-                    lineGraphView.datasource = self;
-                    lineGraphView.delegate = self;
-                    lineGraphView.titleLabel.text = @"Gait";
-                    lineGraphView.subTitleLabel.text = @"Average Score : 20";
-                    [graphCell.graphContainerView addSubview:lineGraphView];
-                    lineGraphView.tintColor = [UIColor appPrimaryColor];
-                    lineGraphView.panGestureRecognizer.delegate = self;
-                    
-                    [self.lineCharts addObject:lineGraphView];
-                }
             }
                 break;
             case kDashboardSectionInsights:
@@ -209,7 +198,7 @@ static NSString * const kDashboardMessagesCellIdentifier    = @"DashboardMessage
                 ((APHDashboardMessageViewCell *)cell).type = kDashboardMessageViewCellTypeAlert;
             }
                 break;
-            default:  NSAssert(0, @"Invalid Cell Type");
+            default:
                 break;
         }
     }
@@ -294,7 +283,7 @@ static NSString * const kDashboardMessagesCellIdentifier    = @"DashboardMessage
 
 - (NSInteger)numberOfPlotsInLineGraph:(APCLineGraphView *)graphView
 {
-    return 2;
+    return 1;
 }
 
 - (CGFloat)lineGraph:(APCLineGraphView *)graphView plot:(NSInteger)plotIndex valueForPointAtIndex:(NSInteger)pointIndex
