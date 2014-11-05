@@ -345,19 +345,18 @@ static  CGFloat  kAPCStepProgressBarHeight = 8.0;
     
 }
 
+
 - (BOOL)taskViewController:(RKTaskViewController *)taskViewController shouldPresentStep:(RKStep *)step
 {
     BOOL shouldShowStep = YES;
     
-    // We need to make sure that every question in a step has an answer.
-    // This method is triggered for every step, so will skip the Introductory step
-    // the presenting of the first step.
-    //
-    // For every step that should be presented, we need to check the surveyResults
-    // which will contain the answers for the current step, and when all answers are
-    // provided, we will present the next step, otherwise prevent it and show an alert
-    // advising the user of the missing information.
-    if (![step.identifier isEqualToString:kHeartAgeIntroduction] && ![step.identifier isEqualToString:kHeartAgeFormStepBiographicAndDemographic]) {
+    taskViewController.navigationBar.topItem.title = NSLocalizedString(@"Heart Age Test", @"Heart Age Test");
+
+    if ([step.identifier isEqualToString:@"HeartAgeResult"]) {
+        
+        taskViewController.navigationBar.topItem.title = NSLocalizedString(@"Survey Complete", @"Survey Complete");
+        
+    } else if (![step.identifier isEqualToString:kHeartAgeIntroduction] && ![step.identifier isEqualToString:kHeartAgeFormStepBiographicAndDemographic]) {
         NSArray *stepSurveyResults = self.surveyResults;
         
         if (stepSurveyResults) {
@@ -395,8 +394,6 @@ static  CGFloat  kAPCStepProgressBarHeight = 8.0;
             }
             
         }
-    } else if (step.identifier == kHeartAgeIntroduction ) {
-        taskViewController.navigationBar.topItem.title = NSLocalizedString(@"Heart Age Test", @"Heart Age Test");
     }
     
     return shouldShowStep;
