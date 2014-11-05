@@ -17,6 +17,7 @@ static  NSString  *kIntroHeadingCaption = @"Tests for Bradykinesia";
 @property  (nonatomic, strong)          APHIntroductionViewController  *instructionsController;
 @property  (nonatomic, weak)  IBOutlet  UILabel  *introHeadingCaption;
 @property  (nonatomic, weak)  IBOutlet  UIView   *instructionsContainer;
+@property (weak, nonatomic) IBOutlet UIButton *getStartedButton;
 
 @property  (nonatomic, strong)          NSArray  *instructionalParagraphs;
 
@@ -32,7 +33,7 @@ static  NSString  *kIntroHeadingCaption = @"Tests for Bradykinesia";
 
 + (void)initialize
 {
-    kIntroHeadingCaption = NSLocalizedString(@"Measure Excercise Tolerance", nil);
+    kIntroHeadingCaption = NSLocalizedString(@"Measure Exercise Tolerance", nil);
 }
 
 #pragma  mark  -  Button Action Methods
@@ -87,6 +88,7 @@ static  NSString  *kIntroHeadingCaption = @"Tests for Bradykinesia";
     [super viewDidLoad];
     
     self.title = kViewControllerTitle;
+    [self.getStartedButton setBackgroundImage:[UIImage imageWithColor:[UIColor appPrimaryColor]] forState:UIControlStateNormal];
 }
 
 - (void)viewWillAppear:(BOOL)animated

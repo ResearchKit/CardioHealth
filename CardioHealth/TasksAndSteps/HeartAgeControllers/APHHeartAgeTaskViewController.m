@@ -23,7 +23,7 @@ static NSString *kHeartAgeFormStepSmokingHistory = @"smokingHistory";
 static NSString *kHeartAgeFormStepCholesterolHdlSystolic = @"cholesterolHdlSystolic";
 static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
 
-static  CGFloat  kAPCStepProgressBarHeight = 10.0;
+static  CGFloat  kAPCStepProgressBarHeight = 8.0;
 
 @interface APHHeartAgeTaskViewController ()
 
@@ -252,6 +252,8 @@ static  CGFloat  kAPCStepProgressBarHeight = 10.0;
     self.progressor.progressTintColor = [UIColor appTertiaryColor1];
     [self.navigationBar addSubview:tempProgressor];
     self.progressor = tempProgressor;
+    
+    self.showsProgressInNavigationBar = NO;
 
 }
 
@@ -393,6 +395,8 @@ static  CGFloat  kAPCStepProgressBarHeight = 10.0;
             }
             
         }
+    } else if (step.identifier == kHeartAgeIntroduction ) {
+        taskViewController.navigationBar.topItem.title = NSLocalizedString(@"Heart Age Test", @"Heart Age Test");
     }
     
     return shouldShowStep;
@@ -409,9 +413,9 @@ static  CGFloat  kAPCStepProgressBarHeight = 10.0;
         
         Class  aClass = [controllers objectForKey:step.identifier];
         APCStepViewController  *controller = [[aClass alloc] initWithNibName:nil bundle:nil];
+        
         controller.resultCollector = self;
         controller.delegate = self;
-        controller.title = @"Interval Tapping";
         controller.step = step;
         
         stepVC = controller;

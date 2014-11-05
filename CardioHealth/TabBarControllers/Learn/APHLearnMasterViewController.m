@@ -42,11 +42,6 @@ static CGFloat kResourceTableViewCellHeight   = 120.0;
     return self;
 }
 
-- (UIRectEdge)edgesForExtendedLayout
-{
-    return UIRectEdgeNone;
-}
-
 #pragma mark - Lifecycle
 
 - (void)viewDidLoad
