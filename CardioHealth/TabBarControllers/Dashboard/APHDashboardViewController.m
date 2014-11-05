@@ -11,21 +11,26 @@
 #import "APHEditSectionsViewController.h"
 
 /* Views */
-
 #import "APHDashboardGraphViewCell.h"
 #import "APHDashboardMessageViewCell.h"
 #import "APHDashboardProgressViewCell.h"
+
+/* Scoring */
+#import "APHScoring.h"
 
 static NSString * const kDashboardRightDetailCellIdentifier = @"DashboardRightDetailCellIdentifier";
 static NSString * const kDashboardGraphCellIdentifier       = @"DashboardGraphCellIdentifier";
 static NSString * const kDashboardProgressCellIdentifier    = @"DashboardProgressCellIdentifier";
 static NSString * const kDashboardMessagesCellIdentifier    = @"DashboardMessageCellIdentifier";
 
-@interface APHDashboardViewController () <APCLineGraphViewDelegate, APCLineGraphViewDataSource, UIGestureRecognizerDelegate>
+@interface APHDashboardViewController () <APCLineGraphViewDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) NSMutableArray *sectionsOrder;
 
 @property (nonatomic, strong) NSMutableArray *lineCharts;
+
+@property (nonatomic, strong) APHScoring *distanceScore;
+@property (nonatomic, strong) APHScoring *heartRateScore;
 
 @end
 
@@ -69,6 +74,14 @@ static NSString * const kDashboardMessagesCellIdentifier    = @"DashboardMessage
     UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Edit", nil) style:UIBarButtonItemStylePlain target:self action:@selector(editTapped)];
     [self.navigationItem setRightBarButtonItem:editButton];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    self.distanceScore = [[APHScoring alloc] initWithKind:APHDataKindWalk
+                                             numberOfDays:5
+                                        correlateWithKind:APHDataKindNone];
+    
+    self.heartRateScore = [[APHScoring alloc] initWithKind:APHDataKindHeartRate
+                                              numberOfDays:5
+                                         correlateWithKind:APHDataKindNone];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -154,11 +167,11 @@ static NSString * const kDashboardMessagesCellIdentifier    = @"DashboardMessage
                 APHDashboardGraphViewCell * graphCell = (APHDashboardGraphViewCell *) cell;
                 if (graphCell.graphContainerView.subviews.count == 0) {
                     APCLineGraphView *lineGraphView = [[APCLineGraphView alloc] initWithFrame:graphCell.graphContainerView.frame];
-                    lineGraphView.datasource = self;
+                    lineGraphView.datasource = self.distanceScore;
                     lineGraphView.delegate = self;
                     lineGraphView.titleLabel.text = NSLocalizedString(@"Distance", @"Distance");
-                    lineGraphView.subTitleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Average : %d",
-                                                                                                    @"Average : {average value}"), 20];
+                    lineGraphView.subTitleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Average : %lu ft",
+                                                                                                    @"Average: {value} ft"), [[self.distanceScore averageDataPoint] integerValue]];
                     lineGraphView.tintColor = [UIColor appPrimaryColor];
                     [graphCell.graphContainerView addSubview:lineGraphView];
                     lineGraphView.panGestureRecognizer.delegate = self;
@@ -172,11 +185,11 @@ static NSString * const kDashboardMessagesCellIdentifier    = @"DashboardMessage
                 APHDashboardGraphViewCell * graphCell = (APHDashboardGraphViewCell *) cell;
                 if (graphCell.graphContainerView.subviews.count == 0) {
                     APCLineGraphView *lineGraphView = [[APCLineGraphView alloc] initWithFrame:graphCell.graphContainerView.frame];
-                    lineGraphView.datasource = self;
+                    lineGraphView.datasource = self.heartRateScore;
                     lineGraphView.delegate = self;
                     lineGraphView.titleLabel.text = NSLocalizedString(@"Heart Rate", @"Heart Rate");
-                    lineGraphView.subTitleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Average : %d",
-                                                                                                    @"Average : {average value}"), 20];
+                    lineGraphView.subTitleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Average : %lu bpm",
+                                                                                                    @"Average: {value} bpm"), [[self.heartRateScore averageDataPoint] integerValue]];
                     [graphCell.graphContainerView addSubview:lineGraphView];
                     lineGraphView.tintColor = [UIColor appPrimaryColor];
                     lineGraphView.panGestureRecognizer.delegate = self;
@@ -274,33 +287,6 @@ static NSString * const kDashboardMessagesCellIdentifier    = @"DashboardMessage
     [self presentViewController:editSectionsNavigationController animated:YES completion:nil];
 }
 
-#pragma mark - APCLineCharViewDataSource
-
-- (NSInteger)lineGraph:(APCLineGraphView *)graphView numberOfPointsInPlot:(NSInteger)plotIndex
-{
-    return 5;
-}
-
-- (NSInteger)numberOfPlotsInLineGraph:(APCLineGraphView *)graphView
-{
-    return 1;
-}
-
-- (CGFloat)lineGraph:(APCLineGraphView *)graphView plot:(NSInteger)plotIndex valueForPointAtIndex:(NSInteger)pointIndex
-{
-    CGFloat value;
-    
-    if (plotIndex == 0) {
-        NSArray *values = @[@10.0, @16.0, @64.0, @56.0, @24.0];
-        value = ((NSNumber *)values[pointIndex]).floatValue;
-    } else {
-        NSArray *values = @[@23.0, @46.0, @87.0, @12.0, @51.0];
-        value = ((NSNumber *)values[pointIndex]).floatValue;
-    }
-    
-    return value;
-}
-
 #pragma mark - APCLineGraphViewDelegate methods
 
 - (void)lineGraphTouchesBegan:(APCLineGraphView *)graphView
@@ -328,22 +314,6 @@ static NSString * const kDashboardMessagesCellIdentifier    = @"DashboardMessage
             [lineGraph setScrubberViewsHidden:YES animated:YES];
         }
     }
-}
-
-- (CGFloat)minimumValueForLineGraph:(APCLineGraphView *)graphView
-{
-    return 0;
-}
-
-- (CGFloat)maximumValueForLineGraph:(APCLineGraphView *)graphView
-{
-    return 100;
-}
-
-- (NSString *)lineGraph:(APCLineGraphView *)graphView titleForXAxisAtIndex:(NSInteger)pointIndex
-{
-    NSArray *values = @[@"Nov 8", @"9", @"10", @"11", @"12"];
-    return values[pointIndex];
 }
 
 @end
