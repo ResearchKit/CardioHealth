@@ -13,8 +13,8 @@ static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
 
 @interface APHFitnessSixMinuteFitnessTestView ()
 @property (weak, nonatomic) IBOutlet UILabel *heartRateLabel;
-@property (weak, nonatomic) IBOutlet UILabel *stepCountLabel UI_APPEARANCE_SELECTOR;
-@property (weak, nonatomic) IBOutlet UILabel *distanceTotalLabel UI_APPEARANCE_SELECTOR;
+@property (weak, nonatomic) IBOutlet UILabel *stepCountLabel;
+@property (weak, nonatomic) IBOutlet UILabel *distanceTotalLabel;
 
 
 @property (assign) CLLocationDistance totalDistance;
@@ -104,7 +104,7 @@ static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
     
     CLLocationDistance distanceInFeet = self.totalDistance * kAPHFitnessTestMetersToFeetConversion;
     
-    self.distanceTotalLabel.text = [NSString stringWithFormat:@"%0.2f", distanceInFeet];
+    self.distanceTotalLabel.text = [NSString stringWithFormat:@"%f", distanceInFeet];
 }
 
 @end
