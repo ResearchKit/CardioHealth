@@ -24,12 +24,6 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9sA-PE-gEI" userLabel="milesContainer">
                             <rect key="frame" x="0.0" y="0.0" width="140" height="80"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4AP-O7-jNd">
-                                    <rect key="frame" x="57.5" y="41.5" width="15.5" height="33.5"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="28"/>
-                                    <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dJK-7Q-ihC" userLabel="FeetContainer">
                                     <rect key="frame" x="0.0" y="0.0" width="140" height="44"/>
                                     <subviews>
@@ -44,6 +38,12 @@
                                         </imageView>
                                     </subviews>
                                 </view>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4AP-O7-jNd">
+                                    <rect key="frame" x="0.0" y="46" width="140" height="33.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                    <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                             </subviews>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rkF-bK-WRY" userLabel="BPMContainer">
@@ -98,7 +98,7 @@
                 <outlet property="distanceTotalLabel" destination="4AP-O7-jNd" id="Olu-2L-aqM"/>
                 <outlet property="heartRateLabel" destination="3u1-Ke-e7g" id="8vz-Ah-0SD"/>
             </connections>
-            <point key="canvasLocation" x="380" y="89"/>
+            <point key="canvasLocation" x="356" y="89"/>
         </view>
     </objects>
     <resources>
