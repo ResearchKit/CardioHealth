@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *heartAgeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *estimatedTenYearFactorLabel;
 @property (weak, nonatomic) IBOutlet UILabel *estimatedLifetimeFactorLabel;
+@property (weak, nonatomic) IBOutlet UILabel *label3;
 
 @property (weak, nonatomic) IBOutlet UIView *circularProgressBar;
 
@@ -45,6 +46,7 @@
     [self.circularProgress setProgress:percent];
     
     [self.circularProgressBar addSubview:self.circularProgress];
+    self.label3.text = [NSString stringWithFormat:@"%lu/%lu", completedScheduledTasks, allScheduledTasks];
 }
 
 - (void)viewDidLayoutSubviews {
