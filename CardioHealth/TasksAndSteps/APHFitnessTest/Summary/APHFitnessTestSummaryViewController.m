@@ -30,7 +30,7 @@ static NSString *InformationCell = @"InformationCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
             
-    UIColor *viewBackgroundColor = [UIColor colorWithRed:248.0f/255.0f green:248.0f/255.0f blue:248.0f/255.0f alpha:1.000];
+    UIColor *viewBackgroundColor = [UIColor appSecondaryColor4];
     
     [self.view setBackgroundColor:viewBackgroundColor];
     self.navigationItem.title = NSLocalizedString(@"Survey Complete", @"Survey Complete");
@@ -42,7 +42,12 @@ static NSString *InformationCell = @"InformationCell";
     
     self.circularProgress = [[APCCircularProgressView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.circularProgressBar.frame), CGRectGetHeight(self.circularProgressBar.frame))];
     self.circularProgress.hidesProgressValue = YES;
-    [self.circularProgress setProgress:0.33];
+    NSUInteger allScheduledTasks = ((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.allScheduledTasksForToday;
+    NSUInteger completedScheduledTasks = ((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.completedScheduledTasksForToday;
+    completedScheduledTasks = MIN(allScheduledTasks, completedScheduledTasks+1);
+    CGFloat percent = (CGFloat) completedScheduledTasks / (CGFloat) allScheduledTasks;
+    [self.circularProgress setProgress:percent];
+    self.label3.text = [NSString stringWithFormat:@"%lu/%lu", completedScheduledTasks, allScheduledTasks];
     
     [self.circularProgressBar addSubview:self.circularProgress];
 }
