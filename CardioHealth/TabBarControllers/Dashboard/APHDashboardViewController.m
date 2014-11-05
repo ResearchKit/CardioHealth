@@ -42,10 +42,8 @@ static NSString * const kDashboardMessagesCellIdentifier    = @"DashboardMessage
         
         if (!_sectionsOrder.count) {
             _sectionsOrder = [[NSMutableArray alloc] initWithArray:@[
-//                                                                     @(kDashboardSectionStudyOverView),
                                                                      @(kDashboardSectionActivity),
                                                                      @(kDashboardSectionBloodCount),
-                                                                     @(kDashboardSectionMedications),
                                                                      @(kDashboardSectionInsights),
                                                                      @(kDashboardSectionAlerts)]];
             
@@ -151,8 +149,9 @@ static NSString * const kDashboardMessagesCellIdentifier    = @"DashboardMessage
                     APCLineGraphView *lineGraphView = [[APCLineGraphView alloc] initWithFrame:graphCell.graphContainerView.frame];
                     lineGraphView.datasource = self;
                     lineGraphView.delegate = self;
-                    lineGraphView.titleLabel.text = @"Interval Tapping";
-                    lineGraphView.subTitleLabel.text = @"Average Score : 20";
+                    lineGraphView.titleLabel.text = NSLocalizedString(@"Distance", @"Distance");
+                    lineGraphView.subTitleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Average : %d",
+                                                                                                    @"Average : {average value}"), 20];
                     lineGraphView.tintColor = [UIColor appPrimaryColor];
                     [graphCell.graphContainerView addSubview:lineGraphView];
                     lineGraphView.panGestureRecognizer.delegate = self;
@@ -168,32 +167,15 @@ static NSString * const kDashboardMessagesCellIdentifier    = @"DashboardMessage
                     APCLineGraphView *lineGraphView = [[APCLineGraphView alloc] initWithFrame:graphCell.graphContainerView.frame];
                     lineGraphView.datasource = self;
                     lineGraphView.delegate = self;
-                    lineGraphView.titleLabel.text = @"Gait";
-                    lineGraphView.subTitleLabel.text = @"Average Score : 20";
+                    lineGraphView.titleLabel.text = NSLocalizedString(@"Heart Rate", @"Heart Rate");
+                    lineGraphView.subTitleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Average : %d",
+                                                                                                    @"Average : {average value}"), 20];
                     [graphCell.graphContainerView addSubview:lineGraphView];
                     lineGraphView.tintColor = [UIColor appPrimaryColor];
                     lineGraphView.panGestureRecognizer.delegate = self;
                     [self.lineCharts addObject:lineGraphView];
                 }
                 
-            }
-                break;
-            case kDashboardSectionMedications:
-            {
-                cell = (APHDashboardGraphViewCell *)[tableView dequeueReusableCellWithIdentifier:kDashboardGraphCellIdentifier forIndexPath:indexPath];
-                APHDashboardGraphViewCell * graphCell = (APHDashboardGraphViewCell *) cell;
-                if (graphCell.graphContainerView.subviews.count == 0) {
-                    APCLineGraphView *lineGraphView = [[APCLineGraphView alloc] initWithFrame:graphCell.graphContainerView.frame];
-                    lineGraphView.datasource = self;
-                    lineGraphView.delegate = self;
-                    lineGraphView.titleLabel.text = @"Gait";
-                    lineGraphView.subTitleLabel.text = @"Average Score : 20";
-                    [graphCell.graphContainerView addSubview:lineGraphView];
-                    lineGraphView.tintColor = [UIColor appPrimaryColor];
-                    lineGraphView.panGestureRecognizer.delegate = self;
-                    
-                    [self.lineCharts addObject:lineGraphView];
-                }
             }
                 break;
             case kDashboardSectionInsights:
@@ -209,7 +191,7 @@ static NSString * const kDashboardMessagesCellIdentifier    = @"DashboardMessage
                 ((APHDashboardMessageViewCell *)cell).type = kDashboardMessageViewCellTypeAlert;
             }
                 break;
-            default:  NSAssert(0, @"Invalid Cell Type");
+            default:
                 break;
         }
     }
@@ -294,7 +276,7 @@ static NSString * const kDashboardMessagesCellIdentifier    = @"DashboardMessage
 
 - (NSInteger)numberOfPlotsInLineGraph:(APCLineGraphView *)graphView
 {
-    return 2;
+    return 1;
 }
 
 - (CGFloat)lineGraph:(APCLineGraphView *)graphView plot:(NSInteger)plotIndex valueForPointAtIndex:(NSInteger)pointIndex
