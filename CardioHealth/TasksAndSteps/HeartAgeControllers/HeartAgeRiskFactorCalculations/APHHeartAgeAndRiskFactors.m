@@ -79,7 +79,7 @@ NSString *const kSummaryLifetimeRisk = @"lifetimeRisk";
                                                           kLifetimeRiskFactorOptimal: @8,
                                                           kLifetimeRiskFactorNotOptimal: @27,
                                                           kLifetimeRiskFactorElevated: @39,
-                                                          kLifetimeRiskFactorMajor: @27,
+                                                          kLifetimeRiskFactorMajor: @39,
                                                           kLifetimeRiskFactorMajorGreaterThanEqualToTwo: @50
                                                           },
                                                   kLookupEthnicityAfricanAmerican: @{
@@ -341,16 +341,13 @@ NSString *const kSummaryLifetimeRisk = @"lifetimeRisk";
     NSString *gender = results[kHeartAgeTestDataGender];
     NSUInteger totalCholesterol = [results[kHeartAgeTestDataTotalCholesterol] integerValue];
     NSUInteger systolicBP = [results[kHeartAgeTestDataSystolicBloodPressure] integerValue];
-    NSUInteger hypertension = [results[kHeartAgeTestDataHypertension] integerValue];
-    NSUInteger diabetes = [results[kHeartAgeTestDataDiabetes] integerValue];
-    NSUInteger smoker = [results[kHeartAgeTestDataSmoke] integerValue];
-    
+    NSUInteger hypertension = [results[kHeartAgeTestDataHypertension] integerValue];    
     
     // The YES and NO are 1 and 0, respectively.
     NSUInteger riskFactorAllOptimal = (totalCholesterol < 180) + ((systolicBP < 120) && (hypertension == 0));
     NSUInteger riskFactorNotOptimal = ((totalCholesterol >= 180) && (totalCholesterol < 200)) + ((systolicBP >= 120) && (systolicBP < 140) && (hypertension == 0));
     NSUInteger riskFactorElevated = ((totalCholesterol >= 200) && (totalCholesterol < 240)) + ((systolicBP >= 140) && (systolicBP < 160) && (hypertension == 0));
-    NSUInteger riskFactorMajor = (totalCholesterol >= 240) + (systolicBP > 160) + ((systolicBP > 160) + hypertension) + diabetes + smoker;
+    NSUInteger riskFactorMajor = (totalCholesterol > 240) + (systolicBP > 160) + ((systolicBP > 160) + hypertension);
     
     NSUInteger personRiskFactorAllOptimal = ((riskFactorAllOptimal == 2) && (riskFactorMajor == 0)) * [self.heartAgeParametersLookup[gender][kLookupLifetimeRiskFactor][kLifetimeRiskFactorOptimal] integerValue];
     
