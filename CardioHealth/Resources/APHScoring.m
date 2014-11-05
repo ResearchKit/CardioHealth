@@ -192,6 +192,10 @@
     
     if (self.current < [self.dataPoints count]) {
         nextPoint = [self.dataPoints objectAtIndex:self.current++];
+    } else {
+        // reset index
+        self.current = 0;
+        nextPoint = [self.dataPoints objectAtIndex:self.current++];
     }
     
     return nextPoint;
