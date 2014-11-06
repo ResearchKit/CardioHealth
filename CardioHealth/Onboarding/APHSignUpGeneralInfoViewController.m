@@ -69,28 +69,29 @@
 //#endif
 }
 
-- (void) prepareFields {
-    NSMutableArray *items = [NSMutableArray new];
-    NSMutableArray *itemsOrder = [NSMutableArray new];
+- (void)prepareFields {
+    
+    [self.items removeAllObjects];
+    NSMutableArray *rowItems = [NSMutableArray new];
     
     {
         APCTableViewTextFieldItem *field = [APCTableViewTextFieldItem new];
-        field.style = UITableViewCellStyleValue1;
         field.caption = NSLocalizedString(@"Email", @"");
         field.placeholder = NSLocalizedString(@"add email", @"");
         field.keyboardType = UIKeyboardTypeEmailAddress;
         field.returnKeyType = UIReturnKeyNext;
         field.clearButtonMode = UITextFieldViewModeWhileEditing;
         field.identifier = kAPCTextFieldTableViewCellIdentifier;
+        field.style = UITableViewCellStyleValue1;
         
-        [items addObject:field];
-        
-        [itemsOrder addObject:@(APCSignUpUserInfoItemEmail)];
+        APCTableViewRow *row = [APCTableViewRow new];
+        row.item = field;
+        row.itemType = kAPCUserInfoItemTypeEmail;
+        [rowItems addObject:row];
     }
     
     {
         APCTableViewTextFieldItem *field = [APCTableViewTextFieldItem new];
-        field.style = UITableViewCellStyleValue1;
         field.caption = NSLocalizedString(@"Password", @"");
         field.placeholder = NSLocalizedString(@"add password", @"");
         field.secure = YES;
@@ -98,19 +99,22 @@
         field.returnKeyType = UIReturnKeyNext;
         field.clearButtonMode = UITextFieldViewModeWhileEditing;
         field.identifier = kAPCTextFieldTableViewCellIdentifier;
+        field.style = UITableViewCellStyleValue1;
         
-        [items addObject:field];
-        
-        [itemsOrder addObject:@(APCSignUpUserInfoItemPassword)];
+        APCTableViewRow *row = [APCTableViewRow new];
+        row.item = field;
+        row.itemType = kAPCUserInfoItemTypePassword;
+        [rowItems addObject:row];
     }
     
     {
         APCTableViewDatePickerItem *field = [APCTableViewDatePickerItem new];
-        field.style = UITableViewCellStyleValue1;
-        field.selectionStyle = UITableViewCellSelectionStyleGray;
         field.caption = NSLocalizedString(@"Birthdate", @"");
         field.placeholder = NSLocalizedString(@"add birthdate", @"");
         field.datePickerMode = UIDatePickerModeDate;
+        field.style = UITableViewCellStyleValue1;
+        field.selectionStyle = UITableViewCellSelectionStyleGray;
+        field.identifier = kAPCDefaultTableViewCellIdentifier;
         
         NSCalendar * gregorian = [[NSCalendar alloc] initWithCalendarIdentifier: NSCalendarIdentifierGregorian];
         NSDate * currentDate = [NSDate date];
@@ -127,31 +131,32 @@
             field.date = maxDate;
         }
         
-        field.identifier = kAPCDefaultTableViewCellIdentifier;
-    
-        [items addObject:field];
-        
-        [itemsOrder addObject:@(APCSignUpUserInfoItemDateOfBirth)];
+        APCTableViewRow *row = [APCTableViewRow new];
+        row.item = field;
+        row.itemType = kAPCUserInfoItemTypeDateOfBirth;
+        [rowItems addObject:row];
     }
     
     {
         APCTableViewSegmentItem *field = [APCTableViewSegmentItem new];
         field.style = UITableViewCellStyleValue1;
         field.segments = [APCUser sexTypesInStringValue];
+        field.identifier = kAPCSegmentedTableViewCellIdentifier;
+        
         if (self.permissionGranted && self.user.biologicalSex) {
             field.selectedIndex = [APCUser stringIndexFromSexType:self.user.biologicalSex];
             field.editable = NO;
         }
-        field.identifier = kAPCSegmentedTableViewCellIdentifier;
         
-        [items addObject:field];
-        
-        [itemsOrder addObject:@(APCSignUpUserInfoItemGender)];
+        APCTableViewRow *row = [APCTableViewRow new];
+        row.item = field;
+        row.itemType = kAPCUserInfoItemTypeBiologicalSex;
+        [rowItems addObject:row];
     }
     
-    
-    self.items = items;
-    self.itemsOrder = itemsOrder;
+    APCTableViewSection *section = [APCTableViewSection new];
+    section.rows = [NSArray arrayWithArray:rowItems];
+    [self.items addObject:section];
 }
 
 #pragma mark - UITextFieldDelegate methods
@@ -208,18 +213,20 @@
     
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     
-    APCTableViewTextFieldItem *item = self.items[indexPath.row];
-    if ([self.itemsOrder[indexPath.row] integerValue] == APCSignUpUserInfoItemPassword) {
-        if ([[(APCTableViewTextFieldItem *)item value] length] == 0) {
-            UIAlertController *alert = [UIAlertController simpleAlertWithTitle:NSLocalizedString(@"General Information", @"") message:@"Please give a valid Password"];
+    APCTableViewTextFieldItem *item = (APCTableViewTextFieldItem *)[self itemForIndexPath:indexPath];
+    APCTableViewItemType itemType = [self itemTypeForIndexPath:indexPath];
+    
+    if (itemType == kAPCUserInfoItemTypePassword) {
+        if (item.value.length == 0) {
+            UIAlertController *alert = [UIAlertController simpleAlertWithTitle:NSLocalizedString(@"General Information", @"") message:NSLocalizedString(@"Please give a valid Password", nil)];
             [self presentViewController:alert animated:YES completion:nil];
         }
-        else if ([[(APCTableViewTextFieldItem *)item value] length] < 6) {
-            UIAlertController *alert = [UIAlertController simpleAlertWithTitle:NSLocalizedString(@"General Information", @"") message:@"Password should be at least 6 characters"];
+        else if (item.value.length < kAPCPasswordMinimumLength) {
+            UIAlertController *alert = [UIAlertController simpleAlertWithTitle:NSLocalizedString(@"General Information", @"") message:[NSString stringWithFormat:NSLocalizedString(@"Password should be at least %d characters", ), kAPCPasswordMinimumLength]];
             [self presentViewController:alert animated:YES completion:nil];
         }
     }
-    else if ([self.itemsOrder[indexPath.row] integerValue] == APCSignUpUserInfoItemEmail) {
+    else if (itemType == kAPCUserInfoItemTypeEmail) {
         if (![item.value isValidForRegex:kAPCGeneralInfoItemEmailRegEx]) {
             UIAlertController *alert = [UIAlertController simpleAlertWithTitle:NSLocalizedString(@"General Information", @"") message:@"Please give a valid email address"];
             [self presentViewController:alert animated:YES completion:nil];
@@ -232,9 +239,9 @@
 
 #pragma mark - APCSegmentedTableViewCellDelegate methods
 
-- (void)segmentedTableViewcell:(APCSegmentedTableViewCell *)cell didSelectSegmentAtIndex:(NSInteger)index
+- (void)segmentedTableViewCell:(APCSegmentedTableViewCell *)cell didSelectSegmentAtIndex:(NSInteger)index
 {
-    [super segmentedTableViewcell:cell didSelectSegmentAtIndex:index];
+    [super segmentedTableViewCell:cell didSelectSegmentAtIndex:index];
 }
 
 #pragma mark - Private Methods
@@ -245,57 +252,64 @@
 
     if (isContentValid) {
         
-        for (int i = 0; i < self.itemsOrder.count; i++) {
-            NSNumber *order = self.itemsOrder[i];
+        for (int j=0; j<self.items.count; j++) {
             
-            APCTableViewItem *item = self.items[i];
+            APCTableViewSection *section = self.items[j];
             
-            switch (order.integerValue) {
-                    
-                case APCSignUpUserInfoItemUserName:
-                    isContentValid = [[(APCTableViewTextFieldItem *)item value] isValidForRegex:kAPCGeneralInfoItemUserNameRegEx];
-                    if (errorMessage) {
-                        *errorMessage = NSLocalizedString(@"Please enter valid Username.", @"");
-                    }
-                    break;
-                    
-                case APCSignUpUserInfoItemPassword:
-                    if ([[(APCTableViewTextFieldItem *)item value] length] == 0) {
-                        isContentValid = NO;
+            for (int i = 0; i < section.rows.count; i++) {
+                
+                APCTableViewRow *row = section.rows[i];
+                
+                APCTableViewItem *item = row.item;
+                APCTableViewItemType itemType = row.itemType;
+                
+                switch (itemType) {
+                        
+                    case kAPCUserInfoItemTypeEmail:
+                    {
+                        isContentValid = [[(APCTableViewTextFieldItem *)item value] isValidForRegex:kAPCGeneralInfoItemEmailRegEx];
                         
                         if (errorMessage) {
-                            *errorMessage = NSLocalizedString(@"Please enter a Password.", @"");
+                            *errorMessage = NSLocalizedString(@"Please enter a valid email address.", @"");
                         }
                     }
-                    else if ([[(APCTableViewTextFieldItem *)item value] length] < 2) {
-                        isContentValid = NO;
+                        break;
                         
-                        if (errorMessage) {
-                            *errorMessage = NSLocalizedString(@"Password should be at least 2 characters.", @"");
+                    case kAPCUserInfoItemTypePassword:
+                    {
+                        if ([[(APCTableViewTextFieldItem *)item value] length] == 0) {
+                            isContentValid = NO;
+                            
+                            if (errorMessage) {
+                                *errorMessage = NSLocalizedString(@"Please enter a Password.", @"");
+                            }
+                        }
+                        else if ([[(APCTableViewTextFieldItem *)item value] length] < kAPCPasswordMinimumLength) {
+                            isContentValid = NO;
+                            
+                            if (errorMessage) {
+                                *errorMessage = [NSString stringWithFormat:NSLocalizedString(@"Password should be at least %d characters", ), kAPCPasswordMinimumLength];
+                            }
                         }
                     }
-                    break;
+                        break;
+                        
                     
-                case APCSignUpUserInfoItemEmail:
-                    isContentValid = [[(APCTableViewTextFieldItem *)item value] isValidForRegex:kAPCGeneralInfoItemEmailRegEx];
-                    
-                    if (errorMessage) {
-                        *errorMessage = NSLocalizedString(@"Please enter a valid email address.", @"");
-                    }
+                        
+                    default:
+                        //#warning ASSERT_MESSAGE Require
+                        NSAssert(itemType <= kAPCUserInfoItemTypeWakeUpTime, @"ASSER_MESSAGE");
+                        break;
+                }
+                
+                // If any of the content is not valid the break the for loop
+                // We doing this 'break' here because we cannot break a for loop inside switch-statements (switch already have break statement)
+                if (!isContentValid) {
                     break;
-                    
-                default:
-//#warning ASSERT_MESSAGE Require
-                    NSAssert(order.integerValue <= APCSignUpUserInfoItemWakeUpTime, @"ASSER_MESSAGE");
-                    break;
-            }
-            
-            // If any of the content is not valid the break the for loop
-            // We doing this 'break' here because we cannot break a for loop inside switch-statements (switch already have break statement)
-            if (!isContentValid) {
-                break;
+                }
             }
         }
+        
     }
     
     if (isContentValid) {
@@ -316,32 +330,42 @@
         }
     }
     
-    for (int i = 0; i < self.itemsOrder.count; i++) {
-        NSNumber *order = self.itemsOrder[i];
+    
+    for (int j=0; j<self.items.count; j++) {
         
-        APCTableViewItem *item = self.items[i];
+        APCTableViewSection *section = self.items[j];
         
-        switch (order.integerValue) {
-                
-            case APCSignUpUserInfoItemPassword:
-                self.user.password = [(APCTableViewTextFieldItem *)item value];
-                break;
-                
-            case APCSignUpUserInfoItemEmail:
-                self.user.email = [(APCTableViewTextFieldItem *)item value];
-                break;
-            case APCSignUpUserInfoItemGender:{
-                self.user.biologicalSex = [APCUser sexTypeForIndex:((APCTableViewSegmentItem *)item).selectedIndex];
+        for (int i = 0; i < section.rows.count; i++) {
+            
+            APCTableViewRow *row = section.rows[i];
+            
+            APCTableViewItem *item = row.item;
+            APCTableViewItemType itemType = row.itemType;
+            
+            switch (itemType) {
+                    
+                case kAPCUserInfoItemTypePassword:
+                    self.user.password = [(APCTableViewTextFieldItem *)item value];
+                    break;
+                    
+                case kAPCUserInfoItemTypeEmail:
+                    self.user.email = [(APCTableViewTextFieldItem *)item value];
+                    break;
+                    
+                case kAPCUserInfoItemTypeBiologicalSex:{
+                    self.user.biologicalSex = [APCUser sexTypeForIndex:((APCTableViewSegmentItem *)item).selectedIndex];
+                }
+                    break;
+                    
+                default:
+                {
+                    //Do nothing for some types as they are readonly attributes
+                }
+                    break;
             }
-                break;
-                
-            default:
-            {
-                //Do nothing for some types as they are readonly attributes
-            }
-                break;
         }
     }
+    
 }
 
 - (void) validateContent {
@@ -409,28 +433,36 @@
     
     NSUInteger randomInteger = arc4random();
     
-    for (int i = 0; i < self.itemsOrder.count; i++) {
-        NSNumber *order = self.itemsOrder[i];
+    for (int j=0; j<self.items.count; j++) {
         
-        APCTableViewTextFieldItem *item = self.items[i];
+        APCTableViewSection *section = self.items[j];
         
-        switch (order.integerValue) {
-            case APCSignUpUserInfoItemPassword:
-                item.value = @"Password123";
-                break;
-                
-            case APCSignUpUserInfoItemEmail:
-                item.value = [NSString stringWithFormat:@"dhanush.balachandran+%@@ymedialabs.com", @(randomInteger)];
-                break;
-                
-            default:
-            {
-                //Do nothing for some types
+        for (int i = 0; i < section.rows.count; i++) {
+            
+            APCTableViewRow *row = section.rows[i];
+            
+            APCTableViewTextFieldItem *item = (APCTableViewTextFieldItem *)row.item;
+            APCTableViewItemType itemType = row.itemType;
+            
+            switch (itemType) {
+                case kAPCUserInfoItemTypePassword:
+                    item.value = @"Password123";
+                    break;
+                    
+                case kAPCUserInfoItemTypeEmail:
+                    item.value = [NSString stringWithFormat:@"dhanush.balachandran+%@@ymedialabs.com", @(randomInteger)];
+                    break;
+                    
+                default:
+                {
+                    //Do nothing for some types
+                }
+                    break;
             }
-                break;
         }
-        [self.tableView reloadData];
     }
+    
+    [self.tableView reloadData];
     
     [self.permissionButton setSelected:YES];
     

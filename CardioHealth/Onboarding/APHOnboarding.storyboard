@@ -962,7 +962,7 @@
                                     <constraints>
                                         <constraint firstItem="vgy-lQ-aY8" firstAttribute="leading" secondItem="fNH-lN-iEe" secondAttribute="trailing" constant="12" id="K5X-WA-cVf"/>
                                         <constraint firstItem="fNH-lN-iEe" firstAttribute="leading" secondItem="QU2-2E-RfX" secondAttribute="leadingMargin" constant="12" id="Pc1-WL-6KE"/>
-                                        <constraint firstAttribute="centerY" secondItem="fNH-lN-iEe" secondAttribute="centerY" constant="0.5" id="YSO-ZK-Avt"/>
+                                        <constraint firstAttribute="centerY" secondItem="fNH-lN-iEe" secondAttribute="centerY" id="YSO-ZK-Avt"/>
                                         <constraint firstAttribute="centerY" secondItem="vgy-lQ-aY8" secondAttribute="centerY" constant="-1" id="o4E-xL-sVL"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="vgy-lQ-aY8" secondAttribute="trailing" constant="6" id="r8F-ef-ZcK"/>
                                     </constraints>
@@ -1020,26 +1020,26 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d2d-84-jZf">
-                                            <rect key="frame" x="0.0" y="1" width="106" height="64"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d2d-84-jZf">
+                                            <rect key="frame" x="0.0" y="1" width="107" height="63"/>
                                             <state key="normal" title="Male">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F1e-g2-3Q7">
-                                            <rect key="frame" x="107" y="1" width="106" height="64"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F1e-g2-3Q7">
+                                            <rect key="frame" x="106" y="1" width="106" height="63"/>
                                             <state key="normal" title="Female">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jBa-NA-XPd">
-                                            <rect key="frame" x="214" y="1" width="106" height="64"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jBa-NA-XPd">
+                                            <rect key="frame" x="213" y="1" width="107" height="63"/>
                                             <state key="normal" title="Other">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                         </button>
-                                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wwd-KK-BNy">
-                                            <rect key="frame" x="106" y="0.0" width="1" height="65"/>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wwd-KK-BNy">
+                                            <rect key="frame" x="108" y="0.0" width="1" height="65"/>
                                             <color key="backgroundColor" red="0.92549019610000005" green="0.92549019610000005" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="1" id="EWW-dF-rqO"/>
