@@ -202,6 +202,13 @@ static  CGFloat  kAPCStepProgressBarHeight = 8.0;
 - (void)taskViewController:(RKTaskViewController *)taskViewController
 willPresentStepViewController:(RKStepViewController *)stepViewController{
     
+    if (stepViewController.step.identifier == kFitnessTestStep104) {
+        
+        if (!self.heartRateIsUpdating) {
+            [stepViewController goToNextStep];
+        }
+    }
+    
     taskViewController.navigationBar.topItem.title = NSLocalizedString(@"6 Minute Walk", @"6 Minute Walk");
     
     stepViewController = (RKStepViewController *) stepViewController;
