@@ -57,6 +57,8 @@ static  CGFloat  kAPCStepProgressBarHeight = 8.0;
     self.progressor.progressTintColor = [UIColor appTertiaryColor1];
     [self.navigationBar addSubview:tempProgressor];
     self.progressor = tempProgressor;
+    
+    self.showsProgressInNavigationBar = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -195,6 +197,8 @@ static  CGFloat  kAPCStepProgressBarHeight = 8.0;
 - (void)taskViewController:(RKTaskViewController *)taskViewController
 willPresentStepViewController:(RKStepViewController *)stepViewController{
     
+    taskViewController.navigationBar.topItem.title = NSLocalizedString(@"6 Minute Walk", @"6 Minute Walk");
+    
     stepViewController = (RKStepViewController *) stepViewController;
     
     if ([stepViewController.step.identifier isEqualToString:@""]) {
@@ -246,6 +250,8 @@ willPresentStepViewController:(RKStepViewController *)stepViewController{
     }else if ([stepViewController.step.identifier isEqualToString:kFitnessTestStep106]) {
         
         stepViewController.continueButton = [[UIBarButtonItem alloc] initWithTitle:@"Well done!" style:stepViewController.continueButton.style target:stepViewController.continueButton.target action:stepViewController.continueButton.action];
+        
+        taskViewController.navigationBar.topItem.title = NSLocalizedString(@"Task Complete", @"Task Complete");
         
     }
 }
