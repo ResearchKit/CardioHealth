@@ -33,6 +33,9 @@ static  CGFloat  kAPCStepProgressBarHeight = 8.0;
 
 @property (strong, nonatomic) RKDataArchive *taskArchive;
 
+@property (assign) NSInteger heartRateMonitoring;
+@property (assign) BOOL heartRateIsUpdating;
+
 @end
 
 @implementation APHFitnessTaskViewController
@@ -74,6 +77,8 @@ static  CGFloat  kAPCStepProgressBarHeight = 8.0;
     self.distanceTracker = [[APHFitnessTestDistanceTracker alloc] init];
     [self.distanceTracker setDelegate:self];
     [self.distanceTracker prepLocationUpdates];
+    
+    self.heartRateMonitoring = 0;
     
     [self beginTask];
 }
@@ -400,6 +405,14 @@ willPresentStepViewController:(RKStepViewController *)stepViewController{
 /*********************************************************************************/
 
 - (void)fitnessTestHealthKitSampleTypeTracker:(APHFitnessTestHealthKitSampleTypeTracker *)heartRateTracker didUpdateHeartRate:(NSInteger)heartBPM {
+    
+    if (self.heartRateMonitoring == 1) {
+        
+        self.heartRateIsUpdating = YES;
+    }
+    
+    self.heartRateMonitoring = 1;
+    
     
     NSDictionary* heartBPMDictionary = @{@"heartBPM": [NSNumber numberWithInteger:heartBPM],
                                  @"time": @([[NSDate date] timeIntervalSinceReferenceDate])};
