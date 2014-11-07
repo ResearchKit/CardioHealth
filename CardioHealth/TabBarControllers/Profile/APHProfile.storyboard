@@ -46,7 +46,7 @@
                                         <constraint firstAttribute="height" constant="1" id="efr-Pm-dXj"/>
                                     </constraints>
                                 </view>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Johnny" placeholder="Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="syY-uL-lu7">
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Johnny" placeholder="First Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="syY-uL-lu7">
                                     <rect key="frame" x="110" y="17" width="202" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="30" id="c3q-nt-vZK"/>
@@ -64,7 +64,7 @@
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Appleseed" placeholder="Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="K3a-vc-OyO">
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Appleseed" placeholder="Last Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="K3a-vc-OyO">
                                     <rect key="frame" x="110" y="80" width="202" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="30" id="1gu-Oi-YQd"/>
@@ -395,6 +395,42 @@
                             </constraints>
                         </view>
                         <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="APCPickerTableViewCell" rowHeight="164" id="z2L-f3-rZV" customClass="APCPickerTableViewCell">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="164"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="z2L-f3-rZV" id="v8X-zI-YH5">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="LzO-ib-bFl">
+                                            <rect key="frame" x="0.0" y="1" width="320" height="162"/>
+                                            <date key="date" timeIntervalSinceReferenceDate="434936841.48193699">
+                                                <!--2014-10-13 23:47:21 +0000-->
+                                            </date>
+                                            <connections>
+                                                <action selector="dateChanged:" destination="z2L-f3-rZV" eventType="valueChanged" id="3pq-BX-1zs"/>
+                                            </connections>
+                                        </datePicker>
+                                        <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0ql-gq-kjf">
+                                            <rect key="frame" x="0.0" y="1" width="320" height="162"/>
+                                        </pickerView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailingMargin" secondItem="LzO-ib-bFl" secondAttribute="trailing" constant="-8" id="3uT-OY-lzy"/>
+                                        <constraint firstItem="LzO-ib-bFl" firstAttribute="leading" secondItem="v8X-zI-YH5" secondAttribute="leadingMargin" constant="-8" id="Cfo-LN-POM"/>
+                                        <constraint firstItem="0ql-gq-kjf" firstAttribute="leading" secondItem="v8X-zI-YH5" secondAttribute="leadingMargin" constant="-8" id="O7L-Bz-AzQ"/>
+                                        <constraint firstItem="LzO-ib-bFl" firstAttribute="top" secondItem="v8X-zI-YH5" secondAttribute="topMargin" constant="-7" id="Pnj-L6-odY"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="0ql-gq-kjf" secondAttribute="trailing" constant="-8" id="ecc-jO-Hqf"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="0ql-gq-kjf" secondAttribute="bottom" constant="-8" id="fyE-za-YQC"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="LzO-ib-bFl" secondAttribute="bottom" constant="-8" id="imw-2K-hQ8"/>
+                                        <constraint firstItem="0ql-gq-kjf" firstAttribute="top" secondItem="v8X-zI-YH5" secondAttribute="topMargin" constant="-7" id="nV7-Ly-kCg"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="datePicker" destination="LzO-ib-bFl" id="NjT-YK-GuV"/>
+                                    <outlet property="pickerView" destination="0ql-gq-kjf" id="6SI-YG-U7w"/>
+                                </connections>
+                            </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="APCSwitchTableViewCell" id="OWG-SV-jq1" customClass="APCSwitchTableViewCell">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OWG-SV-jq1" id="D93-IR-SNg">
@@ -405,7 +441,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="Y0d-iP-VW2"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -429,22 +465,36 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="cellSwich" destination="UiM-L1-3KN" id="kBK-RW-0w1"/>
+                                    <outlet property="cellSwitch" destination="UiM-L1-3KN" id="eZN-NJ-VYV"/>
                                     <outlet property="textLabel" destination="G45-qf-RUK" id="vyK-sq-1DX"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="APCRightDetailCellIdentifier" textLabel="oP3-E7-zmm" detailTextLabel="fqe-Z5-fyp" style="IBUITableViewCellStyleValue1" id="7cM-eE-o2z">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="APCBasicTableViewCell" textLabel="jve-v1-6D3" style="IBUITableViewCellStyleDefault" id="UHg-2R-az4">
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7cM-eE-o2z" id="FFn-te-nmO">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UHg-2R-az4" id="WIL-Wa-2hR">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Auto Lock" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="oP3-E7-zmm">
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jve-v1-6D3">
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fqe-Z5-fyp">
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="APCRightDetailTableViewCell" textLabel="Wcv-vX-oDL" detailTextLabel="YlF-cO-IAJ" style="IBUITableViewCellStyleValue1" id="wIk-uw-sxC">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wIk-uw-sxC" id="wds-Mz-Uy8">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Wcv-vX-oDL">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YlF-cO-IAJ">
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
@@ -453,19 +503,44 @@
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="APCBasicCellIdentifier" textLabel="ItM-fZ-ztd" style="IBUITableViewCellStyleDefault" id="KDs-4h-GSf">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="APCDefaultTableViewCell" id="XIo-FJ-MDD" customClass="APCDefaultTableViewCell">
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KDs-4h-GSf" id="LVl-HG-7TL">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XIo-FJ-MDD" id="sFo-vF-Ncb">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Change Passcode" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ItM-fZ-ztd">
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="2Ge-63-FrC">
+                                            <rect key="frame" x="20" y="21" width="100" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="100" id="apg-gQ-OQZ"/>
+                                                <constraint firstAttribute="height" constant="21" id="oX9-PR-J0a"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="e8n-dt-pWC">
+                                            <rect key="frame" x="132" y="23" width="174" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="xXx-Fp-0Rc"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="centerY" secondItem="2Ge-63-FrC" secondAttribute="centerY" constant="0.5" id="BwD-BW-sQT"/>
+                                        <constraint firstAttribute="centerY" secondItem="e8n-dt-pWC" secondAttribute="centerY" constant="-1" id="MmK-k7-val"/>
+                                        <constraint firstItem="e8n-dt-pWC" firstAttribute="leading" secondItem="2Ge-63-FrC" secondAttribute="trailing" constant="12" id="czb-eU-pvG"/>
+                                        <constraint firstItem="2Ge-63-FrC" firstAttribute="leading" secondItem="sFo-vF-Ncb" secondAttribute="leadingMargin" constant="12" id="sRh-1x-c41"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="e8n-dt-pWC" secondAttribute="trailing" constant="6" id="vQC-Fv-jJZ"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="detailTextLabel" destination="e8n-dt-pWC" id="Txp-zG-jP6"/>
+                                    <outlet property="textLabel" destination="2Ge-63-FrC" id="QnD-nV-4m6"/>
+                                    <outlet property="textLabelWidthConstraint" destination="apg-gQ-OQZ" id="VhR-lw-eYQ"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <sections/>
