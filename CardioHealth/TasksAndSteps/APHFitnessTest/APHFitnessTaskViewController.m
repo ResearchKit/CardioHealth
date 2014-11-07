@@ -73,12 +73,13 @@ static  CGFloat  kAPCStepProgressBarHeight = 8.0;
     self.healthKitSampleTracker = [[APHFitnessTestHealthKitSampleTypeTracker alloc] init];
     [self.healthKitSampleTracker setDelegate:self];
     [self.healthKitSampleTracker startUpdating];
-    
+
     self.distanceTracker = [[APHFitnessTestDistanceTracker alloc] init];
     [self.distanceTracker setDelegate:self];
     [self.distanceTracker prepLocationUpdates];
     
     self.heartRateMonitoring = 0;
+    self.heartRateIsUpdating = NO;
     
     [self beginTask];
 }
@@ -92,6 +93,8 @@ static  CGFloat  kAPCStepProgressBarHeight = 8.0;
 {
     APCAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     APCParameters *parameters = appDelegate.dataSubstrate.parameters;
+    
+    
     
     NSMutableArray *steps = [[NSMutableArray alloc] init];
 
@@ -199,12 +202,15 @@ static  CGFloat  kAPCStepProgressBarHeight = 8.0;
 /*********************************************************************************/
 #pragma  mark  - TaskViewController delegates
 /*********************************************************************************/
-- (void)taskViewController:(RKTaskViewController *)taskViewController
-willPresentStepViewController:(RKStepViewController *)stepViewController{
+- (void)taskViewController:(RKTaskViewController *)taskViewController willPresentStepViewController:(RKStepViewController *)stepViewController{
     
+    //If we're not capturing any heart rate data then skip
     if (stepViewController.step.identifier == kFitnessTestStep104) {
         
         if (!self.heartRateIsUpdating) {
+            RKActiveStep *theStep = (RKActiveStep *)stepViewController.step;
+            
+            theStep.voicePrompt = nil;
             [stepViewController goToNextStep];
         }
     }
@@ -229,11 +235,6 @@ willPresentStepViewController:(RKStepViewController *)stepViewController{
         [customView addConstraints:verticalConstraints];
         
         [(RKActiveStepViewController*)stepViewController setCustomView:customView];
-        
-        
-        stepViewController.learnMoreButton =[[UIBarButtonItem alloc] initWithTitle:@"View Important Details" style:stepViewController.continueButton.style target:self action:@selector(importantDetails:)];
-        
-        
         
         stepViewController.continueButton = [[UIBarButtonItem alloc] initWithTitle:@"Get Started" style:stepViewController.continueButton.style target:stepViewController.continueButton.target action:stepViewController.continueButton.action];
         

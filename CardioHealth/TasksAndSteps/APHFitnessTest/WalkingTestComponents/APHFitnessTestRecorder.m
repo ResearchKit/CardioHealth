@@ -59,10 +59,6 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
                                                      name:@"APHFitnessDistanceUpdated"
                                                    object:nil];
         
-/*********************************************************************************/
-#pragma mark functioning code
-/*********************************************************************************/
-        
         UINib *nib = [UINib nibWithNibName:@"APHFitnessSixMinuteFitnessTestView" bundle:nil];
         APHFitnessSixMinuteFitnessTestView *updatedView = [[nib instantiateWithOwner:self options:nil] objectAtIndex:0];
         [updatedView setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -78,7 +74,7 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
         
         NSDictionary *viewsDictionary = @{@"c": updatedView, @"container" : stepViewController.customView };
         
-        NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[c(>=160)]" options:0 metrics:nil views:@{@"c":updatedView}];
+        NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[c(>=200)]" options:0 metrics:nil views:@{@"c":updatedView}];
         
         for (NSLayoutConstraint *constraint in verticalConstraints) {
             constraint.priority = UILayoutPriorityFittingSizeLevel;
