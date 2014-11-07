@@ -33,7 +33,7 @@
     [super viewDidLoad];
 
     [self setupNavigationItems];
-    [self prepareFields];
+    [self prepareFields]; 
     
     self.permissionButton.unconfirmedTitle = NSLocalizedString(@"I agree to the Terms and Conditions", @"");
     self.permissionButton.confirmedTitle = NSLocalizedString(@"I agree to the Terms and Conditions", @"");
