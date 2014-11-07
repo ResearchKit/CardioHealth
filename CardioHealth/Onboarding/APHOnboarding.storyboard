@@ -36,17 +36,6 @@
                                                         <constraint firstAttribute="height" constant="109" id="ahX-26-0zm"/>
                                                     </constraints>
                                                 </view>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R3W-BT-qwl" customClass="APCImageButton">
-                                                    <rect key="frame" x="182" y="62" width="130" height="109"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="130" id="8I6-7V-9mm"/>
-                                                        <constraint firstAttribute="height" constant="109" id="Ovp-MO-2lH"/>
-                                                    </constraints>
-                                                    <state key="normal" title="Caregiver" image="eligibility_doctor_inactive">
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <state key="selected" image="eligibility_doctor"/>
-                                                </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I am a..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nk3-3G-4UX">
                                                     <rect key="frame" x="130" y="14" width="61" height="20"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
@@ -71,17 +60,21 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
                                                     <color key="backgroundColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 </view>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eVQ-MT-J03" customClass="APCImageButton">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eVQ-MT-J03" customClass="APCImageButton">
                                                     <rect key="frame" x="8" y="63" width="130" height="110"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="130" id="ncX-vC-9Lb"/>
                                                         <constraint firstAttribute="height" constant="110" id="yD6-hA-iVz"/>
                                                     </constraints>
-                                                    <state key="normal" title="Patient" image="eligibility_patient_inactive">
-                                                        <color key="titleColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <state key="selected" image="eligibility_patient"/>
+                                                    <state key="normal" title="Patient" image="eligibility_patient"/>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R3W-BT-qwl" customClass="APCImageButton">
+                                                    <rect key="frame" x="182" y="62" width="130" height="109"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="130" id="8I6-7V-9mm"/>
+                                                        <constraint firstAttribute="height" constant="109" id="Ovp-MO-2lH"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Caregiver" image="eligibility_doctor"/>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -115,14 +108,12 @@
                                                         <constraint firstAttribute="height" constant="109" id="tXj-tk-dT5"/>
                                                     </constraints>
                                                 </view>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K6H-qX-QHt">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K6H-qX-QHt">
                                                     <rect key="frame" x="32" y="72" width="120" height="108"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="108" id="sTo-Pu-vUP"/>
                                                     </constraints>
-                                                    <state key="normal" title="Yes">
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
+                                                    <state key="normal" title="Yes"/>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Are you over 18?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ast-lw-g4Y">
                                                     <rect key="frame" x="8" y="17" width="304" height="20"/>
@@ -130,14 +121,12 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dEJ-vR-V6G">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dEJ-vR-V6G">
                                                     <rect key="frame" x="175" y="73" width="120" height="108"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="120" id="fb8-T7-Qfb"/>
                                                     </constraints>
-                                                    <state key="normal" title="No">
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
+                                                    <state key="normal" title="No"/>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -1020,23 +1009,17 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d2d-84-jZf">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d2d-84-jZf">
                                             <rect key="frame" x="0.0" y="1" width="107" height="63"/>
-                                            <state key="normal" title="Male">
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
+                                            <state key="normal" title="Male"/>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F1e-g2-3Q7">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F1e-g2-3Q7">
                                             <rect key="frame" x="106" y="1" width="106" height="63"/>
-                                            <state key="normal" title="Female">
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
+                                            <state key="normal" title="Female"/>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jBa-NA-XPd">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jBa-NA-XPd">
                                             <rect key="frame" x="213" y="1" width="107" height="63"/>
-                                            <state key="normal" title="Other">
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
+                                            <state key="normal" title="Other"/>
                                         </button>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wwd-KK-BNy">
                                             <rect key="frame" x="108" y="0.0" width="1" height="65"/>
@@ -1743,9 +1726,7 @@
     </scenes>
     <resources>
         <image name="eligibility_doctor" width="133" height="168"/>
-        <image name="eligibility_doctor_inactive" width="133" height="168"/>
         <image name="eligibility_patient" width="220" height="104"/>
-        <image name="eligibility_patient_inactive" width="220" height="104"/>
         <image name="logo_disease" width="102" height="86"/>
         <image name="logo_researchInstitute" width="284" height="55"/>
         <image name="profilePlaceholder" width="150" height="150"/>
