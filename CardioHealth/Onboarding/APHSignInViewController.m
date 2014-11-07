@@ -16,14 +16,7 @@
 
 - (void) viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
-    self.userHandleTextField.font = [UITableView textFieldFont];
-    self.userHandleTextField.textColor = [UITableView textFieldTextColor];
-    
-    self.passwordTextField.font = [UITableView textFieldFont];
-    self.passwordTextField.textColor = [UITableView textFieldTextColor];
-    
+    // Do any additional setup after loading the view.    
 }
 
 - (void)didReceiveMemoryWarning {
