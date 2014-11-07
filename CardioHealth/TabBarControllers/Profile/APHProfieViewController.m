@@ -40,8 +40,8 @@
 
 - (void)prepareFields
 {
-    self.items = [NSMutableArray new];
-    self.itemsOrder = [NSMutableArray new];
+    [self.items removeAllObjects];
+    NSMutableArray *rowItems = [NSMutableArray new];
     
     {
         APCTableViewItem *field = [APCTableViewItem new];
@@ -50,8 +50,11 @@
         field.editable = NO;
         field.textAlignnment = NSTextAlignmentLeft;
         field.detailText = self.user.email;
-        [self.items addObject:field];
-        [self.itemsOrder addObject:@(APCSignUpUserInfoItemEmail)];
+        
+        APCTableViewRow *row = [APCTableViewRow new];
+        row.item = field;
+        row.itemType = kAPCUserInfoItemTypeEmail;
+        [rowItems addObject:row];
     }
     
     {
@@ -61,8 +64,11 @@
         field.editable = NO;
         field.textAlignnment = NSTextAlignmentRight;
         field.detailText = [self.user.birthDate toStringWithFormat:NSDateDefaultDateFormat];
-        [self.items addObject:field];
-        [self.itemsOrder addObject:@(APCSignUpUserInfoItemDateOfBirth)];
+        
+        APCTableViewRow *row = [APCTableViewRow new];
+        row.item = field;
+        row.itemType = kAPCUserInfoItemTypeDateOfBirth;
+        [rowItems addObject:row];
     }
     
     {
@@ -72,8 +78,11 @@
         field.editable = NO;
         field.textAlignnment = NSTextAlignmentRight;
         field.detailText = [APCUser stringValueFromSexType:self.user.biologicalSex];
-        [self.items addObject:field];
-        [self.itemsOrder addObject:@(APCSignUpUserInfoItemGender)];
+        
+        APCTableViewRow *row = [APCTableViewRow new];
+        row.item = field;
+        row.itemType = kAPCUserInfoItemTypeBiologicalSex;
+        [rowItems addObject:row];
     }
     
     {
@@ -90,8 +99,10 @@
             field.selectedRowIndices = @[ @(0) ];
         }
         
-        [self.items addObject:field];
-        [self.itemsOrder addObject:@(APCSignUpUserInfoItemMedicalCondition)];
+        APCTableViewRow *row = [APCTableViewRow new];
+        row.item = field;
+        row.itemType = kAPCUserInfoItemTypeMedicalCondition;
+        [rowItems addObject:row];
     }
     
     {
@@ -108,8 +119,10 @@
             field.selectedRowIndices = @[ @(0) ];
         }
         
-        [self.items addObject:field];
-        [self.itemsOrder addObject:@(APCSignUpUserInfoItemMedication)];
+        APCTableViewRow *row = [APCTableViewRow new];
+        row.item = field;
+        row.itemType = kAPCUserInfoItemTypeMedication;
+        [rowItems addObject:row];
     }
     
     {
@@ -130,8 +143,10 @@
             field.selectedRowIndices = @[ @(2), @(5) ];
         }
         
-        [self.items addObject:field];
-        [self.itemsOrder addObject:@(APCSignUpUserInfoItemHeight)];
+        APCTableViewRow *row = [APCTableViewRow new];
+        row.item = field;
+        row.itemType = kAPCUserInfoItemTypeHeight;
+        [rowItems addObject:row];
     }
     
     {
@@ -146,8 +161,10 @@
         field.textAlignnment = NSTextAlignmentRight;
         field.identifier = kAPCTextFieldTableViewCellIdentifier;
         
-        [self.items addObject:field];
-        [self.itemsOrder addObject:@(APCSignUpUserInfoItemWeight)];
+        APCTableViewRow *row = [APCTableViewRow new];
+        row.item = field;
+        row.itemType = kAPCUserInfoItemTypeWeight;
+        [rowItems addObject:row];
     }
     
     {
@@ -167,8 +184,10 @@
             field.detailText = [field.date toStringWithFormat:kAPCMedicalInfoItemSleepTimeFormat];
         }
         
-        [self.items addObject:field];
-        [self.itemsOrder addObject:@(APCSignUpUserInfoItemWakeUpTime)];
+        APCTableViewRow *row = [APCTableViewRow new];
+        row.item = field;
+        row.itemType = kAPCUserInfoItemTypeWakeUpTime;
+        [rowItems addObject:row];
     }
     
     {
@@ -188,10 +207,15 @@
             field.detailText = [field.date toStringWithFormat:kAPCMedicalInfoItemSleepTimeFormat];
         }
         
-        [self.items addObject:field];
-        [self.itemsOrder addObject:@(APCSignUpUserInfoItemSleepTime)];
+        APCTableViewRow *row = [APCTableViewRow new];
+        row.item = field;
+        row.itemType = kAPCUserInfoItemTypeSleepTime;
+        [rowItems addObject:row];
     }
     
+    APCTableViewSection *section = [APCTableViewSection new];
+    section.rows = [NSArray arrayWithArray:rowItems];
+    [self.items addObject:section];
 }
 
 #pragma mark - Overriden Methods
@@ -205,55 +229,64 @@
         self.user.profileImage = UIImageJPEGRepresentation(self.profileImage, 1.0);
     }
     
-    for (int i = 0; i < self.itemsOrder.count; i++) {
-        NSNumber *order = self.itemsOrder[i];
+    for (int j=0; j<self.items.count; j++) {
         
-        APCTableViewItem *item = self.items[i];
+        APCTableViewSection *section = self.items[j];
         
-        switch (order.integerValue) {
-            case APCSignUpUserInfoItemMedicalCondition:
-                self.user.medicalConditions = [(APCTableViewCustomPickerItem *)item stringValue];
-                break;
-                
-            case APCSignUpUserInfoItemMedication:
-                self.user.medications = [(APCTableViewCustomPickerItem *)item stringValue];
-                break;
-                
-            case APCSignUpUserInfoItemHeight:
-            {
-                double height = [APCUser heightInInchesForSelectedIndices:[(APCTableViewCustomPickerItem *)item selectedRowIndices]];
-                HKUnit *inchUnit = [HKUnit inchUnit];
-                HKQuantity *heightQuantity = [HKQuantity quantityWithUnit:inchUnit doubleValue:height];
-                
-                self.user.height = heightQuantity;
+        for (int i = 0; i < section.rows.count; i++) {
+            
+            APCTableViewRow *row = section.rows[i];
+            
+            APCTableViewItem *item = row.item;
+            APCTableViewItemType itemType = row.itemType;
+            
+            switch (itemType) {
+                case kAPCUserInfoItemTypeMedicalCondition:
+                    self.user.medicalConditions = [(APCTableViewCustomPickerItem *)item stringValue];
+                    break;
+                    
+                case kAPCUserInfoItemTypeMedication:
+                    self.user.medications = [(APCTableViewCustomPickerItem *)item stringValue];
+                    break;
+                    
+                case kAPCUserInfoItemTypeHeight:
+                {
+                    double height = [APCUser heightInInchesForSelectedIndices:[(APCTableViewCustomPickerItem *)item selectedRowIndices]];
+                    HKUnit *inchUnit = [HKUnit inchUnit];
+                    HKQuantity *heightQuantity = [HKQuantity quantityWithUnit:inchUnit doubleValue:height];
+                    
+                    self.user.height = heightQuantity;
+                }
+                    
+                    break;
+                    
+                case kAPCUserInfoItemTypeWeight:
+                {
+                    double weight = [[(APCTableViewTextFieldItem *)item value] floatValue];
+                    HKUnit *poundUnit = [HKUnit poundUnit];
+                    HKQuantity *weightQuantity = [HKQuantity quantityWithUnit:poundUnit doubleValue:weight];
+                    
+                    self.user.weight = weightQuantity;
+                }
+                    break;
+                    
+                case kAPCUserInfoItemTypeSleepTime:
+                    self.user.sleepTime = [(APCTableViewDatePickerItem *)item date];
+                    break;
+                    
+                case kAPCUserInfoItemTypeWakeUpTime:
+                    self.user.wakeUpTime = [(APCTableViewDatePickerItem *)item date];
+                    break;
+                    
+                default:
+                    //#warning ASSERT_MESSAGE Require
+                    NSAssert(itemType <= kAPCUserInfoItemTypeWakeUpTime, @"ASSER_MESSAGE");
+                    break;
             }
-                
-                break;
-                
-            case APCSignUpUserInfoItemWeight:
-            {
-                double weight = [[(APCTableViewTextFieldItem *)item value] floatValue];
-                HKUnit *poundUnit = [HKUnit poundUnit];
-                HKQuantity *weightQuantity = [HKQuantity quantityWithUnit:poundUnit doubleValue:weight];
-                
-                self.user.weight = weightQuantity;
-            }
-                break;
-                
-            case APCSignUpUserInfoItemSleepTime:
-                self.user.sleepTime = [(APCTableViewDatePickerItem *)item date];
-                break;
-                
-            case APCSignUpUserInfoItemWakeUpTime:
-                self.user.wakeUpTime = [(APCTableViewDatePickerItem *)item date];
-                break;
-                
-            default:
-                //#warning ASSERT_MESSAGE Require
-                NSAssert(order.integerValue <= APCSignUpUserInfoItemWakeUpTime, @"ASSER_MESSAGE");
-                break;
         }
+        
     }
+    
 }
 
 @end
