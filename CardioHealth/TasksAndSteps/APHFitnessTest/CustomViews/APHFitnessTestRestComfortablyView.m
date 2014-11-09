@@ -41,7 +41,7 @@
 //    self.stepCountLbl.text = @"--";
 //    [self.stepCountLbl setBackgroundColor:[UIColor yellowColor]];
 //    [self addSubview:self.stepCountLbl];
-//    
+
 //    self.distanceTrackerLbl.text = @"--";
 //    [self.distanceTrackerLbl setBackgroundColor:[UIColor yellowColor]];
 //    [self addSubview:self.distanceTrackerLbl];
