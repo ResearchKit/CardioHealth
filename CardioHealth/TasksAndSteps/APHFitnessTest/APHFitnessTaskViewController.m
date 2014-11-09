@@ -247,6 +247,66 @@ static  CGFloat  kAPCStepProgressBarHeight = 8.0;
     
     }else if ([stepViewController.step.identifier isEqualToString:kFitnessTestStep103]) {
         
+        RKActiveStepViewController *stepVC = (RKActiveStepViewController *) stepViewController;
+        
+        UIView *updatedView = [UIView new];
+        
+        [stepVC setCustomView:updatedView];
+        
+        // Height constraint
+        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:updatedView
+                                                                attribute:NSLayoutAttributeHeight
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:stepVC.view
+                                                                attribute:NSLayoutAttributeHeight
+                                                               multiplier:0.3
+                                                                 constant:0]];
+        
+        
+        /**** use for setting custom views. **/
+        UINib *nib = [UINib nibWithNibName:@"APHFitnessSixMinuteFitnessTestView" bundle:nil];
+        APHFitnessSixMinuteFitnessTestView *restComfortablyView = [[nib instantiateWithOwner:self options:nil] objectAtIndex:0];
+        
+        [stepVC.view addSubview:restComfortablyView];
+        
+        [restComfortablyView setTranslatesAutoresizingMaskIntoConstraints:NO];
+        
+        [restComfortablyView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[c(>=280)]" options:0 metrics:nil views:@{@"c":restComfortablyView}]];
+        
+        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:restComfortablyView
+                                                                attribute:NSLayoutAttributeHeight
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:stepVC.view
+                                                                attribute:NSLayoutAttributeHeight
+                                                               multiplier:0.5
+                                                                 constant:0]];
+        
+        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:restComfortablyView
+                                                                attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual
+                                                                   toItem:stepViewController.view
+                                                                attribute:NSLayoutAttributeCenterY
+                                                               multiplier:1.15
+                                                                 constant:75]];
+        
+        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:restComfortablyView
+                                                                attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual
+                                                                   toItem:stepViewController.view
+                                                                attribute:NSLayoutAttributeWidth
+                                                               multiplier:1
+                                                                 constant:0]];
+        
+        // Center horizontally
+        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:stepVC.view
+                                                                attribute:NSLayoutAttributeCenterX
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:restComfortablyView
+                                                                attribute:NSLayoutAttributeCenterX
+                                                               multiplier:1.0
+                                                                 constant:0.0]];
+        
+        [stepVC.view layoutIfNeeded];
+
+        
         stepViewController.continueButton = nil;
         stepViewController.skipButton = nil;
         
