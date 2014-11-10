@@ -145,11 +145,15 @@ static CGFloat kSectionHeight = 64.0;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
+    CGFloat headerHeight;
+    
     if (section == APHHeartAgeSummarySectionTodaysActivities) {
-        return kSectionHeight;
+        headerHeight = kSectionHeight;
     } else {
-        return tableView.sectionHeaderHeight;
+        headerHeight = tableView.sectionHeaderHeight;
     }
+    
+    return headerHeight;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
