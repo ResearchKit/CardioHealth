@@ -186,18 +186,21 @@ static NSString *kRecommendationsCellIdentifier  = @"RecommendationCell";
     [numberFormatter setNumberStyle:NSNumberFormatterPercentStyle];
     [numberFormatter setMaximumFractionDigits:2];
     
-    NSString *riskPercentage = nil;
+    NSString *calculatedRisk = nil;
+    NSString *optimalRisk = nil;
     
     if (indexPath.section == APHHeartAgeSummarySectionTenYearRiskEstimate) {
         cell.riskEstimateTitle = NSLocalizedString(@"10 Year Risk Estimate", @"10 year risk estimate");
-        riskPercentage = [numberFormatter stringFromNumber:self.tenYearRisk];
+        calculatedRisk = [numberFormatter stringFromNumber:self.tenYearRisk];
+        optimalRisk = [numberFormatter stringFromNumber:self.optimalTenYearRisk];
     } else {
         cell.riskEstimateTitle = NSLocalizedString(@"Lifetime Risk Estimate", @"Lifetime risk estimate");
-        riskPercentage = [NSString stringWithFormat:@"%lu%%", [self.lifetimeRisk integerValue]];
+        calculatedRisk = [NSString stringWithFormat:@"%lu%%", [self.lifetimeRisk integerValue]];
+        optimalRisk = [NSString stringWithFormat:@"%lu%%", [self.lifetimeRisk integerValue]];
     }
     
-    cell.calculatedRiskValue = riskPercentage;
-    cell.optimalFactorRiskValue = @"0.0%";
+    cell.calculatedRiskValue = calculatedRisk;
+    cell.optimalFactorRiskValue = optimalRisk;
     
     return cell;
 }
