@@ -67,7 +67,7 @@
     
     // Color declarations
     UIColor *lightGray = [UIColor colorWithWhite:0.836 alpha:1.000];
-    
+
     // Box that will enclose the Age and Heart Age
     CGFloat lineWidth = 0.5; //change line width here
     
@@ -90,6 +90,13 @@
     CGContextAddLineToPoint(context, rect.size.width, rect.size.height);
     CGContextStrokePath(context);
     CGContextRestoreGState(context);
+    
+    // Filled rect
+    CGFloat sidebarWidth = 3.0;
+    CGRect sidebar = CGRectMake(0, 0, sidebarWidth, rect.size.height);
+    UIColor *sidebarColor = [UIColor colorWithRed:0.757 green:0.094 blue:0.129 alpha:1.000];
+    [sidebarColor setFill];
+    UIRectFill(sidebar);
 }
 
 @end
