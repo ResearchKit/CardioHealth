@@ -33,24 +33,30 @@
     [super viewDidLoad];
 
     [self setupNavigationItems];
-    [self prepareFields];
+    [self prepareFields]; 
     
     self.permissionButton.unconfirmedTitle = NSLocalizedString(@"I agree to the Terms and Conditions", @"");
     self.permissionButton.confirmedTitle = NSLocalizedString(@"I agree to the Terms and Conditions", @"");
     self.permissionButton.attributed = NO;
     self.permissionButton.alignment = kAPCPermissionButtonAlignmentLeft;
     
-    //TODO: This permission request is temporary. Remove later.
     self.permissionManager = [[APCPermissionsManager alloc] init];
-    [self.permissionManager requestForPermissionForType:kSignUpPermissionsTypeHealthKit withCompletion:^(BOOL granted, NSError *error) {
-        if (granted) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.permissionGranted = YES;
-                [self prepareFields];
-                [self.tableView reloadData];
-            });
-        }
-    }];
+    
+    self.permissionGranted = [self.permissionManager isPermissionsGrantedForType:kSignUpPermissionsTypeHealthKit];
+    
+    if (!self.permissionGranted) {
+        [self.permissionManager requestForPermissionForType:kSignUpPermissionsTypeHealthKit withCompletion:^(BOOL granted, NSError *error) {
+            if (granted) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    self.permissionGranted = YES;
+                    [self prepareFields];
+                    [self.tableView reloadData];
+                });
+            }
+        }];
+    } else{
+        [self prepareFields];
+    }
 }
 
 - (void)setupAppearance
