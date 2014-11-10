@@ -20,15 +20,11 @@
 
 @implementation APHHeartAgeTodaysActivitiesCell
 
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+- (void)awakeFromNib
 {
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    [super awakeFromNib];
     
-    if (self) {
-        _circularProgress.hidesProgressValue = YES;
-    }
-    
-    return self;
+    _circularProgress.hidesProgressValue = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
