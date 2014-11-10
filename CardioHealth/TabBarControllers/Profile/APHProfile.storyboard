@@ -46,7 +46,7 @@
                                         <constraint firstAttribute="height" constant="1" id="efr-Pm-dXj"/>
                                     </constraints>
                                 </view>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Johnny" placeholder="Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="syY-uL-lu7">
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Johnny" placeholder="First Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="syY-uL-lu7">
                                     <rect key="frame" x="110" y="17" width="202" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="30" id="c3q-nt-vZK"/>
@@ -64,7 +64,7 @@
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Appleseed" placeholder="Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="K3a-vc-OyO">
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Appleseed" placeholder="Last Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="K3a-vc-OyO">
                                     <rect key="frame" x="110" y="80" width="202" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="30" id="1gu-Oi-YQd"/>
