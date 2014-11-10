@@ -7,6 +7,7 @@
 //
 
 #import "APHProfieViewController.h"
+#import "APHWithdrawSurveyViewController.h"
 
 @interface APHProfieViewController ()
 
@@ -337,5 +338,10 @@
     }
 }
 
-
+- (void)leaveStudy:(id)sender
+{
+    UINavigationController *withdrawViewController = [[UIStoryboard storyboardWithName:@"APHProfile" bundle:nil] instantiateViewControllerWithIdentifier:@"WithdrawSurveyNC"];
+    [self.navigationController presentViewController:withdrawViewController animated:YES completion:nil];
+    
+}
 @end
