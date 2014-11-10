@@ -15,7 +15,7 @@
 
 static NSString *MainStudyIdentifier = @"com.cardioVascular.fitnessTest";
 static NSString *kdataResultsFileName = @"FitnessTestResult.json";
-static NSInteger kCountDownTimer = 1;
+static NSInteger kCountDownTimer = 5;
 static  NSString  *kFitnessTestStep101 = @"FitnessStep101";
 static  NSString  *kFitnessTestStep102 = @"FitnessStep102";
 static  NSString  *kFitnessTestStep103 = @"FitnessStep103";
@@ -213,7 +213,7 @@ static  CGFloat  kAPCStepProgressBarHeight = 8.0;
             RKActiveStep *theStep = (RKActiveStep *)stepViewController.step;
             
             theStep.voicePrompt = nil;
-            //[stepViewController goToNextStep];
+            [stepViewController goToNextStep];
         }
     }
     
