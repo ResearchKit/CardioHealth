@@ -248,11 +248,9 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="axs-tL-S2Q">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" lineBreakMode="wordWrap" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="axs-tL-S2Q">
                                                     <rect key="frame" x="8" y="37" width="584" height="21"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" secondItem="axs-tL-S2Q" secondAttribute="height" multiplier="584:21" id="S7W-zG-sMN"/>
-                                                    </constraints>
+                                                    <string key="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -260,12 +258,12 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="ivn-43-NIO" firstAttribute="top" secondItem="J0r-JC-61X" secondAttribute="topMargin" id="0E7-9W-lvT"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="axs-tL-S2Q" secondAttribute="bottom" constant="10.5" id="2qk-6S-KQC"/>
-                                                <constraint firstItem="axs-tL-S2Q" firstAttribute="top" secondItem="ivn-43-NIO" secondAttribute="bottom" constant="8" id="J66-OI-NXT"/>
+                                                <constraint firstItem="axs-tL-S2Q" firstAttribute="trailing" secondItem="J0r-JC-61X" secondAttribute="trailingMargin" id="FW8-a9-amy"/>
+                                                <constraint firstItem="axs-tL-S2Q" firstAttribute="top" secondItem="ivn-43-NIO" secondAttribute="bottom" constant="8" id="Kpp-4v-kpM"/>
                                                 <constraint firstItem="ivn-43-NIO" firstAttribute="trailing" secondItem="J0r-JC-61X" secondAttribute="trailingMargin" id="bkx-Hj-TmK"/>
-                                                <constraint firstItem="axs-tL-S2Q" firstAttribute="leading" secondItem="J0r-JC-61X" secondAttribute="leadingMargin" id="naO-q5-JhV"/>
+                                                <constraint firstItem="axs-tL-S2Q" firstAttribute="leading" secondItem="J0r-JC-61X" secondAttribute="leadingMargin" id="gsS-pj-bou"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="axs-tL-S2Q" secondAttribute="bottom" constant="11" id="qCK-hz-0aU"/>
                                                 <constraint firstItem="ivn-43-NIO" firstAttribute="leading" secondItem="J0r-JC-61X" secondAttribute="leadingMargin" id="qfR-ma-yvW"/>
-                                                <constraint firstItem="axs-tL-S2Q" firstAttribute="trailing" secondItem="J0r-JC-61X" secondAttribute="trailingMargin" id="zvo-O7-wkS"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
