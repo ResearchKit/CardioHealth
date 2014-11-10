@@ -22,7 +22,7 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="17u-5N-srW">
+                <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="17u-5N-srW">
                     <rect key="frame" x="0.0" y="216" width="280" height="48"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="280" id="EOq-I0-1gY"/>
@@ -31,14 +31,14 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="6minwalk-Icon-bpm" translatesAutoresizingMaskIntoConstraints="NO" id="vhg-vf-yxt">
+                <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="6minwalk-Icon-bpm" translatesAutoresizingMaskIntoConstraints="NO" id="vhg-vf-yxt">
                     <rect key="frame" x="90" y="179.5" width="30" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="HxB-AY-4cD"/>
                         <constraint firstAttribute="width" constant="30" id="JQg-HA-RCD"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BPM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cC5-oS-EFY">
+                <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BPM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cC5-oS-EFY">
                     <rect key="frame" x="121" y="175" width="70" height="38.5"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="70" id="Xcj-gQ-CBF"/>
@@ -76,8 +76,8 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="distanceTotalLabel" destination="ebn-g6-URM" id="E6Q-7t-ETT"/>
-                <outlet property="heartRateLabel" destination="17u-5N-srW" id="MEG-b0-Blu"/>
+                <outlet property="distanceTotalLabel" destination="ebn-g6-URM" id="RZe-t7-AoG"/>
+                <outlet property="heartRateLabel" destination="17u-5N-srW" id="rk5-EE-och"/>
             </connections>
             <point key="canvasLocation" x="343" y="234"/>
         </view>
