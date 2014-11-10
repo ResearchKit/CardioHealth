@@ -39,5 +39,14 @@ extern NSString *const kSummaryLifetimeRisk;
  *
  */
 - (NSDictionary *)calculateHeartAgeAndRiskFactors:(NSDictionary *)results;
+/**
+ * @brief  Returns the 10-year and lifetime risk based on the optimal factors.
+ *
+ * @param  results   an NSDictionary of results collected from the survey.
+ *
+ * @return returns a dictionary with 3 keys: 'age', 'tenYearRisk', and 'lifetimeRisk' whoes value is an NSNumber.
+ *
+ */
+- (NSDictionary *)calculateRiskWithOptimalFactors:(NSDictionary *)results;
 
 @end

@@ -7,25 +7,43 @@
 //
 
 #import "APHHeartAgeResultsViewController.h"
+#import "APHHeartAgeTodaysActivitiesCell.h"
+#import "APHHeartAgeSummaryCell.h"
+#import "APHHeartAgeRiskEstimateCell.h"
+#import "APHHeartAgeRecommendationCell.h"
 
-@interface APHHeartAgeResultsViewController ()
-@property (weak, nonatomic) IBOutlet UILabel *actualAgeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *heartAgeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *estimatedTenYearFactorLabel;
-@property (weak, nonatomic) IBOutlet UILabel *estimatedLifetimeFactorLabel;
-@property (weak, nonatomic) IBOutlet UILabel *label3;
+typedef NS_ENUM(NSUInteger, APHHeartAgeSummarySections)
+{
+    APHHeartAgeSummarySectionTodaysActivities = 0,
+    APHHeartAgeSummarySectionHeartAge,
+    APHHeartAgeSummarySectionTenYearRiskEstimate,
+    APHHeartAgeSummarySectionLifetimeRiskEstimate,
+    APHHeartAgeSummaryNumberOfSections
+};
 
-@property (weak, nonatomic) IBOutlet UIView *circularProgressBar;
+typedef NS_ENUM(NSUInteger, APHHeartAgeSummaryRows)
+{
+    APHHeartAgeSummaryRowBanner = 0,
+    APHHeartAgeSummaryRowRecommendation,
+    APHHeartAgeSummartNumberOfRows
+};
 
-@property (nonatomic, strong) APCCircularProgressView *circularProgress;
+// Cell Identifiers
+static NSString *kTodaysActivitiesCellIdentifier = @"TodaysActivitiesCell";
+static NSString *kHeartAgeCellIdentifier         = @"HeartAgeCell";
+static NSString *kRiskEstimateCellIdenfier       = @"RiskEstimateCell";
+static NSString *kRecommendationsCellIdentifier  = @"RecommendationCell";
+
+@interface APHHeartAgeResultsViewController () <UITableViewDataSource, UITableViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
 @end
 
 @implementation APHHeartAgeResultsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-
     UIColor *viewBackgroundColor = [UIColor appSecondaryColor4];
     
     [self.view setBackgroundColor:viewBackgroundColor];
@@ -37,34 +55,9 @@
                                                                                            target:self
                                                                                            action:@selector(doneButtonTapped:)];
     
-    self.circularProgress = [[APCCircularProgressView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.circularProgressBar.frame), CGRectGetHeight(self.circularProgressBar.frame))];
-    self.circularProgress.hidesProgressValue = YES;
-    NSUInteger allScheduledTasks = ((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.allScheduledTasksForToday;
-    NSUInteger completedScheduledTasks = ((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.completedScheduledTasksForToday;
-    completedScheduledTasks = MIN(allScheduledTasks, completedScheduledTasks+1);
-    CGFloat percent = (CGFloat) completedScheduledTasks / (CGFloat) allScheduledTasks;
-    [self.circularProgress setProgress:percent];
-    
-    [self.circularProgressBar addSubview:self.circularProgress];
-    self.label3.text = [NSString stringWithFormat:@"%lu/%lu", completedScheduledTasks, allScheduledTasks];
-}
-
-- (void)viewDidLayoutSubviews {
-    
-    CGRect rect = CGRectMake(0, 0, CGRectGetWidth(self.circularProgressBar.frame), CGRectGetHeight(self.circularProgressBar.frame));
-    [self.circularProgress setFrame:rect];
-    
-    self.actualAgeLabel.text = [NSString stringWithFormat:@"%lu", self.actualAge];
-    self.heartAgeLabel.text = [NSString stringWithFormat:@"%lu", self.heartAge];
-    
-    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    [numberFormatter setNumberStyle:NSNumberFormatterPercentStyle];
-    
-    NSString *tenYearRiskPercentage = [numberFormatter stringFromNumber:self.tenYearRisk];
-    
-    self.estimatedTenYearFactorLabel.text = [NSString stringWithFormat:@"You have an estimated %@ 10-year risk of ASCVD.", tenYearRiskPercentage];
-    
-    self.estimatedLifetimeFactorLabel.text = [NSString stringWithFormat:@"You have an estimated %lu%% lifetime risk of ASCVD.", [self.lifetimeRisk integerValue]];
+    // This will trigger self-sizing rows in the tableview
+    self.tableView.estimatedRowHeight = 44.0;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -75,7 +68,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Actions
@@ -87,6 +79,145 @@
             [self.delegate stepViewControllerDidFinish:self navigationDirection:RKStepViewControllerNavigationDirectionForward];
         }
     }
+}
+
+#pragma mark - TableView
+#pragma mark Datasource
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return APHHeartAgeSummaryNumberOfSections;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    NSUInteger rows = 1;
+    
+    if (section != APHHeartAgeSummarySectionTodaysActivities) {
+        rows = APHHeartAgeSummartNumberOfRows;
+    }
+    
+    return rows;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = nil;
+    
+    switch (indexPath.section) {
+        case APHHeartAgeSummarySectionTodaysActivities:
+        {
+            cell = [self configureTodaysActivitiesCellAtIndexPath:indexPath];
+        }
+        break;
+        
+        case APHHeartAgeSummarySectionHeartAge:
+        {
+            if (indexPath.row == APHHeartAgeSummaryRowBanner) {
+                cell = [self configureHeartAgeEstimateCellAtIndexPath:indexPath];
+            } else {
+                cell = [self configureRecommendationCellAtIndexPath:indexPath];
+            }
+        }
+        break;
+        
+        case APHHeartAgeSummarySectionTenYearRiskEstimate:
+        case APHHeartAgeSummarySectionLifetimeRiskEstimate:
+        {
+            if (indexPath.row == APHHeartAgeSummaryRowBanner) {
+                cell = [self configureRiskEstimateCellAtIndexPath:indexPath];
+            } else {
+                cell = [self configureRecommendationCellAtIndexPath:indexPath];
+            }
+            
+        }
+        break;
+        
+        default:
+            NSAssert(YES, @"Extra section encountered.");
+        break;
+    }
+    
+    return cell;
+}
+
+#pragma mark Cell Configurations
+
+- (APHHeartAgeTodaysActivitiesCell *)configureTodaysActivitiesCellAtIndexPath:(NSIndexPath *)indexPath
+{
+    APHHeartAgeTodaysActivitiesCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kTodaysActivitiesCellIdentifier];
+    
+    cell.caption = NSLocalizedString(@"Today's Activities", @"Today's Activities");
+    
+    NSUInteger allScheduledTasks = ((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.allScheduledTasksForToday;
+    NSUInteger completedScheduledTasks = ((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.completedScheduledTasksForToday;
+    
+    completedScheduledTasks = MIN(allScheduledTasks, completedScheduledTasks+1);
+    CGFloat percent = (CGFloat) completedScheduledTasks / (CGFloat) allScheduledTasks;
+    
+    cell.activitiesCount = [NSString stringWithFormat:@"%lu/%lu", completedScheduledTasks, allScheduledTasks];
+    cell.activitiesProgress = [NSNumber numberWithFloat:percent];
+    
+    return cell;
+}
+
+- (APHHeartAgeSummaryCell *)configureHeartAgeEstimateCellAtIndexPath:(NSIndexPath *)indexPath
+{
+    APHHeartAgeSummaryCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kHeartAgeCellIdentifier];
+    
+    cell.heartAgeTitle = NSLocalizedString(@"Your Heart Age Estimate", @"Your Heart Age Estimate");
+    cell.actualAgeLabel = NSLocalizedString(@"Actual Age", @"Actual Age");
+    cell.heartAgeLabel = NSLocalizedString(@"Heart Age", @"Heart Age");
+    
+    cell.actualAgeValue = [NSString stringWithFormat:@"%lu", self.actualAge];
+    cell.heartAgeValue = [NSString stringWithFormat:@"%lu", self.heartAge];
+    
+    return cell;
+}
+
+- (APHHeartAgeRiskEstimateCell *)configureRiskEstimateCellAtIndexPath:(NSIndexPath *)indexPath
+{
+    APHHeartAgeRiskEstimateCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kRiskEstimateCellIdenfier];
+    
+    cell.calculatedRiskLabel = NSLocalizedString(@"Calculated Risk", @"Calculated risk");
+    cell.optimalFactorRiskLabel = NSLocalizedString(@"with Optimal Risk Factors", @"with Optimak Risk Factors");
+    
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setNumberStyle:NSNumberFormatterPercentStyle];
+    [numberFormatter setMaximumFractionDigits:2];
+    
+    NSString *calculatedRisk = nil;
+    NSString *optimalRisk = nil;
+    
+    if (indexPath.section == APHHeartAgeSummarySectionTenYearRiskEstimate) {
+        cell.riskEstimateTitle = NSLocalizedString(@"10 Year Risk Estimate", @"10 year risk estimate");
+        calculatedRisk = [numberFormatter stringFromNumber:self.tenYearRisk];
+        optimalRisk = [numberFormatter stringFromNumber:self.optimalTenYearRisk];
+    } else {
+        cell.riskEstimateTitle = NSLocalizedString(@"Lifetime Risk Estimate", @"Lifetime risk estimate");
+        calculatedRisk = [NSString stringWithFormat:@"%lu%%", [self.lifetimeRisk integerValue]];
+        optimalRisk = [NSString stringWithFormat:@"%lu%%", [self.lifetimeRisk integerValue]];
+    }
+    
+    cell.calculatedRiskValue = calculatedRisk;
+    cell.optimalFactorRiskValue = optimalRisk;
+    
+    return cell;
+}
+
+- (APHHeartAgeRecommendationCell *)configureRecommendationCellAtIndexPath:(NSIndexPath *)indexPath
+{
+    APHHeartAgeRecommendationCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kRecommendationsCellIdentifier];
+    
+    if (indexPath.section == APHHeartAgeSummarySectionHeartAge) {
+        cell.recommendationTitle = NSLocalizedString(@"Time to Make a Change", @"Time to make a change");
+        cell.recommendationContent = NSLocalizedString(@"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", @"Placeholder copy");
+    } else {
+        cell.recommendationTitle = NSLocalizedString(@"Recommendations", @"Recommendations");
+        cell.recommendationContent = NSLocalizedString(@"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", @"Placeholder copy");
+    }
+    
+    return cell;
 }
 
 @end

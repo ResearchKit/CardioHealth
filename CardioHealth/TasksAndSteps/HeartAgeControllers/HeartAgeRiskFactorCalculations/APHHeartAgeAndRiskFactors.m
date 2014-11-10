@@ -232,6 +232,29 @@ NSString *const kSummaryLifetimeRisk = @"lifetimeRisk";
              };
 }
 
+- (NSDictionary *)calculateRiskWithOptimalFactors:(NSDictionary *)results
+{
+    NSNumber *actualAge = results[kHeartAgeTestDataAge];
+    NSString *gender = results[kHeartAgeTestDataGender];
+    NSString *ethnicity = results[kHeartAgeTestDataEthnicity];
+    
+    NSDictionary *optimalResults = @{
+                                     kHeartAgeTestDataAge: actualAge,
+                                     kHeartAgeTestDataGender: gender,
+                                     kHeartAgeTestDataEthnicity: ethnicity,
+                                     kHeartAgeTestDataTotalCholesterol: self.heartAgeParametersLookup[kLookupOptimalRiskFactors][kLookupOptimalRiskFactorTotalCholesterol],
+                                     kHeartAgeTestDataHDL: self.heartAgeParametersLookup[kLookupOptimalRiskFactors][kLookupOptimalRiskFactorHDL],
+                                     kHeartAgeTestDataSystolicBloodPressure: self.heartAgeParametersLookup[kLookupOptimalRiskFactors][kLookupOptimalRiskFactorSystolicBP],
+                                     kHeartAgeTestDataHypertension: [NSNumber numberWithBool:NO],
+                                     kHeartAgeTestDataCurrentlySmoke: [NSNumber numberWithBool:NO],
+                                     kHeartAgeTestDataDiabetes: results[kHeartAgeTestDataDiabetes]
+                                     };
+    
+    NSDictionary *riskWithOptimalFactors = [self calculateHeartAgeAndRiskFactors:optimalResults];
+    
+    return riskWithOptimalFactors;
+}
+
 /**
  * @brief   Searches the estimated 10 year risk table that generated for the given gender and ethnicity.
  *
