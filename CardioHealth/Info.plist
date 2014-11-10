@@ -26,6 +26,7 @@
 	<string>Needed to measure your distance for some tasks.</string>
 	<key>UIBackgroundModes</key>
 	<array>
+		<string>audio</string>
 		<string>bluetooth-central</string>
 		<string>fetch</string>
 		<string>location</string>
