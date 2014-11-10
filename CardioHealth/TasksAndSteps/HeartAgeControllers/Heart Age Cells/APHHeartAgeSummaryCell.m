@@ -61,23 +61,14 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    
     // General declartions
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     // Color declarations
-    UIColor *fillColor = [UIColor whiteColor];
     UIColor *lightGray = [UIColor colorWithWhite:0.836 alpha:1.000];
     
     // Box that will enclose the Age and Heart Age
     CGFloat lineWidth = 0.5; //change line width here
-    
-    UIBezierPath *bgRect = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:0];
-    CGContextSaveGState(context);
-    CGContextSetLineWidth(context, lineWidth);
-    [fillColor setFill];
-    [bgRect fill];
-    CGContextRestoreGState(context);
     
     // Divider line
     CGContextSaveGState(context);
