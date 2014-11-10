@@ -10,4 +10,7 @@
 
 @interface APHHeartAgeRecommendationCell : UITableViewCell
 
+@property (nonatomic, strong) NSString *recommendationTitle;
+@property (nonatomic, strong) NSString *recommendationContent;
+
 @end

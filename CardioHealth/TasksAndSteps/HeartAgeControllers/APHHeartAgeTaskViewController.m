@@ -461,7 +461,8 @@ static  CGFloat  kAPCStepProgressBarHeight = 8.0;
         APHHeartAgeAndRiskFactors *heartAgeAndRiskFactors = [[APHHeartAgeAndRiskFactors alloc] init];
         self.heartAgeInfo = [heartAgeAndRiskFactors calculateHeartAgeAndRiskFactors:surveyResultsDictionary];
         
-        APHHeartAgeResultsViewController *heartAgeResultsVC = [[APHHeartAgeResultsViewController alloc] initWithNibName:@"APHHeartAgeResultsViewController" bundle:nil];
+        UIStoryboard *sbHeartAgeSummary = [UIStoryboard storyboardWithName:@"APHHeartAgeSummary" bundle:nil];
+        APHHeartAgeResultsViewController *heartAgeResultsVC = [sbHeartAgeSummary instantiateInitialViewController];
         
         heartAgeResultsVC.resultCollector = self;
         heartAgeResultsVC.delegate = self;

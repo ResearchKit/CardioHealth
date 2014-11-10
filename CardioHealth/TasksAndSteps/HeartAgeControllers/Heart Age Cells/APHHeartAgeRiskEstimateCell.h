@@ -10,4 +10,10 @@
 
 @interface APHHeartAgeRiskEstimateCell : UITableViewCell
 
+@property (nonatomic, strong) NSString *riskEstimateTitle;
+@property (nonatomic, strong) NSString *calculatedRiskLabel;
+@property (nonatomic, strong) NSString *optimalFactorRiskLabel;
+@property (nonatomic, strong) NSString *calculatedRiskValue;
+@property (nonatomic, strong) NSString *optimalFactorRiskValue;
+
 @end

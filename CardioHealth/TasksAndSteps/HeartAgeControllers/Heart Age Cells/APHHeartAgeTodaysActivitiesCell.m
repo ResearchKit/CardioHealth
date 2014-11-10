@@ -8,16 +8,52 @@
 
 #import "APHHeartAgeTodaysActivitiesCell.h"
 
+@import APCAppleCore;
+
+@interface APHHeartAgeTodaysActivitiesCell()
+
+@property (weak, nonatomic) IBOutlet UILabel *todaysActivitiesCaption;
+@property (weak, nonatomic) IBOutlet UILabel *activitiesStatus;
+@property (weak, nonatomic) IBOutlet APCCircularProgressView *circularProgress;
+
+@end
+
 @implementation APHHeartAgeTodaysActivitiesCell
 
-- (void)awakeFromNib {
-    // Initialization code
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    
+    if (self) {
+        _circularProgress.hidesProgressValue = YES;
+    }
+    
+    return self;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
+}
 
-    // Configure the view for the selected state
+- (void)setCaption:(NSString *)caption
+{
+    _caption = caption;
+    
+    self.todaysActivitiesCaption.text = _caption;
+}
+
+- (void)setActivitiesCount:(NSString *)activitiesCount
+{
+    _activitiesCount = activitiesCount;
+    
+    self.activitiesStatus.text = _activitiesCount;
+}
+
+- (void)setActivitiesProgress:(NSNumber *)activitiesProgress
+{
+    _activitiesProgress = activitiesProgress;
+    
+    [self.circularProgress setProgress:[_activitiesProgress doubleValue] animated:YES];
 }
 
 @end

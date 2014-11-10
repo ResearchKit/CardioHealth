@@ -8,16 +8,56 @@
 
 #import "APHHeartAgeRiskEstimateCell.h"
 
-@implementation APHHeartAgeRiskEstimateCell
+@interface APHHeartAgeRiskEstimateCell()
 
-- (void)awakeFromNib {
-    // Initialization code
-}
+@property (weak, nonatomic) IBOutlet UILabel *riskCellTitle;
+@property (weak, nonatomic) IBOutlet UILabel *calculatedRiskCellLabel;
+@property (weak, nonatomic) IBOutlet UILabel *optimalFactorsRiskCellLabel;
+@property (weak, nonatomic) IBOutlet UILabel *calculatedRisk;
+@property (weak, nonatomic) IBOutlet UILabel *optimalFactorRisk;
+
+
+@end
+
+@implementation APHHeartAgeRiskEstimateCell
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
+}
 
-    // Configure the view for the selected state
+- (void)setRiskEstimateTitle:(NSString *)riskEstimateTitle
+{
+    _riskEstimateTitle = riskEstimateTitle;
+    
+    self.riskCellTitle.text = _riskEstimateTitle;
+}
+
+- (void)setCalculatedRiskLabel:(NSString *)calculatedRiskLabel
+{
+    _calculatedRiskLabel = calculatedRiskLabel;
+    
+    self.calculatedRiskCellLabel.text = _calculatedRiskLabel;
+}
+
+- (void)setCalculatedRiskValue:(NSString *)calculatedRiskValue
+{
+    _calculatedRiskValue = calculatedRiskValue;
+    
+    self.calculatedRisk.text = _calculatedRiskValue;
+}
+
+- (void)setOptimalFactorRiskLabel:(NSString *)optimalFactorRiskLabel
+{
+    _optimalFactorRiskLabel = optimalFactorRiskLabel;
+    
+    self.optimalFactorsRiskCellLabel.text = _optimalFactorRiskLabel;
+}
+
+- (void)setOptimalFactorRiskValue:(NSString *)optimalFactorRiskValue
+{
+    _optimalFactorRiskValue = optimalFactorRiskValue;
+    
+    self.optimalFactorRisk.text = _optimalFactorRiskValue;
 }
 
 @end
