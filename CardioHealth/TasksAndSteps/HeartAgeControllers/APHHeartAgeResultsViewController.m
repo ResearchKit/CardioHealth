@@ -93,7 +93,7 @@ static NSString *kRecommendationsCellIdentifier  = @"RecommendationCell";
 {
     NSUInteger rows = 1;
     
-    if (section != 0) {
+    if (section != APHHeartAgeSummarySectionTodaysActivities) {
         rows = APHHeartAgeSummartNumberOfRows;
     }
     
@@ -134,7 +134,7 @@ static NSString *kRecommendationsCellIdentifier  = @"RecommendationCell";
         break;
         
         default:
-        NSAssert(YES, @"Extra section encountered.");
+            NSAssert(YES, @"Extra section encountered.");
         break;
     }
     
