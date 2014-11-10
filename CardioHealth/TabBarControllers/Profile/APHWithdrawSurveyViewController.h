@@ -1,5 +1,5 @@
 //
-//  APHLearnMasterViewController.h
+//  APHWithdrawSurveyViewController.h
 //  CardioHealth
 //
 //  Created by Ramsundar Shandilya on 11/9/14.
@@ -8,6 +8,6 @@
 
 @import APCAppleCore;
 
-@interface APHLearnMasterViewController : APCLearnMasterViewController
+@interface APHWithdrawSurveyViewController : APCWithdrawSurveyViewController
 
 @end
