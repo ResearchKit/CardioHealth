@@ -435,7 +435,13 @@ static  CGFloat  kAPCStepProgressBarHeight = 8.0;
                 NSString *questionIdentifier = [[formStepAndFormItemIdentifier componentsSeparatedByString:@"."] lastObject];
                 
                 if ([questionIdentifier isEqualToString:kHeartAgeTestDataEthnicity]) {
-                    [surveyResultsDictionary setObject:(NSString *)questionResult.answer forKey:questionIdentifier];
+                    APCAppDelegate *apcDelegate = [[UIApplication sharedApplication] delegate];
+                    NSString *ethnicity = (NSString *)questionResult.answer;
+                    
+                    // persist ethnicity to the datastore
+                    [apcDelegate.dataSubstrate.currentUser setEthnicity:ethnicity];
+                    
+                    [surveyResultsDictionary setObject:ethnicity forKey:questionIdentifier];
                 } else if ([questionIdentifier isEqualToString:kHeartAgeTestDataGender]) {
                     NSNumber *numericGender = questionResult.answer;
                     NSString *selectedGender = ([numericGender integerValue] == HKBiologicalSexFemale) ? kHeartAgeTestDataGenderFemale :kHeartAgeTestDataGenderMale;
