@@ -61,6 +61,7 @@
     
     if (indexPath.row == 3) {
         APCShareViewController *shareViewController = [[UIStoryboard storyboardWithName:@"APHOnboarding" bundle:nil] instantiateViewControllerWithIdentifier:@"ShareVC"];
+        shareViewController.hidesOkayButton = YES;
         [self.navigationController pushViewController:shareViewController animated:YES];
         
     } else if (indexPath.row == 4) {
