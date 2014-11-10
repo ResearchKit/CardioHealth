@@ -76,8 +76,8 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="distanceTotalLabel" destination="ebn-g6-URM" id="E6Q-7t-ETT"/>
-                <outlet property="heartRateLabel" destination="17u-5N-srW" id="MEG-b0-Blu"/>
+                <outlet property="distanceTotalLabel" destination="ebn-g6-URM" id="RZe-t7-AoG"/>
+                <outlet property="heartRateLabel" destination="17u-5N-srW" id="rk5-EE-och"/>
             </connections>
             <point key="canvasLocation" x="343" y="234"/>
         </view>
