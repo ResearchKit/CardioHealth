@@ -811,19 +811,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F55BBE7519D362D0003CA0F9 /* APHLearnDetailViewCell.m in Sources */,
 				08FA98031A108839002317C8 /* APHHeartAgeSummaryCell.m in Sources */,
-				F55BBE7819D362D0003CA0F9 /* APHLearnResourceViewCell.m in Sources */,
 				7B8E912A19F9B5BA0040F77F /* APHFitnessTestIntroStepViewController.m in Sources */,
 				F5778E8619F061B00079F1B2 /* APHProfieViewController.m in Sources */,
 				F573807419E45A0A008A8354 /* APHDataSubstrate.m in Sources */,
 				F5481F1419E4820100D84617 /* APHHeartAgeTaskViewController.m in Sources */,
-				F55BBE7719D362D0003CA0F9 /* APHLearnMasterTableViewCell.m in Sources */,
 				7BC7215219F7173D00C70956 /* APHFitnessTestSummaryViewController.m in Sources */,
 				F5778E7119F0613D0079F1B2 /* APHEligibleViewController.m in Sources */,
-				F55BBE7219D362D0003CA0F9 /* APHLearnDetailViewController.m in Sources */,
 				08FA98061A108A46002317C8 /* APHHeartAgeRiskEstimateCell.m in Sources */,
-				F55BBE7419D362D0003CA0F9 /* APHLearnMasterViewController.m in Sources */,
 				08D3A10219E4A08C00A3D20D /* APHHeartAgeAndRiskFactors.m in Sources */,
 				7B41049E19E5E46800592B96 /* APHFitnessSixMinuteFitnessTestView.m in Sources */,
 				08FA97FF1A108680002317C8 /* APHHeartAgeTodaysActivitiesCell.m in Sources */,
