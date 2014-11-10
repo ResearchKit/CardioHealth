@@ -7,7 +7,6 @@
 //
 
 @import APCAppleCore;
-#import <APCAppleCore/APCAppleCore.h>
 
 @interface APHStudyOverviewViewController : APCStudyOverviewViewController
 
