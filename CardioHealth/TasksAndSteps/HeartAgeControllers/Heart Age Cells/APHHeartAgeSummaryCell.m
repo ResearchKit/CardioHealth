@@ -59,4 +59,45 @@
     self.heartAge.text = _heartAgeValue;
 }
 
+- (void)drawRect:(CGRect)rect
+{
+    
+    // General declartions
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    // Color declarations
+    UIColor *fillColor = [UIColor whiteColor];
+    UIColor *lightGray = [UIColor colorWithWhite:0.836 alpha:1.000];
+    
+    // Box that will enclose the Age and Heart Age
+    CGFloat lineWidth = 0.5; //change line width here
+    
+    UIBezierPath *bgRect = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:0];
+    CGContextSaveGState(context);
+    CGContextSetLineWidth(context, lineWidth);
+    [fillColor setFill];
+    [bgRect fill];
+    CGContextRestoreGState(context);
+    
+    // Divider line
+    CGContextSaveGState(context);
+    CGContextSetLineCap(context, kCGLineCapSquare);
+    CGContextSetStrokeColorWithColor(context, lightGray.CGColor); //change color here
+    CGContextSetLineWidth(context, lineWidth);
+    CGContextMoveToPoint(context, rect.size.width/2, 50 + (lineWidth * 0.5));
+    CGContextAddLineToPoint(context, rect.size.width/2, (rect.size.height - 20) + lineWidth * 0.5);
+    CGContextStrokePath(context);
+    CGContextRestoreGState(context);
+    
+    // Bottom border
+    CGContextSaveGState(context);
+    CGContextSetLineCap(context, kCGLineCapSquare);
+    CGContextSetStrokeColorWithColor(context, lightGray.CGColor); //change color here
+    CGContextSetLineWidth(context, lineWidth*2);
+    CGContextMoveToPoint(context, 0, rect.size.height);
+    CGContextAddLineToPoint(context, rect.size.width, rect.size.height);
+    CGContextStrokePath(context);
+    CGContextRestoreGState(context);
+}
+
 @end
