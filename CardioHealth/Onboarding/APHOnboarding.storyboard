@@ -505,7 +505,7 @@
             </objects>
             <point key="canvasLocation" x="623" y="1043"/>
         </scene>
-        <!--Eligibility-->
+        <!--Share-->
         <scene sceneID="QI9-JV-qGk">
             <objects>
                 <viewController storyboardIdentifier="ShareVC" id="SwE-E5-cJ4" customClass="APCShareViewController" sceneMemberID="viewController">
@@ -648,7 +648,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="qrd-S5-3MD" secondAttribute="trailing" constant="-16" id="ynM-y7-QJI"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Eligibility" id="Rt2-no-ct4"/>
+                    <navigationItem key="navigationItem" title="Share" id="Rt2-no-ct4"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
