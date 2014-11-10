@@ -1,33 +1,66 @@
 {
-    "disease_name":"Cardiovascular Health",
-    "from_date":"November 2014",
-    "to_date":"October 2015",
-    "logo_name": "logo_research_institute",
-    "questions":
+    "items" :
     [
-     {
-     "title":"About this Study",
-     "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vel turpis id fringilla. Nam pharetra gravida enim consectetur rutrum.",
-     "icon_image":"paperplus_icon",
-     "tint_color" : "blue"
-     },
-     {
-     "title":"How this Study Works",
-     "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vel turpis id fringilla. Nam pharetra gravida enim consectetur rutrum.",
-     "icon_image":"rulerpencil_icon",
-     "tint_color" : "red"
-     },
-     {
-     "title":"Who is Eligible to Participate",
-     "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vel turpis id fringilla. Nam pharetra gravida enim consectetur rutrum.",
-     "icon_image":"clipboard_icon",
-     "tint_color" : "yellow"
-     },
-     {
-     "title":"Share this Study",
-     "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vel turpis id fringilla. Nam pharetra gravida enim consectetur rutrum.",
-     "icon_image":"share_icon",
-     "tint_color" : "green"
-     }
+        {
+         "section_title":"",
+         "row_items":
+             [
+              {
+              "title":"Study Details",
+              "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vel turpis id fringilla. Nam pharetra gravida enim consectetur rutrum.",
+              "icon_image":"paperplus_icon",
+              "tint_color" : "blue"
+              },
+              {
+              "title":"Diagnostics & Symptoms",
+              "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vel turpis id fringilla. Nam pharetra gravida enim consectetur rutrum.",
+              "icon_image":"diagnostics_icon",
+              "tint_color" : "red"
+              },
+              {
+              "title":"Life with Parkinson's",
+              "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vel turpis id fringilla. Nam pharetra gravida enim consectetur rutrum.",
+              "icon_image":"disease_icon",
+              "tint_color" : "green"
+              },
+              {
+              "title":"Treatment Options",
+              "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vel turpis id fringilla. Nam pharetra gravida enim consectetur rutrum.",
+              "icon_image":"treatment_icon",
+              "tint_color" : "yellow"
+              }
+              ]
+        },
+     
+         {
+         "section_title":"Resources",
+         "row_items":
+         [
+          {
+          "title":"Parkinson’s Resource",
+          "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vel turpis id fringilla. Nam pharetra gravida enim consectetur rutrum.",
+          "icon_image":"globe_icon",
+          "tint_color" : "gray"
+          },
+          {
+          "title":"Parkinson’s Resource",
+          "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vel turpis id fringilla. Nam pharetra gravida enim consectetur rutrum.",
+          "icon_image":"globe_icon",
+          "tint_color" : "gray"
+          },
+          {
+          "title":"Parkinson’s Resource",
+          "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vel turpis id fringilla. Nam pharetra gravida enim consectetur rutrum.",
+          "icon_image":"globe_icon",
+          "tint_color" : "gray"
+          },
+          {
+          "title":"Parkinson’s Resource",
+          "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vel turpis id fringilla. Nam pharetra gravida enim consectetur rutrum.",
+          "icon_image":"globe_icon",
+          "tint_color" : "gray"
+          }
+          ]
+         }
     ]
 }

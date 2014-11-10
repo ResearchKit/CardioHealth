@@ -16,40 +16,9 @@ static NSString * const kStudyOverviewCellIdentifier = @"kStudyOverviewCellIdent
 
 @interface APHStudyOverviewViewController ()
 
-@property (nonatomic, strong) NSArray *studyDetailsArray;
-@property (nonatomic, strong) NSArray * imagesArray;
-@property (nonatomic, strong) NSArray * colorsArray;
-
 @end
 
 @implementation APHStudyOverviewViewController
-
-- (void)prepareContent
-{
-    _studyDetailsArray = [self studyDetailsFromJSONFile:@"StudyOverview"];
-}
-
-- (NSArray *)imagesArray
-{
-    return @[
-             @"paperplus_icon",
-             @"rulerpencil_icon",
-             @"stethescope_icon",
-             @"clipboard_icon",
-             @"stopwatch_icon"
-             ];
-}
-
-- (NSArray *)colorsArray
-{
-    return @[
-             [UIColor colorWithRed:0.132 green:0.684 blue:0.959 alpha:1.000],
-             [UIColor colorWithRed:0.919 green:0.226 blue:0.342 alpha:1.000],
-             [UIColor colorWithRed:0.195 green:0.830 blue:0.443 alpha:1.000],
-             [UIColor colorWithRed:0.994 green:0.709 blue:0.278 alpha:1.000],
-             [UIColor colorWithRed:0.574 green:0.252 blue:0.829 alpha:1.000]
-             ];
-}
 
 #pragma mark - Lifecycle
 
@@ -57,8 +26,12 @@ static NSString * const kStudyOverviewCellIdentifier = @"kStudyOverviewCellIdent
     [super viewDidLoad];
     
     [self prepareContent];
-    self.logoImageView.image = [UIImage imageNamed:@"logo_research_institute"];
-    [self setupTable];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -66,43 +39,9 @@ static NSString * const kStudyOverviewCellIdentifier = @"kStudyOverviewCellIdent
     // Dispose of any resources that can be recreated.
 }
 
-- (void)setupTable
+- (void)prepareContent
 {
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-}
-
-#pragma mark - UITableViewDataSource methods
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return self.studyDetailsArray.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kStudyOverviewCellIdentifier forIndexPath:indexPath];
-    
-    APCStudyDetails *studyDetails = self.studyDetailsArray[indexPath.row];
-    
-    UIView * view = [cell viewWithTag:100];
-    view.backgroundColor = self.colorsArray[indexPath.row];
-    
-    UIImageView * imageView = (UIImageView*) [cell viewWithTag:200];
-    imageView.image = [UIImage imageNamed:self.imagesArray[indexPath.row]];
-    
-    UILabel * label = (UILabel*) [cell viewWithTag:300];
-    label.text = studyDetails.title;
-    
-    [self setUpCellAppearance:cell];
-    return cell;
-}
-
-- (void) setUpCellAppearance: (UITableViewCell*) cell
-{
-    UILabel * label = (UILabel*) [cell viewWithTag:300];
-    label.font = [UIFont appRegularFontWithSize:16];
-    label.textColor = [UIColor appSecondaryColor1];
+    [self studyDetailsFromJSONFile:@"StudyOverview"];
 }
 
 #pragma mark - IBActions
@@ -139,12 +78,17 @@ static NSString * const kStudyOverviewCellIdentifier = @"kStudyOverviewCellIdent
 {
     [super tableView:tableView didSelectRowAtIndexPath:indexPath];
     
-    APCStudyDetails *studyDetails = self.studyDetailsArray[indexPath.row];
+    APCTableViewStudyDetailsItem *studyDetails = [self itemForIndexPath:indexPath];
     
-    APCStudyDetailsViewController *detailsViewController = [[UIStoryboard storyboardWithName:@"APHOnboarding" bundle:nil] instantiateViewControllerWithIdentifier:@"StudyDetailsVC"];
-    detailsViewController.iconImageView.image = [UIImage imageNamed:self.imagesArray[indexPath.row]];
-    detailsViewController.title = studyDetails.title;
-    [self.navigationController pushViewController:detailsViewController animated:YES];
+    if (indexPath.row == 3) {
+        APCShareViewController *shareViewController = [[UIStoryboard storyboardWithName:@"APHOnboarding" bundle:nil] instantiateViewControllerWithIdentifier:@"ShareVC"];
+        [self.navigationController pushViewController:shareViewController animated:YES];
+        
+    } else {
+        APCStudyDetailsViewController *detailsViewController = [[UIStoryboard storyboardWithName:@"APHOnboarding" bundle:nil] instantiateViewControllerWithIdentifier:@"StudyDetailsVC"];
+        detailsViewController.studyDetails = studyDetails;
+        [self.navigationController pushViewController:detailsViewController animated:YES];
+    }
 }
 
 @end
