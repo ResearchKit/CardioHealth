@@ -1,18 +1,18 @@
 //
-//  APHLearnMasterViewController.m
+//  APHLearnStudyDetailsViewController.m
 //  CardioHealth
 //
 //  Created by Ramsundar Shandilya on 11/9/14.
 //  Copyright (c) 2014 Y Media Labs. All rights reserved.
 //
 
-#import "APHLearnMasterViewController.h"
+#import "APHLearnStudyDetailsViewController.h"
 
-@interface APHLearnMasterViewController ()
+@interface APHLearnStudyDetailsViewController ()
 
 @end
 
-@implementation APHLearnMasterViewController
+@implementation APHLearnStudyDetailsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
