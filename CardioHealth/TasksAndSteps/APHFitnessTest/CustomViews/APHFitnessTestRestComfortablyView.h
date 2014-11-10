@@ -11,5 +11,9 @@
 
 @interface APHFitnessTestRestComfortablyView : UIView
 
+@property (weak, nonatomic) IBOutlet UILabel *distanceTrackerLabel;
+
+
+@property (strong, nonatomic) NSNumber *totalDistance;
 
 @end

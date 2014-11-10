@@ -36,6 +36,8 @@ static  CGFloat  kAPCStepProgressBarHeight = 8.0;
 @property (assign) NSInteger heartRateMonitoring;
 @property (assign) BOOL heartRateIsUpdating;
 
+@property (strong, nonatomic) NSData *lastDataResult;
+
 @end
 
 @implementation APHFitnessTaskViewController
@@ -334,15 +336,18 @@ static  CGFloat  kAPCStepProgressBarHeight = 8.0;
         
         [stepVC.view addSubview:restComfortablyView];
         
+        NSError* error;
+        NSDictionary* json = [NSJSONSerialization JSONObjectWithData:self.lastDataResult
+                                                             options:kNilOptions
+                                                               error:&error];
+        
+        NSArray* distances = [json objectForKey:@"distance"];
+        
+        NSDictionary *lastObject = [distances lastObject];
+        
+        [restComfortablyView setTotalDistance:[NSNumber numberWithInteger:[lastObject[@"totalDistanceInFeet"] integerValue]]];
+        
         [restComfortablyView setTranslatesAutoresizingMaskIntoConstraints:NO];
-//
-//        NSArray *restComfortablyViewVerticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[c(>=230)]" options:0 metrics:nil views:@{@"c":restComfortablyView}];
-//        
-//        for (NSLayoutConstraint *constraint in restComfortablyViewVerticalConstraints) {
-//            constraint.priority = UILayoutPriorityFittingSizeLevel;
-//        }
-//        
-//        [restComfortablyView addConstraints:restComfortablyViewVerticalConstraints];
         
         [restComfortablyView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[c(>=280)]" options:0 metrics:nil views:@{@"c":restComfortablyView}]];
         
@@ -429,8 +434,8 @@ static  CGFloat  kAPCStepProgressBarHeight = 8.0;
 - (void)taskViewController:(RKTaskViewController *)taskViewController didProduceResult:(RKDataResult *)result {
 
     NSLog(@"didProduceResult = %@", result.data);
+    self.lastDataResult = result.data;
     
-
     if ([result isKindOfClass:[RKSurveyResult class]]) {
         RKSurveyResult* sresult = (RKSurveyResult*)result;
         

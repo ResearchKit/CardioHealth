@@ -32,7 +32,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="6minwalk-Icon-bpm" translatesAutoresizingMaskIntoConstraints="NO" id="dE5-kV-vfm">
-                    <rect key="frame" x="90" y="179.5" width="30" height="30"/>
+                    <rect key="frame" x="90" y="179" width="30" height="30"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="30" id="HHy-QE-UHP"/>
                         <constraint firstAttribute="height" constant="30" id="O5n-hk-NKX"/>
@@ -47,7 +47,7 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0′" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AQY-x7-7Vg">
+                <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0′" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AQY-x7-7Vg">
                     <rect key="frame" x="0.0" y="43" width="280" height="97"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="97" id="01N-9x-Mlg"/>
@@ -76,6 +76,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="distanceTrackerLabel" destination="AQY-x7-7Vg" id="KVw-IL-wvU"/>
                 <outlet property="heartRateBPMLbl" destination="ouE-yV-Jxe" id="a7s-Or-nEl"/>
             </connections>
             <point key="canvasLocation" x="343" y="234"/>
