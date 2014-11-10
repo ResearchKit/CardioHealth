@@ -33,6 +33,11 @@ static  CGFloat  kAPCStepProgressBarHeight = 8.0;
 
 @property (strong, nonatomic) RKDataArchive *taskArchive;
 
+@property (assign) NSInteger heartRateMonitoring;
+@property (assign) BOOL heartRateIsUpdating;
+
+@property (strong, nonatomic) NSData *lastDataResult;
+
 @end
 
 @implementation APHFitnessTaskViewController
@@ -70,10 +75,13 @@ static  CGFloat  kAPCStepProgressBarHeight = 8.0;
     self.healthKitSampleTracker = [[APHFitnessTestHealthKitSampleTypeTracker alloc] init];
     [self.healthKitSampleTracker setDelegate:self];
     [self.healthKitSampleTracker startUpdating];
-    
+
     self.distanceTracker = [[APHFitnessTestDistanceTracker alloc] init];
     [self.distanceTracker setDelegate:self];
     [self.distanceTracker prepLocationUpdates];
+    
+    self.heartRateMonitoring = 0;
+    self.heartRateIsUpdating = NO;
     
     [self beginTask];
 }
@@ -87,6 +95,8 @@ static  CGFloat  kAPCStepProgressBarHeight = 8.0;
 {
     APCAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     APCParameters *parameters = appDelegate.dataSubstrate.parameters;
+    
+    
     
     NSMutableArray *steps = [[NSMutableArray alloc] init];
 
@@ -194,8 +204,18 @@ static  CGFloat  kAPCStepProgressBarHeight = 8.0;
 /*********************************************************************************/
 #pragma  mark  - TaskViewController delegates
 /*********************************************************************************/
-- (void)taskViewController:(RKTaskViewController *)taskViewController
-willPresentStepViewController:(RKStepViewController *)stepViewController{
+- (void)taskViewController:(RKTaskViewController *)taskViewController willPresentStepViewController:(RKStepViewController *)stepViewController{
+    
+    //If we're not capturing any heart rate data then skip
+    if (stepViewController.step.identifier == kFitnessTestStep104) {
+        
+        if (!self.heartRateIsUpdating) {
+            RKActiveStep *theStep = (RKActiveStep *)stepViewController.step;
+            
+            theStep.voicePrompt = nil;
+            [stepViewController goToNextStep];
+        }
+    }
     
     taskViewController.navigationBar.topItem.title = NSLocalizedString(@"6 Minute Walk", @"6 Minute Walk");
     
@@ -218,11 +238,6 @@ willPresentStepViewController:(RKStepViewController *)stepViewController{
         
         [(RKActiveStepViewController*)stepViewController setCustomView:customView];
         
-        
-        stepViewController.learnMoreButton =[[UIBarButtonItem alloc] initWithTitle:@"View Important Details" style:stepViewController.continueButton.style target:self action:@selector(importantDetails:)];
-        
-        
-        
         stepViewController.continueButton = [[UIBarButtonItem alloc] initWithTitle:@"Get Started" style:stepViewController.continueButton.style target:stepViewController.continueButton.target action:stepViewController.continueButton.action];
         
         stepViewController.skipButton = nil;
@@ -234,10 +249,170 @@ willPresentStepViewController:(RKStepViewController *)stepViewController{
     
     }else if ([stepViewController.step.identifier isEqualToString:kFitnessTestStep103]) {
         
+        RKActiveStepViewController *stepVC = (RKActiveStepViewController *) stepViewController;
+        
+        UIView *updatedView = [UIView new];
+        
+        [stepVC setCustomView:updatedView];
+        
+        // Height constraint
+        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:updatedView
+                                                                attribute:NSLayoutAttributeHeight
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:stepVC.view
+                                                                attribute:NSLayoutAttributeHeight
+                                                               multiplier:0.3
+                                                                 constant:0]];
+        
+        
+        /**** use for setting custom views. **/
+        UINib *nib = [UINib nibWithNibName:@"APHFitnessSixMinuteFitnessTestView" bundle:nil];
+        APHFitnessSixMinuteFitnessTestView *restComfortablyView = [[nib instantiateWithOwner:self options:nil] objectAtIndex:0];
+        
+        [stepVC.view addSubview:restComfortablyView];
+        
+        [restComfortablyView setTranslatesAutoresizingMaskIntoConstraints:NO];
+        
+        [restComfortablyView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[c(>=280)]" options:0 metrics:nil views:@{@"c":restComfortablyView}]];
+        
+        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:restComfortablyView
+                                                                attribute:NSLayoutAttributeHeight
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:stepVC.view
+                                                                attribute:NSLayoutAttributeHeight
+                                                               multiplier:0.5
+                                                                 constant:0]];
+        
+        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:restComfortablyView
+                                                                attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual
+                                                                   toItem:stepViewController.view
+                                                                attribute:NSLayoutAttributeCenterY
+                                                               multiplier:1.15
+                                                                 constant:75]];
+        
+        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:restComfortablyView
+                                                                attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual
+                                                                   toItem:stepViewController.view
+                                                                attribute:NSLayoutAttributeWidth
+                                                               multiplier:1
+                                                                 constant:0]];
+        
+        // Center horizontally
+        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:stepVC.view
+                                                                attribute:NSLayoutAttributeCenterX
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:restComfortablyView
+                                                                attribute:NSLayoutAttributeCenterX
+                                                               multiplier:1.0
+                                                                 constant:0.0]];
+        
+        [stepVC.view layoutIfNeeded];
+
+        
         stepViewController.continueButton = nil;
         stepViewController.skipButton = nil;
         
     }else if ([stepViewController.step.identifier isEqualToString:kFitnessTestStep104]) {
+
+        RKActiveStepViewController *stepVC = (RKActiveStepViewController *) stepViewController;
+        
+        UIView *updatedView = [UIView new];
+        
+        [stepVC setCustomView:updatedView];
+        
+        // Height constraint
+        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:updatedView
+                                                                attribute:NSLayoutAttributeHeight
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:stepVC.view
+                                                                attribute:NSLayoutAttributeHeight
+                                                               multiplier:0.3
+                                                                 constant:0]];
+
+        
+        /**** use for setting custom views. **/
+        UINib *nib = [UINib nibWithNibName:@"APHFitnessTestRestComfortablyView" bundle:nil];
+        APHFitnessTestRestComfortablyView *restComfortablyView = [[nib instantiateWithOwner:self options:nil] objectAtIndex:0];
+        
+        [stepVC.view addSubview:restComfortablyView];
+        
+        NSError* error;
+        NSDictionary* json = [NSJSONSerialization JSONObjectWithData:self.lastDataResult
+                                                             options:kNilOptions
+                                                               error:&error];
+        
+        NSArray* distances = [json objectForKey:@"distance"];
+        
+        NSDictionary *lastObject = [distances lastObject];
+        
+        [restComfortablyView setTotalDistance:[NSNumber numberWithInteger:[lastObject[@"totalDistanceInFeet"] integerValue]]];
+        
+        [restComfortablyView setTranslatesAutoresizingMaskIntoConstraints:NO];
+        
+        [restComfortablyView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[c(>=280)]" options:0 metrics:nil views:@{@"c":restComfortablyView}]];
+        
+        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:restComfortablyView
+                                                                attribute:NSLayoutAttributeHeight
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:stepVC.view
+                                                                attribute:NSLayoutAttributeHeight
+                                                               multiplier:0.5
+                                                                 constant:0]];
+        
+                
+
+
+        
+        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:restComfortablyView
+                                                                attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual
+                                                                   toItem:stepViewController.view
+                                                                attribute:NSLayoutAttributeCenterY
+                                                               multiplier:1.15
+                                                                 constant:75]];
+        
+        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:restComfortablyView
+                                                                attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual
+                                                                   toItem:stepViewController.view
+                                                                attribute:NSLayoutAttributeWidth
+                                                               multiplier:1
+                                                                 constant:0]];
+        
+//        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:restComfortablyView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:stepViewController.view attribute:NSLayoutAttributeBottom multiplier:0.95 constant:2]];
+        
+        //Notes
+        /*
+         Multipliers are pretty amazing.
+         
+         Strategy to center horizontally with constantsa and multipliers.
+         */
+        
+        
+        
+        // Center horizontally
+        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:stepVC.view
+                                                              attribute:NSLayoutAttributeCenterX
+                                                              relatedBy:NSLayoutRelationEqual
+                                                                 toItem:restComfortablyView
+                                                              attribute:NSLayoutAttributeCenterX
+                                                             multiplier:1.0
+                                                               constant:0.0]];
+        
+        // Center vertically
+//        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:restComfortablyView
+//                                                              attribute:NSLayoutAttributeCenterY
+//                                                              relatedBy:NSLayoutRelationEqual
+//                                                                 toItem:stepVC.view
+//                                                              attribute:NSLayoutAttributeCenterY
+//                                                             multiplier:1.0
+//                                                               constant:0.0]];
+
+        
+        /**** set margin between custom view and rest view **/
+//        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:restComfortablyView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:updatedView attribute:NSLayoutAttributeTop multiplier:1 constant:-100]];
+        
+        
+        
+        [stepVC.view layoutIfNeeded];
         
         stepViewController.continueButton = nil;
         stepViewController.skipButton = nil;
@@ -259,8 +434,8 @@ willPresentStepViewController:(RKStepViewController *)stepViewController{
 - (void)taskViewController:(RKTaskViewController *)taskViewController didProduceResult:(RKDataResult *)result {
 
     NSLog(@"didProduceResult = %@", result.data);
+    self.lastDataResult = result.data;
     
-
     if ([result isKindOfClass:[RKSurveyResult class]]) {
         RKSurveyResult* sresult = (RKSurveyResult*)result;
         
@@ -400,6 +575,14 @@ willPresentStepViewController:(RKStepViewController *)stepViewController{
 /*********************************************************************************/
 
 - (void)fitnessTestHealthKitSampleTypeTracker:(APHFitnessTestHealthKitSampleTypeTracker *)heartRateTracker didUpdateHeartRate:(NSInteger)heartBPM {
+    
+    if (self.heartRateMonitoring == 1) {
+        
+        self.heartRateIsUpdating = YES;
+    }
+    
+    self.heartRateMonitoring = 1;
+    
     
     NSDictionary* heartBPMDictionary = @{@"heartBPM": [NSNumber numberWithInteger:heartBPM],
                                  @"time": @([[NSDate date] timeIntervalSinceReferenceDate])};
