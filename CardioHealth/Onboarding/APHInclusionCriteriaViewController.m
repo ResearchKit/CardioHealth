@@ -53,20 +53,13 @@
     self.question2Label.textColor = [UIColor appSecondaryColor1];
     self.question2Label.font = [UIFont appRegularFontWithSize:19.0f];
     
-    [self.question1Option1 setTitleColor:[UIColor appSecondaryColor3] forState:UIControlStateNormal];
-    [self.question1Option1 setTitleColor:[UIColor appPrimaryColor] forState:UIControlStateSelected];
+    [self.question1Option1 setImage:[[UIImage imageNamed:@"eligibility_patient"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
     [self.question1Option1.titleLabel setFont:[UIFont appRegularFontWithSize:16.0]];
     
-    [self.question1Option2 setTitleColor:[UIColor appSecondaryColor3] forState:UIControlStateNormal];
-    [self.question1Option2 setTitleColor:[UIColor appPrimaryColor] forState:UIControlStateSelected];
+    [self.question1Option2 setImage:[[UIImage imageNamed:@"eligibility_doctor"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
     [self.question1Option2.titleLabel setFont:[UIFont appRegularFontWithSize:16.0]];
-    
-    [self.question2Option1 setTitleColor:[UIColor appSecondaryColor3] forState:UIControlStateNormal];
-    [self.question2Option1 setTitleColor:[UIColor appPrimaryColor] forState:UIControlStateSelected];
+
     [self.question2Option1.titleLabel setFont:[UIFont appRegularFontWithSize:44.0]];
-    
-    [self.question2Option2 setTitleColor:[UIColor appSecondaryColor3] forState:UIControlStateNormal];
-    [self.question2Option2 setTitleColor:[UIColor appPrimaryColor] forState:UIControlStateSelected];
     [self.question2Option2.titleLabel setFont:[UIFont appRegularFontWithSize:44.0]];
 }
 

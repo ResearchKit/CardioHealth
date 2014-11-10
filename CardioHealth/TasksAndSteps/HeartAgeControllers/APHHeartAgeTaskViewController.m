@@ -461,7 +461,10 @@ static  CGFloat  kAPCStepProgressBarHeight = 8.0;
         APHHeartAgeAndRiskFactors *heartAgeAndRiskFactors = [[APHHeartAgeAndRiskFactors alloc] init];
         self.heartAgeInfo = [heartAgeAndRiskFactors calculateHeartAgeAndRiskFactors:surveyResultsDictionary];
         
-        APHHeartAgeResultsViewController *heartAgeResultsVC = [[APHHeartAgeResultsViewController alloc] initWithNibName:@"APHHeartAgeResultsViewController" bundle:nil];
+        NSDictionary *optimalRiskFactors = [heartAgeAndRiskFactors calculateRiskWithOptimalFactors:surveyResultsDictionary];
+        
+        UIStoryboard *sbHeartAgeSummary = [UIStoryboard storyboardWithName:@"APHHeartAgeSummary" bundle:nil];
+        APHHeartAgeResultsViewController *heartAgeResultsVC = [sbHeartAgeSummary instantiateInitialViewController];
         
         heartAgeResultsVC.resultCollector = self;
         heartAgeResultsVC.delegate = self;
@@ -471,6 +474,8 @@ static  CGFloat  kAPCStepProgressBarHeight = 8.0;
         heartAgeResultsVC.heartAge = [self.heartAgeInfo[kSummaryHeartAge] integerValue];
         heartAgeResultsVC.tenYearRisk = self.heartAgeInfo[kSummaryTenYearRisk];
         heartAgeResultsVC.lifetimeRisk = self.heartAgeInfo[kSummaryLifetimeRisk];
+        heartAgeResultsVC.optimalTenYearRisk = optimalRiskFactors[kSummaryTenYearRisk];
+        heartAgeResultsVC.optimalLifetimeRisk = optimalRiskFactors[kSummaryLifetimeRisk];
         
         stepVC = heartAgeResultsVC;
     }
