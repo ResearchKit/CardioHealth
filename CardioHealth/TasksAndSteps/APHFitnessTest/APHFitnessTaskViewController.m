@@ -104,6 +104,8 @@ static  CGFloat  kAPCStepProgressBarHeight = 8.0;
         step.text = NSLocalizedString(@"Get Ready!", @"");
         step.countDown = kCountDownTimer;
         step.useNextForSkip = NO;
+        step.buzz = YES;
+        step.speakCountDown = YES;
         
         [steps addObject:step];
     }

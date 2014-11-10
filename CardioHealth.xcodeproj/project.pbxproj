@@ -713,6 +713,9 @@
 							com.apple.HealthKit = {
 								enabled = 1;
 							};
+							com.apple.InterAppAudio = {
+								enabled = 0;
+							};
 						};
 					};
 				};
