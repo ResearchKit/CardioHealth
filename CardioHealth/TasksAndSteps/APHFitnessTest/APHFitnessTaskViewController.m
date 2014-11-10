@@ -120,7 +120,6 @@ static  CGFloat  kAPCStepProgressBarHeight = 8.0;
         [steps addObject:step];
     }
     
-    
     {
         //Walking 6 minutes
         RKActiveStep* step = [[RKActiveStep alloc] initWithIdentifier:kFitnessTestStep103 name:@"6 Minute Walk"];
