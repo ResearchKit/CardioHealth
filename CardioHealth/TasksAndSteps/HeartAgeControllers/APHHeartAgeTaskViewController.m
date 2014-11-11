@@ -23,7 +23,7 @@ static NSString *kHeartAgeFormStepSmokingHistory = @"smokingHistory";
 static NSString *kHeartAgeFormStepCholesterolHdlSystolic = @"cholesterolHdlSystolic";
 static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
 
-static  CGFloat  kAPCStepProgressBarHeight = 8.0;
+static  CGFloat  kAPCStepProgressBarHeight = 12.0;
 
 @interface APHHeartAgeTaskViewController ()
 

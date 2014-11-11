@@ -59,60 +59,56 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
                                                      name:@"APHFitnessDistanceUpdated"
                                                    object:nil];
         
-/*********************************************************************************/
-#pragma mark functioning code
-/*********************************************************************************/
-        
-        UINib *nib = [UINib nibWithNibName:@"APHFitnessSixMinuteFitnessTestView" bundle:nil];
-        APHFitnessSixMinuteFitnessTestView *updatedView = [[nib instantiateWithOwner:self options:nil] objectAtIndex:0];
-        [updatedView setTranslatesAutoresizingMaskIntoConstraints:NO];
-        
-        RKActiveStepViewController * stepViewController = (RKActiveStepViewController *)viewController;
-        
-        UIView *blankView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 280, 560.00)];
-        [blankView addSubview: updatedView];
-  
-        [stepViewController setCustomView:blankView];
-        [stepViewController.customView setBackgroundColor:[UIColor greenColor]];
-        //[stepViewController.customView addSubview: updatedView];
-        
-        NSDictionary *viewsDictionary = @{@"c": updatedView, @"container" : stepViewController.customView };
-        
-        NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[c(>=160)]" options:0 metrics:nil views:@{@"c":updatedView}];
-        
-        for (NSLayoutConstraint *constraint in verticalConstraints) {
-            constraint.priority = UILayoutPriorityFittingSizeLevel;
-        }
-        
-        [updatedView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[c(>=280)]" options:0 metrics:nil views:@{@"c":updatedView, @"container" : stepViewController}]];
-        
-        [updatedView addConstraints:verticalConstraints];
-        
-        
-        NSArray *constraint_POS_V = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[c]"
-                                                                            options:0
-                                                                            metrics:nil
-                                                                              views:viewsDictionary];
-        
-        NSArray *constraint_POS_V2 = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[c]-0-|"
-                                                                            options:0
-                                                                            metrics:nil
-                                                                              views:viewsDictionary];
-        
-        NSArray *constraint_POS_H = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[c]"
-                                                                            options:0
-                                                                            metrics:nil
-                                                                              views:viewsDictionary];
-        
-        NSArray *constraint_POS_H2 = [NSLayoutConstraint constraintsWithVisualFormat:@"H:[c]-0-|"
-                                                                            options:0
-                                                                            metrics:nil
-                                                                              views:viewsDictionary];
-        
-        [stepViewController.customView addConstraints:constraint_POS_H];
-        [stepViewController.customView addConstraints:constraint_POS_H2];
-        [stepViewController.customView addConstraints:constraint_POS_V];
-        [stepViewController.customView addConstraints:constraint_POS_V2];
+//        UINib *nib = [UINib nibWithNibName:@"APHFitnessSixMinuteFitnessTestView" bundle:nil];
+//        APHFitnessSixMinuteFitnessTestView *updatedView = [[nib instantiateWithOwner:self options:nil] objectAtIndex:0];
+//        [updatedView setTranslatesAutoresizingMaskIntoConstraints:NO];
+//        
+//        RKActiveStepViewController * stepViewController = (RKActiveStepViewController *)viewController;
+//        
+//        UIView *blankView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 280, 560.00)];
+//        [blankView addSubview: updatedView];
+//  
+//        [stepViewController setCustomView:blankView];
+//        [stepViewController.customView setBackgroundColor:[UIColor greenColor]];
+//        //[stepViewController.customView addSubview: updatedView];
+//        
+//        NSDictionary *viewsDictionary = @{@"c": updatedView, @"container" : stepViewController.customView };
+//        
+//        NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[c(>=200)]" options:0 metrics:nil views:@{@"c":updatedView}];
+//        
+//        for (NSLayoutConstraint *constraint in verticalConstraints) {
+//            constraint.priority = UILayoutPriorityFittingSizeLevel;
+//        }
+//        
+//        [updatedView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[c(>=280)]" options:0 metrics:nil views:@{@"c":updatedView, @"container" : stepViewController}]];
+//        
+//        [updatedView addConstraints:verticalConstraints];
+//        
+//        
+//        NSArray *constraint_POS_V = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[c]"
+//                                                                            options:0
+//                                                                            metrics:nil
+//                                                                              views:viewsDictionary];
+//        
+//        NSArray *constraint_POS_V2 = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[c]-0-|"
+//                                                                            options:0
+//                                                                            metrics:nil
+//                                                                              views:viewsDictionary];
+//        
+//        NSArray *constraint_POS_H = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[c]"
+//                                                                            options:0
+//                                                                            metrics:nil
+//                                                                              views:viewsDictionary];
+//        
+//        NSArray *constraint_POS_H2 = [NSLayoutConstraint constraintsWithVisualFormat:@"H:[c]-0-|"
+//                                                                            options:0
+//                                                                            metrics:nil
+//                                                                              views:viewsDictionary];
+//        
+//        [stepViewController.customView addConstraints:constraint_POS_H];
+//        [stepViewController.customView addConstraints:constraint_POS_H2];
+//        [stepViewController.customView addConstraints:constraint_POS_V];
+//        [stepViewController.customView addConstraints:constraint_POS_V2];
         
 
 /*********************************************************************************/
@@ -137,56 +133,56 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
         
         
         
-        UINib *nib = [UINib nibWithNibName:@"APHFitnessTestRestComfortablyView" bundle:nil];
-        APHFitnessTestRestComfortablyView *updatedView = [[nib instantiateWithOwner:self options:nil] objectAtIndex:0];
-        [updatedView setTranslatesAutoresizingMaskIntoConstraints:NO];
-        
-        RKActiveStepViewController * stepViewController = (RKActiveStepViewController *)viewController;
-        
-        UIView *blankView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 280, 560.00)];
-        [blankView addSubview: updatedView];
-        
-        [stepViewController setCustomView:blankView];
-        [stepViewController.customView setBackgroundColor:[UIColor greenColor]];
-        //[stepViewController.customView addSubview: updatedView];
-        
-        NSDictionary *viewsDictionary = @{@"c": updatedView, @"container" : stepViewController.customView };
-        
-        NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[c(>=160)]" options:0 metrics:nil views:@{@"c":updatedView}];
-        
-        for (NSLayoutConstraint *constraint in verticalConstraints) {
-            constraint.priority = UILayoutPriorityFittingSizeLevel;
-        }
-        
-        [updatedView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[c(>=280)]" options:0 metrics:nil views:@{@"c":updatedView, @"container" : stepViewController}]];
-        
-        [updatedView addConstraints:verticalConstraints];
-        
-        
-        NSArray *constraint_POS_V = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[c]"
-                                                                            options:0
-                                                                            metrics:nil
-                                                                              views:viewsDictionary];
-        
-        NSArray *constraint_POS_V2 = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[c]-0-|"
-                                                                             options:0
-                                                                             metrics:nil
-                                                                               views:viewsDictionary];
-        
-        NSArray *constraint_POS_H = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[c]"
-                                                                            options:0
-                                                                            metrics:nil
-                                                                              views:viewsDictionary];
-        
-        NSArray *constraint_POS_H2 = [NSLayoutConstraint constraintsWithVisualFormat:@"H:[c]-0-|"
-                                                                             options:0
-                                                                             metrics:nil
-                                                                               views:viewsDictionary];
-        
-        [stepViewController.customView addConstraints:constraint_POS_H];
-        [stepViewController.customView addConstraints:constraint_POS_H2];
-        [stepViewController.customView addConstraints:constraint_POS_V];
-        [stepViewController.customView addConstraints:constraint_POS_V2];
+//        UINib *nib = [UINib nibWithNibName:@"APHFitnessTestRestComfortablyView" bundle:nil];
+//        APHFitnessTestRestComfortablyView *updatedView = [[nib instantiateWithOwner:self options:nil] objectAtIndex:0];
+//        [updatedView setTranslatesAutoresizingMaskIntoConstraints:NO];
+//        
+//        RKActiveStepViewController * stepViewController = (RKActiveStepViewController *)viewController;
+//        
+//        UIView *blankView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 280, 560.00)];
+//        [blankView addSubview: updatedView];
+//        
+//        [stepViewController setCustomView:blankView];
+//        [stepViewController.customView setBackgroundColor:[UIColor greenColor]];
+//        //[stepViewController.customView addSubview: updatedView];
+//        
+//        NSDictionary *viewsDictionary = @{@"c": updatedView, @"container" : stepViewController.customView };
+//        
+//        NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[c(>=160)]" options:0 metrics:nil views:@{@"c":updatedView}];
+//        
+//        for (NSLayoutConstraint *constraint in verticalConstraints) {
+//            constraint.priority = UILayoutPriorityFittingSizeLevel;
+//        }
+//        
+//        [updatedView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[c(>=280)]" options:0 metrics:nil views:@{@"c":updatedView, @"container" : stepViewController}]];
+//        
+//        [updatedView addConstraints:verticalConstraints];
+//        
+//        
+//        NSArray *constraint_POS_V = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[c]"
+//                                                                            options:0
+//                                                                            metrics:nil
+//                                                                              views:viewsDictionary];
+//        
+//        NSArray *constraint_POS_V2 = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[c]-0-|"
+//                                                                             options:0
+//                                                                             metrics:nil
+//                                                                               views:viewsDictionary];
+//        
+//        NSArray *constraint_POS_H = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[c]"
+//                                                                            options:0
+//                                                                            metrics:nil
+//                                                                              views:viewsDictionary];
+//        
+//        NSArray *constraint_POS_H2 = [NSLayoutConstraint constraintsWithVisualFormat:@"H:[c]-0-|"
+//                                                                             options:0
+//                                                                             metrics:nil
+//                                                                               views:viewsDictionary];
+//        
+//        [stepViewController.customView addConstraints:constraint_POS_H];
+//        [stepViewController.customView addConstraints:constraint_POS_H2];
+//        [stepViewController.customView addConstraints:constraint_POS_V];
+//        [stepViewController.customView addConstraints:constraint_POS_V2];
 
     
     }

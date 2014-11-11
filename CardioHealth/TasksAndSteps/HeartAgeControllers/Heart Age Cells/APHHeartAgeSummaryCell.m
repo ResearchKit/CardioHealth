@@ -7,6 +7,7 @@
 //
 
 #import "APHHeartAgeSummaryCell.h"
+#import "APHTheme.h"
 
 @interface APHHeartAgeSummaryCell()
 
@@ -65,15 +66,15 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     // Color declarations
-    UIColor *lightGray = [UIColor colorWithWhite:0.836 alpha:1.000];
+    UIColor *dividerColor = [APHTheme colorForDividerLine];
     
     // Box that will enclose the Age and Heart Age
-    CGFloat lineWidth = 0.5; //change line width here
+    CGFloat lineWidth = [APHTheme widthForDividerLine];
     
     // Divider line
     CGContextSaveGState(context);
     CGContextSetLineCap(context, kCGLineCapSquare);
-    CGContextSetStrokeColorWithColor(context, lightGray.CGColor); //change color here
+    CGContextSetStrokeColorWithColor(context, dividerColor.CGColor);
     CGContextSetLineWidth(context, lineWidth);
     CGContextMoveToPoint(context, rect.size.width/2, 50 + (lineWidth * 0.5));
     CGContextAddLineToPoint(context, rect.size.width/2, (rect.size.height - 20) + lineWidth * 0.5);
@@ -83,12 +84,19 @@
     // Bottom border
     CGContextSaveGState(context);
     CGContextSetLineCap(context, kCGLineCapSquare);
-    CGContextSetStrokeColorWithColor(context, lightGray.CGColor); //change color here
+    CGContextSetStrokeColorWithColor(context, dividerColor.CGColor);
     CGContextSetLineWidth(context, lineWidth*2);
     CGContextMoveToPoint(context, 0, rect.size.height);
     CGContextAddLineToPoint(context, rect.size.width, rect.size.height);
     CGContextStrokePath(context);
     CGContextRestoreGState(context);
+    
+    // Filled rect
+    CGFloat sidebarWidth = [APHTheme widthForRightCellBorder];
+    CGRect sidebar = CGRectMake(0, 0, sidebarWidth, rect.size.height);
+    UIColor *sidebarColor = [APHTheme colorForRightCellBorder];
+    [sidebarColor setFill];
+    UIRectFill(sidebar);
 }
 
 @end

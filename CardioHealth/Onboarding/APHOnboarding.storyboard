@@ -655,6 +655,7 @@
                         <outlet property="logoImageView" destination="mzv-Du-B0Y" id="c2e-ex-mCw"/>
                         <outlet property="messageLabel" destination="c3M-aS-58O" id="b7N-Cd-Z2R"/>
                         <outlet property="okayButton" destination="gLQ-Qx-ABM" id="EM9-H4-YaL"/>
+                        <outlet property="tableBottomConstraint" destination="BVt-YD-cYs" id="tcW-bG-xVt"/>
                         <outlet property="tableHeaderLabel" destination="FZ6-p7-odm" id="4ur-Ez-Hpg"/>
                         <outlet property="tableView" destination="4LB-xo-RKO" id="UYM-a8-rUf"/>
                     </connections>
