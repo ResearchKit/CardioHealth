@@ -25,7 +25,7 @@ typedef NS_ENUM(NSUInteger, APHHeartAgeSummaryRows)
 {
     APHHeartAgeSummaryRowBanner = 0,
     APHHeartAgeSummaryRowRecommendation,
-    APHHeartAgeSummartNumberOfRows
+    APHHeartAgeSummaryNumberOfRows
 };
 
 // Cell Identifiers
