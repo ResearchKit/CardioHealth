@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		08547C121A11899C00DC6E7C /* APHTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 08547C111A11899C00DC6E7C /* APHTheme.m */; };
 		087476371A0995A600F9A0A8 /* APHDataPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 087476341A0995A600F9A0A8 /* APHDataPoint.m */; };
 		087476381A0995A600F9A0A8 /* APHScoring.m in Sources */ = {isa = PBXBuildFile; fileRef = 087476361A0995A600F9A0A8 /* APHScoring.m */; };
 		08D3A10219E4A08C00A3D20D /* APHHeartAgeAndRiskFactors.m in Sources */ = {isa = PBXBuildFile; fileRef = 08D3A0FA19E4A08C00A3D20D /* APHHeartAgeAndRiskFactors.m */; };
@@ -131,6 +132,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		08547C101A11899C00DC6E7C /* APHTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHTheme.h; sourceTree = "<group>"; };
+		08547C111A11899C00DC6E7C /* APHTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHTheme.m; sourceTree = "<group>"; };
 		087476331A0995A600F9A0A8 /* APHDataPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHDataPoint.h; sourceTree = "<group>"; };
 		087476341A0995A600F9A0A8 /* APHDataPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHDataPoint.m; sourceTree = "<group>"; };
 		087476351A0995A600F9A0A8 /* APHScoring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHScoring.h; sourceTree = "<group>"; };
@@ -193,7 +196,6 @@
 		7BD73F7A19E8A20600F5DFF3 /* Intro.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Intro.mp4; sourceTree = "<group>"; };
 		7BEEFA5D1A003E04004F6C87 /* APHHeartAgeResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHHeartAgeResultsViewController.h; sourceTree = "<group>"; };
 		7BEEFA5E1A003E04004F6C87 /* APHHeartAgeResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHHeartAgeResultsViewController.m; sourceTree = "<group>"; };
-		7BEEFA5F1A003E04004F6C87 /* APHHeartAgeResultsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = APHHeartAgeResultsViewController.xib; sourceTree = "<group>"; };
 		F5165E7919E86581003836CA /* APCParameters.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = APCParameters.json; sourceTree = "<group>"; };
 		F5481F0B19E4820100D84617 /* APHHeartAgeTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHHeartAgeTaskViewController.h; sourceTree = "<group>"; };
 		F5481F0C19E4820100D84617 /* APHHeartAgeTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHHeartAgeTaskViewController.m; sourceTree = "<group>"; };
@@ -444,6 +446,8 @@
 		F55BBDEF19D362D0003CA0F9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				08547C101A11899C00DC6E7C /* APHTheme.h */,
+				08547C111A11899C00DC6E7C /* APHTheme.m */,
 				087476351A0995A600F9A0A8 /* APHScoring.h */,
 				087476361A0995A600F9A0A8 /* APHScoring.m */,
 				087476331A0995A600F9A0A8 /* APHDataPoint.h */,
@@ -797,7 +801,6 @@
 				F55BBE6219D362D0003CA0F9 /* JSON_READ_ME in Resources */,
 				7B4104A319E5E46800592B96 /* APHFitnessTestRestView.xib in Resources */,
 				5BB6471E19F1C07900AA30AA /* temp.storyboard in Resources */,
-				7BEEFA611A003E04004F6C87 /* APHHeartAgeResultsViewController.xib in Resources */,
 				7B41049F19E5E46800592B96 /* APHFitnessSixMinuteFitnessTestView.xib in Resources */,
 				5BB2BAA41A10157B00684CCE /* Learn.json in Resources */,
 				F55BBE6619D362D0003CA0F9 /* LaunchScreen.xib in Resources */,
@@ -846,6 +849,7 @@
 				F55BBE6F19D362D0003CA0F9 /* APHDashboardMessageViewCell.m in Sources */,
 				7B41047E19E5D94F00592B96 /* APHFitnessTaskViewController.m in Sources */,
 				F55BBE5719D362D0003CA0F9 /* NSString+CustomMethods.m in Sources */,
+				08547C121A11899C00DC6E7C /* APHTheme.m in Sources */,
 				087476371A0995A600F9A0A8 /* APHDataPoint.m in Sources */,
 				F5778E7719F0613D0079F1B2 /* APHSignUpGeneralInfoViewController.m in Sources */,
 				F5778E7A19F0613D0079F1B2 /* APHSignupTouchIDViewController.m in Sources */,
