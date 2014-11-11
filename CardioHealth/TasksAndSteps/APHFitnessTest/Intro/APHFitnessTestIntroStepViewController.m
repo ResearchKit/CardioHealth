@@ -66,7 +66,7 @@ static  NSString  *kIntroHeadingCaption = @"Tests for Bradykinesia";
     NSArray  *paragraphs = @[
                              @"Once you tap Get Started, you will have 5 seconds until this test begins tracking your movements.",
                              @"Begin walking at your fastest possible pace for 6 minutes.",
-                             @"After 6 minutes expires, sit down and rest for 3 minutes.",
+                             @"After 6 minutes expires and if you're tracking your BPM sit down and rest for 3 minutes.",
                              @"After the test is finished, your results will be analyzed and available on the dashboard. You will be notified when analysis is ready."
                              ];
     
