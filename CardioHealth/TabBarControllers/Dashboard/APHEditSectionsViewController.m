@@ -80,12 +80,12 @@ static NSString * const SectionNamesCellIdentifier = @"SectionNamesCell";
             break;
         case kDashboardSectionActivity:
         {
-            cell.textLabel.text = NSLocalizedString(@"Activity", @"Activity");
+            cell.textLabel.text = NSLocalizedString(@"Distance", @"Distance");
         }
             break;
         case kDashboardSectionBloodCount:
         {
-            cell.textLabel.text = NSLocalizedString(@"Blood Count", @"Blood Count");
+            cell.textLabel.text = NSLocalizedString(@"Heart Rate", @"Heart Rate");
         }
             break;
         case kDashboardSectionMedications:
