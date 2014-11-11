@@ -25,7 +25,7 @@ typedef NS_ENUM(NSUInteger, APHHeartAgeSummaryRows)
 {
     APHHeartAgeSummaryRowBanner = 0,
     APHHeartAgeSummaryRowRecommendation,
-    APHHeartAgeSummartNumberOfRows
+    APHHeartAgeSummaryNumberOfRows
 };
 
 // Cell Identifiers
@@ -95,8 +95,21 @@ static CGFloat kSectionHeight = 64.0;
 {
     NSUInteger rows = 1;
     
-    if (section != APHHeartAgeSummarySectionTodaysActivities) {
-        rows = APHHeartAgeSummartNumberOfRows;
+    switch (section) {
+        case APHHeartAgeSummarySectionTodaysActivities:
+            break;
+        case APHHeartAgeSummarySectionTenYearRiskEstimate:
+        {
+            if (self.actualAge <= 40) {
+                rows = 0;
+            } else {
+                rows = APHHeartAgeSummaryNumberOfRows;
+            }
+        }
+            break;
+        default:
+            rows = APHHeartAgeSummaryNumberOfRows;
+            break;
     }
     
     return rows;
@@ -251,11 +264,22 @@ static CGFloat kSectionHeight = 64.0;
     
     NSString *calculatedRisk = nil;
     NSString *optimalRisk = nil;
+    static double kOnePercent = 0.01;
     
     if (indexPath.section == APHHeartAgeSummarySectionTenYearRiskEstimate) {
         cell.riskEstimateTitle = NSLocalizedString(@"10 Year Risk Estimate", @"10 year risk estimate");
-        calculatedRisk = [numberFormatter stringFromNumber:self.tenYearRisk];
-        optimalRisk = [numberFormatter stringFromNumber:self.optimalTenYearRisk];
+        
+        if ([self.tenYearRisk doubleValue] < kOnePercent) {
+            calculatedRisk = @"< 1%";
+        } else {
+            calculatedRisk = [numberFormatter stringFromNumber:self.tenYearRisk];
+        }
+        
+        if ([self.optimalTenYearRisk doubleValue] < kOnePercent) {
+            optimalRisk = @"< 1%";
+        } else {
+            optimalRisk = [numberFormatter stringFromNumber:self.optimalTenYearRisk];
+        }
     } else {
         cell.riskEstimateTitle = NSLocalizedString(@"Lifetime Risk Estimate", @"Lifetime risk estimate");
         calculatedRisk = [NSString stringWithFormat:@"%lu%%", [self.lifetimeRisk integerValue]];
