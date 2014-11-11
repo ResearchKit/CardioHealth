@@ -80,6 +80,10 @@
     NSDictionary *heartBeatInfo = notification.userInfo;
     
     self.heartRateBPMLbl.text = [NSString stringWithFormat:@"%@", [heartBeatInfo objectForKey:@"heartBPM"]];
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        self.distanceTrackerLabel.alpha = 1;
+    }];
 }
 
 - (void)receiveStepCountNotification:(NSNotification *)notification {
@@ -92,11 +96,6 @@
     //NSDictionary *distanceUpdatedInfo = notification.userInfo;
     
     self.distanceTrackerLabel.text = [NSString stringWithFormat:@"%@′", self.totalDistance];
-    
-    [UIView animateWithDuration:0.3 animations:^{
-        self.distanceTrackerLabel.alpha = 1;
-    }];
-    
 }
 
 

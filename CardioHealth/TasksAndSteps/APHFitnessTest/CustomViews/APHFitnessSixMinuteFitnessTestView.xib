@@ -76,7 +76,9 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="BPMTitleLabel" destination="cC5-oS-EFY" id="yde-W8-wRO"/>
                 <outlet property="distanceTotalLabel" destination="ebn-g6-URM" id="RZe-t7-AoG"/>
+                <outlet property="heartImage" destination="vhg-vf-yxt" id="TaC-ec-M9S"/>
                 <outlet property="heartRateLabel" destination="17u-5N-srW" id="rk5-EE-och"/>
             </connections>
             <point key="canvasLocation" x="343" y="234"/>
