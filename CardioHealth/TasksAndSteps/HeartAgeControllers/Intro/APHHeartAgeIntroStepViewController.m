@@ -8,8 +8,6 @@
 
 #import "APHHeartAgeIntroStepViewController.h"
 
-static CGFloat kProgressBarHeight = 10.0;
-
 @interface APHHeartAgeIntroStepViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *getStartedButton;
 

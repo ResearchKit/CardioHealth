@@ -80,7 +80,7 @@ static NSString * const kStudyOverviewCellIdentifier = @"kStudyOverviewCellIdent
     
     APCTableViewStudyDetailsItem *studyDetails = [self itemForIndexPath:indexPath];
     
-    if (indexPath.row == 3) {
+    if (indexPath.row == 4) {
         APCShareViewController *shareViewController = [[UIStoryboard storyboardWithName:@"APHOnboarding" bundle:nil] instantiateViewControllerWithIdentifier:@"ShareVC"];
         shareViewController.hidesOkayButton = YES;
         [self.navigationController pushViewController:shareViewController animated:YES];
