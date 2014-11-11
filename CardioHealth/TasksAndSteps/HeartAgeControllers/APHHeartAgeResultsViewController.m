@@ -25,7 +25,7 @@ typedef NS_ENUM(NSUInteger, APHHeartAgeSummaryRows)
 {
     APHHeartAgeSummaryRowBanner = 0,
     APHHeartAgeSummaryRowRecommendation,
-    APHHeartAgeSummartNumberOfRows
+    APHHeartAgeSummaryNumberOfRows
 };
 
 // Cell Identifiers
@@ -95,8 +95,21 @@ static CGFloat kSectionHeight = 64.0;
 {
     NSUInteger rows = 1;
     
-    if (section != APHHeartAgeSummarySectionTodaysActivities) {
-        rows = APHHeartAgeSummartNumberOfRows;
+    switch (section) {
+        case APHHeartAgeSummarySectionTodaysActivities:
+            break;
+        case APHHeartAgeSummarySectionTenYearRiskEstimate:
+        {
+            if (self.actualAge <= 40) {
+                rows = 0;
+            } else {
+                rows = APHHeartAgeSummaryNumberOfRows;
+            }
+        }
+            break;
+        default:
+            rows = APHHeartAgeSummaryNumberOfRows;
+            break;
     }
     
     return rows;
