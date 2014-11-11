@@ -10,7 +10,7 @@
 @interface APHFitnessTestRestComfortablyView ()
 
 @property (weak, nonatomic) IBOutlet UILabel *heartRateBPMLbl;
-@property (weak, nonatomic) IBOutlet UILabel *distanceTrackerLbl;
+
 @property (weak, nonatomic) IBOutlet UILabel *stepCountLbl;
 
 @end
@@ -41,10 +41,15 @@
 //    self.stepCountLbl.text = @"--";
 //    [self.stepCountLbl setBackgroundColor:[UIColor yellowColor]];
 //    [self addSubview:self.stepCountLbl];
-//    
-//    self.distanceTrackerLbl.text = @"--";
+
+    self.distanceTrackerLabel.text = [NSString stringWithFormat:@"%@", self.totalDistance];
+
 //    [self.distanceTrackerLbl setBackgroundColor:[UIColor yellowColor]];
 //    [self addSubview:self.distanceTrackerLbl];
+}
+
+- (void)setTheTotalDistance:(NSNumber *)totalDistance {
+    self.distanceTrackerLabel.text = [NSString stringWithFormat:@"%@", self.totalDistance];
 }
 
 - (id)initWithFrame:(CGRect)aRect
@@ -75,6 +80,10 @@
     NSDictionary *heartBeatInfo = notification.userInfo;
     
     self.heartRateBPMLbl.text = [NSString stringWithFormat:@"%@", [heartBeatInfo objectForKey:@"heartBPM"]];
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        self.distanceTrackerLabel.alpha = 1;
+    }];
 }
 
 - (void)receiveStepCountNotification:(NSNotification *)notification {
@@ -84,9 +93,9 @@
 }
 
 - (void)receiveUpdatedLocationNotification:(NSNotification *)notification {
-    NSDictionary *distanceUpdatedInfo = notification.userInfo;
+    //NSDictionary *distanceUpdatedInfo = notification.userInfo;
     
-    self.distanceTrackerLbl.text = [NSString stringWithFormat:@"%@", [distanceUpdatedInfo objectForKey:@"distance"]];
+    self.distanceTrackerLabel.text = [NSString stringWithFormat:@"%@′", self.totalDistance];
 }
 
 

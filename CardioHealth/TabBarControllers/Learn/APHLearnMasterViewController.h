@@ -1,13 +1,13 @@
 //
 //  APHLearnMasterViewController.h
-//  BasicTabBar
+//  CardioHealth
 //
-//  Created by Henry McGilton on 9/7/14.
-//  Copyright (c) 2014 2014 Y Media Labs. All rights reserved.
+//  Created by Ramsundar Shandilya on 11/9/14.
+//  Copyright (c) 2014 Y Media Labs. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import APCAppleCore;
 
-@interface APHLearnMasterViewController : UITableViewController
+@interface APHLearnMasterViewController : APCLearnMasterViewController
 
 @end

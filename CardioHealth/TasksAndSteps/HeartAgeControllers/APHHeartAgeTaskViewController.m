@@ -23,7 +23,7 @@ static NSString *kHeartAgeFormStepSmokingHistory = @"smokingHistory";
 static NSString *kHeartAgeFormStepCholesterolHdlSystolic = @"cholesterolHdlSystolic";
 static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
 
-static  CGFloat  kAPCStepProgressBarHeight = 8.0;
+static  CGFloat  kAPCStepProgressBarHeight = 12.0;
 
 @interface APHHeartAgeTaskViewController ()
 
@@ -435,7 +435,13 @@ static  CGFloat  kAPCStepProgressBarHeight = 8.0;
                 NSString *questionIdentifier = [[formStepAndFormItemIdentifier componentsSeparatedByString:@"."] lastObject];
                 
                 if ([questionIdentifier isEqualToString:kHeartAgeTestDataEthnicity]) {
-                    [surveyResultsDictionary setObject:(NSString *)questionResult.answer forKey:questionIdentifier];
+                    APCAppDelegate *apcDelegate = [[UIApplication sharedApplication] delegate];
+                    NSString *ethnicity = (NSString *)questionResult.answer;
+                    
+                    // persist ethnicity to the datastore
+                    [apcDelegate.dataSubstrate.currentUser setEthnicity:ethnicity];
+                    
+                    [surveyResultsDictionary setObject:ethnicity forKey:questionIdentifier];
                 } else if ([questionIdentifier isEqualToString:kHeartAgeTestDataGender]) {
                     NSNumber *numericGender = questionResult.answer;
                     NSString *selectedGender = ([numericGender integerValue] == HKBiologicalSexFemale) ? kHeartAgeTestDataGenderFemale :kHeartAgeTestDataGenderMale;
@@ -461,7 +467,10 @@ static  CGFloat  kAPCStepProgressBarHeight = 8.0;
         APHHeartAgeAndRiskFactors *heartAgeAndRiskFactors = [[APHHeartAgeAndRiskFactors alloc] init];
         self.heartAgeInfo = [heartAgeAndRiskFactors calculateHeartAgeAndRiskFactors:surveyResultsDictionary];
         
-        APHHeartAgeResultsViewController *heartAgeResultsVC = [[APHHeartAgeResultsViewController alloc] initWithNibName:@"APHHeartAgeResultsViewController" bundle:nil];
+        NSDictionary *optimalRiskFactors = [heartAgeAndRiskFactors calculateRiskWithOptimalFactors:surveyResultsDictionary];
+        
+        UIStoryboard *sbHeartAgeSummary = [UIStoryboard storyboardWithName:@"APHHeartAgeSummary" bundle:nil];
+        APHHeartAgeResultsViewController *heartAgeResultsVC = [sbHeartAgeSummary instantiateInitialViewController];
         
         heartAgeResultsVC.resultCollector = self;
         heartAgeResultsVC.delegate = self;
@@ -471,6 +480,8 @@ static  CGFloat  kAPCStepProgressBarHeight = 8.0;
         heartAgeResultsVC.heartAge = [self.heartAgeInfo[kSummaryHeartAge] integerValue];
         heartAgeResultsVC.tenYearRisk = self.heartAgeInfo[kSummaryTenYearRisk];
         heartAgeResultsVC.lifetimeRisk = self.heartAgeInfo[kSummaryLifetimeRisk];
+        heartAgeResultsVC.optimalTenYearRisk = optimalRiskFactors[kSummaryTenYearRisk];
+        heartAgeResultsVC.optimalLifetimeRisk = optimalRiskFactors[kSummaryLifetimeRisk];
         
         stepVC = heartAgeResultsVC;
     }

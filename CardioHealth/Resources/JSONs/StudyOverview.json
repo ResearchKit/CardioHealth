@@ -7,23 +7,33 @@
     [
      {
      "title":"About this Study",
-     "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vel turpis id fringilla. Nam pharetra gravida enim consectetur rutrum."
-     },
-     {
-     "title":"How this Study Works",
-     "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vel turpis id fringilla. Nam pharetra gravida enim consectetur rutrum."
+     "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vel turpis id fringilla. Nam pharetra gravida enim consectetur rutrum.",
+     "icon_image":"paperplus_icon",
+     "tint_color" : "blue"
      },
      {
      "title":"Who is Running this Study",
-     "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vel turpis id fringilla. Nam pharetra gravida enim consectetur rutrum."
+     "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vel turpis id fringilla. Nam pharetra gravida enim consectetur rutrum.",
+     "icon_image":"stethescope_icon",
+     "tint_color" : "green"
      },
      {
      "title":"Who is Eligible to Participate",
-     "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vel turpis id fringilla. Nam pharetra gravida enim consectetur rutrum."
+     "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vel turpis id fringilla. Nam pharetra gravida enim consectetur rutrum.",
+     "icon_image":"clipboard_icon",
+     "tint_color" : "yellow"
      },
      {
-     "title":"Length of the Study",
-     "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vel turpis id fringilla. Nam pharetra gravida enim consectetur rutrum."
+     "title":"Length of Study",
+     "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vel turpis id fringilla. Nam pharetra gravida enim consectetur rutrum.",
+     "icon_image":"stopwatch_icon",
+     "tint_color" : "purple"
+     },
+     {
+     "title":"Share this Study",
+     "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vel turpis id fringilla. Nam pharetra gravida enim consectetur rutrum.",
+     "icon_image":"share_icon",
+     "tint_color" : "red"
      }
      ]
 }

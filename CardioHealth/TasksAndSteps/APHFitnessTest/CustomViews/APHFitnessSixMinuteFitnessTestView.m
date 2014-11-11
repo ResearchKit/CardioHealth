@@ -16,7 +16,8 @@ static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
 @property (weak, nonatomic) IBOutlet UILabel *stepCountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *distanceTotalLabel;
 
-
+@property (weak, nonatomic) IBOutlet UIImageView *heartImage;
+@property (weak, nonatomic) IBOutlet UILabel *BPMTitleLabel;
 @property (assign) CLLocationDistance totalDistance;
 @end
 
@@ -85,6 +86,12 @@ static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
 - (void)receiveHeartBPMNotification:(NSNotification *)notification {
     NSDictionary *heartBeatInfo = notification.userInfo;
     
+    [UIView animateWithDuration:0.3 animations:^{
+        self.BPMTitleLabel.alpha = 1;
+        self.heartImage.alpha = 1;
+        self.heartRateLabel.alpha = 1;
+    }];
+
     self.heartRateLabel.text = [NSString stringWithFormat:@"%@", [heartBeatInfo objectForKey:@"heartBPM"]];
 }
 
@@ -104,7 +111,7 @@ static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
     
     CLLocationDistance distanceInFeet = self.totalDistance * kAPHFitnessTestMetersToFeetConversion;
     
-    self.distanceTotalLabel.text = [NSString stringWithFormat:@"%d", (int)roundf(distanceInFeet)];
+    self.distanceTotalLabel.text = [NSString stringWithFormat:@"%d′", (int)roundf(distanceInFeet)];
 }
 
 @end
