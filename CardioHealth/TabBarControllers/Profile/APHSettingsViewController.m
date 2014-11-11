@@ -106,7 +106,6 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
         {
             APCTableViewItem *field = [APCTableViewItem new];
             field.caption = NSLocalizedString(@"Devices", @"");
-            field.detailText = NSLocalizedString(@"Detail", nil);
             field.identifier = kAPCRightDetailTableViewCellIdentifier;
             field.textAlignnment = NSTextAlignmentRight;
             

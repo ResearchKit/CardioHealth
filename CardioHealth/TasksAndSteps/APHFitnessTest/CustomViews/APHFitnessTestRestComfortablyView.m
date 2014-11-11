@@ -95,7 +95,7 @@
 - (void)receiveUpdatedLocationNotification:(NSNotification *)notification {
     //NSDictionary *distanceUpdatedInfo = notification.userInfo;
     
-    self.distanceTrackerLabel.text = [NSString stringWithFormat:@"%@′", self.totalDistance];
+    self.distanceTrackerLabel.text = [NSString stringWithFormat:@"%@ft", self.totalDistance];
 }
 
 

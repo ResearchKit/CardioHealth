@@ -112,9 +112,9 @@ static  CGFloat  kAPCStepProgressBarHeight = 12.0;
         NSMutableArray *stepQuestions = [NSMutableArray array];
         RKFormStep *step = [[RKFormStep alloc] initWithIdentifier:kHeartAgeFormStepSmokingHistory
                                                              name:@"smokingHistory"
-                                                            title:NSLocalizedString(@"Smoking History",
-                                                                                    @"Smoking History")
-                                                         subtitle:nil];
+                                                            title:nil
+                                                         subtitle:NSLocalizedString(@"Smoking History",
+                                                                                    @"Smoking History")];
         step.optional = NO;
         {
             RKFormItem *item = [[RKFormItem alloc] initWithIdentifier:kHeartAgeTestDataSmoke
