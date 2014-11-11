@@ -86,10 +86,12 @@ static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
 - (void)receiveHeartBPMNotification:(NSNotification *)notification {
     NSDictionary *heartBeatInfo = notification.userInfo;
     
-    self.BPMTitleLabel.alpha = 1;
-    self.heartImage.alpha = 1;
-    self.heartRateLabel.alpha = 1;
-    
+    [UIView animateWithDuration:0.3 animations:^{
+        self.BPMTitleLabel.alpha = 1;
+        self.heartImage.alpha = 1;
+        self.heartRateLabel.alpha = 1;
+    }];
+
     self.heartRateLabel.text = [NSString stringWithFormat:@"%@", [heartBeatInfo objectForKey:@"heartBPM"]];
 }
 
