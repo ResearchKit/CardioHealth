@@ -144,7 +144,7 @@ static NSString * const kDashboardMessagesCellIdentifier    = @"DashboardMessage
             cell.textLabel.font = [UIFont appRegularFontWithSize:14.0f];
             NSUInteger allScheduledTasks = ((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.allScheduledTasksForToday;
             NSUInteger completedScheduledTasks = ((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.completedScheduledTasksForToday;
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"%lu/%lu", completedScheduledTasks, allScheduledTasks];
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%lu/%lu", (unsigned long)completedScheduledTasks, (unsigned long)allScheduledTasks];
             cell.detailTextLabel.textColor = [UIColor appSecondaryColor3];
             cell.detailTextLabel.font = [UIFont appRegularFontWithSize:17.0f];
             
