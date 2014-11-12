@@ -28,7 +28,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fIS-Re-7Fl">
-                    <rect key="frame" x="22" y="55" width="279" height="406"/>
+                    <rect key="frame" x="22" y="42" width="279" height="406"/>
                     <color key="backgroundColor" red="0.97647064920000004" green="0.90980398650000005" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="fIS-Re-7Fl" secondAttribute="height" multiplier="24:35" id="zTt-5z-xrG"/>
@@ -51,9 +51,9 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="fIS-Re-7Fl" firstAttribute="top" secondItem="0SX-WE-cMJ" secondAttribute="bottom" constant="14" id="5Hi-19-lzS"/>
+                <constraint firstItem="fIS-Re-7Fl" firstAttribute="top" secondItem="0SX-WE-cMJ" secondAttribute="bottom" constant="1" id="5Hi-19-lzS"/>
                 <constraint firstAttribute="trailing" secondItem="E1y-Bp-4si" secondAttribute="trailing" id="Drj-iX-duk"/>
-                <constraint firstItem="E1y-Bp-4si" firstAttribute="top" secondItem="fIS-Re-7Fl" secondAttribute="bottom" constant="-21" id="E74-SK-VFV"/>
+                <constraint firstItem="E1y-Bp-4si" firstAttribute="top" secondItem="fIS-Re-7Fl" secondAttribute="bottom" constant="-8" id="E74-SK-VFV"/>
                 <constraint firstItem="0SX-WE-cMJ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="EHg-Ja-gtF"/>
                 <constraint firstItem="E1y-Bp-4si" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Lrb-lg-3cX"/>
                 <constraint firstItem="0SX-WE-cMJ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="OA1-GW-q93"/>
