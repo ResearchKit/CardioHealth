@@ -47,7 +47,7 @@ static NSString *InformationCell = @"InformationCell";
     completedScheduledTasks = MIN(allScheduledTasks, completedScheduledTasks+1);
     CGFloat percent = (CGFloat) completedScheduledTasks / (CGFloat) allScheduledTasks;
     [self.circularProgress setProgress:percent];
-    self.label3.text = [NSString stringWithFormat:@"%lu/%lu", completedScheduledTasks, allScheduledTasks];
+    self.label3.text = [NSString stringWithFormat:@"%lu/%lu", (unsigned long)completedScheduledTasks, (unsigned long)allScheduledTasks];
     
 //    self.circularProgress = [[APCCircularProgressView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.circularProgressBar.frame), CGRectGetHeight(self.circularProgressBar.frame))];
 //    self.circularProgress.hidesProgressValue = YES;

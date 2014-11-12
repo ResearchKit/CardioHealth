@@ -231,7 +231,7 @@ static CGFloat kSectionHeight = 64.0;
     completedScheduledTasks = MIN(allScheduledTasks, completedScheduledTasks+1);
     CGFloat percent = (CGFloat) completedScheduledTasks / (CGFloat) allScheduledTasks;
     
-    cell.activitiesCount = [NSString stringWithFormat:@"%lu/%lu", completedScheduledTasks, allScheduledTasks];
+    cell.activitiesCount = [NSString stringWithFormat:@"%lu/%lu", (unsigned long)completedScheduledTasks, (unsigned long)allScheduledTasks];
     cell.activitiesProgress = [NSNumber numberWithFloat:percent];
     
     return cell;
@@ -245,8 +245,8 @@ static CGFloat kSectionHeight = 64.0;
     cell.actualAgeLabel = NSLocalizedString(@"Actual Age", @"Actual Age");
     cell.heartAgeLabel = NSLocalizedString(@"Heart Age", @"Heart Age");
     
-    cell.actualAgeValue = [NSString stringWithFormat:@"%lu", self.actualAge];
-    cell.heartAgeValue = [NSString stringWithFormat:@"%lu", self.heartAge];
+    cell.actualAgeValue = [NSString stringWithFormat:@"%lu", (unsigned long)self.actualAge];
+    cell.heartAgeValue = [NSString stringWithFormat:@"%lu", (unsigned long)self.heartAge];
     
     return cell;
 }
@@ -282,8 +282,8 @@ static CGFloat kSectionHeight = 64.0;
         }
     } else {
         cell.riskEstimateTitle = NSLocalizedString(@"Lifetime Risk Estimate", @"Lifetime risk estimate");
-        calculatedRisk = [NSString stringWithFormat:@"%lu%%", [self.lifetimeRisk integerValue]];
-        optimalRisk = [NSString stringWithFormat:@"%lu%%", [self.lifetimeRisk integerValue]];
+        calculatedRisk = [NSString stringWithFormat:@"%lu%%", (long)[self.lifetimeRisk integerValue]];
+        optimalRisk = [NSString stringWithFormat:@"%lu%%", (long)[self.lifetimeRisk integerValue]];
     }
     
     cell.calculatedRiskValue = calculatedRisk;

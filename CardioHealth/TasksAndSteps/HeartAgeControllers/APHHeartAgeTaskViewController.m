@@ -245,7 +245,12 @@ static  CGFloat  kAPCStepProgressBarHeight = 12.0;
     
     APCStepProgressBar  *tempProgressor = [[APCStepProgressBar alloc] initWithFrame:progressorFrame style:APCStepProgressBarStyleOnlyProgressView];
     
-    RKTask  *task = self.task;
+    RKTask  *task = nil;
+    
+    if ([self.task isKindOfClass:[RKTask class]]) {
+        task =  (RKTask *)self.task;
+    }
+    
     NSArray  *steps = task.steps;
     tempProgressor.numberOfSteps = [steps count];
     [tempProgressor setCompletedSteps: 1 animation:NO];
