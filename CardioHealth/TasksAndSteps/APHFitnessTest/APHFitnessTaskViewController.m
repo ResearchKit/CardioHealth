@@ -57,7 +57,7 @@ static  CGFloat  kAPCStepProgressBarHeight = 12.0;
     
     RKTask  *task = nil;
     
-    if ([self.task isMemberOfClass:[RKTask class]]) {
+    if ([self.task isKindOfClass:[RKTask class]]) {
         task =  (RKTask *)self.task;
     }
     
