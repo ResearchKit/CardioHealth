@@ -23,7 +23,7 @@ static  NSString  *kFitnessTestStep104 = @"FitnessStep104";
 static  NSString  *kFitnessTestStep105 = @"FitnessStep105";
 static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
 
-static  CGFloat  kAPCStepProgressBarHeight = 12.0;
+static  CGFloat  kAPCStepProgressBarHeight = 8.0;
 
 @interface APHFitnessTaskViewController ()
 
