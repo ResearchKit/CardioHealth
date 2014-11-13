@@ -8,7 +8,6 @@
 
 #import "APHSevenDayFitnessAllocationTaskViewController.h"
 #import "APHSevenDayFitnessIntroStepViewController.h"
-//#import "APHFitnessTestIntroStepViewController.h"
 
 static NSString *kMainStudyIdentifier = @"com.cardioVascular.sevenDayFitnessAllocation";
 static NSString *kSevenDayFitnessInstructionStep = @"sevenDayFitnessInstructionStep";
@@ -23,6 +22,9 @@ static NSString *kSevenDayFitnessInstructionStep = @"sevenDayFitnessInstructionS
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.showsProgressInNavigationBar = NO;
+    self.navigationBar.topItem.title = @"Activity Tracking";
 }
 
 - (void)didReceiveMemoryWarning {
