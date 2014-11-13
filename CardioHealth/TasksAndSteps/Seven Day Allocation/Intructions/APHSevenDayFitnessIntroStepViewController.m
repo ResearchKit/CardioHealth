@@ -86,7 +86,8 @@ static  NSString  *kIntroHeadingCaption = @"Tests for Bradykinesia";
     [super viewDidLoad];
     
     self.title = kViewControllerTitle;
-    [self.getStartedButton setBackgroundImage:[UIImage imageWithColor:[UIColor appPrimaryColor]] forState:UIControlStateNormal];
+    [self.getStartedButton setBackgroundImage:[UIImage imageWithColor:[UIColor appPrimaryColor]]
+                                     forState:UIControlStateNormal];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -94,7 +95,9 @@ static  NSString  *kIntroHeadingCaption = @"Tests for Bradykinesia";
     [super viewWillAppear:animated];
     
     self.title = kViewControllerTitle;
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonTapped:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                                                                           target:self
+                                                                                           action:@selector(cancelButtonTapped:)];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -108,17 +111,5 @@ static  NSString  *kIntroHeadingCaption = @"Tests for Bradykinesia";
 {
     [super didReceiveMemoryWarning];
 }
-
-//- (void)viewImportantDetailsSelected:(APHIntroductionViewController *)introductionViewController {
-//    NSLog(@"clicky");
-//    
-//    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"APHImportantDetailsTableViewController" bundle:nil];
-//    UITableViewController *vc = [sb instantiateViewControllerWithIdentifier:@"APHImportantDetailsTableViewController"];
-//    vc.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-//    
-//    
-//    
-//    [self presentViewController:vc animated:YES completion:NULL];
-//}
 
 @end

@@ -6,10 +6,8 @@
 //  Copyright (c) 2014 Y Media Labs. All rights reserved.
 //
 
-//#import <APCAppleCore/APCAppleCore.h>
 @import APCAppleCore;
-//#import "APHIntroductionViewController.h"
 
-@interface APHSevenDayFitnessIntroStepViewController : APCStepViewController //<APHIntroductionViewControllerDelegate>
+@interface APHSevenDayFitnessIntroStepViewController : APCStepViewController
 
 @end
