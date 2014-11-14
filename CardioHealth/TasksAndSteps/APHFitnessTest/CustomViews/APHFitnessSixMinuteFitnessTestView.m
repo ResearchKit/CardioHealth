@@ -123,6 +123,8 @@ static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
         CLLocationDistance distanceInFeet = self.totalDistance * kAPHFitnessTestMetersToFeetConversion;
         
         self.distanceTotalLabel.text = [NSString stringWithFormat:@"%dft", (int)roundf(distanceInFeet)];
+        
+        self.previousLocation = location;
     }
 }
 
