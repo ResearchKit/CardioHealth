@@ -643,9 +643,10 @@ static  CGFloat  kAPCStepProgressBarHeight = 12.0;
 /**
  * @brief Did update locations.
  */
-- (void)fitnessTestDistanceTracker:(APHFitnessTestDistanceTracker *)parameters didUpdateLocations:(CLLocationDistance)distance {
+- (void)fitnessTestDistanceTracker:(APHFitnessTestDistanceTracker *)parameters didUpdateLocations:(CLLocation *)location {
     
-    NSDictionary* dictionary = @{@"distance": [NSNumber numberWithDouble:distance],
+    NSDictionary* dictionary = @{@"latitude" : [NSNumber numberWithDouble:location.coordinate.latitude],
+                                 @"longitude" : [NSNumber numberWithDouble:location.coordinate.longitude],
                                  @"time": @([[NSDate date] timeIntervalSinceReferenceDate])};
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"APHFitnessDistanceUpdated" object:self userInfo:dictionary];
