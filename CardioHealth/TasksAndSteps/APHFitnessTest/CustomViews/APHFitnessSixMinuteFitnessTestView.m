@@ -19,6 +19,7 @@ static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
 @property (weak, nonatomic) IBOutlet UIImageView *heartImage;
 @property (weak, nonatomic) IBOutlet UILabel *BPMTitleLabel;
 @property (assign) CLLocationDistance totalDistance;
+@property (strong, nonatomic) CLLocation *previousLocation;
 @end
 
 @implementation APHFitnessSixMinuteFitnessTestView
@@ -105,13 +106,24 @@ static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
     
     NSMutableDictionary *distanceUpdatedInfo = [notification.userInfo mutableCopy];
     
-    CLLocationDistance distance = [[distanceUpdatedInfo objectForKey:@"distance"] doubleValue];
+    CLLocationDegrees latitude = [[distanceUpdatedInfo objectForKey:@"latitude"] doubleValue];
+    CLLocationDegrees longitude = [[distanceUpdatedInfo objectForKey:@"longitude"] doubleValue];
     
-    self.totalDistance += distance;
+    CLLocation *location = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
     
-    CLLocationDistance distanceInFeet = self.totalDistance * kAPHFitnessTestMetersToFeetConversion;
-    
-    self.distanceTotalLabel.text = [NSString stringWithFormat:@"%dft", (int)roundf(distanceInFeet)];
+    if (!self.previousLocation) {
+        
+        self.previousLocation = location;
+    } else {
+        
+        CLLocationDistance distance = [self.previousLocation distanceFromLocation:location];
+        
+        self.totalDistance += distance;
+        
+        CLLocationDistance distanceInFeet = self.totalDistance * kAPHFitnessTestMetersToFeetConversion;
+        
+        self.distanceTotalLabel.text = [NSString stringWithFormat:@"%dft", (int)roundf(distanceInFeet)];
+    }
 }
 
 @end

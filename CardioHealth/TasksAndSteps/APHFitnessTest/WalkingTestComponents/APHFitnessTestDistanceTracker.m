@@ -175,7 +175,7 @@ static const NSUInteger kAPHValidLocationHistoryDeltaInterval = 3;     // the ma
     
         //Return the updated distance
         NSLog(@"Update View");
-        [self didUpdateLocation:distance];
+        [self didUpdateLocation:bestLocation];
     
         
         self.temporaryLocationPoint = bestLocation;
@@ -241,13 +241,13 @@ static const NSUInteger kAPHValidLocationHistoryDeltaInterval = 3;     // the ma
     }
 }
 
-- (void) didUpdateLocation:(CLLocationDistance)distance
+- (void) didUpdateLocation:(CLLocation *)location
 {
     //TODO return the total distance traveled
     
     if ( [self.delegate respondsToSelector:@selector(fitnessTestDistanceTracker:didUpdateLocations:)] ) {
         
-        [self.delegate fitnessTestDistanceTracker:self didUpdateLocations:distance];
+        [self.delegate fitnessTestDistanceTracker:self didUpdateLocations:location];
     }
 }
 
