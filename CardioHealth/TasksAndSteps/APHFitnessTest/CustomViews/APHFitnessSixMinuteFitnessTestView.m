@@ -106,7 +106,7 @@ static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
                       target:self
                       selector:@selector(blink)
                       userInfo:nil
-                      repeats:TRUE];
+                      repeats:YES];
     }
 
     self.heartRateLabel.text = [NSString stringWithFormat:@"%@", [heartBeatInfo objectForKey:@"heartBPM"]];

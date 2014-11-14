@@ -91,7 +91,7 @@
                       target:self
                       selector:@selector(blink)
                       userInfo:nil
-                      repeats:TRUE];
+                      repeats:YES];
     }
     
     [UIView animateWithDuration:0.3 animations:^{
