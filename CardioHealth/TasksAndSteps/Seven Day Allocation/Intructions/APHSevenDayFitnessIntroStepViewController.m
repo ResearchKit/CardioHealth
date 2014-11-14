@@ -9,17 +9,13 @@
 #import "APHSevenDayFitnessIntroStepViewController.h"
 #import "APHIntroductionViewController.h"
 
-static  NSString  *kViewControllerTitle = @"Interval Tapping";
-
-static  NSString  *kIntroHeadingCaption = @"Tests for Bradykinesia";
-
 @interface APHSevenDayFitnessIntroStepViewController () <APHIntroductionViewControllerDelegate>
 
 @property (nonatomic, strong) APHIntroductionViewController *instructionsController;
 
 @property (nonatomic, weak) IBOutlet UILabel  *introHeadingCaption;
 @property (nonatomic, weak) IBOutlet UIView   *instructionsContainer;
-@property (nonatomic, weak) IBOutlet UIButton *getStartedButton;
+@property (nonatomic, weak) IBOutlet UIButton *btnGetStarted;
 
 @property (nonatomic, strong) NSArray *instructionalParagraphs;
 
@@ -27,16 +23,9 @@ static  NSString  *kIntroHeadingCaption = @"Tests for Bradykinesia";
 
 @implementation APHSevenDayFitnessIntroStepViewController
 
-#pragma  mark  -  Initialisation
-
-+ (void)initialize
-{
-    kIntroHeadingCaption = NSLocalizedString(@"7 Day Fitness Test", nil);
-}
-
 #pragma  mark  -  Actions
 
-- (IBAction)getStartedWasTapped:(id)sender
+- (IBAction)handleGetStarted:(UIButton *)sender
 {
     if (self.delegate != nil) {
         if ([self.delegate respondsToSelector:@selector(stepViewControllerDidFinish:navigationDirection:)] == YES) {
@@ -45,7 +34,7 @@ static  NSString  *kIntroHeadingCaption = @"Tests for Bradykinesia";
     }
 }
 
-- (void)cancelButtonTapped:(id)sender
+- (void)handleCancel:(id)sender
 {
     if (self.delegate != nil) {
         if ([self.delegate respondsToSelector:@selector(stepViewControllerDidCancel:)] == YES) {
@@ -82,29 +71,23 @@ static  NSString  *kIntroHeadingCaption = @"Tests for Bradykinesia";
 
 - (void)viewDidLoad
 {
-
     [super viewDidLoad];
     
-    self.title = kViewControllerTitle;
-    [self.getStartedButton setBackgroundImage:[UIImage imageWithColor:[UIColor appPrimaryColor]]
-                                     forState:UIControlStateNormal];
+    [self.btnGetStarted setBackgroundColor:[UIColor appPrimaryColor]];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    self.title = kViewControllerTitle;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                                                            target:self
-                                                                                           action:@selector(cancelButtonTapped:)];
+                                                                                           action:@selector(handleCancel:)];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
-    self.title = kViewControllerTitle;
 }
 
 - (void)didReceiveMemoryWarning

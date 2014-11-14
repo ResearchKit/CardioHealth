@@ -7,7 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="APHSevenDayFitnessIntroStepViewController">
             <connections>
-                <outlet property="getStartedButton" destination="E1y-Bp-4si" id="usq-Il-9Kp"/>
+                <outlet property="btnGetStarted" destination="E1y-Bp-4si" id="W7t-Av-vbA"/>
                 <outlet property="instructionsContainer" destination="fIS-Re-7Fl" id="tCU-Vv-Xzv"/>
                 <outlet property="introHeadingCaption" destination="0SX-WE-cMJ" id="qG1-XL-qS2"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -45,7 +45,7 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="getStartedWasTapped:" destination="-1" eventType="touchUpInside" id="D3Q-9K-eZX"/>
+                        <action selector="handleGetStarted:" destination="-1" eventType="touchUpInside" id="TP4-jb-GdR"/>
                     </connections>
                 </button>
             </subviews>
