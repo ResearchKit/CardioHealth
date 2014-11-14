@@ -8,6 +8,6 @@
 @import APCAppleCore;
 #import <Foundation/Foundation.h>
 
-@interface APHHeartAgeTaskViewController : APCSetupTaskViewController
+@interface APHHeartAgeTaskViewController : APCBaseWithProgressTaskViewController
 
 @end

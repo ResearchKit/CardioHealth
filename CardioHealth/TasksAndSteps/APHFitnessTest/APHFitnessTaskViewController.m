@@ -15,7 +15,7 @@
 
 static NSString *MainStudyIdentifier = @"com.cardioVascular.fitnessTest";
 static NSString *kdataResultsFileName = @"FitnessTestResult.json";
-static NSInteger kCountDownTimer = 5;
+
 static  NSString  *kFitnessTestStep101 = @"FitnessStep101";
 static  NSString  *kFitnessTestStep102 = @"FitnessStep102";
 static  NSString  *kFitnessTestStep103 = @"FitnessStep103";
@@ -23,7 +23,8 @@ static  NSString  *kFitnessTestStep104 = @"FitnessStep104";
 static  NSString  *kFitnessTestStep105 = @"FitnessStep105";
 static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
 
-static  CGFloat  kAPCStepProgressBarHeight = 8.0;
+static NSInteger kCountDownTimer = 1;
+static  CGFloat  kAPCStepProgressBarHeight = 12.0;
 
 @interface APHFitnessTaskViewController ()
 
@@ -130,10 +131,10 @@ static  CGFloat  kAPCStepProgressBarHeight = 8.0;
         RKActiveStep* step = [[RKActiveStep alloc] initWithIdentifier:kFitnessTestStep103 name:@"6 Minute Walk"];
         step.recorderConfigurations = @[[APHFitnessTestCustomRecorderConfiguration new]];
         step.caption = NSLocalizedString(@"Start Walking", @"");
-        step.text = NSLocalizedString(@"Start Walking", @"");
+        step.text = @"   \n      ";
         step.buzz = YES;
         step.vibration = YES;
-        step.voicePrompt = step.text;
+        step.voicePrompt = NSLocalizedString(@"Start Walking", @"");
         step.countDown = [[parameters numberForKey:@"FT6Min"] doubleValue];
         step.useNextForSkip = NO;
         
@@ -257,6 +258,36 @@ static  CGFloat  kAPCStepProgressBarHeight = 8.0;
         
         RKActiveStepViewController *stepVC = (RKActiveStepViewController *) stepViewController;
         
+        //Adding "Time" subview
+        UILabel *countdownTitle = [UILabel new];
+        [countdownTitle setTranslatesAutoresizingMaskIntoConstraints:NO];
+        [countdownTitle setBackgroundColor:[UIColor clearColor]];
+        countdownTitle.text = @"Time";
+        countdownTitle.textAlignment = NSTextAlignmentCenter;
+        
+        [countdownTitle addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[c(>=55)]" options:0 metrics:nil views:@{@"c":countdownTitle}]];
+
+        //TODO Add Font and Size
+        /*******************/
+        [countdownTitle setFont:[UIFont fontWithName:@"HelveticaNeue" size:32]];
+        
+        [stepVC.view addSubview:countdownTitle];
+        
+        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:countdownTitle attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:stepVC.view attribute:NSLayoutAttributeLeading multiplier:1.0f constant:0.0f]];
+
+        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:countdownTitle attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:stepVC.view attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0.0f]];
+        
+        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:countdownTitle attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:stepVC.view attribute:NSLayoutAttributeCenterY multiplier:0.47f constant:5.0f]];
+        
+        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:countdownTitle
+                                                                attribute:NSLayoutAttributeCenterX
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:stepVC.view
+                                                                attribute:NSLayoutAttributeCenterX
+                                                               multiplier:1.0
+                                                                 constant:0.0]];
+        
+        //Adding custom view which includes the distance and BPM.
         UIView *updatedView = [UIView new];
         
         [stepVC setCustomView:updatedView];
@@ -322,6 +353,37 @@ static  CGFloat  kAPCStepProgressBarHeight = 8.0;
 
         RKActiveStepViewController *stepVC = (RKActiveStepViewController *) stepViewController;
         
+        
+        //Adding "Time" subview
+        UILabel *countdownTitle = [UILabel new];
+        [countdownTitle setTranslatesAutoresizingMaskIntoConstraints:NO];
+        [countdownTitle setBackgroundColor:[UIColor clearColor]];
+        countdownTitle.text = @"Time";
+        countdownTitle.textAlignment = NSTextAlignmentCenter;
+        
+        [countdownTitle addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[c(>=55)]" options:0 metrics:nil views:@{@"c":countdownTitle}]];
+        
+        //TODO Add Font and Size
+        /*******************/
+        [countdownTitle setFont:[UIFont fontWithName:@"HelveticaNeue" size:32]];
+        
+        [stepVC.view addSubview:countdownTitle];
+        
+        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:countdownTitle attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:stepVC.view attribute:NSLayoutAttributeLeading multiplier:1.0f constant:0.0f]];
+        
+        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:countdownTitle attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:stepVC.view attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0.0f]];
+        
+        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:countdownTitle attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:stepVC.view attribute:NSLayoutAttributeCenterY multiplier:0.47f constant:5.0f]];
+        
+        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:countdownTitle
+                                                                attribute:NSLayoutAttributeCenterX
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:stepVC.view
+                                                                attribute:NSLayoutAttributeCenterX
+                                                               multiplier:1.0
+                                                                 constant:0.0]];
+        
+        //Adding custom view which includes the distance and BPM.
         UIView *updatedView = [UIView new];
         
         [stepVC setCustomView:updatedView];
@@ -365,10 +427,6 @@ static  CGFloat  kAPCStepProgressBarHeight = 8.0;
                                                                multiplier:0.5
                                                                  constant:0]];
         
-                
-
-
-        
         [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:restComfortablyView
                                                                 attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual
                                                                    toItem:stepViewController.view
@@ -383,18 +441,6 @@ static  CGFloat  kAPCStepProgressBarHeight = 8.0;
                                                                multiplier:1
                                                                  constant:0]];
         
-//        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:restComfortablyView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:stepViewController.view attribute:NSLayoutAttributeBottom multiplier:0.95 constant:2]];
-        
-        //Notes
-        /*
-         Multipliers are pretty amazing.
-         
-         Strategy to center horizontally with constantsa and multipliers.
-         */
-        
-        
-        
-        // Center horizontally
         [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:stepVC.view
                                                               attribute:NSLayoutAttributeCenterX
                                                               relatedBy:NSLayoutRelationEqual
@@ -402,20 +448,6 @@ static  CGFloat  kAPCStepProgressBarHeight = 8.0;
                                                               attribute:NSLayoutAttributeCenterX
                                                              multiplier:1.0
                                                                constant:0.0]];
-        
-        // Center vertically
-//        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:restComfortablyView
-//                                                              attribute:NSLayoutAttributeCenterY
-//                                                              relatedBy:NSLayoutRelationEqual
-//                                                                 toItem:stepVC.view
-//                                                              attribute:NSLayoutAttributeCenterY
-//                                                             multiplier:1.0
-//                                                               constant:0.0]];
-
-        
-        /**** set margin between custom view and rest view **/
-//        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:restComfortablyView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:updatedView attribute:NSLayoutAttributeTop multiplier:1 constant:-100]];
-        
         
         
         [stepVC.view layoutIfNeeded];

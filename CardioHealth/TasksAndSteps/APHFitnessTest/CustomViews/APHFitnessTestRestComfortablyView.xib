@@ -31,7 +31,7 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="6minwalk-Icon-bpm" translatesAutoresizingMaskIntoConstraints="NO" id="dE5-kV-vfm">
+                <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="6minwalk-Icon-bpm" translatesAutoresizingMaskIntoConstraints="NO" id="dE5-kV-vfm">
                     <rect key="frame" x="90" y="179" width="30" height="30"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="30" id="HHy-QE-UHP"/>
@@ -77,6 +77,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="distanceTrackerLabel" destination="AQY-x7-7Vg" id="KVw-IL-wvU"/>
+                <outlet property="heartImage" destination="dE5-kV-vfm" id="HB5-09-2DD"/>
                 <outlet property="heartRateBPMLbl" destination="ouE-yV-Jxe" id="a7s-Or-nEl"/>
             </connections>
             <point key="canvasLocation" x="343" y="234"/>
