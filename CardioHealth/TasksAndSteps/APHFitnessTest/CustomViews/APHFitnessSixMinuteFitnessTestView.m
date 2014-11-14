@@ -19,12 +19,21 @@ static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
 @property (weak, nonatomic) IBOutlet UIImageView *heartImage;
 @property (weak, nonatomic) IBOutlet UILabel *BPMTitleLabel;
 @property (assign) CLLocationDistance totalDistance;
+
+@property (assign) BOOL blinkStatus;
+@property (nonatomic, strong) NSTimer *timer;
 @end
 
 @implementation APHFitnessSixMinuteFitnessTestView
 
 - (void)commonInit
 {
+    
+    self.blinkStatus = NO;
+    
+    
+    
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(receiveHeartBPMNotification:)
                                                  name:@"APHFitnessHeartRateBPMUpdated"
@@ -88,13 +97,41 @@ static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
     
     [UIView animateWithDuration:0.3 animations:^{
         self.BPMTitleLabel.alpha = 1;
-        self.heartImage.alpha = 1;
         self.heartRateLabel.alpha = 1;
     }];
+    
+    if (!self.timer) {
+        self.timer = [NSTimer
+                      scheduledTimerWithTimeInterval:(NSTimeInterval)(0.5)
+                      target:self
+                      selector:@selector(blink)
+                      userInfo:nil
+                      repeats:TRUE];
+    }
 
     self.heartRateLabel.text = [NSString stringWithFormat:@"%@", [heartBeatInfo objectForKey:@"heartBPM"]];
 }
 
+-(void)blink{
+    
+    if(self.blinkStatus == NO){
+
+        [UIView animateWithDuration:0.1 animations:^{
+            self.heartImage.alpha = 0;
+        }];
+        
+        [self.heartImage setImage:[UIImage imageNamed:@"CD-pulsingIcon-1-2"]];
+        self.blinkStatus = YES;
+    }else {
+
+        [UIView animateWithDuration:0.3 animations:^{
+            self.heartImage.alpha = 0.9;
+        }];
+        
+        [self.heartImage setImage:[UIImage imageNamed:@"CD-pulsingIcon-1-2"]];
+        self.blinkStatus = NO;
+    }
+}
 - (void)receiveStepCountNotification:(NSNotification *)notification {
     NSDictionary *stepCountInfo = notification.userInfo;
 
