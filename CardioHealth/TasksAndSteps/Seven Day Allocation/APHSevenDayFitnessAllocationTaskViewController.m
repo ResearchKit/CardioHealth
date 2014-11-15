@@ -8,9 +8,12 @@
 
 #import "APHSevenDayFitnessAllocationTaskViewController.h"
 #import "APHSevenDayFitnessIntroStepViewController.h"
+#import "APHActivityTrackingStepViewController.h"
 
 static NSString *kMainStudyIdentifier = @"com.cardioVascular.sevenDayFitnessAllocation";
 static NSString *kSevenDayFitnessInstructionStep = @"sevenDayFitnessInstructionStep";
+static NSString *kSevenDayFitnessActivityStep = @"sevenDayFitnessActivityStep";
+static NSString *kSevenDayFitnessCompleteStep = @"sevenDayFitnessCompleteStep";
 
 @interface APHSevenDayFitnessAllocationTaskViewController ()
 
@@ -46,14 +49,11 @@ static NSString *kSevenDayFitnessInstructionStep = @"sevenDayFitnessInstructionS
     }
     
     {
-        //Introduction to fitness test
-        RKActiveStep* step = [[RKActiveStep alloc] initWithIdentifier:@"Step102" name:@"active step"];
-        step.caption = NSLocalizedString(@"Fitness Test", @"");
-        step.text = NSLocalizedString(@"Get Ready!", @"");
-        step.countDown = 2.0;
-        step.useNextForSkip = NO;
-        step.buzz = YES;
-        step.speakCountDown = YES;
+        // Seven Day Fitness Allocation Step
+        RKActiveStep* step = [[RKActiveStep alloc] initWithIdentifier:kSevenDayFitnessActivityStep
+                                                                 name:@"Activity Tracking"];
+        step.caption = NSLocalizedString(@"Activity Tracking", @"Activity Tracking");
+        step.text = NSLocalizedString(@"Get Ready!", @"Get Ready");
         
         [steps addObject:step];
     }
@@ -71,16 +71,24 @@ static NSString *kSevenDayFitnessInstructionStep = @"sevenDayFitnessInstructionS
     RKStepViewController *stepVC = nil;
     
     if (step.identifier == kSevenDayFitnessInstructionStep) {
-        NSDictionary  *controllers = @{kSevenDayFitnessInstructionStep: [APHSevenDayFitnessIntroStepViewController class] };
-        
+        NSDictionary  *controllers = @{kSevenDayFitnessInstructionStep: [APHSevenDayFitnessIntroStepViewController class]};
         Class  aClass = [controllers objectForKey:step.identifier];
-        APCStepViewController  *controller = [[aClass alloc] initWithNibName:nil bundle:nil];
+        APCStepViewController *controller = [[aClass alloc] initWithNibName:nil bundle:nil];
         controller.resultCollector = self;
         controller.delegate = self;
         controller.title = @"Activity Tracking";
         controller.step = step;
         
         stepVC = controller;
+    } else if (step.identifier == kSevenDayFitnessActivityStep) {
+        UIStoryboard *sbActivityTracking = [UIStoryboard storyboardWithName:@"APHActivityTracking" bundle:nil];
+        APHActivityTrackingStepViewController *activityVC = [sbActivityTracking instantiateInitialViewController];
+        
+        activityVC.resultCollector = self;
+        activityVC.delegate = self;
+        activityVC.step = step;
+        
+        stepVC = activityVC;
     }
     
     return stepVC;

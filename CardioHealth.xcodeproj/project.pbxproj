@@ -13,6 +13,8 @@
 		08C2328A1A15796E00DB4EF9 /* APHSevenDayFitnessAllocationTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08C232821A15796E00DB4EF9 /* APHSevenDayFitnessAllocationTaskViewController.m */; };
 		08C2328C1A15796E00DB4EF9 /* APHSevenDayFitnessIntroStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08C232871A15796E00DB4EF9 /* APHSevenDayFitnessIntroStepViewController.m */; };
 		08C2328D1A15796E00DB4EF9 /* APHSevenDayFitnessIntroStepViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C232881A15796E00DB4EF9 /* APHSevenDayFitnessIntroStepViewController.xib */; };
+		08C56E361A15E75400D3BF61 /* APHActivityTrackingStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08C56E351A15E75400D3BF61 /* APHActivityTrackingStepViewController.m */; };
+		08C56E391A15E7D100D3BF61 /* APHActivityTracking.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08C56E381A15E7D100D3BF61 /* APHActivityTracking.storyboard */; };
 		08D3A10219E4A08C00A3D20D /* APHHeartAgeAndRiskFactors.m in Sources */ = {isa = PBXBuildFile; fileRef = 08D3A0FA19E4A08C00A3D20D /* APHHeartAgeAndRiskFactors.m */; };
 		08FA97FB1A10630F002317C8 /* APHHeartAgeSummary.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08FA97FA1A10630F002317C8 /* APHHeartAgeSummary.storyboard */; };
 		08FA97FF1A108680002317C8 /* APHHeartAgeTodaysActivitiesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FA97FE1A108680002317C8 /* APHHeartAgeTodaysActivitiesCell.m */; };
@@ -146,6 +148,9 @@
 		08C232861A15796E00DB4EF9 /* APHSevenDayFitnessIntroStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHSevenDayFitnessIntroStepViewController.h; sourceTree = "<group>"; };
 		08C232871A15796E00DB4EF9 /* APHSevenDayFitnessIntroStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHSevenDayFitnessIntroStepViewController.m; sourceTree = "<group>"; };
 		08C232881A15796E00DB4EF9 /* APHSevenDayFitnessIntroStepViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = APHSevenDayFitnessIntroStepViewController.xib; sourceTree = "<group>"; };
+		08C56E341A15E75400D3BF61 /* APHActivityTrackingStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APHActivityTrackingStepViewController.h; path = "Activity Tracking/APHActivityTrackingStepViewController.h"; sourceTree = "<group>"; };
+		08C56E351A15E75400D3BF61 /* APHActivityTrackingStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APHActivityTrackingStepViewController.m; path = "Activity Tracking/APHActivityTrackingStepViewController.m"; sourceTree = "<group>"; };
+		08C56E381A15E7D100D3BF61 /* APHActivityTracking.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = APHActivityTracking.storyboard; path = "Activity Tracking/APHActivityTracking.storyboard"; sourceTree = "<group>"; };
 		08D3A0F919E4A08C00A3D20D /* APHHeartAgeAndRiskFactors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHHeartAgeAndRiskFactors.h; sourceTree = "<group>"; };
 		08D3A0FA19E4A08C00A3D20D /* APHHeartAgeAndRiskFactors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHHeartAgeAndRiskFactors.m; sourceTree = "<group>"; };
 		08FA97FA1A10630F002317C8 /* APHHeartAgeSummary.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = APHHeartAgeSummary.storyboard; sourceTree = "<group>"; };
@@ -300,19 +305,31 @@
 			children = (
 				08C232811A15796E00DB4EF9 /* APHSevenDayFitnessAllocationTaskViewController.h */,
 				08C232821A15796E00DB4EF9 /* APHSevenDayFitnessAllocationTaskViewController.m */,
-				08C232851A15796E00DB4EF9 /* Intructions */,
+				08C232851A15796E00DB4EF9 /* Instructions */,
+				08C56E371A15E75800D3BF61 /* Activity Tracking */,
 			);
 			path = "Seven Day Allocation";
 			sourceTree = "<group>";
 		};
-		08C232851A15796E00DB4EF9 /* Intructions */ = {
+		08C232851A15796E00DB4EF9 /* Instructions */ = {
 			isa = PBXGroup;
 			children = (
 				08C232861A15796E00DB4EF9 /* APHSevenDayFitnessIntroStepViewController.h */,
 				08C232871A15796E00DB4EF9 /* APHSevenDayFitnessIntroStepViewController.m */,
 				08C232881A15796E00DB4EF9 /* APHSevenDayFitnessIntroStepViewController.xib */,
 			);
+			name = Instructions;
 			path = Intructions;
+			sourceTree = "<group>";
+		};
+		08C56E371A15E75800D3BF61 /* Activity Tracking */ = {
+			isa = PBXGroup;
+			children = (
+				08C56E341A15E75400D3BF61 /* APHActivityTrackingStepViewController.h */,
+				08C56E351A15E75400D3BF61 /* APHActivityTrackingStepViewController.m */,
+				08C56E381A15E7D100D3BF61 /* APHActivityTracking.storyboard */,
+			);
+			name = "Activity Tracking";
 			sourceTree = "<group>";
 		};
 		08D3A0F819E4A08C00A3D20D /* HeartAgeRiskFactorCalculations */ = {
@@ -816,6 +833,7 @@
 				F5165E7A19E86581003836CA /* APCParameters.json in Resources */,
 				5B5A31341A10A78600552F7D /* WithdrawStudy.json in Resources */,
 				F55BBE6719D362D0003CA0F9 /* Main.storyboard in Resources */,
+				08C56E391A15E7D100D3BF61 /* APHActivityTracking.storyboard in Resources */,
 				7BD73F7B19E8A20600F5DFF3 /* Intro.mp4 in Resources */,
 				08C2328D1A15796E00DB4EF9 /* APHSevenDayFitnessIntroStepViewController.xib in Resources */,
 				F55BBE7119D362D0003CA0F9 /* APHLearn.storyboard in Resources */,
@@ -860,6 +878,7 @@
 				7B41049019E5D94F00592B96 /* APHFitnessTestHealthKitSampleTypeTracker.m in Sources */,
 				7B8E912F19FADA180040F77F /* APHIntroductionViewController.m in Sources */,
 				5B5A312E1A10A3EA00552F7D /* APHWithdrawSurveyViewController.m in Sources */,
+				08C56E361A15E75400D3BF61 /* APHActivityTrackingStepViewController.m in Sources */,
 				5B55FE3A1A056A4D009BEE5E /* APHSettingsViewController.m in Sources */,
 				F5778E7319F0613D0079F1B2 /* APHInEligibleViewController.m in Sources */,
 				5B5A31261A10848500552F7D /* APHLearnStudyDetailsViewController.m in Sources */,
