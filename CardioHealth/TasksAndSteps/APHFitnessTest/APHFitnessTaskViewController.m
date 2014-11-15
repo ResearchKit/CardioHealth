@@ -25,6 +25,7 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
 
 static NSInteger kCountDownTimer = 1;
 static  CGFloat  kAPCStepProgressBarHeight = 12.0;
+static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
 
 @interface APHFitnessTaskViewController ()
 
@@ -39,6 +40,9 @@ static  CGFloat  kAPCStepProgressBarHeight = 12.0;
 
 @property (strong, nonatomic) NSData *lastDataResult;
 
+@property (strong, nonatomic) CLLocation *previousLocation;
+@property (assign) CLLocationDistance totalDistance;
+@property (assign) BOOL finishedSixMinuteStep;
 @end
 
 @implementation APHFitnessTaskViewController
@@ -70,6 +74,9 @@ static  CGFloat  kAPCStepProgressBarHeight = 12.0;
     self.progressor = tempProgressor;
     
     self.showsProgressInNavigationBar = NO;
+    
+    //sixMinuteStepFlag
+    self.finishedSixMinuteStep = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -195,6 +202,10 @@ static  CGFloat  kAPCStepProgressBarHeight = 12.0;
 - (void)stepViewControllerDidFinish:(RKStepViewController *)stepViewController navigationDirection:(RKStepViewControllerNavigationDirection)direction
 {
     [super stepViewControllerDidFinish:stepViewController navigationDirection:direction];
+    
+    if (stepViewController.step.identifier == kFitnessTestStep103) {
+        self.finishedSixMinuteStep = YES;
+    }
     
     NSInteger  completedSteps = self.progressor.completedSteps;
     if (direction == RKStepViewControllerNavigationDirectionForward) {
@@ -404,16 +415,11 @@ static  CGFloat  kAPCStepProgressBarHeight = 12.0;
         
         [stepVC.view addSubview:restComfortablyView];
         
-        NSError* error;
-        NSDictionary* json = [NSJSONSerialization JSONObjectWithData:self.lastDataResult
-                                                             options:kNilOptions
-                                                               error:&error];
+        CLLocationDistance distanceInFeet = self.totalDistance * kAPHFitnessTestMetersToFeetConversion;
         
-        NSArray* distances = [json objectForKey:@"distance"];
+        [NSString stringWithFormat:@"%dft", (int)roundf(distanceInFeet)];
         
-        NSDictionary *lastObject = [distances lastObject];
-        
-        [restComfortablyView setTotalDistance:[NSNumber numberWithInteger:[lastObject[@"totalDistanceInFeet"] integerValue]]];
+        [restComfortablyView setTotalDistance:[NSNumber numberWithInt:(int)roundf(distanceInFeet)]];
         
         [restComfortablyView setTranslatesAutoresizingMaskIntoConstraints:NO];
         
@@ -648,6 +654,21 @@ static  CGFloat  kAPCStepProgressBarHeight = 12.0;
     NSDictionary* dictionary = @{@"latitude" : [NSNumber numberWithDouble:location.coordinate.latitude],
                                  @"longitude" : [NSNumber numberWithDouble:location.coordinate.longitude],
                                  @"time": @([[NSDate date] timeIntervalSinceReferenceDate])};
+    
+    if (!self.finishedSixMinuteStep) {
+        
+        if (!self.previousLocation) {
+            
+            self.previousLocation = location;
+        } else {
+            
+            CLLocationDistance distance = [self.previousLocation distanceFromLocation:location];
+            
+            self.totalDistance += distance;
+            
+            self.previousLocation = location;
+        }
+    }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"APHFitnessDistanceUpdated" object:self userInfo:dictionary];
 }
