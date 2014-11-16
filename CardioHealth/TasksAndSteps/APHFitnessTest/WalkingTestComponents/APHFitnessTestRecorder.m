@@ -27,7 +27,7 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
 @property (nonatomic, strong) NSMutableArray* distanceRecords;
 @property (nonatomic, strong) NSMutableArray* heartRateRecords;
 @property (nonatomic, strong) NSMutableArray* stepCountRecords;
-//@property (nonatomic, strong) NSTimer* timer;
+@property (strong, nonatomic) CLLocation *previousLocation;
 
 @property (assign) CLLocationDistance totalDistance;
 @end
@@ -232,14 +232,26 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
 - (void)receiveUpdatedLocationNotification:(NSNotification *)notification {
     NSMutableDictionary *distanceUpdatedInfo = [notification.userInfo mutableCopy];
     
-    CLLocationDistance distance = [[distanceUpdatedInfo objectForKey:@"distance"] doubleValue];
-    self.totalDistance += distance;
+    CLLocationDegrees latitude = [[distanceUpdatedInfo objectForKey:@"latitude"] doubleValue];
+    CLLocationDegrees longitude = [[distanceUpdatedInfo objectForKey:@"longitude"] doubleValue];
     
-    CLLocationDistance distanceInFeet = self.totalDistance * kAPHFitnessTestMetersToFeetConversion;
+    CLLocation *location = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
     
-    distanceUpdatedInfo[@"totalDistanceInFeet"] = @(distanceInFeet);
-    
-    [self.distanceRecords addObject:distanceUpdatedInfo];
+    if (!self.previousLocation) {
+        
+        self.previousLocation = location;
+    } else {
+        
+        CLLocationDistance distance = [self.previousLocation distanceFromLocation:location];
+        
+        self.totalDistance += distance;
+        
+        CLLocationDistance distanceInFeet = self.totalDistance * kAPHFitnessTestMetersToFeetConversion;
+        
+        distanceUpdatedInfo[@"totalDistanceInFeet"] = @(distanceInFeet);
+        
+        [self.distanceRecords addObject:distanceUpdatedInfo];
+    }
 }
 
 

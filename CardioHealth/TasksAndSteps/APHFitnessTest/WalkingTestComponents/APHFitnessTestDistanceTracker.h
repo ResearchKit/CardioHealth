@@ -84,7 +84,7 @@ typedef NS_ENUM(NSInteger, APHLocationManagerGPSSignalStrength) {
 /**
  * @brief Did update locations.
  */
-- (void)fitnessTestDistanceTracker:(APHFitnessTestDistanceTracker *)distanceTracker didUpdateLocations:(CLLocationDistance)distance;
+- (void)fitnessTestDistanceTracker:(APHFitnessTestDistanceTracker *)distanceTracker didUpdateLocations:(CLLocation *)location;
 
 /**
  * @brief Signal strength changed
