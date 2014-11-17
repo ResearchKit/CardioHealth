@@ -104,13 +104,13 @@ static NSInteger kIntervalByDay = 1;
 {
     NSLog(@"Start/End: %@/%@", startDate, endDate);
     
-    HKQuantityType *stepCount = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDistanceWalkingRunning];
+    HKQuantityType *distance = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDistanceWalkingRunning];
     NSPredicate *predicate = [HKQuery predicateForSamplesWithStartDate:startDate
                                                                endDate:endDate
                                                                options:HKQueryOptionStrictStartDate];
     HKStatisticsOptions sumOptions = HKStatisticsOptionCumulativeSum;
     HKStatisticsQuery *query;
-    query = [[HKStatisticsQuery alloc] initWithQuantityType:stepCount
+    query = [[HKStatisticsQuery alloc] initWithQuantityType:distance
                                     quantitySamplePredicate:predicate
                                                     options:sumOptions
                                           completionHandler:^(HKStatisticsQuery *query, HKStatistics *result, NSError *error) {
