@@ -74,11 +74,11 @@
                                     <constraint firstItem="69k-ZL-o2M" firstAttribute="top" secondItem="U6v-h5-YfZ" secondAttribute="top" constant="3" id="lpo-AQ-YuD"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5zS-Qy-ghC">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5zS-Qy-ghC" customClass="APHActivitySummaryView">
                                 <rect key="frame" x="0.0" y="81" width="600" height="411"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hwJ-uI-4hb">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hwJ-uI-4hb" customClass="APHActivityLegendView">
                                 <rect key="frame" x="0.0" y="492" width="600" height="44"/>
                                 <color key="backgroundColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -105,7 +105,9 @@
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
+                        <outlet property="chartView" destination="5zS-Qy-ghC" id="H3w-TY-Isq"/>
                         <outlet property="daysRemaining" destination="uN4-Ax-0TN" id="fHh-gs-f2j"/>
+                        <outlet property="legendView" destination="hwJ-uI-4hb" id="Xhi-7Z-4Dj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wVk-sI-Vwd" userLabel="First Responder" sceneMemberID="firstResponder"/>
