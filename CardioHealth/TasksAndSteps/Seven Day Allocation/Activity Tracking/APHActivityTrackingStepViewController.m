@@ -22,7 +22,8 @@ static NSInteger kIntervalByDay = 1;
 @property (weak, nonatomic) IBOutlet UIView *legendView;
 
 @property (nonatomic, strong) HKHealthStore *healthStore;
-@property (nonatomic, strong) NSMutableArray *dataset;
+@property (nonatomic, strong) NSMutableArray *datasetForToday;
+@property (nonatomic, strong) NSMutableArray *datasetForTheWeek;
 @property (nonatomic, strong) NSMutableArray *normalizedSegmentValues;
 
 @property (nonatomic) NSUInteger numberOfSegments;
@@ -44,7 +45,8 @@ static NSInteger kIntervalByDay = 1;
                                                                              action:@selector(handleClose:)];
     self.view.layer.backgroundColor = [UIColor colorWithWhite:0.973 alpha:1.000].CGColor;
     
-    self.dataset = [NSMutableArray array];
+    self.datasetForToday = [NSMutableArray array];
+    self.datasetForTheWeek = [NSMutableArray array];
     
     if ([HKHealthStore isHealthDataAvailable]) {
         self.healthStore = [[HKHealthStore alloc] init];
@@ -59,6 +61,9 @@ static NSInteger kIntervalByDay = 1;
                                                         
                                                         return;
                                                     }
+                                                    
+                                                    [self runStatsCollectionQueryForSpan:kStatusForToday];
+                                                    [self runStatsCollectionQueryForSpan:kStatusForTheWeek];
                                                 }];
     }
 }
@@ -71,18 +76,22 @@ static NSInteger kIntervalByDay = 1;
 
 - (IBAction)handleToday:(UIButton *)sender
 {
-    NSLog(@"Tapped Today.");
-    [self runStatsCollectionQueryForSpan:kStatusForToday];
+    [self showDataForKind:kStatusForToday];
 }
 
 - (IBAction)handleWeek:(UIButton *)sender
 {
-    NSLog(@"Tapped Week.");
-    [self runStatsCollectionQueryForSpan:kStatusForTheWeek];
+    [self showDataForKind:kStatusForTheWeek];
 }
 
-- (void)showData
+- (void)showDataForKind:(NSInteger)kind
 {
+    if (kind == kStatusForToday) {
+        [self normalizeData:self.datasetForToday];
+    } else {
+        [self normalizeData:self.datasetForTheWeek];
+    }
+    
     self.chartView.hideAllLabels = YES;
     self.chartView.numberOfSegments = self.numberOfSegments;
     [self.chartView drawWithSegmentValues:self.normalizedSegmentValues];
@@ -90,7 +99,6 @@ static NSInteger kIntervalByDay = 1;
 
 - (void)handleClose:(UIBarButtonItem *)sender
 {
-    NSLog(@"You tapped close.");
     if (self.delegate != nil) {
         if ([self.delegate respondsToSelector:@selector(stepViewControllerDidFinish:navigationDirection:)] == YES) {
             [self.delegate stepViewControllerDidFinish:self navigationDirection:RKStepViewControllerNavigationDirectionForward];
@@ -162,17 +170,21 @@ static NSInteger kIntervalByDay = 1;
                                                double value = [quantity doubleValueForUnit:[HKUnit meterUnit]];
                                                double mileValue = value/1609.344;
                                                
-                                               [self.dataset addObject:@{
-                                                                         @"date": date,
-                                                                         @"value": [NSNumber numberWithDouble:value]
-                                                                        }];
-                                               
+                                               if (span == kStatusForToday) {
+                                                   [self.datasetForToday addObject:@{
+                                                                             @"date": date,
+                                                                             @"value": [NSNumber numberWithDouble:value]
+                                                                             }];
+                                               } else {
+                                                   [self.datasetForTheWeek addObject:@{
+                                                                             @"date": date,
+                                                                             @"value": [NSNumber numberWithDouble:value]
+                                                                             }];
+                                               }
                                                
                                                NSLog(@"%@: %f (%f)", date, value, mileValue);
                                            }
                                        }];
-            [self normalizeData];
-            [self showData];
         }
     };
     
@@ -231,7 +243,7 @@ static NSInteger kIntervalByDay = 1;
 
 #pragma mark - Normalize Data
 
-- (void)normalizeData
+- (void)normalizeData:(NSArray *)dataset
 {
     // Why 4? Because we only have 4 segments that needs to be
     // displayed: Inactive, sedentary, moderate, and vigorous.
@@ -248,7 +260,7 @@ static NSInteger kIntervalByDay = 1;
                                                                     @{@"segmentName": @"Vigorous", @"value": @0}
                                                                    ]];
     
-    for (NSDictionary *data in self.dataset) {
+    for (NSDictionary *data in dataset) {
         NSUInteger segment = 0;
         NSUInteger value = [data[@"value"] integerValue];
         
