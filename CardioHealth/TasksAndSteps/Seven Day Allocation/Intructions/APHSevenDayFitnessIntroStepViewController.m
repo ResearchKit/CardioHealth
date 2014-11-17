@@ -48,7 +48,7 @@
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     
-    NSArray  *introImageNames = @[@"6minwalk", @"Updated-Data-Cardio"];
+    NSArray  *introImageNames = @[@"tutorial-1", @"tutorial-2"];
     
     NSArray  *paragraphs = @[
                              NSLocalizedString(@"During the next week, your fitness allocation will be monitored, analyed, and available to you in real time.",
