@@ -75,15 +75,8 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5zS-Qy-ghC" customClass="APHActivitySummaryView">
-                                <rect key="frame" x="0.0" y="81" width="600" height="411"/>
+                                <rect key="frame" x="0.0" y="81" width="600" height="455"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hwJ-uI-4hb" customClass="APHActivityLegendView">
-                                <rect key="frame" x="0.0" y="492" width="600" height="44"/>
-                                <color key="backgroundColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="Bnz-pm-h06"/>
-                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.97254902124404907" green="0.97254902124404907" blue="0.97254902124404907" alpha="1" colorSpace="calibratedRGB"/>
@@ -92,14 +85,12 @@
                             <constraint firstItem="uN4-Ax-0TN" firstAttribute="leading" secondItem="IaW-xM-au3" secondAttribute="leadingMargin" id="7C0-tc-KqE"/>
                             <constraint firstAttribute="trailing" secondItem="5zS-Qy-ghC" secondAttribute="trailing" id="8eU-wU-KoX"/>
                             <constraint firstAttribute="centerX" secondItem="uN4-Ax-0TN" secondAttribute="centerX" id="CRv-Ot-qnk"/>
+                            <constraint firstItem="5zS-Qy-ghC" firstAttribute="bottom" secondItem="upX-AZ-JBq" secondAttribute="top" id="NOx-Ls-tHs"/>
                             <constraint firstItem="U6v-h5-YfZ" firstAttribute="leading" secondItem="IaW-xM-au3" secondAttribute="leading" id="OLD-8J-Y8Y"/>
                             <constraint firstAttribute="trailing" secondItem="U6v-h5-YfZ" secondAttribute="trailing" id="U1v-9f-PwD"/>
-                            <constraint firstItem="hwJ-uI-4hb" firstAttribute="leading" secondItem="IaW-xM-au3" secondAttribute="leading" id="Z85-EV-Ocl"/>
-                            <constraint firstItem="upX-AZ-JBq" firstAttribute="top" secondItem="hwJ-uI-4hb" secondAttribute="bottom" id="anp-Xf-qxn"/>
                             <constraint firstItem="5zS-Qy-ghC" firstAttribute="top" secondItem="U6v-h5-YfZ" secondAttribute="bottom" id="hre-Vw-Cgm"/>
-                            <constraint firstItem="hwJ-uI-4hb" firstAttribute="top" secondItem="5zS-Qy-ghC" secondAttribute="bottom" id="lNp-Z1-G7c"/>
                             <constraint firstItem="5zS-Qy-ghC" firstAttribute="leading" secondItem="IaW-xM-au3" secondAttribute="leading" id="nkk-ex-o4f"/>
-                            <constraint firstAttribute="trailing" secondItem="hwJ-uI-4hb" secondAttribute="trailing" id="pf7-XA-1il"/>
+                            <constraint firstItem="5zS-Qy-ghC" firstAttribute="top" secondItem="IaW-xM-au3" secondAttribute="top" constant="81" id="rSd-s2-yhk"/>
                             <constraint firstItem="U6v-h5-YfZ" firstAttribute="top" secondItem="uN4-Ax-0TN" secondAttribute="bottom" constant="8" id="typ-GZ-LEJ"/>
                         </constraints>
                     </view>
@@ -107,7 +98,6 @@
                     <connections>
                         <outlet property="chartView" destination="5zS-Qy-ghC" id="H3w-TY-Isq"/>
                         <outlet property="daysRemaining" destination="uN4-Ax-0TN" id="fHh-gs-f2j"/>
-                        <outlet property="legendView" destination="hwJ-uI-4hb" id="Xhi-7Z-4Dj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wVk-sI-Vwd" userLabel="First Responder" sceneMemberID="firstResponder"/>
