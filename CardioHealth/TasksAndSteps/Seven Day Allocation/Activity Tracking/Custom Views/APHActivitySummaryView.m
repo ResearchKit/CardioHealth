@@ -20,6 +20,7 @@ NSString *const kDatasetSegmentNameKey = @"datasetSegmentNameKey";
 @property (nonatomic, strong) NSArray *segementColors;
 
 @property (nonatomic) double lastPercentage;
+@property (nonatomic) double sumQuantity;
 
 @end
 
@@ -51,8 +52,6 @@ NSString *const kDatasetSegmentNameKey = @"datasetSegmentNameKey";
 {
     // Add the CAShapeLayer
     // Set up the shape of the circle
-    NSLog(@"Width %f (%f)", self.frame.size.width, self.frame.size.width * 0.3);
-    
     int radius = self.frame.size.width * 0.3;
     _circle = [CAShapeLayer layer];
     // Make a circular shape
@@ -93,22 +92,27 @@ NSString *const kDatasetSegmentNameKey = @"datasetSegmentNameKey";
 {
     if (values) {
         self.segmentValues = values;
+        self.sumQuantity = [[self.segmentValues valueForKeyPath:@"@sum.datasetValueKey"] doubleValue];
+        
         [self drawCircle];
     }
 }
+
+#pragma mark - Percent
 
 - (double)percentageOfValue:(double)value
 {
     double percentage = 0.0;
     
-    NSNumber *valueSum = [self.segmentValues valueForKeyPath:@"@sum.datasetValueKey"];
-    
-    percentage = value / [valueSum doubleValue];
+    percentage = value / self.sumQuantity;
     
     NSLog(@"%f", percentage);
     
     return percentage;
 }
+
+#pragma mark - Drawing
+#pragma mark Legend
 
 - (void)drawLegend
 {
@@ -130,6 +134,8 @@ NSString *const kDatasetSegmentNameKey = @"datasetSegmentNameKey";
         [self.layer addSublayer:dot];
     }
 }
+
+#pragma mark Circle
 
 - (void)drawCircle
 {
