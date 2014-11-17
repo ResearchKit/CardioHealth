@@ -7,11 +7,13 @@
 //
 
 #import "APHActivitySummaryView.h"
+#import "APHTheme.h"
 
 @interface APHActivitySummaryView()
 
 @property (nonatomic, strong) CAShapeLayer *circle;
 @property (nonatomic, strong) NSArray *segmentValues;
+@property (nonatomic, strong) NSArray *segementColors;
 
 @property (nonatomic) double lastPercentage;
 
@@ -22,6 +24,12 @@
 - (void)commonInit
 {
     self.backgroundColor = [UIColor whiteColor];
+    self.segementColors = @[
+                            [APHTheme colorForActivityInactive],
+                            [APHTheme colorForActivitySedentary],
+                            [APHTheme colorForActivityModerate],
+                            [APHTheme colorForActivityVigorous]
+                           ];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -48,15 +56,25 @@
                                               cornerRadius:radius].CGPath;
     // Center the shape in self.view
     _circle.position = CGPointMake(CGRectGetMidX(self.frame)-radius,
-                                   CGRectGetMidY(self.frame)-radius);
+                                   CGRectGetMidY(self.frame)-radius*2);
     
     // Configure the apperence of the circle
     _circle.fillColor = [UIColor clearColor].CGColor;
-    _circle.strokeColor = [UIColor colorWithWhite:0.973 alpha:1.000].CGColor;
+    _circle.strokeColor = [APHTheme colorForActivityOutline].CGColor;
     _circle.lineWidth = 20;
     
     // Add to parent layer
     [self.layer addSublayer:self.circle];
+    
+    CAShapeLayer *border = [CAShapeLayer layer];
+    border.path = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - 64)].CGPath;
+    border.fillColor = [UIColor clearColor].CGColor;
+    border.strokeColor = [APHTheme colorForDividerLine].CGColor;
+    border.lineWidth = 1.0;
+    
+    [self.layer addSublayer:border];
+    
+    [self drawLegend];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -88,6 +106,27 @@
     return percentage;
 }
 
+- (void)drawLegend
+{
+    int radius = 10;
+    
+    for (NSInteger idx = 0; idx < 4; idx++) {
+        CAShapeLayer *dot = [CAShapeLayer layer];
+        // Make a circular shape
+        dot.path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, 2.0*radius, 2.0*radius)
+                                              cornerRadius:radius].CGPath;
+        dot.position = CGPointMake(10 + self.frame.size.width/4 * idx + (radius*2), self.frame.size.height - 54);
+    
+        // Configure the apperence of the circle
+        dot.fillColor = [[self.segementColors objectAtIndex:idx] CGColor];
+        dot.strokeColor = [UIColor clearColor].CGColor;
+        dot.lineWidth = 1;
+        
+        // Add to parent layer
+        [self.layer addSublayer:dot];
+    }
+}
+
 - (void)drawCircle
 {
     [CATransaction begin];
@@ -98,29 +137,6 @@
         }];
         
         for (NSInteger idx = 0; idx < self.numberOfSegments; idx++) {
-            UIColor *segmentColor = nil;
-            
-            switch (idx) {
-                case 0:
-                    // Inactive
-                    segmentColor = [UIColor colorWithRed:0.176 green:0.706 blue:0.980 alpha:1.000];
-                    break;
-                case 1:
-                    // Sedentary
-                    segmentColor = [UIColor colorWithRed:0.608 green:0.196 blue:0.867 alpha:1.000];
-                    break;
-                case 2:
-                    // Moderate
-                    segmentColor = [UIColor colorWithRed:0.145 green:0.851 blue:0.443 alpha:1.000];
-                    break;
-                case 3:
-                    // Vigorous
-                    segmentColor = [UIColor colorWithRed:0.957 green:0.745 blue:0.290 alpha:1.000];
-                    break;
-                default:
-                    break;
-            }
-            
             CAShapeLayer* strokePart = [[CAShapeLayer alloc] init];
             strokePart.fillColor = [[UIColor clearColor] CGColor];
             strokePart.frame = self.circle.bounds;
@@ -128,7 +144,7 @@
             strokePart.lineCap = self.circle.lineCap;
             strokePart.lineWidth = self.circle.lineWidth;
             
-            strokePart.strokeColor = segmentColor.CGColor;
+            strokePart.strokeColor = [[self.segementColors objectAtIndex:idx] CGColor];
             
             if (idx == 0) {
                 strokePart.strokeStart = 0.0;
