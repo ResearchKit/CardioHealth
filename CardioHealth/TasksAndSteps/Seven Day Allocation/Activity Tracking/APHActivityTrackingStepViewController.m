@@ -233,9 +233,9 @@ static NSInteger kIntervalByDay = 1;
                                                                                 toDate:[NSDate date] // today
                                                                                options:NSCalendarWrapComponents];
     if ([numberOfDaysRemaining day] == 1) {
-        remaining = [NSString stringWithFormat:@"%lu Day Remaining", [numberOfDaysRemaining day]];
+        remaining = [NSString stringWithFormat:NSLocalizedString(@"%lu Day Remaining", @"{count} Day Renmaining"), [numberOfDaysRemaining day]];
     } else {
-        remaining = [NSString stringWithFormat:@"%lu Days Remaining", [numberOfDaysRemaining day]];
+        remaining = [NSString stringWithFormat:NSLocalizedString(@"%lu Days Remaining", @"{count} Days Remaining"), [numberOfDaysRemaining day]];
     }
     
     return remaining;
@@ -254,10 +254,10 @@ static NSInteger kIntervalByDay = 1;
     NSRange moderateRange = NSMakeRange(0, 1207); // number beyond this is considered vigorous
     
     self.normalizedSegmentValues = [NSMutableArray arrayWithArray:@[
-                                                                    @{@"segmentName": @"Inactive", @"value": @0},
-                                                                    @{@"segmentName": @"Sedentary", @"value": @0},
-                                                                    @{@"segmentName": @"Moderate", @"value": @0},
-                                                                    @{@"segmentName": @"Vigorous", @"value": @0}
+                                                                    @{@"segmentName": NSLocalizedString(@"Inactive", @"Inactive"), @"value": @0},
+                                                                    @{@"segmentName": NSLocalizedString(@"Sedentary", @"Sedentary"), @"value": @0},
+                                                                    @{@"segmentName": NSLocalizedString(@"Moderate", @"Moderate"), @"value": @0},
+                                                                    @{@"segmentName": NSLocalizedString(@"Vigorous", @"Vigorous"), @"value": @0}
                                                                    ]];
     
     for (NSDictionary *data in dataset) {

@@ -27,7 +27,7 @@ static NSString *kSevenDayFitnessCompleteStep = @"sevenDayFitnessCompleteStep";
     [super viewDidLoad];
     
     self.showsProgressInNavigationBar = NO;
-    self.navigationBar.topItem.title = @"Activity Tracking";
+    self.navigationBar.topItem.title = NSLocalizedString(@"Activity Tracking", @"Activity Tracking");
 }
 
 - (void)didReceiveMemoryWarning {
@@ -76,7 +76,7 @@ static NSString *kSevenDayFitnessCompleteStep = @"sevenDayFitnessCompleteStep";
         APCStepViewController *controller = [[aClass alloc] initWithNibName:nil bundle:nil];
         controller.resultCollector = self;
         controller.delegate = self;
-        controller.title = @"Activity Tracking";
+        controller.title = NSLocalizedString(@"Activity Tracking", @"Activity Tracking");
         controller.step = step;
         
         stepVC = controller;
