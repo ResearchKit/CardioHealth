@@ -31,7 +31,7 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="6minwalk-Icon-bpm" translatesAutoresizingMaskIntoConstraints="NO" id="vhg-vf-yxt">
+                <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CD-pulsingIcon-1-2" translatesAutoresizingMaskIntoConstraints="NO" id="vhg-vf-yxt">
                     <rect key="frame" x="90" y="179.5" width="30" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="HxB-AY-4cD"/>
@@ -85,6 +85,6 @@
         </view>
     </objects>
     <resources>
-        <image name="6minwalk-Icon-bpm" width="42" height="37"/>
+        <image name="CD-pulsingIcon-1-2" width="40" height="35"/>
     </resources>
 </document>

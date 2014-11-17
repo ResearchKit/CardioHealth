@@ -10,15 +10,19 @@
 @interface APHFitnessTestRestComfortablyView ()
 
 @property (weak, nonatomic) IBOutlet UILabel *heartRateBPMLbl;
+@property (weak, nonatomic) IBOutlet UIImageView *heartImage;
 
 @property (weak, nonatomic) IBOutlet UILabel *stepCountLbl;
-
+@property (assign) BOOL blinkStatus;
+@property (strong, nonatomic) NSTimer *timer;
 @end
 
 @implementation APHFitnessTestRestComfortablyView
 
 - (void)commonInit
 {
+    self.blinkStatus = NO;
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(receiveHeartBPMNotification:)
                                                  name:@"APHFitnessHeartRateBPMUpdated"
@@ -81,9 +85,39 @@
     
     self.heartRateBPMLbl.text = [NSString stringWithFormat:@"%@", [heartBeatInfo objectForKey:@"heartBPM"]];
     
+    if (!self.timer) {
+        self.timer = [NSTimer
+                      scheduledTimerWithTimeInterval:(NSTimeInterval)(0.5)
+                      target:self
+                      selector:@selector(blink)
+                      userInfo:nil
+                      repeats:YES];
+    }
+    
     [UIView animateWithDuration:0.3 animations:^{
         self.distanceTrackerLabel.alpha = 1;
     }];
+}
+
+-(void)blink{
+    
+    if(self.blinkStatus == NO){
+        
+        [UIView animateWithDuration:0.1 animations:^{
+            self.heartImage.alpha = 0;
+        }];
+        
+        [self.heartImage setImage:[UIImage imageNamed:@"CD-pulsingIcon-1-2"]];
+        self.blinkStatus = YES;
+    }else {
+        
+        [UIView animateWithDuration:0.3 animations:^{
+            self.heartImage.alpha = 0.9;
+        }];
+        
+        [self.heartImage setImage:[UIImage imageNamed:@"CD-pulsingIcon-1-2"]];
+        self.blinkStatus = NO;
+    }
 }
 
 - (void)receiveStepCountNotification:(NSNotification *)notification {
