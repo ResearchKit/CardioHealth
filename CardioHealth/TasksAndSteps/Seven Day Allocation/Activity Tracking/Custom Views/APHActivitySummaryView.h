@@ -15,6 +15,7 @@
 @property (nonatomic) BOOL hideAllLabels;
 @property (nonatomic) BOOL hideInsideLabels;
 @property (nonatomic) BOOL hideOutsideLabels;
+@property (nonatomic) BOOL hideLegend;
 
 - (void)drawWithSegmentValues:(NSArray *)values;
 
