@@ -9,6 +9,10 @@
 #import "APHActivitySummaryView.h"
 #import "APHTheme.h"
 
+NSString *const kDatasetDateKey = @"datasetDateKey";
+NSString *const kDatasetValueKey = @"datasetValueKey";
+NSString *const kDatasetSegmentNameKey = @"datasetSegmentNameKey";
+
 @interface APHActivitySummaryView()
 
 @property (nonatomic, strong) CAShapeLayer *circle;
@@ -97,7 +101,7 @@
 {
     double percentage = 0.0;
     
-    NSNumber *valueSum = [self.segmentValues valueForKeyPath:@"@sum.value"];
+    NSNumber *valueSum = [self.segmentValues valueForKeyPath:@"@sum.datasetValueKey"];
     
     percentage = value / [valueSum doubleValue];
     
@@ -151,12 +155,12 @@
                 
                 NSDictionary *segmentValue = [self.segmentValues objectAtIndex:idx];
                 
-                strokePart.strokeEnd = [self percentageOfValue:[segmentValue[@"value"] floatValue]];
+                strokePart.strokeEnd = [self percentageOfValue:[segmentValue[kDatasetValueKey] floatValue]];
             } else {
                 NSDictionary *segmentValue = [self.segmentValues objectAtIndex:idx];
                 
                 strokePart.strokeStart = self.lastPercentage;
-                strokePart.strokeEnd = strokePart.strokeStart + [self percentageOfValue:[segmentValue[@"value"] doubleValue]];
+                strokePart.strokeEnd = strokePart.strokeStart + [self percentageOfValue:[segmentValue[kDatasetValueKey] doubleValue]];
             }
             
             self.lastPercentage = strokePart.strokeEnd;
@@ -165,7 +169,7 @@
             
             [self.circle addSublayer:strokePart];
             
-            CAKeyframeAnimation* animation = [CAKeyframeAnimation animationWithKeyPath: @"strokeEnd"];
+            CAKeyframeAnimation* animation = [CAKeyframeAnimation animationWithKeyPath:@"strokeEnd"];
             NSArray* times = @[ @(0.0), // Note: This works because both the times and the stroke start/end are on scales of 0..1
                                 @(strokePart.strokeStart),
                                 @(strokePart.strokeEnd),

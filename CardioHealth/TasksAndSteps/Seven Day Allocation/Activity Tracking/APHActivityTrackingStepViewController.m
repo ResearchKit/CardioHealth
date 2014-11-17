@@ -172,13 +172,13 @@ static NSInteger kIntervalByDay = 1;
                                                
                                                if (span == kStatusForToday) {
                                                    [self.datasetForToday addObject:@{
-                                                                             @"date": date,
-                                                                             @"value": [NSNumber numberWithDouble:value]
+                                                                             kDatasetDateKey: date,
+                                                                             kDatasetValueKey: [NSNumber numberWithDouble:value]
                                                                              }];
                                                } else {
                                                    [self.datasetForTheWeek addObject:@{
-                                                                             @"date": date,
-                                                                             @"value": [NSNumber numberWithDouble:value]
+                                                                             kDatasetDateKey: date,
+                                                                             kDatasetValueKey: [NSNumber numberWithDouble:value]
                                                                              }];
                                                }
                                                
@@ -224,19 +224,17 @@ static NSInteger kIntervalByDay = 1;
 
 - (NSString *)fitnessDaysRemaining
 {
-    NSString *remaining = nil;
-    
     NSDate *startDate = [self dateForSpan:-3];
     // Compute the remaing days of the 7 day fitness allocation.
     NSDateComponents *numberOfDaysRemaining = [[NSCalendar currentCalendar] components:NSCalendarUnitDay
                                                                               fromDate:startDate
                                                                                 toDate:[NSDate date] // today
                                                                                options:NSCalendarWrapComponents];
-    if ([numberOfDaysRemaining day] == 1) {
-        remaining = [NSString stringWithFormat:NSLocalizedString(@"%lu Day Remaining", @"{count} Day Renmaining"), [numberOfDaysRemaining day]];
-    } else {
-        remaining = [NSString stringWithFormat:NSLocalizedString(@"%lu Days Remaining", @"{count} Days Remaining"), [numberOfDaysRemaining day]];
-    }
+
+    NSString *days = ([numberOfDaysRemaining day] == 1) ? NSLocalizedString(@"Day", @"Day") : NSLocalizedString(@"Days", @"Days");
+    
+    NSString *remaining = [NSString stringWithFormat:NSLocalizedString(@"%lu %@ Remaining",
+                                                                       @"{count} {day/s} Remaining"), [numberOfDaysRemaining day], days];
     
     return remaining;
 }
@@ -254,15 +252,15 @@ static NSInteger kIntervalByDay = 1;
     NSRange moderateRange = NSMakeRange(0, 1207); // number beyond this is considered vigorous
     
     self.normalizedSegmentValues = [NSMutableArray arrayWithArray:@[
-                                                                    @{@"segmentName": NSLocalizedString(@"Inactive", @"Inactive"), @"value": @0},
-                                                                    @{@"segmentName": NSLocalizedString(@"Sedentary", @"Sedentary"), @"value": @0},
-                                                                    @{@"segmentName": NSLocalizedString(@"Moderate", @"Moderate"), @"value": @0},
-                                                                    @{@"segmentName": NSLocalizedString(@"Vigorous", @"Vigorous"), @"value": @0}
+                                                                    @{kDatasetSegmentNameKey: NSLocalizedString(@"Inactive", @"Inactive"), kDatasetValueKey: @0},
+                                                                    @{kDatasetSegmentNameKey: NSLocalizedString(@"Sedentary", @"Sedentary"), kDatasetValueKey: @0},
+                                                                    @{kDatasetSegmentNameKey: NSLocalizedString(@"Moderate", @"Moderate"), kDatasetValueKey: @0},
+                                                                    @{kDatasetSegmentNameKey: NSLocalizedString(@"Vigorous", @"Vigorous"), kDatasetValueKey: @0}
                                                                    ]];
     
     for (NSDictionary *data in dataset) {
         NSUInteger segment = 0;
-        NSUInteger value = [data[@"value"] integerValue];
+        NSUInteger value = [data[kDatasetValueKey] integerValue];
         
         if (NSLocationInRange(value, inactiveRange)) {
             segment = 0;
@@ -274,11 +272,11 @@ static NSInteger kIntervalByDay = 1;
             segment = 3;
         }
         
-        NSNumber *currentValue = [self.normalizedSegmentValues objectAtIndex:segment][@"value"];
+        NSNumber *currentValue = [self.normalizedSegmentValues objectAtIndex:segment][kDatasetValueKey];
         
         NSDictionary *segmentValue = @{
-                                       @"segmentName": [self.normalizedSegmentValues objectAtIndex:segment][@"segmentName"],
-                                       @"value": [NSNumber numberWithInteger:[currentValue integerValue] + value]
+                                       kDatasetSegmentNameKey: [self.normalizedSegmentValues objectAtIndex:segment][kDatasetSegmentNameKey],
+                                       kDatasetValueKey: [NSNumber numberWithInteger:[currentValue integerValue] + value]
                                        };
         
         [self.normalizedSegmentValues replaceObjectAtIndex:segment withObject:segmentValue];
