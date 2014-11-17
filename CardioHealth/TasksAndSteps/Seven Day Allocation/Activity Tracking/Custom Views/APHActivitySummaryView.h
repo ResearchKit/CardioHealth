@@ -10,4 +10,12 @@
 
 @interface APHActivitySummaryView : UIView
 
+@property (nonatomic) NSUInteger numberOfSegments;
+
+@property (nonatomic) BOOL hideAllLabels;
+@property (nonatomic) BOOL hideInsideLabels;
+@property (nonatomic) BOOL hideOutsideLabels;
+
+- (void)drawWithSegmentValues:(NSArray *)values;
+
 @end
