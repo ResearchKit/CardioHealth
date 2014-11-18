@@ -116,7 +116,10 @@ static  NSString  *kIntroHeadingCaption = @"Tests for Bradykinesia";
     
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"APHImportantDetailsTableViewController" bundle:nil];
     UITableViewController *vc = [sb instantiateViewControllerWithIdentifier:@"APHImportantDetailsTableViewController"];
-    vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    vc.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    
+    
+    
     [self presentViewController:vc animated:YES completion:NULL];
 }
 

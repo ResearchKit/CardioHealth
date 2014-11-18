@@ -11,6 +11,12 @@
               "taskID": "APHFitnessTest-00000000-1111-1111-1111-F810BE28D995",
               "taskType": "APHFitnessTest",
               "taskClassName": "APHFitnessTaskViewController"
+              },
+              {
+              "taskTitle": "7 Day Fitness Allocation",
+              "taskID": "APHSevenDayAllocation-00000000-1111-1111-1111-F810BE28D995",
+              "taskType": "APHSevenDayAllocation",
+              "taskClassName": "APHSevenDayFitnessAllocationTaskViewController"
               }
               ],
     "schedules": [
@@ -25,6 +31,12 @@
                   "href": "appleparkinson:",
                   "schedule": "1:3",
                   "taskID": "APHFitnessTest-00000000-1111-1111-1111-F810BE28D995"
+                  },
+                  {
+                  "type": "REPEATING",
+                  "href": "applecardio:",
+                  "schedule": "1:7",
+                  "taskID": "APHSevenDayAllocation-00000000-1111-1111-1111-F810BE28D995"
                   }
                   ]
 }
