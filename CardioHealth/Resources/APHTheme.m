@@ -30,4 +30,29 @@
     return 0.5;
 }
 
++ (UIColor *)colorForActivityOutline
+{
+    return [UIColor colorWithWhite:0.973 alpha:1.000];
+}
+
++ (UIColor *)colorForActivityInactive
+{
+    return [UIColor colorWithRed:0.176 green:0.706 blue:0.980 alpha:1.000];
+}
+
++ (UIColor *)colorForActivitySedentary
+{
+    return [UIColor colorWithRed:0.608 green:0.196 blue:0.867 alpha:1.000];
+}
+
++ (UIColor *)colorForActivityModerate
+{
+    return [UIColor colorWithRed:0.145 green:0.851 blue:0.443 alpha:1.000];
+}
+
++ (UIColor *)colorForActivityVigorous
+{
+    return [UIColor colorWithRed:0.957 green:0.745 blue:0.290 alpha:1.000];
+}
+
 @end
