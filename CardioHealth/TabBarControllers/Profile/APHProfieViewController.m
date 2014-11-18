@@ -232,7 +232,7 @@
             
             APCTableViewRow *row = [APCTableViewRow new];
             row.item = field;
-            row.itemType = kAPCStudyItemTypeShare;
+            row.itemType = kAPCTableViewStudyItemTypeShare;
             [rowItems addObject:row];
         }
         
@@ -323,7 +323,7 @@
     APCTableViewItemType type = [self itemTypeForIndexPath:indexPath];
     
     switch (type) {
-        case kAPCStudyItemTypeShare:
+        case kAPCTableViewStudyItemTypeShare:
         {
             APCShareViewController *shareViewController = [[UIStoryboard storyboardWithName:@"APHOnboarding" bundle:nil] instantiateViewControllerWithIdentifier:@"ShareVC"];
             shareViewController.hidesOkayButton = YES;

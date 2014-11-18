@@ -22,6 +22,7 @@
 		08FA98031A108839002317C8 /* APHHeartAgeSummaryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FA98021A108839002317C8 /* APHHeartAgeSummaryCell.m */; };
 		08FA98061A108A46002317C8 /* APHHeartAgeRiskEstimateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FA98051A108A46002317C8 /* APHHeartAgeRiskEstimateCell.m */; };
 		08FA98091A108C33002317C8 /* APHHeartAgeRecommendationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FA98081A108C33002317C8 /* APHHeartAgeRecommendationCell.m */; };
+		5B4633851A15917000E68B82 /* APHDashboardEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B4633841A15917000E68B82 /* APHDashboardEditViewController.m */; };
 		5B55FE321A0553D5009BEE5E /* APHChangePasscodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B55FE311A0553D5009BEE5E /* APHChangePasscodeViewController.m */; };
 		5B55FE3A1A056A4D009BEE5E /* APHSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B55FE391A056A4D009BEE5E /* APHSettingsViewController.m */; };
 		5B5A31261A10848500552F7D /* APHLearnStudyDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B5A31251A10848500552F7D /* APHLearnStudyDetailsViewController.m */; };
@@ -66,11 +67,6 @@
 		F55BBE6919D362D0003CA0F9 /* APHActivitiesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F55BBDFF19D362D0003CA0F9 /* APHActivitiesViewController.m */; };
 		F55BBE6A19D362D0003CA0F9 /* APHDashboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F55BBE0119D362D0003CA0F9 /* APHDashboard.storyboard */; };
 		F55BBE6B19D362D0003CA0F9 /* APHDashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F55BBE0319D362D0003CA0F9 /* APHDashboardViewController.m */; };
-		F55BBE6C19D362D0003CA0F9 /* APHEditSectionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F55BBE0519D362D0003CA0F9 /* APHEditSectionsViewController.m */; };
-		F55BBE6D19D362D0003CA0F9 /* APHEditSectionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F55BBE0619D362D0003CA0F9 /* APHEditSectionsViewController.xib */; };
-		F55BBE6E19D362D0003CA0F9 /* APHDashboardGraphViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F55BBE0919D362D0003CA0F9 /* APHDashboardGraphViewCell.m */; };
-		F55BBE6F19D362D0003CA0F9 /* APHDashboardMessageViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F55BBE0B19D362D0003CA0F9 /* APHDashboardMessageViewCell.m */; };
-		F55BBE7019D362D0003CA0F9 /* APHDashboardProgressViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F55BBE0D19D362D0003CA0F9 /* APHDashboardProgressViewCell.m */; };
 		F55BBE7119D362D0003CA0F9 /* APHLearn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F55BBE0F19D362D0003CA0F9 /* APHLearn.storyboard */; };
 		F55BBE8C19D362D0003CA0F9 /* APHSpecialSurveyTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F55BBE4419D362D0003CA0F9 /* APHSpecialSurveyTaskViewController.m */; };
 		F56F60F419D37E4F00A0A2E1 /* APCAppleCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F56F60F119D37E4A00A0A2E1 /* APCAppleCore.framework */; };
@@ -166,6 +162,8 @@
 		08FA98051A108A46002317C8 /* APHHeartAgeRiskEstimateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APHHeartAgeRiskEstimateCell.m; path = "Heart Age Cells/APHHeartAgeRiskEstimateCell.m"; sourceTree = "<group>"; };
 		08FA98071A108C33002317C8 /* APHHeartAgeRecommendationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APHHeartAgeRecommendationCell.h; path = "Heart Age Cells/APHHeartAgeRecommendationCell.h"; sourceTree = "<group>"; };
 		08FA98081A108C33002317C8 /* APHHeartAgeRecommendationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APHHeartAgeRecommendationCell.m; path = "Heart Age Cells/APHHeartAgeRecommendationCell.m"; sourceTree = "<group>"; };
+		5B4633831A15917000E68B82 /* APHDashboardEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHDashboardEditViewController.h; sourceTree = "<group>"; };
+		5B4633841A15917000E68B82 /* APHDashboardEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHDashboardEditViewController.m; sourceTree = "<group>"; };
 		5B55FE301A0553D5009BEE5E /* APHChangePasscodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHChangePasscodeViewController.h; sourceTree = "<group>"; };
 		5B55FE311A0553D5009BEE5E /* APHChangePasscodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHChangePasscodeViewController.m; sourceTree = "<group>"; };
 		5B55FE381A056A4D009BEE5E /* APHSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHSettingsViewController.h; sourceTree = "<group>"; };
@@ -232,15 +230,6 @@
 		F55BBE0119D362D0003CA0F9 /* APHDashboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = APHDashboard.storyboard; sourceTree = "<group>"; };
 		F55BBE0219D362D0003CA0F9 /* APHDashboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHDashboardViewController.h; sourceTree = "<group>"; };
 		F55BBE0319D362D0003CA0F9 /* APHDashboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHDashboardViewController.m; sourceTree = "<group>"; };
-		F55BBE0419D362D0003CA0F9 /* APHEditSectionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHEditSectionsViewController.h; sourceTree = "<group>"; };
-		F55BBE0519D362D0003CA0F9 /* APHEditSectionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHEditSectionsViewController.m; sourceTree = "<group>"; };
-		F55BBE0619D362D0003CA0F9 /* APHEditSectionsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = APHEditSectionsViewController.xib; sourceTree = "<group>"; };
-		F55BBE0819D362D0003CA0F9 /* APHDashboardGraphViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHDashboardGraphViewCell.h; sourceTree = "<group>"; };
-		F55BBE0919D362D0003CA0F9 /* APHDashboardGraphViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHDashboardGraphViewCell.m; sourceTree = "<group>"; };
-		F55BBE0A19D362D0003CA0F9 /* APHDashboardMessageViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHDashboardMessageViewCell.h; sourceTree = "<group>"; };
-		F55BBE0B19D362D0003CA0F9 /* APHDashboardMessageViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHDashboardMessageViewCell.m; sourceTree = "<group>"; };
-		F55BBE0C19D362D0003CA0F9 /* APHDashboardProgressViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHDashboardProgressViewCell.h; sourceTree = "<group>"; };
-		F55BBE0D19D362D0003CA0F9 /* APHDashboardProgressViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHDashboardProgressViewCell.m; sourceTree = "<group>"; };
 		F55BBE0F19D362D0003CA0F9 /* APHLearn.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = APHLearn.storyboard; sourceTree = "<group>"; };
 		F55BBE4319D362D0003CA0F9 /* APHSpecialSurveyTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHSpecialSurveyTaskViewController.h; sourceTree = "<group>"; };
 		F55BBE4419D362D0003CA0F9 /* APHSpecialSurveyTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHSpecialSurveyTaskViewController.m; sourceTree = "<group>"; };
@@ -570,25 +559,10 @@
 				F55BBE0119D362D0003CA0F9 /* APHDashboard.storyboard */,
 				F55BBE0219D362D0003CA0F9 /* APHDashboardViewController.h */,
 				F55BBE0319D362D0003CA0F9 /* APHDashboardViewController.m */,
-				F55BBE0419D362D0003CA0F9 /* APHEditSectionsViewController.h */,
-				F55BBE0519D362D0003CA0F9 /* APHEditSectionsViewController.m */,
-				F55BBE0619D362D0003CA0F9 /* APHEditSectionsViewController.xib */,
-				F55BBE0719D362D0003CA0F9 /* DashboardViews */,
+				5B4633831A15917000E68B82 /* APHDashboardEditViewController.h */,
+				5B4633841A15917000E68B82 /* APHDashboardEditViewController.m */,
 			);
 			path = Dashboard;
-			sourceTree = "<group>";
-		};
-		F55BBE0719D362D0003CA0F9 /* DashboardViews */ = {
-			isa = PBXGroup;
-			children = (
-				F55BBE0819D362D0003CA0F9 /* APHDashboardGraphViewCell.h */,
-				F55BBE0919D362D0003CA0F9 /* APHDashboardGraphViewCell.m */,
-				F55BBE0A19D362D0003CA0F9 /* APHDashboardMessageViewCell.h */,
-				F55BBE0B19D362D0003CA0F9 /* APHDashboardMessageViewCell.m */,
-				F55BBE0C19D362D0003CA0F9 /* APHDashboardProgressViewCell.h */,
-				F55BBE0D19D362D0003CA0F9 /* APHDashboardProgressViewCell.m */,
-			);
-			path = DashboardViews;
 			sourceTree = "<group>";
 		};
 		F55BBE0E19D362D0003CA0F9 /* Learn */ = {
@@ -853,7 +827,6 @@
 				08C2328D1A15796E00DB4EF9 /* APHSevenDayFitnessIntroStepViewController.xib in Resources */,
 				F55BBE7119D362D0003CA0F9 /* APHLearn.storyboard in Resources */,
 				7B6753421A01540E005864E6 /* APHHeartAgeIntroStepViewController.xib in Resources */,
-				F55BBE6D19D362D0003CA0F9 /* APHEditSectionsViewController.xib in Resources */,
 				F55BBE6A19D362D0003CA0F9 /* APHDashboard.storyboard in Resources */,
 				F55BBE6119D362D0003CA0F9 /* APHTasksAndSchedules.json in Resources */,
 				08FA97FB1A10630F002317C8 /* APHHeartAgeSummary.storyboard in Resources */,
@@ -899,6 +872,7 @@
 				F5778E7319F0613D0079F1B2 /* APHInEligibleViewController.m in Sources */,
 				5B5A31261A10848500552F7D /* APHLearnStudyDetailsViewController.m in Sources */,
 				7B4104A019E5E46800592B96 /* APHFitnessTestRestComfortablyView.m in Sources */,
+				5B4633851A15917000E68B82 /* APHDashboardEditViewController.m in Sources */,
 				F55BBE6519D362D0003CA0F9 /* APHAppDelegate.m in Sources */,
 				F5778E7B19F0613D0079F1B2 /* APHStudyOverviewViewController.m in Sources */,
 				7B4104A219E5E46800592B96 /* APHFitnessTestRestView.m in Sources */,
@@ -910,19 +884,15 @@
 				F5F644FF19D35BA2004CFBB2 /* main.m in Sources */,
 				F5778E7819F0613D0079F1B2 /* APHSignUpMedicalInfoViewController.m in Sources */,
 				7B6753411A01540E005864E6 /* APHHeartAgeIntroStepViewController.m in Sources */,
-				F55BBE6C19D362D0003CA0F9 /* APHEditSectionsViewController.m in Sources */,
-				F55BBE6F19D362D0003CA0F9 /* APHDashboardMessageViewCell.m in Sources */,
 				7B41047E19E5D94F00592B96 /* APHFitnessTaskViewController.m in Sources */,
 				F55BBE5719D362D0003CA0F9 /* NSString+CustomMethods.m in Sources */,
 				08547C121A11899C00DC6E7C /* APHTheme.m in Sources */,
 				087476371A0995A600F9A0A8 /* APHDataPoint.m in Sources */,
 				F5778E7719F0613D0079F1B2 /* APHSignUpGeneralInfoViewController.m in Sources */,
 				F5778E7A19F0613D0079F1B2 /* APHSignupTouchIDViewController.m in Sources */,
-				F55BBE6E19D362D0003CA0F9 /* APHDashboardGraphViewCell.m in Sources */,
 				F5778E7419F0613D0079F1B2 /* APHIntroVideoViewController.m in Sources */,
 				F55BBE8C19D362D0003CA0F9 /* APHSpecialSurveyTaskViewController.m in Sources */,
 				08C2328C1A15796E00DB4EF9 /* APHSevenDayFitnessIntroStepViewController.m in Sources */,
-				F55BBE7019D362D0003CA0F9 /* APHDashboardProgressViewCell.m in Sources */,
 				5B55FE321A0553D5009BEE5E /* APHChangePasscodeViewController.m in Sources */,
 				F5778E7919F0613D0079F1B2 /* APHSignUpPermissionsViewController.m in Sources */,
 				F55BBE5819D362D0003CA0F9 /* RKStep+Description.m in Sources */,
