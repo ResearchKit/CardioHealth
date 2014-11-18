@@ -16,12 +16,14 @@
 static NSString * const kAPCBasicTableViewCellIdentifier       = @"APCBasicTableViewCell";
 static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetailTableViewCell";
 
-@interface APHDashboardViewController ()
+@interface APHDashboardViewController ()<UIViewControllerTransitioningDelegate>
 
 @property (nonatomic, strong) NSMutableArray *rowItemsOrder;
 
 @property (nonatomic, strong) APHScoring *distanceScore;
 @property (nonatomic, strong) APHScoring *heartRateScore;
+
+@property (nonatomic, strong) APCPresentAnimator *presentAnimator;
 
 @end
 
@@ -49,6 +51,8 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
         }
         
         self.title = NSLocalizedString(@"Dashboard", @"Dashboard");
+        
+        _presentAnimator = [APCPresentAnimator new];
     }
     
     return self;
@@ -215,6 +219,39 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
     }
     
     [self.tableView reloadData];
+}
+
+#pragma mark - APCDashboardGraphTableViewCellDelegate methods
+
+- (void)dashboardGraphViewCellDidTapExpandForCell:(APCDashboardGraphTableViewCell *)cell
+{
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    
+    APCTableViewDashboardGraphItem *graphItem = (APCTableViewDashboardGraphItem *)[self itemForIndexPath:indexPath];
+    
+    CGRect initialFrame = [cell convertRect:cell.bounds toView:self.view.window];
+    self.presentAnimator.initialFrame = initialFrame;
+
+    APCLineGraphViewController *graphViewController = [[UIStoryboard storyboardWithName:@"APHDashboard" bundle:nil] instantiateViewControllerWithIdentifier:@"GraphVC"];
+    graphViewController.graphItem = graphItem;
+//    graphViewController.transitioningDelegate = self;
+//    graphViewController.modalPresentationStyle = UIModalPresentationCustom;
+    [self.navigationController presentViewController:graphViewController animated:YES completion:nil];
+}
+
+#pragma mark - UIViewControllerTransitioningDelegate methods
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
+                                                                  presentingController:(UIViewController *)presenting
+                                                                      sourceController:(UIViewController *)source {
+    self.presentAnimator.presenting = YES;
+    return self.presentAnimator;
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
+    
+    self.presentAnimator.presenting = NO;
+    return self.presentAnimator;
 }
 
 @end
