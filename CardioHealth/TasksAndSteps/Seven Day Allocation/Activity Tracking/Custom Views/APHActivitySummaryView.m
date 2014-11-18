@@ -16,11 +16,26 @@ NSString *const kDatasetSegmentNameKey = @"datasetSegmentNameKey";
 @interface APHActivitySummaryView()
 
 @property (nonatomic, strong) CAShapeLayer *circle;
+@property (nonatomic, strong) CAShapeLayer *border;
+@property (nonatomic, strong) CAShapeLayer *dotInactive;
+@property (nonatomic, strong) CAShapeLayer *dotSedentary;
+@property (nonatomic, strong) CAShapeLayer *dotModerate;
+@property (nonatomic, strong) CAShapeLayer *dotVigorous;
+
 @property (nonatomic, strong) NSArray *segmentValues;
 @property (nonatomic, strong) NSArray *segementColors;
+@property (nonatomic, strong) NSArray *segementNames;
+
+@property (nonatomic, strong) UILabel *distanceLabel;
+@property (nonatomic, strong) UILabel *distanceCaption;
+@property (nonatomic, strong) UILabel *inactiveCaption;
+@property (nonatomic, strong) UILabel *sedentaryCaption;
+@property (nonatomic, strong) UILabel *moderateCaption;
+@property (nonatomic, strong) UILabel *vigorousCaption;
 
 @property (nonatomic) double lastPercentage;
 @property (nonatomic) double sumQuantity;
+@property (nonatomic) NSUInteger radius;
 
 @end
 
@@ -35,6 +50,13 @@ NSString *const kDatasetSegmentNameKey = @"datasetSegmentNameKey";
                             [APHTheme colorForActivityModerate],
                             [APHTheme colorForActivityVigorous]
                            ];
+    self.segementNames = @[
+                           NSLocalizedString(@"Inactive", @"Inactive"),
+                           NSLocalizedString(@"Sedentary", @"Sedentary"),
+                           NSLocalizedString(@"Moderate", @"Moderate"),
+                           NSLocalizedString(@"Vigorous", @"Vigorous")
+                           ];
+    [self setupChartView];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -48,38 +70,6 @@ NSString *const kDatasetSegmentNameKey = @"datasetSegmentNameKey";
     return self;
 }
 
-- (void)layoutSubviews
-{
-    // Add the CAShapeLayer
-    // Set up the shape of the circle
-    int radius = self.frame.size.width * 0.3;
-    _circle = [CAShapeLayer layer];
-    // Make a circular shape
-    _circle.path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, 2.0*radius, 2.0*radius)
-                                              cornerRadius:radius].CGPath;
-    // Center the shape in self.view
-    _circle.position = CGPointMake(CGRectGetMidX(self.frame)-radius,
-                                   CGRectGetMidY(self.frame)-radius*2);
-    
-    // Configure the apperence of the circle
-    _circle.fillColor = [UIColor clearColor].CGColor;
-    _circle.strokeColor = [APHTheme colorForActivityOutline].CGColor;
-    _circle.lineWidth = 20;
-    
-    // Add to parent layer
-    [self.layer addSublayer:self.circle];
-    
-    CAShapeLayer *border = [CAShapeLayer layer];
-    border.path = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - 64)].CGPath;
-    border.fillColor = [UIColor clearColor].CGColor;
-    border.strokeColor = [APHTheme colorForDividerLine].CGColor;
-    border.lineWidth = 1.0;
-    
-    [self.layer addSublayer:border];
-    
-    [self drawLegend];
-}
-
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if ((self = [super initWithCoder:aDecoder])) {
@@ -88,11 +78,94 @@ NSString *const kDatasetSegmentNameKey = @"datasetSegmentNameKey";
     return self;
 }
 
+- (void)setupChartView
+{
+    // Add the CAShapeLayer
+    self.circle = [CAShapeLayer layer];
+    // Add to parent layer
+    [self.layer addSublayer:self.circle];
+    
+    self.border = [CAShapeLayer layer];
+    [self.layer addSublayer:self.border];
+    
+    self.distanceLabel = [self addLabelWithTitle:@"0.00 mi"
+                                           color:[UIColor blackColor]
+                                        position:CGPointMake(0, 0)];
+    self.distanceLabel.font = [UIFont systemFontOfSize:42.0];
+    [self addSubview:self.distanceLabel];
+    
+    self.distanceCaption = [self addLabelWithTitle:NSLocalizedString(@"Distance", @"Distance")
+                                             color:[UIColor lightGrayColor]
+                                          position:CGPointMake(0, 0)];
+    self.distanceCaption.font = [UIFont systemFontOfSize:21.0];
+    [self addSubview:self.distanceCaption];
+    
+    self.inactiveCaption = [self addLabelWithTitle:@"Inactive"
+                                             color:[UIColor lightGrayColor]
+                                          position:CGPointMake(0, 0)];
+    [self addSubview:self.inactiveCaption];
+    
+    self.sedentaryCaption = [self addLabelWithTitle:@"Sedentary"
+                                              color:[UIColor lightGrayColor]
+                                           position:CGPointMake(0, 0)];
+    [self addSubview:self.sedentaryCaption];
+    
+    self.moderateCaption = [self addLabelWithTitle:@"Moderate"
+                                             color:[UIColor lightGrayColor]
+                                          position:CGPointMake(0, 0)];
+    [self addSubview:self.moderateCaption];
+    
+    self.vigorousCaption = [self addLabelWithTitle:@"Vigorous"
+                                             color:[UIColor lightGrayColor]
+                                          position:CGPointMake(0, 0)];
+    [self addSubview:self.vigorousCaption];
+}
+
+- (void)layoutSubviews
+{
+    self.radius = self.frame.size.width * 0.3;
+    // Make a circular shape
+    self.circle.path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, 2.0*self.radius, 2.0*self.radius)
+                                              cornerRadius:self.radius].CGPath;
+    // Center the shape in self.view
+    self.circle.position = CGPointMake(CGRectGetMidX(self.frame)-self.radius,
+                                   CGRectGetMidY(self.frame)-self.radius*2);
+    
+    // Configure the apperence of the circle
+    self.circle.fillColor = [UIColor clearColor].CGColor;
+    self.circle.strokeColor = [APHTheme colorForActivityOutline].CGColor;
+    self.circle.lineWidth = 20;
+    
+    self.border.path = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - 64)].CGPath;
+    self.border.fillColor = [UIColor clearColor].CGColor;
+    self.border.strokeColor = [APHTheme colorForDividerLine].CGColor;
+    self.border.lineWidth = 1.0;
+    
+    CGFloat circleDiameter = self.radius * 2;
+    CGFloat labelFrameWidth = circleDiameter/sqrt(2.0);
+    
+    CGRect distanceLabelFrame = CGRectMake((CGRectGetWidth(self.bounds) - labelFrameWidth)/2,
+                                                  (CGRectGetHeight(self.bounds) - labelFrameWidth)/2 - 20,
+                                                  labelFrameWidth,
+                                                  labelFrameWidth);
+    self.distanceLabel.frame = distanceLabelFrame;
+    
+    CGRect distanceCaptionFrame = CGRectMake((CGRectGetWidth(self.bounds) - labelFrameWidth)/2,
+                                           (CGRectGetHeight(self.bounds) - labelFrameWidth)/2 + 20,
+                                           labelFrameWidth,
+                                           labelFrameWidth);
+    self.distanceCaption.frame = distanceCaptionFrame;
+    
+    [self drawLegend];
+}
+
 - (void)drawWithSegmentValues:(NSArray *)values
 {
     if (values) {
         self.segmentValues = values;
         self.sumQuantity = [[self.segmentValues valueForKeyPath:@"@sum.datasetValueKey"] doubleValue];
+        
+        self.distanceLabel.text = [NSString stringWithFormat:@"%.2f mi", self.sumQuantity/1609.344];
         
         [self drawCircle];
     }
@@ -132,6 +205,24 @@ NSString *const kDatasetSegmentNameKey = @"datasetSegmentNameKey";
         
         // Add to parent layer
         [self.layer addSublayer:dot];
+        
+        CGPoint labelPosition = CGPointMake(self.frame.size.width/4 * idx - 10, self.frame.size.height - 27);
+        CGRect labelFrame = CGRectMake(labelPosition.x, labelPosition.y, 100, 21);
+        
+        switch (idx) {
+            case 0:
+                self.inactiveCaption.frame = labelFrame;
+                break;
+            case 1:
+                self.sedentaryCaption.frame = labelFrame;
+                break;
+            case 2:
+                self.moderateCaption.frame = labelFrame;
+                break;
+            default:
+                self.vigorousCaption.frame = labelFrame;
+                break;
+        }
     }
 }
 
@@ -194,6 +285,17 @@ NSString *const kDatasetSegmentNameKey = @"datasetSegmentNameKey";
         }
     }
     [CATransaction commit];
+}
+
+- (UILabel *)addLabelWithTitle:(NSString *)title color:(UIColor *)color position:(CGPoint)position
+{
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(position.x, position.y, 100, 21)];
+    label.text = title;
+    label.textColor = color;
+    label.textAlignment = NSTextAlignmentCenter;
+    label.font = [UIFont systemFontOfSize:14.0];
+    
+    return label;
 }
 
 - (void)setHideAllLabels:(BOOL)hideAllLabels

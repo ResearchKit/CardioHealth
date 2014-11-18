@@ -27,6 +27,7 @@ static NSInteger kIntervalByDay = 1;
 @property (nonatomic, strong) NSMutableArray *normalizedSegmentValues;
 
 @property (nonatomic) NSUInteger numberOfSegments;
+@property (nonatomic) BOOL showTodaysDataAtViewLoad;
 
 @end
 
@@ -37,6 +38,8 @@ static NSInteger kIntervalByDay = 1;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.daysRemaining.text = [self fitnessDaysRemaining];
+    
+    self.showTodaysDataAtViewLoad = YES;
     
     self.navigationItem.leftBarButtonItem = nil;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Close"
@@ -99,10 +102,8 @@ static NSInteger kIntervalByDay = 1;
 
 - (void)handleClose:(UIBarButtonItem *)sender
 {
-    if (self.delegate != nil) {
-        if ([self.delegate respondsToSelector:@selector(stepViewControllerDidFinish:navigationDirection:)] == YES) {
-            [self.delegate stepViewControllerDidFinish:self navigationDirection:RKStepViewControllerNavigationDirectionForward];
-        }
+    if ([self.delegate respondsToSelector:@selector(stepViewControllerDidFinish:navigationDirection:)] == YES) {
+        [self.delegate stepViewControllerDidFinish:self navigationDirection:RKStepViewControllerNavigationDirectionForward];
     }
 }
 
@@ -168,7 +169,6 @@ static NSInteger kIntervalByDay = 1;
                                            if (quantity) {
                                                NSDate *date = result.startDate;
                                                double value = [quantity doubleValueForUnit:[HKUnit meterUnit]];
-                                               double mileValue = value/1609.344;
                                                
                                                if (span == kStatusForToday) {
                                                    [self.datasetForToday addObject:@{
@@ -182,14 +182,17 @@ static NSInteger kIntervalByDay = 1;
                                                                              }];
                                                }
                                                
-                                               NSLog(@"%@: %f (%f)", date, value, mileValue);
+                                               NSLog(@"%@: %f", date, value);
                                            }
                                        }];
+            if ((span == kStatusForToday) && self.showTodaysDataAtViewLoad) {
+                [self handleToday:nil];
+                self.showTodaysDataAtViewLoad = NO;
+            }
         }
     };
     
     [self.healthStore executeQuery:query];
-    
 }
 
 #pragma mark - Helpers
