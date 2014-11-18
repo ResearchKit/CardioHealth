@@ -861,7 +861,7 @@ IHRoYXQgeW91IGNvdWxkIG5vdCBjb250aW51ZS4
         </scene>
     </scenes>
     <resources>
-        <image name="logo_disease" width="102" height="86"/>
+        <image name="logo_disease" width="92" height="78"/>
         <image name="profilePlaceholder" width="150" height="150"/>
     </resources>
 </document>
