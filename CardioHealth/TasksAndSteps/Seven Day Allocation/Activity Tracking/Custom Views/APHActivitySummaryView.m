@@ -13,6 +13,8 @@ NSString *const kDatasetDateKey = @"datasetDateKey";
 NSString *const kDatasetValueKey = @"datasetValueKey";
 NSString *const kDatasetSegmentNameKey = @"datasetSegmentNameKey";
 
+static CGFloat kMetersPerMile = 1609.344;
+
 @interface APHActivitySummaryView()
 
 @property (nonatomic, strong) CAShapeLayer *circle;
@@ -24,7 +26,6 @@ NSString *const kDatasetSegmentNameKey = @"datasetSegmentNameKey";
 
 @property (nonatomic, strong) NSArray *segmentValues;
 @property (nonatomic, strong) NSArray *segementColors;
-@property (nonatomic, strong) NSArray *segementNames;
 
 @property (nonatomic, strong) UILabel *distanceLabel;
 @property (nonatomic, strong) UILabel *distanceCaption;
@@ -49,12 +50,6 @@ NSString *const kDatasetSegmentNameKey = @"datasetSegmentNameKey";
                             [APHTheme colorForActivitySedentary],
                             [APHTheme colorForActivityModerate],
                             [APHTheme colorForActivityVigorous]
-                           ];
-    self.segementNames = @[
-                           NSLocalizedString(@"Inactive", @"Inactive"),
-                           NSLocalizedString(@"Sedentary", @"Sedentary"),
-                           NSLocalizedString(@"Moderate", @"Moderate"),
-                           NSLocalizedString(@"Vigorous", @"Vigorous")
                            ];
     [self setupChartView];
 }
@@ -100,22 +95,22 @@ NSString *const kDatasetSegmentNameKey = @"datasetSegmentNameKey";
     self.distanceCaption.font = [UIFont systemFontOfSize:21.0];
     [self addSubview:self.distanceCaption];
     
-    self.inactiveCaption = [self addLabelWithTitle:@"Inactive"
+    self.inactiveCaption = [self addLabelWithTitle:NSLocalizedString(@"Inactive", @"Inactive")
                                              color:[UIColor lightGrayColor]
                                           position:CGPointMake(0, 0)];
     [self addSubview:self.inactiveCaption];
     
-    self.sedentaryCaption = [self addLabelWithTitle:@"Sedentary"
+    self.sedentaryCaption = [self addLabelWithTitle:NSLocalizedString(@"Sedentary", @"Sedentary")
                                               color:[UIColor lightGrayColor]
                                            position:CGPointMake(0, 0)];
     [self addSubview:self.sedentaryCaption];
     
-    self.moderateCaption = [self addLabelWithTitle:@"Moderate"
+    self.moderateCaption = [self addLabelWithTitle:NSLocalizedString(@"Moderate", @"Moderate")
                                              color:[UIColor lightGrayColor]
                                           position:CGPointMake(0, 0)];
     [self addSubview:self.moderateCaption];
     
-    self.vigorousCaption = [self addLabelWithTitle:@"Vigorous"
+    self.vigorousCaption = [self addLabelWithTitle:NSLocalizedString(@"Vigorous", @"Vigorous")
                                              color:[UIColor lightGrayColor]
                                           position:CGPointMake(0, 0)];
     [self addSubview:self.vigorousCaption];
@@ -165,7 +160,7 @@ NSString *const kDatasetSegmentNameKey = @"datasetSegmentNameKey";
         self.segmentValues = values;
         self.sumQuantity = [[self.segmentValues valueForKeyPath:@"@sum.datasetValueKey"] doubleValue];
         
-        self.distanceLabel.text = [NSString stringWithFormat:@"%.2f mi", self.sumQuantity/1609.344];
+        self.distanceLabel.text = [NSString stringWithFormat:@"%.2f mi", self.sumQuantity/kMetersPerMile];
         
         [self drawCircle];
     }
