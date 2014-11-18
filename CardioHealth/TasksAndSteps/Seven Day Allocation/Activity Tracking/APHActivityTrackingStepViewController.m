@@ -10,16 +10,16 @@
 #import "APHActivitySummaryView.h"
 #import "APHActivityLegendView.h"
 
-static NSInteger kStatusForToday = -1;
-static NSInteger kStatusForTheWeek = -7;
+static NSInteger kStatusForToday = 0;
 static NSInteger kIntervalByHour = 1;
 static NSInteger kIntervalByDay = 1;
+
+static NSString *kSevenDayFitnessStartDateKey = @"sevenDayFitnessStartDateKey";
 
 @interface APHActivityTrackingStepViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *daysRemaining;
 @property (weak, nonatomic) IBOutlet APHActivitySummaryView *chartView;
-@property (weak, nonatomic) IBOutlet UIView *legendView;
 
 @property (nonatomic, strong) HKHealthStore *healthStore;
 @property (nonatomic, strong) NSMutableArray *datasetForToday;
@@ -28,6 +28,7 @@ static NSInteger kIntervalByDay = 1;
 
 @property (nonatomic) NSUInteger numberOfSegments;
 @property (nonatomic) BOOL showTodaysDataAtViewLoad;
+@property (nonatomic) NSInteger numberOfDaysOfFitnessWeek;
 
 @end
 
@@ -66,7 +67,7 @@ static NSInteger kIntervalByDay = 1;
                                                     }
                                                     
                                                     [self runStatsCollectionQueryForSpan:kStatusForToday];
-                                                    [self runStatsCollectionQueryForSpan:kStatusForTheWeek];
+                                                    [self runStatsCollectionQueryForSpan:self.numberOfDaysOfFitnessWeek];
                                                 }];
     }
 }
@@ -84,7 +85,7 @@ static NSInteger kIntervalByDay = 1;
 
 - (IBAction)handleWeek:(UIButton *)sender
 {
-    [self showDataForKind:kStatusForTheWeek];
+    [self showDataForKind:self.numberOfDaysOfFitnessWeek];
 }
 
 - (void)showDataForKind:(NSInteger)kind
@@ -227,17 +228,20 @@ static NSInteger kIntervalByDay = 1;
 
 - (NSString *)fitnessDaysRemaining
 {
-    NSDate *startDate = [self dateForSpan:-3];
+    NSDate *startDate = [self checkSevenDayFitnessStartDate];
     // Compute the remaing days of the 7 day fitness allocation.
-    NSDateComponents *numberOfDaysRemaining = [[NSCalendar currentCalendar] components:NSCalendarUnitDay
+    NSDateComponents *numberOfDaysFromStartDate = [[NSCalendar currentCalendar] components:NSCalendarUnitDay
                                                                               fromDate:startDate
                                                                                 toDate:[NSDate date] // today
                                                                                options:NSCalendarWrapComponents];
+    self.numberOfDaysOfFitnessWeek = [numberOfDaysFromStartDate day];
+    
+    NSUInteger daysRemain = 7 - self.numberOfDaysOfFitnessWeek;
 
-    NSString *days = ([numberOfDaysRemaining day] == 1) ? NSLocalizedString(@"Day", @"Day") : NSLocalizedString(@"Days", @"Days");
+    NSString *days = (daysRemain == 1) ? NSLocalizedString(@"Day", @"Day") : NSLocalizedString(@"Days", @"Days");
     
     NSString *remaining = [NSString stringWithFormat:NSLocalizedString(@"%lu %@ Remaining",
-                                                                       @"{count} {day/s} Remaining"), [numberOfDaysRemaining day], days];
+                                                                       @"{count} {day/s} Remaining"), daysRemain, days];
     
     return remaining;
 }
@@ -284,6 +288,29 @@ static NSInteger kIntervalByDay = 1;
         
         [self.normalizedSegmentValues replaceObjectAtIndex:segment withObject:segmentValue];
     }
+}
+
+- (NSDate *)checkSevenDayFitnessStartDate
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    NSDate *fitnessStartDate = [defaults objectForKey:kSevenDayFitnessStartDateKey];
+    
+    if (!fitnessStartDate) {
+        fitnessStartDate = [NSDate date];
+        [self saveSevenDayFitnessStartDate:fitnessStartDate];
+    }
+    
+    return fitnessStartDate;
+}
+
+- (void)saveSevenDayFitnessStartDate:(NSDate *)startDate
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    [defaults setObject:startDate forKey:kSevenDayFitnessStartDateKey];
+    
+    [defaults synchronize];
 }
 
 @end
