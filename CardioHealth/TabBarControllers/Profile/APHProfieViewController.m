@@ -110,7 +110,7 @@
         
         {
             APCTableViewCustomPickerItem *field = [APCTableViewCustomPickerItem new];
-            field.caption = NSLocalizedString(@"Medication", @"");
+            field.caption = NSLocalizedString(@"Medications", @"");
             field.pickerData = @[[APCUser medications]];
             field.textAlignnment = NSTextAlignmentRight;
             field.identifier = kAPCDefaultTableViewCellIdentifier;
