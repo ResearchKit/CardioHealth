@@ -16,5 +16,10 @@
 + (UIColor *)colorForDividerLine;
 + (CGFloat)widthForDividerLine;
 
++ (UIColor *)colorForActivityOutline;
++ (UIColor *)colorForActivityInactive;
++ (UIColor *)colorForActivitySedentary;
++ (UIColor *)colorForActivityModerate;
++ (UIColor *)colorForActivityVigorous;
 
 @end
