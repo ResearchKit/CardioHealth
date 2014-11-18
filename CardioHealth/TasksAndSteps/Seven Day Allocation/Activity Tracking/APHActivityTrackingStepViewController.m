@@ -8,7 +8,6 @@
 
 #import "APHActivityTrackingStepViewController.h"
 #import "APHActivitySummaryView.h"
-#import "APHActivityLegendView.h"
 
 static NSInteger kStatusForToday = 0;
 static NSInteger kIntervalByHour = 1;
