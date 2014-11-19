@@ -136,7 +136,7 @@
             field.identifier = kAPCDefaultTableViewCellIdentifier;
             
             if (self.user.height) {
-                double heightInInches = [APCUser heightInInches:self.user.height];
+                double heightInInches = roundf([APCUser heightInInches:self.user.height]);
                 NSString *feet = [NSString stringWithFormat:@"%d'", (int)heightInInches/12];
                 NSString *inches = [NSString stringWithFormat:@"%d''", (int)heightInInches%12];
                 
