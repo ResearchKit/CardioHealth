@@ -15,6 +15,6 @@
 #import "APHFitnessTestRestView.h"
 #import <CoreLocation/CoreLocation.h>
 
-@interface APHFitnessTaskViewController : APCSetupTaskViewController <APHFitnessTestHealthKitSampleTypeTrackerDelegate, APHFitnessTestDistanceTrackerDelegate>
+@interface APHFitnessTaskViewController : APCBaseTaskViewController <APHFitnessTestHealthKitSampleTypeTrackerDelegate, APHFitnessTestDistanceTrackerDelegate>
 
 @end

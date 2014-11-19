@@ -57,7 +57,6 @@
 		F54227C419E460360023807E /* BridgeSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F573806D19E459BD008A8354 /* BridgeSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F5481F1419E4820100D84617 /* APHHeartAgeTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5481F0C19E4820100D84617 /* APHHeartAgeTaskViewController.m */; };
 		F55BBE5719D362D0003CA0F9 /* NSString+CustomMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = F55BBDDB19D362D0003CA0F9 /* NSString+CustomMethods.m */; };
-		F55BBE5819D362D0003CA0F9 /* RKStep+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = F55BBDDD19D362D0003CA0F9 /* RKStep+Description.m */; };
 		F55BBE6119D362D0003CA0F9 /* APHTasksAndSchedules.json in Resources */ = {isa = PBXBuildFile; fileRef = F55BBDF119D362D0003CA0F9 /* APHTasksAndSchedules.json */; };
 		F55BBE6219D362D0003CA0F9 /* JSON_READ_ME in Resources */ = {isa = PBXBuildFile; fileRef = F55BBDF219D362D0003CA0F9 /* JSON_READ_ME */; };
 		F55BBE6519D362D0003CA0F9 /* APHAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F55BBDF819D362D0003CA0F9 /* APHAppDelegate.m */; };
@@ -68,7 +67,6 @@
 		F55BBE6A19D362D0003CA0F9 /* APHDashboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F55BBE0119D362D0003CA0F9 /* APHDashboard.storyboard */; };
 		F55BBE6B19D362D0003CA0F9 /* APHDashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F55BBE0319D362D0003CA0F9 /* APHDashboardViewController.m */; };
 		F55BBE7119D362D0003CA0F9 /* APHLearn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F55BBE0F19D362D0003CA0F9 /* APHLearn.storyboard */; };
-		F55BBE8C19D362D0003CA0F9 /* APHSpecialSurveyTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F55BBE4419D362D0003CA0F9 /* APHSpecialSurveyTaskViewController.m */; };
 		F56F60F419D37E4F00A0A2E1 /* APCAppleCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F56F60F119D37E4A00A0A2E1 /* APCAppleCore.framework */; };
 		F56F60F519D37E4F00A0A2E1 /* APCAppleCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F56F60F119D37E4A00A0A2E1 /* APCAppleCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F573807419E45A0A008A8354 /* APHDataSubstrate.m in Sources */ = {isa = PBXBuildFile; fileRef = F573807319E45A0A008A8354 /* APHDataSubstrate.m */; };
@@ -216,8 +214,6 @@
 		F5481F0C19E4820100D84617 /* APHHeartAgeTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHHeartAgeTaskViewController.m; sourceTree = "<group>"; };
 		F55BBDDA19D362D0003CA0F9 /* NSString+CustomMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CustomMethods.h"; sourceTree = "<group>"; };
 		F55BBDDB19D362D0003CA0F9 /* NSString+CustomMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CustomMethods.m"; sourceTree = "<group>"; };
-		F55BBDDC19D362D0003CA0F9 /* RKStep+Description.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RKStep+Description.h"; sourceTree = "<group>"; };
-		F55BBDDD19D362D0003CA0F9 /* RKStep+Description.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RKStep+Description.m"; sourceTree = "<group>"; };
 		F55BBDF119D362D0003CA0F9 /* APHTasksAndSchedules.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = APHTasksAndSchedules.json; sourceTree = "<group>"; };
 		F55BBDF219D362D0003CA0F9 /* JSON_READ_ME */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = JSON_READ_ME; sourceTree = "<group>"; };
 		F55BBDF719D362D0003CA0F9 /* APHAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHAppDelegate.h; sourceTree = "<group>"; };
@@ -231,8 +227,6 @@
 		F55BBE0219D362D0003CA0F9 /* APHDashboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHDashboardViewController.h; sourceTree = "<group>"; };
 		F55BBE0319D362D0003CA0F9 /* APHDashboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHDashboardViewController.m; sourceTree = "<group>"; };
 		F55BBE0F19D362D0003CA0F9 /* APHLearn.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = APHLearn.storyboard; sourceTree = "<group>"; };
-		F55BBE4319D362D0003CA0F9 /* APHSpecialSurveyTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHSpecialSurveyTaskViewController.h; sourceTree = "<group>"; };
-		F55BBE4419D362D0003CA0F9 /* APHSpecialSurveyTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHSpecialSurveyTaskViewController.m; sourceTree = "<group>"; };
 		F56F60EB19D37E4A00A0A2E1 /* APCAppleCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = APCAppleCore.xcodeproj; path = AppleCore/APCAppleCore/APCAppleCore.xcodeproj; sourceTree = SOURCE_ROOT; };
 		F573806D19E459BD008A8354 /* BridgeSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BridgeSDK.framework; path = AppleCore/APCAppleCore/BridgeSDK.framework; sourceTree = SOURCE_ROOT; };
 		F573807219E45A0A008A8354 /* APHDataSubstrate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHDataSubstrate.h; sourceTree = "<group>"; };
@@ -485,8 +479,6 @@
 			children = (
 				F55BBDDA19D362D0003CA0F9 /* NSString+CustomMethods.h */,
 				F55BBDDB19D362D0003CA0F9 /* NSString+CustomMethods.m */,
-				F55BBDDC19D362D0003CA0F9 /* RKStep+Description.h */,
-				F55BBDDD19D362D0003CA0F9 /* RKStep+Description.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -601,19 +593,9 @@
 				7BC7213919F7018700C70956 /* Common Instructional View */,
 				7B41045519E5D94F00592B96 /* APHFitnessTest */,
 				F5481F0619E4820100D84617 /* HeartAgeControllers */,
-				F55BBE4219D362D0003CA0F9 /* SpecialSurveyControllers */,
 				08C2327E1A15796E00DB4EF9 /* Seven Day Allocation */,
 			);
 			path = TasksAndSteps;
-			sourceTree = "<group>";
-		};
-		F55BBE4219D362D0003CA0F9 /* SpecialSurveyControllers */ = {
-			isa = PBXGroup;
-			children = (
-				F55BBE4319D362D0003CA0F9 /* APHSpecialSurveyTaskViewController.h */,
-				F55BBE4419D362D0003CA0F9 /* APHSpecialSurveyTaskViewController.m */,
-			);
-			path = SpecialSurveyControllers;
 			sourceTree = "<group>";
 		};
 		F56F60EC19D37E4A00A0A2E1 /* Products */ = {
@@ -891,11 +873,9 @@
 				F5778E7719F0613D0079F1B2 /* APHSignUpGeneralInfoViewController.m in Sources */,
 				F5778E7A19F0613D0079F1B2 /* APHSignupTouchIDViewController.m in Sources */,
 				F5778E7419F0613D0079F1B2 /* APHIntroVideoViewController.m in Sources */,
-				F55BBE8C19D362D0003CA0F9 /* APHSpecialSurveyTaskViewController.m in Sources */,
 				08C2328C1A15796E00DB4EF9 /* APHSevenDayFitnessIntroStepViewController.m in Sources */,
 				5B55FE321A0553D5009BEE5E /* APHChangePasscodeViewController.m in Sources */,
 				F5778E7919F0613D0079F1B2 /* APHSignUpPermissionsViewController.m in Sources */,
-				F55BBE5819D362D0003CA0F9 /* RKStep+Description.m in Sources */,
 				087476381A0995A600F9A0A8 /* APHScoring.m in Sources */,
 				F5778E7219F0613D0079F1B2 /* APHInclusionCriteriaViewController.m in Sources */,
 				08C2328A1A15796E00DB4EF9 /* APHSevenDayFitnessAllocationTaskViewController.m in Sources */,

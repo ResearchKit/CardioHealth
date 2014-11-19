@@ -108,7 +108,7 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
 - (void)handleClose:(UIBarButtonItem *)sender
 {
     if ([self.delegate respondsToSelector:@selector(stepViewControllerDidFinish:navigationDirection:)] == YES) {
-        [self.delegate stepViewControllerDidFinish:self navigationDirection:RKStepViewControllerNavigationDirectionForward];
+        [self.delegate stepViewControllerDidFinish:self navigationDirection:RKSTStepViewControllerNavigationDirectionForward];
     }
 }
 
