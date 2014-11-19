@@ -74,6 +74,7 @@
     [super viewDidLoad];
     
     [self.btnGetStarted setBackgroundColor:[UIColor appPrimaryColor]];
+    self.navigationController.navigationBar.topItem.title = NSLocalizedString(@"Activity Tracking", @"Activity Tracking");
 }
 
 - (void)viewWillAppear:(BOOL)animated

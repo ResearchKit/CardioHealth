@@ -74,7 +74,6 @@ static NSString *kSevenDayFitnessCompleteStep = @"sevenDayFitnessCompleteStep";
         APCStepViewController *controller = [[aClass alloc] initWithNibName:nil bundle:nil];
 
         controller.delegate = self;
-        controller.title = NSLocalizedString(@"Activity Tracking", @"Activity Tracking");
         controller.step = step;
         
         stepVC = controller;

@@ -46,6 +46,9 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
     
     self.showTodaysDataAtViewLoad = YES;
     
+    self.navigationController.navigationBar.topItem.title = NSLocalizedString(@"Activity Tracking", @"Activity Tracking");
+    
+    self.navigationItem.hidesBackButton = YES;
     self.navigationItem.leftBarButtonItem = nil;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Close"
                                                                               style:UIBarButtonItemStylePlain
@@ -89,7 +92,7 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
 
 - (IBAction)handleWeek:(UIButton *)sender
 {
-    [self showDataForKind:self.numberOfDaysOfFitnessWeek];
+    [self showDataForKind:SevenDayFitnessDatasetKindWeek];
 }
 
 - (void)showDataForKind:(SevenDayFitnessDatasetKinds)kind
