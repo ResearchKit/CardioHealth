@@ -223,7 +223,7 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
 
 #pragma mark - APCDashboardGraphTableViewCellDelegate methods
 
-- (void)dashboardGraphViewCellDidTapExpandForCell:(APCDashboardGraphTableViewCell *)cell
+- (void)dashboardGraphViewCellDidTapExpandForCell:(APCDashboardLineGraphTableViewCell *)cell
 {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     
