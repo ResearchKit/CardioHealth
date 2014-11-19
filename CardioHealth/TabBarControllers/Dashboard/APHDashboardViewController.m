@@ -3,34 +3,27 @@
 //  BasicTabBar
 //
 //  Created by Henry McGilton on 9/7/14.
-//  Copyright (c) 2014 Trilithon Software. All rights reserved.
+//  Copyright (c) 2014 Y Media Labs. All rights reserved.
 //
 
 /* Controllers */
 #import "APHDashboardViewController.h"
-#import "APHEditSectionsViewController.h"
-
-/* Views */
-#import "APHDashboardGraphViewCell.h"
-#import "APHDashboardMessageViewCell.h"
-#import "APHDashboardProgressViewCell.h"
+#import "APHDashboardEditViewController.h"
 
 /* Scoring */
 #import "APHScoring.h"
 
-static NSString * const kDashboardRightDetailCellIdentifier = @"DashboardRightDetailCellIdentifier";
-static NSString * const kDashboardGraphCellIdentifier       = @"DashboardGraphCellIdentifier";
-static NSString * const kDashboardProgressCellIdentifier    = @"DashboardProgressCellIdentifier";
-static NSString * const kDashboardMessagesCellIdentifier    = @"DashboardMessageCellIdentifier";
+static NSString * const kAPCBasicTableViewCellIdentifier       = @"APCBasicTableViewCell";
+static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetailTableViewCell";
 
-@interface APHDashboardViewController () <APCLineGraphViewDelegate, UIGestureRecognizerDelegate>
+@interface APHDashboardViewController ()<UIViewControllerTransitioningDelegate>
 
-@property (nonatomic, strong) NSMutableArray *sectionsOrder;
-
-@property (nonatomic, strong) NSMutableArray *lineCharts;
+@property (nonatomic, strong) NSMutableArray *rowItemsOrder;
 
 @property (nonatomic, strong) APHScoring *distanceScore;
 @property (nonatomic, strong) APHScoring *heartRateScore;
+
+@property (nonatomic, strong) APCPresentAnimator *presentAnimator;
 
 @end
 
@@ -43,22 +36,23 @@ static NSString * const kDashboardMessagesCellIdentifier    = @"DashboardMessage
     if (self = [super initWithCoder:aDecoder]) {
         
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        _sectionsOrder = [NSMutableArray arrayWithArray:[defaults objectForKey:kDashboardSectionsOrder]];
+        _rowItemsOrder = [NSMutableArray arrayWithArray:[defaults objectForKey:kAPCDashboardRowItemsOrder]];
         
-        if (!_sectionsOrder.count) {
-            _sectionsOrder = [[NSMutableArray alloc] initWithArray:@[
-                                                                     @(kDashboardSectionActivity),
-                                                                     @(kDashboardSectionBloodCount),
-                                                                     @(kDashboardSectionInsights),
-                                                                     @(kDashboardSectionAlerts)]];
+        if (!_rowItemsOrder.count) {
+            _rowItemsOrder = [[NSMutableArray alloc] initWithArray:@[
+                                                                     @(kAPHDashboardItemTypeDistance),
+                                                                     @(kAPHDashboardItemTypeHeartRate),
+                                                                     @(kAPHDashboardItemTypeAlerts),
+                                                                     @(kAPHDashboardItemTypeInsights)]];
             
-            [defaults setObject:[NSArray arrayWithArray:_sectionsOrder] forKey:kDashboardSectionsOrder];
+            [defaults setObject:[NSArray arrayWithArray:_rowItemsOrder] forKey:kAPCDashboardRowItemsOrder];
             [defaults synchronize];
             
         }
         
         self.title = NSLocalizedString(@"Dashboard", @"Dashboard");
-        _lineCharts = [[NSMutableArray alloc] init];
+        
+        _presentAnimator = [APCPresentAnimator new];
     }
     
     return self;
@@ -70,9 +64,6 @@ static NSString * const kDashboardMessagesCellIdentifier    = @"DashboardMessage
 {
     [super viewDidLoad];
     
-    [self.tableView setSeparatorInset:UIEdgeInsetsZero];
-    UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Edit", nil) style:UIBarButtonItemStylePlain target:self action:@selector(editTapped)];
-    [self.navigationItem setRightBarButtonItem:editButton];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     self.distanceScore = [[APHScoring alloc] initWithKind:APHDataKindWalk
@@ -82,6 +73,8 @@ static NSString * const kDashboardMessagesCellIdentifier    = @"DashboardMessage
     self.heartRateScore = [[APHScoring alloc] initWithKind:APHDataKindHeartRate
                                               numberOfDays:5
                                          correlateWithKind:APHDataKindNone];
+    
+    [self prepareData];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -89,9 +82,9 @@ static NSString * const kDashboardMessagesCellIdentifier    = @"DashboardMessage
     [super viewWillAppear:animated];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    self.sectionsOrder = [NSMutableArray arrayWithArray:[defaults objectForKey:kDashboardSectionsOrder]];
+    self.rowItemsOrder = [NSMutableArray arrayWithArray:[defaults objectForKey:kAPCDashboardRowItemsOrder]];
     
-    [self.tableView reloadData];
+    [self prepareData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -99,221 +92,166 @@ static NSString * const kDashboardMessagesCellIdentifier    = @"DashboardMessage
     [super didReceiveMemoryWarning];
 }
 
+#pragma mark - Data
 
-#pragma mark - UIGestureRecognizerDelegate methods
-
-- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
-    if (![gestureRecognizer isEqual:self.tableView.panGestureRecognizer] && ([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]])) {
-        UIPanGestureRecognizer *panGesture = (UIPanGestureRecognizer*)gestureRecognizer;
-        CGPoint translation = [panGesture velocityInView:self.tableView];
-        return fabs(translation.x) > fabs(translation.y);
-    }
-    return YES;
-}
-
-#pragma mark - UITableViewDataSource Methods
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+- (void)prepareData
 {
-    return 2;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    NSInteger rowCount;
+    [self.items removeAllObjects];
     
-    if (section == 0) {
-        rowCount = 2;
-    } else{
-        rowCount = self.sectionsOrder.count;
-    }
-    
-    return rowCount;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell *cell = nil;
-    
-    if (indexPath.section == 0) {
-        if (indexPath.row == 0) {
-            cell = [tableView dequeueReusableCellWithIdentifier:kDashboardRightDetailCellIdentifier];
+    {
+        NSMutableArray *rowItems = [NSMutableArray new];
+        
+        {
+            APCTableViewItem *item = [APCTableViewItem new];
+            item.caption = NSLocalizedString(@"Activities", @"");
+            item.identifier = kAPCRightDetailTableViewCellIdentifier;
+            item.editable = NO;
+            item.textAlignnment = NSTextAlignmentRight;
             
-            cell.textLabel.text = NSLocalizedString(@"Activities", nil);
-            cell.textLabel.textColor = [UIColor appSecondaryColor1];
-            cell.textLabel.font = [UIFont appRegularFontWithSize:14.0f];
             NSUInteger allScheduledTasks = ((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.allScheduledTasksForToday;
             NSUInteger completedScheduledTasks = ((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.completedScheduledTasksForToday;
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"%lu/%lu", (unsigned long)completedScheduledTasks, (unsigned long)allScheduledTasks];
-            cell.detailTextLabel.textColor = [UIColor appSecondaryColor3];
-            cell.detailTextLabel.font = [UIFont appRegularFontWithSize:17.0f];
             
-        } else if (indexPath.row == 1){
-            cell = [tableView dequeueReusableCellWithIdentifier:kDashboardProgressCellIdentifier];
-            APHDashboardProgressViewCell * progressCell = (APHDashboardProgressViewCell*) cell;
-            NSUInteger allScheduledTasks = ((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.allScheduledTasksForToday;
-            NSUInteger completedScheduledTasks = ((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.completedScheduledTasksForToday;
-            CGFloat percent = (CGFloat) completedScheduledTasks / (CGFloat) allScheduledTasks;
-            [progressCell.progressView setProgress:percent animated:YES];
+            item.detailText = [NSString stringWithFormat:@"%lu/%lu", (unsigned long)completedScheduledTasks, (unsigned long)allScheduledTasks];
+            
+            APCTableViewRow *row = [APCTableViewRow new];
+            row.item = item;
+            row.itemType = kAPCTableViewDashboardItemTypeProgress;
+            [rowItems addObject:row];
+        }
+        
+        {
+            APCTableViewDashboardProgressItem *item = [APCTableViewDashboardProgressItem new];
+            item.identifier = kAPCDashboardProgressTableViewCellIdentifier;
+            item.editable = NO;
+            
+            APCTableViewRow *row = [APCTableViewRow new];
+            row.item = item;
+            row.itemType = kAPCTableViewDashboardItemTypeProgress;
+            [rowItems addObject:row];
+        }
+        
+        
+        APCTableViewSection *section = [APCTableViewSection new];
+        section.sectionTitle = NSLocalizedString(@"Today", @"");
+        section.rows = [NSArray arrayWithArray:rowItems];
+        [self.items addObject:section];
+    }
+    
+    {
+        NSMutableArray *rowItems = [NSMutableArray new];
+        
+        for (NSNumber *typeNumber in self.rowItemsOrder) {
+            
+            APHDashboardItemType rowType = typeNumber.integerValue;
+            
+            switch (rowType) {
+                case kAPHDashboardItemTypeDistance:
+                {
+                    APCTableViewDashboardGraphItem *item = [APCTableViewDashboardGraphItem new];
+                    item.caption = NSLocalizedString(@"Distance", @"");
+                    item.graphData = self.distanceScore;
+                    item.detailText = [NSString stringWithFormat:NSLocalizedString(@"Average : %lu ft", @"Average: {value} ft"), [[self.distanceScore averageDataPoint] integerValue]];
+                    item.identifier = kAPCDashboardGraphTableViewCellIdentifier;
+                    item.editable = YES;
+                    item.tintColor = [UIColor appTertiaryPurpleColor];
+                    
+                    APCTableViewRow *row = [APCTableViewRow new];
+                    row.item = item;
+                    row.itemType = rowType;
+                    [rowItems addObject:row];
+
+                }
+                    break;
+                case kAPHDashboardItemTypeHeartRate:{
+                    
+                    APCTableViewDashboardGraphItem *item = [APCTableViewDashboardGraphItem new];
+                    item.caption = NSLocalizedString(@"Heart Rate", @"");
+                    item.graphData = self.heartRateScore;
+                    item.detailText = [NSString stringWithFormat:NSLocalizedString(@"Average : %lu bpm", @"Average: {value} bpm"), [[self.heartRateScore averageDataPoint] integerValue]];
+                    item.identifier = kAPCDashboardGraphTableViewCellIdentifier;
+                    item.editable = YES;
+                    item.tintColor = [UIColor appTertiaryYellowColor];
+                    
+                    APCTableViewRow *row = [APCTableViewRow new];
+                    row.item = item;
+                    row.itemType = rowType;
+                    [rowItems addObject:row];
+                }
+                    break;
+                case kAPHDashboardItemTypeAlerts:{
+                    
+                    APCTableViewDashboardMessageItem *item = [APCTableViewDashboardMessageItem new];
+                    item.identifier = kAPCDashboardMessageTableViewCellIdentifier;
+                    item.messageType = kAPCDashboardMessageTypeAlert;
+                    item.detailText = @"Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+                    item.editable = YES;
+                    
+                    APCTableViewRow *row = [APCTableViewRow new];
+                    row.item = item;
+                    row.itemType = rowType;
+                    [rowItems addObject:row];
+                }
+                    break;
+                case kAPHDashboardItemTypeInsights:{
+                    
+                    APCTableViewDashboardMessageItem *item = [APCTableViewDashboardMessageItem new];
+                    item.identifier = kAPCDashboardMessageTableViewCellIdentifier;
+                    item.messageType = kAPCDashboardMessageTypeInsight;
+                    item.detailText = @"Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+                    item.editable = YES;
+                    
+                    APCTableViewRow *row = [APCTableViewRow new];
+                    row.item = item;
+                    row.itemType = rowType;
+                    [rowItems addObject:row];
+                }
+                    break;
+                default:
+                    break;
+            }
             
         }
-    } else {
-        NSInteger cellType = ((NSNumber *)[self.sectionsOrder objectAtIndex:indexPath.row]).integerValue;
         
-        switch (cellType) {
-            case kDashboardSectionActivity:
-            {
-                cell = (APHDashboardGraphViewCell *)[tableView dequeueReusableCellWithIdentifier:kDashboardGraphCellIdentifier forIndexPath:indexPath];
-                APHDashboardGraphViewCell * graphCell = (APHDashboardGraphViewCell *) cell;
-                if (graphCell.graphContainerView.subviews.count == 0) {
-                    APCLineGraphView *lineGraphView = [[APCLineGraphView alloc] initWithFrame:graphCell.graphContainerView.frame];
-                    lineGraphView.datasource = self.distanceScore;
-                    lineGraphView.delegate = self;
-                    lineGraphView.titleLabel.text = NSLocalizedString(@"Distance", @"Distance");
-                    lineGraphView.subTitleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Average : %lu ft",
-                                                                                                    @"Average: {value} ft"), [[self.distanceScore averageDataPoint] integerValue]];
-                    lineGraphView.tintColor = [UIColor appPrimaryColor];
-                    [graphCell.graphContainerView addSubview:lineGraphView];
-                    lineGraphView.panGestureRecognizer.delegate = self;
-                    [self.lineCharts addObject:lineGraphView];
-                }
-            }
-                break;
-            case kDashboardSectionBloodCount:
-            {
-                cell = (APHDashboardGraphViewCell *)[tableView dequeueReusableCellWithIdentifier:kDashboardGraphCellIdentifier forIndexPath:indexPath];
-                APHDashboardGraphViewCell * graphCell = (APHDashboardGraphViewCell *) cell;
-                if (graphCell.graphContainerView.subviews.count == 0) {
-                    APCLineGraphView *lineGraphView = [[APCLineGraphView alloc] initWithFrame:graphCell.graphContainerView.frame];
-                    lineGraphView.datasource = self.heartRateScore;
-                    lineGraphView.delegate = self;
-                    lineGraphView.titleLabel.text = NSLocalizedString(@"Heart Rate", @"Heart Rate");
-                    lineGraphView.subTitleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Average : %lu bpm",
-                                                                                                    @"Average: {value} bpm"), [[self.heartRateScore averageDataPoint] integerValue]];
-                    [graphCell.graphContainerView addSubview:lineGraphView];
-                    lineGraphView.tintColor = [UIColor appPrimaryColor];
-                    lineGraphView.panGestureRecognizer.delegate = self;
-                    [self.lineCharts addObject:lineGraphView];
-                }
-                
-            }
-                break;
-            case kDashboardSectionInsights:
-            {
-                cell = (APHDashboardMessageViewCell *)[tableView dequeueReusableCellWithIdentifier:kDashboardMessagesCellIdentifier forIndexPath:indexPath];
-                ((APHDashboardMessageViewCell *)cell).type = kDashboardMessageViewCellTypeInsight;
-                
-            }
-                break;
-            case kDashboardSectionAlerts:
-            {
-                cell = (APHDashboardMessageViewCell *)[tableView dequeueReusableCellWithIdentifier:kDashboardMessagesCellIdentifier forIndexPath:indexPath];
-                ((APHDashboardMessageViewCell *)cell).type = kDashboardMessageViewCellTypeAlert;
-            }
-                break;
-            default:
-                break;
-        }
+        APCTableViewSection *section = [APCTableViewSection new];
+        section.rows = [NSArray arrayWithArray:rowItems];
+        section.sectionTitle = NSLocalizedString(@"Past 5 Days", @"");
+        [self.items addObject:section];
     }
     
-    return cell;
+    [self.tableView reloadData];
 }
 
-#pragma mark - UITableViewDelegate Methods
+#pragma mark - APCDashboardGraphTableViewCellDelegate methods
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)dashboardGraphViewCellDidTapExpandForCell:(APCDashboardLineGraphTableViewCell *)cell
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    
+    APCTableViewDashboardGraphItem *graphItem = (APCTableViewDashboardGraphItem *)[self itemForIndexPath:indexPath];
+    
+    CGRect initialFrame = [cell convertRect:cell.bounds toView:self.view.window];
+    self.presentAnimator.initialFrame = initialFrame;
+
+    APCLineGraphViewController *graphViewController = [[UIStoryboard storyboardWithName:@"APHDashboard" bundle:nil] instantiateViewControllerWithIdentifier:@"GraphVC"];
+    graphViewController.graphItem = graphItem;
+//    graphViewController.transitioningDelegate = self;
+//    graphViewController.modalPresentationStyle = UIModalPresentationCustom;
+    [self.navigationController presentViewController:graphViewController animated:YES completion:nil];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    CGFloat height;
-    
-    if (indexPath.section == 0) {
-        if (indexPath.row == 0) {
-            height = 65.0f;
-        } else {
-            height = 163.0f;
-        }
-    } else{
-        APHDashboardSection cellType = ((NSNumber *)[self.sectionsOrder objectAtIndex:indexPath.row]).integerValue;
-        
-        switch (cellType) {
-            case kDashboardSectionBloodCount:
-            case kDashboardSectionActivity:
-            case kDashboardSectionMedications:
-                height = 204.0f;
-                break;
-            default:
-                height = 150;
-                break;
-        }
-    }
-    
-    
-    return height;
+#pragma mark - UIViewControllerTransitioningDelegate methods
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
+                                                                  presentingController:(UIViewController *)presenting
+                                                                      sourceController:(UIViewController *)source {
+    self.presentAnimator.presenting = YES;
+    return self.presentAnimator;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    UITableViewHeaderFooterView *headerView = [[UITableViewHeaderFooterView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(tableView.frame), tableView.sectionHeaderHeight)];
-    headerView.contentView.backgroundColor = [UIColor appSecondaryColor4];
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
     
-    UILabel *headerLabel = [[UILabel alloc] initWithFrame:headerView.bounds];
-    headerLabel.font = [UIFont appLightFontWithSize:16.0f];
-    headerLabel.textColor = [UIColor appSecondaryColor3];
-    headerLabel.textAlignment = NSTextAlignmentCenter;
-    [headerView addSubview:headerLabel];
-    
-    if (section == 0) {
-        headerLabel.text = @"Today";
-    } else{
-        headerLabel.text = @"Past 5 Days";
-    }
-    
-    return headerView;
-}
-
-#pragma mark - Selection Actions
-
-- (void)editTapped
-{
-    APHEditSectionsViewController *editSectionsViewController = [[APHEditSectionsViewController alloc] initWithNibName:@"APHEditSectionsViewController" bundle:nil];
-    
-    UINavigationController *editSectionsNavigationController = [[UINavigationController alloc] initWithRootViewController:editSectionsViewController];
-    editSectionsNavigationController.navigationBar.translucent = NO;
-    
-    [self presentViewController:editSectionsNavigationController animated:YES completion:nil];
-}
-
-#pragma mark - APCLineGraphViewDelegate methods
-
-- (void)lineGraphTouchesBegan:(APCLineGraphView *)graphView
-{
-    for (APCLineGraphView *lineGraph in self.lineCharts) {
-        if (lineGraph != graphView) {
-            [lineGraph setScrubberViewsHidden:NO animated:YES];
-        }
-    }
-}
-
-- (void)lineGraph:(APCLineGraphView *)graphView touchesMovedToXPosition:(CGFloat)xPosition
-{
-    for (APCLineGraphView *lineGraph in self.lineCharts) {
-        if (lineGraph != graphView) {
-            [lineGraph scrubReferenceLineForXPosition:xPosition];
-        }
-    }
-}
-
-- (void)lineGraphTouchesEnded:(APCLineGraphView *)graphView
-{
-    for (APCLineGraphView *lineGraph in self.lineCharts) {
-        if (lineGraph != graphView) {
-            [lineGraph setScrubberViewsHidden:YES animated:YES];
-        }
-    }
+    self.presentAnimator.presenting = NO;
+    return self.presentAnimator;
 }
 
 @end

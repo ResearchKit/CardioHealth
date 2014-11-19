@@ -9,11 +9,16 @@
 #import "APHActivityTrackingStepViewController.h"
 #import "APHActivitySummaryView.h"
 
-static NSInteger kStatusForToday = 0;
 static NSInteger kIntervalByHour = 1;
 static NSInteger kIntervalByDay = 1;
 
 static NSString *kSevenDayFitnessStartDateKey = @"sevenDayFitnessStartDateKey";
+
+typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
+{
+    SevenDayFitnessDatasetKindToday = 0,
+    SevenDayFitnessDatasetKindWeek
+};
 
 @interface APHActivityTrackingStepViewController ()
 
@@ -65,8 +70,8 @@ static NSString *kSevenDayFitnessStartDateKey = @"sevenDayFitnessStartDateKey";
                                                         return;
                                                     }
                                                     
-                                                    [self runStatsCollectionQueryForSpan:kStatusForToday];
-                                                    [self runStatsCollectionQueryForSpan:self.numberOfDaysOfFitnessWeek];
+                                                    [self runStatsCollectionQueryForKind:SevenDayFitnessDatasetKindToday];
+                                                    [self runStatsCollectionQueryForKind:SevenDayFitnessDatasetKindWeek];
                                                 }];
     }
 }
@@ -79,7 +84,7 @@ static NSString *kSevenDayFitnessStartDateKey = @"sevenDayFitnessStartDateKey";
 
 - (IBAction)handleToday:(UIButton *)sender
 {
-    [self showDataForKind:kStatusForToday];
+    [self showDataForKind:SevenDayFitnessDatasetKindToday];
 }
 
 - (IBAction)handleWeek:(UIButton *)sender
@@ -87,9 +92,9 @@ static NSString *kSevenDayFitnessStartDateKey = @"sevenDayFitnessStartDateKey";
     [self showDataForKind:self.numberOfDaysOfFitnessWeek];
 }
 
-- (void)showDataForKind:(NSInteger)kind
+- (void)showDataForKind:(SevenDayFitnessDatasetKinds)kind
 {
-    if (kind == kStatusForToday) {
+    if (kind == SevenDayFitnessDatasetKindToday) {
         [self normalizeData:self.datasetForToday];
     } else {
         [self normalizeData:self.datasetForTheWeek];
@@ -130,19 +135,28 @@ static NSString *kSevenDayFitnessStartDateKey = @"sevenDayFitnessStartDateKey";
     [self.healthStore executeQuery:query];
 }
 
-- (void)runStatsCollectionQueryForSpan:(NSInteger)span
+- (void)runStatsCollectionQueryForKind:(SevenDayFitnessDatasetKinds)kind
 {
-    NSDate *startDate = [self dateForSpan:span];
-    
+    NSDate *startDate = nil;
     NSDateComponents *interval = [[NSDateComponents alloc] init];
     
-    if (span == kStatusForToday) {
+    if (kind == SevenDayFitnessDatasetKindToday) {
+        startDate = [[NSCalendar currentCalendar] dateBySettingHour:0
+                                                             minute:0
+                                                             second:0
+                                                             ofDate:[NSDate date]
+                                                            options:0];
         interval.hour = kIntervalByHour;
+        NSLog(@"Today Start/End: %@/%@", startDate, [NSDate date]);
     } else {
+        startDate = [[NSCalendar currentCalendar] dateBySettingHour:0
+                                                             minute:0
+                                                             second:0
+                                                             ofDate:[self checkSevenDayFitnessStartDate]
+                                                            options:0];
         interval.day = kIntervalByDay;
+        NSLog(@"Week Start/End: %@/%@", startDate, [NSDate date]);
     }
-    
-    NSLog(@"Start/End: %@/%@", startDate, [NSDate date]);
     
     HKQuantityType *distanceType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDistanceWalkingRunning];
     
@@ -156,11 +170,13 @@ static NSString *kSevenDayFitnessStartDateKey = @"sevenDayFitnessStartDateKey";
         if (error) {
             NSLog(@"Error: %@", error.localizedDescription);
         } else {
-            NSDate *endDate = [NSDate date];
-            NSDate *beginDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitDay
-                                                                         value:span
-                                                                        toDate:endDate
-                                                                       options:0];
+            NSDate *endDate = [[NSCalendar currentCalendar] dateBySettingHour:0
+                                                                       minute:0
+                                                                       second:0
+                                                                       ofDate:[NSDate date]
+                                                                      options:0];
+            NSDate *beginDate = startDate;
+            
             [results enumerateStatisticsFromDate:beginDate
                                           toDate:endDate
                                        withBlock:^(HKStatistics *result, BOOL *stop) {
@@ -170,7 +186,7 @@ static NSString *kSevenDayFitnessStartDateKey = @"sevenDayFitnessStartDateKey";
                                                NSDate *date = result.startDate;
                                                double value = [quantity doubleValueForUnit:[HKUnit meterUnit]];
                                                
-                                               if (span == kStatusForToday) {
+                                               if (kind == SevenDayFitnessDatasetKindToday) {
                                                    [self.datasetForToday addObject:@{
                                                                              kDatasetDateKey: date,
                                                                              kDatasetValueKey: [NSNumber numberWithDouble:value]
@@ -185,7 +201,7 @@ static NSString *kSevenDayFitnessStartDateKey = @"sevenDayFitnessStartDateKey";
                                                NSLog(@"%@: %f", date, value);
                                            }
                                        }];
-            if ((span == kStatusForToday) && self.showTodaysDataAtViewLoad) {
+            if ((kind == SevenDayFitnessDatasetKindToday) && self.showTodaysDataAtViewLoad) {
                 [self handleToday:nil];
                 self.showTodaysDataAtViewLoad = NO;
             }
@@ -197,27 +213,6 @@ static NSString *kSevenDayFitnessStartDateKey = @"sevenDayFitnessStartDateKey";
 
 #pragma mark - Helpers
 
-/**
- * @brief   Returns an NSDate that is past/future by the value of daySpan.
- *
- * @param   daySpan Number of days relative to current date.
- *                  If negative, date will be number of days in the past;
- *                  otherwise the date will be number of days in the future.
- *
- * @return  Returns the date as NSDate.
- */
-- (NSDate *)dateForSpan:(NSInteger)daySpan
-{
-    NSDateComponents *components = [[NSDateComponents alloc] init];
-    components.day = daySpan;
-
-    NSDate *spanDate = [[NSCalendar currentCalendar] dateByAddingComponents:components
-                                                                     toDate:[NSDate date]
-                                                                    options:0];
-    
-    return spanDate;
-}
-
 - (NSSet *)healthKitDataTypesToRead {
     HKQuantityType *steps = [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierStepCount];
     HKQuantityType *distance = [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierDistanceWalkingRunning];
@@ -227,12 +222,21 @@ static NSString *kSevenDayFitnessStartDateKey = @"sevenDayFitnessStartDateKey";
 
 - (NSString *)fitnessDaysRemaining
 {
-    NSDate *startDate = [self checkSevenDayFitnessStartDate];
+    NSDate *startDate = [[NSCalendar currentCalendar] dateBySettingHour:0
+                                                                 minute:0
+                                                                 second:0
+                                                                 ofDate:[self checkSevenDayFitnessStartDate]
+                                                                options:0];
+    NSDate *today = [[NSCalendar currentCalendar] dateBySettingHour:0
+                                                             minute:0
+                                                             second:0
+                                                             ofDate:[NSDate date]
+                                                            options:0];
     // Compute the remaing days of the 7 day fitness allocation.
     NSDateComponents *numberOfDaysFromStartDate = [[NSCalendar currentCalendar] components:NSCalendarUnitDay
-                                                                              fromDate:startDate
-                                                                                toDate:[NSDate date] // today
-                                                                               options:NSCalendarWrapComponents];
+                                                                                  fromDate:startDate
+                                                                                    toDate:today
+                                                                                   options:NSCalendarWrapComponents];
     self.numberOfDaysOfFitnessWeek = [numberOfDaysFromStartDate day];
     
     NSUInteger daysRemain = 7 - self.numberOfDaysOfFitnessWeek;

@@ -51,8 +51,8 @@
     NSArray  *introImageNames = @[@"tutorial-1", @"tutorial-2"];
     
     NSArray  *paragraphs = @[
-                             NSLocalizedString(@"During the next week, your fitness allocation will be monitored, analyed, and available to you in real time.",
-                                               @"During the next week, your fitness allocation will be monitored, analyed, and available to you in real time."),
+                             NSLocalizedString(@"During the next week, your fitness allocation will be monitored, analyzed, and available to you in real time.",
+                                               @"During the next week, your fitness allocation will be monitored, analyzed, and available to you in real time."),
                              NSLocalizedString(@"To ensure the accuracy of this task, keep your phone on you at all times.",
                                                @"To ensure the accuracy of this task, keep your phone on you at all times.")
                              ];

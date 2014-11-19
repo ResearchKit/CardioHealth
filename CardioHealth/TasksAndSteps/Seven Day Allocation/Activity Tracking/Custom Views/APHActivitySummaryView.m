@@ -34,7 +34,12 @@ static CGFloat kMetersPerMile = 1609.344;
 @property (nonatomic, strong) UILabel *moderateCaption;
 @property (nonatomic, strong) UILabel *vigorousCaption;
 
-@property (nonatomic) double lastPercentage;
+@property (nonatomic, strong) UILabel *inactiveValue;
+@property (nonatomic, strong) UILabel *sedentaryValue;
+@property (nonatomic, strong) UILabel *moderateValue;
+@property (nonatomic, strong) UILabel *vigorousValue;
+
+//@property (nonatomic) double lastPercentage;
 @property (nonatomic) double sumQuantity;
 @property (nonatomic) NSUInteger radius;
 
@@ -75,9 +80,7 @@ static CGFloat kMetersPerMile = 1609.344;
 
 - (void)setupChartView
 {
-    // Add the CAShapeLayer
     self.circle = [CAShapeLayer layer];
-    // Add to parent layer
     [self.layer addSublayer:self.circle];
     
     self.border = [CAShapeLayer layer];
@@ -114,17 +117,35 @@ static CGFloat kMetersPerMile = 1609.344;
                                              color:[UIColor lightGrayColor]
                                           position:CGPointMake(0, 0)];
     [self addSubview:self.vigorousCaption];
+    
+    self.inactiveValue = [self addLabelWithTitle:@"" color:[UIColor lightGrayColor] position:CGPointMake(0, 0)];
+    [self addSubview:self.inactiveValue];
+    
+    self.sedentaryValue = [self addLabelWithTitle:@"" color:[UIColor lightGrayColor] position:CGPointMake(0, 0)];
+    [self addSubview:self.sedentaryValue];
+    
+    self.moderateValue = [self addLabelWithTitle:@"" color:[UIColor lightGrayColor] position:CGPointMake(0, 0)];
+    [self addSubview:self.moderateValue];
+    
+    self.vigorousValue = [self addLabelWithTitle:@"" color:[UIColor lightGrayColor] position:CGPointMake(0, 0)];
+    [self addSubview:self.vigorousValue];
 }
 
 - (void)layoutSubviews
 {
-    self.radius = self.frame.size.width * 0.3;
-    // Make a circular shape
-    self.circle.path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, 2.0*self.radius, 2.0*self.radius)
-                                              cornerRadius:self.radius].CGPath;
+    CGPoint center = CGPointMake(CGRectGetWidth(self.bounds)/2.8, CGRectGetHeight(self.bounds)/3.4);
+    CGFloat startAngle = -M_PI_2;
+    CGFloat endAngle = startAngle + 2*M_PI;
+    
+    self.radius = MIN(CGRectGetWidth(self.bounds)/2.8, CGRectGetHeight(self.bounds)/2.8);
+    
+    self.circle.path = [UIBezierPath bezierPathWithArcCenter:center
+                                                      radius:self.radius
+                                                  startAngle:startAngle
+                                                    endAngle:endAngle
+                                                   clockwise:YES].CGPath;
     // Center the shape in self.view
-    self.circle.position = CGPointMake(CGRectGetMidX(self.frame)-self.radius,
-                                   CGRectGetMidY(self.frame)-self.radius*2);
+    self.circle.position = CGPointMake(CGRectGetMidX(self.frame)-self.radius, CGRectGetMidY(self.frame)-self.radius*2);
     
     // Configure the apperence of the circle
     self.circle.fillColor = [UIColor clearColor].CGColor;
@@ -162,7 +183,11 @@ static CGFloat kMetersPerMile = 1609.344;
         
         self.distanceLabel.text = [NSString stringWithFormat:@"%.2f mi", self.sumQuantity/kMetersPerMile];
         
-        [self drawCircle];
+        if (self.sumQuantity == 0) {
+            [self.circle.sublayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
+        } else {
+            [self drawCircle];
+        }
     }
 }
 
@@ -232,6 +257,8 @@ static CGFloat kMetersPerMile = 1609.344;
             NSLog(@"Animation Completed.");
         }];
         
+        double lastPercentage = 0;
+        
         for (NSInteger idx = 0; idx < self.numberOfSegments; idx++) {
             CAShapeLayer* strokePart = [[CAShapeLayer alloc] init];
             strokePart.fillColor = [[UIColor clearColor] CGColor];
@@ -242,41 +269,46 @@ static CGFloat kMetersPerMile = 1609.344;
             
             strokePart.strokeColor = [[self.segementColors objectAtIndex:idx] CGColor];
             
-            if (idx == 0) {
-                strokePart.strokeStart = 0.0;
+            NSDictionary *segmentValue = [self.segmentValues objectAtIndex:idx];
+            
+            if ([segmentValue[kDatasetValueKey] doubleValue] != 0) {
                 
-                NSDictionary *segmentValue = [self.segmentValues objectAtIndex:idx];
+                CGFloat percentValueOfDatasetValue = [self percentageOfValue:[segmentValue[kDatasetValueKey] floatValue]];
+                double arcAngleInRadians = 0;
+
+                if (idx == 0) {
+                    strokePart.strokeStart = 0.0;
+                    strokePart.strokeEnd = percentValueOfDatasetValue;
+                    arcAngleInRadians = percentValueOfDatasetValue;
+                } else {
+                    strokePart.strokeStart = lastPercentage;
+                    strokePart.strokeEnd = strokePart.strokeStart + percentValueOfDatasetValue;
+                    arcAngleInRadians = strokePart.strokeEnd - strokePart.strokeStart;
+                }
                 
-                strokePart.strokeEnd = [self percentageOfValue:[segmentValue[kDatasetValueKey] floatValue]];
-            } else {
-                NSDictionary *segmentValue = [self.segmentValues objectAtIndex:idx];
+                lastPercentage = strokePart.strokeEnd;
                 
-                strokePart.strokeStart = self.lastPercentage;
-                strokePart.strokeEnd = strokePart.strokeStart + [self percentageOfValue:[segmentValue[kDatasetValueKey] doubleValue]];
+                NSLog(@"Start/End: %f/%f", strokePart.strokeStart, strokePart.strokeEnd);
+                
+                [self.circle addSublayer:strokePart];
+                
+                CAKeyframeAnimation* animation = [CAKeyframeAnimation animationWithKeyPath:@"strokeEnd"];
+                NSArray* times = @[ @(0.0), // Note: This works because both the times and the stroke start/end are on scales of 0..1
+                                    @(strokePart.strokeStart),
+                                    @(strokePart.strokeEnd),
+                                    @(1.0) ];
+                NSArray* values = @[ @(strokePart.strokeStart),
+                                     @(strokePart.strokeStart),
+                                     @(strokePart.strokeEnd),
+                                     @(strokePart.strokeEnd) ];
+                
+                animation.keyTimes = times;
+                animation.values = values;
+                animation.removedOnCompletion = NO;
+                animation.fillMode = kCAFillModeForwards;
+                
+                [strokePart addAnimation:animation forKey:@"drawCircleAnimation"];
             }
-            
-            self.lastPercentage = strokePart.strokeEnd;
-            
-            NSLog(@"Start/End: %f/%f", strokePart.strokeStart, strokePart.strokeEnd);
-            
-            [self.circle addSublayer:strokePart];
-            
-            CAKeyframeAnimation* animation = [CAKeyframeAnimation animationWithKeyPath:@"strokeEnd"];
-            NSArray* times = @[ @(0.0), // Note: This works because both the times and the stroke start/end are on scales of 0..1
-                                @(strokePart.strokeStart),
-                                @(strokePart.strokeEnd),
-                                @(1.0) ];
-            NSArray* values = @[ @(strokePart.strokeStart),
-                                 @(strokePart.strokeStart),
-                                 @(strokePart.strokeEnd),
-                                 @(strokePart.strokeEnd) ];
-            
-            animation.keyTimes = times;
-            animation.values = values;
-            animation.removedOnCompletion = NO;
-            animation.fillMode = kCAFillModeForwards;
-            
-            [strokePart addAnimation:animation forKey:@"drawCircleAnimation"];
         }
     }
     [CATransaction commit];

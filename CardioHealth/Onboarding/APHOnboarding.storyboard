@@ -1725,7 +1725,7 @@
     <resources>
         <image name="eligibility_doctor" width="133" height="168"/>
         <image name="eligibility_patient" width="220" height="104"/>
-        <image name="logo_disease" width="102" height="86"/>
+        <image name="logo_disease" width="92" height="78"/>
         <image name="logo_researchInstitute" width="284" height="55"/>
         <image name="profilePlaceholder" width="150" height="150"/>
         <image name="study_details_video" width="320" height="214"/>
