@@ -220,7 +220,7 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
         [steps addObject:step];
     }
     
-    RKSTOrderedTask *task = [[RKSTOrderedTask alloc] initWithIdentifier:@"heartAgeTest" steps:steps];
+    RKSTOrderedTask *task = [[RKSTOrderedTask alloc] initWithIdentifier:@"Heart Age Test" steps:steps];
     
     return task;
 }
