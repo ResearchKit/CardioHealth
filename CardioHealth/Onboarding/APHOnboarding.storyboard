@@ -264,6 +264,13 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ss2-Gw-7ka">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="132"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f3I-Hh-FbV">
+                                        <rect key="frame" x="0.0" y="131" width="320" height="1"/>
+                                        <color key="backgroundColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="JZz-re-mPN"/>
+                                        </constraints>
+                                    </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_disease" translatesAutoresizingMaskIntoConstraints="NO" id="Ff4-sh-IpT">
                                         <rect key="frame" x="78" y="28" width="38" height="38"/>
                                         <constraints>
@@ -308,10 +315,13 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="wHy-mh-c0X" firstAttribute="leading" secondItem="Ss2-Gw-7ka" secondAttribute="leading" constant="46" id="BLM-VO-eeQ"/>
+                                    <constraint firstAttribute="bottom" secondItem="f3I-Hh-FbV" secondAttribute="bottom" id="CRZ-DB-d50"/>
                                     <constraint firstAttribute="trailing" secondItem="wHy-mh-c0X" secondAttribute="trailing" constant="46" id="DyC-yz-2fi"/>
                                     <constraint firstAttribute="trailing" secondItem="eAh-qf-l36" secondAttribute="trailing" constant="37" id="F3H-CN-Dyz"/>
+                                    <constraint firstItem="f3I-Hh-FbV" firstAttribute="leading" secondItem="Ss2-Gw-7ka" secondAttribute="leading" id="Lpo-k0-GiP"/>
                                     <constraint firstItem="Ff4-sh-IpT" firstAttribute="top" secondItem="Ss2-Gw-7ka" secondAttribute="top" constant="28" id="OTu-2f-tRE"/>
                                     <constraint firstAttribute="centerX" secondItem="Ff4-sh-IpT" secondAttribute="centerX" constant="63" id="SoA-8X-Q1b"/>
+                                    <constraint firstAttribute="trailing" secondItem="f3I-Hh-FbV" secondAttribute="trailing" id="T4Q-W2-BCA"/>
                                     <constraint firstAttribute="centerX" secondItem="OK7-TH-QWM" secondAttribute="centerX" constant="28.5" id="WEc-y6-rA3"/>
                                     <constraint firstItem="OK7-TH-QWM" firstAttribute="top" secondItem="Ss2-Gw-7ka" secondAttribute="top" constant="28" id="aro-cz-yeF"/>
                                     <constraint firstAttribute="bottom" secondItem="eAh-qf-l36" secondAttribute="bottom" constant="14" id="eDd-TI-SYN"/>
