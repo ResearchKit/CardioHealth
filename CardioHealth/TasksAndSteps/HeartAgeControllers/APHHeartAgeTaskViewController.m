@@ -23,14 +23,11 @@ static NSString *kHeartAgeFormStepSmokingHistory = @"smokingHistory";
 static NSString *kHeartAgeFormStepCholesterolHdlSystolic = @"cholesterolHdlSystolic";
 static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
 
-//static  CGFloat  kAPCStepProgressBarHeight = 8.0;
-
 @interface APHHeartAgeTaskViewController ()
-
-//@property  (nonatomic, weak)  APCStepProgressBar  *progressor;
 
 @property (nonatomic, strong) NSDictionary *heartAgeInfo;
 @property (strong, nonatomic) RKSTDataArchive *taskArchive;
+@property (nonatomic, strong) NSDictionary *heartAgeTaskQuestionIndex;
 
 @end
 
@@ -43,8 +40,6 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-//    [self beginTask];
 }
 
 /*********************************************************************************/
@@ -235,6 +230,23 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
     if ([self.task isKindOfClass:[RKSTOrderedTask class]]) {
         task =  (RKSTOrderedTask *)self.task;
     }
+    
+    self.heartAgeTaskQuestionIndex = @{
+                                       kHeartAgeFormStepBiographicAndDemographic: @[
+                                               kHeartAgeTestDataAge,
+                                               kHeartAgeTestDataGender,
+                                               kHeartAgeTestDataEthnicity],
+                                       kHeartAgeFormStepMedicalHistory: @[
+                                               kHeartAgeTestDataDiabetes,
+                                               kHeartAgeTestDataHypertension],
+                                       kHeartAgeFormStepCholesterolHdlSystolic: @[
+                                               kHeartAgeTestDataTotalCholesterol,
+                                               kHeartAgeTestDataHDL,
+                                               kHeartAgeTestDataSystolicBloodPressure],
+                                       kHeartAgeFormStepSmokingHistory: @[
+                                               kHeartAgeTestDataSmoke,
+                                               kHeartAgeTestDataCurrentlySmoke]
+                                       };
 }
 
 - (void)didReceiveMemoryWarning {
@@ -421,43 +433,40 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
         
         // Normalize survey results into dictionary.
         for (RKSTStepResult *survey in taskViewController.result.results) {
-            for (RKSTQuestionResult *questionResult in survey.results) {
-                // Since we are using form steps and form items, the identifiers
-                // for a question are now in a formStepIdentifier.formItemIdentifier format.
-                NSString *formStepAndFormItemIdentifier = [questionResult identifier]; //[[questionResult itemIdentifier] stringValue];
+            if (![survey.identifier isEqualToString:kHeartAgeIntroduction]) {
+                NSArray *qrIdentifiers = self.heartAgeTaskQuestionIndex[survey.identifier];
                 
-                // we will only use the last part of the identifier, that is the 'formItemIdentifier'
-                // because it is the unique identifier that is provided by the Heart Age Calculations
-                // class and the methods in that class expect this identifier as the element key of the
-                // dictionary that is passed to it.
-                NSString *questionIdentifier = [[formStepAndFormItemIdentifier componentsSeparatedByString:@"."] lastObject];
-                
-                if ([questionIdentifier isEqualToString:kHeartAgeTestDataEthnicity]) {
-                    APCAppDelegate *apcDelegate = [[UIApplication sharedApplication] delegate];
-                    NSString *ethnicity = (NSString *)questionResult.answer;
+                [survey.results enumerateObjectsUsingBlock:^(RKSTQuestionResult *questionResult, NSUInteger idx, BOOL *stop) {
+                    NSString *questionIdentifier = [qrIdentifiers objectAtIndex:idx];
                     
-                    // persist ethnicity to the datastore
-                    [apcDelegate.dataSubstrate.currentUser setEthnicity:ethnicity];
-                    
-                    [surveyResultsDictionary setObject:ethnicity forKey:questionIdentifier];
-                } else if ([questionIdentifier isEqualToString:kHeartAgeTestDataGender]) {
-                    NSNumber *numericGender = questionResult.answer;
-                    NSString *selectedGender = ([numericGender integerValue] == HKBiologicalSexFemale) ? kHeartAgeTestDataGenderFemale :kHeartAgeTestDataGenderMale;
-                    [surveyResultsDictionary setObject:selectedGender
-                                                forKey:questionIdentifier];
-                } else if ([questionIdentifier isEqualToString:kHeartAgeTestDataAge]) {
-                    NSDate *dateOfBirth = [[NSCalendar currentCalendar] dateFromComponents:(NSDateComponents *)questionResult.answer];
-                    // Compute the age of the user.
-                    NSDateComponents *ageComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitYear
-                                                                                      fromDate:dateOfBirth
-                                                                                        toDate:[NSDate date] // today
-                                                                                       options:NSCalendarWrapComponents];
-                    
-                    NSUInteger usersAge = [ageComponents year];
-                    [surveyResultsDictionary setObject:[NSNumber numberWithInteger:usersAge] forKey:questionIdentifier];
-                } else {
-                    [surveyResultsDictionary setObject:(NSNumber *)questionResult.answer forKey:questionIdentifier];
-                }
+                    if ([questionIdentifier isEqualToString:kHeartAgeTestDataEthnicity]) {
+                        APCAppDelegate *apcDelegate = [[UIApplication sharedApplication] delegate];
+                        NSString *ethnicity = (NSString *)questionResult.answer;
+                        
+                        // persist ethnicity to the datastore
+                        [apcDelegate.dataSubstrate.currentUser setEthnicity:ethnicity];
+                        
+                        [surveyResultsDictionary setObject:ethnicity forKey:questionIdentifier];
+                    } else if ([questionIdentifier isEqualToString:kHeartAgeTestDataGender]) {
+                        NSNumber *numericGender = questionResult.answer;
+                        NSString *selectedGender = ([numericGender integerValue] == HKBiologicalSexFemale) ? kHeartAgeTestDataGenderFemale :kHeartAgeTestDataGenderMale;
+                        [surveyResultsDictionary setObject:selectedGender
+                                                    forKey:questionIdentifier];
+                    } else if ([questionIdentifier isEqualToString:kHeartAgeTestDataAge]) {
+                        RKSTDateAnswer *dob = questionResult.answer;
+                        NSDate *dateOfBirth = [[NSCalendar currentCalendar] dateFromComponents:[dob dateComponents]];
+                        // Compute the age of the user.
+                        NSDateComponents *ageComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitYear
+                                                                                          fromDate:dateOfBirth
+                                                                                            toDate:[NSDate date] // today
+                                                                                           options:NSCalendarWrapComponents];
+                        
+                        NSUInteger usersAge = [ageComponents year];
+                        [surveyResultsDictionary setObject:[NSNumber numberWithInteger:usersAge] forKey:questionIdentifier];
+                    } else {
+                        [surveyResultsDictionary setObject:(NSNumber *)questionResult.answer forKey:questionIdentifier];
+                    }
+                }];
             }
         }
         
@@ -484,50 +493,6 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
     
     return stepVC;
 }
-
-//- (void)taskViewController:(RKSTTaskViewController *)taskViewController didProduceResult:(RKSurveyResult *)result
-//{
-//    // We need to create three question results that will hold the value of Heart Age,
-//    // Ten Year Risk, and Lifetime Risk factors. Ideally we would like to simply
-//    // amend the self.headerAgeInfo dictionary to the results, but an appropriate
-//    // RKSurveyQuestionType is not available for adding dictionary to the result;
-//    // thus we create separate question results for each of these data points.
-//    
-//    NSMutableArray *questionResultsForSurvey = [NSMutableArray array];
-//    
-//    for (RKSurveyResult *miniSurvey in result.surveyResults) {
-//        for (RKSTQuestionResult *surveyQuestionResult in miniSurvey.surveyResults) {
-//            [questionResultsForSurvey addObject:surveyQuestionResult];
-//        }
-//    }
-//    
-//    RKSTQuestionResult *qrHeartAge = [[RKSTQuestionResult alloc] initWithStep:[[RKSTStep alloc] initWithIdentifier:kSummaryHeartAge
-//                                                                                                        name:kSummaryHeartAge]];
-//    qrHeartAge.questionType = RKSurveyQuestionTypeInteger;
-//    qrHeartAge.answer = self.heartAgeInfo[kSummaryHeartAge];
-//    
-//    [questionResultsForSurvey addObject:qrHeartAge];
-//    
-//    RKSTQuestionResult *qrTenYearRisk = [[RKSTQuestionResult alloc] initWithStep:[[RKSTStep alloc] initWithIdentifier:kSummaryTenYearRisk
-//                                                                                                           name:kSummaryTenYearRisk]];
-//    qrTenYearRisk.questionType = RKSurveyQuestionTypeDecimal;
-//    qrTenYearRisk.answer = self.heartAgeInfo[kSummaryTenYearRisk];
-//    
-//    [questionResultsForSurvey addObject:qrTenYearRisk];
-//    
-//    RKSTQuestionResult *qrLifetimeRisk = [[RKSTQuestionResult alloc] initWithStep:[[RKSTStep alloc] initWithIdentifier:kSummaryLifetimeRisk
-//                                                                                                            name:kSummaryLifetimeRisk]];
-//    qrLifetimeRisk.questionType = RKSurveyQuestionTypeDecimal;
-//    qrLifetimeRisk.answer = self.heartAgeInfo[kSummaryLifetimeRisk];
-//    
-//    [questionResultsForSurvey addObject:qrLifetimeRisk];
-//    
-//    result.surveyResults = questionResultsForSurvey;
-//    
-//    [self sendResult:result];
-//    
-//    [super taskViewController:taskViewController didProduceResult:result];
-//}
 
 /*********************************************************************************/
 #pragma mark - StepViewController Delegate Methods
