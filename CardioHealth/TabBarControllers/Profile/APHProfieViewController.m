@@ -110,7 +110,7 @@
         
         {
             APCTableViewCustomPickerItem *field = [APCTableViewCustomPickerItem new];
-            field.caption = NSLocalizedString(@"Medication", @"");
+            field.caption = NSLocalizedString(@"Medications", @"");
             field.pickerData = @[[APCUser medications]];
             field.textAlignnment = NSTextAlignmentRight;
             field.identifier = kAPCDefaultTableViewCellIdentifier;
@@ -232,7 +232,7 @@
             
             APCTableViewRow *row = [APCTableViewRow new];
             row.item = field;
-            row.itemType = kAPCStudyItemTypeShare;
+            row.itemType = kAPCTableViewStudyItemTypeShare;
             [rowItems addObject:row];
         }
         
@@ -323,7 +323,7 @@
     APCTableViewItemType type = [self itemTypeForIndexPath:indexPath];
     
     switch (type) {
-        case kAPCStudyItemTypeShare:
+        case kAPCTableViewStudyItemTypeShare:
         {
             APCShareViewController *shareViewController = [[UIStoryboard storyboardWithName:@"APHOnboarding" bundle:nil] instantiateViewControllerWithIdentifier:@"ShareVC"];
             shareViewController.hidesOkayButton = YES;
