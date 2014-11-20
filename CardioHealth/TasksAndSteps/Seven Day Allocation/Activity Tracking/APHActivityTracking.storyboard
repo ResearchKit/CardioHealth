@@ -74,7 +74,7 @@
                                     <constraint firstItem="69k-ZL-o2M" firstAttribute="top" secondItem="U6v-h5-YfZ" secondAttribute="top" constant="3" id="lpo-AQ-YuD"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5zS-Qy-ghC" customClass="APHActivitySummaryView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5zS-Qy-ghC" customClass="APHStackedCircleView">
                                 <rect key="frame" x="0.0" y="81" width="600" height="455"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
