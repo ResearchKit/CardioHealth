@@ -50,9 +50,6 @@ static CGFloat kSectionHeight = 64.0;
     
     [self.view setBackgroundColor:viewBackgroundColor];
     
-    self.navigationItem.title = NSLocalizedString(@"Survey Complete", @"Survey Complete");
-    self.navigationItem.leftBarButtonItem = nil;
-    self.navigationItem.hidesBackButton = YES;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                                            target:self
                                                                                            action:@selector(doneButtonTapped:)];
@@ -62,10 +59,13 @@ static CGFloat kSectionHeight = 64.0;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-
+    
+    self.navigationItem.title = NSLocalizedString(@"Survey Complete", @"Survey Complete");
+    self.navigationItem.leftBarButtonItem = nil;
+    self.navigationItem.hidesBackButton = YES;
 }
 
 - (void)didReceiveMemoryWarning {
