@@ -182,8 +182,8 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
         NSMutableArray *stepQuestions = [NSMutableArray array];
         RKSTFormStep *step = [[RKSTFormStep alloc] initWithIdentifier:kHeartAgeFormStepMedicalHistory
                                                                 title:nil
-                                                             subtitle:NSLocalizedString(@"Your medical history.",
-                                                                                        @"Your medical history.")];
+                                                             subtitle:NSLocalizedString(@"Your Medical History",
+                                                                                        @"Your medical history")];
         step.optional = NO;
         {
             RKSTFormItem *item = [[RKSTFormItem alloc] initWithIdentifier:kHeartAgeTestDataDiabetes
