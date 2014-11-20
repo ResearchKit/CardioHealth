@@ -221,9 +221,13 @@ NSString *const kSummaryLifetimeRisk = @"lifetimeRisk";
     // Estimated 10 year risk with Optimal Risk  Factors for an individual
     double individualEstimatedTenYearRisk = 1 - pow(baseline, exp(individualSum - populationMean));
     
+    // since NAN is not equal to anything, including itself
+    if (individualEstimatedTenYearRisk != individualEstimatedTenYearRisk) {
+        individualEstimatedTenYearRisk = 0;
+    }
+    
     NSUInteger heartAge = [self findHeartAgeForRiskValue:individualEstimatedTenYearRisk forGender:gender forEthnicity:ethnicity];
     NSUInteger lifetimeRiskFactor = [self lifetimeRisk:results];
-    
     
     return @{
              kSummaryHeartAge: [NSNumber numberWithDouble:heartAge],

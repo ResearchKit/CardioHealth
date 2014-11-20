@@ -7,7 +7,8 @@
 //
 
 #import "APHActivityTrackingStepViewController.h"
-#import "APHActivitySummaryView.h"
+#import "APHStackedCircleView.h"
+#import "APHTheme.h"
 
 static NSInteger kIntervalByHour = 1;
 static NSInteger kIntervalByDay = 1;
@@ -23,7 +24,7 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
 @interface APHActivityTrackingStepViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *daysRemaining;
-@property (weak, nonatomic) IBOutlet APHActivitySummaryView *chartView;
+@property (weak, nonatomic) IBOutlet APHStackedCircleView *chartView;
 
 @property (nonatomic, strong) HKHealthStore *healthStore;
 @property (nonatomic, strong) NSMutableArray *datasetForToday;
@@ -46,7 +47,8 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
     
     self.showTodaysDataAtViewLoad = YES;
     
-    self.navigationItem.leftBarButtonItem = nil;
+    self.navigationController.navigationBar.topItem.title = NSLocalizedString(@"Activity Tracking", @"Activity Tracking");
+    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Close"
                                                                               style:UIBarButtonItemStylePlain
                                                                              target:self
@@ -76,6 +78,14 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
     }
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    self.navigationItem.hidesBackButton = YES;
+    self.navigationItem.leftBarButtonItem = nil;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
@@ -89,7 +99,7 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
 
 - (IBAction)handleWeek:(UIButton *)sender
 {
-    [self showDataForKind:self.numberOfDaysOfFitnessWeek];
+    [self showDataForKind:SevenDayFitnessDatasetKindWeek];
 }
 
 - (void)showDataForKind:(SevenDayFitnessDatasetKinds)kind
@@ -100,15 +110,20 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
         [self normalizeData:self.datasetForTheWeek];
     }
     
-    self.chartView.hideAllLabels = YES;
-    self.chartView.numberOfSegments = self.numberOfSegments;
-    [self.chartView drawWithSegmentValues:self.normalizedSegmentValues];
+    self.chartView.hideAllLabels = NO;
+    self.chartView.insideCaptionText = NSLocalizedString(@"Distance", @"Distance");
+    self.chartView.scale = @[
+                             [NSValue valueWithRange:NSMakeRange(0, 402)],
+                             [NSValue valueWithRange:NSMakeRange(0, 804)],
+                             [NSValue valueWithRange:NSMakeRange(0, 1207)]
+                             ];
+    [self.chartView plotSegmentValues:self.normalizedSegmentValues];
 }
 
 - (void)handleClose:(UIBarButtonItem *)sender
 {
     if ([self.delegate respondsToSelector:@selector(stepViewControllerDidFinish:navigationDirection:)] == YES) {
-        [self.delegate stepViewControllerDidFinish:self navigationDirection:RKStepViewControllerNavigationDirectionForward];
+        [self.delegate stepViewControllerDidFinish:self navigationDirection:RKSTStepViewControllerNavigationDirectionForward];
     }
 }
 
@@ -262,10 +277,18 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
     NSRange moderateRange = NSMakeRange(0, 1207); // number beyond this is considered vigorous
     
     self.normalizedSegmentValues = [NSMutableArray arrayWithArray:@[
-                                                                    @{kDatasetSegmentNameKey: NSLocalizedString(@"Inactive", @"Inactive"), kDatasetValueKey: @0},
-                                                                    @{kDatasetSegmentNameKey: NSLocalizedString(@"Sedentary", @"Sedentary"), kDatasetValueKey: @0},
-                                                                    @{kDatasetSegmentNameKey: NSLocalizedString(@"Moderate", @"Moderate"), kDatasetValueKey: @0},
-                                                                    @{kDatasetSegmentNameKey: NSLocalizedString(@"Vigorous", @"Vigorous"), kDatasetValueKey: @0}
+                                                                    @{kDatasetSegmentNameKey: NSLocalizedString(@"Inactive", @"Inactive"),
+                                                                      kDatasetValueKey: @0,
+                                                                      kDatasetSegmentColorKey: [APHTheme colorForActivityInactive]},
+                                                                    @{kDatasetSegmentNameKey: NSLocalizedString(@"Sedentary", @"Sedentary"),
+                                                                      kDatasetValueKey: @0,
+                                                                      kDatasetSegmentColorKey: [APHTheme colorForActivitySedentary]},
+                                                                    @{kDatasetSegmentNameKey: NSLocalizedString(@"Moderate", @"Moderate"),
+                                                                      kDatasetValueKey: @0,
+                                                                      kDatasetSegmentColorKey: [APHTheme colorForActivityModerate]},
+                                                                    @{kDatasetSegmentNameKey: NSLocalizedString(@"Vigorous", @"Vigorous"),
+                                                                      kDatasetValueKey: @0,
+                                                                      kDatasetSegmentColorKey: [APHTheme colorForActivityVigorous]}
                                                                    ]];
     
     for (NSDictionary *data in dataset) {
@@ -282,14 +305,12 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
             segment = 3;
         }
         
-        NSNumber *currentValue = [self.normalizedSegmentValues objectAtIndex:segment][kDatasetValueKey];
+        NSMutableDictionary *normalSegment = [[self.normalizedSegmentValues objectAtIndex:segment] mutableCopy];
+        NSNumber *currentValue = normalSegment[kDatasetValueKey];
         
-        NSDictionary *segmentValue = @{
-                                       kDatasetSegmentNameKey: [self.normalizedSegmentValues objectAtIndex:segment][kDatasetSegmentNameKey],
-                                       kDatasetValueKey: [NSNumber numberWithInteger:[currentValue integerValue] + value]
-                                       };
-        
-        [self.normalizedSegmentValues replaceObjectAtIndex:segment withObject:segmentValue];
+        normalSegment[kDatasetValueKey] = [NSNumber numberWithInteger:[currentValue integerValue] + value];
+
+        [self.normalizedSegmentValues replaceObjectAtIndex:segment withObject:normalSegment];
     }
 }
 
@@ -303,6 +324,17 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
         fitnessStartDate = [NSDate date];
         [self saveSevenDayFitnessStartDate:fitnessStartDate];
     }
+    
+    // remove before commiting
+    NSDateComponents *comp = [[NSDateComponents alloc] init];
+    comp.day = -5;
+
+    NSDate *today = [[NSCalendar currentCalendar] dateBySettingHour:0 minute:0 second:0 ofDate:[NSDate date] options:0];
+    NSDate *dummyDate = [[NSCalendar currentCalendar] dateByAddingComponents:comp
+                                                                      toDate:today
+                                                                     options:0];
+
+    fitnessStartDate = dummyDate;
     
     return fitnessStartDate;
 }

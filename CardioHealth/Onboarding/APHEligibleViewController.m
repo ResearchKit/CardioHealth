@@ -31,7 +31,7 @@
 - (IBAction)startConsentTapped:(id)sender
 {
 #if DEVELOPMENT
-    if (YES) {
+    if (/* DISABLES CODE */ (YES)) {
 #else
         if (((APCAppDelegate*)[UIApplication sharedApplication].delegate).dataSubstrate.parameters.hideConsent) {
 #endif
