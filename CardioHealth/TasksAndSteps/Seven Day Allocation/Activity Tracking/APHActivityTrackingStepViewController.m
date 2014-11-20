@@ -174,8 +174,10 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
     
     HKQuantityType *distanceType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDistanceWalkingRunning];
     
+    NSPredicate *predicate = [HKQuery predicateForSamplesWithStartDate:startDate endDate:[NSDate date] options:HKQueryOptionStrictStartDate];
+    
     HKStatisticsCollectionQuery *query = [[HKStatisticsCollectionQuery alloc] initWithQuantityType:distanceType
-                                                                           quantitySamplePredicate:nil
+                                                                           quantitySamplePredicate:predicate
                                                                                            options:HKStatisticsOptionCumulativeSum
                                                                                         anchorDate:startDate
                                                                                 intervalComponents:interval];
