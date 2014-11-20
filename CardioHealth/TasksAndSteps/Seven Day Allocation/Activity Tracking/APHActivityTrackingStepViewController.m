@@ -31,7 +31,6 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
 @property (nonatomic, strong) NSMutableArray *datasetForTheWeek;
 @property (nonatomic, strong) NSMutableArray *normalizedSegmentValues;
 
-@property (nonatomic) NSUInteger numberOfSegments;
 @property (nonatomic) BOOL showTodaysDataAtViewLoad;
 @property (nonatomic) NSInteger numberOfDaysOfFitnessWeek;
 
@@ -268,13 +267,9 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
 
 - (void)normalizeData:(NSArray *)dataset
 {
-    // Why 4? Because we only have 4 segments that needs to be
-    // displayed: Inactive, sedentary, moderate, and vigorous.
-    self.numberOfSegments = 4;
-    
     NSRange inactiveRange = NSMakeRange(0, 402);
     NSRange sedentaryRange = NSMakeRange(0, 804);
-    NSRange moderateRange = NSMakeRange(0, 1207); // number beyond this is considered vigorous
+    NSRange moderateRange = NSMakeRange(0, 1207); // a number beyond this is considered vigorous
     
     self.normalizedSegmentValues = [NSMutableArray arrayWithArray:@[
                                                                     @{kDatasetSegmentNameKey: NSLocalizedString(@"Inactive", @"Inactive"),
@@ -324,17 +319,6 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
         fitnessStartDate = [NSDate date];
         [self saveSevenDayFitnessStartDate:fitnessStartDate];
     }
-    
-    // remove before commiting
-    NSDateComponents *comp = [[NSDateComponents alloc] init];
-    comp.day = -5;
-
-    NSDate *today = [[NSCalendar currentCalendar] dateBySettingHour:0 minute:0 second:0 ofDate:[NSDate date] options:0];
-    NSDate *dummyDate = [[NSCalendar currentCalendar] dateByAddingComponents:comp
-                                                                      toDate:today
-                                                                     options:0];
-
-    fitnessStartDate = dummyDate;
     
     return fitnessStartDate;
 }
