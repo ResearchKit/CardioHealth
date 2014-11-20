@@ -217,10 +217,12 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
                                                NSLog(@"%@: %f", date, value);
                                            }
                                        }];
-            if ((kind == SevenDayFitnessDatasetKindToday) && self.showTodaysDataAtViewLoad) {
-                [self handleToday:nil];
-                self.showTodaysDataAtViewLoad = NO;
-            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if ((kind == SevenDayFitnessDatasetKindToday) && self.showTodaysDataAtViewLoad) {
+                    [self handleToday:nil];
+                    self.showTodaysDataAtViewLoad = NO;
+                }
+            });
         }
     };
     
