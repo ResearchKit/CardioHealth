@@ -29,7 +29,7 @@
 {
     if (self.delegate != nil) {
         if ([self.delegate respondsToSelector:@selector(stepViewControllerDidFinish:navigationDirection:)] == YES) {
-            [self.delegate stepViewControllerDidFinish:self navigationDirection:RKStepViewControllerNavigationDirectionForward];
+            [self.delegate stepViewControllerDidFinish:self navigationDirection:RKSTStepViewControllerNavigationDirectionForward];
         }
     }
 }
@@ -74,6 +74,7 @@
     [super viewDidLoad];
     
     [self.btnGetStarted setBackgroundColor:[UIColor appPrimaryColor]];
+    self.navigationController.navigationBar.topItem.title = NSLocalizedString(@"Activity Tracking", @"Activity Tracking");
 }
 
 - (void)viewWillAppear:(BOOL)animated

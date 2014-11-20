@@ -23,7 +23,7 @@ static  NSString  *kIntroHeadingCaption = @"Tests for Bradykinesia";
 
 @property  (nonatomic, weak)  IBOutlet  UILabel  *tapGetStarted;
 
-//@property (weak, nonatomic) IBOutlet RKBoldTextCell *getStartedView;
+//@property (weak, nonatomic) IBOutlet RKSTBoldTextCell *getStartedView;
 
 @end
 
@@ -42,7 +42,7 @@ static  NSString  *kIntroHeadingCaption = @"Tests for Bradykinesia";
 {
     if (self.delegate != nil) {
         if ([self.delegate respondsToSelector:@selector(stepViewControllerDidFinish:navigationDirection:)] == YES) {
-            [self.delegate stepViewControllerDidFinish:self navigationDirection:RKStepViewControllerNavigationDirectionForward];
+            [self.delegate stepViewControllerDidFinish:self navigationDirection:RKSTStepViewControllerNavigationDirectionForward];
         }
     }
 }

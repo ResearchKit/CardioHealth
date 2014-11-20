@@ -33,7 +33,7 @@ static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
 @property (strong, nonatomic) APHFitnessTestHealthKitSampleTypeTracker *healthKitSampleTracker;
 @property (strong, nonatomic) APHFitnessTestDistanceTracker *distanceTracker;
 
-@property (strong, nonatomic) RKDataArchive *taskArchive;
+@property (strong, nonatomic) RKSTDataArchive *taskArchive;
 
 @property (assign) NSInteger heartRateMonitoring;
 @property (assign) BOOL heartRateIsUpdating;
@@ -60,10 +60,10 @@ static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
     
     APCStepProgressBar  *tempProgressor = [[APCStepProgressBar alloc] initWithFrame:progressorFrame style:APCStepProgressBarStyleOnlyProgressView];
     
-    RKTask  *task = nil;
+    RKSTOrderedTask  *task = nil;
     
-    if ([self.task isKindOfClass:[RKTask class]]) {
-        task =  (RKTask *)self.task;
+    if ([self.task isKindOfClass:[RKSTOrderedTask class]]) {
+        task =  (RKSTOrderedTask *)self.task;
     }
     
     NSArray  *steps = task.steps;
@@ -95,8 +95,6 @@ static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
     
     self.heartRateMonitoring = 0;
     self.heartRateIsUpdating = NO;
-    
-    [self beginTask];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -104,7 +102,7 @@ static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
     [super viewDidAppear:animated];
 }
 
-+ (RKTask *)createTask:(APCScheduledTask *)scheduledTask
++ (RKSTOrderedTask *)createTask:(APCScheduledTask *)scheduledTask
 {
     APCAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     APCParameters *parameters = appDelegate.dataSubstrate.parameters;
@@ -114,92 +112,77 @@ static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
     NSMutableArray *steps = [[NSMutableArray alloc] init];
 
     {
-        RKIntroductionStep *step = [[RKIntroductionStep alloc] initWithIdentifier:kFitnessTestStep101 name:@"Tap Intro"];
-        step.caption = NSLocalizedString(@"Measure Excercise Tolerance", @"");
-        step.instruction = NSLocalizedString(@"Once you tap Get Started, you will have 5 seconds until this test begins tracking your movement.", @"");
+        RKSTInstructionStep *step = [[RKSTInstructionStep alloc] initWithIdentifier:kFitnessTestStep101];
+        step.title = NSLocalizedString(@"Measure Excercise Tolerance", @"");
+        step.detailText = NSLocalizedString(@"Once you tap Get Started, you will have 5 seconds until this test begins tracking your movement.", @"");
         [steps addObject:step];
     }
     
     {
         //Introduction to fitness test
-        RKActiveStep* step = [[RKActiveStep alloc] initWithIdentifier:kFitnessTestStep102 name:@"active step"];
-        step.caption = NSLocalizedString(@"Fitness Test", @"");
+        RKSTActiveStep* step = [[RKSTActiveStep alloc] initWithIdentifier:kFitnessTestStep102];
+        step.title = NSLocalizedString(@"Fitness Test", @"");
         step.text = NSLocalizedString(@"Get Ready!", @"");
-        step.countDown = kCountDownTimer;
-        step.useNextForSkip = NO;
-        step.buzz = YES;
-        step.speakCountDown = YES;
+        step.countDownInterval = kCountDownTimer;
+        step.shouldUseNextAsSkipButton = NO;
+        step.shouldPlaySoundOnStart = YES;
+        step.shouldSpeakCountDown = YES;
         
         [steps addObject:step];
     }
     
     {
         //Walking 6 minutes
-        RKActiveStep* step = [[RKActiveStep alloc] initWithIdentifier:kFitnessTestStep103 name:@"6 Minute Walk"];
+        RKSTActiveStep* step = [[RKSTActiveStep alloc] initWithIdentifier:kFitnessTestStep103];
         step.recorderConfigurations = @[[APHFitnessTestCustomRecorderConfiguration new]];
-        step.caption = NSLocalizedString(@"Start Walking", @"");
+        step.title = NSLocalizedString(@"Start Walking", @"");
         step.text = @"   \n      ";
-        step.buzz = YES;
-        step.vibration = YES;
-        step.voicePrompt = NSLocalizedString(@"Start Walking", @"");
-        step.countDown = [[parameters numberForKey:@"FT6Min"] doubleValue];
-        step.useNextForSkip = NO;
+        step.shouldPlaySoundOnStart = YES;
+        step.shouldVibrateOnStart = YES;
+        step.spokenInstruction = NSLocalizedString(@"Start Walking", @"");
+        step.countDownInterval = [[parameters numberForKey:@"FT6Min"] doubleValue];
+        step.shouldUseNextAsSkipButton = NO;
         
         [steps addObject:step];
     }
     
     {
         //Stop and sit in a comfortable position for 3 minutes
-        RKActiveStep* step = [[RKActiveStep alloc] initWithIdentifier:kFitnessTestStep104 name:@"3 Minutes in a comfortable Position"];
+        RKSTActiveStep* step = [[RKSTActiveStep alloc] initWithIdentifier:kFitnessTestStep104];
         step.recorderConfigurations = @[[APHFitnessTestCustomRecorderConfiguration new]];
-        step.caption = NSLocalizedString(@"Good Work!", @"");
+        step.title = NSLocalizedString(@"Good Work!", @"");
         step.text = NSLocalizedString(@"Stop walking, and sit in a comfortable position for 3 minutes.", @"");
-        step.buzz = YES;
-        step.vibration = YES;
-        step.voicePrompt = step.text;
-        step.countDown = [[parameters numberForKey:@"FT3MinComfPos"] doubleValue];
-        step.useNextForSkip = NO;
+        step.shouldPlaySoundOnStart = YES;
+        step.shouldVibrateOnStart = YES;
+        step.spokenInstruction = step.text;
+        step.countDownInterval = [[parameters numberForKey:@"FT3MinComfPos"] doubleValue];
+        step.shouldUseNextAsSkipButton = NO;
         
         [steps addObject:step];
     }
     
     {
         //Finished
-        RKActiveStep* step = [[RKActiveStep alloc] initWithIdentifier:kFitnessTestStep106 name:@"Completed"];
+        RKSTActiveStep* step = [[RKSTActiveStep alloc] initWithIdentifier:kFitnessTestStep106];
         step.recorderConfigurations = @[];
-        step.caption = NSLocalizedString(@"Good job.", @"");
+        step.title = NSLocalizedString(@"Good job.", @"");
         step.text = NSLocalizedString(@"Great job.", @"");
         
-        step.useNextForSkip = NO;
+        step.shouldUseNextAsSkipButton = NO;
         [steps addObject:step];
     }
 
-    RKTask  *task = [[RKTask alloc] initWithName:@"Fitness Test" identifier:@"Fitness Test" steps:steps];
+    RKSTOrderedTask  *task = [[RKSTOrderedTask alloc] initWithIdentifier:@"Fitness Test" steps:steps];
     
     return  task;
 }
 
 
 /*********************************************************************************/
-#pragma  mark  - Private methods
-/*********************************************************************************/
-
-- (void)beginTask
-{
-    if (self.taskArchive)
-    {
-        [self.taskArchive resetContent];
-    }
-    
-    self.taskArchive = [[RKDataArchive alloc] initWithItemIdentifier:[RKItemIdentifier itemIdentifierForTask:self.task] studyIdentifier:MainStudyIdentifier taskInstanceUUID:self.taskInstanceUUID extraMetadata:nil fileProtection:RKFileProtectionCompleteUnlessOpen];
-    
-}
-
-/*********************************************************************************/
 #pragma mark - StepViewController Delegate Methods
 /*********************************************************************************/
 
-- (void)stepViewControllerDidFinish:(RKStepViewController *)stepViewController navigationDirection:(RKStepViewControllerNavigationDirection)direction
+- (void)stepViewControllerDidFinish:(RKSTStepViewController *)stepViewController navigationDirection:(RKSTStepViewControllerNavigationDirection)direction
 {
     [super stepViewControllerDidFinish:stepViewController navigationDirection:direction];
     
@@ -208,7 +191,7 @@ static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
     }
     
     NSInteger  completedSteps = self.progressor.completedSteps;
-    if (direction == RKStepViewControllerNavigationDirectionForward) {
+    if (direction == RKSTStepViewControllerNavigationDirectionForward) {
         completedSteps = completedSteps + 1;
     } else {
         completedSteps = completedSteps - 1;
@@ -222,22 +205,22 @@ static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
 /*********************************************************************************/
 #pragma  mark  - TaskViewController delegates
 /*********************************************************************************/
-- (void)taskViewController:(RKTaskViewController *)taskViewController willPresentStepViewController:(RKStepViewController *)stepViewController{
+- (void)taskViewController:(RKSTTaskViewController *)taskViewController willPresentStepViewController:(RKSTStepViewController *)stepViewController{
     
     //If we're not capturing any heart rate data then skip
     if (stepViewController.step.identifier == kFitnessTestStep104) {
         
         if (!self.heartRateIsUpdating) {
-            RKActiveStep *theStep = (RKActiveStep *)stepViewController.step;
+            RKSTActiveStep *theStep = (RKSTActiveStep *)stepViewController.step;
             
-            theStep.voicePrompt = nil;
-            [stepViewController goToNextStep];
+            theStep.spokenInstruction = nil;
+            [stepViewController goForward];
         }
     }
     
     taskViewController.navigationBar.topItem.title = NSLocalizedString(@"6 Minute Walk", @"6 Minute Walk");
     
-    stepViewController = (RKStepViewController *) stepViewController;
+    stepViewController = (RKSTStepViewController *) stepViewController;
     
     if ([stepViewController.step.identifier isEqualToString:@""]) {
         UIView* customView = [UIView new];
@@ -254,7 +237,7 @@ static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
         [customView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[c(>=280)]" options:0 metrics:nil views:@{@"c":customView}]];
         [customView addConstraints:verticalConstraints];
         
-        [(RKActiveStepViewController*)stepViewController setCustomView:customView];
+        [(RKSTActiveStepViewController*)stepViewController setCustomView:customView];
         
         stepViewController.continueButton = [[UIBarButtonItem alloc] initWithTitle:@"Get Started" style:stepViewController.continueButton.style target:stepViewController.continueButton.target action:stepViewController.continueButton.action];
         
@@ -267,7 +250,7 @@ static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
     
     }else if ([stepViewController.step.identifier isEqualToString:kFitnessTestStep103]) {
         
-        RKActiveStepViewController *stepVC = (RKActiveStepViewController *) stepViewController;
+        RKSTActiveStepViewController *stepVC = (RKSTActiveStepViewController *) stepViewController;
         
         //Adding "Time" subview
         UILabel *countdownTitle = [UILabel new];
@@ -362,7 +345,7 @@ static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
         
     }else if ([stepViewController.step.identifier isEqualToString:kFitnessTestStep104]) {
 
-        RKActiveStepViewController *stepVC = (RKActiveStepViewController *) stepViewController;
+        RKSTActiveStepViewController *stepVC = (RKSTActiveStepViewController *) stepViewController;
         
         
         //Adding "Time" subview
@@ -475,30 +458,14 @@ static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
     }
 }
 
-- (void)taskViewController:(RKTaskViewController *)taskViewController didProduceResult:(RKDataResult *)result {
-
-    NSLog(@"didProduceResult = %@", result.data);
-    self.lastDataResult = result.data;
-    
-    if ([result isKindOfClass:[RKSurveyResult class]]) {
-        RKSurveyResult* sresult = (RKSurveyResult*)result;
-        
-        for (RKQuestionResult* qr in sresult.surveyResults) {
-            NSLog(@"%@ = [%@] %@ ", [[qr itemIdentifier] stringValue], [qr.answer class], qr.answer);
-        }
-    }
-
-    [super taskViewController:taskViewController didProduceResult:result];
-}
-
-- (void)taskViewControllerDidFail: (RKTaskViewController *)taskViewController withError:(NSError*)error{
+- (void)taskViewControllerDidFail: (RKSTTaskViewController *)taskViewController withError:(NSError*)error{
     
     [self.taskArchive resetContent];
     self.taskArchive = nil;
     
 }
 
-- (void)taskViewControllerDidCancel:(RKTaskViewController *)taskViewController{
+- (void)taskViewControllerDidCancel:(RKSTTaskViewController *)taskViewController{
     
     [taskViewController suspend];
     
@@ -508,64 +475,15 @@ static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)taskViewControllerDidComplete: (RKTaskViewController *)taskViewController
+- (RKSTStepViewController *)taskViewController:(RKSTTaskViewController *)taskViewController viewControllerForStep:(RKSTStep *)step
 {
-    NSFetchRequest * request = [APCResult request];
-    request.predicate = [NSPredicate predicateWithFormat:@"scheduledTask == %@ AND rkTaskInstanceUUID == %@", self.scheduledTask, self.taskInstanceUUID.UUIDString];
-
-    APCAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    NSArray * results = [appDelegate.dataSubstrate.mainContext executeFetchRequest:request error:NULL];
-    
-    RKStep * dummyStep = [[RKStep alloc] initWithIdentifier:@"Dummy" name:@"name"];
-    RKDataResult * result = [[RKDataResult alloc] initWithStep:dummyStep];
-    result.filename = kdataResultsFileName;
-    result.contentType = @"application/json";
-    NSMutableDictionary * dictionary = [NSMutableDictionary dictionary];
-    [results enumerateObjectsUsingBlock:^(APCDataResult * result, NSUInteger idx, BOOL *stop) {
-        dictionary[result.rkItemIdentifier] = [NSJSONSerialization JSONObjectWithData:result.data options:0 error:NULL];
-    }];
-
-    
-    NSMutableDictionary *wrapperDictionary = [NSMutableDictionary dictionary];
-    wrapperDictionary[@"fitnessTest"] = dictionary;
-    
-    result.data = [NSJSONSerialization dataWithJSONObject:wrapperDictionary options:(NSJSONWritingOptions)0 error:NULL];
-    [result addToArchive:self.taskArchive error:NULL];
-    
-    NSError *err = nil;
-    NSURL *archiveFileURL = [self.taskArchive archiveURLWithError:&err];
-    if (archiveFileURL)
-    {
-        NSURL *documents = [NSURL fileURLWithPath:[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]];
-        NSURL *outputUrl = [documents URLByAppendingPathComponent:[archiveFileURL lastPathComponent]];
-        
-        // This is where you would queue the archive for upload. In this demo, we move it
-        // to the documents directory, where you could copy it off using iTunes, for instance.
-        [[NSFileManager defaultManager] moveItemAtURL:archiveFileURL toURL:outputUrl error:nil];
-        
-        NSLog(@"outputUrl= %@", outputUrl);
-        
-        // When done, clean up:
-        self.taskArchive = nil;
-        if (archiveFileURL)
-        {
-            [[NSFileManager defaultManager] removeItemAtURL:archiveFileURL error:nil];
-        }
-    }
-    
-    [super taskViewControllerDidComplete:taskViewController];
-}
-
-- (RKStepViewController *)taskViewController:(RKTaskViewController *)taskViewController viewControllerForStep:(RKStep *)step
-{
-    RKStepViewController *stepVC = nil;
+    RKSTStepViewController *stepVC = nil;
     
     if (step.identifier == kFitnessTestStep101) {
         NSDictionary  *controllers = @{ kFitnessTestStep101 : [APHFitnessTestIntroStepViewController class] };
         
         Class  aClass = [controllers objectForKey:step.identifier];
         APCStepViewController  *controller = [[aClass alloc] initWithNibName:nil bundle:nil];
-        controller.resultCollector = self;
         controller.delegate = self;
         controller.title = @"Interval Tapping";
         controller.step = step;
@@ -575,7 +493,6 @@ static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
         
         APHFitnessTestSummaryViewController *summaryViewController = [[APHFitnessTestSummaryViewController alloc] initWithNibName:@"APHFitnessTestSummaryViewController" bundle:nil];
         
-        summaryViewController.resultCollector = self;
         summaryViewController.delegate = self;
         summaryViewController.step = step;
         summaryViewController.taskProgress = 0.25;
@@ -590,7 +507,7 @@ static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
 #pragma mark - Helpers
 /*********************************************************************************/
 
--(void)sendCompleteResult:(RKDataResult*)result
+-(void)sendCompleteResult:(RKSTDataResult*)result
 {
     // In a real application, consider adding to the archive on a concurrent queue.
     NSError *err = nil;
@@ -602,7 +519,7 @@ static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
     }
 }
 
--(void)sendResult:(RKDataResult*)result
+-(void)sendResult:(RKSTDataResult*)result
 {
     // In a real application, consider adding to the archive on a concurrent queue.
     NSError *err = nil;
