@@ -62,6 +62,8 @@ static CGFloat kMetersPerMile = 1609.344;
                                         position:CGPointMake(0, 0)];
     self.insideCaption.font = [UIFont systemFontOfSize:21.0];
     [self addSubview:self.insideCaption];
+    
+    self.legendLabels = [NSMutableArray array];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -123,10 +125,6 @@ static CGFloat kMetersPerMile = 1609.344;
                                              labelFrameWidth,
                                              labelFrameWidth);
     self.insideCaption.frame = insideCaptionFrame;
-    
-    if (!self.hideLegend) {
-        [self drawLegend];
-    }
 }
 
 #pragma mark - Entry point
@@ -140,7 +138,9 @@ static CGFloat kMetersPerMile = 1609.344;
         self.insideLabel.text = [NSString stringWithFormat:@"%.2f mi", self.sumQuantity/kMetersPerMile];
         self.insideCaption.text = self.insideCaptionText;
         
-        [self setupLegend];
+        if (!self.hideLegend) {
+            [self setupLegend];
+        }
         
         if (self.sumQuantity == 0) {
             [self resetPlot];
@@ -243,21 +243,25 @@ static CGFloat kMetersPerMile = 1609.344;
         CGPoint labelPosition = CGPointMake(self.frame.size.width/4 * idx - 10, self.frame.size.height - 27);
         CGRect labelFrame = CGRectMake(labelPosition.x, labelPosition.y, 100, 21);
         
-//        UILabel *label = [self.legendLabels objectAtIndex:idx];
-//        
-//        label.frame = labelFrame;
+        UILabel *label = [self.legendLabels objectAtIndex:idx];
+        
+        label.frame = labelFrame;
     }
 }
 
 - (void)setupLegend
 {
-    for (NSDictionary *segment in self.segments) {
-        UILabel *label = [self addLabelWithTitle:[segment valueForKey:kDatasetSegmentNameKey]
-                                           color:[UIColor lightGrayColor]
-                                        position:CGPointMake(0, 0)];
-        [self addSubview:label];
+    if ([self.legendLabels count] == 0) {
+        for (NSDictionary *segment in self.segments) {
+            UILabel *label = [self addLabelWithTitle:[segment valueForKey:kDatasetSegmentNameKey]
+                                               color:[UIColor lightGrayColor]
+                                            position:CGPointMake(0, 0)];
+            [self addSubview:label];
+            
+            [self.legendLabels addObject:label];
+        }
         
-        [self.legendLabels addObject:label];
+        [self drawLegend];
     }
 }
 
