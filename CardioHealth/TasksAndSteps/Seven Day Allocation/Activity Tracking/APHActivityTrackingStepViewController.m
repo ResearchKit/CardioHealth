@@ -186,9 +186,9 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
         if (error) {
             NSLog(@"Error: %@", error.localizedDescription);
         } else {
-            NSDate *endDate = [[NSCalendar currentCalendar] dateBySettingHour:0
-                                                                       minute:0
-                                                                       second:0
+            NSDate *endDate = [[NSCalendar currentCalendar] dateBySettingHour:23
+                                                                       minute:59
+                                                                       second:59
                                                                        ofDate:[NSDate date]
                                                                       options:0];
             NSDate *beginDate = startDate;
