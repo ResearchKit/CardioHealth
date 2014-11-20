@@ -111,8 +111,6 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
                              [NSValue valueWithRange:NSMakeRange(0, 804)],
                              [NSValue valueWithRange:NSMakeRange(0, 1207)]
                              ];
-//    self.chartView.numberOfSegments = self.numberOfSegments;
-//    [self.chartView drawWithSegmentValues:self.normalizedSegmentValues];
     [self.chartView plotSegmentValues:self.normalizedSegmentValues];
 }
 
@@ -303,8 +301,6 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
         
         NSMutableDictionary *normalSegment = [[self.normalizedSegmentValues objectAtIndex:segment] mutableCopy];
         NSNumber *currentValue = normalSegment[kDatasetValueKey];
-        
-//        [normalSegment setObject:[NSNumber numberWithInteger:[currentValue integerValue]] forKey:kDatasetValueKey];
         
         normalSegment[kDatasetValueKey] = [NSNumber numberWithInteger:[currentValue integerValue] + value];
 
