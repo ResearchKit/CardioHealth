@@ -1,39 +1,37 @@
 {
-    "disease_name":"Cardiovascular Health",
-    "from_date":"November 2014",
-    "to_date":"October 2015",
+    "disease_name":"Asthma Study App",
+    "from_date":"December 2014",
+    "to_date":"January 2015",
     "logo_name": "logo_research_institute",
     "questions":
     [
      {
      "title":"About this Study",
-     "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vel turpis id fringilla. Nam pharetra gravida enim consectetur rutrum.",
+     "details":"People with asthma do best if they actively manage their asthma. This study is exploring the effect of an app on your mobile phone that helps you actively manage your asthma. The information you put into the app will help you track how well your asthma is controlled and how you are doing compared to other app users with asthma. \rThis app is designed for educational purposes only. You should not rely on this information as a substitute for personal medical attention, diagnosis or hands-on treatment. If you are concerned about your health or that of a child, please consult your family's health provider immediately. Do not wait for a response from our professionals. ",
      "icon_image":"paperplus_icon",
      "tint_color" : "blue"
      },
+
      {
      "title":"Who is Running this Study",
-     "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vel turpis id fringilla. Nam pharetra gravida enim consectetur rutrum.",
+     "details":"Mount Sinai, etc...",
      "icon_image":"stethescope_icon",
      "tint_color" : "green"
      },
+
      {
      "title":"Who is Eligible to Participate",
-     "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vel turpis id fringilla. Nam pharetra gravida enim consectetur rutrum.",
+     "details":"To participate in this study, you must meet these criteria: \r• Be 18 years of age or older \r• Have doctor-diagnosed asthma \r• Have been prescribed medication for asthma (including inhalers or pills) \r• <10 pack year smoking history \rand not a current smoker \r• No other diagnosed lung disease (e.g. chronic bronchitis, emphysema, cystic fibrosis, etc.) \r• Not be pregnant \r• Have an iPhone \r• Sufficient English-language ability to participate in informed consent process, complete study assessments and understand the text in mobile phone-delivered interventions ",
      "icon_image":"clipboard_icon",
      "tint_color" : "yellow"
      },
+
      {
-     "title":"Length of this Study",
-     "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vel turpis id fringilla. Nam pharetra gravida enim consectetur rutrum.",
+     "title":"How this study works",
+     "details":"This study involves using this app to complete daily and weekly tasks that should only take a minute or two each day to complete, for a total of 15 minutes each week. The study will last for 4 weeks.",
      "icon_image":"stopwatch_icon",
      "tint_color" : "purple"
-     },
-     {
-     "title":"Share this Study",
-     "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vel turpis id fringilla. Nam pharetra gravida enim consectetur rutrum.",
-     "icon_image":"share_icon",
-     "tint_color" : "red"
      }
+
      ]
 }
