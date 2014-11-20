@@ -50,7 +50,6 @@
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ug0-yw-NxK" customClass="APCCircularProgressView">
                                                     <rect key="frame" x="541" y="7" width="30" height="30"/>
-                                                    <color key="backgroundColor" red="0.0" green="0.75075231480000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="30" id="DkK-vg-bYE"/>
                                                         <constraint firstAttribute="height" constant="30" id="KnZ-mM-hcB"/>
