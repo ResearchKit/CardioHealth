@@ -49,8 +49,6 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
     
     self.navigationController.navigationBar.topItem.title = NSLocalizedString(@"Activity Tracking", @"Activity Tracking");
     
-    self.navigationItem.hidesBackButton = YES;
-    self.navigationItem.leftBarButtonItem = nil;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Close"
                                                                               style:UIBarButtonItemStylePlain
                                                                              target:self
@@ -78,6 +76,14 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
                                                     [self runStatsCollectionQueryForKind:SevenDayFitnessDatasetKindWeek];
                                                 }];
     }
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    self.navigationItem.hidesBackButton = YES;
+    self.navigationItem.leftBarButtonItem = nil;
 }
 
 - (void)didReceiveMemoryWarning {
