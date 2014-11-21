@@ -95,8 +95,10 @@ static  NSString  *kIntroHeadingCaption = @"Tests for Bradykinesia";
 {
     [super viewWillAppear:animated];
     
-    self.title = kViewControllerTitle;
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonTapped:)];
+    self.navigationController.navigationBar.topItem.title = NSLocalizedString(@"6 Minute Walk", @"6 Minute Walk");
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                                                                           target:self
+                                                                                           action:@selector(cancelButtonTapped:)];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -117,8 +119,6 @@ static  NSString  *kIntroHeadingCaption = @"Tests for Bradykinesia";
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"APHImportantDetailsTableViewController" bundle:nil];
     UITableViewController *vc = [sb instantiateViewControllerWithIdentifier:@"APHImportantDetailsTableViewController"];
     vc.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    
-    
     
     [self presentViewController:vc animated:YES completion:NULL];
 }

@@ -7,7 +7,6 @@
 //
 
 #import "APHSevenDayFitnessAllocationTaskViewController.h"
-#import "APHSevenDayFitnessIntroStepViewController.h"
 #import "APHActivityTrackingStepViewController.h"
 
 static NSString *kMainStudyIdentifier = @"com.cardioVascular.sevenDayFitnessAllocation";
@@ -69,10 +68,20 @@ static NSString *kSevenDayFitnessCompleteStep = @"sevenDayFitnessCompleteStep";
     RKSTStepViewController *stepVC = nil;
     
     if (step.identifier == kSevenDayFitnessInstructionStep) {
-        NSDictionary  *controllers = @{kSevenDayFitnessInstructionStep: [APHSevenDayFitnessIntroStepViewController class]};
-        Class  aClass = [controllers objectForKey:step.identifier];
-        APCStepViewController *controller = [[aClass alloc] initWithNibName:nil bundle:nil];
-
+        APCInstructionStepViewController *controller = [[UIStoryboard storyboardWithName:@"APCInstructionStep"
+                                                                                  bundle:[NSBundle appleCoreBundle]] instantiateInitialViewController];
+        controller.imagesArray = @[@"tutorial-1", @"tutorial-2"];
+        controller.headingsArray = @[
+                                     NSLocalizedString(@"7 Day Fitness Allocation", @"7 Day Fitness Allocation"),
+                                     NSLocalizedString(@"Keep Your Phone On You", @"Keep Your Phone On You")
+                                     ];
+        controller.messagesArray = @[
+                                     NSLocalizedString(@"During the next week, your fitness allocation will be monitored, analyzed, and available to you in real time.",
+                                                       @"During the next week, your fitness allocation will be monitored, analyzed, and available to you in real time."),
+                                     NSLocalizedString(@"To ensure the accuracy of this task, keep your phone on you at all times.",
+                                                       @"To ensure the accuracy of this task, keep your phone on you at all times.")
+                                     ];
+        
         controller.delegate = self;
         controller.step = step;
         

@@ -17,6 +17,12 @@
               "taskID": "APHSevenDayAllocation-00000000-1111-1111-1111-F810BE28D995",
               "taskType": "APHSevenDayAllocation",
               "taskClassName": "APHSevenDayFitnessAllocationTaskViewController"
+              },
+              {
+              "taskTitle": "Healthy Heart",
+              "taskID": "APHHealthyHeart-7259AC18-D711-47A6-ADBD-6CFCECDED1DF",
+              "taskType": "APHHealthyHeart",
+              "taskClassName": "APHHealthyHeartTaskViewController"
               }
               ],
     "schedules": [
@@ -37,6 +43,12 @@
                   "href": "applecardio:",
                   "schedule": "1:7",
                   "taskID": "APHSevenDayAllocation-00000000-1111-1111-1111-F810BE28D995"
+                  },
+                  {
+                  "type": "REPEATING",
+                  "href": "appleparkinson:",
+                  "schedule": "1:2",
+                  "taskID": "APHHealthyHeart-7259AC18-D711-47A6-ADBD-6CFCECDED1DF"
                   }
                   ]
 }

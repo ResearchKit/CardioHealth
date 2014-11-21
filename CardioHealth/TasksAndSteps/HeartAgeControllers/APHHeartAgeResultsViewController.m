@@ -283,7 +283,7 @@ static CGFloat kSectionHeight = 64.0;
     } else {
         cell.riskEstimateTitle = NSLocalizedString(@"Lifetime Risk Estimate", @"Lifetime risk estimate");
         calculatedRisk = [NSString stringWithFormat:@"%lu%%", (long)[self.lifetimeRisk integerValue]];
-        optimalRisk = [NSString stringWithFormat:@"%lu%%", (long)[self.lifetimeRisk integerValue]];
+        optimalRisk = [NSString stringWithFormat:@"%lu%%", (long)[self.optimalLifetimeRisk integerValue]];
     }
     
     cell.calculatedRiskValue = calculatedRisk;
