@@ -251,7 +251,7 @@ NSString *const kSummaryLifetimeRisk = @"lifetimeRisk";
                                      kHeartAgeTestDataSystolicBloodPressure: self.heartAgeParametersLookup[kLookupOptimalRiskFactors][kLookupOptimalRiskFactorSystolicBP],
                                      kHeartAgeTestDataHypertension: [NSNumber numberWithBool:NO],
                                      kHeartAgeTestDataCurrentlySmoke: [NSNumber numberWithBool:NO],
-                                     kHeartAgeTestDataDiabetes: results[kHeartAgeTestDataDiabetes]
+                                     kHeartAgeTestDataDiabetes: [NSNumber numberWithBool:NO]
                                      };
     
     NSDictionary *riskWithOptimalFactors = [self calculateHeartAgeAndRiskFactors:optimalResults];
