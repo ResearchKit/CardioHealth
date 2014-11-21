@@ -101,15 +101,16 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
     {
         NSMutableArray *rowItems = [NSMutableArray new];
         
+        NSUInteger allScheduledTasks = ((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.allScheduledTasksForToday;
+        NSUInteger completedScheduledTasks = ((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.completedScheduledTasksForToday;
+        
         {
             APCTableViewItem *item = [APCTableViewItem new];
             item.caption = NSLocalizedString(@"Activities", @"");
             item.identifier = kAPCRightDetailTableViewCellIdentifier;
             item.editable = NO;
             item.textAlignnment = NSTextAlignmentRight;
-            
-            NSUInteger allScheduledTasks = ((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.allScheduledTasksForToday;
-            NSUInteger completedScheduledTasks = ((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.completedScheduledTasksForToday;
+
             
             item.detailText = [NSString stringWithFormat:@"%lu/%lu", (unsigned long)completedScheduledTasks, (unsigned long)allScheduledTasks];
             
@@ -123,6 +124,7 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
             APCTableViewDashboardProgressItem *item = [APCTableViewDashboardProgressItem new];
             item.identifier = kAPCDashboardProgressTableViewCellIdentifier;
             item.editable = NO;
+            item.progress = (CGFloat)completedScheduledTasks/allScheduledTasks;
             
             APCTableViewRow *row = [APCTableViewRow new];
             row.item = item;
