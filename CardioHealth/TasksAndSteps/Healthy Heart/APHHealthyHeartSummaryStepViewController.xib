@@ -5,7 +5,7 @@
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="APHFitnessTestSummaryViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="APHHealthyHeartSummaryStepViewController">
             <connections>
                 <outlet property="circularProgressBar" destination="au4-cC-isv" id="f4x-WO-4HQ"/>
                 <outlet property="label1" destination="7At-o6-pZw" id="DIg-05-J8D"/>

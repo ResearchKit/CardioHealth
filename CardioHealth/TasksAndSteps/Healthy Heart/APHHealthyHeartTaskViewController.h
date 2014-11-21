@@ -8,6 +8,6 @@
 
 @import APCAppleCore;
 
-@interface APHHealthyHeartTaskViewController : APCSetupTaskViewController
+@interface APHHealthyHeartTaskViewController : APCBaseWithProgressTaskViewController
 
 @end
