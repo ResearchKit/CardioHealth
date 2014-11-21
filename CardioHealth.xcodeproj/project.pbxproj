@@ -12,8 +12,6 @@
 		087476381A0995A600F9A0A8 /* APHScoring.m in Sources */ = {isa = PBXBuildFile; fileRef = 087476361A0995A600F9A0A8 /* APHScoring.m */; };
 		0897C9B71A1DC62C007B5EAC /* APHStackedCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0897C9B61A1DC62C007B5EAC /* APHStackedCircleView.m */; };
 		08C2328A1A15796E00DB4EF9 /* APHSevenDayFitnessAllocationTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08C232821A15796E00DB4EF9 /* APHSevenDayFitnessAllocationTaskViewController.m */; };
-		08C2328C1A15796E00DB4EF9 /* APHSevenDayFitnessIntroStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08C232871A15796E00DB4EF9 /* APHSevenDayFitnessIntroStepViewController.m */; };
-		08C2328D1A15796E00DB4EF9 /* APHSevenDayFitnessIntroStepViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C232881A15796E00DB4EF9 /* APHSevenDayFitnessIntroStepViewController.xib */; };
 		08C56E361A15E75400D3BF61 /* APHActivityTrackingStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08C56E351A15E75400D3BF61 /* APHActivityTrackingStepViewController.m */; };
 		08C56E391A15E7D100D3BF61 /* APHActivityTracking.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08C56E381A15E7D100D3BF61 /* APHActivityTracking.storyboard */; };
 		08D3A10219E4A08C00A3D20D /* APHHeartAgeAndRiskFactors.m in Sources */ = {isa = PBXBuildFile; fileRef = 08D3A0FA19E4A08C00A3D20D /* APHHeartAgeAndRiskFactors.m */; };
@@ -141,9 +139,6 @@
 		0897C9B61A1DC62C007B5EAC /* APHStackedCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APHStackedCircleView.m; path = "Activity Tracking/Custom Views/APHStackedCircleView.m"; sourceTree = "<group>"; };
 		08C232811A15796E00DB4EF9 /* APHSevenDayFitnessAllocationTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHSevenDayFitnessAllocationTaskViewController.h; sourceTree = "<group>"; };
 		08C232821A15796E00DB4EF9 /* APHSevenDayFitnessAllocationTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHSevenDayFitnessAllocationTaskViewController.m; sourceTree = "<group>"; };
-		08C232861A15796E00DB4EF9 /* APHSevenDayFitnessIntroStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHSevenDayFitnessIntroStepViewController.h; sourceTree = "<group>"; };
-		08C232871A15796E00DB4EF9 /* APHSevenDayFitnessIntroStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHSevenDayFitnessIntroStepViewController.m; sourceTree = "<group>"; };
-		08C232881A15796E00DB4EF9 /* APHSevenDayFitnessIntroStepViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = APHSevenDayFitnessIntroStepViewController.xib; sourceTree = "<group>"; };
 		08C56E341A15E75400D3BF61 /* APHActivityTrackingStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APHActivityTrackingStepViewController.h; path = "Activity Tracking/APHActivityTrackingStepViewController.h"; sourceTree = "<group>"; };
 		08C56E351A15E75400D3BF61 /* APHActivityTrackingStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APHActivityTrackingStepViewController.m; path = "Activity Tracking/APHActivityTrackingStepViewController.m"; sourceTree = "<group>"; };
 		08C56E381A15E7D100D3BF61 /* APHActivityTracking.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = APHActivityTracking.storyboard; path = "Activity Tracking/APHActivityTracking.storyboard"; sourceTree = "<group>"; };
@@ -290,21 +285,9 @@
 			children = (
 				08C232811A15796E00DB4EF9 /* APHSevenDayFitnessAllocationTaskViewController.h */,
 				08C232821A15796E00DB4EF9 /* APHSevenDayFitnessAllocationTaskViewController.m */,
-				08C232851A15796E00DB4EF9 /* Instructions */,
 				08C56E371A15E75800D3BF61 /* Activity Tracking */,
 			);
 			path = "Seven Day Allocation";
-			sourceTree = "<group>";
-		};
-		08C232851A15796E00DB4EF9 /* Instructions */ = {
-			isa = PBXGroup;
-			children = (
-				08C232861A15796E00DB4EF9 /* APHSevenDayFitnessIntroStepViewController.h */,
-				08C232871A15796E00DB4EF9 /* APHSevenDayFitnessIntroStepViewController.m */,
-				08C232881A15796E00DB4EF9 /* APHSevenDayFitnessIntroStepViewController.xib */,
-			);
-			name = Instructions;
-			path = Intructions;
 			sourceTree = "<group>";
 		};
 		08C56E371A15E75800D3BF61 /* Activity Tracking */ = {
@@ -803,7 +786,6 @@
 				F55BBE6719D362D0003CA0F9 /* Main.storyboard in Resources */,
 				08C56E391A15E7D100D3BF61 /* APHActivityTracking.storyboard in Resources */,
 				7BD73F7B19E8A20600F5DFF3 /* Intro.mp4 in Resources */,
-				08C2328D1A15796E00DB4EF9 /* APHSevenDayFitnessIntroStepViewController.xib in Resources */,
 				F55BBE7119D362D0003CA0F9 /* APHLearn.storyboard in Resources */,
 				7B6753421A01540E005864E6 /* APHHeartAgeIntroStepViewController.xib in Resources */,
 				F55BBE6A19D362D0003CA0F9 /* APHDashboard.storyboard in Resources */,
@@ -868,7 +850,6 @@
 				F5778E7719F0613D0079F1B2 /* APHSignUpGeneralInfoViewController.m in Sources */,
 				F5778E7A19F0613D0079F1B2 /* APHSignupTouchIDViewController.m in Sources */,
 				F5778E7419F0613D0079F1B2 /* APHIntroVideoViewController.m in Sources */,
-				08C2328C1A15796E00DB4EF9 /* APHSevenDayFitnessIntroStepViewController.m in Sources */,
 				5B55FE321A0553D5009BEE5E /* APHChangePasscodeViewController.m in Sources */,
 				F5778E7919F0613D0079F1B2 /* APHSignUpPermissionsViewController.m in Sources */,
 				087476381A0995A600F9A0A8 /* APHScoring.m in Sources */,
