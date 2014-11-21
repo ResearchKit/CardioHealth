@@ -331,9 +331,8 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
 
 @implementation APHFitnessTestCustomRecorderConfiguration
 
-- (RKSTRecorder*)recorderForStep:(RKSTStep*)step taskInstanceUUID:(NSUUID*)taskInstanceUUID{
-    
-    //TODO: For Dhanush
+- (RKSTRecorder *)recorderForStep:(RKSTStep *)step outputDirectory:(NSURL *)outputDirectory
+{
     return [[APHFitnessTestRecorder alloc] initWithStep:step outputDirectory:nil];
 }
 
