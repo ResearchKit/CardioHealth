@@ -9,10 +9,10 @@
 @import APCAppleCore;
 #import <ResearchKit/ResearchKit.h>
 
-@interface APHFitnessTestRecorder : RKRecorder
+@interface APHFitnessTestRecorder : RKSTRecorder
 
 @end
 
-@interface APHFitnessTestCustomRecorderConfiguration : NSObject <RKRecorderConfiguration>
+@interface APHFitnessTestCustomRecorderConfiguration : RKSTRecorderConfiguration 
 
 @end

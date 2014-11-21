@@ -8,6 +8,6 @@
 
 @import APCAppleCore;
 
-@interface APHSevenDayFitnessAllocationTaskViewController : APCSetupTaskViewController
+@interface APHSevenDayFitnessAllocationTaskViewController : APCBaseTaskViewController
 
 @end

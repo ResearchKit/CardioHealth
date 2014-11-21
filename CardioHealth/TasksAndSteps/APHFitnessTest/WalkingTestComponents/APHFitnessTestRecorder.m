@@ -63,7 +63,7 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
 //        APHFitnessSixMinuteFitnessTestView *updatedView = [[nib instantiateWithOwner:self options:nil] objectAtIndex:0];
 //        [updatedView setTranslatesAutoresizingMaskIntoConstraints:NO];
 //        
-//        RKActiveStepViewController * stepViewController = (RKActiveStepViewController *)viewController;
+//        RKSTActiveStepViewController * stepViewController = (RKSTActiveStepViewController *)viewController;
 //        
 //        UIView *blankView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 280, 560.00)];
 //        [blankView addSubview: updatedView];
@@ -129,7 +129,7 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
 //        
 //        [updatedView addConstraints:verticalConstraints];
 //        
-//        [(RKActiveStepViewController *)viewController setCustomView:updatedView];
+//        [(RKSTActiveStepViewController *)viewController setCustomView:updatedView];
         
         
         
@@ -137,7 +137,7 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
 //        APHFitnessTestRestComfortablyView *updatedView = [[nib instantiateWithOwner:self options:nil] objectAtIndex:0];
 //        [updatedView setTranslatesAutoresizingMaskIntoConstraints:NO];
 //        
-//        RKActiveStepViewController * stepViewController = (RKActiveStepViewController *)viewController;
+//        RKSTActiveStepViewController * stepViewController = (RKSTActiveStepViewController *)viewController;
 //        
 //        UIView *blankView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 280, 560.00)];
 //        [blankView addSubview: updatedView];
@@ -259,16 +259,9 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
 #pragma mark - Overriding Methods
 /*********************************************************************************/
 //Start begins whenever the timer starts in the step view controller
-- (BOOL)start:(NSError *__autoreleasing *)error{
-    BOOL didStart = [super start:error];
-    
-    
-    return didStart;
-}
 
-- (BOOL)stop:(NSError *__autoreleasing *)error{
-    BOOL didStop = [super stop:error];
-    
+- (void)stop
+{
     //If the step collects distance
     if (self.step.identifier == kFitnessTestStep103) {
         self.dictionaryRecord[@"distance"] = self.distanceRecords;
@@ -281,36 +274,28 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
         
         NSLog(@"%@", self.dictionaryRecord);
         
-        id<RKRecorderDelegate> localDelegate = self.delegate;
+        id<RKSTRecorderDelegate> localDelegate = self.delegate;
         if (localDelegate && [localDelegate respondsToSelector:@selector(recorder:didCompleteWithResult:)]) {
-            RKDataResult* result = [[RKDataResult alloc] initWithStep:self.step];
-            result.taskInstanceUUID = self.taskInstanceUUID;
+            RKSTDataResult* result = [[RKSTDataResult alloc] initWithIdentifier:self.step.identifier];
             result.contentType = [self mimeType];
             NSError* err;
             result.data = [NSJSONSerialization dataWithJSONObject:self.dictionaryRecord options:(NSJSONWritingOptions)0 error:&err];
             
             if (err) {
-                if (error) {
-                    *error = err;
-                }
-                return NO;
+                
             }
-
+            
             result.filename = self.fileName;
             [localDelegate recorder:self didCompleteWithResult:result];
             self.dictionaryRecord = nil;
         }
     }else{
-        if (error) {
-            *error = [NSError errorWithDomain:RKErrorDomain
-                                         code:RKErrorObjectNotFound
-                                     userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(@"Records object is nil.", nil)}];
-        }
-        didStop = NO;
+        
     }
     
-    return didStop;
+    [super stop];
 }
+
 
 - (NSString*)dataType{
     return @"fitnessTest";
@@ -346,40 +331,10 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
 
 @implementation APHFitnessTestCustomRecorderConfiguration
 
-- (RKRecorder*)recorderForStep:(RKStep*)step taskInstanceUUID:(NSUUID*)taskInstanceUUID{
+- (RKSTRecorder*)recorderForStep:(RKSTStep*)step taskInstanceUUID:(NSUUID*)taskInstanceUUID{
     
-    return [[APHFitnessTestRecorder alloc] initWithStep:step taskInstanceUUID:taskInstanceUUID];
-}
-
-#pragma mark - RKSerialization
-
-- (instancetype)initWithDictionary:(NSDictionary *)dictionary{
-    
-    self = [self init];
-    if (self) {
-        
-    }
-    return self;
-}
-
-- (NSDictionary*)dictionaryValue{
-    
-    return @{ @"_class" : NSStringFromClass([self class]) };
-}
-
-+ (BOOL)supportsSecureCoding
-{
-    return YES;
-}
-
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
-    self = [super init];
-    return self;
-}
-
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{
+    //TODO: For Dhanush
+    return [[APHFitnessTestRecorder alloc] initWithStep:step outputDirectory:nil];
 }
 
 @end
