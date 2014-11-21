@@ -42,6 +42,21 @@ static NSString * const kStudyOverviewCellIdentifier = @"kStudyOverviewCellIdent
 - (void)prepareContent
 {
     [self studyDetailsFromJSONFile:@"StudyOverview"];
+    
+    {
+        APCTableViewStudyDetailsItem *shareStudyItem = [APCTableViewStudyDetailsItem new];
+        shareStudyItem.caption = NSLocalizedString(@"Share this Study", nil);
+        shareStudyItem.iconImage = [UIImage imageNamed:@"share_icon"];
+        shareStudyItem.tintColor = [UIColor appTertiaryGreenColor];
+        
+        APCTableViewRow *rowItem = [APCTableViewRow new];
+        rowItem.item = shareStudyItem;
+        rowItem.itemType = kAPCTableViewStudyItemTypeShare;
+        APCTableViewSection *section = [self.items firstObject];
+        NSMutableArray *rowItems = [NSMutableArray arrayWithArray:section.rows];
+        [rowItems addObject:rowItem];
+        section.rows = [NSArray arrayWithArray:rowItems];
+    }
 }
 
 #pragma mark - IBActions
@@ -80,15 +95,26 @@ static NSString * const kStudyOverviewCellIdentifier = @"kStudyOverviewCellIdent
     
     APCTableViewStudyDetailsItem *studyDetails = [self itemForIndexPath:indexPath];
     
-    if (indexPath.row == 4) {
-        APCShareViewController *shareViewController = [[UIStoryboard storyboardWithName:@"APHOnboarding" bundle:nil] instantiateViewControllerWithIdentifier:@"ShareVC"];
-        shareViewController.hidesOkayButton = YES;
-        [self.navigationController pushViewController:shareViewController animated:YES];
-        
-    } else {
-        APCStudyDetailsViewController *detailsViewController = [[UIStoryboard storyboardWithName:@"APHOnboarding" bundle:nil] instantiateViewControllerWithIdentifier:@"StudyDetailsVC"];
-        detailsViewController.studyDetails = studyDetails;
-        [self.navigationController pushViewController:detailsViewController animated:YES];
+    APCTableViewStudyItemType itemType = [self itemTypeForIndexPath:indexPath];
+    
+    switch (itemType) {
+        case kAPCTableViewStudyItemTypeStudyDetails:
+        {
+            APCStudyDetailsViewController *detailsViewController = [[UIStoryboard storyboardWithName:@"APHOnboarding" bundle:nil] instantiateViewControllerWithIdentifier:@"StudyDetailsVC"];
+            detailsViewController.studyDetails = studyDetails;
+            [self.navigationController pushViewController:detailsViewController animated:YES];
+        }
+            break;
+        case kAPCTableViewStudyItemTypeShare:
+        {
+            APCShareViewController *shareViewController = [[UIStoryboard storyboardWithName:@"APHOnboarding" bundle:nil] instantiateViewControllerWithIdentifier:@"ShareVC"];
+            shareViewController.hidesOkayButton = YES;
+            [self.navigationController pushViewController:shareViewController animated:YES];
+        }
+            break;
+            
+        default:
+            break;
     }
 }
 
