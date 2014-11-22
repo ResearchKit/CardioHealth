@@ -829,7 +829,6 @@
 				F55BBE6719D362D0003CA0F9 /* Main.storyboard in Resources */,
 				08C56E391A15E7D100D3BF61 /* APHActivityTracking.storyboard in Resources */,
 				7BD73F7B19E8A20600F5DFF3 /* Intro.mp4 in Resources */,
-				08C2328D1A15796E00DB4EF9 /* APHSevenDayFitnessIntroStepViewController.xib in Resources */,
 				5B8E6BFD1A1FB5240033733A /* HowStudyWorks.pdf in Resources */,
 				F55BBE7119D362D0003CA0F9 /* APHLearn.storyboard in Resources */,
 				7B6753421A01540E005864E6 /* APHHeartAgeIntroStepViewController.xib in Resources */,
