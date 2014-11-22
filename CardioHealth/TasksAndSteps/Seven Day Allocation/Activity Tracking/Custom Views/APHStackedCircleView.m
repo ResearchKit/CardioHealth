@@ -87,17 +87,10 @@ static CGFloat kMetersPerMile = 1609.344;
 
 - (void)layoutSubviews
 {
-    CGPoint center = CGPointMake(CGRectGetWidth(self.bounds)/2.8, CGRectGetHeight(self.bounds)/3.4);
-    CGFloat startAngle = -M_PI_2;
-    CGFloat endAngle = startAngle + 2*M_PI;
+    self.radius = MIN(CGRectGetWidth(self.bounds)/3, CGRectGetHeight(self.bounds)/3);
     
-    self.radius = MIN(CGRectGetWidth(self.bounds)/2.8, CGRectGetHeight(self.bounds)/2.8);
-    
-    self.circle.path = [UIBezierPath bezierPathWithArcCenter:center
-                                                      radius:self.radius
-                                                  startAngle:startAngle
-                                                    endAngle:endAngle
-                                                   clockwise:YES].CGPath;
+    self.circle.path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, 2.0*self.radius, 2.0*self.radius)
+                                                  cornerRadius:self.radius].CGPath;
     // Center the shape in self.view
     self.circle.position = CGPointMake(CGRectGetMidX(self.frame)-self.radius, CGRectGetMidY(self.frame)-self.radius*2);
     
@@ -138,6 +131,8 @@ static CGFloat kMetersPerMile = 1609.344;
         self.insideLabel.text = [NSString stringWithFormat:@"%.2f mi", self.sumQuantity/kMetersPerMile];
         self.insideCaption.text = self.insideCaptionText;
         
+        [self resetPlot];
+        
         if (!self.hideLegend) {
             [self setupLegend];
         }
@@ -165,7 +160,7 @@ static CGFloat kMetersPerMile = 1609.344;
         double lastPercentage = 0;
         
         for (NSInteger idx = 0; idx < [self.segments count]; idx++) {
-            CAShapeLayer* strokePart = [[CAShapeLayer alloc] init];
+            CAShapeLayer* strokePart = [CAShapeLayer layer];
             strokePart.fillColor = [[UIColor clearColor] CGColor];
             strokePart.frame = self.circle.bounds;
             strokePart.path = self.circle.path;
@@ -179,16 +174,13 @@ static CGFloat kMetersPerMile = 1609.344;
             if ([segmentValue[kDatasetValueKey] doubleValue] != 0) {
                 
                 CGFloat percentValueOfDatasetValue = [self percentageOfValue:[segmentValue[kDatasetValueKey] floatValue]];
-                double arcAngleInRadians = 0;
                 
                 if (idx == 0) {
                     strokePart.strokeStart = 0.0;
                     strokePart.strokeEnd = percentValueOfDatasetValue;
-                    arcAngleInRadians = percentValueOfDatasetValue;
                 } else {
                     strokePart.strokeStart = lastPercentage;
                     strokePart.strokeEnd = strokePart.strokeStart + percentValueOfDatasetValue;
-                    arcAngleInRadians = strokePart.strokeEnd - strokePart.strokeStart;
                 }
                 
                 lastPercentage = strokePart.strokeEnd;
@@ -196,6 +188,28 @@ static CGFloat kMetersPerMile = 1609.344;
                 NSLog(@"Start/End: %f/%f", strokePart.strokeStart, strokePart.strokeEnd);
                 
                 [self.circle addSublayer:strokePart];
+                
+                CGRect boundingBox = CGPathGetBoundingBox(strokePart.path);
+                
+                if (percentValueOfDatasetValue != 1.0) {
+                    
+                    CGFloat angle = (strokePart.strokeStart + strokePart.strokeEnd) * M_PI; // in radians
+                    
+                    //NSInteger offset = ((angle - M_PI_2) > M_PI) ? strokePart.lineWidth + 25 : strokePart.lineWidth + 20;
+                    NSInteger offset = strokePart.lineWidth + 20;
+                    
+                    CGPoint labelCenter = CGPointMake(cos(angle - M_PI_2) * (self.radius + offset) + boundingBox.size.width/2,
+                                                      sin(angle - M_PI_2) * (self.radius + offset) + boundingBox.size.height/2);
+                    
+                    CATextLayer *textLayer = [CATextLayer layer];
+                    textLayer.string = [NSString stringWithFormat:@"%0.0f%%", percentValueOfDatasetValue * 100];
+                    textLayer.fontSize = 21.0;
+                    textLayer.foregroundColor = strokePart.strokeColor;
+                    textLayer.frame = CGRectMake(labelCenter.x, labelCenter.y, 50, 21);
+                    textLayer.contentsScale = [[UIScreen mainScreen] scale];
+                    
+                    [self.circle addSublayer:textLayer];
+                }
                 
                 CAKeyframeAnimation* animation = [CAKeyframeAnimation animationWithKeyPath:@"strokeEnd"];
                 NSArray* times = @[ @(0.0), // Note: This works because both the times and the stroke start/end are on scales of 0..1
