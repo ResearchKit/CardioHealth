@@ -205,7 +205,7 @@ static CGFloat kMetersPerMile = 1609.344;
                     textLayer.string = [NSString stringWithFormat:@"%0.0f%%", percentValueOfDatasetValue * 100];
                     textLayer.fontSize = 21.0;
                     textLayer.foregroundColor = strokePart.strokeColor;
-                    textLayer.frame = CGRectMake(labelCenter.x, labelCenter.y, 40, 21);
+                    textLayer.frame = CGRectMake(labelCenter.x, labelCenter.y, 50, 21);
                     textLayer.contentsScale = [[UIScreen mainScreen] scale];
                     
                     [self.circle addSublayer:textLayer];
