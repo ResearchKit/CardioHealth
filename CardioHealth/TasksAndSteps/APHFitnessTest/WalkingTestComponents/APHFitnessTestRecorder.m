@@ -191,7 +191,7 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
                                                                 relatedBy:NSLayoutRelationEqual
                                                                    toItem:viewController.view
                                                                 attribute:NSLayoutAttributeHeight
-                                                               multiplier:0.3
+                                                               multiplier:0.15
                                                                  constant:0]];
         
         

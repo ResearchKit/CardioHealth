@@ -463,22 +463,22 @@ static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
     }
 }
 
-- (void)taskViewControllerDidFail: (RKSTTaskViewController *)taskViewController withError:(NSError*)error{
-    
-    [self.taskArchive resetContent];
-    self.taskArchive = nil;
-    
-}
-
-- (void)taskViewControllerDidCancel:(RKSTTaskViewController *)taskViewController{
-    
-    [taskViewController suspend];
-    
-    [self.taskArchive resetContent];
-    self.taskArchive = nil;
-    
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
+//- (void)taskViewControllerDidFail: (RKSTTaskViewController *)taskViewController withError:(NSError*)error{
+//    
+//    [self.taskArchive resetContent];
+//    self.taskArchive = nil;
+//    
+//}
+//
+//- (void)taskViewControllerDidCancel:(RKSTTaskViewController *)taskViewController{
+//    
+//    [taskViewController suspend];
+//    
+//    [self.taskArchive resetContent];
+//    self.taskArchive = nil;
+//    
+//    [self dismissViewControllerAnimated:YES completion:nil];
+//}
 
 - (RKSTStepViewController *)taskViewController:(RKSTTaskViewController *)taskViewController viewControllerForStep:(RKSTStep *)step
 {
