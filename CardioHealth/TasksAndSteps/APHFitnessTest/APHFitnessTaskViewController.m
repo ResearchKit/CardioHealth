@@ -77,6 +77,8 @@ static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
     
     //sixMinuteStepFlag
     self.finishedSixMinuteStep = NO;
+    
+    self.stepsToAutomaticallyAdvanceOnTimer = @[kFitnessTestStep102, kFitnessTestStep103, kFitnessTestStep104];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -127,6 +129,7 @@ static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
         step.shouldUseNextAsSkipButton = NO;
         step.shouldPlaySoundOnStart = YES;
         step.shouldSpeakCountDown = YES;
+        step.shouldStartTimerAutomatically = YES;
         
         [steps addObject:step];
     }
@@ -142,6 +145,7 @@ static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
         step.spokenInstruction = NSLocalizedString(@"Start Walking", @"");
         step.countDownInterval = [[parameters numberForKey:@"FT6Min"] doubleValue];
         step.shouldUseNextAsSkipButton = NO;
+        step.shouldStartTimerAutomatically = YES;
         
         [steps addObject:step];
     }
@@ -157,6 +161,7 @@ static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
         step.spokenInstruction = step.text;
         step.countDownInterval = [[parameters numberForKey:@"FT3MinComfPos"] doubleValue];
         step.shouldUseNextAsSkipButton = NO;
+        step.shouldStartTimerAutomatically = YES;
         
         [steps addObject:step];
     }
@@ -252,92 +257,92 @@ static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
         
         RKSTActiveStepViewController *stepVC = (RKSTActiveStepViewController *) stepViewController;
         
-        //Adding "Time" subview
-        UILabel *countdownTitle = [UILabel new];
-        [countdownTitle setTranslatesAutoresizingMaskIntoConstraints:NO];
-        [countdownTitle setBackgroundColor:[UIColor clearColor]];
-        countdownTitle.text = @"Time";
-        countdownTitle.textAlignment = NSTextAlignmentCenter;
-        
-        [countdownTitle addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[c(>=55)]" options:0 metrics:nil views:@{@"c":countdownTitle}]];
-
-        //TODO Add Font and Size
-        /*******************/
-        [countdownTitle setFont:[UIFont fontWithName:@"HelveticaNeue" size:32]];
-        
-        [stepVC.view addSubview:countdownTitle];
-        
-        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:countdownTitle attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:stepVC.view attribute:NSLayoutAttributeLeading multiplier:1.0f constant:0.0f]];
-
-        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:countdownTitle attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:stepVC.view attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0.0f]];
-        
-        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:countdownTitle attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:stepVC.view attribute:NSLayoutAttributeCenterY multiplier:0.47f constant:5.0f]];
-        
-        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:countdownTitle
-                                                                attribute:NSLayoutAttributeCenterX
-                                                                relatedBy:NSLayoutRelationEqual
-                                                                   toItem:stepVC.view
-                                                                attribute:NSLayoutAttributeCenterX
-                                                               multiplier:1.0
-                                                                 constant:0.0]];
-        
-        //Adding custom view which includes the distance and BPM.
-        UIView *updatedView = [UIView new];
-        
-        [stepVC setCustomView:updatedView];
-        
-        // Height constraint
-        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:updatedView
-                                                                attribute:NSLayoutAttributeHeight
-                                                                relatedBy:NSLayoutRelationEqual
-                                                                   toItem:stepVC.view
-                                                                attribute:NSLayoutAttributeHeight
-                                                               multiplier:0.3
-                                                                 constant:0]];
-        
-        
-        /**** use for setting custom views. **/
-        UINib *nib = [UINib nibWithNibName:@"APHFitnessSixMinuteFitnessTestView" bundle:nil];
-        APHFitnessSixMinuteFitnessTestView *restComfortablyView = [[nib instantiateWithOwner:self options:nil] objectAtIndex:0];
-        
-        [stepVC.view addSubview:restComfortablyView];
-        
-        [restComfortablyView setTranslatesAutoresizingMaskIntoConstraints:NO];
-        
-        [restComfortablyView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[c(>=280)]" options:0 metrics:nil views:@{@"c":restComfortablyView}]];
-        
-        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:restComfortablyView
-                                                                attribute:NSLayoutAttributeHeight
-                                                                relatedBy:NSLayoutRelationEqual
-                                                                   toItem:stepVC.view
-                                                                attribute:NSLayoutAttributeHeight
-                                                               multiplier:0.5
-                                                                 constant:0]];
-        
-        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:restComfortablyView
-                                                                attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual
-                                                                   toItem:stepViewController.view
-                                                                attribute:NSLayoutAttributeCenterY
-                                                               multiplier:1.15
-                                                                 constant:75]];
-        
-        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:restComfortablyView
-                                                                attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual
-                                                                   toItem:stepViewController.view
-                                                                attribute:NSLayoutAttributeWidth
-                                                               multiplier:1
-                                                                 constant:0]];
-        
-        // Center horizontally
-        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:stepVC.view
-                                                                attribute:NSLayoutAttributeCenterX
-                                                                relatedBy:NSLayoutRelationEqual
-                                                                   toItem:restComfortablyView
-                                                                attribute:NSLayoutAttributeCenterX
-                                                               multiplier:1.0
-                                                                 constant:0.0]];
-        
-        [stepVC.view layoutIfNeeded];
+//        //Adding "Time" subview
+//        UILabel *countdownTitle = [UILabel new];
+//        [countdownTitle setTranslatesAutoresizingMaskIntoConstraints:NO];
+//        [countdownTitle setBackgroundColor:[UIColor clearColor]];
+//        countdownTitle.text = @"Time";
+//        countdownTitle.textAlignment = NSTextAlignmentCenter;
+//        
+//        [countdownTitle addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[c(>=55)]" options:0 metrics:nil views:@{@"c":countdownTitle}]];
+//
+//        //TODO Add Font and Size
+//        /*******************/
+//        [countdownTitle setFont:[UIFont fontWithName:@"HelveticaNeue" size:32]];
+//        
+//        [stepVC.view addSubview:countdownTitle];
+//        
+//        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:countdownTitle attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:stepVC.view attribute:NSLayoutAttributeLeading multiplier:1.0f constant:0.0f]];
+//
+//        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:countdownTitle attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:stepVC.view attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0.0f]];
+//        
+//        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:countdownTitle attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:stepVC.view attribute:NSLayoutAttributeCenterY multiplier:0.47f constant:5.0f]];
+//        
+//        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:countdownTitle
+//                                                                attribute:NSLayoutAttributeCenterX
+//                                                                relatedBy:NSLayoutRelationEqual
+//                                                                   toItem:stepVC.view
+//                                                                attribute:NSLayoutAttributeCenterX
+//                                                               multiplier:1.0
+//                                                                 constant:0.0]];
+//        
+//        //Adding custom view which includes the distance and BPM.
+//        UIView *updatedView = [UIView new];
+//        
+//        [stepVC setCustomView:updatedView];
+//        
+//        // Height constraint
+//        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:updatedView
+//                                                                attribute:NSLayoutAttributeHeight
+//                                                                relatedBy:NSLayoutRelationEqual
+//                                                                   toItem:stepVC.view
+//                                                                attribute:NSLayoutAttributeHeight
+//                                                               multiplier:0.3
+//                                                                 constant:0]];
+//        
+//        
+//        /**** use for setting custom views. **/
+//        UINib *nib = [UINib nibWithNibName:@"APHFitnessSixMinuteFitnessTestView" bundle:nil];
+//        APHFitnessSixMinuteFitnessTestView *restComfortablyView = [[nib instantiateWithOwner:self options:nil] objectAtIndex:0];
+//        
+//        [stepVC.view addSubview:restComfortablyView];
+//        
+//        [restComfortablyView setTranslatesAutoresizingMaskIntoConstraints:NO];
+//        
+//        [restComfortablyView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[c(>=280)]" options:0 metrics:nil views:@{@"c":restComfortablyView}]];
+//        
+//        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:restComfortablyView
+//                                                                attribute:NSLayoutAttributeHeight
+//                                                                relatedBy:NSLayoutRelationEqual
+//                                                                   toItem:stepVC.view
+//                                                                attribute:NSLayoutAttributeHeight
+//                                                               multiplier:0.5
+//                                                                 constant:0]];
+//        
+//        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:restComfortablyView
+//                                                                attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual
+//                                                                   toItem:stepViewController.view
+//                                                                attribute:NSLayoutAttributeCenterY
+//                                                               multiplier:1.15
+//                                                                 constant:75]];
+//        
+//        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:restComfortablyView
+//                                                                attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual
+//                                                                   toItem:stepViewController.view
+//                                                                attribute:NSLayoutAttributeWidth
+//                                                               multiplier:1
+//                                                                 constant:0]];
+//        
+//        // Center horizontally
+//        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:stepVC.view
+//                                                                attribute:NSLayoutAttributeCenterX
+//                                                                relatedBy:NSLayoutRelationEqual
+//                                                                   toItem:restComfortablyView
+//                                                                attribute:NSLayoutAttributeCenterX
+//                                                               multiplier:1.0
+//                                                                 constant:0.0]];
+//        
+//        [stepVC.view layoutIfNeeded];
 
         
         stepViewController.continueButton = nil;
@@ -348,98 +353,98 @@ static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
         RKSTActiveStepViewController *stepVC = (RKSTActiveStepViewController *) stepViewController;
         
         
-        //Adding "Time" subview
-        UILabel *countdownTitle = [UILabel new];
-        [countdownTitle setTranslatesAutoresizingMaskIntoConstraints:NO];
-        [countdownTitle setBackgroundColor:[UIColor clearColor]];
-        countdownTitle.text = @"Time";
-        countdownTitle.textAlignment = NSTextAlignmentCenter;
-        
-        [countdownTitle addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[c(>=55)]" options:0 metrics:nil views:@{@"c":countdownTitle}]];
-        
-        //TODO Add Font and Size
-        /*******************/
-        [countdownTitle setFont:[UIFont fontWithName:@"HelveticaNeue" size:32]];
-        
-        [stepVC.view addSubview:countdownTitle];
-        
-        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:countdownTitle attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:stepVC.view attribute:NSLayoutAttributeLeading multiplier:1.0f constant:0.0f]];
-        
-        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:countdownTitle attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:stepVC.view attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0.0f]];
-        
-        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:countdownTitle attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:stepVC.view attribute:NSLayoutAttributeCenterY multiplier:0.47f constant:5.0f]];
-        
-        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:countdownTitle
-                                                                attribute:NSLayoutAttributeCenterX
-                                                                relatedBy:NSLayoutRelationEqual
-                                                                   toItem:stepVC.view
-                                                                attribute:NSLayoutAttributeCenterX
-                                                               multiplier:1.0
-                                                                 constant:0.0]];
-        
-        //Adding custom view which includes the distance and BPM.
-        UIView *updatedView = [UIView new];
-        
-        [stepVC setCustomView:updatedView];
-        
-        // Height constraint
-        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:updatedView
-                                                                attribute:NSLayoutAttributeHeight
-                                                                relatedBy:NSLayoutRelationEqual
-                                                                   toItem:stepVC.view
-                                                                attribute:NSLayoutAttributeHeight
-                                                               multiplier:0.3
-                                                                 constant:0]];
-
-        
-        /**** use for setting custom views. **/
-        UINib *nib = [UINib nibWithNibName:@"APHFitnessTestRestComfortablyView" bundle:nil];
-        APHFitnessTestRestComfortablyView *restComfortablyView = [[nib instantiateWithOwner:self options:nil] objectAtIndex:0];
-        
-        [stepVC.view addSubview:restComfortablyView];
-        
-        CLLocationDistance distanceInFeet = self.totalDistance * kAPHFitnessTestMetersToFeetConversion;
-        
-        [NSString stringWithFormat:@"%dft", (int)roundf(distanceInFeet)];
-        
-        [restComfortablyView setTotalDistance:[NSNumber numberWithInt:(int)roundf(distanceInFeet)]];
-        
-        [restComfortablyView setTranslatesAutoresizingMaskIntoConstraints:NO];
-        
-        [restComfortablyView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[c(>=280)]" options:0 metrics:nil views:@{@"c":restComfortablyView}]];
-        
-        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:restComfortablyView
-                                                                attribute:NSLayoutAttributeHeight
-                                                                relatedBy:NSLayoutRelationEqual
-                                                                   toItem:stepVC.view
-                                                                attribute:NSLayoutAttributeHeight
-                                                               multiplier:0.5
-                                                                 constant:0]];
-        
-        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:restComfortablyView
-                                                                attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual
-                                                                   toItem:stepViewController.view
-                                                                attribute:NSLayoutAttributeCenterY
-                                                               multiplier:1.15
-                                                                 constant:75]];
-        
-        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:restComfortablyView
-                                                                attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual
-                                                                   toItem:stepViewController.view
-                                                                attribute:NSLayoutAttributeWidth
-                                                               multiplier:1
-                                                                 constant:0]];
-        
-        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:stepVC.view
-                                                              attribute:NSLayoutAttributeCenterX
-                                                              relatedBy:NSLayoutRelationEqual
-                                                                 toItem:restComfortablyView
-                                                              attribute:NSLayoutAttributeCenterX
-                                                             multiplier:1.0
-                                                               constant:0.0]];
-        
-        
-        [stepVC.view layoutIfNeeded];
+//        //Adding "Time" subview
+//        UILabel *countdownTitle = [UILabel new];
+//        [countdownTitle setTranslatesAutoresizingMaskIntoConstraints:NO];
+//        [countdownTitle setBackgroundColor:[UIColor clearColor]];
+//        countdownTitle.text = @"Time";
+//        countdownTitle.textAlignment = NSTextAlignmentCenter;
+//        
+//        [countdownTitle addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[c(>=55)]" options:0 metrics:nil views:@{@"c":countdownTitle}]];
+//        
+//        //TODO Add Font and Size
+//        /*******************/
+//        [countdownTitle setFont:[UIFont fontWithName:@"HelveticaNeue" size:32]];
+//        
+//        [stepVC.view addSubview:countdownTitle];
+//        
+//        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:countdownTitle attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:stepVC.view attribute:NSLayoutAttributeLeading multiplier:1.0f constant:0.0f]];
+//        
+//        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:countdownTitle attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:stepVC.view attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0.0f]];
+//        
+//        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:countdownTitle attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:stepVC.view attribute:NSLayoutAttributeCenterY multiplier:0.47f constant:5.0f]];
+//        
+//        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:countdownTitle
+//                                                                attribute:NSLayoutAttributeCenterX
+//                                                                relatedBy:NSLayoutRelationEqual
+//                                                                   toItem:stepVC.view
+//                                                                attribute:NSLayoutAttributeCenterX
+//                                                               multiplier:1.0
+//                                                                 constant:0.0]];
+//        
+//        //Adding custom view which includes the distance and BPM.
+//        UIView *updatedView = [UIView new];
+//        
+//        [stepVC setCustomView:updatedView];
+//        
+//        // Height constraint
+//        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:updatedView
+//                                                                attribute:NSLayoutAttributeHeight
+//                                                                relatedBy:NSLayoutRelationEqual
+//                                                                   toItem:stepVC.view
+//                                                                attribute:NSLayoutAttributeHeight
+//                                                               multiplier:0.3
+//                                                                 constant:0]];
+//
+//        
+//        /**** use for setting custom views. **/
+//        UINib *nib = [UINib nibWithNibName:@"APHFitnessTestRestComfortablyView" bundle:nil];
+//        APHFitnessTestRestComfortablyView *restComfortablyView = [[nib instantiateWithOwner:self options:nil] objectAtIndex:0];
+//        
+//        [stepVC.view addSubview:restComfortablyView];
+//        
+//        CLLocationDistance distanceInFeet = self.totalDistance * kAPHFitnessTestMetersToFeetConversion;
+//        
+//        [NSString stringWithFormat:@"%dft", (int)roundf(distanceInFeet)];
+//        
+//        [restComfortablyView setTotalDistance:[NSNumber numberWithInt:(int)roundf(distanceInFeet)]];
+//        
+//        [restComfortablyView setTranslatesAutoresizingMaskIntoConstraints:NO];
+//        
+//        [restComfortablyView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[c(>=280)]" options:0 metrics:nil views:@{@"c":restComfortablyView}]];
+//        
+//        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:restComfortablyView
+//                                                                attribute:NSLayoutAttributeHeight
+//                                                                relatedBy:NSLayoutRelationEqual
+//                                                                   toItem:stepVC.view
+//                                                                attribute:NSLayoutAttributeHeight
+//                                                               multiplier:0.5
+//                                                                 constant:0]];
+//        
+//        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:restComfortablyView
+//                                                                attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual
+//                                                                   toItem:stepViewController.view
+//                                                                attribute:NSLayoutAttributeCenterY
+//                                                               multiplier:1.15
+//                                                                 constant:75]];
+//        
+//        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:restComfortablyView
+//                                                                attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual
+//                                                                   toItem:stepViewController.view
+//                                                                attribute:NSLayoutAttributeWidth
+//                                                               multiplier:1
+//                                                                 constant:0]];
+//        
+//        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:stepVC.view
+//                                                              attribute:NSLayoutAttributeCenterX
+//                                                              relatedBy:NSLayoutRelationEqual
+//                                                                 toItem:restComfortablyView
+//                                                              attribute:NSLayoutAttributeCenterX
+//                                                             multiplier:1.0
+//                                                               constant:0.0]];
+//        
+//        
+//        [stepVC.view layoutIfNeeded];
         
         stepViewController.continueButton = nil;
         stepViewController.skipButton = nil;
