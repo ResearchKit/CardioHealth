@@ -448,8 +448,7 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
                         
                         [surveyResultsDictionary setObject:ethnicity forKey:questionIdentifier];
                     } else if ([questionIdentifier isEqualToString:kHeartAgeTestDataGender]) {
-                        NSNumber *numericGender = questionResult.answer;
-                        NSString *selectedGender = ([numericGender integerValue] == HKBiologicalSexFemale) ? kHeartAgeTestDataGenderFemale :kHeartAgeTestDataGenderMale;
+                        NSString *selectedGender = ([(NSString *)questionResult.answer isEqualToString:@"HKBiologicalSexFemale"]) ? kHeartAgeTestDataGenderFemale :kHeartAgeTestDataGenderMale;
                         [surveyResultsDictionary setObject:selectedGender
                                                     forKey:questionIdentifier];
                     } else if ([questionIdentifier isEqualToString:kHeartAgeTestDataAge]) {
