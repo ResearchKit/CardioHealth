@@ -128,7 +128,7 @@ static CGFloat kMetersPerMile = 1609.344;
         self.segments = values;
         self.sumQuantity = [[self.segments valueForKeyPath:@"@sum.datasetValueKey"] doubleValue];
         
-        self.insideLabel.text = [NSString stringWithFormat:@"%.2f mi", self.sumQuantity/kMetersPerMile];
+        self.insideLabel.text = [NSString stringWithFormat:@"%.1f mi", self.sumQuantity/kMetersPerMile];
         self.insideCaption.text = self.insideCaptionText;
         
         [self resetPlot];
