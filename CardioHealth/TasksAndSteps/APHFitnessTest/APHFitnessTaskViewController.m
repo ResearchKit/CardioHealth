@@ -11,8 +11,6 @@
 
 #import "APHFitnessTestIntroStepViewController.h"
 
-#import "APHFitnessTestSummaryViewController.h"
-
 static NSString *MainStudyIdentifier = @"com.cardioVascular.fitnessTest";
 static NSString *kdataResultsFileName = @"FitnessTestResult.json";
 
@@ -24,9 +22,8 @@ static  NSString  *kFitnessTestStep105 = @"FitnessStep105";
 static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
 
 static NSInteger kCountDownTimer = 1;
-static NSInteger kUpdatedHeartRateThreshold = 2;
-static NSTimeInterval kUpdatedHeartRateTimeThreshold = 10;
-
+static  CGFloat  kAPCStepProgressBarHeight = 12.0;
+static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
 
 @interface APHFitnessTaskViewController ()
 
@@ -173,44 +170,17 @@ static NSTimeInterval kUpdatedHeartRateTimeThreshold = 10;
     return  task;
 }
 
-
-/*********************************************************************************/
-#pragma mark - StepViewController Delegate Methods
-/*********************************************************************************/
-
-//- (void)stepViewControllerDidFinish:(RKSTStepViewController *)stepViewController navigationDirection:(RKSTStepViewControllerNavigationDirection)direction
-//{
-//    [super stepViewControllerDidFinish:stepViewController navigationDirection:direction];
-//    
-//    if (stepViewController.step.identifier == kFitnessTestStep103) {
-//        self.finishedSixMinuteStep = YES;
-//    }
-//    
-//    NSInteger  completedSteps = self.progressor.completedSteps;
-//    if (direction == RKSTStepViewControllerNavigationDirectionForward) {
-//        completedSteps = completedSteps + 1;
-//    } else {
-//        completedSteps = completedSteps - 1;
-//    }
-//    [self.progressor setCompletedSteps:completedSteps animation:YES];
-//
-//    
-//    NSLog(@"Finished Step: %@", stepViewController.step.identifier);
-//}
-
 /*********************************************************************************/
 #pragma  mark  - TaskViewController delegates
 /*********************************************************************************/
 
-- (BOOL)taskViewController:(RKSTTaskViewController *)taskViewController shouldPresentStep:(RKSTStep *)step {
-    
-    
-
-    
+- (BOOL)taskViewController:(RKSTTaskViewController *)taskViewController shouldPresentStep:(RKSTStep *)step
+{
     return YES;
 }
 
-- (void)taskViewController:(RKSTTaskViewController *)taskViewController stepViewControllerWillAppear:(RKSTStepViewController *)stepViewController {
+- (void)taskViewController:(RKSTTaskViewController *)taskViewController stepViewControllerWillAppear:(RKSTStepViewController *)stepViewController
+{
     
     [super taskViewController:taskViewController stepViewControllerWillAppear:stepViewController];
     
@@ -274,8 +244,7 @@ static NSTimeInterval kUpdatedHeartRateTimeThreshold = 10;
         stepVC = controller;
     }   else if (step.identifier == kFitnessTestStep106) {
         
-        APHFitnessTestSummaryViewController *summaryViewController = [[APHFitnessTestSummaryViewController alloc] initWithNibName:@"APHFitnessTestSummaryViewController" bundle:nil];
-        
+        APCSimpleTaskSummaryViewController  *summaryViewController = [[APCSimpleTaskSummaryViewController alloc] initWithNibName:nil bundle:[NSBundle appleCoreBundle]];
         summaryViewController.delegate = self;
         summaryViewController.step = step;
         summaryViewController.taskProgress = 0.25;
