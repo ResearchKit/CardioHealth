@@ -24,8 +24,9 @@ static  NSString  *kFitnessTestStep105 = @"FitnessStep105";
 static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
 
 static NSInteger kCountDownTimer = 1;
-static  CGFloat  kAPCStepProgressBarHeight = 12.0;
-static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
+static NSInteger kUpdatedHeartRateThreshold = 2;
+static NSTimeInterval kUpdatedHeartRateTimeThreshold = 10;
+
 
 @interface APHFitnessTaskViewController ()
 
@@ -88,7 +89,17 @@ static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
 {
     APCAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     APCParameters *parameters = appDelegate.dataSubstrate.parameters;
+    NSInteger totalUpdates = appDelegate.healthKitTracker.totalUpdates;
+    NSDate *lastUpdate = appDelegate.healthKitTracker.lastUpdate;
     
+    NSTimeInterval secondsBetween = [[NSDate date] timeIntervalSinceDate:lastUpdate];
+    
+    BOOL heartIsUpdating = NO;
+    
+    if (totalUpdates > kUpdatedHeartRateThreshold && secondsBetween < kUpdatedHeartRateTimeThreshold) {
+        heartIsUpdating = YES;
+    }
+
     NSMutableArray *steps = [[NSMutableArray alloc] init];
 
     {
@@ -128,20 +139,22 @@ static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
         [steps addObject:step];
     }
     
-    {
-        //Stop and sit in a comfortable position for 3 minutes
-        RKSTActiveStep* step = [[RKSTActiveStep alloc] initWithIdentifier:kFitnessTestStep104];
-        step.recorderConfigurations = @[[APHFitnessTestCustomRecorderConfiguration new]];
-        step.title = NSLocalizedString(@"Good Work!", @"");
-        step.text = NSLocalizedString(@"Stop walking, and sit in a comfortable position for 3 minutes.", @"");
-        step.shouldPlaySoundOnStart = YES;
-        step.shouldVibrateOnStart = YES;
-        step.spokenInstruction = step.text;
-        step.countDownInterval = [[parameters numberForKey:@"FT3MinComfPos"] doubleValue];
-        step.shouldUseNextAsSkipButton = NO;
-        step.shouldStartTimerAutomatically = YES;
-        
-        [steps addObject:step];
+    if (heartIsUpdating) {
+        {
+            //Stop and sit in a comfortable position for 3 minutes
+            RKSTActiveStep* step = [[RKSTActiveStep alloc] initWithIdentifier:kFitnessTestStep104];
+            step.recorderConfigurations = @[[APHFitnessTestCustomRecorderConfiguration new]];
+            step.title = NSLocalizedString(@"Good Work!", @"");
+            step.text = NSLocalizedString(@"Stop walking, and sit in a comfortable position for 3 minutes.", @"");
+            step.shouldPlaySoundOnStart = YES;
+            step.shouldVibrateOnStart = YES;
+            step.spokenInstruction = step.text;
+            step.countDownInterval = [[parameters numberForKey:@"FT3MinComfPos"] doubleValue];
+            step.shouldUseNextAsSkipButton = NO;
+            step.shouldStartTimerAutomatically = YES;
+            
+            [steps addObject:step];
+        }
     }
     
     {
