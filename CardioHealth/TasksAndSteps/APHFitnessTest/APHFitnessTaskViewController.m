@@ -14,6 +14,8 @@
 static NSString *MainStudyIdentifier = @"com.cardioVascular.fitnessTest";
 static NSString *kdataResultsFileName = @"FitnessTestResult.json";
 
+static NSString *kNotificationUpdatedName = @"APHFitnessDistanceUpdated";
+
 static  NSString  *kFitnessTestStep101 = @"FitnessStep101";
 static  NSString  *kFitnessTestStep102 = @"FitnessStep102";
 static  NSString  *kFitnessTestStep103 = @"FitnessStep103";
@@ -24,6 +26,7 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
 static NSInteger kCountDownTimer = 5;
 static NSInteger kUpdatedHeartRateThreshold = 2;
 static NSInteger kUpdatedHeartRateTimeThreshold = 10;
+static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
 
 @interface APHFitnessTaskViewController ()
 
@@ -31,7 +34,6 @@ static NSInteger kUpdatedHeartRateTimeThreshold = 10;
 @property (strong, nonatomic) APHFitnessTestHealthKitSampleTypeTracker *healthKitSampleTracker;
 @property (strong, nonatomic) APHFitnessTestDistanceTracker *distanceTracker;
 
-@property (strong, nonatomic) RKSTDataArchive *taskArchive;
 
 @property (assign) NSInteger heartRateMonitoring;
 @property (assign) BOOL heartRateIsUpdating;
@@ -41,6 +43,7 @@ static NSInteger kUpdatedHeartRateTimeThreshold = 10;
 @property (strong, nonatomic) CLLocation *previousLocation;
 @property (assign) CLLocationDistance totalDistance;
 @property (assign) BOOL finishedSixMinuteStep;
+@property (assign) BOOL willPresentStep4;
 @end
 
 @implementation APHFitnessTaskViewController
@@ -91,7 +94,7 @@ static NSInteger kUpdatedHeartRateTimeThreshold = 10;
     
     NSTimeInterval secondsBetween = [[NSDate date] timeIntervalSinceDate:lastUpdate];
     
-    BOOL heartIsUpdating = NO;
+    BOOL heartIsUpdating = YES;
     
     if (totalUpdates > kUpdatedHeartRateThreshold && secondsBetween < kUpdatedHeartRateTimeThreshold) {
         heartIsUpdating = YES;
@@ -156,7 +159,7 @@ static NSInteger kUpdatedHeartRateTimeThreshold = 10;
     
     {
         //Finished
-        RKSTActiveStep* step = [[RKSTActiveStep alloc] initWithIdentifier:kFitnessTestStep106];
+        RKSTActiveStep* step = [[RKSTActiveStep alloc] initWithIdentifier:kFitnessTestStep105];
         step.recorderConfigurations = @[];
         step.title = NSLocalizedString(@"Good job.", @"");
         step.text = NSLocalizedString(@"Great job.", @"");
@@ -174,11 +177,6 @@ static NSInteger kUpdatedHeartRateTimeThreshold = 10;
 #pragma  mark  - TaskViewController delegates
 /*********************************************************************************/
 
-- (BOOL)taskViewController:(RKSTTaskViewController *)taskViewController shouldPresentStep:(RKSTStep *)step
-{
-    return YES;
-}
-
 - (void)taskViewController:(RKSTTaskViewController *)taskViewController stepViewControllerWillAppear:(RKSTStepViewController *)stepViewController
 {
     
@@ -188,38 +186,141 @@ static NSInteger kUpdatedHeartRateTimeThreshold = 10;
     
     stepViewController = (RKSTStepViewController *) stepViewController;
     
-    if ([stepViewController.step.identifier isEqualToString:@""]) {
-        UIView* customView = [UIView new];
-        customView.backgroundColor = [UIColor cyanColor];
-        
-        // Have the custom view request the space it needs.
-        // A little tricky because we need to let it size to fit if there's not enough space.
-        [customView setTranslatesAutoresizingMaskIntoConstraints:NO];
-        NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[c(>=160)]" options:0 metrics:nil views:@{@"c":customView}];
-        for (NSLayoutConstraint *constraint in verticalConstraints)
-        {
-            constraint.priority = UILayoutPriorityFittingSizeLevel;
-        }
-        [customView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[c(>=280)]" options:0 metrics:nil views:@{@"c":customView}]];
-        [customView addConstraints:verticalConstraints];
-        
-        [(RKSTActiveStepViewController*)stepViewController setCustomView:customView];
-        
-        stepViewController.continueButton = [[UIBarButtonItem alloc] initWithTitle:@"Get Started" style:stepViewController.continueButton.style target:stepViewController.continueButton.target action:stepViewController.continueButton.action];
-        
-        stepViewController.skipButton = nil;
-        
-    }else if ([stepViewController.step.identifier isEqualToString:kFitnessTestStep102]) {
-    
-        stepViewController.continueButton = nil;
-        stepViewController.skipButton = nil;
-    
-    }else if ([stepViewController.step.identifier isEqualToString:kFitnessTestStep105]) {
+    if ([stepViewController.step.identifier isEqualToString:kFitnessTestStep104]) {
 
+        RKSTStepResult *stepResult = [taskViewController.result stepResultForStepIdentifier:kFitnessTestStep103];
+        
+        RKSTDataResult * result = (RKSTDataResult*) [stepResult resultForIdentifier:kFitnessTestStep103];
+        
+        NSError* error;
+        NSDictionary* json = [NSJSONSerialization JSONObjectWithData:result.data
+                                                             options:kNilOptions
+                                                               error:&error];
+        
+        NSArray* totalDist = json[@"distance"];
+        NSDictionary *singleEntry = [totalDist lastObject];
+        
+        NSLog(@"distance: %@", singleEntry[@"totalDistanceInFeet"]);
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        //Adding "Time" subview
+        UILabel *countdownTitle = [UILabel new];
+        [countdownTitle setTranslatesAutoresizingMaskIntoConstraints:NO];
+        [countdownTitle setBackgroundColor:[UIColor clearColor]];
+        countdownTitle.text = @"Time";
+        countdownTitle.textAlignment = NSTextAlignmentCenter;
+        
+        [countdownTitle addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[c(>=55)]" options:0 metrics:nil views:@{@"c":countdownTitle}]];
+        
+        //TODO Add Font and Size
+        /*******************/
+        [countdownTitle setFont:[UIFont fontWithName:@"HelveticaNeue" size:32]];
+        
+        [stepViewController.view addSubview:countdownTitle];
+        
+        [stepViewController.view addConstraint:[NSLayoutConstraint constraintWithItem:countdownTitle attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:stepViewController.view attribute:NSLayoutAttributeLeading multiplier:1.0f constant:0.0f]];
+        
+        [stepViewController.view addConstraint:[NSLayoutConstraint constraintWithItem:countdownTitle attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:stepViewController.view attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0.0f]];
+        
+        [stepViewController.view addConstraint:[NSLayoutConstraint constraintWithItem:countdownTitle attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:stepViewController.view attribute:NSLayoutAttributeCenterY multiplier:0.47f constant:5.0f]];
+
+        [stepViewController.view addConstraint:[NSLayoutConstraint constraintWithItem:countdownTitle
+                                                                        attribute:NSLayoutAttributeCenterX
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:stepViewController.view
+                                                                        attribute:NSLayoutAttributeCenterX
+                                                                       multiplier:1.0
+                                                                         constant:0.0]];
+        
+        //Adding custom view which includes the distance and BPM.
+        UIView *updatedView = [UIView new];
+        
+        
+        RKSTActiveStepViewController *stepVC = (RKSTActiveStepViewController *)stepViewController;
+        [stepVC setCustomView:updatedView];
+        
+        // Height constraint
+        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:updatedView
+                                                                        attribute:NSLayoutAttributeHeight
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:stepViewController.view
+                                                                        attribute:NSLayoutAttributeHeight
+                                                                       multiplier:0.15
+                                                                         constant:0]];
+        
+        
+        /**** use for setting custom views. **/
+        UINib *nib = [UINib nibWithNibName:@"APHFitnessTestRestComfortablyView" bundle:nil];
+        APHFitnessTestRestComfortablyView *restComfortablyView = [[nib instantiateWithOwner:self options:nil] objectAtIndex:0];
+
+        [stepViewController.view addSubview:restComfortablyView];
+        
+        //int distanceIntFeet = (int)roundf(self.totalDistance);
+        CLLocationDistance distanceInFeet = [singleEntry[@"totalDistanceInFeet"] doubleValue];
+        int distanceAsInt = (int)roundf(distanceInFeet);
+        [restComfortablyView setTotalDistance:[NSNumber numberWithInt:distanceAsInt]];
+        
+        [restComfortablyView setTranslatesAutoresizingMaskIntoConstraints:NO];
+        
+        [restComfortablyView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[c(>=280)]" options:0 metrics:nil views:@{@"c":restComfortablyView}]];
+        
+        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:restComfortablyView
+                                                                        attribute:NSLayoutAttributeHeight
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:stepVC.view
+                                                                        attribute:NSLayoutAttributeHeight
+                                                                       multiplier:0.5
+                                                                         constant:0]];
+        
+        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:restComfortablyView
+                                                                        attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual
+                                                                           toItem:stepVC.view
+                                                                        attribute:NSLayoutAttributeCenterY
+                                                                       multiplier:1.15
+                                                                         constant:75]];
+        
+        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:restComfortablyView
+                                                                        attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual
+                                                                           toItem:stepVC.view
+                                                                        attribute:NSLayoutAttributeWidth
+                                                                       multiplier:1
+                                                                         constant:0]];
+        
+        [stepVC.view addConstraint:[NSLayoutConstraint constraintWithItem:stepVC.view
+                                                                        attribute:NSLayoutAttributeCenterX
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:restComfortablyView
+                                                                        attribute:NSLayoutAttributeCenterX
+                                                                       multiplier:1.0
+                                                                         constant:0.0]];
+        
+        
+        [stepVC.view layoutIfNeeded];
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         stepViewController.continueButton = nil;
         stepViewController.skipButton = nil;
         
-    }else if ([stepViewController.step.identifier isEqualToString:kFitnessTestStep106]) {
+    }else if ([stepViewController.step.identifier isEqualToString:kFitnessTestStep105]) {
         
         stepViewController.continueButton = [[UIBarButtonItem alloc] initWithTitle:@"Well done!" style:stepViewController.continueButton.style target:stepViewController.continueButton.target action:stepViewController.continueButton.action];
         
@@ -242,7 +343,7 @@ static NSInteger kUpdatedHeartRateTimeThreshold = 10;
         controller.step = step;
         
         stepVC = controller;
-    }   else if (step.identifier == kFitnessTestStep106) {
+    }   else if (step.identifier == kFitnessTestStep105) {
         
         APCSimpleTaskSummaryViewController  *summaryViewController = [[APCSimpleTaskSummaryViewController alloc] initWithNibName:nil bundle:[NSBundle appleCoreBundle]];
         summaryViewController.delegate = self;
@@ -258,30 +359,30 @@ static NSInteger kUpdatedHeartRateTimeThreshold = 10;
 /*********************************************************************************/
 #pragma mark - Helpers
 /*********************************************************************************/
-
--(void)sendCompleteResult:(RKSTDataResult*)result
-{
-    // In a real application, consider adding to the archive on a concurrent queue.
-    NSError *err = nil;
-    if (![result addToArchive:self.taskArchive error:&err])
-    {
-        // Error adding the result to the archive; archive may be invalid. Tell
-        // the user there's been a problem and stop the task.
-        NSLog(@"Error adding %@ to archive: %@", result, err);
-    }
-}
-
--(void)sendResult:(RKSTDataResult*)result
-{
-    // In a real application, consider adding to the archive on a concurrent queue.
-    NSError *err = nil;
-    if (![result addToArchive:self.taskArchive error:&err])
-    {
-        // Error adding the result to the archive; archive may be invalid. Tell
-        // the user there's been a problem and stop the task.
-        NSLog(@"Error adding %@ to archive: %@", result, err);
-    }
-}
+//
+//-(void)sendCompleteResult:(RKSTDataResult*)result
+//{
+//    // In a real application, consider adding to the archive on a concurrent queue.
+//    NSError *err = nil;
+//    if (![result addToArchive:self.taskArchive error:&err])
+//    {
+//        // Error adding the result to the archive; archive may be invalid. Tell
+//        // the user there's been a problem and stop the task.
+//        NSLog(@"Error adding %@ to archive: %@", result, err);
+//    }
+//}
+//
+//-(void)sendResult:(RKSTDataResult*)result
+//{
+//    // In a real application, consider adding to the archive on a concurrent queue.
+//    NSError *err = nil;
+//    if (![result addToArchive:self.taskArchive error:&err])
+//    {
+//        // Error adding the result to the archive; archive may be invalid. Tell
+//        // the user there's been a problem and stop the task.
+//        NSLog(@"Error adding %@ to archive: %@", result, err);
+//    }
+//}
 
 /*********************************************************************************/
 #pragma mark - APHFitnessTestHealthKitSampleTypeTrackerDelegate delegate methods
@@ -295,7 +396,6 @@ static NSInteger kUpdatedHeartRateTimeThreshold = 10;
     }
     
     self.heartRateMonitoring = 1;
-    
     
     NSDictionary* heartBPMDictionary = @{@"heartBPM": [NSNumber numberWithInteger:heartBPM],
                                  @"time": @([[NSDate date] timeIntervalSinceReferenceDate])};
@@ -324,22 +424,22 @@ static NSInteger kUpdatedHeartRateTimeThreshold = 10;
                                  @"longitude" : [NSNumber numberWithDouble:location.coordinate.longitude],
                                  @"time": @([[NSDate date] timeIntervalSinceReferenceDate])};
     
-    if (!self.finishedSixMinuteStep) {
+
+    if (!self.previousLocation) {
         
-        if (!self.previousLocation) {
-            
-            self.previousLocation = location;
-        } else {
-            
-            CLLocationDistance distance = [self.previousLocation distanceFromLocation:location];
-            
-            self.totalDistance += distance;
-            
-            self.previousLocation = location;
-        }
+        self.previousLocation = location;
+    } else {
+        
+        CLLocationDistance distance = [self.previousLocation distanceFromLocation:location];
+        
+        self.totalDistance += distance;
+        
+        self.previousLocation = location;
     }
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"APHFitnessDistanceUpdated" object:self userInfo:dictionary];
+    if (self.currentStepViewController.step.identifier == kFitnessTestStep103 || self.currentStepViewController.step.identifier == kFitnessTestStep104) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationUpdatedName object:self userInfo:dictionary];
+    }
 }
 
 - (void)locationManager:(CLLocationManager *)locationManager finishedPrepLocation:(BOOL)finishedPrep {

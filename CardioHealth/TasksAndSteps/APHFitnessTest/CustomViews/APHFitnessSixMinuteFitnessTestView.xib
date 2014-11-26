@@ -32,7 +32,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CD-pulsingIcon-1-2" translatesAutoresizingMaskIntoConstraints="NO" id="vhg-vf-yxt">
-                    <rect key="frame" x="90" y="179.5" width="30" height="30"/>
+                    <rect key="frame" x="90" y="179" width="30" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="HxB-AY-4cD"/>
                         <constraint firstAttribute="width" constant="30" id="JQg-HA-RCD"/>
@@ -53,7 +53,7 @@
                         <constraint firstAttribute="width" constant="280" id="6Yf-t6-syg"/>
                         <constraint firstAttribute="height" constant="97" id="9EF-CO-O0A"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="104"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="98"/>
                     <color key="textColor" red="0.62745098040000002" green="0.0" blue="0.1647058824" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>

@@ -52,8 +52,8 @@
 //    [self addSubview:self.distanceTrackerLbl];
 }
 
-- (void)setTheTotalDistance:(NSNumber *)totalDistance {
-    self.distanceTrackerLabel.text = [NSString stringWithFormat:@"%@", self.totalDistance];
+- (void)setTotalDistance:(NSNumber *)totalDistance {
+    self.distanceTrackerLabel.text = [NSString stringWithFormat:@"%@ft", totalDistance];
 }
 
 - (id)initWithFrame:(CGRect)aRect
@@ -84,7 +84,7 @@
     NSDictionary *heartBeatInfo = notification.userInfo;
     
     self.heartRateBPMLbl.text = [NSString stringWithFormat:@"%@", [heartBeatInfo objectForKey:@"heartBPM"]];
-    
+    self.distanceTrackerLabel.text = [NSString stringWithFormat:@"%@", self.totalDistance];
     if (!self.timer) {
         self.timer = [NSTimer
                       scheduledTimerWithTimeInterval:(NSTimeInterval)(0.5)
@@ -129,7 +129,7 @@
 - (void)receiveUpdatedLocationNotification:(NSNotification *)notification {
     //NSDictionary *distanceUpdatedInfo = notification.userInfo;
     
-    self.distanceTrackerLabel.text = [NSString stringWithFormat:@"%@ft", self.totalDistance];
+//    self.distanceTrackerLabel.text = [NSString stringWithFormat:@"%@ft", self.totalDistance];
 }
 
 
