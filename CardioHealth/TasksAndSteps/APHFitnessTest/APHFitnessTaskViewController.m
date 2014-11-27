@@ -8,9 +8,6 @@
 
 #import "APHFitnessTaskViewController.h"
 
-
-#import "APHFitnessTestIntroStepViewController.h"
-
 static NSString *MainStudyIdentifier = @"com.cardioVascular.fitnessTest";
 static NSString *kdataResultsFileName = @"FitnessTestResult.json";
 
@@ -300,29 +297,39 @@ static NSInteger kUpdatedHeartRateTimeThreshold = 10;
 
 - (RKSTStepViewController *)taskViewController:(RKSTTaskViewController *)taskViewController viewControllerForStep:(RKSTStep *)step
 {
-    RKSTStepViewController *stepVC = nil;
+    RKSTStepViewController  *controller = nil;
     
     if (step.identifier == kFitnessTestStep101) {
-        NSDictionary  *controllers = @{ kFitnessTestStep101 : [APHFitnessTestIntroStepViewController class] };
+        controller = (APCInstructionStepViewController *)[[UIStoryboard storyboardWithName:@"APCInstructionStep" bundle:[NSBundle appleCoreBundle]] instantiateInitialViewController];
+        APCInstructionStepViewController  *instController = (APCInstructionStepViewController*)controller;
+        instController.imagesArray = @[ @"6minwalk", @"6minwalk-Icon-1", @"6minwalk-Icon-2", @"Updated-Data-Cardio" ];
+        instController.headingsArray = @[ @"Test Exercise Tolerance", @"Test Exercise Tolerance", @"Test Exercise Tolerance", @"Test Exercise Tolerance" ];
+        instController.messagesArray  = @[
+                                          @"Once you tap Get Started, you will have 5 seconds until this test begins tracking your movements.",
+                                          @"Begin walking at your fastest possible pace for 6 minutes.",
+                                          @"After 6 minutes expires and if you're tracking your BPM sit down and rest for 3 minutes.",
+                                          @"After the test is finished, your results will be analyzed and available on the dashboard. You will be notified when analysis is ready."
+                                          ];
+        UIButton  *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        CGRect     frame = CGRectMake(0.0, 0.0, 100.0, 27.0);
+        button.frame = frame;
         
-        Class  aClass = [controllers objectForKey:step.identifier];
-        APCStepViewController  *controller = [[aClass alloc] initWithNibName:nil bundle:nil];
+        button.titleLabel.textAlignment = NSTextAlignmentCenter;
+        [button setTitle:@"View Important Details" forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor appPrimaryColor] forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(viewImportantDetailButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+        
+        instController.accessoryContent = button;
         controller.delegate = self;
-        controller.title = @"Interval Tapping";
         controller.step = step;
+    }   else if (step.identifier == kFitnessTestStep106) {
         
-        stepVC = controller;
-    }   else if (step.identifier == kFitnessTestStep105) {
-        
-        APCSimpleTaskSummaryViewController  *summaryViewController = [[APCSimpleTaskSummaryViewController alloc] initWithNibName:nil bundle:[NSBundle appleCoreBundle]];
-        summaryViewController.delegate = self;
-        summaryViewController.step = step;
-        summaryViewController.taskProgress = 0.25;
-        
-        stepVC = summaryViewController;
+        APCSimpleTaskSummaryViewController  *controller = [[APCSimpleTaskSummaryViewController alloc] initWithNibName:nil bundle:[NSBundle appleCoreBundle]];
+        controller.delegate = self;
+        controller.step = step;
+        controller.taskProgress = 0.25;
     }
-    
-    return stepVC;
+    return  controller;
 }
 
 /*********************************************************************************/
