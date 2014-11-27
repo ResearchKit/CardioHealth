@@ -26,7 +26,6 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
 static NSInteger kCountDownTimer = 5;
 static NSInteger kUpdatedHeartRateThreshold = 2;
 static NSInteger kUpdatedHeartRateTimeThreshold = 10;
-static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
 
 @interface APHFitnessTaskViewController ()
 
@@ -42,8 +41,7 @@ static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
 
 @property (strong, nonatomic) CLLocation *previousLocation;
 @property (assign) CLLocationDistance totalDistance;
-@property (assign) BOOL finishedSixMinuteStep;
-@property (assign) BOOL willPresentStep4;
+
 @end
 
 @implementation APHFitnessTaskViewController
@@ -55,9 +53,6 @@ static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    //sixMinuteStepFlag
-    self.finishedSixMinuteStep = NO;
     
     self.stepsToAutomaticallyAdvanceOnTimer = @[kFitnessTestStep102, kFitnessTestStep103, kFitnessTestStep104, kFitnessTestStep105];
 }
@@ -202,14 +197,6 @@ static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
         
         NSLog(@"distance: %@", singleEntry[@"totalDistanceInFeet"]);
         
-        
-        
-        
-        
-        
-        
-        
-        
         //Adding "Time" subview
         UILabel *countdownTitle = [UILabel new];
         [countdownTitle setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -303,26 +290,8 @@ static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
         
         
         [stepVC.view layoutIfNeeded];
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        stepViewController.continueButton = nil;
-        stepViewController.skipButton = nil;
         
     }else if ([stepViewController.step.identifier isEqualToString:kFitnessTestStep105]) {
-        
-        stepViewController.continueButton = [[UIBarButtonItem alloc] initWithTitle:@"Well done!" style:stepViewController.continueButton.style target:stepViewController.continueButton.target action:stepViewController.continueButton.action];
         
         taskViewController.navigationBar.topItem.title = NSLocalizedString(@"Task Complete", @"Task Complete");
         
@@ -355,34 +324,6 @@ static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
     
     return stepVC;
 }
-
-/*********************************************************************************/
-#pragma mark - Helpers
-/*********************************************************************************/
-//
-//-(void)sendCompleteResult:(RKSTDataResult*)result
-//{
-//    // In a real application, consider adding to the archive on a concurrent queue.
-//    NSError *err = nil;
-//    if (![result addToArchive:self.taskArchive error:&err])
-//    {
-//        // Error adding the result to the archive; archive may be invalid. Tell
-//        // the user there's been a problem and stop the task.
-//        NSLog(@"Error adding %@ to archive: %@", result, err);
-//    }
-//}
-//
-//-(void)sendResult:(RKSTDataResult*)result
-//{
-//    // In a real application, consider adding to the archive on a concurrent queue.
-//    NSError *err = nil;
-//    if (![result addToArchive:self.taskArchive error:&err])
-//    {
-//        // Error adding the result to the archive; archive may be invalid. Tell
-//        // the user there's been a problem and stop the task.
-//        NSLog(@"Error adding %@ to archive: %@", result, err);
-//    }
-//}
 
 /*********************************************************************************/
 #pragma mark - APHFitnessTestHealthKitSampleTypeTrackerDelegate delegate methods
