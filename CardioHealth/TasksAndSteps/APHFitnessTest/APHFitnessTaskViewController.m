@@ -322,7 +322,7 @@ static NSInteger kUpdatedHeartRateTimeThreshold = 10;
         instController.accessoryContent = button;
         controller.delegate = self;
         controller.step = step;
-    }   else if (step.identifier == kFitnessTestStep106) {
+    }   else if (step.identifier == kFitnessTestStep105) {
         
         APCSimpleTaskSummaryViewController  *controller = [[APCSimpleTaskSummaryViewController alloc] initWithNibName:nil bundle:[NSBundle appleCoreBundle]];
         controller.delegate = self;
