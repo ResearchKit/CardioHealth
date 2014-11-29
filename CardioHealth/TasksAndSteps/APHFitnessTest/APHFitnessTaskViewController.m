@@ -12,6 +12,7 @@ static NSString *MainStudyIdentifier = @"com.cardioVascular.fitnessTest";
 static NSString *kdataResultsFileName = @"FitnessTestResult.json";
 
 static NSString *kNotificationUpdatedName = @"APHFitnessDistanceUpdated";
+static  NSString  *kImportantDetailsViewControllerId = @"APHImportantDetailsTableViewController";
 
 static  NSString  *kFitnessTestStep101 = @"FitnessStep101";
 static  NSString  *kFitnessTestStep102 = @"FitnessStep102";
@@ -331,6 +332,20 @@ static NSInteger kUpdatedHeartRateTimeThreshold = 10;
     }
     return  controller;
 }
+
+/*********************************************************************************/
+#pragma mark - Helpers
+/*********************************************************************************/
+
+- (void)viewImportantDetailButtonTapped
+{
+    
+    UIStoryboard  *storyboard = [UIStoryboard storyboardWithName:kImportantDetailsViewControllerId bundle:nil];
+    UITableViewController  *controller = [storyboard instantiateViewControllerWithIdentifier:kImportantDetailsViewControllerId];
+    controller.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    [self presentViewController:controller animated:YES completion:NULL];
+}
+
 
 /*********************************************************************************/
 #pragma mark - APHFitnessTestHealthKitSampleTypeTrackerDelegate delegate methods
