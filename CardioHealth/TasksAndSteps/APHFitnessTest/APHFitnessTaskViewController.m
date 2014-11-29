@@ -86,7 +86,7 @@ static NSInteger kUpdatedHeartRateTimeThreshold = 10;
     
     NSTimeInterval secondsBetween = [[NSDate date] timeIntervalSinceDate:lastUpdate];
     
-    BOOL heartIsUpdating = YES;
+    BOOL heartIsUpdating = NO;
     
     if (totalUpdates > kUpdatedHeartRateThreshold && secondsBetween < kUpdatedHeartRateTimeThreshold) {
         heartIsUpdating = YES;
