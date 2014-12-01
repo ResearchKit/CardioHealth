@@ -128,7 +128,6 @@ static const NSUInteger kAPHValidLocationHistoryDeltaInterval = 3;     // the ma
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     
-    NSLog(@"Location Updated");
     /** GPS Accuracy
      
      StackOverflow:
@@ -173,9 +172,6 @@ static const NSUInteger kAPHValidLocationHistoryDeltaInterval = 3;     // the ma
         
         CLLocationDistance distance = [bestLocation distanceFromLocation:self.temporaryLocationPoint];
         
-    
-        //Return the updated distance
-        NSLog(@"Update View");
         [self didUpdateLocation:bestLocation];
     
         

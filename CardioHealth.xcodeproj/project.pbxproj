@@ -47,13 +47,8 @@
 		7B4104A319E5E46800592B96 /* APHFitnessTestRestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B41049D19E5E46800592B96 /* APHFitnessTestRestView.xib */; };
 		7B6753411A01540E005864E6 /* APHHeartAgeIntroStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B67533F1A01540E005864E6 /* APHHeartAgeIntroStepViewController.m */; };
 		7B6753421A01540E005864E6 /* APHHeartAgeIntroStepViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B6753401A01540E005864E6 /* APHHeartAgeIntroStepViewController.xib */; };
-		7B8E912A19F9B5BA0040F77F /* APHFitnessTestIntroStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B8E912819F9B5BA0040F77F /* APHFitnessTestIntroStepViewController.m */; };
-		7B8E912B19F9B5BA0040F77F /* APHFitnessTestIntroStepViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B8E912919F9B5BA0040F77F /* APHFitnessTestIntroStepViewController.xib */; };
-		7B8E912F19FADA180040F77F /* APHIntroductionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B8E912E19FADA180040F77F /* APHIntroductionViewController.m */; };
 		7B96D7421A02E4DB006D93C1 /* APHImportantDetailsTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B96D7411A02E4DB006D93C1 /* APHImportantDetailsTableViewController.storyboard */; };
 		7B96D7481A0300D8006D93C1 /* APHImportantDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B96D7471A0300D8006D93C1 /* APHImportantDetailsViewController.m */; };
-		7BC7215219F7173D00C70956 /* APHFitnessTestSummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC7215019F7173D00C70956 /* APHFitnessTestSummaryViewController.m */; };
-		7BC7215319F7173D00C70956 /* APHFitnessTestSummaryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BC7215119F7173D00C70956 /* APHFitnessTestSummaryViewController.xib */; };
 		7BD73F7B19E8A20600F5DFF3 /* Intro.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 7BD73F7A19E8A20600F5DFF3 /* Intro.mp4 */; };
 		7BEEFA601A003E04004F6C87 /* APHHeartAgeResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BEEFA5E1A003E04004F6C87 /* APHHeartAgeResultsViewController.m */; };
 		F5165E7A19E86581003836CA /* APCParameters.json in Resources */ = {isa = PBXBuildFile; fileRef = F5165E7919E86581003836CA /* APCParameters.json */; };
@@ -204,17 +199,9 @@
 		7B67533E1A01540E005864E6 /* APHHeartAgeIntroStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHHeartAgeIntroStepViewController.h; sourceTree = "<group>"; };
 		7B67533F1A01540E005864E6 /* APHHeartAgeIntroStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHHeartAgeIntroStepViewController.m; sourceTree = "<group>"; };
 		7B6753401A01540E005864E6 /* APHHeartAgeIntroStepViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = APHHeartAgeIntroStepViewController.xib; sourceTree = "<group>"; };
-		7B8E912719F9B5BA0040F77F /* APHFitnessTestIntroStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHFitnessTestIntroStepViewController.h; sourceTree = "<group>"; };
-		7B8E912819F9B5BA0040F77F /* APHFitnessTestIntroStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHFitnessTestIntroStepViewController.m; sourceTree = "<group>"; };
-		7B8E912919F9B5BA0040F77F /* APHFitnessTestIntroStepViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = APHFitnessTestIntroStepViewController.xib; sourceTree = "<group>"; };
-		7B8E912D19FADA180040F77F /* APHIntroductionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHIntroductionViewController.h; sourceTree = "<group>"; };
-		7B8E912E19FADA180040F77F /* APHIntroductionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHIntroductionViewController.m; sourceTree = "<group>"; };
 		7B96D7411A02E4DB006D93C1 /* APHImportantDetailsTableViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = APHImportantDetailsTableViewController.storyboard; sourceTree = "<group>"; };
 		7B96D7461A0300D8006D93C1 /* APHImportantDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHImportantDetailsViewController.h; sourceTree = "<group>"; };
 		7B96D7471A0300D8006D93C1 /* APHImportantDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHImportantDetailsViewController.m; sourceTree = "<group>"; };
-		7BC7214F19F7173D00C70956 /* APHFitnessTestSummaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHFitnessTestSummaryViewController.h; sourceTree = "<group>"; };
-		7BC7215019F7173D00C70956 /* APHFitnessTestSummaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHFitnessTestSummaryViewController.m; sourceTree = "<group>"; };
-		7BC7215119F7173D00C70956 /* APHFitnessTestSummaryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = APHFitnessTestSummaryViewController.xib; sourceTree = "<group>"; };
 		7BD73F7A19E8A20600F5DFF3 /* Intro.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Intro.mp4; sourceTree = "<group>"; };
 		7BEEFA5D1A003E04004F6C87 /* APHHeartAgeResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHHeartAgeResultsViewController.h; sourceTree = "<group>"; };
 		7BEEFA5E1A003E04004F6C87 /* APHHeartAgeResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHHeartAgeResultsViewController.m; sourceTree = "<group>"; };
@@ -381,7 +368,6 @@
 				7B8E912519F9B58D0040F77F /* Intro */,
 				7B41047319E5D94F00592B96 /* WalkingTestComponents */,
 				7B41049419E5E37700592B96 /* CustomViews */,
-				7BC7214E19F716C400C70956 /* Summary */,
 			);
 			path = APHFitnessTest;
 			sourceTree = "<group>";
@@ -428,39 +414,11 @@
 		7B8E912519F9B58D0040F77F /* Intro */ = {
 			isa = PBXGroup;
 			children = (
-				7B8E912719F9B5BA0040F77F /* APHFitnessTestIntroStepViewController.h */,
-				7B8E912819F9B5BA0040F77F /* APHFitnessTestIntroStepViewController.m */,
-				7B8E912919F9B5BA0040F77F /* APHFitnessTestIntroStepViewController.xib */,
-				7B96D7411A02E4DB006D93C1 /* APHImportantDetailsTableViewController.storyboard */,
 				7B96D7461A0300D8006D93C1 /* APHImportantDetailsViewController.h */,
 				7B96D7471A0300D8006D93C1 /* APHImportantDetailsViewController.m */,
+				7B96D7411A02E4DB006D93C1 /* APHImportantDetailsTableViewController.storyboard */,
 			);
 			path = Intro;
-			sourceTree = "<group>";
-		};
-		7BC7213919F7018700C70956 /* Common Instructional View */ = {
-			isa = PBXGroup;
-			children = (
-				7BC7214519F7051600C70956 /* intervalimages */,
-			);
-			path = "Common Instructional View";
-			sourceTree = "<group>";
-		};
-		7BC7214519F7051600C70956 /* intervalimages */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = intervalimages;
-			sourceTree = "<group>";
-		};
-		7BC7214E19F716C400C70956 /* Summary */ = {
-			isa = PBXGroup;
-			children = (
-				7BC7214F19F7173D00C70956 /* APHFitnessTestSummaryViewController.h */,
-				7BC7215019F7173D00C70956 /* APHFitnessTestSummaryViewController.m */,
-				7BC7215119F7173D00C70956 /* APHFitnessTestSummaryViewController.xib */,
-			);
-			path = Summary;
 			sourceTree = "<group>";
 		};
 		7BEEFA5B1A003DE8004F6C87 /* Summary */ = {
@@ -609,9 +567,6 @@
 		F55BBE2219D362D0003CA0F9 /* TasksAndSteps */ = {
 			isa = PBXGroup;
 			children = (
-				7B8E912D19FADA180040F77F /* APHIntroductionViewController.h */,
-				7B8E912E19FADA180040F77F /* APHIntroductionViewController.m */,
-				7BC7213919F7018700C70956 /* Common Instructional View */,
 				7B41045519E5D94F00592B96 /* APHFitnessTest */,
 				F5481F0619E4820100D84617 /* HeartAgeControllers */,
 				08C2327E1A15796E00DB4EF9 /* Seven Day Allocation */,
@@ -836,9 +791,7 @@
 				F55BBE6A19D362D0003CA0F9 /* APHDashboard.storyboard in Resources */,
 				F55BBE6119D362D0003CA0F9 /* APHTasksAndSchedules.json in Resources */,
 				08FA97FB1A10630F002317C8 /* APHHeartAgeSummary.storyboard in Resources */,
-				7B8E912B19F9B5BA0040F77F /* APHFitnessTestIntroStepViewController.xib in Resources */,
 				F5778E7519F0613D0079F1B2 /* APHOnboarding.storyboard in Resources */,
-				7BC7215319F7173D00C70956 /* APHFitnessTestSummaryViewController.xib in Resources */,
 				F573809319E45D62008A8354 /* StudyOverview.json in Resources */,
 				F55BBE6219D362D0003CA0F9 /* JSON_READ_ME in Resources */,
 				7B4104A319E5E46800592B96 /* APHFitnessTestRestView.xib in Resources */,
@@ -859,18 +812,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				08FA98031A108839002317C8 /* APHHeartAgeSummaryCell.m in Sources */,
-				7B8E912A19F9B5BA0040F77F /* APHFitnessTestIntroStepViewController.m in Sources */,
 				F5778E8619F061B00079F1B2 /* APHProfieViewController.m in Sources */,
 				F573807419E45A0A008A8354 /* APHDataSubstrate.m in Sources */,
 				F5481F1419E4820100D84617 /* APHHeartAgeTaskViewController.m in Sources */,
-				7BC7215219F7173D00C70956 /* APHFitnessTestSummaryViewController.m in Sources */,
 				F5778E7119F0613D0079F1B2 /* APHEligibleViewController.m in Sources */,
 				08FA98061A108A46002317C8 /* APHHeartAgeRiskEstimateCell.m in Sources */,
 				08D3A10219E4A08C00A3D20D /* APHHeartAgeAndRiskFactors.m in Sources */,
 				7B41049E19E5E46800592B96 /* APHFitnessSixMinuteFitnessTestView.m in Sources */,
 				08FA97FF1A108680002317C8 /* APHHeartAgeTodaysActivitiesCell.m in Sources */,
 				7B41049019E5D94F00592B96 /* APHFitnessTestHealthKitSampleTypeTracker.m in Sources */,
-				7B8E912F19FADA180040F77F /* APHIntroductionViewController.m in Sources */,
 				5B5A312E1A10A3EA00552F7D /* APHWithdrawSurveyViewController.m in Sources */,
 				08B9724F1A1FB47B00316D49 /* APHHealthyHeartSummaryStepViewController.m in Sources */,
 				08C56E361A15E75400D3BF61 /* APHActivityTrackingStepViewController.m in Sources */,

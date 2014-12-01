@@ -28,7 +28,7 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
 @property (nonatomic, strong) NSMutableArray* heartRateRecords;
 @property (nonatomic, strong) NSMutableArray* stepCountRecords;
 @property (strong, nonatomic) CLLocation *previousLocation;
-
+@property (strong, nonatomic) APHFitnessSixMinuteFitnessTestView *restComfortablyView;
 @property (assign) CLLocationDistance totalDistance;
 @end
 @implementation APHFitnessTestRecorder
@@ -106,15 +106,15 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
         
         /**** use for setting custom views. **/
         UINib *nib = [UINib nibWithNibName:@"APHFitnessSixMinuteFitnessTestView" bundle:nil];
-        APHFitnessSixMinuteFitnessTestView *restComfortablyView = [[nib instantiateWithOwner:self options:nil] objectAtIndex:0];
+        self.restComfortablyView = [[nib instantiateWithOwner:self options:nil] objectAtIndex:0];
         
-        [viewController.view addSubview:restComfortablyView];
+        [viewController.view addSubview:self.restComfortablyView];
         
-        [restComfortablyView setTranslatesAutoresizingMaskIntoConstraints:NO];
+        [self.restComfortablyView setTranslatesAutoresizingMaskIntoConstraints:NO];
         
-        [restComfortablyView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[c(>=280)]" options:0 metrics:nil views:@{@"c":restComfortablyView}]];
+        [self.restComfortablyView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[c(>=280)]" options:0 metrics:nil views:@{@"c":self.restComfortablyView}]];
         
-        [viewController.view addConstraint:[NSLayoutConstraint constraintWithItem:restComfortablyView
+        [viewController.view addConstraint:[NSLayoutConstraint constraintWithItem:self.restComfortablyView
                                                                 attribute:NSLayoutAttributeHeight
                                                                 relatedBy:NSLayoutRelationEqual
                                                                    toItem:viewController.view
@@ -122,14 +122,14 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
                                                                multiplier:0.5
                                                                  constant:0]];
         
-        [viewController.view addConstraint:[NSLayoutConstraint constraintWithItem:restComfortablyView
+        [viewController.view addConstraint:[NSLayoutConstraint constraintWithItem:self.restComfortablyView
                                                                 attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual
                                                                    toItem:viewController.view
                                                                 attribute:NSLayoutAttributeCenterY
                                                                multiplier:1.15
                                                                  constant:75]];
         
-        [viewController.view addConstraint:[NSLayoutConstraint constraintWithItem:restComfortablyView
+        [viewController.view addConstraint:[NSLayoutConstraint constraintWithItem:self.restComfortablyView
                                                                 attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual
                                                                    toItem:viewController.view
                                                                 attribute:NSLayoutAttributeWidth
@@ -140,109 +140,109 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
         [viewController.view addConstraint:[NSLayoutConstraint constraintWithItem:viewController.view
                                                                 attribute:NSLayoutAttributeCenterX
                                                                 relatedBy:NSLayoutRelationEqual
-                                                                   toItem:restComfortablyView
+                                                                   toItem:self.restComfortablyView
                                                                 attribute:NSLayoutAttributeCenterX
                                                                multiplier:1.0
                                                                  constant:0.0]];
         
         [viewController.view layoutIfNeeded];
         
-    } else {
+    } else if (self.step.identifier == kFitnessTestStep104) {
 
-        //Adding "Time" subview
-        UILabel *countdownTitle = [UILabel new];
-        [countdownTitle setTranslatesAutoresizingMaskIntoConstraints:NO];
-        [countdownTitle setBackgroundColor:[UIColor clearColor]];
-        countdownTitle.text = @"Time";
-        countdownTitle.textAlignment = NSTextAlignmentCenter;
-        
-        [countdownTitle addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[c(>=55)]" options:0 metrics:nil views:@{@"c":countdownTitle}]];
-        
-        //TODO Add Font and Size
-        /*******************/
-        [countdownTitle setFont:[UIFont fontWithName:@"HelveticaNeue" size:32]];
-        
-        [viewController.view addSubview:countdownTitle];
-        
-        [viewController.view addConstraint:[NSLayoutConstraint constraintWithItem:countdownTitle attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:viewController.view attribute:NSLayoutAttributeLeading multiplier:1.0f constant:0.0f]];
-        
-        [viewController.view addConstraint:[NSLayoutConstraint constraintWithItem:countdownTitle attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:viewController.view attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0.0f]];
-        
-        [viewController.view addConstraint:[NSLayoutConstraint constraintWithItem:countdownTitle attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:viewController.view attribute:NSLayoutAttributeCenterY multiplier:0.47f constant:5.0f]];
-        
-        [viewController.view addConstraint:[NSLayoutConstraint constraintWithItem:countdownTitle
-                                                                attribute:NSLayoutAttributeCenterX
-                                                                relatedBy:NSLayoutRelationEqual
-                                                                   toItem:viewController.view
-                                                                attribute:NSLayoutAttributeCenterX
-                                                               multiplier:1.0
-                                                                 constant:0.0]];
-        
-        //Adding custom view which includes the distance and BPM.
-        UIView *updatedView = [UIView new];
-        
-        
-        RKSTActiveStepViewController *stepVC = (RKSTActiveStepViewController *)viewController;
-        [stepVC setCustomView:updatedView];
-        
-        // Height constraint
-        [viewController.view addConstraint:[NSLayoutConstraint constraintWithItem:updatedView
-                                                                attribute:NSLayoutAttributeHeight
-                                                                relatedBy:NSLayoutRelationEqual
-                                                                   toItem:viewController.view
-                                                                attribute:NSLayoutAttributeHeight
-                                                               multiplier:0.15
-                                                                 constant:0]];
-        
-        
-        /**** use for setting custom views. **/
-        UINib *nib = [UINib nibWithNibName:@"APHFitnessTestRestComfortablyView" bundle:nil];
-        APHFitnessTestRestComfortablyView *restComfortablyView = [[nib instantiateWithOwner:self options:nil] objectAtIndex:0];
-        
-        [viewController.view addSubview:restComfortablyView];
-        
-        CLLocationDistance distanceInFeet = self.totalDistance * kAPHFitnessTestMetersToFeetConversion;
-        
-        [NSString stringWithFormat:@"%dft", (int)roundf(distanceInFeet)];
-        
-        [restComfortablyView setTotalDistance:[NSNumber numberWithInt:(int)roundf(distanceInFeet)]];
-        
-        [restComfortablyView setTranslatesAutoresizingMaskIntoConstraints:NO];
-        
-        [restComfortablyView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[c(>=280)]" options:0 metrics:nil views:@{@"c":restComfortablyView}]];
-        
-        [viewController.view addConstraint:[NSLayoutConstraint constraintWithItem:restComfortablyView
-                                                                attribute:NSLayoutAttributeHeight
-                                                                relatedBy:NSLayoutRelationEqual
-                                                                   toItem:viewController.view
-                                                                attribute:NSLayoutAttributeHeight
-                                                               multiplier:0.5
-                                                                 constant:0]];
-        
-        [viewController.view addConstraint:[NSLayoutConstraint constraintWithItem:restComfortablyView
-                                                                attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual
-                                                                   toItem:viewController.view
-                                                                attribute:NSLayoutAttributeCenterY
-                                                               multiplier:1.15
-                                                                 constant:75]];
-        
-        [viewController.view addConstraint:[NSLayoutConstraint constraintWithItem:restComfortablyView
-                                                                attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual
-                                                                   toItem:viewController.view
-                                                                attribute:NSLayoutAttributeWidth
-                                                               multiplier:1
-                                                                 constant:0]];
-        
-        [viewController.view addConstraint:[NSLayoutConstraint constraintWithItem:viewController.view
-                                                                attribute:NSLayoutAttributeCenterX
-                                                                relatedBy:NSLayoutRelationEqual
-                                                                   toItem:restComfortablyView
-                                                                attribute:NSLayoutAttributeCenterX
-                                                               multiplier:1.0
-                                                                 constant:0.0]];
-        
-        
-        [viewController.view layoutIfNeeded];
+//        //Adding "Time" subview
+//        UILabel *countdownTitle = [UILabel new];
+//        [countdownTitle setTranslatesAutoresizingMaskIntoConstraints:NO];
+//        [countdownTitle setBackgroundColor:[UIColor clearColor]];
+//        countdownTitle.text = @"Time";
+//        countdownTitle.textAlignment = NSTextAlignmentCenter;
+//        
+//        [countdownTitle addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[c(>=55)]" options:0 metrics:nil views:@{@"c":countdownTitle}]];
+//        
+//        //TODO Add Font and Size
+//        /*******************/
+//        [countdownTitle setFont:[UIFont fontWithName:@"HelveticaNeue" size:32]];
+//        
+//        [viewController.view addSubview:countdownTitle];
+//        
+//        [viewController.view addConstraint:[NSLayoutConstraint constraintWithItem:countdownTitle attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:viewController.view attribute:NSLayoutAttributeLeading multiplier:1.0f constant:0.0f]];
+//        
+//        [viewController.view addConstraint:[NSLayoutConstraint constraintWithItem:countdownTitle attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:viewController.view attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0.0f]];
+//        
+//        [viewController.view addConstraint:[NSLayoutConstraint constraintWithItem:countdownTitle attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:viewController.view attribute:NSLayoutAttributeCenterY multiplier:0.47f constant:5.0f]];
+//        
+//        [viewController.view addConstraint:[NSLayoutConstraint constraintWithItem:countdownTitle
+//                                                                attribute:NSLayoutAttributeCenterX
+//                                                                relatedBy:NSLayoutRelationEqual
+//                                                                   toItem:viewController.view
+//                                                                attribute:NSLayoutAttributeCenterX
+//                                                               multiplier:1.0
+//                                                                 constant:0.0]];
+//        
+//        //Adding custom view which includes the distance and BPM.
+//        UIView *updatedView = [UIView new];
+//        
+//        
+//        RKSTActiveStepViewController *stepVC = (RKSTActiveStepViewController *)viewController;
+//        [stepVC setCustomView:updatedView];
+//        
+//        // Height constraint
+//        [viewController.view addConstraint:[NSLayoutConstraint constraintWithItem:updatedView
+//                                                                attribute:NSLayoutAttributeHeight
+//                                                                relatedBy:NSLayoutRelationEqual
+//                                                                   toItem:viewController.view
+//                                                                attribute:NSLayoutAttributeHeight
+//                                                               multiplier:0.15
+//                                                                 constant:0]];
+//        
+//        
+//        /**** use for setting custom views. **/
+//        UINib *nib = [UINib nibWithNibName:@"APHFitnessTestRestComfortablyView" bundle:nil];
+//        APHFitnessTestRestComfortablyView *restComfortablyView = [[nib instantiateWithOwner:self options:nil] objectAtIndex:0];
+//        
+//        [viewController.view addSubview:restComfortablyView];
+//        
+//        CLLocationDistance distanceInFeet = self.totalDistance * kAPHFitnessTestMetersToFeetConversion;
+//        
+//        [NSString stringWithFormat:@"%dft", (int)roundf(distanceInFeet)];
+//        
+//        [restComfortablyView setTotalDistance:[NSNumber numberWithInt:(int)roundf(distanceInFeet)]];
+//        
+//        [restComfortablyView setTranslatesAutoresizingMaskIntoConstraints:NO];
+//        
+//        [restComfortablyView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[c(>=280)]" options:0 metrics:nil views:@{@"c":restComfortablyView}]];
+//        
+//        [viewController.view addConstraint:[NSLayoutConstraint constraintWithItem:restComfortablyView
+//                                                                attribute:NSLayoutAttributeHeight
+//                                                                relatedBy:NSLayoutRelationEqual
+//                                                                   toItem:viewController.view
+//                                                                attribute:NSLayoutAttributeHeight
+//                                                               multiplier:0.5
+//                                                                 constant:0]];
+//        
+//        [viewController.view addConstraint:[NSLayoutConstraint constraintWithItem:restComfortablyView
+//                                                                attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual
+//                                                                   toItem:viewController.view
+//                                                                attribute:NSLayoutAttributeCenterY
+//                                                               multiplier:1.15
+//                                                                 constant:75]];
+//        
+//        [viewController.view addConstraint:[NSLayoutConstraint constraintWithItem:restComfortablyView
+//                                                                attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual
+//                                                                   toItem:viewController.view
+//                                                                attribute:NSLayoutAttributeWidth
+//                                                               multiplier:1
+//                                                                 constant:0]];
+//        
+//        [viewController.view addConstraint:[NSLayoutConstraint constraintWithItem:viewController.view
+//                                                                attribute:NSLayoutAttributeCenterX
+//                                                                relatedBy:NSLayoutRelationEqual
+//                                                                   toItem:restComfortablyView
+//                                                                attribute:NSLayoutAttributeCenterX
+//                                                               multiplier:1.0
+//                                                                 constant:0.0]];
+//        
+//        
+//        [viewController.view layoutIfNeeded];
 
 
     
@@ -310,8 +310,11 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
         CLLocationDistance distanceInFeet = self.totalDistance * kAPHFitnessTestMetersToFeetConversion;
         
         distanceUpdatedInfo[@"totalDistanceInFeet"] = @(distanceInFeet);
+        int distanceAsInt = (int)roundf(distanceInFeet);
         
+        self.restComfortablyView.distanceTotalLabel.text = [NSString stringWithFormat:@"%dft", distanceAsInt];
         [self.distanceRecords addObject:distanceUpdatedInfo];
+        
     }
 }
 
@@ -356,6 +359,7 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
     
     [super stop];
 }
+
 
 
 - (NSString*)dataType{
