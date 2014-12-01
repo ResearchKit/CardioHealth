@@ -553,6 +553,7 @@
 				F5F644F619D35BA2004CFBB2 /* Frameworks */,
 				F5F644F719D35BA2004CFBB2 /* Resources */,
 				081328B019DF5ADB0008A661 /* Embed Frameworks */,
+				F53F27B61A2D380D00A1D725 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -660,6 +661,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		F53F27B61A2D380D00A1D725 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${SRCROOT}/AppleCore/APCAppleCore/APCAppleCore/Resources/update_version.sh";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F5F644F519D35BA2004CFBB2 /* Sources */ = {
