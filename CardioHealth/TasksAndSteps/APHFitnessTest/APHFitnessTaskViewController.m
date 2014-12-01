@@ -249,6 +249,10 @@ static NSInteger kUpdatedHeartRateTimeThreshold = 10;
         
         //int distanceIntFeet = (int)roundf(self.totalDistance);
         CLLocationDistance distanceInFeet = [singleEntry[@"totalDistanceInFeet"] doubleValue];
+        
+        if (singleEntry == nil) {
+            distanceInFeet = 0.0;
+        }
         int distanceAsInt = (int)roundf(distanceInFeet);
         [restComfortablyView setTotalDistance:[NSNumber numberWithInt:distanceAsInt]];
         
@@ -325,10 +329,13 @@ static NSInteger kUpdatedHeartRateTimeThreshold = 10;
         controller.step = step;
     }   else if (step.identifier == kFitnessTestStep105) {
         
-        APCSimpleTaskSummaryViewController  *controller = [[APCSimpleTaskSummaryViewController alloc] initWithNibName:nil bundle:[NSBundle appleCoreBundle]];
+        APCSimpleTaskSummaryViewController  *simpleTaskSummaryViewController = [[APCSimpleTaskSummaryViewController alloc] initWithNibName:nil bundle:[NSBundle appleCoreBundle]];
+        simpleTaskSummaryViewController.taskProgress = 0.25;
+        
+        controller = (RKSTStepViewController *) simpleTaskSummaryViewController;
         controller.delegate = self;
         controller.step = step;
-        controller.taskProgress = 0.25;
+        
     }
     return  controller;
 }
