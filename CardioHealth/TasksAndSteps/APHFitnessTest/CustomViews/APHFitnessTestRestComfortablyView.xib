@@ -47,13 +47,13 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0ft" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AQY-x7-7Vg">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AQY-x7-7Vg">
                     <rect key="frame" x="0.0" y="43" width="280" height="97"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="97" id="01N-9x-Mlg"/>
                         <constraint firstAttribute="width" constant="280" id="TtT-wZ-TBM"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="104"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="98"/>
                     <color key="textColor" red="0.62745098039215685" green="0.0" blue="0.16470588235294117" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
