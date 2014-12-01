@@ -9,7 +9,7 @@
 #import "APHFitnessSixMinuteFitnessTestView.h"
 #import <CoreLocation/CoreLocation.h>
 
-static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
+//static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
 
 @interface APHFitnessSixMinuteFitnessTestView ()
 @property (weak, nonatomic) IBOutlet UILabel *heartRateLabel;

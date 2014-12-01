@@ -80,7 +80,7 @@ static NSInteger kUpdatedHeartRateTimeThreshold = 10;
 
 + (RKSTOrderedTask *)createTask:(APCScheduledTask *)scheduledTask
 {
-    APCAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    APCAppDelegate *appDelegate = (APCAppDelegate*) [[UIApplication sharedApplication] delegate];
     APCParameters *parameters = appDelegate.dataSubstrate.parameters;
     NSInteger totalUpdates = appDelegate.healthKitTracker.totalUpdates;
     NSDate *lastUpdate = appDelegate.healthKitTracker.lastUpdate;
