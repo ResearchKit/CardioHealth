@@ -42,7 +42,7 @@ static NSString *const kVideoShownKey = @"VideoShown";
                                                    ],
                                            kAppServicesListRequiredKey           : @[
                                                    @(kSignUpPermissionsTypeLocation),
-                                                   @(kSignUpPermissionsTypePushNotifications),
+//                                                   @(kSignUpPermissionsTypePushNotifications),
                                                    @(kSignUpPermissionsTypeCoremotion)
                                                    ]
                                            }];
