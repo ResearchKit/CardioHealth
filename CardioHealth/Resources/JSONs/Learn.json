@@ -1,48 +1,46 @@
 {
-    "items" :
-    [
+    "items": [
         {
-         "section_title":"",
-         "row_items":
-             [
-              {
-              "title":"Study Details",
-              "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vel turpis id fringilla. Nam pharetra gravida enim consectetur rutrum.",
-              "icon_image":"paperplus_icon",
-              "tint_color" : "blue"
-              },
-              {
-              "title":"Diagnostics & Symptoms",
-              "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vel turpis id fringilla. Nam pharetra gravida enim consectetur rutrum.",
-              "icon_image":"diagnostics_icon",
-              "tint_color" : "red"
-              },
-              {
-              "title":"Life with Cardiovascular Disease",
-              "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vel turpis id fringilla. Nam pharetra gravida enim consectetur rutrum.",
-              "icon_image":"disease_icon",
-              "tint_color" : "green"
-              },
-              {
-              "title":"Treatment Options",
-              "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vel turpis id fringilla. Nam pharetra gravida enim consectetur rutrum.",
-              "icon_image":"treatment_icon",
-              "tint_color" : "yellow"
-              }
-              ]
+            "section_title": "",
+            "row_items": [
+                          
+                          {
+                          "title":"Study Details",
+                          "details":"study_details",
+                          "icon_image":"paperplus_icon",
+                          "tint_color" : "blue"
+                          },
+                          
+                {
+                    "title": "Cardiovascular Disease information",
+                    "details": "disease_information",
+                    "icon_image": "disease_icon",
+                    "tint_color": "red"
+                },
+                {
+                    "title": "Symptoms",
+                    "details": "symptoms",
+                    "icon_image": "diagnostics_icon",
+                    "tint_color": "red"
+                },
+                {
+                    "title": "Treatment Options",
+                    "details": "treatment",
+                    "icon_image": "treatment_icon",
+                    "tint_color": "yellow"
+                }
+            ]
         },
-     
-         {
-         "section_title":"Resources",
-         "row_items":
-         [
-          {
-          "title":"Cardiovascular Health Resource",
-          "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vel turpis id fringilla. Nam pharetra gravida enim consectetur rutrum.",
-          "icon_image":"globe_icon",
-          "tint_color" : "gray"
-          },
-          ]
-         }
+        {
+            "section_title": "Resources",
+            "row_items": [
+                {
+                    "title": "Links of Interest",
+                    "details": "online_resources",
+                    "icon_image": "globe_icon",
+                    "tint_color": "gray"
+                }
+            ]
+        }
     ]
 }
