@@ -9,12 +9,12 @@
 #import "APHFitnessSixMinuteFitnessTestView.h"
 #import <CoreLocation/CoreLocation.h>
 
-static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
+//static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
 
 @interface APHFitnessSixMinuteFitnessTestView ()
 @property (weak, nonatomic) IBOutlet UILabel *heartRateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *stepCountLabel;
-@property (weak, nonatomic) IBOutlet UILabel *distanceTotalLabel;
+
 
 @property (weak, nonatomic) IBOutlet UIImageView *heartImage;
 @property (weak, nonatomic) IBOutlet UILabel *BPMTitleLabel;
@@ -45,10 +45,10 @@ static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
                                                  name:@"APHFitnessStepCountUpdated"
                                                object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(receiveUpdatedLocationNotification:)
-                                                 name:@"APHFitnessDistanceUpdated"
-                                               object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(receiveUpdatedLocationNotification:)
+//                                                 name:@"APHFitnessDistanceUpdated"
+//                                               object:nil];
 
     self.heartRateLabel.text = @"--";
     [self.heartRateLabel setBackgroundColor:[UIColor yellowColor]];
@@ -139,30 +139,30 @@ static CGFloat kAPHFitnessTestMetersToFeetConversion = 3.28084;
     self.stepCountLabel.text = [NSString stringWithFormat:@"%@", [stepCountInfo objectForKey:@"stepCount"]];
 }
 
-- (void)receiveUpdatedLocationNotification:(NSNotification *)notification {
-    
-    NSMutableDictionary *distanceUpdatedInfo = [notification.userInfo mutableCopy];
-    
-    CLLocationDegrees latitude = [[distanceUpdatedInfo objectForKey:@"latitude"] doubleValue];
-    CLLocationDegrees longitude = [[distanceUpdatedInfo objectForKey:@"longitude"] doubleValue];
-    
-    CLLocation *location = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
-    
-    if (!self.previousLocation) {
-        
-        self.previousLocation = location;
-    } else {
-        
-        CLLocationDistance distance = [self.previousLocation distanceFromLocation:location];
-        
-        self.totalDistance += distance;
-        
-        CLLocationDistance distanceInFeet = self.totalDistance * kAPHFitnessTestMetersToFeetConversion;
-        
-        self.distanceTotalLabel.text = [NSString stringWithFormat:@"%dft", (int)roundf(distanceInFeet)];
-        
-        self.previousLocation = location;
-    }
-}
+//- (void)receiveUpdatedLocationNotification:(NSNotification *)notification {
+//    
+//    NSMutableDictionary *distanceUpdatedInfo = [notification.userInfo mutableCopy];
+//    
+//    CLLocationDegrees latitude = [[distanceUpdatedInfo objectForKey:@"latitude"] doubleValue];
+//    CLLocationDegrees longitude = [[distanceUpdatedInfo objectForKey:@"longitude"] doubleValue];
+//    
+//    CLLocation *location = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
+//    
+//    if (!self.previousLocation) {
+//        
+//        self.previousLocation = location;
+//    } else {
+//        
+//        CLLocationDistance distance = [self.previousLocation distanceFromLocation:location];
+//        
+//        self.totalDistance += distance;
+//        
+//        CLLocationDistance distanceInFeet = self.totalDistance * kAPHFitnessTestMetersToFeetConversion;
+//        
+//        self.distanceTotalLabel.text = [NSString stringWithFormat:@"%dft", (int)roundf(distanceInFeet)];
+//        
+//        self.previousLocation = location;
+//    }
+//}
 
 @end

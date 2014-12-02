@@ -10,5 +10,6 @@
 
 @interface APHFitnessSixMinuteFitnessTestView : UIView
 
+@property (weak, nonatomic) IBOutlet UILabel *distanceTotalLabel;
 
 @end

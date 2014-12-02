@@ -49,7 +49,7 @@ static const NSUInteger kAPHValidLocationHistoryDeltaInterval = 3;     // the ma
         self.startUpdatingDistance = NO;
         self.prepLocationComplete = NO;
 //        }
-        APCAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+        APCAppDelegate *appDelegate = (APCAppDelegate*)[[UIApplication sharedApplication] delegate];
         APCParameters *parameters = appDelegate.dataSubstrate.parameters;
         self.horizontalAccuracy = [[parameters numberForKey:@"FTrackerHorizonalAccuracy"] doubleValue];
     }
@@ -128,7 +128,6 @@ static const NSUInteger kAPHValidLocationHistoryDeltaInterval = 3;     // the ma
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     
-    NSLog(@"Location Updated");
     /** GPS Accuracy
      
      StackOverflow:
@@ -171,11 +170,6 @@ static const NSUInteger kAPHValidLocationHistoryDeltaInterval = 3;     // the ma
             bestLocation = manager.location;
         }
         
-        CLLocationDistance distance = [bestLocation distanceFromLocation:self.temporaryLocationPoint];
-        
-    
-        //Return the updated distance
-        NSLog(@"Update View");
         [self didUpdateLocation:bestLocation];
     
         

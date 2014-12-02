@@ -23,7 +23,7 @@
     self = [super init];
     
     if (self) {
-        APCAppDelegate *apcAppleDelegate = [[UIApplication sharedApplication] delegate];
+        APCAppDelegate *apcAppleDelegate = (APCAppDelegate*)[[UIApplication sharedApplication] delegate];
         
         //TODO this isn't working yet.
 //        if (apcAppleDelegate.dataSubstrate.currentUser) {

@@ -225,8 +225,8 @@ static CGFloat kSectionHeight = 64.0;
     
     cell.caption = NSLocalizedString(@"Today's Activities", @"Today's Activities");
     
-    NSUInteger allScheduledTasks = ((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.allScheduledTasksForToday;
-    NSUInteger completedScheduledTasks = ((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.completedScheduledTasksForToday;
+    NSUInteger allScheduledTasks = ((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.countOfAllScheduledTasksForToday;
+    NSUInteger completedScheduledTasks = ((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.countOfCompletedScheduledTasksForToday;
     
     completedScheduledTasks = MIN(allScheduledTasks, completedScheduledTasks+1);
     CGFloat percent = (CGFloat) completedScheduledTasks / (CGFloat) allScheduledTasks;

@@ -14,16 +14,16 @@
      
      {
      "title":"How this study works",
-     "details":"HowStudyWorks",
-     "icon_image":"rulerpencil_icon",
-     "tint_color" : "red"
+     "details":"howstudyworks",
+     "icon_image":"stethescope_icon",
+     "tint_color" : "purple"
      },
      
      {
      "title":"Who is Eligible to Participate",
      "details":"EligibleToParticipate",
      "icon_image":"clipboard_icon",
-     "tint_color" : "yellow"
-     },
+     "tint_color" : "green"
+     } 
      ]
 }
