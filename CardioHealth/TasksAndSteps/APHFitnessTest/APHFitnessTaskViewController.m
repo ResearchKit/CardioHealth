@@ -22,7 +22,7 @@ static  NSString  *kFitnessTestStep105 = @"FitnessStep105";
 static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
 
 static NSInteger kCountDownTimer = 5;
-static NSInteger kUpdatedHeartRateThreshold = 2;
+static NSInteger kUpdatedHeartRateThreshold = 1;
 static NSInteger kUpdatedHeartRateTimeThreshold = 10;
 
 @interface APHFitnessTaskViewController ()
