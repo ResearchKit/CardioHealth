@@ -9,7 +9,7 @@
 
 
 #import "APHInclusionCriteriaViewController.h"
-#import "APHSignUpGeneralInfoViewController.h"
+#import "APHAppDelegate.h"
 
 @interface APHInclusionCriteriaViewController () <APCSegmentedButtonDelegate>
 
@@ -63,11 +63,9 @@
     [self.question2Option2.titleLabel setFont:[UIFont appRegularFontWithSize:44.0]];
 }
 
-- (void)startSignUp
+- (APCOnboarding *)onboarding
 {
-    APHSignUpGeneralInfoViewController *signUpVC = [[UIStoryboard storyboardWithName:@"APHOnboarding" bundle:nil] instantiateViewControllerWithIdentifier:@"SignUpGeneralInfoVC"];
-    [self.navigationController pushViewController:signUpVC animated:YES];
-
+    return ((APHAppDelegate *)[UIApplication sharedApplication].delegate).onboarding;
 }
 
 /*********************************************************************************/
@@ -104,14 +102,10 @@
 
 - (void)next
 {
-    if ([self isEligible]) {
-        
-        [self.navigationController pushViewController:[[UIStoryboard storyboardWithName:@"APHOnboarding" bundle:nil] instantiateViewControllerWithIdentifier:@"EligibleVC"] animated:YES];
-    }
-    else
-    {
-        [self.navigationController pushViewController:[[UIStoryboard storyboardWithName:@"APHOnboarding" bundle:nil] instantiateViewControllerWithIdentifier:@"InEligibleVC"] animated:YES];
-    }
+    [self onboarding].signUpTask.eligible = [self isEligible];
+    
+    UIViewController *viewController = [[self onboarding] nextScene];
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 - (BOOL) isEligible
