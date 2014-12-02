@@ -96,6 +96,7 @@ static NSString *const kVideoShownKey = @"VideoShown";
     if (self.dataSubstrate.currentUser.isConsented) {
         NSError *error = nil;
         {
+            [super setUpCollectors];
             //TODO Need to setup a mechanism to gather sleep data like passive data collection.
             //           HKCategorySample *sleepSampleType = [HKCategorySample categorySampleWithType:[HKCategoryType categoryTypeForIdentifier:HKCategoryTypeIdentifierSleepAnalysis] value:HKCategoryValueSleepAnalysisAsleep startDate:[NSDate date] endDate:[NSDate date]];
             
