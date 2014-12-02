@@ -10,8 +10,9 @@
 #import "APHFitnessAllocation.h"
 
 static NSString *kSevenDayFitnessStartDateKey  = @"sevenDayFitnessStartDateKey";
+static CGFloat metersPerMile = 1609.344;
 
-@interface APHActivityTrackingStepViewController () <APCPieGraphViewDatasource>
+@interface APHActivityTrackingStepViewController () <APCPieGraphViewDatasource, APHFitnessAllocationDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *daysRemaining;
 @property (weak, nonatomic) IBOutlet APCPieGraphView *chartView;
@@ -41,7 +42,7 @@ static NSString *kSevenDayFitnessStartDateKey  = @"sevenDayFitnessStartDateKey";
     self.view.layer.backgroundColor = [UIColor colorWithWhite:0.973 alpha:1.000].CGColor;
     
     self.fitnessAllocation = [[APHFitnessAllocation alloc] initWithAllocationStartDate:[self checkSevenDayFitnessStartDate]];
-    [self handleToday:nil];
+    self.fitnessAllocation.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -55,13 +56,10 @@ static NSString *kSevenDayFitnessStartDateKey  = @"sevenDayFitnessStartDateKey";
     self.chartView.datasource = self;
     self.chartView.legendPaddingHeight = 60.0;
     self.chartView.titleLabel.text = NSLocalizedString(@"Distance", @"Distance");
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
     
-    //[self.chartView layoutSubviews];
+    if (self.showTodaysDataAtViewLoad) {
+        [self handleToday:nil];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -82,7 +80,7 @@ static NSString *kSevenDayFitnessStartDateKey  = @"sevenDayFitnessStartDateKey";
 
 - (void)showDataForKind:(NSInteger)kind
 {
-    self.allocationDataset = [self.fitnessAllocation allocationForDays:kind];
+    [self.fitnessAllocation allocationForDays:kind];
 }
 
 - (void)handleClose:(UIBarButtonItem *)sender
@@ -142,6 +140,20 @@ static NSString *kSevenDayFitnessStartDateKey  = @"sevenDayFitnessStartDateKey";
     [defaults setObject:startDate forKey:kSevenDayFitnessStartDateKey];
     
     [defaults synchronize];
+}
+
+#pragma mark - Fitness Allocation Delegate
+
+- (void)datasetDidUpdate:(NSArray *)dataset forKind:(NSInteger)kind
+{
+    self.allocationDataset = dataset;
+    
+    CGFloat totalDistance = [[self.allocationDataset valueForKeyPath:@"@sum.datasetValueKey"] floatValue];
+    
+    self.chartView.valueLabel.text = [NSString stringWithFormat:@"%0.1f mi", totalDistance/metersPerMile];
+    
+    [self.chartView layoutSubviews];
+    
 }
 
 #pragma mark - PieGraphView Delegates

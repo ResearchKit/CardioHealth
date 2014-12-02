@@ -13,10 +13,19 @@ extern NSString *const kDatasetValueKey;
 extern NSString *const kDatasetSegmentNameKey;
 extern NSString *const kDatasetSegmentColorKey;
 
+@protocol APHFitnessAllocationDelegate <NSObject>
+
+@required
+- (void)datasetDidUpdate:(NSArray *)dataset forKind:(NSInteger)kind;
+
+@end
+
 @interface APHFitnessAllocation : NSObject
 
+@property (nonatomic, weak) id <APHFitnessAllocationDelegate> delegate;
+
 - (instancetype)initWithAllocationStartDate:(NSDate *)startDate;
-- (NSArray *)allocationForDays:(NSInteger)days;
+- (void)allocationForDays:(NSInteger)days;
 - (void)reloadAllocationDatasets;
 
 @end

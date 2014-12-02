@@ -12,7 +12,6 @@
 #import "APHTheme.h"
 
 static NSInteger kIntervalByHour = 1;
-static NSInteger kIntervalByDay = 1;
 
 NSString *const kDatasetDateKey         = @"datasetDateKey";
 NSString *const kDatasetValueKey        = @"datasetValueKey";
@@ -73,19 +72,17 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
     return self;
 }
 
-- (NSArray *)allocationForDays:(NSInteger)days
+- (void)allocationForDays:(NSInteger)days
 {
-    NSArray *allocation = nil;
-    
     if (days == SevenDayFitnessDatasetKindToday) {
         [self normalizeData:self.datasetForToday];
     } else {
         [self normalizeData:self.datasetForTheWeek];
     }
     
-    allocation = self.datasetNormalized;
-    
-    return allocation;
+    if ([self.delegate respondsToSelector:@selector(datasetDidUpdate:forKind:)]) {
+        [self.delegate datasetDidUpdate:self.datasetNormalized forKind:days];
+    }
 }
 
 - (void)reloadAllocationDatasets
@@ -289,9 +286,7 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
                                            }
                                        }];
 //            dispatch_async(dispatch_get_main_queue(), ^{
-//                if (kind == SevenDayFitnessDatasetKindToday) {
-//                    
-//                }
+//                [self allocationForDays:kind];
 //            });
         }
     };
