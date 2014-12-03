@@ -33,6 +33,7 @@ static NSString *kTodaysActivitiesCellIdentifier = @"TodaysActivitiesCell";
 static NSString *kHeartAgeCellIdentifier         = @"HeartAgeCell";
 static NSString *kRiskEstimateCellIdenfier       = @"RiskEstimateCell";
 static NSString *kRecommendationsCellIdentifier  = @"RecommendationCell";
+static NSString *kKludgeIdentifierForHeartAgeTaskB = @"APHHeartAgeB-7259AC18-D711-47A6-ADBD-6CFCECDED1DF";
 
 static CGFloat kSectionHeight = 64.0;
 
@@ -46,6 +47,9 @@ static CGFloat kSectionHeight = 64.0;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    NSLog(@"Task Identifier : %@", self.taskViewController.task.identifier);
+    
     UIColor *viewBackgroundColor = [UIColor appSecondaryColor4];
     
     [self.view setBackgroundColor:viewBackgroundColor];
@@ -96,6 +100,12 @@ static CGFloat kSectionHeight = 64.0;
     NSUInteger rows = 1;
     
     switch (section) {
+        case APHHeartAgeSummarySectionHeartAge:
+        {
+            if ([self.taskViewController.task.identifier isEqualToString:kKludgeIdentifierForHeartAgeTaskB]) {
+                rows = 0;
+            }
+        }
         case APHHeartAgeSummarySectionTodaysActivities:
             break;
         case APHHeartAgeSummarySectionTenYearRiskEstimate:
