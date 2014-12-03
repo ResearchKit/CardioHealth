@@ -99,5 +99,12 @@ static NSString *kSevenDayFitnessCompleteStep = @"sevenDayFitnessCompleteStep";
     return stepVC;
 }
 
+- (void)taskViewController:(RKSTTaskViewController *)taskViewController stepViewControllerWillAppear:(RKSTStepViewController *)stepViewController
+{
+    
+    [super taskViewController:taskViewController stepViewControllerWillAppear:stepViewController];
+    
+    taskViewController.navigationBar.topItem.title = NSLocalizedString(@"7 Day Fitness Allocation", @"7 Day Fitness Allocation");
+}
 
 @end
