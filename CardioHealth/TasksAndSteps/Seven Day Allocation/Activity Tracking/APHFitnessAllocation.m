@@ -62,9 +62,9 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
     if (self) {
         if (startDate) {
             if (startDate) {
-                self.allocationStartDate = startDate;
+                _allocationStartDate = startDate;
             } else {
-                self.allocationStartDate = [NSDate date];
+                _allocationStartDate = [NSDate date];
             }
             
             if (!dateFormatter) {
@@ -87,11 +87,11 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
             _segmentVigorous = NSLocalizedString(@"Vigorous", @"Vigorous");
             
             if ([HKHealthStore isHealthDataAvailable]) {
-                self.healthStore = [[HKHealthStore alloc] init];
+                _healthStore = [[HKHealthStore alloc] init];
                 
                 NSSet *readDataTypes = [self healthKitDataTypesToRead];
                 
-                [self.healthStore requestAuthorizationToShareTypes:nil
+                [_healthStore requestAuthorizationToShareTypes:nil
                                                          readTypes:readDataTypes
                                                         completion:^(BOOL success, NSError *error) {
                                                             if (!success) {
