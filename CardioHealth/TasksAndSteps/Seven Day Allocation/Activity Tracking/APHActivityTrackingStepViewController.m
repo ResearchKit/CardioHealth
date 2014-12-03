@@ -72,7 +72,7 @@ static CGFloat metersPerMile = 1609.344;
 - (void)viewDidAppear:(BOOL)animated
 {
     if (self.showTodaysDataAtViewLoad) {
-        [self handleToday:nil];
+        [self handleToday:self.btnToday];
     }
 }
 
