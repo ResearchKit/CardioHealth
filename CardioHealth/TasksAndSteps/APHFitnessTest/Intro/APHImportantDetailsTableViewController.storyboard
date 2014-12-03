@@ -149,7 +149,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QtK-hB-6Mh" id="cWT-5I-NjL">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Before you begin, follow the list below for your safety and comfort." lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u3O-wC-0as">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Before you begin, follow the list below for your safety and comfort." lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u3O-wC-0as">
                                                     <rect key="frame" x="8" y="0.0" width="284" height="80"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.66666666666666663" green="0.6588235294117647" blue="0.67843137254901964" alpha="1" colorSpace="calibratedRGB"/>
@@ -157,6 +157,12 @@
                                                 </label>
                                             </subviews>
                                             <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstItem="u3O-wC-0as" firstAttribute="leading" secondItem="cWT-5I-NjL" secondAttribute="leadingMargin" id="AcP-Ka-HtS"/>
+                                                <constraint firstItem="u3O-wC-0as" firstAttribute="trailing" secondItem="cWT-5I-NjL" secondAttribute="trailingMargin" id="XlT-8J-qQV"/>
+                                                <constraint firstItem="u3O-wC-0as" firstAttribute="top" secondItem="cWT-5I-NjL" secondAttribute="topMargin" constant="-8" id="b29-LL-IuR"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="u3O-wC-0as" secondAttribute="bottom" constant="-8" id="odb-3H-7U2"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -227,7 +233,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EHb-0K-fxU" id="C2P-6n-NUH">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Please discontinue if you experience any of the following:" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bIA-dx-L9j">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please discontinue if you experience any of the following:" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bIA-dx-L9j">
                                                     <rect key="frame" x="8" y="0.0" width="284" height="80"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.71372549019607845" green="0.70980392156862748" blue="0.72156862745098038" alpha="1" colorSpace="calibratedRGB"/>
@@ -235,6 +241,12 @@
                                                 </label>
                                             </subviews>
                                             <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstItem="bIA-dx-L9j" firstAttribute="top" secondItem="C2P-6n-NUH" secondAttribute="topMargin" constant="-8" id="MOI-tH-bSJ"/>
+                                                <constraint firstItem="bIA-dx-L9j" firstAttribute="leading" secondItem="C2P-6n-NUH" secondAttribute="leadingMargin" id="NQG-fe-XEK"/>
+                                                <constraint firstItem="bIA-dx-L9j" firstAttribute="trailing" secondItem="C2P-6n-NUH" secondAttribute="trailingMargin" id="YiP-ca-yuw"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="bIA-dx-L9j" secondAttribute="bottom" constant="-8" id="cME-g2-22o"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -314,7 +326,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="R5m-ZB-zIJ" id="Iqq-bR-2h1">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Apply the following hints during the test." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CTc-sO-E6X">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Apply the following hints during the test." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CTc-sO-E6X">
                                                     <rect key="frame" x="8" y="9" width="284" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.66666666669999997" green="0.6588235294" blue="0.67843137249999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -322,6 +334,12 @@
                                                 </label>
                                             </subviews>
                                             <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstItem="CTc-sO-E6X" firstAttribute="trailing" secondItem="Iqq-bR-2h1" secondAttribute="trailingMargin" id="CiF-6Z-yOI"/>
+                                                <constraint firstItem="CTc-sO-E6X" firstAttribute="leading" secondItem="Iqq-bR-2h1" secondAttribute="leadingMargin" id="QfO-Zr-zMg"/>
+                                                <constraint firstItem="CTc-sO-E6X" firstAttribute="top" secondItem="Iqq-bR-2h1" secondAttribute="topMargin" constant="1" id="aCZ-Ru-2Bk"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="CTc-sO-E6X" secondAttribute="bottom" constant="2" id="khC-Nm-dHo"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
