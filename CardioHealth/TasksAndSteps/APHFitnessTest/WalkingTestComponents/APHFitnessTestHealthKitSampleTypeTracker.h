@@ -58,7 +58,7 @@
 @optional
 
 /**
- * @brief Location has failed to update.
+ * 
  */
 - (void)fitnessTestHealthKitSampleTypeTracker:(APHFitnessTestHealthKitSampleTypeTracker *)heartRateTracker didUpdateHeartRate:(NSInteger)heartBPM;
 
