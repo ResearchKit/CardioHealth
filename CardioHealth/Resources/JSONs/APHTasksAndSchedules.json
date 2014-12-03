@@ -6,6 +6,11 @@
               "taskClassName": "APHHeartAgeTaskViewController"
               },
               {
+              "taskTitle": "Heart Age Test B",
+              "taskID": "APHHeartAgeB-7259AC18-D711-47A6-ADBD-6CFCECDED1DF",
+              "taskClassName": "APHHeartAgeTaskViewController"
+              },
+              {
               "taskTitle": "Fitness Test",
               "taskID": "APHFitnessTest-00000000-1111-1111-1111-F810BE28D995",
               "taskClassName": "APHFitnessTaskViewController"
@@ -21,6 +26,11 @@
                   "scheduleType": "recurring",
                   "scheduleString": "0 5 * * *",
                   "taskID": "APHHeartAge-7259AC18-D711-47A6-ADBD-6CFCECDED1DF"
+                  },
+                  {
+                  "scheduleType": "recurring",
+                  "scheduleString": "0 5 * * *",
+                  "taskID": "APHHeartAgeB-7259AC18-D711-47A6-ADBD-6CFCECDED1DF"
                   },
                   {
                   "scheduleType": "recurring",

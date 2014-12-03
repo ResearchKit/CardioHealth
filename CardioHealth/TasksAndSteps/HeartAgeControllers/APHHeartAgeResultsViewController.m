@@ -46,6 +46,9 @@ static CGFloat kSectionHeight = 64.0;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    NSLog(@"Task Identifier : %@", self.taskViewController.task.identifier);
+    
     UIColor *viewBackgroundColor = [UIColor appSecondaryColor4];
     
     [self.view setBackgroundColor:viewBackgroundColor];
@@ -96,6 +99,12 @@ static CGFloat kSectionHeight = 64.0;
     NSUInteger rows = 1;
     
     switch (section) {
+        case APHHeartAgeSummarySectionHeartAge:
+        {
+            if ([self.taskViewController.task.identifier isEqualToString:@"APHHeartAgeB-7259AC18-D711-47A6-ADBD-6CFCECDED1DF"]) {
+                rows = 0;
+            }
+        }
         case APHHeartAgeSummarySectionTodaysActivities:
             break;
         case APHHeartAgeSummarySectionTenYearRiskEstimate:
