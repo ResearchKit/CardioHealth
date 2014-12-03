@@ -56,7 +56,10 @@ static CGFloat metersPerMile = 1609.344;
     self.chartView.datasource = self;
     self.chartView.legendPaddingHeight = 60.0;
     self.chartView.titleLabel.text = NSLocalizedString(@"Distance", @"Distance");
-    
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
     if (self.showTodaysDataAtViewLoad) {
         [self handleToday:nil];
     }
@@ -148,12 +151,11 @@ static CGFloat metersPerMile = 1609.344;
 {
     self.allocationDataset = dataset;
     
-    CGFloat totalDistance = [[self.allocationDataset valueForKeyPath:@"@sum.datasetValueKey"] floatValue];
+    CGFloat totalDistance = [[self.allocationDataset valueForKeyPath:@"@sum.segmentSumKey"] floatValue];
     
     self.chartView.valueLabel.text = [NSString stringWithFormat:@"%0.1f mi", totalDistance/metersPerMile];
     
     [self.chartView layoutSubviews];
-    
 }
 
 #pragma mark - PieGraphView Delegates
@@ -170,12 +172,12 @@ static CGFloat metersPerMile = 1609.344;
 
 - (NSString *)pieGraphView:(APCPieGraphView *)pieGraphView titleForSegmentAtIndex:(NSInteger)index
 {
-    return [[self.allocationDataset valueForKey:kDatasetSegmentNameKey] objectAtIndex:index];
+    return [[self.allocationDataset valueForKey:kDatasetSegmentKey] objectAtIndex:index];
 }
 
 - (CGFloat)pieGraphView:(APCPieGraphView *)pieGraphView valueForSegmentAtIndex:(NSInteger)index
 {
-    return [[[self.allocationDataset valueForKey:kDatasetValueKey] objectAtIndex:index] floatValue];
+    return [[[self.allocationDataset valueForKey:kSegmentSumKey] objectAtIndex:index] floatValue];
 }
 
 @end
