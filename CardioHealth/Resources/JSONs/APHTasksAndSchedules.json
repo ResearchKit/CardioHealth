@@ -14,11 +14,6 @@
               "taskTitle": "7 Day Fitness Allocation",
               "taskID": "APHSevenDayAllocation-00000000-1111-1111-1111-F810BE28D995",
               "taskClassName": "APHSevenDayFitnessAllocationTaskViewController"
-              },
-              {
-              "taskTitle": "Healthy Heart",
-              "taskID": "APHHealthyHeart-7259AC18-D711-47A6-ADBD-6CFCECDED1DF",
-              "taskClassName": "APHHealthyHeartTaskViewController"
               }
               ],
     "schedules": [
@@ -31,11 +26,6 @@
                   "scheduleType": "recurring",
                   "scheduleString": "0 5 * * *",
                   "taskID": "APHFitnessTest-00000000-1111-1111-1111-F810BE28D995"
-                  },
-                  {
-                  "scheduleType": "recurring",
-                  "scheduleString": "0 5 * * *",
-                  "taskID": "APHHealthyHeart-7259AC18-D711-47A6-ADBD-6CFCECDED1DF"
                   },
                   {
                   "scheduleType": "recurring",
