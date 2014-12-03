@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Y Media Labs. All rights reserved.
 //
 
-@import APCAppleCore;
+@import APCAppCore;
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 /**
