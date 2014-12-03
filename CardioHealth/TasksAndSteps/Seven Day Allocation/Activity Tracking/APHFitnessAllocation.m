@@ -12,11 +12,18 @@
 #import "APHTheme.h"
 
 static NSInteger kIntervalByHour = 1;
+static NSDateFormatter *dateFormatter = nil;
 
 NSString *const kDatasetDateKey         = @"datasetDateKey";
 NSString *const kDatasetValueKey        = @"datasetValueKey";
 NSString *const kDatasetSegmentNameKey  = @"datasetSegmentNameKey";
 NSString *const kDatasetSegmentColorKey = @"datasetSegmentColorKey";
+
+NSString *const kDatasetSegmentKey      = @"segmentKey";
+NSString *const kDatasetDateHourKey     = @"dateHourKey";
+NSString *const kSegmentSumKey          = @"segmentSumKey";
+
+NSString *const kDatasetDateKeyFormat   = @"YYYY-MM-dd-hh";
 
 typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
 {
@@ -31,8 +38,18 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
 
 @property (nonatomic, strong) NSMutableArray *datasetForToday;
 @property (nonatomic, strong) NSMutableArray *datasetForTheWeek;
-@property (nonatomic, strong) NSMutableArray *datasetNormalized;
+
+@property (nonatomic, strong) NSArray *datasetNormalized;
+
+@property (nonatomic, strong) NSMutableArray *motionDatasetForToday;
+@property (nonatomic, strong) NSMutableArray *motionDatasetForTheWeek;
+
 @property (nonatomic, strong) NSDate *allocationStartDate;
+
+@property (nonatomic, strong) NSString *segmentInactive;
+@property (nonatomic, strong) NSString *segmentSedentary;
+@property (nonatomic, strong) NSString *segmentModerate;
+@property (nonatomic, strong) NSString *segmentVigorous;
 
 @end
 
@@ -44,9 +61,30 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
     
     if (self) {
         if (startDate) {
-            self.allocationStartDate = startDate;
-            self.datasetForToday = [NSMutableArray array];
-            self.datasetForTheWeek = [NSMutableArray array];
+            if (startDate) {
+                self.allocationStartDate = startDate;
+            } else {
+                self.allocationStartDate = [NSDate date];
+            }
+            
+            if (!dateFormatter) {
+                dateFormatter = [[NSDateFormatter alloc] init];
+                [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
+                [dateFormatter setDateFormat:kDatasetDateKeyFormat];
+            }
+            
+            _datasetForToday = [NSMutableArray array];
+            _datasetForTheWeek = [NSMutableArray array];
+            
+            _motionDatasetForToday = [NSMutableArray array];
+            _motionDatasetForTheWeek = [NSMutableArray array];
+            
+            _datasetNormalized = nil;
+            
+            _segmentInactive = NSLocalizedString(@"Inactive", @"Inactive");
+            _segmentSedentary = NSLocalizedString(@"Sedentary", @"Sedentary");
+            _segmentModerate = NSLocalizedString(@"Moderate", @"Moderate");
+            _segmentVigorous = NSLocalizedString(@"Vigorous", @"Vigorous");
             
             if ([HKHealthStore isHealthDataAvailable]) {
                 self.healthStore = [[HKHealthStore alloc] init];
@@ -63,7 +101,9 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
                                                             }
                                                             
                                                             [self runStatsCollectionQueryForKind:SevenDayFitnessDatasetKindToday];
+                                                            [self retrieveDataFromCoreMotionForDays:SevenDayFitnessDatasetKindToday];
                                                             [self runStatsCollectionQueryForKind:SevenDayFitnessDatasetKindWeek];
+                                                            [self retrieveDataFromCoreMotionForDays:SevenDayFitnessDatasetKindWeek];
                                                         }];
             }
         }
@@ -75,9 +115,9 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
 - (void)allocationForDays:(NSInteger)days
 {
     if (days == SevenDayFitnessDatasetKindToday) {
-        [self normalizeData:self.datasetForToday];
+        [self groupDataFromMotion:self.motionDatasetForToday andHealthKit:self.datasetForToday];
     } else {
-        [self normalizeData:self.datasetForTheWeek];
+        [self groupDataFromMotion:self.motionDatasetForTheWeek andHealthKit:self.datasetForTheWeek];
     }
     
     if ([self.delegate respondsToSelector:@selector(datasetDidUpdate:forKind:)]) {
@@ -89,6 +129,9 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
 {
     [self runStatsCollectionQueryForKind:SevenDayFitnessDatasetKindToday];
     [self runStatsCollectionQueryForKind:SevenDayFitnessDatasetKindWeek];
+    
+    [self retrieveDataFromCoreMotionForDays:SevenDayFitnessDatasetKindToday];
+    [self retrieveDataFromCoreMotionForDays:SevenDayFitnessDatasetKindWeek];
 }
 
 #pragma mark - Allocation Algorithm
@@ -103,49 +146,137 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
  *        timestamp is within the same hour as the HealthKit data, the data from HealthKit
  *        will be organized according to the Activity type that is provided by Core Motion.
  */
-
-- (void)normalizeData:(NSArray *)dataset
+- (void)groupDataFromMotion:(NSArray *)motionDataset andHealthKit:(NSArray *)healthkitDataset
 {
-    NSRange inactiveRange = NSMakeRange(0, 402);
-    NSRange sedentaryRange = NSMakeRange(0, 804);
-    NSRange moderateRange = NSMakeRange(0, 1207); // a number beyond this is considered vigorous
+    // At this point all datasets (from HealthKit and Core Motion) should be
+    // available, since the queries to build these datasets gets fired at -initWithAllocationStartDate.
     
-    self.datasetNormalized = [NSMutableArray arrayWithArray:@[
-                                                            @{kDatasetSegmentNameKey: NSLocalizedString(@"Inactive", @"Inactive"),
-                                                              kDatasetValueKey: @0,
-                                                              kDatasetSegmentColorKey: [APHTheme colorForActivityInactive]},
-                                                            @{kDatasetSegmentNameKey: NSLocalizedString(@"Sedentary", @"Sedentary"),
-                                                              kDatasetValueKey: @0,
-                                                              kDatasetSegmentColorKey: [APHTheme colorForActivitySedentary]},
-                                                            @{kDatasetSegmentNameKey: NSLocalizedString(@"Moderate", @"Moderate"),
-                                                              kDatasetValueKey: @0,
-                                                              kDatasetSegmentColorKey: [APHTheme colorForActivityModerate]},
-                                                            @{kDatasetSegmentNameKey: NSLocalizedString(@"Vigorous", @"Vigorous"),
-                                                              kDatasetValueKey: @0,
-                                                              kDatasetSegmentColorKey: [APHTheme colorForActivityVigorous]}
-                                                            ]];
+    NSMutableArray *normalDataset = [NSMutableArray array];
+    NSArray *segments = [motionDataset valueForKeyPath:@"@distinctUnionOfObjects.segmentKey"];
     
-    for (NSDictionary *data in dataset) {
-        NSUInteger segment = 0;
-        NSUInteger value = [data[kDatasetValueKey] integerValue];
+    for (NSString *segmentId in segments) {
+        NSMutableDictionary *entry = [NSMutableDictionary new];
+        [entry setObject:segmentId forKey:kDatasetSegmentKey];
         
-        if (NSLocationInRange(value, inactiveRange)) {
-            segment = 0;
-        } else if (NSLocationInRange(value, sedentaryRange)) {
-            segment = 1;
-        } else if (NSLocationInRange(value, moderateRange)) {
-            segment = 2;
-        } else {
-            segment = 3;
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K = %@", kDatasetSegmentKey, segmentId];
+        NSArray *groupSegments = [motionDataset filteredArrayUsingPredicate:predicate];
+        double segmentSum = 0;
+        
+        for (int i = 0; i < groupSegments.count; i++) {
+            NSString *dateHour = [[groupSegments objectAtIndex:i] objectForKey:kDatasetDateHourKey];
+            NSNumber *value = [self retrieveDataFromDataset:healthkitDataset forDateHour:dateHour];
+            
+            segmentSum += [value doubleValue];
+            
+            [entry setObject:value forKey:dateHour];
         }
         
-        NSMutableDictionary *normalSegment = [[self.datasetNormalized objectAtIndex:segment] mutableCopy];
-        NSNumber *currentValue = normalSegment[kDatasetValueKey];
+        entry[kSegmentSumKey] = @(segmentSum);
         
-        normalSegment[kDatasetValueKey] = [NSNumber numberWithInteger:[currentValue integerValue] + value];
+        UIColor *segmentColor = nil;
         
-        [self.datasetNormalized replaceObjectAtIndex:segment withObject:normalSegment];
+        if ([segmentId isEqualToString:self.segmentInactive]) {
+            segmentColor = [APHTheme colorForActivityInactive];
+        } else if ([segmentId isEqualToString:self.segmentSedentary]) {
+            segmentColor = [APHTheme colorForActivitySedentary];
+        } else if ([segmentId isEqualToString:self.segmentModerate]) {
+            segmentColor = [APHTheme colorForActivityModerate];
+        } else {
+            segmentColor = [APHTheme colorForActivityVigorous];
+        }
+        
+        entry[kDatasetSegmentColorKey] = segmentColor;
+        
+        [normalDataset addObject:entry];
     }
+    
+    self.datasetNormalized = normalDataset;
+}
+
+- (void)normalizeMotionData:(NSArray *)dataset forKind:(SevenDayFitnessDatasetKinds)kind
+{
+    // The way we are corrolating the Core Motion data is as that each of the
+    // activity type is mapped to our categories. That association is:
+    //
+    //   Core Motion       Confidence        Our Map
+    //   ============================================
+    //   Stationary        Any               Inactive
+    //   Walking           Low               Sedentary
+    //   Walking           Medium/High       Moderate
+    //   Running           Low               Moderate
+    //   Running           Medium/High       Vigorous
+    //   Cycling           Medium/High       Vigorous
+    //
+
+    for (CMMotionActivity *activity in dataset) {
+        BOOL isValidActivityType = YES;
+        NSString *dateHour = [dateFormatter stringFromDate:activity.startDate];
+        NSString *activityType = nil;
+        
+        if (activity.stationary) {
+            activityType = self.segmentInactive;
+        } else if (activity.walking) {
+            if (activity.confidence == CMMotionActivityConfidenceLow) {
+                activityType = self.segmentSedentary;
+            } else {
+                activityType = self.segmentModerate;
+            }
+        } else if (activity.running) {
+            if (activity.confidence == CMMotionActivityConfidenceLow) {
+                activityType = self.segmentModerate;
+            } else {
+                activityType = self.segmentVigorous;
+            }
+        } else if (activity.cycling) {
+            if (activity.confidence == CMMotionActivityConfidenceLow) {
+                activityType = self.segmentModerate;
+            } else {
+                activityType = self.segmentVigorous;
+            }
+        } else {
+            isValidActivityType = NO;
+        }
+        
+        if (isValidActivityType) {
+            NSArray *filteredSegments = nil;
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(%K = %@) AND (%K = %@)",
+                                      kDatasetSegmentKey,
+                                      activityType,
+                                      kDatasetDateHourKey,
+                                      dateHour];
+            
+            NSDictionary *segment = @{kDatasetSegmentKey: activityType, kDatasetDateHourKey: dateHour};
+            
+            if (kind == SevenDayFitnessDatasetKindToday) {
+                filteredSegments = [self.motionDatasetForToday filteredArrayUsingPredicate:predicate];
+                
+                if ([filteredSegments count] == 0) {
+                    [self.motionDatasetForToday addObject:segment];
+                }
+            } else {
+                filteredSegments = [self.motionDatasetForTheWeek filteredArrayUsingPredicate:predicate];
+                
+                if ([filteredSegments count] == 0) {
+                    [self.motionDatasetForTheWeek addObject:segment];
+                }
+            }
+        }
+    }
+}
+
+- (NSNumber *)retrieveDataFromDataset:(NSArray *)dataset forDateHour:(NSString *)dateHour
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", kDatasetDateHourKey, dateHour];
+    NSArray *filteredDataset = nil;
+    NSNumber *dataValue = @(0);
+    
+    filteredDataset = [dataset filteredArrayUsingPredicate:predicate];
+    
+    if ([filteredDataset count] > 0) {
+        dataValue = [[filteredDataset firstObject] valueForKey:kDatasetValueKey];
+    }
+    
+    return dataValue;
 }
 
 #pragma mark - Queries
@@ -186,30 +317,7 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
                                                            toDate:endDate
                                                           toQueue:[NSOperationQueue new]
                                                       withHandler:^(NSArray *activities, NSError *error) {
-                                                          for (CMMotionActivity *activity in activities) {
-                                                              NSString *kind = nil;
-                                                              NSString *confidence = nil;
-
-                                                              if (activity.stationary) {
-                                                                  kind = @"Stationary";
-                                                              } else if (activity.walking) {
-                                                                  kind = @"Walking";
-                                                              } else if (activity.running) {
-                                                                  kind = @"Running";
-                                                              } else if (activity.cycling) {
-                                                                  kind = @"Cycling";
-                                                              }
-
-                                                              if (activity.confidence == CMMotionActivityConfidenceLow) {
-                                                                  confidence = @"Low";
-                                                              } else if (activity.confidence == CMMotionActivityConfidenceMedium) {
-                                                                  confidence = @"Medium";
-                                                              } else if (activity.confidence == CMMotionActivityConfidenceHigh) {
-                                                                  confidence = @"High";
-                                                              }
-
-                                                              NSLog(@"%@ (%@) -- %@", activity, kind, confidence);
-                                                          }
+                                                          [self normalizeMotionData:activities forKind:kind];
                                                       }];
     } else {
         NSLog(@"Core Motion is not available for this device.");
@@ -234,7 +342,6 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
                                                              second:0
                                                              ofDate:self.allocationStartDate
                                                             options:0];
-//        interval.day = kIntervalByDay;
         NSLog(@"Week Start/End: %@/%@", startDate, [NSDate date]);
     }
     
@@ -270,16 +377,15 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
                                                NSDate *date = result.startDate;
                                                double value = [quantity doubleValueForUnit:[HKUnit meterUnit]];
                                                
+                                               NSDictionary *dataPoint = @{
+                                                                           kDatasetDateHourKey: [dateFormatter stringFromDate:date],
+                                                                           kDatasetValueKey: [NSNumber numberWithDouble:value]
+                                                                           };
+                                               
                                                if (kind == SevenDayFitnessDatasetKindToday) {
-                                                   [self.datasetForToday addObject:@{
-                                                                                     kDatasetDateKey: date,
-                                                                                     kDatasetValueKey: [NSNumber numberWithDouble:value]
-                                                                                     }];
+                                                   [self.datasetForToday addObject:dataPoint];
                                                } else {
-                                                   [self.datasetForTheWeek addObject:@{
-                                                                                       kDatasetDateKey: date,
-                                                                                       kDatasetValueKey: [NSNumber numberWithDouble:value]
-                                                                                       }];
+                                                   [self.datasetForTheWeek addObject:dataPoint];
                                                }
                                                
                                                NSLog(@"%@: %f", date, value);

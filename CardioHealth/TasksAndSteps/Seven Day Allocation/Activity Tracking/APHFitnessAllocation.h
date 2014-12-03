@@ -12,6 +12,9 @@ extern NSString *const kDatasetDateKey;
 extern NSString *const kDatasetValueKey;
 extern NSString *const kDatasetSegmentNameKey;
 extern NSString *const kDatasetSegmentColorKey;
+extern NSString *const kDatasetSegmentKey;
+extern NSString *const kDatasetDateHourKey;
+extern NSString *const kSegmentSumKey;
 
 @protocol APHFitnessAllocationDelegate <NSObject>
 
