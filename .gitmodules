@@ -1,0 +1,3 @@
+[submodule "AppCore"]
+        path = AppCore
+        url = https://bitbucket.org/ymedialabs/applecore.git
