@@ -16,6 +16,8 @@ static CGFloat metersPerMile = 1609.344;
 
 @property (weak, nonatomic) IBOutlet UILabel *daysRemaining;
 @property (weak, nonatomic) IBOutlet APCPieGraphView *chartView;
+@property (weak, nonatomic) IBOutlet UIButton *btnToday;
+@property (weak, nonatomic) IBOutlet UIButton *btnWeek;
 
 @property (nonatomic, strong) APHFitnessAllocation *fitnessAllocation;
 @property (nonatomic, strong) NSArray *allocationDataset;
@@ -43,6 +45,13 @@ static CGFloat metersPerMile = 1609.344;
     
     self.fitnessAllocation = [[APHFitnessAllocation alloc] initWithAllocationStartDate:[self checkSevenDayFitnessStartDate]];
     self.fitnessAllocation.delegate = self;
+    
+    // Button Appearance
+    [self.btnToday setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    [self.btnToday setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
+    
+    [self.btnWeek setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    [self.btnWeek setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -56,6 +65,7 @@ static CGFloat metersPerMile = 1609.344;
     self.chartView.datasource = self;
     self.chartView.legendPaddingHeight = 60.0;
     self.chartView.titleLabel.text = NSLocalizedString(@"Distance", @"Distance");
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -73,11 +83,17 @@ static CGFloat metersPerMile = 1609.344;
 
 - (IBAction)handleToday:(UIButton *)sender
 {
+    self.btnToday.selected = YES;
+    self.btnWeek.selected = NO;
+    
     [self showDataForKind:0];
 }
 
 - (IBAction)handleWeek:(UIButton *)sender
 {
+    self.btnToday.selected = NO;
+    self.btnWeek.selected = YES;
+    
     [self showDataForKind:-7];
 }
 
