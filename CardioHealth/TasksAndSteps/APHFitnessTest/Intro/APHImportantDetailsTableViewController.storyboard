@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="WIY-rh-jol">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A388a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="WIY-rh-jol">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -11,7 +11,7 @@
             <objects>
                 <tableViewController id="ADt-lG-Uqh" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="AkX-Cz-HT8">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="1300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="1300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <sections>
@@ -23,7 +23,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Purpose" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vMj-jh-51K">
-                                                    <rect key="frame" x="0.0" y="8" width="320" height="21"/>
+                                                    <rect key="frame" x="0.0" y="8" width="300" height="19.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="vMj-jh-51K" secondAttribute="height" multiplier="320:21" id="7nF-5k-CmU"/>
                                                     </constraints>
@@ -32,7 +32,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rng-AW-KV0">
-                                                    <rect key="frame" x="26" y="37" width="268" height="100"/>
+                                                    <rect key="frame" x="16" y="37" width="268" height="100"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="268" id="Vtk-qm-vUi"/>
                                                         <constraint firstAttribute="height" constant="100" id="XU9-Ha-FNN"/>
@@ -58,7 +58,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Do not attempt if any of the following has ever applied to you." lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bJF-IF-npP">
-                                                    <rect key="frame" x="8" y="10" width="304" height="60"/>
+                                                    <rect key="frame" x="8" y="10" width="284" height="60"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -83,52 +83,52 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Unstable angina for the past month" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WmG-rX-LjM">
-                                                    <rect key="frame" x="30" y="35" width="282" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <rect key="frame" x="23" y="35" width="270" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.72156862745098038" green="0.71764705882352942" blue="0.72941176470588232" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Heart Attack in the past month" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xzO-cc-3Lr">
-                                                    <rect key="frame" x="30" y="64" width="282" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <rect key="frame" x="23" y="64" width="270" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.72156862745098038" green="0.71764705882352942" blue="0.72941176470588232" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Resting Heart Rate of &gt; 120 bpm" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q4B-ed-0CV">
-                                                    <rect key="frame" x="30" y="93" width="282" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <rect key="frame" x="23" y="93" width="270" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.72156862745098038" green="0.71764705882352942" blue="0.72941176470588232" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Systolic BP of &gt; 177 mm Hg" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nbb-IY-dDn">
-                                                    <rect key="frame" x="30" y="122" width="282" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <rect key="frame" x="23" y="122" width="270" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.72156862745098038" green="0.71764705882352942" blue="0.72941176470588232" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Diastolic BP of &gt; 100 mm Hg" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sat-Hk-mDJ">
-                                                    <rect key="frame" x="30" y="151" width="282" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <rect key="frame" x="23" y="151" width="270" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.72156862745098038" green="0.71764705882352942" blue="0.72941176470588232" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Red-Dot" translatesAutoresizingMaskIntoConstraints="NO" id="F5w-Ne-zI4">
-                                                    <rect key="frame" x="17" y="43" width="5" height="5"/>
+                                                    <rect key="frame" x="10" y="43" width="5" height="5"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Red-Dot" translatesAutoresizingMaskIntoConstraints="NO" id="INk-FE-pZT">
-                                                    <rect key="frame" x="17" y="72" width="5" height="5"/>
+                                                    <rect key="frame" x="10" y="72" width="5" height="5"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Red-Dot" translatesAutoresizingMaskIntoConstraints="NO" id="afl-An-Gxr">
-                                                    <rect key="frame" x="17" y="101" width="5" height="5"/>
+                                                    <rect key="frame" x="10" y="101" width="5" height="5"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Red-Dot" translatesAutoresizingMaskIntoConstraints="NO" id="YfL-vX-2iF">
-                                                    <rect key="frame" x="17" y="130" width="5" height="5"/>
+                                                    <rect key="frame" x="10" y="130" width="5" height="5"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Red-Dot" translatesAutoresizingMaskIntoConstraints="NO" id="zZg-E2-kQO">
-                                                    <rect key="frame" x="17" y="159" width="5" height="5"/>
+                                                    <rect key="frame" x="10" y="159" width="5" height="5"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="When to Not Participate" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CSo-rV-fXi">
-                                                    <rect key="frame" x="0.0" y="6" width="320" height="21"/>
+                                                    <rect key="frame" x="0.0" y="6" width="300" height="19.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="CSo-rV-fXi" secondAttribute="height" multiplier="320:21" id="L6W-ys-cHQ"/>
                                                     </constraints>
@@ -150,7 +150,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Before you begin, follow the list below for your safety and comfort." lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u3O-wC-0as">
-                                                    <rect key="frame" x="8" y="0.0" width="304" height="80"/>
+                                                    <rect key="frame" x="8" y="0.0" width="284" height="80"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.66666666666666663" green="0.6588235294117647" blue="0.67843137254901964" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -169,52 +169,52 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Use any walking aids you normally use" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xmO-ip-sRy">
-                                                    <rect key="frame" x="30" y="95" width="282" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <rect key="frame" x="23" y="95" width="270" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.72156862749999995" green="0.71764705880000002" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Eat a light meal before morning and afternoon tests" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xha-na-gDj">
-                                                    <rect key="frame" x="30" y="124" width="282" height="39"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <rect key="frame" x="23" y="124" width="270" height="39"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.72156862749999995" green="0.71764705880000002" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Wear shoes comfortable for walking" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FtH-Gd-W8G">
-                                                    <rect key="frame" x="30" y="66" width="282" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <rect key="frame" x="23" y="66" width="270" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.72156862749999995" green="0.71764705880000002" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Dress in comfortable clothing" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EYt-1p-wPW">
-                                                    <rect key="frame" x="30" y="37" width="282" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <rect key="frame" x="23" y="37" width="270" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.72156862749999995" green="0.71764705880000002" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Red-Dot" translatesAutoresizingMaskIntoConstraints="NO" id="DGi-vy-rte">
-                                                    <rect key="frame" x="17" y="45" width="5" height="5"/>
+                                                    <rect key="frame" x="10" y="45" width="5" height="5"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Red-Dot" translatesAutoresizingMaskIntoConstraints="NO" id="q2C-bT-Upi">
-                                                    <rect key="frame" x="17" y="74" width="5" height="5"/>
+                                                    <rect key="frame" x="10" y="74" width="5" height="5"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Red-Dot" translatesAutoresizingMaskIntoConstraints="NO" id="hGN-Mo-T3C">
-                                                    <rect key="frame" x="17" y="103" width="5" height="5"/>
+                                                    <rect key="frame" x="10" y="103" width="5" height="5"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Red-Dot" translatesAutoresizingMaskIntoConstraints="NO" id="ooJ-TM-7cq">
-                                                    <rect key="frame" x="17" y="131" width="5" height="5"/>
+                                                    <rect key="frame" x="10" y="131" width="5" height="5"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Red-Dot" translatesAutoresizingMaskIntoConstraints="NO" id="n8C-tr-17D">
-                                                    <rect key="frame" x="17" y="179" width="5" height="5"/>
+                                                    <rect key="frame" x="10" y="179" width="5" height="5"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Diastolic BP of &gt; 100 mm Hg" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y7O-XG-Vbv">
-                                                    <rect key="frame" x="30" y="171" width="282" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <rect key="frame" x="23" y="171" width="270" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.72156862749999995" green="0.71764705880000002" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Preparing for the Test" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tTQ-bv-GSz">
-                                                    <rect key="frame" x="0.0" y="8" width="320" height="21"/>
+                                                    <rect key="frame" x="0.0" y="8" width="300" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -228,7 +228,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Please discontinue if you experience any of the following:" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bIA-dx-L9j">
-                                                    <rect key="frame" x="8" y="0.0" width="304" height="80"/>
+                                                    <rect key="frame" x="8" y="0.0" width="284" height="80"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.71372549019607845" green="0.70980392156862748" blue="0.72156862745098038" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -247,61 +247,61 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Staggering" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="law-74-frU">
-                                                    <rect key="frame" x="30" y="123" width="282" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <rect key="frame" x="23" y="123" width="282" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.72156862749999995" green="0.71764705880000002" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Excessive Sweating" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZH7-Q7-Iy8">
-                                                    <rect key="frame" x="30" y="152" width="282" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <rect key="frame" x="23" y="152" width="282" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.72156862749999995" green="0.71764705880000002" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Leg Cramps" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N7d-xN-a6E">
-                                                    <rect key="frame" x="30" y="94" width="282" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <rect key="frame" x="23" y="94" width="282" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.72156862749999995" green="0.71764705880000002" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Intolerable Dyspnea" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2X3-OD-3og">
-                                                    <rect key="frame" x="30" y="65" width="282" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <rect key="frame" x="23" y="65" width="282" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.72156862749999995" green="0.71764705880000002" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Chest Pain" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T1q-Lt-cbw">
-                                                    <rect key="frame" x="30" y="36" width="282" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <rect key="frame" x="23" y="36" width="282" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.72156862749999995" green="0.71764705880000002" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Red-Dot" translatesAutoresizingMaskIntoConstraints="NO" id="hsx-MO-EgS">
-                                                    <rect key="frame" x="17" y="44" width="5" height="5"/>
+                                                    <rect key="frame" x="10" y="44" width="5" height="5"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Red-Dot" translatesAutoresizingMaskIntoConstraints="NO" id="n8e-Ym-p6V">
-                                                    <rect key="frame" x="17" y="73" width="5" height="5"/>
+                                                    <rect key="frame" x="10" y="73" width="5" height="5"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Red-Dot" translatesAutoresizingMaskIntoConstraints="NO" id="kHy-JZ-wFC">
-                                                    <rect key="frame" x="17" y="102" width="5" height="5"/>
+                                                    <rect key="frame" x="10" y="102" width="5" height="5"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Red-Dot" translatesAutoresizingMaskIntoConstraints="NO" id="t7q-AY-Qp6">
-                                                    <rect key="frame" x="17" y="131" width="5" height="5"/>
+                                                    <rect key="frame" x="10" y="131" width="5" height="5"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Red-Dot" translatesAutoresizingMaskIntoConstraints="NO" id="x3L-tk-adm">
-                                                    <rect key="frame" x="17" y="160" width="5" height="5"/>
+                                                    <rect key="frame" x="10" y="160" width="5" height="5"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Red-Dot" translatesAutoresizingMaskIntoConstraints="NO" id="rju-wz-KsS">
-                                                    <rect key="frame" x="17" y="189" width="5" height="5"/>
+                                                    <rect key="frame" x="10" y="189" width="5" height="5"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="If you become pale in appearance" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CWj-mk-CtW">
-                                                    <rect key="frame" x="30" y="181" width="282" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <rect key="frame" x="23" y="181" width="282" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.72156862749999995" green="0.71764705880000002" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Reasons to Discontinue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZRg-hl-GVa">
-                                                    <rect key="frame" x="0.0" y="7" width="320" height="21"/>
+                                                    <rect key="frame" x="0.0" y="7" width="300" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -315,7 +315,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Apply the following hints during the test." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CTc-sO-E6X">
-                                                    <rect key="frame" x="8" y="9" width="304" height="21"/>
+                                                    <rect key="frame" x="8" y="9" width="284" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.66666666669999997" green="0.6588235294" blue="0.67843137249999996" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -334,34 +334,34 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="You will be permitted to slow down, stop, and rest as needed" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5wk-Rl-49z">
-                                                    <rect key="frame" x="30" y="37" width="282" height="40"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <rect key="frame" x="23" y="37" width="282" height="40"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.72156862749999995" green="0.71764705880000002" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="You may lean against a wall when resting, but should refrain from sitting" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lRs-Ay-V10">
-                                                    <rect key="frame" x="30" y="85" width="282" height="40"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <rect key="frame" x="23" y="85" width="282" height="40"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.72156862749999995" green="0.71764705880000002" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="If you do stop to rest, keep in mind that the timer will not stop when you do, so resume again as soon as possible" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fYm-hP-6r6">
-                                                    <rect key="frame" x="30" y="133" width="282" height="60"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <rect key="frame" x="23" y="133" width="282" height="60"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.72156862749999995" green="0.71764705880000002" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Red-Dot" translatesAutoresizingMaskIntoConstraints="NO" id="zxs-YF-ty6">
-                                                    <rect key="frame" x="17" y="46" width="5" height="5"/>
+                                                    <rect key="frame" x="10" y="46" width="5" height="5"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Red-Dot" translatesAutoresizingMaskIntoConstraints="NO" id="1tz-AC-blF">
-                                                    <rect key="frame" x="17" y="94" width="5" height="5"/>
+                                                    <rect key="frame" x="10" y="94" width="5" height="5"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Red-Dot" translatesAutoresizingMaskIntoConstraints="NO" id="M9e-BM-1s2">
-                                                    <rect key="frame" x="17" y="141" width="5" height="5"/>
+                                                    <rect key="frame" x="10" y="141" width="5" height="5"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Helpful Tips" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ipi-ve-cwd">
-                                                    <rect key="frame" x="-2" y="8" width="322" height="21"/>
+                                                    <rect key="frame" x="0.0" y="8" width="300" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -383,7 +383,7 @@
                         </connections>
                     </tableView>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="1300"/>
+                    <size key="freeformSize" width="300" height="1300"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kCD-KN-KzL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
