@@ -33,6 +33,7 @@ static NSString *kTodaysActivitiesCellIdentifier = @"TodaysActivitiesCell";
 static NSString *kHeartAgeCellIdentifier         = @"HeartAgeCell";
 static NSString *kRiskEstimateCellIdenfier       = @"RiskEstimateCell";
 static NSString *kRecommendationsCellIdentifier  = @"RecommendationCell";
+static NSString *kKludgeIdentifierForHeartAgeTaskB = @"APHHeartAgeB-7259AC18-D711-47A6-ADBD-6CFCECDED1DF";
 
 static CGFloat kSectionHeight = 64.0;
 
@@ -101,7 +102,7 @@ static CGFloat kSectionHeight = 64.0;
     switch (section) {
         case APHHeartAgeSummarySectionHeartAge:
         {
-            if ([self.taskViewController.task.identifier isEqualToString:@"APHHeartAgeB-7259AC18-D711-47A6-ADBD-6CFCECDED1DF"]) {
+            if ([self.taskViewController.task.identifier isEqualToString:kKludgeIdentifierForHeartAgeTaskB]) {
                 rows = 0;
             }
         }
