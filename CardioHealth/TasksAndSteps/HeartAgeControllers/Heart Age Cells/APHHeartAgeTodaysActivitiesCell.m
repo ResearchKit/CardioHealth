@@ -8,7 +8,7 @@
 
 #import "APHHeartAgeTodaysActivitiesCell.h"
 
-@import APCAppleCore;
+@import APCAppCore;
 
 @interface APHHeartAgeTodaysActivitiesCell()
 

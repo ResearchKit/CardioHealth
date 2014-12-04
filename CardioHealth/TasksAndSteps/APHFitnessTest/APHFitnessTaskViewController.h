@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Y Media Labs. All rights reserved.
 //
 
-@import APCAppleCore;
+@import APCAppCore;
 #import "APHFitnessTestHealthKitSampleTypeTracker.h"
 #import "APHFitnessTestDistanceTracker.h"
 #import "APHFitnessTestRecorder.h"

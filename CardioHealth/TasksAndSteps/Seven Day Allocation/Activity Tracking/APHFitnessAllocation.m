@@ -152,7 +152,7 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
     // available, since the queries to build these datasets gets fired at -initWithAllocationStartDate.
     
     NSMutableArray *normalDataset = [NSMutableArray array];
-    NSArray *segments = [motionDataset valueForKeyPath:@"@distinctUnionOfObjects.segmentKey"];
+    NSArray *segments = @[self.segmentInactive, self.segmentSedentary, self.segmentModerate, self.segmentVigorous];
     
     for (NSString *segmentId in segments) {
         NSMutableDictionary *entry = [NSMutableDictionary new];
