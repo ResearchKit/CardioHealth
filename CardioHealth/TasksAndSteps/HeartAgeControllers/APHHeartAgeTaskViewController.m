@@ -440,7 +440,7 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
                     NSString *questionIdentifier = [qrIdentifiers objectAtIndex:idx];
                     
                     if ([questionIdentifier isEqualToString:kHeartAgeTestDataEthnicity]) {
-                        APCAppDelegate *apcDelegate = [[UIApplication sharedApplication] delegate];
+                        APCAppDelegate *apcDelegate = (APCAppDelegate*)[[UIApplication sharedApplication] delegate];
                         NSString *ethnicity = (NSString *)questionResult.answer;
                         
                         // persist ethnicity to the datastore

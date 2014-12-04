@@ -22,8 +22,8 @@ static  NSString  *kFitnessTestStep105 = @"FitnessStep105";
 static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
 
 static NSInteger kCountDownTimer = 5;
-static NSInteger kUpdatedHeartRateThreshold = 2;
-static NSInteger kUpdatedHeartRateTimeThreshold = 10;
+static NSInteger kUpdatedHeartRateThreshold = 1;
+static NSInteger kUpdatedHeartRateTimeThreshold = 20;
 
 @interface APHFitnessTaskViewController ()
 
@@ -80,7 +80,7 @@ static NSInteger kUpdatedHeartRateTimeThreshold = 10;
 
 + (RKSTOrderedTask *)createTask:(APCScheduledTask *)scheduledTask
 {
-    APCAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    APCAppDelegate *appDelegate = (APCAppDelegate*) [[UIApplication sharedApplication] delegate];
     APCParameters *parameters = appDelegate.dataSubstrate.parameters;
     NSInteger totalUpdates = appDelegate.healthKitTracker.totalUpdates;
     NSDate *lastUpdate = appDelegate.healthKitTracker.lastUpdate;
