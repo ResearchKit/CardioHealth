@@ -23,7 +23,7 @@
 		08FA98031A108839002317C8 /* APHHeartAgeSummaryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FA98021A108839002317C8 /* APHHeartAgeSummaryCell.m */; };
 		08FA98061A108A46002317C8 /* APHHeartAgeRiskEstimateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FA98051A108A46002317C8 /* APHHeartAgeRiskEstimateCell.m */; };
 		08FA98091A108C33002317C8 /* APHHeartAgeRecommendationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FA98081A108C33002317C8 /* APHHeartAgeRecommendationCell.m */; };
-		5B18CECA1A2CEF24001A905E /* HTMLContent in Resources */ = {isa = PBXBuildFile; fileRef = 5B18CEC91A2CEF24001A905E /* HTMLContent */; };
+		5B0432611A305742000DC9ED /* HTMLContent in Resources */ = {isa = PBXBuildFile; fileRef = 5B0432601A305742000DC9ED /* HTMLContent */; };
 		5B4633851A15917000E68B82 /* APHDashboardEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B4633841A15917000E68B82 /* APHDashboardEditViewController.m */; };
 		5B5A31341A10A78600552F7D /* WithdrawStudy.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B5A31331A10A78600552F7D /* WithdrawStudy.json */; };
 		5BB2BAA41A10157B00684CCE /* Learn.json in Resources */ = {isa = PBXBuildFile; fileRef = 5BB2BAA31A10157B00684CCE /* Learn.json */; };
@@ -137,7 +137,7 @@
 		08FA98051A108A46002317C8 /* APHHeartAgeRiskEstimateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APHHeartAgeRiskEstimateCell.m; path = "Heart Age Cells/APHHeartAgeRiskEstimateCell.m"; sourceTree = "<group>"; };
 		08FA98071A108C33002317C8 /* APHHeartAgeRecommendationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APHHeartAgeRecommendationCell.h; path = "Heart Age Cells/APHHeartAgeRecommendationCell.h"; sourceTree = "<group>"; };
 		08FA98081A108C33002317C8 /* APHHeartAgeRecommendationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APHHeartAgeRecommendationCell.m; path = "Heart Age Cells/APHHeartAgeRecommendationCell.m"; sourceTree = "<group>"; };
-		5B18CEC91A2CEF24001A905E /* HTMLContent */ = {isa = PBXFileReference; lastKnownFileType = folder; path = HTMLContent; sourceTree = "<group>"; };
+		5B0432601A305742000DC9ED /* HTMLContent */ = {isa = PBXFileReference; lastKnownFileType = folder; path = HTMLContent; sourceTree = "<group>"; };
 		5B4633831A15917000E68B82 /* APHDashboardEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHDashboardEditViewController.h; sourceTree = "<group>"; };
 		5B4633841A15917000E68B82 /* APHDashboardEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHDashboardEditViewController.m; sourceTree = "<group>"; };
 		5B5A31331A10A78600552F7D /* WithdrawStudy.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = WithdrawStudy.json; sourceTree = "<group>"; };
@@ -380,7 +380,7 @@
 		F55BBDEF19D362D0003CA0F9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				5B18CEC91A2CEF24001A905E /* HTMLContent */,
+				5B0432601A305742000DC9ED /* HTMLContent */,
 				08547C101A11899C00DC6E7C /* APHTheme.h */,
 				08547C111A11899C00DC6E7C /* APHTheme.m */,
 				087476351A0995A600F9A0A8 /* APHScoring.h */,
@@ -637,10 +637,10 @@
 				08C56E391A15E7D100D3BF61 /* APHActivityTracking.storyboard in Resources */,
 				7BD73F7B19E8A20600F5DFF3 /* Intro.mp4 in Resources */,
 				7B6753421A01540E005864E6 /* APHHeartAgeIntroStepViewController.xib in Resources */,
-				5B18CECA1A2CEF24001A905E /* HTMLContent in Resources */,
 				F55BBE6A19D362D0003CA0F9 /* APHDashboard.storyboard in Resources */,
 				F55BBE6119D362D0003CA0F9 /* APHTasksAndSchedules.json in Resources */,
 				08FA97FB1A10630F002317C8 /* APHHeartAgeSummary.storyboard in Resources */,
+				5B0432611A305742000DC9ED /* HTMLContent in Resources */,
 				F5778E7519F0613D0079F1B2 /* APHOnboarding.storyboard in Resources */,
 				F573809319E45D62008A8354 /* StudyOverview.json in Resources */,
 				7B4104A319E5E46800592B96 /* APHFitnessTestRestView.xib in Resources */,

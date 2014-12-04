@@ -1,27 +1,25 @@
 {
   "images" : [
     {
-      "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "appicon_stanford_cardio_apple_sow1@2x-2.png",
+      "size" : "29x29",
       "scale" : "2x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "appicon_stanford_cardio_apple_sow1@3x-2.png",
+      "filename" : "appicon_stanford_cardio_apple_sow1@1x.png",
       "scale" : "3x"
+    },
+    {
+      "idiom" : "iphone",
+      "size" : "40x40",
+      "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
       "filename" : "appicon_stanford_cardio_apple_sow1@2x-1.png",
-      "scale" : "2x"
-    },
-    {
-      "size" : "40x40",
-      "idiom" : "iphone",
-      "filename" : "appicon_stanford_cardio_apple_sow1@3x-1.png",
       "scale" : "3x"
     },
     {
