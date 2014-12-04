@@ -215,7 +215,7 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
         [steps addObject:step];
     }
     
-    RKSTOrderedTask *task = [[RKSTOrderedTask alloc] initWithIdentifier:@"Heart Age Test" steps:steps];
+    RKSTOrderedTask *task = [[RKSTOrderedTask alloc] initWithIdentifier:scheduledTask.task.taskID steps:steps];
     
     return task;
 }
@@ -224,6 +224,8 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+
     
     RKSTOrderedTask  *task = nil;
     
