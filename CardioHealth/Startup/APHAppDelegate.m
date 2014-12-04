@@ -65,15 +65,7 @@ static NSString *const kVideoShownKey = @"VideoShown";
 {
     [super showOnBoarding];
     
-    if ([self isVideoShown]) {
-        [self showStudyOverview];
-    }
-    else
-    {
-        NSURL *introFileURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"Intro" ofType:@"mp4"]];
-        APCIntroVideoViewController *introVideoController = [[APCIntroVideoViewController alloc] initWithContentURL:introFileURL];
-        [self setUpRootViewController:introVideoController];
-    }
+    [self showStudyOverview];
 }
 
 - (void) showStudyOverview
