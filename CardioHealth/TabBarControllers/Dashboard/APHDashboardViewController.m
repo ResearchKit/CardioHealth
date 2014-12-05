@@ -148,9 +148,12 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
             switch (rowType) {
                 case kAPHDashboardItemTypeDistance:
                 {
+                    HKQuantityType *stepQuantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierStepCount];
+                    APCScoring *scoring = [[APCScoring alloc] initWithHealthKitQuantityType:stepQuantityType unit:[HKUnit countUnit] numberOfDays:-5];
+                    
                     APCTableViewDashboardGraphItem *item = [APCTableViewDashboardGraphItem new];
-                    item.caption = NSLocalizedString(@"Distance", @"");
-                    item.graphData = self.distanceScore;
+                    item.caption = NSLocalizedString(@"Steps", @"");
+                    item.graphData = scoring;
                     item.detailText = [NSString stringWithFormat:NSLocalizedString(@"Average : %lu ft", @"Average: {value} ft"), [[self.distanceScore averageDataPoint] integerValue]];
                     item.identifier = kAPCDashboardGraphTableViewCellIdentifier;
                     item.editable = YES;
