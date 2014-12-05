@@ -42,7 +42,7 @@ static const NSUInteger kAPHValidLocationHistoryDeltaInterval = 3;     // the ma
         [self.locationManager setDelegate:self];
         [self.locationManager requestAlwaysAuthorization];
         self.locationManager.activityType = CLActivityTypeFitness;
-        [self.locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
+        [self.locationManager setDesiredAccuracy:kCLLocationAccuracyBestForNavigation];
         [self.locationManager setPausesLocationUpdatesAutomatically:YES];
         [self.locationManager setDistanceFilter:kAPHFitnessTestDistanceFilter];
         self.startUpdatingDistance = NO;
@@ -141,12 +141,12 @@ static const NSUInteger kAPHValidLocationHistoryDeltaInterval = 3;     // the ma
 
     [self setGPSSignalStrength:manager];
         
-    if (self.temporaryLocationPoint == nil && manager.location.horizontalAccuracy <= self.horizontalAccuracy && manager.location.horizontalAccuracy > 0) {
+    if (self.temporaryLocationPoint == nil && manager.location.horizontalAccuracy <= self.horizontalAccuracy) {
         
         NSLog(@"Temporary location set and horizontal Accuracy good");
         self.temporaryLocationPoint = manager.location;
     }
-    else if (manager.location.horizontalAccuracy <= self.horizontalAccuracy && manager.location.horizontalAccuracy > 0)
+    else if (manager.location.horizontalAccuracy <= self.horizontalAccuracy)
     {
         CLLocation *bestLocation = nil;
         
