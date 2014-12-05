@@ -367,7 +367,7 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
 
     if ([step.identifier isEqualToString:@"HeartAgeResult"]) {
         
-        taskViewController.navigationBar.topItem.title = NSLocalizedString(@"Survey Complete", @"Survey Complete");
+        taskViewController.navigationBar.topItem.title = NSLocalizedString(@"Activity Complete", @"Activity Complete");
         
     } else if (![step.identifier isEqualToString:kHeartAgeIntroduction] && ![step.identifier isEqualToString:kHeartAgeFormStepBiographicAndDemographic]) {
         NSArray *stepSurveyResults = self.result.results;
