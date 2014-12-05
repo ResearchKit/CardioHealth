@@ -1,11 +1,10 @@
-//
-//  APHHeartPulseTracking.m
-//  CardioHealth
-//
-//  Created by Justin Warmkessel on 10/1/14.
-//  Copyright (c) 2014 Y Media Labs. All rights reserved.
-//
-
+// 
+//  APHFitnessTestHealthKitSampleTypeTracker.m 
+//  MyHeartCounts 
+// 
+//  Copyright (c) 2014 <INSTITUTION-NAME-TBD> All rights reserved. 
+// 
+ 
 #import "APHFitnessTestHealthKitSampleTypeTracker.h"
 
 @interface APHFitnessTestHealthKitSampleTypeTracker ()

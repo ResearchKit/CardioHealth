@@ -1,11 +1,10 @@
-//
-//  APHInclusionCriteriaViewController.m
-//  Parkinson
-//
-//  Created by Ramsundar Shandilya on 9/25/14.
-//  Copyright (c) 2014 Y Media Labs. All rights reserved.
-//
-
+// 
+//  APHInclusionCriteriaViewController.m 
+//  MyHeartCounts 
+// 
+//  Copyright (c) 2014 <INSTITUTION-NAME-TBD> All rights reserved. 
+// 
+ 
 
 
 #import "APHInclusionCriteriaViewController.h"

@@ -1,11 +1,10 @@
-//
-//  APHTheme.m
-//  CardioHealth
-//
-//  Created by Farhan Ahmed on 11/10/14.
-//  Copyright (c) 2014 Y Media Labs. All rights reserved.
-//
-
+// 
+//  APHTheme.m 
+//  MyHeartCounts 
+// 
+//  Copyright (c) 2014 <INSTITUTION-NAME-TBD> All rights reserved. 
+// 
+ 
 #import "APHTheme.h"
 
 @implementation APHTheme

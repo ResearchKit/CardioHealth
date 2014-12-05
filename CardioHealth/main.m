@@ -1,11 +1,10 @@
-//
-//  main.m
-//  CardioHealth
-//
-//  Created by Dhanush Balachandran on 9/24/14.
-//  Copyright (c) 2014 Y Media Labs. All rights reserved.
-//
-
+// 
+//  main.m 
+//  MyHeartCounts 
+// 
+//  Copyright (c) 2014 <INSTITUTION-NAME-TBD> All rights reserved. 
+// 
+ 
 #import <UIKit/UIKit.h>
 #import "APHAppDelegate.h"
 

@@ -1,11 +1,10 @@
-//
-//  YMLDataPoint.h
-//  Scratch
-//
-//  Created by Farhan Ahmed on 11/2/14.
-//  Copyright (c) 2014 Y Media Labs, Inc. All rights reserved.
-//
-
+// 
+//  APHDataPoint.h 
+//  MyHeartCounts 
+// 
+//  Copyright (c) 2014 <INSTITUTION-NAME-TBD> All rights reserved. 
+// 
+ 
 #import <Foundation/Foundation.h>
 
 @interface APHDataPoint : NSObject

@@ -1,11 +1,10 @@
-//
-//  APHFitnessTestDistanceTracker.m
-//  CardioHealth
-//
-//  Created by Justin Warmkessel on 9/30/14.
-//  Copyright (c) 2014 Y Media Labs. All rights reserved.
-//
-
+// 
+//  APHFitnessTestDistanceTracker.m 
+//  MyHeartCounts 
+// 
+//  Copyright (c) 2014 <INSTITUTION-NAME-TBD> All rights reserved. 
+// 
+ 
 #import "APHFitnessTestDistanceTracker.h"
  
 static const NSUInteger kAPHFitnessTestDistanceFilter = 5.0;           // the minimum distance (meters) for which we want to receive location updates (see docs for CLLocationManager.distanceFilter)

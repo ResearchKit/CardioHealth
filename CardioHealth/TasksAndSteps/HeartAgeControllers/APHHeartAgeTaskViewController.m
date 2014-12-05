@@ -1,10 +1,10 @@
-//
-//  APHHeartAgeTaskViewController.m
-//  CardioHealth
-//
-//  Created by Farhan Ahmed on 9/25/14.
-//  Copyright (c) 2014 Y Media Labs. All rights reserved.
-//
+// 
+//  APHHeartAgeTaskViewController.m 
+//  MyHeartCounts 
+// 
+//  Copyright (c) 2014 <INSTITUTION-NAME-TBD> All rights reserved. 
+// 
+
 #import "APHHeartAgeTaskViewController.h"
 #import "APHHeartAgeAndRiskFactors.h"
 #import "APHHeartAgeResultsViewController.h"
@@ -367,7 +367,7 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
 
     if ([step.identifier isEqualToString:@"HeartAgeResult"]) {
         
-        taskViewController.navigationBar.topItem.title = NSLocalizedString(@"Survey Complete", @"Survey Complete");
+        taskViewController.navigationBar.topItem.title = NSLocalizedString(@"Activity Complete", @"Activity Complete");
         
     } else if (![step.identifier isEqualToString:kHeartAgeIntroduction] && ![step.identifier isEqualToString:kHeartAgeFormStepBiographicAndDemographic]) {
         NSArray *stepSurveyResults = self.result.results;

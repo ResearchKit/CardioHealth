@@ -1,11 +1,10 @@
-//
-//  APHOverviewViewController.m
-//  BasicTabBar
-//
-//  Created by Henry McGilton on 9/7/14.
-//  Copyright (c) 2014 Y Media Labs. All rights reserved.
-//
-
+// 
+//  APHDashboardViewController.m 
+//  MyHeartCounts 
+// 
+//  Copyright (c) 2014 <INSTITUTION-NAME-TBD> All rights reserved. 
+// 
+ 
 /* Controllers */
 #import "APHDashboardViewController.h"
 #import "APHDashboardEditViewController.h"
@@ -149,9 +148,12 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
             switch (rowType) {
                 case kAPHDashboardItemTypeDistance:
                 {
+                    HKQuantityType *stepQuantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierStepCount];
+                    APCScoring *scoring = [[APCScoring alloc] initWithHealthKitQuantityType:stepQuantityType unit:[HKUnit countUnit] numberOfDays:-5];
+                    
                     APCTableViewDashboardGraphItem *item = [APCTableViewDashboardGraphItem new];
-                    item.caption = NSLocalizedString(@"Distance", @"");
-                    item.graphData = self.distanceScore;
+                    item.caption = NSLocalizedString(@"Steps", @"");
+                    item.graphData = scoring;
                     item.detailText = [NSString stringWithFormat:NSLocalizedString(@"Average : %lu ft", @"Average: {value} ft"), [[self.distanceScore averageDataPoint] integerValue]];
                     item.identifier = kAPCDashboardGraphTableViewCellIdentifier;
                     item.editable = YES;
@@ -166,9 +168,12 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
                     break;
                 case kAPHDashboardItemTypeHeartRate:{
                     
+                    HKQuantityType *heartRateQuantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierHeartRate];
+                    APCScoring *scoring = [[APCScoring alloc] initWithHealthKitQuantityType:heartRateQuantityType unit:[[HKUnit countUnit] unitDividedByUnit:[HKUnit minuteUnit]] numberOfDays:-5];
+                    
                     APCTableViewDashboardGraphItem *item = [APCTableViewDashboardGraphItem new];
                     item.caption = NSLocalizedString(@"Heart Rate", @"");
-                    item.graphData = self.heartRateScore;
+                    item.graphData = scoring;
                     item.detailText = [NSString stringWithFormat:NSLocalizedString(@"Average : %lu bpm", @"Average: {value} bpm"), [[self.heartRateScore averageDataPoint] integerValue]];
                     item.identifier = kAPCDashboardGraphTableViewCellIdentifier;
                     item.editable = YES;
@@ -180,34 +185,7 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
                     [rowItems addObject:row];
                 }
                     break;
-                case kAPHDashboardItemTypeAlerts:{
-                    
-                    APCTableViewDashboardMessageItem *item = [APCTableViewDashboardMessageItem new];
-                    item.identifier = kAPCDashboardMessageTableViewCellIdentifier;
-                    item.messageType = kAPCDashboardMessageTypeAlert;
-                    item.detailText = @"Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
-                    item.editable = YES;
-                    
-                    APCTableViewRow *row = [APCTableViewRow new];
-                    row.item = item;
-                    row.itemType = rowType;
-                    [rowItems addObject:row];
-                }
-                    break;
-                case kAPHDashboardItemTypeInsights:{
-                    
-                    APCTableViewDashboardMessageItem *item = [APCTableViewDashboardMessageItem new];
-                    item.identifier = kAPCDashboardMessageTableViewCellIdentifier;
-                    item.messageType = kAPCDashboardMessageTypeInsight;
-                    item.detailText = @"Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
-                    item.editable = YES;
-                    
-                    APCTableViewRow *row = [APCTableViewRow new];
-                    row.item = item;
-                    row.itemType = rowType;
-                    [rowItems addObject:row];
-                }
-                    break;
+
                 default:
                     break;
             }
