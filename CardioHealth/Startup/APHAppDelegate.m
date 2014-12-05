@@ -34,7 +34,12 @@ static NSString *const kVideoShownKey = @"VideoShown";
                                            kBridgeEnvironmentKey                : @(SBBEnvironmentStaging),
                                            kHKReadPermissionsKey                : @[
                                                    HKQuantityTypeIdentifierBodyMass,
-                                                   HKQuantityTypeIdentifierHeight
+                                                   HKQuantityTypeIdentifierHeight,
+                                                   HKQuantityTypeIdentifierHeartRate,
+                                                   HKQuantityTypeIdentifierStepCount,
+                                                   HKQuantityTypeIdentifierFlightsClimbed,
+                                                   HKQuantityTypeIdentifierDistanceWalkingRunning,
+                                                   HKQuantityTypeIdentifierDistanceCycling
                                                    ],
                                            kHKWritePermissionsKey                : @[
                                                    HKQuantityTypeIdentifierBodyMass,
@@ -42,7 +47,6 @@ static NSString *const kVideoShownKey = @"VideoShown";
                                                    ],
                                            kAppServicesListRequiredKey           : @[
                                                    @(kSignUpPermissionsTypeLocation),
-//                                                   @(kSignUpPermissionsTypePushNotifications),
                                                    @(kSignUpPermissionsTypeCoremotion)
                                                    ]
                                            }];
@@ -85,12 +89,24 @@ static NSString *const kVideoShownKey = @"VideoShown";
 
 -(void)setUpCollectors
 {
-    if (self.dataSubstrate.currentUser.isConsented) {
         NSError *error = nil;
         {
-            [super setUpCollectors];
             //TODO Need to setup a mechanism to gather sleep data like passive data collection.
             //           HKCategorySample *sleepSampleType = [HKCategorySample categorySampleWithType:[HKCategoryType categoryTypeForIdentifier:HKCategoryTypeIdentifierSleepAnalysis] value:HKCategoryValueSleepAnalysisAsleep startDate:[NSDate date] endDate:[NSDate date]];
+        
+            self.healthKitTracker = [[APCHealthKitQuantityTracker alloc] initWithIdentifier:HKQuantityTypeIdentifierHeartRate withNotificationName:@"APCHeartRateUpdated"];
+            [self.healthKitTracker start];
+            
+            //Setting the Audio Session Category for voice prompts when device is locked
+            AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+            
+            NSError *setCategoryError = nil;
+            BOOL success = [audioSession setCategory:AVAudioSessionCategoryPlayback error:&setCategoryError];
+            if (!success) { /* handle the error condition */ }
+            
+            NSError *activationError = nil;
+            [audioSession setActive:YES error:&activationError];
+            [activationError handle];
             
             RKSTMotionActivityCollector *motionCollector = [self.dataSubstrate.study addMotionActivityCollectorWithStartDate:nil error:&error];
             if (!motionCollector)
@@ -140,7 +156,6 @@ static NSString *const kVideoShownKey = @"VideoShown";
         
     errReturn:
         return;
-    }
     
 }
 
