@@ -4,12 +4,7 @@
 // 
 //  Copyright (c) 2014 <INSTITUTION-NAME-TBD> All rights reserved. 
 // 
-
-#import "APHHeartAgeTaskViewController.h"
-#import "APHHeartAgeAndRiskFactors.h"
-#import "APHHeartAgeResultsViewController.h"
-#import "APHHeartAgeIntroStepViewController.h"
-
+ 
 static NSString *MainStudyIdentifier = @"com.cardiovascular.heartAgeTest";
 
 // Introduction Step and Summary Key
@@ -367,7 +362,7 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
 
     if ([step.identifier isEqualToString:@"HeartAgeResult"]) {
         
-        taskViewController.navigationBar.topItem.title = NSLocalizedString(@"Activity Complete", @"Activity Complete");
+        taskViewController.navigationBar.topItem.title = NSLocalizedString(@"Survey Complete", @"Survey Complete");
         
     } else if (![step.identifier isEqualToString:kHeartAgeIntroduction] && ![step.identifier isEqualToString:kHeartAgeFormStepBiographicAndDemographic]) {
         NSArray *stepSurveyResults = self.result.results;

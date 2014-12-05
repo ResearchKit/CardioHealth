@@ -28,7 +28,7 @@
     UIColor *viewBackgroundColor = [UIColor appSecondaryColor4];
     
     [self.view setBackgroundColor:viewBackgroundColor];
-    self.navigationItem.title = NSLocalizedString(@"Activity Complete", @"Activity Complete");
+    self.navigationItem.title = NSLocalizedString(@"Survey Complete", @"Survey Complete");
     self.navigationItem.leftBarButtonItem = nil;
     self.navigationItem.hidesBackButton = YES;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
