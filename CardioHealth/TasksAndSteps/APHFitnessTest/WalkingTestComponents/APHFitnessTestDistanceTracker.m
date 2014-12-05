@@ -43,7 +43,7 @@ static const NSUInteger kAPHValidLocationHistoryDeltaInterval = 3;     // the ma
         [self.locationManager setDelegate:self];
         [self.locationManager requestAlwaysAuthorization];
         self.locationManager.activityType = CLActivityTypeFitness;
-        [self.locationManager setDesiredAccuracy:kCLLocationAccuracyBestForNavigation];
+        [self.locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
         [self.locationManager setPausesLocationUpdatesAutomatically:YES];
         [self.locationManager setDistanceFilter:kAPHFitnessTestDistanceFilter];
         self.startUpdatingDistance = NO;

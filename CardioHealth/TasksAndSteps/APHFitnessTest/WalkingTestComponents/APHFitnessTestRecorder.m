@@ -314,8 +314,9 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
         
         self.restComfortablyView.distanceTotalLabel.text = [NSString stringWithFormat:@"%dft", distanceAsInt];
         [self.distanceRecords addObject:distanceUpdatedInfo];
-        
+        self.previousLocation = location;
     }
+    
 }
 
 
