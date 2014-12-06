@@ -219,7 +219,7 @@ static NSString *const kVideoShownKey = @"VideoShown";
             case RKSTConsentSectionTypeOverview:
             {
                 section.title = NSLocalizedString(@"Welcome", nil);
-                section.summary = @"Share the Journey is a research study for volunteer women over 18 years of age. This simple walkthrough will explain the study, the impact it may have on your life and will allow you to provide your consent to participate.";
+                section.summary = @"This simple walkthrough will help you to understand the study, the impact it will have on your life, and will allow you to provide consent to participate.";
             }
                 break;
             case RKSTConsentSectionTypeActivity:
