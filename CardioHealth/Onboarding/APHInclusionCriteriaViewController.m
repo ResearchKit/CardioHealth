@@ -111,7 +111,7 @@
 
 - (void)next
 {
-    [self onboarding].signUpTask.eligible = [self isEligible];
+    [self onboarding].onboardingTask.eligible = [self isEligible];
     
     UIViewController *viewController = [[self onboarding] nextScene];
     [self.navigationController pushViewController:viewController animated:YES];
