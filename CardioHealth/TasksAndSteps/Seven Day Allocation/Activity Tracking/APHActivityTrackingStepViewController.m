@@ -150,6 +150,17 @@ static CGFloat metersPerMile = 1609.344;
         [self saveSevenDayFitnessStartDate:fitnessStartDate];
     }
     
+    // remove before going to production
+    NSDateComponents *comp = [[NSDateComponents alloc] init];
+    comp.day = -5;
+    
+    NSDate *today = [[NSCalendar currentCalendar] dateBySettingHour:0 minute:0 second:0 ofDate:fitnessStartDate options:0];
+    NSDate *dummyDate = [[NSCalendar currentCalendar] dateByAddingComponents:comp
+                                                                      toDate:today
+                                                                     options:0];
+    
+    fitnessStartDate = dummyDate;
+    
     return fitnessStartDate;
 }
 
