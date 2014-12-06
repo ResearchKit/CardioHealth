@@ -1,9 +1,8 @@
 //
 //  APHFitnessAllocation.h
-//  CardioHealth
+//  MyHeartCounts
 //
-//  Created by Farhan Ahmed on 12/1/14.
-//  Copyright (c) 2014 Y Media Labs. All rights reserved.
+//  Copyright (c) 2014 Apple, Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
