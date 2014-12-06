@@ -63,7 +63,8 @@ static CGFloat metersPerMile = 1609.344;
     
     self.chartView.datasource = self;
     self.chartView.legendPaddingHeight = 60.0;
-    self.chartView.shouldAnimate = NO;
+    self.chartView.shouldAnimate = YES;
+    self.chartView.shouldAnimateLegend = NO;
     self.chartView.titleLabel.text = NSLocalizedString(@"Distance", @"Distance");
     
 }
