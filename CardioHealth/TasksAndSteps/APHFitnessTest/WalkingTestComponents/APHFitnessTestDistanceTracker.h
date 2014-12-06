@@ -2,7 +2,7 @@
 //  APHFitnessTestDistanceTracker.h 
 //  MyHeartCounts 
 // 
-//  Copyright (c) 2014 <INSTITUTION-NAME-TBD> All rights reserved. 
+//  Copyright (c) 2014 Apple, Inc. All rights reserved. 
 // 
  
 @import APCAppCore;
