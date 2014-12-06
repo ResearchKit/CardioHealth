@@ -1,9 +1,8 @@
 //
 //  APHActivityTrackingStepViewController.m
-//  CardioHealth
+//  MyHeartCounts
 //
-//  Created by Farhan Ahmed on 11/13/14.
-//  Copyright (c) 2014 Y Media Labs. All rights reserved.
+//  Copyright (c) 2014 Apple, Inc. All rights reserved.
 //
 
 #import "APHActivityTrackingStepViewController.h"
@@ -64,7 +63,8 @@ static CGFloat metersPerMile = 1609.344;
     
     self.chartView.datasource = self;
     self.chartView.legendPaddingHeight = 60.0;
-    self.chartView.shouldAnimate = NO;
+    self.chartView.shouldAnimate = YES;
+    self.chartView.shouldAnimateLegend = NO;
     self.chartView.titleLabel.text = NSLocalizedString(@"Distance", @"Distance");
     
 }
@@ -149,6 +149,17 @@ static CGFloat metersPerMile = 1609.344;
         fitnessStartDate = [NSDate date];
         [self saveSevenDayFitnessStartDate:fitnessStartDate];
     }
+    
+    // remove before going to production
+    NSDateComponents *comp = [[NSDateComponents alloc] init];
+    comp.day = -5;
+    
+    NSDate *today = [[NSCalendar currentCalendar] dateBySettingHour:0 minute:0 second:0 ofDate:fitnessStartDate options:0];
+    NSDate *dummyDate = [[NSCalendar currentCalendar] dateByAddingComponents:comp
+                                                                      toDate:today
+                                                                     options:0];
+    
+    fitnessStartDate = dummyDate;
     
     return fitnessStartDate;
 }
