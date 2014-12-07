@@ -34,8 +34,6 @@ static CGFloat metersPerMile = 1609.344;
     [super viewDidLoad];
     self.daysRemaining.text = [self fitnessDaysRemaining];
     
-    self.showTodaysDataAtViewLoad = YES;
-    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Close"
                                                                               style:UIBarButtonItemStylePlain
                                                                              target:self
@@ -57,6 +55,8 @@ static CGFloat metersPerMile = 1609.344;
 {
     [super viewWillAppear:animated];
     
+    self.showTodaysDataAtViewLoad = YES;
+    
     self.navigationItem.hidesBackButton = YES;
     self.navigationItem.leftBarButtonItem = nil;
     self.navigationController.navigationBar.topItem.title = NSLocalizedString(@"7 Day Fitness Allocation", @"7 Day Fitness Allocation");
@@ -67,13 +67,20 @@ static CGFloat metersPerMile = 1609.344;
     self.chartView.shouldAnimateLegend = NO;
     self.chartView.titleLabel.text = NSLocalizedString(@"Distance", @"Distance");
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(allocationDataIsAvailable:)
+                                                 name:APHSevenDayAllocationDataIsReadyNotification
+                                               object:nil];
+    
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewWillDisappear:(BOOL)animated
 {
-    if (self.showTodaysDataAtViewLoad) {
-        [self handleToday:self.btnToday];
-    }
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:APHSevenDayAllocationDataIsReadyNotification
+                                                  object:nil];
+    
+    [super viewWillDisappear:animated];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -96,6 +103,14 @@ static CGFloat metersPerMile = 1609.344;
     self.btnWeek.selected = YES;
     
     [self showDataForKind:-7];
+}
+
+- (void)allocationDataIsAvailable:(NSNotification *)notification
+{
+    if (self.showTodaysDataAtViewLoad) {
+        [self handleToday:self.btnToday];
+        self.showTodaysDataAtViewLoad = NO;
+    }
 }
 
 - (void)showDataForKind:(NSInteger)kind

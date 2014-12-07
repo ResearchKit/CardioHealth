@@ -22,6 +22,8 @@ NSString *const kDatasetSegmentKey      = @"segmentKey";
 NSString *const kDatasetDateHourKey     = @"dateHourKey";
 NSString *const kSegmentSumKey          = @"segmentSumKey";
 
+NSString *const APHSevenDayAllocationDataIsReadyNotification = @"APHSevenDayAllocationDataIsReadyNotification";
+
 NSString *const kDatasetDateKeyFormat   = @"YYYY-MM-dd-hh";
 
 typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
@@ -390,9 +392,10 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
                                                NSLog(@"%@: %f", date, value);
                                            }
                                        }];
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                [self allocationForDays:kind];
-//            });
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:APHSevenDayAllocationDataIsReadyNotification
+                                                                    object:nil];
+            });
         }
     };
     
