@@ -35,8 +35,9 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
             _rowItemsOrder = [[NSMutableArray alloc] initWithArray:@[
                                                                      @(kAPHDashboardItemTypeDistance),
                                                                      @(kAPHDashboardItemTypeHeartRate),
-                                                                     @(kAPHDashboardItemTypeAlerts),
-                                                                     @(kAPHDashboardItemTypeInsights)]];
+//                                                                     @(kAPHDashboardItemTypeAlerts),
+//                                                                     @(kAPHDashboardItemTypeInsights)
+                                                                     ]];
             
             [defaults setObject:[NSArray arrayWithArray:_rowItemsOrder] forKey:kAPCDashboardRowItemsOrder];
             [defaults synchronize];
