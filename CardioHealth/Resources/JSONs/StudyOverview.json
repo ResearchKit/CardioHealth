@@ -1,5 +1,5 @@
 {
-    "disease_name":"Cardiovascular",
+    "disease_name":"My Heart Counts",
     "from_date":"December 2014",
     "to_date":"January 2015",
     "logo_name": "logo_research_institute",
@@ -13,9 +13,9 @@
      },
      
      {
-     "title":"How this study works",
+     "title":"How this Study works",
      "details":"howstudyworks",
-     "icon_image":"stethescope_icon",
+     "icon_image":"rulerpencil_icon",
      "tint_color" : "purple"
      },
      

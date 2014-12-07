@@ -21,10 +21,10 @@
                     "title": "Symptoms",
                     "details": "symptoms",
                     "icon_image": "diagnostics_icon",
-                    "tint_color": "red"
+                    "tint_color": "green"
                 },
                 {
-                    "title": "Treatment Options",
+                    "title": "Treatment",
                     "details": "treatment",
                     "icon_image": "treatment_icon",
                     "tint_color": "yellow"
