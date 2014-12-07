@@ -1,11 +1,10 @@
-//
-//  APHDashboardEditViewController.m
-//  CardioHealth
-//
-//  Created by Ramsundar Shandilya on 11/13/14.
-//  Copyright (c) 2014 Y Media Labs. All rights reserved.
-//
-
+// 
+//  APHDashboardEditViewController.m 
+//  MyHeartCounts 
+// 
+//  Copyright (c) 2014 Apple, Inc. All rights reserved. 
+// 
+ 
 #import "APHDashboardEditViewController.h"
 
 @implementation APHDashboardEditViewController

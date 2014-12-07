@@ -1,11 +1,10 @@
-//
-//  APHFitnessTestRecorder.m
-//  CardioHealth
-//
-//  Created by Justin Warmkessel on 10/3/14.
-//  Copyright (c) 2014 Y Media Labs. All rights reserved.
-//
-
+// 
+//  APHFitnessTestRecorder.m 
+//  MyHeartCounts 
+// 
+//  Copyright (c) 2014 Apple, Inc. All rights reserved. 
+// 
+ 
 #import "APHFitnessTestRecorder.h"
 #import "APHFitnessTestRestComfortablyView.h"
 #import "APHFitnessSixMinuteFitnessTestView.h"
@@ -314,8 +313,9 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
         
         self.restComfortablyView.distanceTotalLabel.text = [NSString stringWithFormat:@"%dft", distanceAsInt];
         [self.distanceRecords addObject:distanceUpdatedInfo];
-        
+        self.previousLocation = location;
     }
+    
 }
 
 

@@ -1,11 +1,10 @@
-//
-//  APHFitnessTestRestComfortablyView.h
-//  CardioHealth
-//
-//  Created by Justin Warmkessel on 10/7/14.
-//  Copyright (c) 2014 Y Media Labs. All rights reserved.
-//
-
+// 
+//  APHFitnessTestRestComfortablyView.h 
+//  MyHeartCounts 
+// 
+//  Copyright (c) 2014 Apple, Inc. All rights reserved. 
+// 
+ 
 @import APCAppCore;
 #import <UIKit/UIKit.h>
 

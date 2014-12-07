@@ -1,11 +1,10 @@
-//
-//  APHHealthyHeartSummaryStepViewController.m
-//  CardioHealth
-//
-//  Created by Farhan Ahmed on 11/21/14.
-//  Copyright (c) 2014 Y Media Labs. All rights reserved.
-//
-
+// 
+//  Healthy 
+//  MyHeartCounts 
+// 
+//  Copyright (c) 2014 Apple, Inc. All rights reserved. 
+// 
+ 
 #import "APHHealthyHeartSummaryStepViewController.h"
 
 @interface APHHealthyHeartSummaryStepViewController ()
@@ -29,7 +28,7 @@
     UIColor *viewBackgroundColor = [UIColor appSecondaryColor4];
     
     [self.view setBackgroundColor:viewBackgroundColor];
-    self.navigationItem.title = NSLocalizedString(@"Survey Complete", @"Survey Complete");
+    self.navigationItem.title = NSLocalizedString(@"Activity Complete", @"Activity Complete");
     self.navigationItem.leftBarButtonItem = nil;
     self.navigationItem.hidesBackButton = YES;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone

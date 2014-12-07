@@ -1,9 +1,8 @@
 //
 //  APHFitnessAllocation.m
-//  CardioHealth
+//  MyHeartCounts
 //
-//  Created by Farhan Ahmed on 12/1/14.
-//  Copyright (c) 2014 Y Media Labs. All rights reserved.
+//  Copyright (c) 2014 Apple, Inc. All rights reserved.
 //
 
 #import "APHFitnessAllocation.h"
@@ -22,6 +21,8 @@ NSString *const kDatasetSegmentColorKey = @"datasetSegmentColorKey";
 NSString *const kDatasetSegmentKey      = @"segmentKey";
 NSString *const kDatasetDateHourKey     = @"dateHourKey";
 NSString *const kSegmentSumKey          = @"segmentSumKey";
+
+NSString *const APHSevenDayAllocationDataIsReadyNotification = @"APHSevenDayAllocationDataIsReadyNotification";
 
 NSString *const kDatasetDateKeyFormat   = @"YYYY-MM-dd-hh";
 
@@ -391,9 +392,10 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
                                                NSLog(@"%@: %f", date, value);
                                            }
                                        }];
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                [self allocationForDays:kind];
-//            });
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:APHSevenDayAllocationDataIsReadyNotification
+                                                                    object:nil];
+            });
         }
     };
     
