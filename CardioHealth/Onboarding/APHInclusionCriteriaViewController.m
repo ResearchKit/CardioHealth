@@ -1,11 +1,10 @@
-//
-//  APHInclusionCriteriaViewController.m
-//  Parkinson
-//
-//  Created by Ramsundar Shandilya on 9/25/14.
-//  Copyright (c) 2014 Y Media Labs. All rights reserved.
-//
-
+// 
+//  APHInclusionCriteriaViewController.m 
+//  MyHeartCounts 
+// 
+//  Copyright (c) 2014 Apple, Inc. All rights reserved. 
+// 
+ 
 
 
 #import "APHInclusionCriteriaViewController.h"
@@ -112,7 +111,7 @@
 
 - (void)next
 {
-    [self onboarding].signUpTask.eligible = [self isEligible];
+    [self onboarding].onboardingTask.eligible = [self isEligible];
     
     UIViewController *viewController = [[self onboarding] nextScene];
     [self.navigationController pushViewController:viewController animated:YES];
