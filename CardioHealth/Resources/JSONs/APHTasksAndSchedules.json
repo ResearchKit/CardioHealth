@@ -1,17 +1,17 @@
 {
     "tasks": [
               {
-              "taskTitle": "Heart Age Test",
+              "taskTitle": "Heart and Stroke Risk Score, Plus Heart Age",
               "taskID": "APHHeartAge-7259AC18-D711-47A6-ADBD-6CFCECDED1DF",
               "taskClassName": "APHHeartAgeTaskViewController"
               },
               {
-              "taskTitle": "Heart Age Test B",
+              "taskTitle": "Heart and Stroke Risk Score",
               "taskID": "APHHeartAgeB-7259AC18-D711-47A6-ADBD-6CFCECDED1DF",
               "taskClassName": "APHHeartAgeTaskViewController"
               },
               {
-              "taskTitle": "Fitness Test",
+              "taskTitle": "6-Minute Walk Test",
               "taskID": "APHFitnessTest-00000000-1111-1111-1111-F810BE28D995",
               "taskClassName": "APHFitnessTaskViewController"
               },
