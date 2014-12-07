@@ -14,6 +14,7 @@ extern NSString *const kDatasetSegmentColorKey;
 extern NSString *const kDatasetSegmentKey;
 extern NSString *const kDatasetDateHourKey;
 extern NSString *const kSegmentSumKey;
+extern NSString *const APHSevenDayAllocationDataIsReadyNotification;
 
 @protocol APHFitnessAllocationDelegate <NSObject>
 
