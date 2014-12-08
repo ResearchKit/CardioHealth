@@ -1,0 +1,245 @@
+{
+    "name":"Well-Being_And_Risk_Perception",
+    "identifier":"satisfied",
+    "questions":[
+               {
+                 "guid": "854afd00-3d2b-41c2-9b36-17c72287819b",
+                 "identifier": "satisfiedwith_life",
+                 "prompt": "The following question asks how satisfied you feel, on a scale from 0 to 10. Zero means you feel “not at all satisfied” and 10 means you feel “completely satisfied” Overall, how satisfied are you with life as a whole these days?",
+                 "constraints":{
+                 
+                 "dataType":"integer",
+                 "minValue":0,
+                 "maxValue":10,
+                 "step":1,
+                 "type":"IntegerConstraints"
+                 },
+                 "uiHint":"slider",
+                 "type":"SurveyQuestion"
+                 },
+                 {
+                 "guid": "854bfd00-3d2b-41c2-9b36-17c72287819b",
+                 "identifier": "feel_worthwhile",
+                 "prompt": "2.\nThe following question asks how worthwhile you feel the things you do in your life are, on a scale from 0 to 10. Zero means you feel the things you do in your life are “not at all worthwhile”, and 10 means “completely worthwhile”.Overall, to what extent do you feel the things you do in your life are worthwhile?",
+                 "constraints":{
+                 
+                 "dataType":"integer",
+                 "minValue":0,
+                 "maxValue":10,
+                 "step":1,
+                 "type":"IntegerConstraints"
+                 },
+                 "uiHint":"slider",
+                 "type":"SurveyQuestion"
+                 },
+                 {
+                 "guid": "854bfd00-3d2b-41e2-9b36-17c72287819b",
+                 "identifier": "feel_worthwhile",
+                 "prompt": "3.\nThe following questions ask about how you felt yesterday on a scale from 0 to 10. Zero               means you did not experience the feeling “at all” yesterday while 10 means you experienced the feeling “all of the time” yesterday.How about happy?",
+                 "constraints":{
+                 
+                 "dataType":"integer",
+                 "minValue":0,
+                 "maxValue":10,
+                 "step":1,
+                 "type":"IntegerConstraints"
+                 },
+                 "uiHint":"slider",
+                 "type":"SurveyQuestion"
+                 },
+                 {
+                 "guid": "854bfd00-3d2b-41e2-9a36-17c72287819b",
+                 "identifier": "feel_worthwhile",
+                 "prompt": "4.\nHow about worried?",
+                 "constraints":{
+                 
+                 "dataType":"integer",
+                 "minValue":0,
+                 "maxValue":10,
+                 "step":1,
+                 "type":"IntegerConstraints"
+                 },
+                 "uiHint":"slider",
+                 "type":"SurveyQuestion"
+                 },
+                 {
+                 "guid": "854bfd00-3d2b-41e2-9b36-17c72287aa9b",
+                 "identifier": "feel_worthwhile",
+                 "prompt": "4.\nHow about depressed?",
+                 "constraints":{
+                 
+                 "dataType":"integer",
+                 "minValue":0,
+                 "maxValue":10,
+                 "step":1,
+                 "type":"IntegerConstraints"
+                 },
+                 "uiHint":"slider",
+                 "type":"SurveyQuestion"
+                 },
+                 {
+                 "guid": "854aed00-3d2c-41c2-9b36-17a7228781aa",
+                 "identifier": "riskfactors",
+                 "prompt": "6.\nOver the next 10 years how likely do you think it is that you personally attack, stroke, or die due to cardiovascular disease? (choose one) ",
+                 "constraints": {
+                 "dataType": "integer",
+                 "enumeration": [
+                                 {
+                                 "label": "Not at all",
+                                 "value": 1,
+                                 "type": "SurveyQuestionOption"
+                                 },
+                                 {
+                                 "label": "A little",
+                                 "value": 2,
+                                 "type": "SurveyQuestionOption"
+                                 },
+                                 {
+                                 "label": "Moderately",
+                                 "value": 3,
+                                 "type": "SurveyQuestionOption"
+                                 },
+                                 {
+                                 "label": "A lot",
+                                 "value": 4,
+                                 "type": "SurveyQuestionOption"
+                                 },
+                                 {
+                                 "label": "Extremely",
+                                 "value": 5,
+                                 "type": "SurveyQuestionOption"
+                                 }
+                                 ],
+     
+                 "type": "MultiValueConstraints"
+                 },
+                 "uiHint": "MultiValueConstraints",
+                 "type": "SurveyQuestion"
+                 },
+                 {
+                 "guid": "854aed00-3d2c-41c2-9b36-17a7228781cc",
+                 "identifier": "riskfactors",
+                 "prompt": "7.\nOver the next 10 years, compared to others your age and sex, how would you rate your risk of having a heart attack, stroke, or dying due to cardiovascular disease? (choose one)",
+                 "constraints": {
+                 "dataType": "integer",
+                 "enumeration": [
+                                 {
+                                 "label": "Much lower than average",
+                                 "value": 1,
+                                 "type": "SurveyQuestionOption"
+                                 },
+                                 {
+                                 "label": "Lower than average",
+                                 "value": 2,
+                                 "type": "SurveyQuestionOption"
+                                 },
+                                 {
+                                 "label": "Average",
+                                 "value": 3,
+                                 "type": "SurveyQuestionOption"
+                                 },
+                                 {
+                                 "label": "Higher than average",
+                                 "value": 4,
+                                 "type": "SurveyQuestionOption"
+                                 },
+                                 {
+                                 "label": "Much higher than average",
+                                 "value": 5,
+                                 "type": "SurveyQuestionOption"
+                                 }
+                                 ],
+                 
+                 "type": "MultiValueConstraints"
+                 },
+                 "uiHint": "MultiValueConstraints",
+                 "type": "SurveyQuestion"
+                 },
+                 
+                 
+                 
+                 {
+                 "guid": "854aed00-3d2c-41c2-9b36-17a7228781cc",
+                 "identifier": "riskfactors",
+                 "prompt": "8.\nOver your lifetime how likely do you think it is that you personally will have a heart attack, stroke, or die due to cardiovascular disease? (choose one)",
+                 "constraints": {
+                 "dataType": "integer",
+                 "enumeration": [
+                                 {
+                                 "label": "Not at all",
+                                 "value": 1,
+                                 "type": "SurveyQuestionOption"
+                                 },
+                                 {
+                                 "label": "A little",
+                                 "value": 2,
+                                 "type": "SurveyQuestionOption"
+                                 },
+                                 {
+                                 "label": "Moderately",
+                                 "value": 3,
+                                 "type": "SurveyQuestionOption"
+                                 },
+                                 {
+                                 "label": "A lot",
+                                 "value": 4,
+                                 "type": "SurveyQuestionOption"
+                                 },
+                                 {
+                                 "label": "Extremely",
+                                 "value": 5,
+                                 "type": "SurveyQuestionOption"
+                                 }
+                                 ],
+                 
+                 "type": "MultiValueConstraints"
+                 },
+                 "uiHint": "MultiValueConstraints",
+                 "type": "SurveyQuestion"
+                 },
+                 {
+                 "guid": "854aed00-3d2c-41c2-9b36-17a7228781cc",
+                 "identifier": "riskfactors",
+                 "prompt": "9.\nOver your lifetime, compared to others your age and sex, how would you rate your risk of having a heart attack, stroke, or dying due to cardiovascular disease? (choose one)",
+                 "constraints": {
+                 "dataType": "integer",
+                 "enumeration":  [
+                                  {
+                                  "label": "Much lower than average",
+                                  "value": 1,
+                                  "type": "SurveyQuestionOption"
+                                  },
+                                  {
+                                  "label": "Lower than average",
+                                  "value": 2,
+                                  "type": "SurveyQuestionOption"
+                                  },
+                                  {
+                                  "label": "Average",
+                                  "value": 3,
+                                  "type": "SurveyQuestionOption"
+                                  },
+                                  {
+                                  "label": "Higher than average",
+                                  "value": 4,
+                                  "type": "SurveyQuestionOption"
+                                  },
+                                  {
+                                  "label": "Much higher than average",
+                                  "value": 5,
+                                  "type": "SurveyQuestionOption"
+                                  }
+                                  ],
+                 "type": "MultiValueConstraints"
+                 },
+                 "uiHint": "MultiValueConstraints",
+                 "type": "SurveyQuestion"
+                 }
+                 
+     
+                 ],
+    "type":"Survey"
+}
+
+
+

@@ -1,0 +1,99 @@
+{
+    "tasks": [
+              {
+              "taskTitle": "Heart and Stroke Risk Score, Plus Heart Age",
+              "taskID": "APHHeartAge-7259AC18-D711-47A6-ADBD-6CFCECDED1DF",
+              "taskClassName": "APHHeartAgeTaskViewController"
+              },
+              {
+              "taskTitle": "Heart and Stroke Risk Score",
+              "taskID": "APHHeartAgeB-7259AC18-D711-47A6-ADBD-6CFCECDED1DF",
+              "taskClassName": "APHHeartAgeTaskViewController"
+              },
+              {
+              "taskTitle": "6-Minute Walk Test",
+              "taskID": "APHFitnessTest-00000000-1111-1111-1111-F810BE28D995",
+              "taskClassName": "APHFitnessTaskViewController"
+              },
+              {
+              "taskTitle": "7 Day Fitness Allocation",
+              "taskID": "APHSevenDayAllocation-00000000-1111-1111-1111-F810BE28D995",
+              "taskClassName": "APHSevenDayFitnessAllocationTaskViewController"
+              },
+              
+              {
+              "taskTitle" : "Activity and Sleep Survey",
+              "taskID": "CardioActivityAndSleepSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66",
+              "taskFileName" : "cardio_activitysleep_survey",
+              "taskClassName" : "APCGenericSurveyTaskViewController"
+              },
+              
+              {
+              "taskTitle" : "Cardiovascular Health Survey",
+              "taskID": "CardioVascularHealthSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66",
+              "taskFileName" : "cardio_CVhealth_survey",
+              "taskClassName" : "APCGenericSurveyTaskViewController"
+              },
+              
+              {
+              "taskTitle" : "Diet Survey",
+              "taskID": "DietSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66",
+              "taskFileName" : "cardio_diet_survey",
+              "taskClassName" : "APCGenericSurveyTaskViewController"
+              },
+              
+              {
+              "taskTitle" : "Well-Being and Risk Perception Survey",
+              "taskID": "WellBeingAndRiskPerceptionSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66",
+              "taskFileName" : "cardio_wellbeing_survey",
+              "taskClassName" : "APCGenericSurveyTaskViewController"
+              }
+              ],
+    "schedules": [
+                  {
+                  "scheduleType": "recurring",
+                  "scheduleString": "0 5 * * *",
+                  "taskID": "APHHeartAge-7259AC18-D711-47A6-ADBD-6CFCECDED1DF"
+                  },
+                  {
+                  "scheduleType": "recurring",
+                  "scheduleString": "0 5 * * *",
+                  "taskID": "APHHeartAgeB-7259AC18-D711-47A6-ADBD-6CFCECDED1DF"
+                  },
+                  {
+                  "scheduleType": "recurring",
+                  "scheduleString": "0 5 * * *",
+                  "taskID": "APHFitnessTest-00000000-1111-1111-1111-F810BE28D995"
+                  },
+                  {
+                  "scheduleType": "recurring",
+                  "scheduleString": "0 5 * * *",
+                  "taskID": "APHSevenDayAllocation-00000000-1111-1111-1111-F810BE28D995"
+                  },
+                  
+                  
+                  
+                  
+                  
+                  {
+                  "scheduleType": "recurring",
+                  "scheduleString": "0 5 * * *",
+                  "taskID": "CardioActivityAndSleepSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66"
+                  },
+                  {
+                  "scheduleType": "recurring",
+                  "scheduleString": "0 5 * * *",
+                  "taskID": "CardioVascularHealthSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66"
+                  },
+                  {
+                  "scheduleType": "recurring",
+                  "scheduleString": "0 5 * * *",
+                  "taskID": "DietSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66"
+                  },
+                  {
+                  "scheduleType": "recurring",
+                  "scheduleString": "0 5 * * *",
+                  "taskID": "WellBeingAndRiskPerceptionSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66"
+                  }
+                  ]
+}
