@@ -10,7 +10,7 @@
 #import <CoreLocation/CoreLocation.h>
 /**
  
- Fitness test distance tracker is going to be used to judge distance between all geolocation points beginning from start: and ending at stop:.
+6-Minute Walk Test distance tracker is going to be used to judge distance between all geolocation points beginning from start: and ending at stop:.
  
  */
 typedef NS_ENUM(NSInteger, APHLocationManagerGPSSignalStrength) {

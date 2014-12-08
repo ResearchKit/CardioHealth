@@ -89,7 +89,7 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
         }
         
         {
-            RKSTAnswerFormat *format = [RKSTChoiceAnswerFormat choiceAnswerWithTextOptions:@[@"African-American", @"Other"]
+            RKSTAnswerFormat *format = [RKSTChoiceAnswerFormat choiceAnswerWithTextOptions:@[@"I prefer not to indicate an ethnicity", @"Alaska Native", @"American Indian", @"Asian", @"Black", @"Hispanic", @"Pacific Islander", @"White", @"Other"]
                                                                                      style:RKChoiceAnswerStyleSingleChoice];
             
             RKSTFormItem *item = [[RKSTFormItem alloc] initWithIdentifier:kHeartAgeTestDataEthnicity
@@ -110,18 +110,11 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
                                                          subtitle:NSLocalizedString(@"Smoking History",
                                                                                     @"Smoking History")];
         step.optional = NO;
-        {
-            RKSTFormItem *item = [[RKSTFormItem alloc] initWithIdentifier:kHeartAgeTestDataSmoke
-                                                                 text:NSLocalizedString(@"Have you ever smoked?",
-                                                                                        @"Have you ever smoked?")
-                                                         answerFormat:[RKSTBooleanAnswerFormat new]];
-            [stepQuestions addObject:item];
-        }
         
         {
             RKSTFormItem *item = [[RKSTFormItem alloc] initWithIdentifier:kHeartAgeTestDataCurrentlySmoke
-                                                                 text:NSLocalizedString(@"Do you still smoke?",
-                                                                                        @"Do you still smoke?")
+                                                                 text:NSLocalizedString(@"Do you smoke cigarettes?",
+                                                                                        @"Do you smoke cigarettes?")
                                                          answerFormat:[RKSTBooleanAnswerFormat new]];
             [stepQuestions addObject:item];
         }
@@ -156,7 +149,7 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
             format.minimum = @(40);
             
             RKSTFormItem *item = [[RKSTFormItem alloc] initWithIdentifier:kHeartAgeTestDataHDL
-                                                                 text:NSLocalizedString(@"HDL", @"HDL")
+                                                                 text:NSLocalizedString(@"HDL Cholesterol", @"HDL Cholesterol")
                                                          answerFormat:format];
             [stepQuestions addObject:item];
         }
@@ -195,8 +188,8 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
         
         {
             RKSTFormItem *item = [[RKSTFormItem alloc] initWithIdentifier:kHeartAgeTestDataHypertension
-                                                                 text:NSLocalizedString(@"Are you being treated for Hypertension?",
-                                                                                        @"Are you being treated for Hypertension?")
+                                                                 text:NSLocalizedString(@"Are you being treated for Hypertension (High Blood Pressure)?",
+                                                                                        @"Are you being treated for Hypertension (High Blood Pressure)?")
                                                          answerFormat:[RKSTBooleanAnswerFormat new]];
             [stepQuestions addObject:item];
         }
