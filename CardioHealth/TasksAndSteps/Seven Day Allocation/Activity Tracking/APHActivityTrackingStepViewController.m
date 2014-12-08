@@ -6,9 +6,9 @@
 //
 
 #import "APHActivityTrackingStepViewController.h"
+#import "APHAppDelegate.h"
 #import "APHFitnessAllocation.h"
 
-static NSString *kSevenDayFitnessStartDateKey  = @"sevenDayFitnessStartDateKey";
 static CGFloat metersPerMile = 1609.344;
 
 @interface APHActivityTrackingStepViewController () <APCPieGraphViewDatasource, APHFitnessAllocationDelegate>
@@ -18,7 +18,6 @@ static CGFloat metersPerMile = 1609.344;
 @property (weak, nonatomic) IBOutlet UIButton *btnToday;
 @property (weak, nonatomic) IBOutlet UIButton *btnWeek;
 
-@property (nonatomic, strong) APHFitnessAllocation *fitnessAllocation;
 @property (nonatomic, strong) NSArray *allocationDataset;
 
 @property (nonatomic) BOOL showTodaysDataAtViewLoad;
@@ -38,10 +37,8 @@ static CGFloat metersPerMile = 1609.344;
                                                                               style:UIBarButtonItemStylePlain
                                                                              target:self
                                                                              action:@selector(handleClose:)];
-    self.view.layer.backgroundColor = [UIColor colorWithWhite:0.973 alpha:1.000].CGColor;
     
-    self.fitnessAllocation = [[APHFitnessAllocation alloc] initWithAllocationStartDate:[self checkSevenDayFitnessStartDate]];
-    self.fitnessAllocation.delegate = self;
+    self.view.layer.backgroundColor = [UIColor colorWithWhite:0.973 alpha:1.000].CGColor;
     
     // Button Appearance
     [self.btnToday setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
@@ -67,19 +64,15 @@ static CGFloat metersPerMile = 1609.344;
     self.chartView.shouldAnimateLegend = NO;
     self.chartView.titleLabel.text = NSLocalizedString(@"Distance", @"Distance");
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(allocationDataIsAvailable:)
-                                                 name:APHSevenDayAllocationDataIsReadyNotification
-                                               object:nil];
+    if (self.showTodaysDataAtViewLoad) {
+        [self handleToday:self.btnToday];
+        self.showTodaysDataAtViewLoad = NO;
+    }
     
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:APHSevenDayAllocationDataIsReadyNotification
-                                                  object:nil];
-    
     [super viewWillDisappear:animated];
 }
 
@@ -105,17 +98,12 @@ static CGFloat metersPerMile = 1609.344;
     [self showDataForKind:-7];
 }
 
-- (void)allocationDataIsAvailable:(NSNotification *)notification
-{
-    if (self.showTodaysDataAtViewLoad) {
-        [self handleToday:self.btnToday];
-        self.showTodaysDataAtViewLoad = NO;
-    }
-}
-
 - (void)showDataForKind:(NSInteger)kind
 {
-    [self.fitnessAllocation allocationForDays:kind];
+    APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    [appDelegate.sevenDayFitnessAllocationData setDelegate:self];
+    [appDelegate.sevenDayFitnessAllocationData allocationForDays:kind];
 }
 
 - (void)handleClose:(UIBarButtonItem *)sender
@@ -164,17 +152,6 @@ static CGFloat metersPerMile = 1609.344;
         fitnessStartDate = [NSDate date];
         [self saveSevenDayFitnessStartDate:fitnessStartDate];
     }
-    
-    // remove before going to production
-    NSDateComponents *comp = [[NSDateComponents alloc] init];
-    comp.day = -5;
-    
-    NSDate *today = [[NSCalendar currentCalendar] dateBySettingHour:0 minute:0 second:0 ofDate:fitnessStartDate options:0];
-    NSDate *dummyDate = [[NSCalendar currentCalendar] dateByAddingComponents:comp
-                                                                      toDate:today
-                                                                     options:0];
-    
-    fitnessStartDate = dummyDate;
     
     return fitnessStartDate;
 }

@@ -7,6 +7,7 @@
  
 @import APCAppCore;
 #import "APHAppDelegate.h"
+#import "APHFitnessAllocation.h"
 
 /*********************************************************************************/
 #pragma mark - Initializations Options
@@ -93,7 +94,8 @@ static NSString *const kVideoShownKey = @"VideoShown";
             //TODO Need to setup a mechanism to gather sleep data like passive data collection.
             //           HKCategorySample *sleepSampleType = [HKCategorySample categorySampleWithType:[HKCategoryType categoryTypeForIdentifier:HKCategoryTypeIdentifierSleepAnalysis] value:HKCategoryValueSleepAnalysisAsleep startDate:[NSDate date] endDate:[NSDate date]];
         
-            self.healthKitTracker = [[APCHealthKitQuantityTracker alloc] initWithIdentifier:HKQuantityTypeIdentifierHeartRate withNotificationName:@"APCHeartRateUpdated"];
+            self.healthKitTracker = [[APCHealthKitQuantityTracker alloc] initWithIdentifier:HKQuantityTypeIdentifierHeartRate
+                                                                       withNotificationName:@"APCHeartRateUpdated"];
             [self.healthKitTracker start];
             
             //Setting the Audio Session Category for voice prompts when device is locked
@@ -116,7 +118,10 @@ static NSString *const kVideoShownKey = @"VideoShown";
             }
             
             HKQuantityType *quantityType = (HKQuantityType*)[HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierStepCount];
-            RKSTHealthCollector *healthCollector = [self.dataSubstrate.study addHealthCollectorWithSampleType:quantityType unit:[HKUnit countUnit] startDate:nil error:&error];
+            RKSTHealthCollector *healthCollector = [self.dataSubstrate.study addHealthCollectorWithSampleType:quantityType
+                                                                                                         unit:[HKUnit countUnit]
+                                                                                                    startDate:nil
+                                                                                                        error:&error];
             if (!healthCollector)
             {
                 NSLog(@"Error creating health collector: %@", error);
@@ -126,7 +131,10 @@ static NSString *const kVideoShownKey = @"VideoShown";
             
             //Collectors below added specifically for the cardio health application.
             HKQuantityType *flightsClimbedQuantityType = (HKQuantityType*)[HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierFlightsClimbed];
-            RKSTHealthCollector *flightsClimbedHealthCollector = [self.dataSubstrate.study addHealthCollectorWithSampleType:flightsClimbedQuantityType unit:[HKUnit countUnit] startDate:nil error:&error];
+            RKSTHealthCollector *flightsClimbedHealthCollector = [self.dataSubstrate.study addHealthCollectorWithSampleType:flightsClimbedQuantityType
+                                                                                                                       unit:[HKUnit countUnit]
+                                                                                                                  startDate:nil
+                                                                                                                      error:&error];
             if (!flightsClimbedHealthCollector)
             {
                 NSLog(@"Error creating flights climbed health collector: %@", error);
@@ -135,7 +143,10 @@ static NSString *const kVideoShownKey = @"VideoShown";
             }
             
             HKQuantityType *distanceWalkingRunningQuantityType = (HKQuantityType*)[HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierDistanceWalkingRunning];
-            RKSTHealthCollector *distanceWalkingRunningHealthCollector = [self.dataSubstrate.study addHealthCollectorWithSampleType:distanceWalkingRunningQuantityType unit:[HKUnit countUnit] startDate:nil error:&error];
+            RKSTHealthCollector *distanceWalkingRunningHealthCollector = [self.dataSubstrate.study addHealthCollectorWithSampleType:distanceWalkingRunningQuantityType
+                                                                                                                               unit:[HKUnit meterUnit]
+                                                                                                                          startDate:nil
+                                                                                                                              error:&error];
             if (!distanceWalkingRunningHealthCollector)
             {
                 NSLog(@"Error creating flights climbed health collector: %@", error);
@@ -144,18 +155,38 @@ static NSString *const kVideoShownKey = @"VideoShown";
             }
             
             HKQuantityType *cyclingQuantityType = (HKQuantityType*)[HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierDistanceCycling];
-            RKSTHealthCollector *cyclingHealthCollector = [self.dataSubstrate.study addHealthCollectorWithSampleType:cyclingQuantityType unit:[HKUnit countUnit] startDate:nil error:&error];
+            RKSTHealthCollector *cyclingHealthCollector = [self.dataSubstrate.study addHealthCollectorWithSampleType:cyclingQuantityType
+                                                                                                                unit:[HKUnit meterUnit]
+                                                                                                           startDate:nil
+                                                                                                               error:&error];
             if (!cyclingHealthCollector)
             {
                 NSLog(@"Error creating flights climbed health collector: %@", error);
                 [self.dataSubstrate.studyStore removeStudy:self.dataSubstrate.study error:nil];
                 goto errReturn;
             }
+            
+            //For the Seven Day Fitness Allocation
+            self.sevenDayFitnessAllocationData = [[APHFitnessAllocation alloc] initWithAllocationStartDate:[self checkSevenDayFitnessStartDate]];
+            goto errReturn;
         }
         
     errReturn:
         return;
     
+}
+
+- (NSDate *)checkSevenDayFitnessStartDate
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    NSDate *fitnessStartDate = [defaults objectForKey:kSevenDayFitnessStartDateKey];
+    
+    if (!fitnessStartDate) {
+        fitnessStartDate = [NSDate date];
+    }
+    
+    return fitnessStartDate;
 }
 
 /*********************************************************************************/

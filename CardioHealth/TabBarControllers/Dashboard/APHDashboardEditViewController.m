@@ -30,6 +30,7 @@
                 {
                     APCTableViewDashboardItem *item = [APCTableViewDashboardItem new];
                     item.caption = NSLocalizedString(@"Distance", @"");
+                    item.tintColor = [UIColor appTertiaryPurpleColor];
                     
                     [self.items addObject:item];
                     
@@ -39,6 +40,7 @@
                     
                     APCTableViewDashboardItem *item = [APCTableViewDashboardItem new];
                     item.caption = NSLocalizedString(@"Heart Rate", @"");
+                    item.tintColor = [UIColor appTertiaryYellowColor];
                     
                     [self.items addObject:item];
                 }
@@ -56,6 +58,16 @@
                     APCTableViewDashboardItem *item = [APCTableViewDashboardItem new];
                     item.caption = NSLocalizedString(@"Insights", @"");
                     
+                    [self.items addObject:item];
+                }
+                    break;
+                
+                case kAPHDashboardItemTypeSevenDayFitness:
+                {
+                    
+                    APCTableViewDashboardItem *item = [APCTableViewDashboardItem new];
+                    item.caption = NSLocalizedString(@"Seven Day Fitness", @"");
+                    item.tintColor = [UIColor appTertiaryGreenColor];
                     [self.items addObject:item];
                 }
                     break;
