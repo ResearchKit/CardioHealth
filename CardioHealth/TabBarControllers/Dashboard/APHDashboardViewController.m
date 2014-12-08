@@ -22,6 +22,8 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
 
 @property (nonatomic, strong) NSArray *allocationDataset;
 
+@property (nonatomic, strong) NSDateFormatter *dateFormatter;
+
 @end
 
 @implementation APHDashboardViewController
@@ -52,6 +54,7 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
         self.title = NSLocalizedString(@"Dashboard", @"Dashboard");
         
         _presentAnimator = [APCPresentAnimator new];
+        _dateFormatter = [NSDateFormatter new];
     }
     
     return self;
@@ -143,7 +146,12 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
         
         
         APCTableViewSection *section = [APCTableViewSection new];
-        section.sectionTitle = NSLocalizedString(@"Today", @"");
+        NSDate *dateToday = [NSDate date];
+        
+        self.dateFormatter.dateFormat = @"MMMM d";
+        
+        section.sectionTitle = [NSString stringWithFormat:@"%@, %@", NSLocalizedString(@"Today", @""), [self.dateFormatter stringFromDate:dateToday]];
+        section.rows = [NSArray arrayWithArray:rowItems];
         section.rows = [NSArray arrayWithArray:rowItems];
         [self.items addObject:section];
     }
