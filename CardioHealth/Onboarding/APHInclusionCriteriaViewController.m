@@ -52,7 +52,7 @@
 {
     {
         self.question1Label.textColor = [UIColor appSecondaryColor1];
-        self.question1Label.font = [UIFont appRegularFontWithSize:19.0f];
+        self.question1Label.font = [UIFont appRegularFontWithSize:15.0f];
         
         [self.question1Option1.titleLabel setFont:[UIFont appRegularFontWithSize:44.0]];
         [self.question1Option2.titleLabel setFont:[UIFont appRegularFontWithSize:44.0]];
@@ -60,7 +60,7 @@
     
     {
         self.question2Label.textColor = [UIColor appSecondaryColor1];
-        self.question2Label.font = [UIFont appRegularFontWithSize:19.0f];
+        self.question2Label.font = [UIFont appRegularFontWithSize:15.0f];
         
         [self.question2Option1.titleLabel setFont:[UIFont appRegularFontWithSize:44.0]];
         [self.question2Option2.titleLabel setFont:[UIFont appRegularFontWithSize:44.0]];
