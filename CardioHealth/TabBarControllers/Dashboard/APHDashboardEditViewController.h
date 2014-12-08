@@ -10,6 +10,7 @@
 typedef NS_ENUM(APCTableViewItemType, APHDashboardItemType) {
     kAPHDashboardItemTypeDistance,
     kAPHDashboardItemTypeHeartRate,
+    kAPHDashboardItemTypeSevenDayFitness,
     kAPHDashboardItemTypeAlerts,
     kAPHDashboardItemTypeInsights,
 };
