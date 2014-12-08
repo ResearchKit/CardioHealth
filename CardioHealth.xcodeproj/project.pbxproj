@@ -36,6 +36,10 @@
 		7B4104A119E5E46800592B96 /* APHFitnessTestRestComfortablyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B41049A19E5E46800592B96 /* APHFitnessTestRestComfortablyView.xib */; };
 		7B4104A219E5E46800592B96 /* APHFitnessTestRestView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B41049C19E5E46800592B96 /* APHFitnessTestRestView.m */; };
 		7B4104A319E5E46800592B96 /* APHFitnessTestRestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B41049D19E5E46800592B96 /* APHFitnessTestRestView.xib */; };
+		7B5BEC9A1A34F0B7007CEA94 /* cardio_activitysleep_survey.json in Resources */ = {isa = PBXBuildFile; fileRef = 7B5BEC961A34F0B7007CEA94 /* cardio_activitysleep_survey.json */; };
+		7B5BEC9B1A34F0B7007CEA94 /* cardio_CVhealth_survey.json in Resources */ = {isa = PBXBuildFile; fileRef = 7B5BEC971A34F0B7007CEA94 /* cardio_CVhealth_survey.json */; };
+		7B5BEC9C1A34F0B7007CEA94 /* cardio_diet_survey.json in Resources */ = {isa = PBXBuildFile; fileRef = 7B5BEC981A34F0B7007CEA94 /* cardio_diet_survey.json */; };
+		7B5BEC9D1A34F0B7007CEA94 /* cardio_wellbeing_survey.json in Resources */ = {isa = PBXBuildFile; fileRef = 7B5BEC991A34F0B7007CEA94 /* cardio_wellbeing_survey.json */; };
 		7B6753411A01540E005864E6 /* APHHeartAgeIntroStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B67533F1A01540E005864E6 /* APHHeartAgeIntroStepViewController.m */; };
 		7B6753421A01540E005864E6 /* APHHeartAgeIntroStepViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B6753401A01540E005864E6 /* APHHeartAgeIntroStepViewController.xib */; };
 		7B96D7421A02E4DB006D93C1 /* APHImportantDetailsTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B96D7411A02E4DB006D93C1 /* APHImportantDetailsTableViewController.storyboard */; };
@@ -155,6 +159,10 @@
 		7B41049B19E5E46800592B96 /* APHFitnessTestRestView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APHFitnessTestRestView.h; path = CustomViews/APHFitnessTestRestView.h; sourceTree = "<group>"; };
 		7B41049C19E5E46800592B96 /* APHFitnessTestRestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APHFitnessTestRestView.m; path = CustomViews/APHFitnessTestRestView.m; sourceTree = "<group>"; };
 		7B41049D19E5E46800592B96 /* APHFitnessTestRestView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = APHFitnessTestRestView.xib; path = CustomViews/APHFitnessTestRestView.xib; sourceTree = "<group>"; };
+		7B5BEC961A34F0B7007CEA94 /* cardio_activitysleep_survey.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cardio_activitysleep_survey.json; sourceTree = "<group>"; };
+		7B5BEC971A34F0B7007CEA94 /* cardio_CVhealth_survey.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cardio_CVhealth_survey.json; sourceTree = "<group>"; };
+		7B5BEC981A34F0B7007CEA94 /* cardio_diet_survey.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cardio_diet_survey.json; sourceTree = "<group>"; };
+		7B5BEC991A34F0B7007CEA94 /* cardio_wellbeing_survey.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cardio_wellbeing_survey.json; sourceTree = "<group>"; };
 		7B67533E1A01540E005864E6 /* APHHeartAgeIntroStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHHeartAgeIntroStepViewController.h; sourceTree = "<group>"; };
 		7B67533F1A01540E005864E6 /* APHHeartAgeIntroStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHHeartAgeIntroStepViewController.m; sourceTree = "<group>"; };
 		7B6753401A01540E005864E6 /* APHHeartAgeIntroStepViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = APHHeartAgeIntroStepViewController.xib; sourceTree = "<group>"; };
@@ -313,6 +321,17 @@
 			name = CustomViews;
 			sourceTree = "<group>";
 		};
+		7B5BEC951A34F0B7007CEA94 /* cardiosurveys */ = {
+			isa = PBXGroup;
+			children = (
+				7B5BEC961A34F0B7007CEA94 /* cardio_activitysleep_survey.json */,
+				7B5BEC971A34F0B7007CEA94 /* cardio_CVhealth_survey.json */,
+				7B5BEC981A34F0B7007CEA94 /* cardio_diet_survey.json */,
+				7B5BEC991A34F0B7007CEA94 /* cardio_wellbeing_survey.json */,
+			);
+			path = cardiosurveys;
+			sourceTree = "<group>";
+		};
 		7B67533C1A0153DB005864E6 /* Intro */ = {
 			isa = PBXGroup;
 			children = (
@@ -388,6 +407,7 @@
 		F55BBDF019D362D0003CA0F9 /* JSONs */ = {
 			isa = PBXGroup;
 			children = (
+				7B5BEC951A34F0B7007CEA94 /* cardiosurveys */,
 				5B0432691A305D3E000DC9ED /* TermsAndConditions.json */,
 				5B5A31331A10A78600552F7D /* WithdrawStudy.json */,
 				5BB2BAA31A10157B00684CCE /* Learn.json */,
@@ -624,12 +644,14 @@
 			files = (
 				7B96D7421A02E4DB006D93C1 /* APHImportantDetailsTableViewController.storyboard in Resources */,
 				F5165E7A19E86581003836CA /* APCParameters.json in Resources */,
+				7B5BEC9B1A34F0B7007CEA94 /* cardio_CVhealth_survey.json in Resources */,
 				08B972511A1FB4AF00316D49 /* APHHealthyHeartSummaryStepViewController.xib in Resources */,
 				5B5A31341A10A78600552F7D /* WithdrawStudy.json in Resources */,
 				F55BBE6719D362D0003CA0F9 /* Main.storyboard in Resources */,
 				08C56E391A15E7D100D3BF61 /* APHActivityTracking.storyboard in Resources */,
 				7BD73F7B19E8A20600F5DFF3 /* Intro.mp4 in Resources */,
 				7B6753421A01540E005864E6 /* APHHeartAgeIntroStepViewController.xib in Resources */,
+				7B5BEC9D1A34F0B7007CEA94 /* cardio_wellbeing_survey.json in Resources */,
 				5B04326A1A305D3E000DC9ED /* TermsAndConditions.json in Resources */,
 				F55BBE6A19D362D0003CA0F9 /* APHDashboard.storyboard in Resources */,
 				F55BBE6119D362D0003CA0F9 /* APHTasksAndSchedules.json in Resources */,
@@ -640,6 +662,8 @@
 				7B4104A319E5E46800592B96 /* APHFitnessTestRestView.xib in Resources */,
 				7B41049F19E5E46800592B96 /* APHFitnessSixMinuteFitnessTestView.xib in Resources */,
 				5BB2BAA41A10157B00684CCE /* Learn.json in Resources */,
+				7B5BEC9C1A34F0B7007CEA94 /* cardio_diet_survey.json in Resources */,
+				7B5BEC9A1A34F0B7007CEA94 /* cardio_activitysleep_survey.json in Resources */,
 				F55BBE6619D362D0003CA0F9 /* LaunchScreen.xib in Resources */,
 				7B4104A119E5E46800592B96 /* APHFitnessTestRestComfortablyView.xib in Resources */,
 				F5F6450A19D35BA2004CFBB2 /* Images.xcassets in Resources */,

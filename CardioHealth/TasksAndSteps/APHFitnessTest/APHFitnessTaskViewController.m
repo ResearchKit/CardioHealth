@@ -57,7 +57,7 @@ static NSInteger kUpdatedHeartRateTimeThreshold = 20;
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.navigationItem.title = NSLocalizedString(@"Fitness Test", @"");
+    self.navigationItem.title = NSLocalizedString(@"6-Minute Walk Test", @"");
 
     //setup heart rate tracker
     self.healthKitSampleTracker = [[APHFitnessTestHealthKitSampleTypeTracker alloc] init];
@@ -102,9 +102,9 @@ static NSInteger kUpdatedHeartRateTimeThreshold = 20;
     }
     
     {
-        //Introduction to fitness test
+        //Introduction to 6-Minute Walk Test
         RKSTActiveStep* step = [[RKSTActiveStep alloc] initWithIdentifier:kFitnessTestStep102];
-        step.title = NSLocalizedString(@"Fitness Test", @"");
+        step.title = NSLocalizedString(@"6-Minute Walk Test", @"");
         step.text = NSLocalizedString(@"Get Ready!", @"");
         step.countDownInterval = kCountDownTimer;
         step.shouldUseNextAsSkipButton = NO;
@@ -160,7 +160,7 @@ static NSInteger kUpdatedHeartRateTimeThreshold = 20;
         [steps addObject:step];
     }
 
-    RKSTOrderedTask  *task = [[RKSTOrderedTask alloc] initWithIdentifier:@"Fitness Test" steps:steps];
+    RKSTOrderedTask  *task = [[RKSTOrderedTask alloc] initWithIdentifier:@"6-Minute Walk Test" steps:steps];
     
     return  task;
 }
@@ -174,7 +174,7 @@ static NSInteger kUpdatedHeartRateTimeThreshold = 20;
     
     [super taskViewController:taskViewController stepViewControllerWillAppear:stepViewController];
     
-    taskViewController.navigationBar.topItem.title = NSLocalizedString(@"6 Minute Walk", @"6 Minute Walk");
+    taskViewController.navigationBar.topItem.title = NSLocalizedString(@"6-Minute Walk Test", @"6-Minute Walk Test");
     
     stepViewController = (RKSTStepViewController *) stepViewController;
     
@@ -306,12 +306,19 @@ static NSInteger kUpdatedHeartRateTimeThreshold = 20;
     if (step.identifier == kFitnessTestStep101) {
         controller = (APCInstructionStepViewController *)[[UIStoryboard storyboardWithName:@"APCInstructionStep" bundle:[NSBundle appleCoreBundle]] instantiateInitialViewController];
         APCInstructionStepViewController  *instController = (APCInstructionStepViewController*)controller;
-        instController.imagesArray = @[ @"6minwalk", @"6minwalk-Icon-1", @"6minwalk-Icon-2", @"Updated-Data-Cardio" ];
-        instController.headingsArray = @[ @"Test Exercise Tolerance", @"Test Exercise Tolerance", @"Test Exercise Tolerance", @"Test Exercise Tolerance" ];
+        instController.imagesArray = @[ @"6minwalk",
+                                        @"tutorial-2",
+                                        @"6minwalk-Icon-1",
+                                        @"6minwalk-Icon-2",
+                                        @"Updated-Data-Cardio" ];
+        
+        instController.headingsArray = @[ @"Measure 6-Minute Walk Distance", @"Measure 6-Minute Walk Distance", @"Measure 6-Minute Walk Distance", @"Measure 6-Minute Walk Distance", @"Measure 6-Minute Walk Distance" ];
+        
         instController.messagesArray  = @[
                                           @"Once you tap Get Started, you will have 5 seconds until this test begins tracking your movements.",
+                                          @"If you have a wearable device linked to your phone that can track your heart rate, please put it on and make sure it captures your resting heart rate before you start.",
                                           @"Begin walking at your fastest possible pace for 6 minutes.",
-                                          @"After 6 minutes expires and if you're tracking your BPM sit down and rest for 3 minutes.",
+                                          @"After 6 minutes expires and you are wearing a heart rate sensing device, you will be asked to sit down and rest for 3 minutes.",
                                           @"After the test is finished, your results will be analyzed and available on the dashboard. You will be notified when analysis is ready."
                                           ];
         UIButton  *button = [UIButton buttonWithType:UIButtonTypeCustom];

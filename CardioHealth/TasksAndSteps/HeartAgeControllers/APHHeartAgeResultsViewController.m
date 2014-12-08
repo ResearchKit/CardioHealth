@@ -305,12 +305,13 @@ static CGFloat kSectionHeight = 64.0;
 {
     APHHeartAgeRecommendationCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kRecommendationsCellIdentifier];
     
-    if (indexPath.section == APHHeartAgeSummarySectionHeartAge) {
-        cell.recommendationTitle = NSLocalizedString(@"Time to Make a Change", @"Time to make a change");
-        cell.recommendationContent = NSLocalizedString(@"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", @"Placeholder copy");
+   cell.recommendationTitle = NSLocalizedString(@"What does my risk score mean?", @"What does my risk score mean?");
+    
+    if (indexPath.section == APHHeartAgeSummarySectionTenYearRiskEstimate) {
+        cell.recommendationContent = NSLocalizedString(@"In general, a 10-year risk >7.5% is considered high and warrants discussion with your doctor. There may be other medical or family history that can increase your risk and these should be discussed with your doctor.", @"Placeholder copy");
     } else {
-        cell.recommendationTitle = NSLocalizedString(@"Recommendations", @"Recommendations");
-        cell.recommendationContent = NSLocalizedString(@"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", @"Placeholder copy");
+ 
+        cell.recommendationContent = NSLocalizedString(@"For official recommendations, please refer to the guide from the American College of Cardiology - http://tools.cardiosource.org/ASCVD-Risk-Estimator/#page_reference_patient", @"Placeholder copy");
     }
     
     return cell;
