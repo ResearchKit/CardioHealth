@@ -310,7 +310,7 @@ static NSInteger kUpdatedHeartRateTimeThreshold = 20;
                                         @"tutorial-2",
                                         @"6minwalk-Icon-1",
                                         @"6minwalk-Icon-2",
-                                        @"Updated-Data-Cardio" ];
+                                        @"illustration_dataanalysis@3x 2" ];
         
         instController.headingsArray = @[ @"Measure 6-Minute Walk Distance", @"Measure 6-Minute Walk Distance", @"Measure 6-Minute Walk Distance", @"Measure 6-Minute Walk Distance", @"Measure 6-Minute Walk Distance" ];
         
