@@ -251,6 +251,7 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
         pieGraphCell.titleLabel.text = fitnessItem.caption;
         pieGraphCell.tintColor = fitnessItem.tintColor;
         pieGraphCell.pieGraphView.shouldAnimateLegend = NO;
+        [pieGraphCell.pieGraphView setNeedsLayout];
     }
     
     return cell;
