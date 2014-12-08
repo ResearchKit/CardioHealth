@@ -7,6 +7,7 @@
  
 @import APCAppCore;
 #import "APHAppDelegate.h"
+#import "APHFitnessAllocation.h"
 
 /*********************************************************************************/
 #pragma mark - Initializations Options
@@ -164,11 +165,28 @@ static NSString *const kVideoShownKey = @"VideoShown";
                 [self.dataSubstrate.studyStore removeStudy:self.dataSubstrate.study error:nil];
                 goto errReturn;
             }
+            
+            //For the Seven Day Fitness Allocation
+            self.sevenDayFitnessAllocationData = [[APHFitnessAllocation alloc] initWithAllocationStartDate:[self checkSevenDayFitnessStartDate]];
+            goto errReturn;
         }
         
     errReturn:
         return;
     
+}
+
+- (NSDate *)checkSevenDayFitnessStartDate
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    NSDate *fitnessStartDate = [defaults objectForKey:kSevenDayFitnessStartDateKey];
+    
+    if (!fitnessStartDate) {
+        fitnessStartDate = [NSDate date];
+    }
+    
+    return fitnessStartDate;
 }
 
 /*********************************************************************************/
