@@ -61,6 +61,16 @@
                     [self.items addObject:item];
                 }
                     break;
+                
+                case kAPHDashboardItemTypeSevenDayFitness:
+                {
+                    
+                    APCTableViewDashboardItem *item = [APCTableViewDashboardItem new];
+                    item.caption = NSLocalizedString(@"Seven Day Fitness", @"");
+                    
+                    [self.items addObject:item];
+                }
+                    break;
                 default:
                     break;
             }
