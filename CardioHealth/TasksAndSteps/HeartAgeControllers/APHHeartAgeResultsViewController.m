@@ -64,7 +64,7 @@ static CGFloat kSectionHeight = 64.0;
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
+    [super viewWillAppear:animated];
     
     self.navigationItem.title = NSLocalizedString(@"Activity Complete", @"Activity Complete");
     self.navigationItem.leftBarButtonItem = nil;

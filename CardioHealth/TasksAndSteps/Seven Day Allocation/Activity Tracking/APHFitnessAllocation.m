@@ -22,6 +22,8 @@ NSString *const kDatasetSegmentKey      = @"segmentKey";
 NSString *const kDatasetDateHourKey     = @"dateHourKey";
 NSString *const kSegmentSumKey          = @"segmentSumKey";
 
+NSString *const kSevenDayFitnessStartDateKey  = @"sevenDayFitnessStartDateKey";
+
 NSString *const APHSevenDayAllocationDataIsReadyNotification = @"APHSevenDayAllocationDataIsReadyNotification";
 
 NSString *const kDatasetDateKeyFormat   = @"YYYY-MM-dd-hh";
@@ -96,8 +98,6 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
                                                          readTypes:readDataTypes
                                                         completion:^(BOOL success, NSError *error) {
                                                             if (!success) {
-                                                                NSLog(@"You didn't allow HealthKit to access these read/write data types. In your app, try to handle this error gracefully when a user decides not to provide access. The error was: %@. If you're using a simulator, try it on a device.", error);
-                                                                
                                                                 return;
                                                             }
                                                             
@@ -388,8 +388,6 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
                                                } else {
                                                    [self.datasetForTheWeek addObject:dataPoint];
                                                }
-                                               
-                                               NSLog(@"%@: %f", date, value);
                                            }
                                        }];
             dispatch_async(dispatch_get_main_queue(), ^{
