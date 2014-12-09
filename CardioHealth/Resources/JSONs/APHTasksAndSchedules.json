@@ -16,7 +16,7 @@
               "taskClassName": "APHFitnessTaskViewController"
               },
               {
-              "taskTitle": "7 Day Fitness Allocation",
+              "taskTitle": "7-Day Activity and Sleep Assessment",
               "taskID": "APHSevenDayAllocation-00000000-1111-1111-1111-F810BE28D995",
               "taskClassName": "APHSevenDayFitnessAllocationTaskViewController"
               },
@@ -70,11 +70,6 @@
                   "scheduleString": "0 5 * * *",
                   "taskID": "APHSevenDayAllocation-00000000-1111-1111-1111-F810BE28D995"
                   },
-                  
-                  
-                  
-                  
-                  
                   {
                   "scheduleType": "recurring",
                   "scheduleString": "0 5 * * *",
