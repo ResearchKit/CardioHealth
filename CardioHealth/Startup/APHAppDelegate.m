@@ -265,7 +265,7 @@ static NSString *const kVideoShownKey = @"VideoShown";
             case RKSTConsentSectionTypeSensorData:
             {
                 section.title = @"Sensor and Health Data";
-                section.content = @"There are sensors in your phone that can help assess activity, plus Apple’s Health app on your phone can store health and activity data from other devices.";
+                section.content = @"This study will gather sensor and health data from your phone.";
             }
                 break;
             case RKSTConsentSectionTypeDeIdentification:
