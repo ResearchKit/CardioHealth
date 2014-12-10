@@ -39,6 +39,8 @@ static NSString *const kVideoShownKey = @"VideoShown";
                                                    HKQuantityTypeIdentifierDistanceWalkingRunning,
                                                    HKQuantityTypeIdentifierDistanceCycling,
                                                    HKQuantityTypeIdentifierBloodPressureSystolic,
+                                                   HKQuantityTypeIdentifierBloodGlucose,
+                                                   HKQuantityTypeIdentifierBloodPressureDiastolic,
                                                    @{kHKCategoryTypeKey : HKCategoryTypeIdentifierSleepAnalysis}
                                                    ],
                                            kHKWritePermissionsKey                : @[
