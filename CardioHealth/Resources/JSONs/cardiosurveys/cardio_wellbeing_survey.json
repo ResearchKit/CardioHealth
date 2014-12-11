@@ -5,7 +5,7 @@
                {
                  "guid": "854afd00-3d2b-41c2-9b36-17c72287819b",
                  "identifier": "satisfiedwith_life",
-                 "prompt": "The following question asks how satisfied you feel, on a scale from 0 to 10. Zero means you feel “not at all satisfied” and 10 means you feel “completely satisfied” Overall, how satisfied are you with life as a whole these days?",
+                 "prompt": "1.\nThe following question asks how satisfied you feel, on a scale from 0 to 10. Zero means you feel “not at all satisfied” and 10 means you feel “completely satisfied” Overall, how satisfied are you with life as a whole these days?",
                  "constraints":{
                  
                  "dataType":"integer",
