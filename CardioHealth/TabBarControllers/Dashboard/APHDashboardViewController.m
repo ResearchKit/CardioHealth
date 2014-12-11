@@ -207,7 +207,7 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
                 case kAPHDashboardItemTypeSevenDayFitness:
                 {
                     APHTableViewDashboardFitnessControlItem *item = [APHTableViewDashboardFitnessControlItem new];
-                    item.caption = NSLocalizedString(@"Seven Day Fitness", @"");
+                    item.caption = NSLocalizedString(@"7-Day Assessment", @"");
                     item.identifier = kAPCDashboardPieGraphTableViewCellIdentifier;
                     item.tintColor = [UIColor appTertiaryGreenColor];
                     item.editable = YES;
