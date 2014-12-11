@@ -25,9 +25,13 @@ static NSString *kSevenDayFitnessCompleteStep = @"sevenDayFitnessCompleteStep";
     [super viewDidLoad];
     
     self.showsProgressInNavigationBar = NO;
-    self.navigationBar.topItem.title = NSLocalizedString(@"Activity Tracking", @"Activity Tracking");
+
 }
 
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.navigationBar.topItem.title = NSLocalizedString(@"7-Day Assessment", nil);
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
@@ -40,7 +44,7 @@ static NSString *kSevenDayFitnessCompleteStep = @"sevenDayFitnessCompleteStep";
     
     {
         RKSTInstructionStep *step = [[RKSTInstructionStep alloc] initWithIdentifier:kSevenDayFitnessInstructionStep];
-        step.title = NSLocalizedString(@"7 Day Fitness Allocation", @"7 Day Fitness Allocation");
+        step.title = NSLocalizedString(@"7-Day Activity and Sleep Assessment", @"7-Day Activity and Sleep Assessment");
         step.detailText = @"Some instructions";
         
         [steps addObject:step];
@@ -71,7 +75,7 @@ static NSString *kSevenDayFitnessCompleteStep = @"sevenDayFitnessCompleteStep";
                                                                                   bundle:[NSBundle appleCoreBundle]] instantiateInitialViewController];
         controller.imagesArray = @[@"tutorial-1", @"tutorial-2"];
         controller.headingsArray = @[
-                                     NSLocalizedString(@"7 Day Fitness Allocation", @"7 Day Fitness Allocation"),
+                                     NSLocalizedString(@"7-Day Activity and Sleep Assessment", @"7-Day Activity and Sleep Assessment"),
                                      NSLocalizedString(@"Keep Your Phone On You", @"Keep Your Phone On You")
                                      ];
         controller.messagesArray = @[
@@ -96,14 +100,6 @@ static NSString *kSevenDayFitnessCompleteStep = @"sevenDayFitnessCompleteStep";
     }
     
     return stepVC;
-}
-
-- (void)taskViewController:(RKSTTaskViewController *)taskViewController stepViewControllerWillAppear:(RKSTStepViewController *)stepViewController
-{
-    
-    [super taskViewController:taskViewController stepViewControllerWillAppear:stepViewController];
-    
-    taskViewController.navigationBar.topItem.title = NSLocalizedString(@"7 Day Fitness Allocation", @"7 Day Fitness Allocation");
 }
 
 @end
