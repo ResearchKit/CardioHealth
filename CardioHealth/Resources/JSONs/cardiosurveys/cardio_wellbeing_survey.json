@@ -80,7 +80,7 @@
                  {
                  "guid": "854aed00-3d2c-41c2-9b36-17a7228781aa",
                  "identifier": "riskfactors",
-                 "prompt": "6.\nOver the next 10 years how likely do you think it is that you personally attack, stroke, or die due to cardiovascular disease? (choose one) ",
+                 "prompt": "6.\nOver the next 10 years how likely do you think it is that you personally will have a heart attack, stroke, or die due to cardiovascular disease? (choose one) ",
                  "constraints": {
                  "dataType": "integer",
                  "enumeration": [
