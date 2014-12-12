@@ -44,6 +44,7 @@
 		7B5BEC9D1A34F0B7007CEA94 /* cardio_wellbeing_survey.json in Resources */ = {isa = PBXBuildFile; fileRef = 7B5BEC991A34F0B7007CEA94 /* cardio_wellbeing_survey.json */; };
 		7B5C43941A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C43921A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.m */; };
 		7B5C43951A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B5C43931A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.xib */; };
+		7B5C43A41A3B98EF001A22F5 /* APHWellBeingSurveyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C43A31A3B98EF001A22F5 /* APHWellBeingSurveyController.m */; };
 		7B6753411A01540E005864E6 /* APHHeartAgeIntroStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B67533F1A01540E005864E6 /* APHHeartAgeIntroStepViewController.m */; };
 		7B6753421A01540E005864E6 /* APHHeartAgeIntroStepViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B6753401A01540E005864E6 /* APHHeartAgeIntroStepViewController.xib */; };
 		7B96D7421A02E4DB006D93C1 /* APHImportantDetailsTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B96D7411A02E4DB006D93C1 /* APHImportantDetailsTableViewController.storyboard */; };
@@ -172,6 +173,8 @@
 		7B5C43911A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHRiskEstimatorWebViewController.h; sourceTree = "<group>"; };
 		7B5C43921A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHRiskEstimatorWebViewController.m; sourceTree = "<group>"; };
 		7B5C43931A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = APHRiskEstimatorWebViewController.xib; sourceTree = "<group>"; };
+		7B5C43A21A3B98EF001A22F5 /* APHWellBeingSurveyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHWellBeingSurveyController.h; sourceTree = "<group>"; };
+		7B5C43A31A3B98EF001A22F5 /* APHWellBeingSurveyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHWellBeingSurveyController.m; sourceTree = "<group>"; };
 		7B67533E1A01540E005864E6 /* APHHeartAgeIntroStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHHeartAgeIntroStepViewController.h; sourceTree = "<group>"; };
 		7B67533F1A01540E005864E6 /* APHHeartAgeIntroStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHHeartAgeIntroStepViewController.m; sourceTree = "<group>"; };
 		7B6753401A01540E005864E6 /* APHHeartAgeIntroStepViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = APHHeartAgeIntroStepViewController.xib; sourceTree = "<group>"; };
@@ -350,6 +353,15 @@
 			path = cardiosurveys;
 			sourceTree = "<group>";
 		};
+		7B5C43A01A3B989C001A22F5 /* Well-Being and Risk Perception Survey */ = {
+			isa = PBXGroup;
+			children = (
+				7B5C43A21A3B98EF001A22F5 /* APHWellBeingSurveyController.h */,
+				7B5C43A31A3B98EF001A22F5 /* APHWellBeingSurveyController.m */,
+			);
+			name = "Well-Being and Risk Perception Survey";
+			sourceTree = "<group>";
+		};
 		7B67533C1A0153DB005864E6 /* Intro */ = {
 			isa = PBXGroup;
 			children = (
@@ -474,6 +486,7 @@
 		F55BBE2219D362D0003CA0F9 /* TasksAndSteps */ = {
 			isa = PBXGroup;
 			children = (
+				7B5C43A01A3B989C001A22F5 /* Well-Being and Risk Perception Survey */,
 				7B41045519E5D94F00592B96 /* APHFitnessTest */,
 				F5481F0619E4820100D84617 /* HeartAgeControllers */,
 				08C2327E1A15796E00DB4EF9 /* Seven Day Allocation */,
@@ -739,6 +752,7 @@
 				F5F644FF19D35BA2004CFBB2 /* main.m in Sources */,
 				7B6753411A01540E005864E6 /* APHHeartAgeIntroStepViewController.m in Sources */,
 				7B41047E19E5D94F00592B96 /* APHFitnessTaskViewController.m in Sources */,
+				7B5C43A41A3B98EF001A22F5 /* APHWellBeingSurveyController.m in Sources */,
 				087EC8571A2E2594009A6768 /* APHFitnessAllocation.m in Sources */,
 				08B9724B1A1FB00700316D49 /* APHHealthyHeartTaskViewController.m in Sources */,
 				F55BBE5719D362D0003CA0F9 /* NSString+CustomMethods.m in Sources */,
