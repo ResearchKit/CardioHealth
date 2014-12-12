@@ -11,6 +11,7 @@
 #import "APHHeartAgeIntroStepViewController.h"
 
 static NSString *MainStudyIdentifier = @"com.cardiovascular.heartAgeTest";
+static NSString *kKludgeIdentifierForHeartAgeTaskB = @"APHHeartAgeB-7259AC18-D711-47A6-ADBD-6CFCECDED1DF";
 
 // Introduction Step and Summary Key
 static NSString *kHeartAgeIntroduction = @"HeartAgeIntroduction";
@@ -40,6 +41,13 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    self.navigationBar.topItem.title = NSLocalizedString(@"Heart Age Test", nil);
+    
+    if ([self.task.identifier isEqualToString:kKludgeIdentifierForHeartAgeTaskB]) {
+        
+        self.navigationBar.topItem.title = NSLocalizedString(@"Heart and Stroke Risk", nil);
+    }
 }
 
 /*********************************************************************************/
