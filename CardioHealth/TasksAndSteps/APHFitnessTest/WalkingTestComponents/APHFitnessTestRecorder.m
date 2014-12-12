@@ -334,27 +334,35 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
     self.dictionaryRecord[@"heartRateBPM"] = self.heartRateRecords;
     self.dictionaryRecord[@"stepCount"] = self.stepCountRecords;
     
+    id<RKSTRecorderDelegate> localDelegate = self.delegate;
+    
     if (self.dictionaryRecord) {
-        
-        NSLog(@"%@", self.dictionaryRecord);
-        
-        id<RKSTRecorderDelegate> localDelegate = self.delegate;
         if (localDelegate && [localDelegate respondsToSelector:@selector(recorder:didCompleteWithResult:)]) {
             RKSTDataResult* result = [[RKSTDataResult alloc] initWithIdentifier:self.step.identifier];
             result.contentType = [self mimeType];
-            NSError* err;
-            result.data = [NSJSONSerialization dataWithJSONObject:self.dictionaryRecord options:(NSJSONWritingOptions)0 error:&err];
             
-            if (err) {
-                
+            NSError  *serializationError = nil;
+            result.data = [NSJSONSerialization dataWithJSONObject:self.dictionaryRecord options:(NSJSONWritingOptions)0 error:&serializationError];
+            
+            if (serializationError != nil) {
+                if (localDelegate != nil && [localDelegate respondsToSelector:@selector(recorder:didFailWithError:)]) {
+                    [localDelegate recorder:self didFailWithError:serializationError];
+                }
+            } else {
+                result.filename = self.fileName;
+                [localDelegate recorder:self didCompleteWithResult:result];
+                self.dictionaryRecord = nil;
             }
-            
-            result.filename = self.fileName;
-            [localDelegate recorder:self didCompleteWithResult:result];
-            self.dictionaryRecord = nil;
         }
-    }else{
+    } else {
         
+        if (localDelegate != nil && [localDelegate respondsToSelector:@selector(recorder:didFailWithError:)]) {
+            NSError  *error = [NSError errorWithDomain:@"Application Internal Error"
+                                          code:999
+                                      userInfo:@{ NSLocalizedDescriptionKey : NSLocalizedString(@"APHFitnessTestRecorder has no recorded data", @"") }
+                               ];
+            [localDelegate recorder:self didFailWithError:error];
+        }
     }
     
     [super stop];

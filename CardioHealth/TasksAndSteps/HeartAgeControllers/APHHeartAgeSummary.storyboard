@@ -246,7 +246,7 @@
                                             <outlet property="riskCellTitle" destination="jVm-bv-Yld" id="yGM-TB-NgK"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RecommendationCell" rowHeight="77" id="op0-73-85b" customClass="APHHeartAgeRecommendationCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RecommendationCell" rowHeight="107" id="op0-73-85b" customClass="APHHeartAgeRecommendationCell">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="op0-73-85b" id="J0r-JC-61X">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -258,19 +258,31 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" lineBreakMode="wordWrap" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="axs-tL-S2Q">
-                                                    <rect key="frame" x="18" y="36.5" width="564" height="21.5"/>
+                                                    <rect key="frame" x="18" y="36" width="564" height="21.5"/>
                                                     <string key="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OPs-DT-SXY">
+                                                    <rect key="frame" x="18" y="65" width="564" height="30"/>
+                                                    <state key="normal" title="ASCVD Risk Estimator">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="ASCVDRiskEstimatorActionButton:" destination="VDE-ac-cZA" eventType="touchUpInside" id="5ya-Ik-9bT"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="ivn-43-NIO" firstAttribute="top" secondItem="J0r-JC-61X" secondAttribute="topMargin" id="0E7-9W-lvT"/>
                                                 <constraint firstItem="axs-tL-S2Q" firstAttribute="top" secondItem="ivn-43-NIO" secondAttribute="bottom" constant="8" id="Kpp-4v-kpM"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="OPs-DT-SXY" secondAttribute="trailing" constant="10" id="MfK-kA-GxN"/>
+                                                <constraint firstItem="OPs-DT-SXY" firstAttribute="leading" secondItem="J0r-JC-61X" secondAttribute="leadingMargin" constant="10" id="Qh4-XA-4lF"/>
+                                                <constraint firstItem="OPs-DT-SXY" firstAttribute="top" secondItem="axs-tL-S2Q" secondAttribute="bottom" constant="7.5" id="VhF-gc-eFa"/>
                                                 <constraint firstItem="ivn-43-NIO" firstAttribute="trailing" secondItem="J0r-JC-61X" secondAttribute="trailing" id="bkx-Hj-TmK"/>
                                                 <constraint firstItem="axs-tL-S2Q" firstAttribute="leading" secondItem="J0r-JC-61X" secondAttribute="leadingMargin" constant="10" id="kKd-d1-Bng"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="axs-tL-S2Q" secondAttribute="bottom" constant="11" id="qCK-hz-0aU"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="OPs-DT-SXY" secondAttribute="bottom" constant="4" id="njP-Va-aqg"/>
                                                 <constraint firstItem="ivn-43-NIO" firstAttribute="leading" secondItem="J0r-JC-61X" secondAttribute="leading" id="qfR-ma-yvW"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="axs-tL-S2Q" secondAttribute="trailing" constant="10" id="vdL-bg-vK7"/>
                                             </constraints>
