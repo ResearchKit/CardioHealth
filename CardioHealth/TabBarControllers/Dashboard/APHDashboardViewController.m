@@ -184,7 +184,7 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
                     APCTableViewDashboardGraphItem *item = [APCTableViewDashboardGraphItem new];
                     item.caption = NSLocalizedString(@"Steps", @"");
                     item.graphData = self.stepScoring;
-                    item.detailText = [NSString stringWithFormat:NSLocalizedString(@"Average : %lu ft", @"Average: {value} ft"), [[self.stepScoring averageDataPoint] integerValue]];
+                    item.detailText = [NSString stringWithFormat:NSLocalizedString(@"Average : %lu", @"Average: {value}"), [[self.stepScoring averageDataPoint] integerValue]];
                     item.identifier = kAPCDashboardGraphTableViewCellIdentifier;
                     item.editable = YES;
                     item.tintColor = [UIColor appTertiaryPurpleColor];
@@ -280,6 +280,9 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
 }
 
 #pragma mark - APCDashboardGraphTableViewCellDelegate methods
+- (void)updateVisibleRowsInTableView:(NSNotification *)notification {
+    [self prepareData];
+}
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     //cell.contentView.subviews
