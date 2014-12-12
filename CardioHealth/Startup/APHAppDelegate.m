@@ -109,7 +109,6 @@ static NSString *const kVideoShownKey = @"VideoShown";
             
             NSError *activationError = nil;
             [audioSession setActive:YES error:&activationError];
-            
             APCLogError2(activationError);
             
             RKSTMotionActivityCollector *motionCollector = [self.dataSubstrate.study addMotionActivityCollectorWithStartDate:nil error:&error];
