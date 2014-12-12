@@ -265,7 +265,7 @@ static NSString *const kVideoShownKey = @"VideoShown";
             case RKSTConsentSectionTypeSensorData:
             {
                 section.title = @"Sensor and Health Data";
-                section.content = @"This study will gather sensor and health data from your phone.";
+                section.summary = @"This study will gather sensor and health data from your phone.";
             }
                 break;
             case RKSTConsentSectionTypeDeIdentification:
