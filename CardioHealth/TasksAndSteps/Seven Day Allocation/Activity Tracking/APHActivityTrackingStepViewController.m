@@ -56,7 +56,7 @@ static CGFloat metersPerMile = 1609.344;
     
     self.navigationItem.hidesBackButton = YES;
     self.navigationItem.leftBarButtonItem = nil;
-    self.navigationController.navigationBar.topItem.title = NSLocalizedString(@"7 Day Fitness Allocation", @"7 Day Fitness Allocation");
+    //self.navigationController.navigationBar.topItem.title = NSLocalizedString(@"7-Day Assessment", @"7-Day Assessment");
     
     self.chartView.datasource = self;
     self.chartView.legendPaddingHeight = 60.0;
