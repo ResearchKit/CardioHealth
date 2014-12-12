@@ -42,6 +42,8 @@
 		7B5BEC9B1A34F0B7007CEA94 /* cardio_CVhealth_survey.json in Resources */ = {isa = PBXBuildFile; fileRef = 7B5BEC971A34F0B7007CEA94 /* cardio_CVhealth_survey.json */; };
 		7B5BEC9C1A34F0B7007CEA94 /* cardio_diet_survey.json in Resources */ = {isa = PBXBuildFile; fileRef = 7B5BEC981A34F0B7007CEA94 /* cardio_diet_survey.json */; };
 		7B5BEC9D1A34F0B7007CEA94 /* cardio_wellbeing_survey.json in Resources */ = {isa = PBXBuildFile; fileRef = 7B5BEC991A34F0B7007CEA94 /* cardio_wellbeing_survey.json */; };
+		7B5C43941A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C43921A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.m */; };
+		7B5C43951A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B5C43931A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.xib */; };
 		7B6753411A01540E005864E6 /* APHHeartAgeIntroStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B67533F1A01540E005864E6 /* APHHeartAgeIntroStepViewController.m */; };
 		7B6753421A01540E005864E6 /* APHHeartAgeIntroStepViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B6753401A01540E005864E6 /* APHHeartAgeIntroStepViewController.xib */; };
 		7B96D7421A02E4DB006D93C1 /* APHImportantDetailsTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B96D7411A02E4DB006D93C1 /* APHImportantDetailsTableViewController.storyboard */; };
@@ -167,6 +169,9 @@
 		7B5BEC971A34F0B7007CEA94 /* cardio_CVhealth_survey.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cardio_CVhealth_survey.json; sourceTree = "<group>"; };
 		7B5BEC981A34F0B7007CEA94 /* cardio_diet_survey.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cardio_diet_survey.json; sourceTree = "<group>"; };
 		7B5BEC991A34F0B7007CEA94 /* cardio_wellbeing_survey.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cardio_wellbeing_survey.json; sourceTree = "<group>"; };
+		7B5C43911A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHRiskEstimatorWebViewController.h; sourceTree = "<group>"; };
+		7B5C43921A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHRiskEstimatorWebViewController.m; sourceTree = "<group>"; };
+		7B5C43931A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = APHRiskEstimatorWebViewController.xib; sourceTree = "<group>"; };
 		7B67533E1A01540E005864E6 /* APHHeartAgeIntroStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHHeartAgeIntroStepViewController.h; sourceTree = "<group>"; };
 		7B67533F1A01540E005864E6 /* APHHeartAgeIntroStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHHeartAgeIntroStepViewController.m; sourceTree = "<group>"; };
 		7B6753401A01540E005864E6 /* APHHeartAgeIntroStepViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = APHHeartAgeIntroStepViewController.xib; sourceTree = "<group>"; };
@@ -371,6 +376,9 @@
 				7BEEFA5D1A003E04004F6C87 /* APHHeartAgeResultsViewController.h */,
 				7BEEFA5E1A003E04004F6C87 /* APHHeartAgeResultsViewController.m */,
 				08FA97FA1A10630F002317C8 /* APHHeartAgeSummary.storyboard */,
+				7B5C43911A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.h */,
+				7B5C43921A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.m */,
+				7B5C43931A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.xib */,
 				08FA98001A108686002317C8 /* Heart Age Summary Cells */,
 			);
 			name = Summary;
@@ -677,6 +685,7 @@
 				F573809319E45D62008A8354 /* StudyOverview.json in Resources */,
 				7B4104A319E5E46800592B96 /* APHFitnessTestRestView.xib in Resources */,
 				7B41049F19E5E46800592B96 /* APHFitnessSixMinuteFitnessTestView.xib in Resources */,
+				7B5C43951A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.xib in Resources */,
 				5BB2BAA41A10157B00684CCE /* Learn.json in Resources */,
 				7B5BEC9C1A34F0B7007CEA94 /* cardio_diet_survey.json in Resources */,
 				7B5BEC9A1A34F0B7007CEA94 /* cardio_activitysleep_survey.json in Resources */,
@@ -723,6 +732,7 @@
 				F55BBE6519D362D0003CA0F9 /* APHAppDelegate.m in Sources */,
 				7B4104A219E5E46800592B96 /* APHFitnessTestRestView.m in Sources */,
 				7BEEFA601A003E04004F6C87 /* APHHeartAgeResultsViewController.m in Sources */,
+				7B5C43941A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.m in Sources */,
 				7B96D7481A0300D8006D93C1 /* APHImportantDetailsViewController.m in Sources */,
 				7B41049119E5D94F00592B96 /* APHFitnessTestRecorder.m in Sources */,
 				08FA98091A108C33002317C8 /* APHHeartAgeRecommendationCell.m in Sources */,
