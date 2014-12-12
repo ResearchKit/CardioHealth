@@ -10,6 +10,7 @@
 #import "APHHeartAgeSummaryCell.h"
 #import "APHHeartAgeRiskEstimateCell.h"
 #import "APHHeartAgeRecommendationCell.h"
+#import "APHRiskEstimatorWebViewController.h"
 
 typedef NS_ENUM(NSUInteger, APHHeartAgeSummarySections)
 {
@@ -40,6 +41,7 @@ static CGFloat kSectionHeight = 64.0;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
+- (IBAction)ASCVDRiskEstimatorActionButton:(id)sender;
 @end
 
 @implementation APHHeartAgeResultsViewController
@@ -311,10 +313,20 @@ static CGFloat kSectionHeight = 64.0;
         cell.recommendationContent = NSLocalizedString(@"In general, a 10-year risk >7.5% is considered high and warrants discussion with your doctor. There may be other medical or family history that can increase your risk and these should be discussed with your doctor.", @"Placeholder copy");
     } else {
  
-        cell.recommendationContent = NSLocalizedString(@"For official recommendations, please refer to the guide from the American College of Cardiology - http://tools.cardiosource.org/ASCVD-Risk-Estimator/#page_reference_patient", @"Placeholder copy");
+        cell.recommendationContent = NSLocalizedString(@"For official recommendations, please refer to the guide from the American College of Cardiology -", @"Placeholder copy");
+        
+        
     }
     
     return cell;
 }
 
+- (IBAction)ASCVDRiskEstimatorActionButton:(id)sender {
+    
+    APHRiskEstimatorWebViewController *viewController = [[APHRiskEstimatorWebViewController alloc] init];
+    
+
+    [self presentViewController:viewController animated:YES completion:nil];
+    
+}
 @end
