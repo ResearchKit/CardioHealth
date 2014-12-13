@@ -29,7 +29,7 @@
                 case kAPHDashboardItemTypeDistance:
                 {
                     APCTableViewDashboardItem *item = [APCTableViewDashboardItem new];
-                    item.caption = NSLocalizedString(@"Distance", @"");
+                    item.caption = NSLocalizedString(@"Steps", @"");
                     item.tintColor = [UIColor appTertiaryPurpleColor];
                     
                     [self.items addObject:item];

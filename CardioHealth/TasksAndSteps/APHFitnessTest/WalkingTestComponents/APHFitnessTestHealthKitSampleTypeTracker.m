@@ -67,7 +67,7 @@
                 
             } else {
 
-                [error handle];
+                APCLogError2(error);
             }
         }];
         
@@ -91,7 +91,7 @@
                 
             } else {
                 
-                [error handle];
+                APCLogError2(error);
             }
             
         }];
