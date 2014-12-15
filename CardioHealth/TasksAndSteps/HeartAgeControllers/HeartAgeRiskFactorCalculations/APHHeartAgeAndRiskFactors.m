@@ -148,6 +148,12 @@ NSString *const kSummaryLifetimeRisk = @"lifetimeRisk";
     NSString *gender = results[kHeartAgeTestDataGender];
     NSString *ethnicity = results[kHeartAgeTestDataEthnicity];
     
+    if ([ethnicity isEqualToString:@"Black"]) {
+        ethnicity = kLookupEthnicityAfricanAmerican;
+    } else {
+        ethnicity = kLookupEthnicityOther;
+    }
+    
     // Coefficients used for computing individual sum.
     NSArray *coefficients = self.heartAgeParametersLookup[gender][ethnicity][kLookupParameters][kLookupCoefficients];
     
