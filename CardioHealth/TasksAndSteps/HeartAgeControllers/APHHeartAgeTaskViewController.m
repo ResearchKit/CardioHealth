@@ -270,7 +270,8 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
     
     
     UIAlertAction* ok = [UIAlertAction
-                         actionWithTitle:@"OK"
+                         actionWithTitle:NSLocalizedString(@"OK",
+                                                           @"OK")
                          style:UIAlertActionStyleDefault
                          handler:^(UIAlertAction * action) {
                              [alerVC dismissViewControllerAnimated:YES completion:nil];
