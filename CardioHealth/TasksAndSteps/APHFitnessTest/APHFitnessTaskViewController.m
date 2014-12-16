@@ -6,6 +6,7 @@
 // 
  
 #import "APHFitnessTaskViewController.h"
+#import <AudioToolbox/AudioToolbox.h> 
 
 static NSString *MainStudyIdentifier = @"com.cardioVascular.fitnessTest";
 static NSString *kdataResultsFileName = @"FitnessTestResult.json";
@@ -38,7 +39,6 @@ static NSInteger kUpdatedHeartRateTimeThreshold = 20;
 
 @property (strong, nonatomic) CLLocation *previousLocation;
 @property (assign) CLLocationDistance totalDistance;
-
 @end
 
 @implementation APHFitnessTaskViewController
@@ -152,10 +152,10 @@ static NSInteger kUpdatedHeartRateTimeThreshold = 20;
     {
         //Finished
         RKSTActiveStep* step = [[RKSTActiveStep alloc] initWithIdentifier:kFitnessTestStep105];
+        
         step.recorderConfigurations = @[];
         step.title = NSLocalizedString(@"Good job.", @"");
-        step.text = NSLocalizedString(@"Great job.", @"");
-        
+        step.text = NSLocalizedString(@"You have completed the task.", @"You have completed the task.");
         step.shouldUseNextAsSkipButton = NO;
         [steps addObject:step];
     }
@@ -296,6 +296,28 @@ static NSInteger kUpdatedHeartRateTimeThreshold = 20;
         
         taskViewController.navigationBar.topItem.title = NSLocalizedString(@"Task Complete", @"Task Complete");
         
+        //Check if there is a heart rate monitor attached and sending data.
+        APCAppDelegate *appDelegate = (APCAppDelegate*) [[UIApplication sharedApplication] delegate];
+        NSInteger totalUpdates = appDelegate.healthKitTracker.totalUpdates;
+        NSDate *lastUpdate = appDelegate.healthKitTracker.lastUpdate;
+        
+        NSTimeInterval secondsBetween = [[NSDate date] timeIntervalSinceDate:lastUpdate];
+        
+        BOOL heartIsUpdating = NO;
+        
+        if (totalUpdates > kUpdatedHeartRateThreshold && secondsBetween < kUpdatedHeartRateTimeThreshold) {
+            heartIsUpdating = YES;
+        }
+        
+        if (heartIsUpdating) {
+            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+            
+            AVSpeechUtterance *utterance = [AVSpeechUtterance
+                                            speechUtteranceWithString:NSLocalizedString(@"You have completed the task.", @"You have completed the task.")];
+            AVSpeechSynthesizer *synth = [[AVSpeechSynthesizer alloc] init];
+            utterance.rate = 0.1;
+            [synth speakUtterance:utterance];
+        }
     }
 }
 
