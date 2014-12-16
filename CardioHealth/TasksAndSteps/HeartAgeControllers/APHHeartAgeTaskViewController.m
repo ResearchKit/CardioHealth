@@ -262,10 +262,8 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
 
 - (void)showAlert:(NSString *)title andMessage:(NSString*)message
 {
-    UIAlertController* alerVC = [UIAlertController alertControllerWithTitle:NSLocalizedString(title,
-                                                                                              title)
-                                                                    message:NSLocalizedString(message,
-                                                                                              message)
+    UIAlertController* alerVC = [UIAlertController alertControllerWithTitle:title
+                                                                    message:message
                                                              preferredStyle:UIAlertControllerStyleAlert];
     
     
