@@ -32,7 +32,7 @@
               "taskTitle" : "Cardiovascular Health Survey",
               "taskID": "CardioVascularHealthSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66",
               "taskFileName" : "cardio_CVhealth_survey",
-              "taskClassName" : "APCGenericSurveyTaskViewController"
+              "taskClassName" : "APHCardiovascularHealthSurveyController"
               },
               
               {
