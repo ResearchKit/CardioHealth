@@ -287,7 +287,7 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
 
 - (BOOL)questionStepResultFieldsAreComplete:(NSString *)stepIdentifier {
 
-    BOOL returnValue = NO;
+   BOOL noPass = NO;
 
     RKSTStepResult *stepResult = [self.result stepResultForStepIdentifier:stepIdentifier];
     
@@ -295,16 +295,14 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
     
     for (RKSTQuestionResult *questionResult in questionsFields) {
         
-        returnValue = YES;
-        
         if (questionResult.answer == [NSNull null]) {
-            returnValue = NO;
+            noPass = YES;
             
             break;
         }
     }
     
-    return returnValue;
+    return !noPass ? YES : NO;
 }
 
 
