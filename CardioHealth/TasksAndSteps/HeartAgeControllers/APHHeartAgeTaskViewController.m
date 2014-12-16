@@ -287,16 +287,20 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
 
 - (BOOL)questionStepResultFieldsAreComplete:(NSString *)stepIdentifier {
 
-    BOOL returnValue = YES;
+    BOOL returnValue = NO;
 
     RKSTStepResult *stepResult = [self.result stepResultForStepIdentifier:stepIdentifier];
     
     NSArray *questionsFields = stepResult.results;
     
     for (RKSTQuestionResult *questionResult in questionsFields) {
-    
+        
+        returnValue = YES;
+        
         if (questionResult.answer == [NSNull null]) {
             returnValue = NO;
+            
+            break;
         }
     }
     
@@ -361,9 +365,11 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
         shouldShowStep = [self questionStepResultFieldsAreComplete:self.currentStepViewController.step.identifier];
         
         if (!shouldShowStep) {
-            [self showAlert:@"Missing Information" andMessage:@"An answer is required."];
+            
+            [self showAlert:NSLocalizedString(@"Missing Information", @"Missing Information") andMessage:NSLocalizedString(@"An answer is required.", @"An answer is required.")];
+            
         } else if (!self.shouldShowResultsStep) {
-            [self showAlert:@"There are missing answers from the previous step." andMessage:@"All fields are required."];
+            [self showAlert:NSLocalizedString(@"There are missing answers from the previous step.", @"There are missing answers from the previous step.") andMessage:NSLocalizedString(@"All fields are required.", @"All fields are required.")];
             
             //Set shouldShowStep to NO so we do not show the next step.
             shouldShowStep = self.shouldShowResultsStep;
@@ -377,7 +383,7 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
         
         if (!shouldShowStep) {
             
-            [self showAlert:@"Missing Information" andMessage:@"An answer is required."];
+            [self showAlert:NSLocalizedString(@"Missing Information", @"Missing Information") andMessage:NSLocalizedString(@"An answer is required.", @"An answer is required.")];
         }
     }
 
@@ -478,7 +484,7 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
         
         if (!self.shouldShowResultsStep) {
             
-            [self showAlert:@"There are missing answers from the previous step." andMessage:@"All fields are required."];
+            [self showAlert:NSLocalizedString(@"There are missing answers from the previous step.", @"There are missing answers from the previous step.") andMessage:NSLocalizedString(@"All fields are required.", @"All fields are required.")];
         }
     }
 }
