@@ -3,7 +3,7 @@
     "identifier":"Diet_survey_cardio",
     "questions":[
                  {
-                 "guid":"21987ad2-4846-48a4-aa80-27c3371186c0",
+                 "guid":"21987ad2-4846-48a4-aa80-27c3371186a2",
                  "identifier":"fruit",
                  "prompt":"1.\nHow many cups of fruit do you eat in an average day?",
                  "constraints":{
@@ -19,7 +19,7 @@
                  },
                  
                  {
-                 "guid":"21987af2-4846-48a4-aa80-27c3371186c0",
+                 "guid":"21987af2-4846-48a4-aa80-27c3371186a3",
                  "identifier":"vegetable",
                  "prompt":"2.\nHow many cups of vegetables do you eat in an average day?",
                  "constraints":{
@@ -35,7 +35,7 @@
                  },
                  
                  {
-                 "guid":"a872f85a-c157-457b-890e-9e28eeed6efa",
+                 "guid":"a872f85a-c157-457b-890e-9e28eeed6ea4",
                  "identifier":"fish",
                  "prompt":"3.\nDo you eat 2 servings of fish or more weekly?",
                  "constraints":{
@@ -48,7 +48,7 @@
                  },
                  
                  {
-                 "guid":"e872f85a-c157-457f-890f-9e28eeed6efa",
+                 "guid":"e872f85a-c157-457f-890f-9e28eeed6ea5",
                  "identifier":"grains",
                  "prompt":"4.\nDo you eat 3 servings of whole grains or more daily?",
                  "constraints":{
@@ -61,7 +61,7 @@
                  },
                  
                  {
-                 "guid":"e872f85c-c157-457b-890f-9e28eeed6efa",
+                 "guid":"e872f85c-c157-457b-890f-9e28eeed6ea6",
                  "identifier":"bev/sugar",
                  "prompt":"5.\nDo you drink less than 36 ounces (450 calories) of beverages with added sugar weekly?",
                  "constraints":{
@@ -73,7 +73,7 @@
                  "type":"SurveyQuestion"
                  },
                  {
-                 "guid":"e872f85c-c157-457b-890f-9e28eeed6efa",
+                 "guid":"e872f85c-c157-457b-890f-9e28eeed6ea1",
                  "identifier":"sodium",
                  "prompt":"6.\nDo you eat less than 1500 mg of sodium daily?",
                  "constraints":{
