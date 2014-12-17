@@ -51,10 +51,12 @@
     
     if ([HKHealthStore isHealthDataAvailable]) {
 
-        self.observerQuery = [[HKObserverQuery alloc] initWithSampleType:heartRateType predicate:nil updateHandler:^(HKObserverQuery *query, HKObserverQueryCompletionHandler completionHandler, NSError *error) {
+        NSPredicate *predicate = [HKQuery predicateForSamplesWithStartDate:[NSDate date] endDate:nil options:HKQueryOptionNone];
+        
+        self.observerQuery = [[HKObserverQuery alloc] initWithSampleType:heartRateType predicate:predicate updateHandler:^(HKObserverQuery *query, HKObserverQueryCompletionHandler completionHandler, NSError *error) {
             if (!error) {
                 
-                [self.healthStore mostRecentQuantitySampleOfType:heartRateType predicate:nil completion:^(HKQuantity *mostRecentQuantity, NSError *error) {
+                [self.healthStore mostRecentQuantitySampleOfType:heartRateType predicate:predicate completion:^(HKQuantity *mostRecentQuantity, NSError *error) {
                     
                     HKUnit * heartBPM = [[HKUnit countUnit] unitDividedByUnit:[HKUnit minuteUnit]];
                     double heartRate;                    
@@ -74,11 +76,11 @@
         //Execute query
         [self.healthStore executeQuery:self.observerQuery];
         
-        self.stepObserverQuery = [[HKObserverQuery alloc] initWithSampleType:stepsCountType predicate:nil updateHandler:^(HKObserverQuery *query, HKObserverQueryCompletionHandler completionHandler, NSError *error) {
+        self.stepObserverQuery = [[HKObserverQuery alloc] initWithSampleType:stepsCountType predicate:predicate updateHandler:^(HKObserverQuery *query, HKObserverQueryCompletionHandler completionHandler, NSError *error) {
             if (!error) {
                 
                 HKQuantityType *stepsCountType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierStepCount];
-                [self.healthStore mostRecentQuantitySampleOfType:stepsCountType predicate:nil completion:^(HKQuantity *mostRecentQuantity, NSError *error) {
+                [self.healthStore mostRecentQuantitySampleOfType:stepsCountType predicate:predicate completion:^(HKQuantity *mostRecentQuantity, NSError *error) {
                     
                     HKUnit * stepCountUnit = [HKUnit countUnit];
                     self.stepCount = [mostRecentQuantity doubleValueForUnit:stepCountUnit];
