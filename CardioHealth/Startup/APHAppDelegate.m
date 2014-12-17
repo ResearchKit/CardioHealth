@@ -50,7 +50,16 @@ static NSString *const kVideoShownKey = @"VideoShown";
                                            kAppServicesListRequiredKey           : @[
                                                    @(kSignUpPermissionsTypeLocation),
                                                    @(kSignUpPermissionsTypeCoremotion)
-                                                   ]
+                                                   ],
+                                           kAppProfileElementsListKey            : @[
+                                                   @(kAPCUserInfoItemTypeEmail),
+                                                   @(kAPCUserInfoItemTypeDateOfBirth),
+                                                   @(kAPCUserInfoItemTypeBiologicalSex),
+                                                   @(kAPCUserInfoItemTypeHeight),
+                                                   @(kAPCUserInfoItemTypeWeight),
+                                                   @(kAPCUserInfoItemTypeWakeUpTime),
+                                                   @(kAPCUserInfoItemTypeSleepTime),
+                                                   ],
                                            }];
     self.initializationOptions = dictionary;
 }
@@ -319,7 +328,7 @@ static NSString *const kVideoShownKey = @"VideoShown";
                 break;
             case RKSTConsentSectionTypeAllowWithdraw:
             {
-                section.content = @"Your authorization for the use and/or disclosure of your health information will expire December 31, 2060.\n\nVOLUNTARY PARTICIPATION AND WITHDRAWAL\nYour participation in this study is voluntary. You do not have to sign this consent form. But if you do not, you will not be able to participate in this research study. You may decide not to participate or you may leave the study at any time. Your decision will not result in any penalty or loss of benefits to which you are entitled.\n● You are not obligated to participate in this study.\n● Your questions should be answered clearly and to your satisfaction, before you choose to participate in the study.\n● You have a right to download or transfer a copy of all of your study data.\n● By agreeing to participate you do not waive any of your legal rights.\n\nIf you choose to withdraw from the research study, we will stop to collect your study data. At the end of the study period we will stop collecting your data, even if the application remains on your phone and you keep using it. If you were interested in joining another study afterward, we would ask you to complete another consent, like this one, explaining the risks and benefits of the new study.\n\nThe Study Principal Investigator or the sponsor may also withdraw you from the study without your consent at any time for any reason, including if it is in your best interest, you do not consent to continue in the study after being told of changes in the research that may affect you, or if the study is cancelled.";
+                section.content = @"Your authorization for the use and/or disclosure of your health information will expire December 31, 2060.\n\nVOLUNTARY PARTICIPATION AND WITHDRAWAL\nYour participation in this study is voluntary. You do not have to sign this consent form. But if you do not, you will not be able to participate in this research study. You may decide not to participate or you may leave the study at any time. Your decision will not result in any penalty or loss of benefits to which you are entitled.\n● You are not obligated to participate in this study.\n● Your questions should be answered clearly and to your satisfaction, before you choose to participate in the study.\n● You have a right to download or transfer a copy of all of your study data.\n● By agreeing to participate you do not waive any of your legal rights.\n\nIf you choose to withdraw from the research study, we will stop collecting your study data. At the end of the study period we will stop collecting your data, even if the application remains on your phone and you keep using it. If you were interested in joining another study afterward, we would ask you to complete another consent, like this one, explaining the risks and benefits of the new study.\n\nThe Study Principal Investigator or the sponsor may also withdraw you from the study without your consent at any time for any reason, including if it is in your best interest, you do not consent to continue in the study after being told of changes in the research that may affect you, or if the study is cancelled.";
             }
                 break;
             default:
