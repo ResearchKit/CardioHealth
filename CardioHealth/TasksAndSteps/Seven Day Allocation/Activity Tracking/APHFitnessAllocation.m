@@ -126,6 +126,19 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
     }
 }
 
+- (NSNumber *)totalDistanceForDays:(NSInteger)days
+{
+    NSNumber *totalDistance = nil;
+    
+    if (days == 0) {
+        totalDistance = [self.datasetForToday valueForKeyPath:@"@sum.datasetValueKey"];
+    } else {
+        totalDistance = [self.datasetForTheWeek valueForKeyPath:@"@sum.datasetValueKey"];
+    }
+    
+    return totalDistance;
+}
+
 - (void)reloadAllocationDatasets
 {
     [self runStatsCollectionQueryForKind:SevenDayFitnessDatasetKindToday];
