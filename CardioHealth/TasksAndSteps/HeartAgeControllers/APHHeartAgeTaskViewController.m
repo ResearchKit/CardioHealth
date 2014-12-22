@@ -119,7 +119,7 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
         step.optional = NO;
         
         {
-            RKSTFormItem *item = [[RKSTFormItem alloc] initWithIdentifier:kHeartAgeTestDataCurrentlySmoke
+            RKSTFormItem *item = [[RKSTFormItem alloc] initWithIdentifier:kHeartAgeTestDataSmoke
                                                                  text:NSLocalizedString(@"Do you smoke cigarettes?",
                                                                                         @"Do you smoke cigarettes?")
                                                          answerFormat:[RKSTBooleanAnswerFormat new]];
