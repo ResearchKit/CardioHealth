@@ -178,7 +178,10 @@ static NSString *const kVideoShownKey = @"VideoShown";
             }
             
             //For the Seven Day Fitness Allocation
-            self.sevenDayFitnessAllocationData = [[APHFitnessAllocation alloc] initWithAllocationStartDate:[self checkSevenDayFitnessStartDate]];
+            NSDate *fitnessStartDate = [self checkSevenDayFitnessStartDate];
+            if (fitnessStartDate) {
+                self.sevenDayFitnessAllocationData = [[APHFitnessAllocation alloc] initWithAllocationStartDate:fitnessStartDate];
+            }
             goto errReturn;
         }
         
@@ -192,10 +195,6 @@ static NSString *const kVideoShownKey = @"VideoShown";
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     NSDate *fitnessStartDate = [defaults objectForKey:kSevenDayFitnessStartDateKey];
-    
-    if (!fitnessStartDate) {
-        fitnessStartDate = [NSDate date];
-    }
     
     return fitnessStartDate;
 }
