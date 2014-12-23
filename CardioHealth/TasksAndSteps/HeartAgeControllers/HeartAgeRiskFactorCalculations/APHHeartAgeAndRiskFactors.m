@@ -170,9 +170,9 @@ NSString *const kSummaryLifetimeRisk = @"lifetimeRisk";
     double individualSum = 0;
     
     // Looping through individual coefficients to compute the individual sum.
-    for (NSNumber *obj in coefficients) {
+    for (NSUInteger idx = 0; idx < coefficients.count; idx++) {
         
-        NSUInteger idx = [coefficients indexOfObject:obj];
+        NSNumber *obj = [coefficients objectAtIndex:idx];
         double coefficientTimesValue = 0;
         
         switch (idx) {
@@ -207,10 +207,10 @@ NSString *const kSummaryLifetimeRisk = @"lifetimeRisk";
                 coefficientTimesValue = (logActualAge * logUnTreatedSystolic) * [obj doubleValue];
                 break;
             case 10:
-                coefficientTimesValue = [results[kHeartAgeTestDataCurrentlySmoke] integerValue] * [obj doubleValue];
+                coefficientTimesValue = [results[kHeartAgeTestDataSmoke] integerValue] * [obj doubleValue];
                 break;
             case 11:
-                coefficientTimesValue = (logActualAge * [results[kHeartAgeTestDataCurrentlySmoke] integerValue]) * [obj doubleValue];
+                coefficientTimesValue = (logActualAge * [results[kHeartAgeTestDataSmoke] integerValue]) * [obj doubleValue];
                 break;
             case 12:
                 coefficientTimesValue = [results[kHeartAgeTestDataDiabetes] integerValue] * [obj doubleValue];
@@ -255,7 +255,7 @@ NSString *const kSummaryLifetimeRisk = @"lifetimeRisk";
                                      kHeartAgeTestDataHDL: self.heartAgeParametersLookup[kLookupOptimalRiskFactors][kLookupOptimalRiskFactorHDL],
                                      kHeartAgeTestDataSystolicBloodPressure: self.heartAgeParametersLookup[kLookupOptimalRiskFactors][kLookupOptimalRiskFactorSystolicBP],
                                      kHeartAgeTestDataHypertension: [NSNumber numberWithBool:NO],
-                                     kHeartAgeTestDataCurrentlySmoke: [NSNumber numberWithBool:NO],
+                                     kHeartAgeTestDataSmoke: [NSNumber numberWithBool:NO],
                                      kHeartAgeTestDataDiabetes: [NSNumber numberWithBool:NO]
                                      };
     
