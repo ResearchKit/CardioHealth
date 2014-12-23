@@ -151,6 +151,9 @@ static CGFloat metersPerMile = 1609.344;
     if (!fitnessStartDate) {
         fitnessStartDate = [NSDate date];
         [self saveSevenDayFitnessStartDate:fitnessStartDate];
+        
+        APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
+        appDelegate.sevenDayFitnessAllocationData = [[APHFitnessAllocation alloc] initWithAllocationStartDate:fitnessStartDate];
     }
     
     return fitnessStartDate;
@@ -171,7 +174,9 @@ static CGFloat metersPerMile = 1609.344;
 {
     self.allocationDataset = dataset;
     
-    CGFloat totalDistance = [[self.allocationDataset valueForKeyPath:@"@sum.segmentSumKey"] floatValue];
+    APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    CGFloat totalDistance = [[appDelegate.sevenDayFitnessAllocationData totalDistanceForDays:kind] floatValue];
     
     self.chartView.valueLabel.text = [NSString stringWithFormat:@"%0.1f mi", totalDistance/metersPerMile];
     
