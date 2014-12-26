@@ -66,7 +66,7 @@
                 {
                     
                     APCTableViewDashboardItem *item = [APCTableViewDashboardItem new];
-                    item.caption = NSLocalizedString(@"Seven Day Fitness", @"");
+                    item.caption = NSLocalizedString(@"7-Day Assessment", @"");
                     item.tintColor = [UIColor appTertiaryGreenColor];
                     [self.items addObject:item];
                 }
