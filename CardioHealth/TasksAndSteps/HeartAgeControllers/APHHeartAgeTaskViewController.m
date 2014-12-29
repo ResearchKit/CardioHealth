@@ -354,8 +354,6 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
 {
     BOOL shouldShowStep = YES;
     
-    taskViewController.navigationBar.topItem.title = NSLocalizedString(@"Heart Age Test", @"Heart Age Test");
-
     if ([step.identifier isEqualToString:@"HeartAgeResult"]) {
         
         shouldShowStep = [self questionStepResultFieldsAreComplete:self.currentStepViewController.step.identifier];
