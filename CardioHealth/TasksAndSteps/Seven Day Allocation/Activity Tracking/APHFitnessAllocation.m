@@ -54,6 +54,8 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
 @property (nonatomic, strong) NSString *segmentModerate;
 @property (nonatomic, strong) NSString *segmentVigorous;
 
+@property (nonatomic, strong) NSString *segmentSleep;
+
 @end
 
 @implementation APHFitnessAllocation
@@ -84,6 +86,7 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
             
             _datasetNormalized = nil;
             
+            _segmentSleep = NSLocalizedString(@"Sleep", @"Sleep");
             _segmentInactive = NSLocalizedString(@"Inactive", @"Inactive");
             _segmentSedentary = NSLocalizedString(@"Sedentary", @"Sedentary");
             _segmentModerate = NSLocalizedString(@"Moderate", @"Moderate");
@@ -166,7 +169,7 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
     // available, since the queries to build these datasets gets fired at -initWithAllocationStartDate.
     
     NSMutableArray *normalDataset = [NSMutableArray array];
-    NSArray *segments = @[self.segmentInactive, self.segmentSedentary, self.segmentModerate, self.segmentVigorous];
+    NSArray *segments = @[self.segmentSleep , self.segmentInactive, self.segmentSedentary, self.segmentModerate, self.segmentVigorous];
     
     for (NSString *segmentId in segments) {
         NSMutableDictionary *entry = [NSMutableDictionary new];
@@ -189,7 +192,9 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
         
         UIColor *segmentColor = nil;
         
-        if ([segmentId isEqualToString:self.segmentInactive]) {
+        if ([segmentId isEqualToString:self.segmentSleep]) {
+            segmentColor =[APHTheme colorForActivitySleep];
+        } else if ([segmentId isEqualToString:self.segmentInactive]) {
             segmentColor = [APHTheme colorForActivityInactive];
         } else if ([segmentId isEqualToString:self.segmentSedentary]) {
             segmentColor = [APHTheme colorForActivitySedentary];
