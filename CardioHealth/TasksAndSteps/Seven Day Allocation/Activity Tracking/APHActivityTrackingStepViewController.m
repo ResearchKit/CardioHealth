@@ -11,7 +11,7 @@
 
 static CGFloat metersPerMile = 1609.344;
 
-@interface APHActivityTrackingStepViewController () <APCPieGraphViewDatasource, APHFitnessAllocationDelegate>
+@interface APHActivityTrackingStepViewController () <APCPieGraphViewDatasource>
 
 @property (weak, nonatomic) IBOutlet UILabel *daysRemaining;
 @property (weak, nonatomic) IBOutlet APCPieGraphView *chartView;
@@ -52,6 +52,8 @@ static CGFloat metersPerMile = 1609.344;
 {
     [super viewWillAppear:animated];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(datasetDidUpdate:) name:APHSevenDayAllocationDataIsReadyNotification object:nil];
+    
     self.showTodaysDataAtViewLoad = YES;
     
     self.navigationItem.hidesBackButton = YES;
@@ -73,6 +75,8 @@ static CGFloat metersPerMile = 1609.344;
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:APHSevenDayAllocationDataIsReadyNotification object:nil];
+    
     [super viewWillDisappear:animated];
 }
 
@@ -102,7 +106,6 @@ static CGFloat metersPerMile = 1609.344;
 {
     APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    [appDelegate.sevenDayFitnessAllocationData setDelegate:self];
     [appDelegate.sevenDayFitnessAllocationData allocationForDays:kind];
 }
 
@@ -170,13 +173,13 @@ static CGFloat metersPerMile = 1609.344;
 
 #pragma mark - Fitness Allocation Delegate
 
-- (void)datasetDidUpdate:(NSArray *)dataset forKind:(NSInteger)kind
+- (void)datasetDidUpdate:(NSNotification *)notif
 {
-    self.allocationDataset = dataset;
-    
     APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    CGFloat totalDistance = [[appDelegate.sevenDayFitnessAllocationData totalDistanceForDays:kind] floatValue];
+    self.allocationDataset = [appDelegate.sevenDayFitnessAllocationData allocationForDays:0];
+    
+    CGFloat totalDistance = [[appDelegate.sevenDayFitnessAllocationData totalDistanceForDays:0] floatValue];
     
     self.chartView.valueLabel.text = [NSString stringWithFormat:@"%0.1f mi", totalDistance/metersPerMile];
     

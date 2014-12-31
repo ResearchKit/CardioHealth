@@ -14,7 +14,7 @@
 static NSString * const kAPCBasicTableViewCellIdentifier       = @"APCBasicTableViewCell";
 static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetailTableViewCell";
 
-@interface APHDashboardViewController ()<UIViewControllerTransitioningDelegate, APCPieGraphViewDatasource, APHFitnessAllocationDelegate>
+@interface APHDashboardViewController ()<UIViewControllerTransitioningDelegate, APCPieGraphViewDatasource>
 
 @property (nonatomic, strong) NSMutableArray *rowItemsOrder;
 
@@ -88,7 +88,6 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
     
     APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    [appDelegate.sevenDayFitnessAllocationData setDelegate:self];
     [appDelegate.sevenDayFitnessAllocationData allocationForDays:0];
 }
 
