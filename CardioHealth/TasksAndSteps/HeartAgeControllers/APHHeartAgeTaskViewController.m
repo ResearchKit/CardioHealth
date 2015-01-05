@@ -227,13 +227,7 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
 
 
     self.shouldShowResultsStep = YES;
-    
-    RKSTOrderedTask  *task = nil;
-    
-    if ([self.task isKindOfClass:[RKSTOrderedTask class]]) {
-        task =  (RKSTOrderedTask *)self.task;
-    }
-    
+        
     self.heartAgeTaskQuestionIndex = @{
                                        kHeartAgeFormStepBiographicAndDemographic: @[
                                                kHeartAgeTestDataAge,
