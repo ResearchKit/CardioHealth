@@ -3,6 +3,7 @@
 ### Objective-C ###
 # OS X
 .DS_Store
+*.swp
 
 # Xcode
 build/
