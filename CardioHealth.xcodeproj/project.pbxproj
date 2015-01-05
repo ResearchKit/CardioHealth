@@ -624,6 +624,7 @@
 		F5F644F119D35BA2004CFBB2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = APH;
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = "Apple, Inc.";
 				TargetAttributes = {
