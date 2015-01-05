@@ -76,10 +76,10 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
 {
     [super viewWillAppear:animated];
     
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(updatePieChart:)
-//                                                 name:APHSevenDayAllocationDataIsReadyNotification
-//                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updatePieChart:)
+                                                 name:APHSevenDayAllocationDataIsReadyNotification
+                                               object:nil];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     self.rowItemsOrder = [NSMutableArray arrayWithArray:[defaults objectForKey:kAPCDashboardRowItemsOrder]];
@@ -94,8 +94,9 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-//    [[NSNotificationCenter defaultCenter] removeObserver:self
-//                                              forKeyPath:APHSevenDayAllocationDataIsReadyNotification];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:APHSevenDayAllocationDataIsReadyNotification
+                                                  object:nil];
     
     [super viewWillDisappear:animated];
 }
@@ -106,6 +107,14 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
 }
 
 #pragma mark - Data
+
+- (void)updatePieChart:(NSNotification *)notification
+{
+    NSLog(@"7-Day Allocation notification received.");
+    APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    [appDelegate.sevenDayFitnessAllocationData allocationForDays:0];
+}
 
 - (void)prepareScoringObjects {
     
@@ -343,6 +352,7 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
 - (void)datasetDidUpdate:(NSArray *)dataset forKind:(NSInteger)kind
 {
     self.allocationDataset = dataset;
+    [self.tableView reloadData];
 }
 
 @end
