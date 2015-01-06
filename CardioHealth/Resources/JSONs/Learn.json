@@ -15,7 +15,7 @@
                     "title": "Life with ASCVD",
                     "details": "disease_information",
                     "icon_image": "disease_icon",
-                    "tint_color": "red"
+                    "tint_color": "appColor"
                 },
                 {
                     "title": "Symptoms",
