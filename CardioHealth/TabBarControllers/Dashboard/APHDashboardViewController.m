@@ -84,6 +84,7 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     self.rowItemsOrder = [NSMutableArray arrayWithArray:[defaults objectForKey:kAPCDashboardRowItemsOrder]];
     
+    [self prepareScoringObjects];
     [self prepareData];
     
     APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -105,13 +106,17 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
     [super didReceiveMemoryWarning];
 }
 
+#pragma mark - APCDashboardGraphTableViewCellDelegate methods
+- (void)updateVisibleRowsInTableView:(NSNotification *)notification
+{
+    [self prepareData];
+}
+
 #pragma mark - Data
 
 - (void)updatePieChart:(NSNotification *)notification
 {
-    NSLog(@"7-Day Allocation notification received.");
     APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
-    
     [appDelegate.sevenDayFitnessAllocationData allocationForDays:0];
 }
 
@@ -190,7 +195,7 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
                     APCTableViewDashboardGraphItem *item = [APCTableViewDashboardGraphItem new];
                     item.caption = NSLocalizedString(@"Steps", @"");
                     item.graphData = self.stepScoring;
-                    item.detailText = [NSString stringWithFormat:NSLocalizedString(@"Average : %lu", @"Average: {value}"), [[self.stepScoring averageDataPoint] integerValue]];
+                    item.detailText = [NSString stringWithFormat:NSLocalizedString(@"Average : %0.0f", @"Average: {value}"), [[self.stepScoring averageDataPoint] doubleValue]];
                     item.identifier = kAPCDashboardGraphTableViewCellIdentifier;
                     item.editable = YES;
                     item.tintColor = [UIColor appTertiaryPurpleColor];
@@ -207,7 +212,8 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
                     APCTableViewDashboardGraphItem *item = [APCTableViewDashboardGraphItem new];
                     item.caption = NSLocalizedString(@"Heart Rate", @"");
                     item.graphData = self.heartRateScoring;
-                    item.detailText = [NSString stringWithFormat:NSLocalizedString(@"Average : %lu bpm", @"Average: {value} bpm"), [[self.heartRateScoring averageDataPoint] integerValue]];
+                    
+                    item.detailText = [NSString stringWithFormat:NSLocalizedString(@"Average : %0.0f bpm", @"Average: {value} bpm"), [[self.heartRateScoring averageDataPoint] doubleValue]];
                     item.identifier = kAPCDashboardGraphTableViewCellIdentifier;
                     item.editable = YES;
                     item.tintColor = [UIColor appTertiaryYellowColor];
@@ -283,11 +289,6 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
     }
     
     return height;
-}
-
-#pragma mark - APCDashboardGraphTableViewCellDelegate methods
-- (void)updateVisibleRowsInTableView:(NSNotification *)notification {
-    [self prepareData];
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
