@@ -162,6 +162,7 @@ static CGFloat metersPerMile = 1609.344;
         
         APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
         appDelegate.sevenDayFitnessAllocationData = [[APHFitnessAllocation alloc] initWithAllocationStartDate:fitnessStartDate];
+        [appDelegate.sevenDayFitnessAllocationData startDataCollection];
     }
     
     return fitnessStartDate;
