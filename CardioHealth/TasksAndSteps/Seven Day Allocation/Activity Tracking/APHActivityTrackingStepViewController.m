@@ -17,6 +17,7 @@ static CGFloat metersPerMile = 1609.344;
 @property (weak, nonatomic) IBOutlet APCPieGraphView *chartView;
 @property (weak, nonatomic) IBOutlet UIButton *btnToday;
 @property (weak, nonatomic) IBOutlet UIButton *btnWeek;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentDays;
 
 @property (nonatomic, strong) NSArray *allocationDataset;
 
@@ -40,12 +41,17 @@ static CGFloat metersPerMile = 1609.344;
     
     self.view.layer.backgroundColor = [UIColor colorWithWhite:0.973 alpha:1.000].CGColor;
     
-    // Button Appearance
-    [self.btnToday setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-    [self.btnToday setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
-    
-    [self.btnWeek setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-    [self.btnWeek setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
+    self.segmentDays.tintColor = [UIColor clearColor];
+    [self.segmentDays setTitleTextAttributes:@{
+                                               NSFontAttributeName:[UIFont appRegularFontWithSize:19.0f],
+                                               NSForegroundColorAttributeName : [UIColor lightGrayColor]
+                                               }
+                                    forState:UIControlStateNormal];
+    [self.segmentDays setTitleTextAttributes:@{
+                                               NSFontAttributeName:[UIFont appMediumFontWithSize:19.0f],
+                                               NSForegroundColorAttributeName : [UIColor blackColor]
+                                               }
+                                    forState:UIControlStateSelected];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -67,7 +73,7 @@ static CGFloat metersPerMile = 1609.344;
     self.chartView.titleLabel.text = NSLocalizedString(@"Distance", @"Distance");
     
     if (self.showTodaysDataAtViewLoad) {
-        [self handleToday:self.btnToday];
+        [self handleDays:self.segmentDays];
         self.showTodaysDataAtViewLoad = NO;
     }
     
@@ -86,20 +92,19 @@ static CGFloat metersPerMile = 1609.344;
 
 #pragma mark - Actions
 
-- (IBAction)handleToday:(UIButton *)sender
+- (IBAction)handleDays:(UISegmentedControl *)sender
 {
-    self.btnToday.selected = YES;
-    self.btnWeek.selected = NO;
-    
-    [self showDataForKind:0];
-}
-
-- (IBAction)handleWeek:(UIButton *)sender
-{
-    self.btnToday.selected = NO;
-    self.btnWeek.selected = YES;
-    
-    [self showDataForKind:-7];
+    switch (sender.selectedSegmentIndex) {
+        case 0:
+            [self showDataForKind:-1];
+            break;
+        case 1:
+            [self showDataForKind:0];
+            break;
+        default:
+            [self showDataForKind:-7];
+            break;
+    }
 }
 
 - (void)showDataForKind:(NSInteger)kind
