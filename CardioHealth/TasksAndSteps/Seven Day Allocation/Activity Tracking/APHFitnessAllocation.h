@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+@import APCAppCore;
 
 @import APCAppCore;
 
@@ -19,20 +20,10 @@ extern NSString *const kSegmentSumKey;
 extern NSString *const kSevenDayFitnessStartDateKey;
 extern NSString *const APHSevenDayAllocationDataIsReadyNotification;
 
-@protocol APHFitnessAllocationDelegate <NSObject>
-
-@required
-- (void)datasetDidUpdate:(NSArray *)dataset forKind:(NSInteger)kind;
-
-@end
-
 @interface APHFitnessAllocation : NSObject
 
-@property (nonatomic, weak) id <APHFitnessAllocationDelegate> delegate;
-
 - (instancetype)initWithAllocationStartDate:(NSDate *)startDate;
-- (void)allocationForDays:(NSInteger)days;
+- (NSArray *)allocationData;
 - (NSNumber *)totalDistanceForDays:(NSInteger)days;
-- (void)reloadAllocationDatasets;
-
+- (void) startDataCollection;
 @end

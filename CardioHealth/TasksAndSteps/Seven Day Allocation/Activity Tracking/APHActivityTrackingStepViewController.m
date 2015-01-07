@@ -9,15 +9,14 @@
 #import "APHAppDelegate.h"
 #import "APHFitnessAllocation.h"
 
-static CGFloat metersPerMile        = 1609.344;
+static CGFloat metersPerMile = 1609.344;
 
-@interface APHActivityTrackingStepViewController () <APCPieGraphViewDatasource, APHFitnessAllocationDelegate>
+@interface APHActivityTrackingStepViewController () <APCPieGraphViewDatasource>
 
 @property (weak, nonatomic) IBOutlet UILabel *daysRemaining;
 @property (weak, nonatomic) IBOutlet APCPieGraphView *chartView;
 @property (weak, nonatomic) IBOutlet UIButton *btnToday;
 @property (weak, nonatomic) IBOutlet UIButton *btnWeek;
-@property (weak, nonatomic) IBOutlet UIButton *btnYesterday;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentDays;
 
 @property (nonatomic, strong) NSArray *allocationDataset;
@@ -59,6 +58,8 @@ static CGFloat metersPerMile        = 1609.344;
 {
     [super viewWillAppear:animated];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(datasetDidUpdate:) name:APHSevenDayAllocationDataIsReadyNotification object:nil];
+    
     self.showTodaysDataAtViewLoad = YES;
     
     self.navigationItem.hidesBackButton = YES;
@@ -75,11 +76,12 @@ static CGFloat metersPerMile        = 1609.344;
         [self handleDays:self.segmentDays];
         self.showTodaysDataAtViewLoad = NO;
     }
-    
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:APHSevenDayAllocationDataIsReadyNotification object:nil];
+    
     [super viewWillDisappear:animated];
 }
 
@@ -108,8 +110,9 @@ static CGFloat metersPerMile        = 1609.344;
 {
     APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    [appDelegate.sevenDayFitnessAllocationData setDelegate:self];
-    [appDelegate.sevenDayFitnessAllocationData allocationForDays:kind];
+    self.allocationDataset = [appDelegate.sevenDayFitnessAllocationData allocationData];
+    
+    [self datasetDidUpdate:nil];
 }
 
 - (void)handleClose:(UIBarButtonItem *)sender
@@ -131,6 +134,12 @@ static CGFloat metersPerMile        = 1609.344;
                                                              second:0
                                                              ofDate:[NSDate date]
                                                             options:0];
+    
+    // Disable Yesterday and Week segments when start date is today
+    BOOL startDateIsToday = [startDate isEqualToDate:today];
+    [self.segmentDays setEnabled:!startDateIsToday forSegmentAtIndex:0];
+    [self.segmentDays setEnabled:!startDateIsToday forSegmentAtIndex:2];
+    
     // Compute the remaing days of the 7 day fitness allocation.
     NSDateComponents *numberOfDaysFromStartDate = [[NSCalendar currentCalendar] components:NSCalendarUnitDay
                                                                                   fromDate:startDate
@@ -164,6 +173,7 @@ static CGFloat metersPerMile        = 1609.344;
         
         APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
         appDelegate.sevenDayFitnessAllocationData = [[APHFitnessAllocation alloc] initWithAllocationStartDate:fitnessStartDate];
+        [appDelegate.sevenDayFitnessAllocationData startDataCollection];
     }
     
     return fitnessStartDate;
@@ -180,13 +190,13 @@ static CGFloat metersPerMile        = 1609.344;
 
 #pragma mark - Fitness Allocation Delegate
 
-- (void)datasetDidUpdate:(NSArray *)dataset forKind:(NSInteger)kind
+- (void)datasetDidUpdate:(NSNotification *)notif
 {
-    self.allocationDataset = dataset;
-    
     APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    CGFloat totalDistance = [[appDelegate.sevenDayFitnessAllocationData totalDistanceForDays:kind] floatValue];
+    self.allocationDataset = [appDelegate.sevenDayFitnessAllocationData allocationData];
+    
+    CGFloat totalDistance = [[appDelegate.sevenDayFitnessAllocationData totalDistanceForDays:0] floatValue];
     
     self.chartView.valueLabel.text = [NSString stringWithFormat:@"%0.1f mi", totalDistance/metersPerMile];
     
