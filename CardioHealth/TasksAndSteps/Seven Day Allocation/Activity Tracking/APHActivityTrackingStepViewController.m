@@ -145,9 +145,13 @@ static CGFloat metersPerMile = 1609.344;
                                                                                   fromDate:startDate
                                                                                     toDate:today
                                                                                    options:NSCalendarWrapComponents];
-    self.numberOfDaysOfFitnessWeek = [numberOfDaysFromStartDate day];
+    self.numberOfDaysOfFitnessWeek = numberOfDaysFromStartDate.day;
     
-    NSUInteger daysRemain = 7 - self.numberOfDaysOfFitnessWeek;
+    NSUInteger daysRemain = 0;
+    
+    if (self.numberOfDaysOfFitnessWeek < 7) {
+        daysRemain = 7 - self.numberOfDaysOfFitnessWeek;
+    }
 
     NSString *days = (daysRemain == 1) ? NSLocalizedString(@"Day", @"Day") : NSLocalizedString(@"Days", @"Days");
     
