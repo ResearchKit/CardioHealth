@@ -84,12 +84,11 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     self.rowItemsOrder = [NSMutableArray arrayWithArray:[defaults objectForKey:kAPCDashboardRowItemsOrder]];
     
+    APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
+    self.allocationDataset = [appDelegate.sevenDayFitnessAllocationData allocationData];
+    
     [self prepareScoringObjects];
     [self prepareData];
-    
-    APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
-    
-    [appDelegate.sevenDayFitnessAllocationData allocationForDays:0];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -117,7 +116,8 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
 - (void)updatePieChart:(NSNotification *)notification
 {
     APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
-    [appDelegate.sevenDayFitnessAllocationData allocationForDays:0];
+    self.allocationDataset = [appDelegate.sevenDayFitnessAllocationData allocationData];
+    [self.tableView reloadData];
 }
 
 - (void)prepareScoringObjects {
@@ -347,12 +347,6 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
 - (CGFloat)pieGraphView:(APCPieGraphView *)pieGraphView valueForSegmentAtIndex:(NSInteger)index
 {
     return [[[self.allocationDataset valueForKey:kSegmentSumKey] objectAtIndex:index] floatValue];
-}
-
-- (void)datasetDidUpdate:(NSArray *)dataset forKind:(NSInteger)kind
-{
-    self.allocationDataset = dataset;
-    [self.tableView reloadData];
 }
 
 @end
