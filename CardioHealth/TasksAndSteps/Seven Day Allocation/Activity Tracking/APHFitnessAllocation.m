@@ -12,6 +12,7 @@
 
 static NSInteger kIntervalByHour = 1;
 static NSDateFormatter *dateFormatter = nil;
+static NSInteger kYesterdayBySeconds = -86400;
 
 NSString *const kDatasetDateKey         = @"datasetDateKey";
 NSString *const kDatasetValueKey        = @"datasetValueKey";
