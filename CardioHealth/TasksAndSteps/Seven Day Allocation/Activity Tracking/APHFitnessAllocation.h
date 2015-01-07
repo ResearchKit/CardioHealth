@@ -23,8 +23,7 @@ extern NSString *const APHSevenDayAllocationDataIsReadyNotification;
 @interface APHFitnessAllocation : NSObject
 
 - (instancetype)initWithAllocationStartDate:(NSDate *)startDate;
-- (NSArray *)allocationForDays:(NSInteger)days;
+- (NSArray *)allocationData;
 - (NSNumber *)totalDistanceForDays:(NSInteger)days;
-//- (void)reloadAllocationDatasets;
 - (void) startDataCollection;
 @end
