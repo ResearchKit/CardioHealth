@@ -6,13 +6,11 @@
 //
 
 #import "APHFitnessAllocation.h"
-//#import <HealthKit/HealthKit.h>
 #import <CoreMotion/CoreMotion.h>
 #import "APHTheme.h"
 
 static NSInteger kIntervalByHour = 1;
 static NSDateFormatter *dateFormatter = nil;
-static NSInteger kYesterdayBySeconds = -86400;
 
 NSString *const kDatasetDateKey         = @"datasetDateKey";
 NSString *const kDatasetValueKey        = @"datasetValueKey";
@@ -130,7 +128,8 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
                                                                                     toDate:[NSDate date]
                                                                                    options:NSCalendarWrapComponents];
 
-    //numberOfDaysFromStartDate provides the difference of days from now to start of task and therefore if there is no difference we are only getting data for one day.
+    // numberOfDaysFromStartDate provides the difference of days from now to start
+    // of task and therefore if there is no difference we are only getting data for one day.
     numberOfDaysFromStartDate.day += 1;
     
     for( int i = 0; i < SevenDayFitnessQueryTypeTotal; i++) {
@@ -197,7 +196,6 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
 {
     // At this point all datasets (from HealthKit and Core Motion) should be
     // available, since the queries to build these datasets gets fired at -initWithAllocationStartDate.
-    
     NSMutableArray *normalDataset = [NSMutableArray array];
     NSArray *segments = @[self.segmentSleep , self.segmentInactive, self.segmentSedentary, self.segmentModerate, self.segmentVigorous];
     
@@ -255,8 +253,6 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
     //   Running           Medium/High       Vigorous
     //   Cycling           Medium/High       Vigorous
     //
-
-    
     for (CMMotionActivity *activity in dataset) {
         BOOL isValidActivityType = YES;
         NSString *dateHour = [dateFormatter stringFromDate:activity.startDate];
@@ -331,7 +327,8 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
     NSDate *userSleepTime = delegate.dataSubstrate.currentUser.sleepTime;
     NSDate *userWakeTime = delegate.dataSubstrate.currentUser.wakeUpTime;
     
-    //TODO remove this for production or after bug has been fixed.
+    // In case the sleep and wake times are not provided
+    // we will default to the 7 AM wake time and 9:30 PM sleep time.
     if (!userSleepTime) {
         userSleepTime = [[NSCalendar currentCalendar] dateBySettingHour:21 minute:30 second:0 ofDate:[NSDate date] options:0];
         userWakeTime = [[NSCalendar currentCalendar] dateBySettingHour:7 minute:0 second:0 ofDate:[NSDate date] options:0];

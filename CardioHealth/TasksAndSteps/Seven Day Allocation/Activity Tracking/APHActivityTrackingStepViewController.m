@@ -15,8 +15,6 @@ static CGFloat metersPerMile = 1609.344;
 
 @property (weak, nonatomic) IBOutlet UILabel *daysRemaining;
 @property (weak, nonatomic) IBOutlet APCPieGraphView *chartView;
-@property (weak, nonatomic) IBOutlet UIButton *btnToday;
-@property (weak, nonatomic) IBOutlet UIButton *btnWeek;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentDays;
 
 @property (nonatomic, strong) NSArray *allocationDataset;
@@ -64,7 +62,6 @@ static CGFloat metersPerMile = 1609.344;
     
     self.navigationItem.hidesBackButton = YES;
     self.navigationItem.leftBarButtonItem = nil;
-    //self.navigationController.navigationBar.topItem.title = NSLocalizedString(@"7-Day Assessment", @"7-Day Assessment");
     
     self.chartView.datasource = self;
     self.chartView.legendPaddingHeight = 60.0;
