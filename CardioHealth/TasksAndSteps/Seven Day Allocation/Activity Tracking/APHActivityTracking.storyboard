@@ -26,7 +26,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U6v-h5-YfZ">
                                 <rect key="frame" x="0.0" y="37" width="320" height="44"/>
                                 <subviews>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="TP5-KZ-eqt">
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="XEY-UO-FTF">
                                         <rect key="frame" x="8" y="8" width="304" height="29"/>
                                         <segments>
                                             <segment title="Yesterday"/>
@@ -34,16 +34,16 @@
                                             <segment title="Week"/>
                                         </segments>
                                         <connections>
-                                            <action selector="handleDays:" destination="VrU-qS-l30" eventType="valueChanged" id="Iqc-1G-h6l"/>
+                                            <action selector="handleDays:" destination="VrU-qS-l30" eventType="valueChanged" id="yUt-Hd-BDh"/>
                                         </connections>
                                     </segmentedControl>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="TP5-KZ-eqt" firstAttribute="leading" secondItem="U6v-h5-YfZ" secondAttribute="leadingMargin" id="GBN-U3-Asa"/>
+                                    <constraint firstItem="XEY-UO-FTF" firstAttribute="leading" secondItem="U6v-h5-YfZ" secondAttribute="leadingMargin" id="AoM-OO-HFl"/>
                                     <constraint firstAttribute="height" constant="44" id="Icr-RN-NOx"/>
-                                    <constraint firstItem="TP5-KZ-eqt" firstAttribute="trailing" secondItem="U6v-h5-YfZ" secondAttribute="trailingMargin" id="M8A-bf-fLF"/>
-                                    <constraint firstItem="TP5-KZ-eqt" firstAttribute="top" secondItem="U6v-h5-YfZ" secondAttribute="topMargin" id="QFp-Db-c66"/>
+                                    <constraint firstItem="XEY-UO-FTF" firstAttribute="top" secondItem="U6v-h5-YfZ" secondAttribute="topMargin" id="bhx-bo-2VZ"/>
+                                    <constraint firstItem="XEY-UO-FTF" firstAttribute="trailing" secondItem="U6v-h5-YfZ" secondAttribute="trailingMargin" id="qNZ-mR-7Yl"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5zS-Qy-ghC" customClass="APCPieGraphView">
@@ -71,7 +71,7 @@
                     <connections>
                         <outlet property="chartView" destination="5zS-Qy-ghC" id="H3w-TY-Isq"/>
                         <outlet property="daysRemaining" destination="uN4-Ax-0TN" id="fHh-gs-f2j"/>
-                        <outlet property="segmentDays" destination="TP5-KZ-eqt" id="dDC-T3-hGb"/>
+                        <outlet property="segmentDays" destination="XEY-UO-FTF" id="e27-iu-z4E"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wVk-sI-Vwd" userLabel="First Responder" sceneMemberID="firstResponder"/>
