@@ -76,7 +76,6 @@ static CGFloat metersPerMile = 1609.344;
         [self handleDays:self.segmentDays];
         self.showTodaysDataAtViewLoad = NO;
     }
-    
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -111,7 +110,7 @@ static CGFloat metersPerMile = 1609.344;
 {
     APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    self.allocationDataset = [appDelegate.sevenDayFitnessAllocationData allocationForDays:kind];
+    self.allocationDataset = [appDelegate.sevenDayFitnessAllocationData allocationData];
     
     [self datasetDidUpdate:nil];
 }
@@ -185,7 +184,7 @@ static CGFloat metersPerMile = 1609.344;
 {
     APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    self.allocationDataset = [appDelegate.sevenDayFitnessAllocationData allocationForDays:0];
+    self.allocationDataset = [appDelegate.sevenDayFitnessAllocationData allocationData];
     
     CGFloat totalDistance = [[appDelegate.sevenDayFitnessAllocationData totalDistanceForDays:0] floatValue];
     
