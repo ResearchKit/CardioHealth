@@ -33,6 +33,9 @@
                                             <segment title="Today"/>
                                             <segment title="Week"/>
                                         </segments>
+                                        <connections>
+                                            <action selector="handleDays:" destination="VrU-qS-l30" eventType="valueChanged" id="yUt-Hd-BDh"/>
+                                        </connections>
                                     </segmentedControl>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

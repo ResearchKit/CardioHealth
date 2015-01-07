@@ -59,9 +59,4 @@
     return [UIColor colorWithRed:0.937 green:0.267 blue:0.380 alpha:1.000];
 }
 
-+ (UIColor *)colorForActivitySleep
-{
-    return [UIColor colorWithRed:0.145 green:0.851 blue:0.443 alpha:1.000];
-}
-
 @end

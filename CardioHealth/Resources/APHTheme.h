@@ -21,6 +21,5 @@
 + (UIColor *)colorForActivitySedentary;
 + (UIColor *)colorForActivityModerate;
 + (UIColor *)colorForActivityVigorous;
-+ (UIColor *)colorForActivitySleep;
 
 @end

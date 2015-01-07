@@ -25,6 +25,6 @@ extern NSString *const APHSevenDayAllocationDataIsReadyNotification;
 - (instancetype)initWithAllocationStartDate:(NSDate *)startDate;
 - (NSArray *)allocationForDays:(NSInteger)days;
 - (NSNumber *)totalDistanceForDays:(NSInteger)days;
-- (void)reloadAllocationDatasets;
+//- (void)reloadAllocationDatasets;
 - (void) startDataCollection;
 @end
