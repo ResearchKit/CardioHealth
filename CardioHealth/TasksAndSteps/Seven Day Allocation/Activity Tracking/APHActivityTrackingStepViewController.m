@@ -134,6 +134,12 @@ static CGFloat metersPerMile = 1609.344;
                                                              second:0
                                                              ofDate:[NSDate date]
                                                             options:0];
+    
+    // Disable Yesterday and Week segments when start date is today
+    BOOL startDateIsToday = [startDate isEqualToDate:today];
+    [self.segmentDays setEnabled:!startDateIsToday forSegmentAtIndex:0];
+    [self.segmentDays setEnabled:!startDateIsToday forSegmentAtIndex:2];
+    
     // Compute the remaing days of the 7 day fitness allocation.
     NSDateComponents *numberOfDaysFromStartDate = [[NSCalendar currentCalendar] components:NSCalendarUnitDay
                                                                                   fromDate:startDate
