@@ -3,15 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "illustration_dataanalysis@3x 2.png"
+      "filename" : "illustration_dataanalysis@1x.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x"
+      "scale" : "2x",
+      "filename" : "illustration_dataanalysis@2x.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x"
+      "scale" : "3x",
+      "filename" : "illustration_dataanalysis@3x.png"
     }
   ],
   "info" : {

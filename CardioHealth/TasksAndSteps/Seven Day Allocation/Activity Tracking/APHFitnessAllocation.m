@@ -6,7 +6,7 @@
 //
 
 #import "APHFitnessAllocation.h"
-#import <HealthKit/HealthKit.h>
+//#import <HealthKit/HealthKit.h>
 #import <CoreMotion/CoreMotion.h>
 #import "APHTheme.h"
 
@@ -25,13 +25,22 @@ NSString *const kSegmentSumKey          = @"segmentSumKey";
 NSString *const kSevenDayFitnessStartDateKey  = @"sevenDayFitnessStartDateKey";
 
 NSString *const APHSevenDayAllocationDataIsReadyNotification = @"APHSevenDayAllocationDataIsReadyNotification";
+NSString *const APHSevenDayAllocationSleepDataIsReadyNotification = @"APHSevenDayAllocationSleepDataIsReadyNotification";
 
 NSString *const kDatasetDateKeyFormat   = @"YYYY-MM-dd-hh";
 
 typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
 {
     SevenDayFitnessDatasetKindToday = 0,
-    SevenDayFitnessDatasetKindWeek
+    SevenDayFitnessDatasetKindWeek,
+    SevenDayFitnessDataSetKindYesterday
+};
+
+typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
+{
+    SevenDayFitnessQueryTypeWake = 0,
+    SevenDayFitnessQueryTypeSleep,
+    SevenDayFitnessQueryTypeTotal
 };
 
 @interface APHFitnessAllocation()
@@ -41,11 +50,15 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
 
 @property (nonatomic, strong) NSMutableArray *datasetForToday;
 @property (nonatomic, strong) NSMutableArray *datasetForTheWeek;
+@property (nonatomic, strong) NSMutableArray *datasetForYesterday;
 
-@property (nonatomic, strong) NSArray *datasetNormalized;
+@property (nonatomic, strong) NSMutableArray *datasetNormalized;
 
 @property (nonatomic, strong) NSMutableArray *motionDatasetForToday;
-@property (nonatomic, strong) NSMutableArray *motionDatasetForTheWeek;
+@property (nonatomic, strong) __block NSMutableArray *motionDatasetForTheWeek;
+
+@property (nonatomic, strong) __block NSMutableArray *sleepDataset;
+@property (nonatomic, strong) __block NSMutableArray *wakeDataset;
 
 @property (nonatomic, strong) NSDate *allocationStartDate;
 
@@ -53,6 +66,12 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
 @property (nonatomic, strong) NSString *segmentSedentary;
 @property (nonatomic, strong) NSString *segmentModerate;
 @property (nonatomic, strong) NSString *segmentVigorous;
+@property (nonatomic, strong) NSString *segmentSleep;
+
+@property (nonatomic, strong) __block NSMutableArray *motionData;
+
+@property (nonatomic,strong) NSDate *userDayStart;
+@property (nonatomic,strong) NSDate *userDayEnd;
 
 @end
 
@@ -76,54 +95,120 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
                 [dateFormatter setDateFormat:kDatasetDateKeyFormat];
             }
             
+            
+            //Set the users start and end of day
+            [self setMostRecentSleepRangeStartDateAndEndDate];
+            
             _datasetForToday = [NSMutableArray array];
             _datasetForTheWeek = [NSMutableArray array];
+            _datasetForYesterday = [NSMutableArray array];
             
             _motionDatasetForToday = [NSMutableArray array];
             _motionDatasetForTheWeek = [NSMutableArray array];
             
-            _datasetNormalized = nil;
+            _sleepDataset = [NSMutableArray array];
+            _wakeDataset = [NSMutableArray array];
             
+            _motionData = [NSMutableArray new];
+            _datasetNormalized = [NSMutableArray new];
+            
+            _segmentSleep = NSLocalizedString(@"Sleep", @"Sleep");
             _segmentInactive = NSLocalizedString(@"Inactive", @"Inactive");
             _segmentSedentary = NSLocalizedString(@"Sedentary", @"Sedentary");
             _segmentModerate = NSLocalizedString(@"Moderate", @"Moderate");
             _segmentVigorous = NSLocalizedString(@"Vigorous", @"Vigorous");
             
-            if ([HKHealthStore isHealthDataAvailable]) {
-                _healthStore = [[HKHealthStore alloc] init];
-                
-                NSSet *readDataTypes = [self healthKitDataTypesToRead];
-                
-                [_healthStore requestAuthorizationToShareTypes:nil
-                                                         readTypes:readDataTypes
-                                                        completion:^(BOOL success, NSError *error) {
-                                                            if (!success) {
-                                                                return;
-                                                            }
-                                                            
-                                                            [self runStatsCollectionQueryForKind:SevenDayFitnessDatasetKindToday];
-                                                            [self retrieveDataFromCoreMotionForDays:SevenDayFitnessDatasetKindToday];
-                                                            [self runStatsCollectionQueryForKind:SevenDayFitnessDatasetKindWeek];
-                                                            [self retrieveDataFromCoreMotionForDays:SevenDayFitnessDatasetKindWeek];
-                                                        }];
-            }
         }
     }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(motionDataGatheringComplete)
+                                                 name:APHSevenDayAllocationSleepDataIsReadyNotification
+                                               object:nil];
     
     return self;
 }
 
-- (void)allocationForDays:(NSInteger)days
+- (void) startDataCollection {
+    
+    [self setMostRecentSleepRangeStartDateAndEndDate];
+    
+    NSDateComponents *numberOfDaysFromStartDate = [[NSCalendar currentCalendar] components:NSCalendarUnitDay
+                                                                                  fromDate:self.allocationStartDate
+                                                                                    toDate:[NSDate date]
+                                                                                   options:NSCalendarWrapComponents];
+
+    // numberOfDaysFromStartDate provides the difference of days from now to start
+    // of task and therefore if there is no difference we are only getting data for one day.
+    numberOfDaysFromStartDate.day += 1;
+
+    [self getRangeOfDataPointsFrom:self.userDayStart
+                        andEndDate:self.userDayEnd
+                   andNumberOfDays:numberOfDaysFromStartDate.day
+                     withQueryType:SevenDayFitnessQueryTypeWake];
+}
+
+- (HKHealthStore *) healthStore {
+    APCAppDelegate *delegate = (APCAppDelegate*)[UIApplication sharedApplication].delegate;
+    
+    return delegate.dataSubstrate.healthStore;
+}
+
+#pragma mark - Public Interface
+
+- (NSArray *)todaysAllocation
 {
-    if (days == SevenDayFitnessDatasetKindToday) {
-        [self groupDataFromMotion:self.motionDatasetForToday andHealthKit:self.datasetForToday];
-    } else {
-        [self groupDataFromMotion:self.motionDatasetForTheWeek andHealthKit:self.datasetForTheWeek];
+    NSArray *allocationForToday = nil;
+    NSDictionary *todaysData = [self.datasetNormalized lastObject];
+    
+    allocationForToday = [self buildSegmentArrayForData:todaysData];
+    
+    return allocationForToday;
+}
+
+- (NSArray *)yesterdaysAllocation
+{
+    NSArray *allcationForYesterday = nil;
+    if ([self.datasetNormalized count] > 1) {
+        NSUInteger yesterdayIndex = [self.datasetNormalized indexOfObject:[self.datasetNormalized lastObject]] - 1;
+        NSDictionary *yesterdaysData = [self.datasetNormalized objectAtIndex:yesterdayIndex];
+        
+        allcationForYesterday = [self buildSegmentArrayForData:yesterdaysData];
     }
     
-    if ([self.delegate respondsToSelector:@selector(datasetDidUpdate:forKind:)]) {
-        [self.delegate datasetDidUpdate:self.datasetNormalized forKind:days];
+    return allcationForYesterday;
+}
+
+- (NSArray *)weeksAllocation
+{
+    NSArray *allocationForTheWeek = nil;
+    
+    NSUInteger weekInactiveCounter = 0;
+    NSUInteger weekSedentaryCounter = 0;
+    NSUInteger weekModerateCounter = 0;
+    NSUInteger weekVigorousCounter = 0;
+    NSUInteger weekSleepCounter = 0;
+    
+    for (NSDictionary *day in self.datasetNormalized) {
+        
+        weekInactiveCounter += [day[self.segmentInactive] integerValue];
+        weekSedentaryCounter += [day[self.segmentSedentary] integerValue];
+        weekModerateCounter += [day[self.segmentModerate] integerValue];
+        weekVigorousCounter += [day[self.segmentVigorous] integerValue];
+        weekSleepCounter += [day[self.segmentSleep] integerValue];
     }
+    
+    NSDictionary *weekData = @{
+                               self.segmentInactive: @(weekInactiveCounter),
+                               self.segmentSedentary: @(weekSedentaryCounter),
+                               self.segmentModerate: @(weekModerateCounter),
+                               self.segmentVigorous: @(weekVigorousCounter),
+                               self.segmentSleep: @(weekSleepCounter)
+                              };
+    
+    allocationForTheWeek = [self buildSegmentArrayForData:weekData];
+    
+    return allocationForTheWeek;
 }
 
 - (NSNumber *)totalDistanceForDays:(NSInteger)days
@@ -132,20 +217,44 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
     
     if (days == 0) {
         totalDistance = [self.datasetForToday valueForKeyPath:@"@sum.datasetValueKey"];
-    } else {
+    } else if (days == -7) {
         totalDistance = [self.datasetForTheWeek valueForKeyPath:@"@sum.datasetValueKey"];
+    } else {
+        totalDistance = [self.datasetForYesterday valueForKeyPath:@"@sum.datasetValueKey"];
     }
     
     return totalDistance;
 }
 
-- (void)reloadAllocationDatasets
+#pragma mark - Helpers
+
+- (NSArray *)buildSegmentArrayForData:(NSDictionary *)data
 {
-    [self runStatsCollectionQueryForKind:SevenDayFitnessDatasetKindToday];
-    [self runStatsCollectionQueryForKind:SevenDayFitnessDatasetKindWeek];
+    NSMutableArray *allocationData = [NSMutableArray new];
+    NSArray *segments = @[self.segmentSleep, self.segmentInactive, self.segmentSedentary, self.segmentModerate, self.segmentVigorous];
+    UIColor *segmentColor = nil;
     
-    [self retrieveDataFromCoreMotionForDays:SevenDayFitnessDatasetKindToday];
-    [self retrieveDataFromCoreMotionForDays:SevenDayFitnessDatasetKindWeek];
+    for (NSString *segmentId in segments) {
+        if ([segmentId isEqualToString:self.segmentSleep]) {
+            segmentColor =[APHTheme colorForActivitySleep];
+        } else if ([segmentId isEqualToString:self.segmentInactive]) {
+            segmentColor = [APHTheme colorForActivityInactive];
+        } else if ([segmentId isEqualToString:self.segmentSedentary]) {
+            segmentColor = [APHTheme colorForActivitySedentary];
+        } else if ([segmentId isEqualToString:self.segmentModerate]) {
+            segmentColor = [APHTheme colorForActivityModerate];
+        } else {
+            segmentColor = [APHTheme colorForActivityVigorous];
+        }
+        
+        [allocationData addObject:@{
+                                    kSegmentSumKey: (data[segmentId]) ?: @(0),
+                                    kDatasetSegmentKey: segmentId,
+                                    kDatasetSegmentColorKey: segmentColor
+                                    }];
+    }
+    
+    return allocationData;
 }
 
 #pragma mark - Allocation Algorithm
@@ -166,7 +275,7 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
     // available, since the queries to build these datasets gets fired at -initWithAllocationStartDate.
     
     NSMutableArray *normalDataset = [NSMutableArray array];
-    NSArray *segments = @[self.segmentInactive, self.segmentSedentary, self.segmentModerate, self.segmentVigorous];
+    NSArray *segments = @[self.segmentSleep , self.segmentInactive, self.segmentSedentary, self.segmentModerate, self.segmentVigorous];
     
     for (NSString *segmentId in segments) {
         NSMutableDictionary *entry = [NSMutableDictionary new];
@@ -177,19 +286,20 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
         double segmentSum = 0;
         
         for (int i = 0; i < groupSegments.count; i++) {
-            NSString *dateHour = [[groupSegments objectAtIndex:i] objectForKey:kDatasetDateHourKey];
-            NSNumber *value = [self retrieveDataFromDataset:healthkitDataset forDateHour:dateHour];
-            
-            segmentSum += [value doubleValue];
-            
-            [entry setObject:value forKey:dateHour];
+            if (![segmentId isEqualToString:self.segmentSleep]) {
+                segmentSum += 1;
+            } else {
+                segmentSum += [[[groupSegments objectAtIndex:i] objectForKey:kSegmentSumKey] integerValue];
+            }
         }
         
         entry[kSegmentSumKey] = @(segmentSum);
         
         UIColor *segmentColor = nil;
         
-        if ([segmentId isEqualToString:self.segmentInactive]) {
+        if ([segmentId isEqualToString:self.segmentSleep]) {
+            segmentColor =[APHTheme colorForActivitySleep];
+        } else if ([segmentId isEqualToString:self.segmentInactive]) {
             segmentColor = [APHTheme colorForActivityInactive];
         } else if ([segmentId isEqualToString:self.segmentSedentary]) {
             segmentColor = [APHTheme colorForActivitySedentary];
@@ -207,7 +317,7 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
     self.datasetNormalized = normalDataset;
 }
 
-- (void)normalizeMotionData:(NSArray *)dataset forKind:(SevenDayFitnessDatasetKinds)kind
+- (void)normalizeMotionData:(NSArray *)dataset
 {
     // The way we are corrolating the Core Motion data is as that each of the
     // activity type is mapped to our categories. That association is:
@@ -222,6 +332,7 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
     //   Cycling           Medium/High       Vigorous
     //
 
+    
     for (CMMotionActivity *activity in dataset) {
         BOOL isValidActivityType = YES;
         NSString *dateHour = [dateFormatter stringFromDate:activity.startDate];
@@ -252,29 +363,19 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
         }
         
         if (isValidActivityType) {
-            NSArray *filteredSegments = nil;
+        NSArray *filteredSegments = nil;
+            NSDictionary *segment = @{kDatasetSegmentKey: activityType, kDatasetDateHourKey: dateHour};
             NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(%K = %@) AND (%K = %@)",
                                       kDatasetSegmentKey,
                                       activityType,
                                       kDatasetDateHourKey,
                                       dateHour];
             
-            NSDictionary *segment = @{kDatasetSegmentKey: activityType, kDatasetDateHourKey: dateHour};
             
-            if (kind == SevenDayFitnessDatasetKindToday) {
-                filteredSegments = [self.motionDatasetForToday filteredArrayUsingPredicate:predicate];
-                
-                if ([filteredSegments count] == 0) {
-                    [self.motionDatasetForToday addObject:segment];
-                }
-            } else {
-                filteredSegments = [self.motionDatasetForTheWeek filteredArrayUsingPredicate:predicate];
-                
-                if ([filteredSegments count] == 0) {
-                    [self.motionDatasetForTheWeek addObject:segment];
-                }
-            }
+            filteredSegments = [self.motionDatasetForTheWeek filteredArrayUsingPredicate:predicate];
+            [self.motionDatasetForTheWeek addObject:segment];
         }
+        
     }
 }
 
@@ -295,75 +396,204 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
 
 #pragma mark - Queries
 
-- (void)retrieveDataFromCoreMotionForDays:(SevenDayFitnessDatasetKinds)kind
-{
-    if ([CMMotionActivityManager isActivityAvailable ]) {
-        self.motionActivityManager = [[CMMotionActivityManager alloc] init];
-
-        NSDate *startDate = nil;
-        NSDate *endDate = nil;
-        
-        if (kind == SevenDayFitnessDatasetKindToday) {
-            startDate = [[NSCalendar currentCalendar] dateBySettingHour:0
-                                                                 minute:0
-                                                                 second:0
-                                                                 ofDate:[NSDate date]
-                                                                options:0];
-            endDate = [[NSCalendar currentCalendar] dateBySettingHour:23
-                                                               minute:59
-                                                               second:59
-                                                               ofDate:[NSDate date]
-                                                              options:0];
-        } else {
-            startDate = [[NSCalendar currentCalendar] dateBySettingHour:0
-                                                                 minute:0
-                                                                 second:0
-                                                                 ofDate:self.allocationStartDate
-                                                                options:0];
-            endDate = [[NSCalendar currentCalendar] dateBySettingHour:23
-                                                               minute:59
-                                                               second:59
-                                                               ofDate:[NSDate date]
-                                                              options:0];
-        }
-
-        [self.motionActivityManager queryActivityStartingFromDate:startDate
-                                                           toDate:endDate
-                                                          toQueue:[NSOperationQueue new]
-                                                      withHandler:^(NSArray *activities, NSError *error) {
-                                                          [self normalizeMotionData:activities forKind:kind];
-                                                      }];
-    } else {
-        NSLog(@"Core Motion is not available for this device.");
+- (void)setMostRecentSleepRangeStartDateAndEndDate {
+    
+    // Extract hour from sleep and wake time
+    APCAppDelegate *delegate = (APCAppDelegate*)[UIApplication sharedApplication].delegate;
+    
+    NSDate *userSleepTime = delegate.dataSubstrate.currentUser.sleepTime;
+    NSDate *userWakeTime = delegate.dataSubstrate.currentUser.wakeUpTime;
+    
+    #warning To avoid the bug with sleep/wak time, we will default to the 7 AM wake time and 9:30 PM sleep time.
+    if (!userSleepTime) {
+        userSleepTime = [[NSCalendar currentCalendar] dateBySettingHour:21 minute:30 second:0 ofDate:[NSDate date] options:0];
+        userWakeTime = [[NSCalendar currentCalendar] dateBySettingHour:7 minute:0 second:0 ofDate:[NSDate date] options:0];
     }
+    
+    NSCalendar *cal = [[NSCalendar alloc] initWithCalendarIdentifier:[NSCalendar currentCalendar].calendarIdentifier];
+    
+    NSCalendarUnit units = (NSCalendarUnitHour | NSCalendarUnitMinute);
+    NSDateComponents* sleepTime = [cal components:units
+                                         fromDate:userSleepTime];
+    
+    NSDateComponents* wakeTime = [cal components:units
+                                         fromDate:userWakeTime];
+
+    // Most recent sleep time components
+    NSDate *newEndDate = [cal dateBySettingHour:sleepTime.hour
+                                           minute:sleepTime.minute
+                                           second:0
+                                           ofDate:[NSDate date]
+                                          options:0];
+    
+    // Most recent wake time components
+    NSDate *newStartDate = [cal dateBySettingHour:wakeTime.hour
+                                         minute:wakeTime.minute
+                                         second:0
+                                         ofDate:[NSDate date]
+                                        options:0];
+    
+    self.userDayStart = newStartDate;
+    self.userDayEnd = newEndDate;
 }
 
-- (void)runStatsCollectionQueryForKind:(SevenDayFitnessDatasetKinds)kind
-{
-    NSDate *startDate = nil;
-    NSDateComponents *interval = [[NSDateComponents alloc] init];
+
+- (void) getRangeOfDataPointsFrom:(NSDate *)startDate andEndDate:(NSDate *)endDate andNumberOfDays:(NSInteger)numberOfDays withQueryType:(SevenDayFitnessQueryType)queryType{
     
-    if (kind == SevenDayFitnessDatasetKindToday) {
-        startDate = [[NSCalendar currentCalendar] dateBySettingHour:0
-                                                             minute:0
-                                                             second:0
-                                                             ofDate:[NSDate date]
-                                                            options:0];
-        NSLog(@"Today Start/End: %@/%@", startDate, [NSDate date]);
-    } else {
-        startDate = [[NSCalendar currentCalendar] dateBySettingHour:0
-                                                             minute:0
-                                                             second:0
-                                                             ofDate:self.allocationStartDate
-                                                            options:0];
-        NSLog(@"Week Start/End: %@/%@", startDate, [NSDate date]);
+    //Making this algorithm zero based.
+    numberOfDays = numberOfDays - 1;
+    
+    self.motionActivityManager = [[CMMotionActivityManager alloc] init];
+    
+    NSInteger numberOfDaysBack = numberOfDays * -1;
+    
+    NSDateComponents *components = [[NSDateComponents alloc] init];
+    [components setDay:numberOfDaysBack];
+    
+    NSDate *newStartDate = [[NSCalendar currentCalendar] dateByAddingComponents:components
+                                                                      toDate:startDate
+                                                                     options:0];
+    
+    NSInteger numberOfDaysBackForEndDate = numberOfDays * -1;
+    
+    NSDateComponents *endDateComponent = [[NSDateComponents alloc] init];
+    [endDateComponent setDay:numberOfDaysBackForEndDate];
+    
+    NSDate *newEndDate = [[NSCalendar currentCalendar] dateByAddingComponents:endDateComponent
+                                                                         toDate:endDate
+                                                                        options:0];
+    
+    [self.motionActivityManager queryActivityStartingFromDate:newStartDate
+                                                       toDate:newEndDate
+                                                      toQueue:[NSOperationQueue new]
+                                                  withHandler:^(NSArray *activities, NSError *error) {
+                                                      
+
+                                                      if (numberOfDays >= 0) {
+                                                          
+                                                          if ( queryType == SevenDayFitnessQueryTypeSleep) {
+                                                              NSInteger sleepForStationaryCounter = 0;
+                                                          
+                                                              for (CMMotionActivity *activity in activities) {
+                                                                  if (activity.stationary && activity.confidence >= 1) {
+                                                                      sleepForStationaryCounter++;
+                                                                  }
+                                                              }
+                                                              
+                                                              [self.sleepDataset addObject:@{
+                                                                                             self.segmentSleep: @(sleepForStationaryCounter)
+                                                                                            }];
+                                                          } else if ( queryType == SevenDayFitnessQueryTypeWake) {
+                                                              [self runStatsCollectionQueryForKind:numberOfDaysBack
+                                                                                     fromStartDate:newStartDate
+                                                                                         toEndDate:newEndDate];
+                                                              
+                                                              NSUInteger inactiveCounter = 0;
+                                                              NSUInteger sedentaryCounter = 0;
+                                                              NSUInteger moderateCounter = 0;
+                                                              NSUInteger vigorousCounter = 0;
+                                                              
+                                                              for (CMMotionActivity *activity in activities) {
+                                                                  if (activity.stationary) {
+                                                                      inactiveCounter++;
+                                                                  } else if (activity.walking) {
+                                                                      if (activity.confidence == CMMotionActivityConfidenceLow) {
+                                                                          sedentaryCounter++;
+                                                                      } else {
+                                                                          moderateCounter++;
+                                                                      }
+                                                                  } else if (activity.running) {
+                                                                      if (activity.confidence == CMMotionActivityConfidenceLow) {
+                                                                          moderateCounter++;
+                                                                      } else {
+                                                                          vigorousCounter++;
+                                                                      }
+                                                                  } else if (activity.cycling) {
+                                                                      if (activity.confidence == CMMotionActivityConfidenceLow) {
+                                                                          moderateCounter++;
+                                                                      } else {
+                                                                          vigorousCounter++;
+                                                                      }
+                                                                  }
+                                                              }
+                                                              
+                                                              [self.wakeDataset addObject:@{
+                                                                                            self.segmentInactive: @(inactiveCounter),
+                                                                                            self.segmentSedentary: @(sedentaryCounter),
+                                                                                            self.segmentModerate: @(moderateCounter),
+                                                                                            self.segmentVigorous: @(vigorousCounter)
+                                                                                           }];
+                                                          }
+            
+                                                          
+                                                        [self getRangeOfDataPointsFrom:startDate
+                                                                            andEndDate:endDate
+                                                                       andNumberOfDays:numberOfDays - 1
+                                                                         withQueryType:queryType];
+                                                      } else {
+                                                          
+                                                          
+                                                          
+                                                          if (queryType == SevenDayFitnessQueryTypeWake) {
+                                                              
+                                                              //Different start date and end date
+                                                              NSDateComponents *numberOfDaysFromStartDate = [[NSCalendar currentCalendar] components:NSCalendarUnitDay
+                                                                                                                                            fromDate:self.allocationStartDate
+                                                                                                                                              toDate:[NSDate date]
+                                                                                                                                             options:NSCalendarWrapComponents];
+                                                              
+                                                              //numberOfDaysFromStartDate provides the difference of days from now to start of task and therefore if there is no difference we are only getting data for one day.
+                                                              numberOfDaysFromStartDate.day += 1;
+                                                              
+                                                              NSDateComponents *dateComponent = [[NSDateComponents alloc] init];
+                                                              [dateComponent setDay:-1];
+                                                              NSDate *newStartDate = [[NSCalendar currentCalendar] dateByAddingComponents:dateComponent
+                                                                                                                                   toDate:self.userDayEnd
+                                                                                                                                  options:0];
+                                                              
+                                                              [self getRangeOfDataPointsFrom:newStartDate andEndDate:self.userDayStart andNumberOfDays:numberOfDaysFromStartDate.day withQueryType:SevenDayFitnessQueryTypeSleep];
+
+                                                          
+                                                          }
+                                                          
+                                                          
+                                                          if (queryType == SevenDayFitnessQueryTypeSleep) {
+                                                              [[NSNotificationCenter defaultCenter] postNotificationName:APHSevenDayAllocationSleepDataIsReadyNotification object:nil];
+                                                          }
+                                                      }
+                                                  }];
+    
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:APHSevenDayAllocationSleepDataIsReadyNotification object:nil];
+}
+
+- (void)motionDataGatheringComplete
+{
+    for (NSDictionary *day in self.sleepDataset) {
+        NSUInteger dayIndex = [self.sleepDataset indexOfObject:day];
+        
+        NSMutableDictionary *wakeData = [[self.wakeDataset objectAtIndex:dayIndex] mutableCopy];
+        
+        [wakeData setObject:day[self.segmentSleep] forKey:self.segmentSleep];
+        
+        [self.wakeDataset replaceObjectAtIndex:dayIndex withObject:wakeData];
     }
     
-    interval.hour = kIntervalByHour;
+    self.datasetNormalized = self.wakeDataset;
+}
+
+- (void)runStatsCollectionQueryForKind:(NSInteger)kind fromStartDate:(NSDate *)startDate toEndDate:(NSDate *)endDate
+{
+    NSDateComponents *interval = [[NSDateComponents alloc] init];
+    interval.day = kIntervalByHour;
     
     HKQuantityType *distanceType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDistanceWalkingRunning];
     
-    NSPredicate *predicate = [HKQuery predicateForSamplesWithStartDate:startDate endDate:[NSDate date] options:HKQueryOptionStrictStartDate];
+    NSPredicate *predicate = [HKQuery predicateForSamplesWithStartDate:startDate
+                                                               endDate:endDate
+                                                               options:HKQueryOptionStrictStartDate];
     
     HKStatisticsCollectionQuery *query = [[HKStatisticsCollectionQuery alloc] initWithQuantityType:distanceType
                                                                            quantitySamplePredicate:predicate
@@ -373,13 +603,9 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
     // set the results handler
     query.initialResultsHandler = ^(HKStatisticsCollectionQuery *query, HKStatisticsCollection *results, NSError *error) {
         if (error) {
-            NSLog(@"Error: %@", error.localizedDescription);
+            APCLogError(@"Error: %@", error.localizedDescription);
         } else {
-            NSDate *endDate = [[NSCalendar currentCalendar] dateBySettingHour:23
-                                                                       minute:59
-                                                                       second:59
-                                                                       ofDate:[NSDate date]
-                                                                      options:0];
+
             NSDate *beginDate = startDate;
             
             [results enumerateStatisticsFromDate:beginDate
@@ -396,10 +622,12 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
                                                                            kDatasetValueKey: [NSNumber numberWithDouble:value]
                                                                            };
                                                
-                                               if (kind == SevenDayFitnessDatasetKindToday) {
+                                               if (kind == 0) {
                                                    [self.datasetForToday addObject:dataPoint];
-                                               } else {
+                                               } else if (kind == -7) {
                                                    [self.datasetForTheWeek addObject:dataPoint];
+                                               } else {
+                                                   [self.datasetForYesterday addObject:dataPoint];
                                                }
                                            }
                                        }];
@@ -411,15 +639,6 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessDatasetKinds)
     };
     
     [self.healthStore executeQuery:query];
-}
-
-#pragma mark - Helpers
-
-- (NSSet *)healthKitDataTypesToRead {
-    HKQuantityType *steps = [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierStepCount];
-    HKQuantityType *distance = [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierDistanceWalkingRunning];
-    
-    return [NSSet setWithObjects:steps, distance, nil];
 }
 
 @end
