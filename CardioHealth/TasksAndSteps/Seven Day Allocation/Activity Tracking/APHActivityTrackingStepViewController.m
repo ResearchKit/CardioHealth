@@ -98,15 +98,12 @@ static CGFloat metersPerMile = 1609.344;
     
     switch (sender.selectedSegmentIndex) {
         case 0:
-            //[self showDataForKind:-1];
             self.allocationDataset = [appDelegate.sevenDayFitnessAllocationData yesterdaysAllocation];
             break;
         case 1:
-            //[self showDataForKind:0];
             self.allocationDataset = [appDelegate.sevenDayFitnessAllocationData todaysAllocation];
             break;
         default:
-            //[self showDataForKind:-7];
             self.allocationDataset = [appDelegate.sevenDayFitnessAllocationData weeksAllocation];
             break;
     }
@@ -201,9 +198,6 @@ static CGFloat metersPerMile = 1609.344;
 - (void)datasetDidUpdate:(NSNotification *)notif
 {
     APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
-    
-    //self.allocationDataset = [appDelegate.sevenDayFitnessAllocationData allocationData];
-    //[self handleDays:self.segmentDays];
     
     CGFloat totalDistance = [[appDelegate.sevenDayFitnessAllocationData totalDistanceForDays:0] floatValue];
     

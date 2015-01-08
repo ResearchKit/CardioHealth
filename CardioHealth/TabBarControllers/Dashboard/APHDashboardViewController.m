@@ -84,9 +84,7 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     self.rowItemsOrder = [NSMutableArray arrayWithArray:[defaults objectForKey:kAPCDashboardRowItemsOrder]];
-    
-//    APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
-//    self.allocationDataset = [appDelegate.sevenDayFitnessAllocationData todaysAllocation];
+
     [self updatePieChart:nil];
     
     [self prepareScoringObjects];
