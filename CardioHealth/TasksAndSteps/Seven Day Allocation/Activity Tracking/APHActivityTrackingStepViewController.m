@@ -111,15 +111,6 @@ static CGFloat metersPerMile = 1609.344;
     [self datasetDidUpdate:nil];
 }
 
-- (void)showDataForKind:(NSInteger)kind
-{
-    APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
-    
-    self.allocationDataset = [appDelegate.sevenDayFitnessAllocationData allocationData];
-    
-    [self datasetDidUpdate:nil];
-}
-
 - (void)handleClose:(UIBarButtonItem *)sender
 {
     if ([self.delegate respondsToSelector:@selector(stepViewControllerDidFinish:navigationDirection:)] == YES) {

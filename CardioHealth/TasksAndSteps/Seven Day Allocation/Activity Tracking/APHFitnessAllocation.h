@@ -23,7 +23,6 @@ extern NSString *const APHSevenDayAllocationDataIsReadyNotification;
 @interface APHFitnessAllocation : NSObject
 
 - (instancetype)initWithAllocationStartDate:(NSDate *)startDate;
-- (NSArray *)allocationData;
 - (NSArray *)todaysAllocation;
 - (NSArray *)yesterdaysAllocation;
 - (NSArray *)weeksAllocation;

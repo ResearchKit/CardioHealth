@@ -156,14 +156,6 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
 
 #pragma mark - Public Interface
 
-- (NSArray *)allocationData
-{
-//    [self groupDataFromMotion:self.motionDatasetForTheWeek andHealthKit:self.datasetForTheWeek];
-//    
-//    return self.datasetNormalized;
-    return @[];
-}
-
 - (NSArray *)todaysAllocation
 {
     NSArray *allocationForToday = nil;
@@ -412,7 +404,7 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
     NSDate *userSleepTime = delegate.dataSubstrate.currentUser.sleepTime;
     NSDate *userWakeTime = delegate.dataSubstrate.currentUser.wakeUpTime;
     
-    //TODO remove this for production or after bug has been fixed.
+    #warning To avoid the bug with sleep/wak time, we will default to the 7 AM wake time and 9:30 PM sleep time.
     if (!userSleepTime) {
         userSleepTime = [[NSCalendar currentCalendar] dateBySettingHour:21 minute:30 second:0 ofDate:[NSDate date] options:0];
         userWakeTime = [[NSCalendar currentCalendar] dateBySettingHour:7 minute:0 second:0 ofDate:[NSDate date] options:0];
