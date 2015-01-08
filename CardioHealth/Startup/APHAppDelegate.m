@@ -181,6 +181,8 @@ static NSString *const kVideoShownKey = @"VideoShown";
             NSDate *fitnessStartDate = [self checkSevenDayFitnessStartDate];
             if (fitnessStartDate) {
                 self.sevenDayFitnessAllocationData = [[APHFitnessAllocation alloc] initWithAllocationStartDate:fitnessStartDate];
+                
+                [self.sevenDayFitnessAllocationData startDataCollection];
             }
             goto errReturn;
         }

@@ -227,13 +227,7 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
 
 
     self.shouldShowResultsStep = YES;
-    
-    RKSTOrderedTask  *task = nil;
-    
-    if ([self.task isKindOfClass:[RKSTOrderedTask class]]) {
-        task =  (RKSTOrderedTask *)self.task;
-    }
-    
+        
     self.heartAgeTaskQuestionIndex = @{
                                        kHeartAgeFormStepBiographicAndDemographic: @[
                                                kHeartAgeTestDataAge,
@@ -354,8 +348,6 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
 {
     BOOL shouldShowStep = YES;
     
-    taskViewController.navigationBar.topItem.title = NSLocalizedString(@"Heart Age Test", @"Heart Age Test");
-
     if ([step.identifier isEqualToString:@"HeartAgeResult"]) {
         
         shouldShowStep = [self questionStepResultFieldsAreComplete:self.currentStepViewController.step.identifier];

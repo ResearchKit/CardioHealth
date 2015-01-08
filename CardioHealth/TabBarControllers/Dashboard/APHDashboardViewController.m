@@ -14,7 +14,7 @@
 static NSString * const kAPCBasicTableViewCellIdentifier       = @"APCBasicTableViewCell";
 static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetailTableViewCell";
 
-@interface APHDashboardViewController ()<UIViewControllerTransitioningDelegate, APCPieGraphViewDatasource, APHFitnessAllocationDelegate>
+@interface APHDashboardViewController ()<UIViewControllerTransitioningDelegate, APCPieGraphViewDatasource>
 
 @property (nonatomic, strong) NSMutableArray *rowItemsOrder;
 
@@ -67,7 +67,8 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
     [super viewDidLoad];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-
+    
+    [self updatePieChart:nil];
     [self prepareScoringObjects];
     [self prepareData];
 }
@@ -83,13 +84,11 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     self.rowItemsOrder = [NSMutableArray arrayWithArray:[defaults objectForKey:kAPCDashboardRowItemsOrder]];
+
+    [self updatePieChart:nil];
     
+    [self prepareScoringObjects];
     [self prepareData];
-    
-    APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
-    
-    [appDelegate.sevenDayFitnessAllocationData setDelegate:self];
-    [appDelegate.sevenDayFitnessAllocationData allocationForDays:0];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -106,14 +105,19 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
     [super didReceiveMemoryWarning];
 }
 
+#pragma mark - APCDashboardGraphTableViewCellDelegate methods
+- (void)updateVisibleRowsInTableView:(NSNotification *)notification
+{
+    [self prepareData];
+}
+
 #pragma mark - Data
 
 - (void)updatePieChart:(NSNotification *)notification
 {
-    NSLog(@"7-Day Allocation notification received.");
     APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
-    
-    [appDelegate.sevenDayFitnessAllocationData allocationForDays:0];
+    self.allocationDataset = [appDelegate.sevenDayFitnessAllocationData todaysAllocation];
+    [self.tableView reloadData];
 }
 
 - (void)prepareScoringObjects {
@@ -191,7 +195,7 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
                     APCTableViewDashboardGraphItem *item = [APCTableViewDashboardGraphItem new];
                     item.caption = NSLocalizedString(@"Steps", @"");
                     item.graphData = self.stepScoring;
-                    item.detailText = [NSString stringWithFormat:NSLocalizedString(@"Average : %lu", @"Average: {value}"), [[self.stepScoring averageDataPoint] integerValue]];
+                    item.detailText = [NSString stringWithFormat:NSLocalizedString(@"Average : %0.0f", @"Average: {value}"), [[self.stepScoring averageDataPoint] doubleValue]];
                     item.identifier = kAPCDashboardGraphTableViewCellIdentifier;
                     item.editable = YES;
                     item.tintColor = [UIColor appTertiaryPurpleColor];
@@ -208,7 +212,8 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
                     APCTableViewDashboardGraphItem *item = [APCTableViewDashboardGraphItem new];
                     item.caption = NSLocalizedString(@"Heart Rate", @"");
                     item.graphData = self.heartRateScoring;
-                    item.detailText = [NSString stringWithFormat:NSLocalizedString(@"Average : %lu bpm", @"Average: {value} bpm"), [[self.heartRateScoring averageDataPoint] integerValue]];
+                    
+                    item.detailText = [NSString stringWithFormat:NSLocalizedString(@"Average : %0.0f bpm", @"Average: {value} bpm"), [[self.heartRateScoring averageDataPoint] doubleValue]];
                     item.identifier = kAPCDashboardGraphTableViewCellIdentifier;
                     item.editable = YES;
                     item.tintColor = [UIColor appTertiaryYellowColor];
@@ -286,11 +291,6 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
     return height;
 }
 
-#pragma mark - APCDashboardGraphTableViewCellDelegate methods
-- (void)updateVisibleRowsInTableView:(NSNotification *)notification {
-    [self prepareData];
-}
-
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     //cell.contentView.subviews
     
@@ -347,12 +347,6 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
 - (CGFloat)pieGraphView:(APCPieGraphView *)pieGraphView valueForSegmentAtIndex:(NSInteger)index
 {
     return [[[self.allocationDataset valueForKey:kSegmentSumKey] objectAtIndex:index] floatValue];
-}
-
-- (void)datasetDidUpdate:(NSArray *)dataset forKind:(NSInteger)kind
-{
-    self.allocationDataset = dataset;
-    [self.tableView reloadData];
 }
 
 @end

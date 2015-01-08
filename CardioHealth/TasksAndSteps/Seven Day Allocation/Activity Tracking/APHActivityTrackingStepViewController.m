@@ -11,12 +11,11 @@
 
 static CGFloat metersPerMile = 1609.344;
 
-@interface APHActivityTrackingStepViewController () <APCPieGraphViewDatasource, APHFitnessAllocationDelegate>
+@interface APHActivityTrackingStepViewController () <APCPieGraphViewDatasource>
 
 @property (weak, nonatomic) IBOutlet UILabel *daysRemaining;
 @property (weak, nonatomic) IBOutlet APCPieGraphView *chartView;
-@property (weak, nonatomic) IBOutlet UIButton *btnToday;
-@property (weak, nonatomic) IBOutlet UIButton *btnWeek;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentDays;
 
 @property (nonatomic, strong) NSArray *allocationDataset;
 
@@ -40,23 +39,31 @@ static CGFloat metersPerMile = 1609.344;
     
     self.view.layer.backgroundColor = [UIColor colorWithWhite:0.973 alpha:1.000].CGColor;
     
-    // Button Appearance
-    [self.btnToday setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-    [self.btnToday setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
-    
-    [self.btnWeek setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-    [self.btnWeek setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
+    self.segmentDays.tintColor = [UIColor clearColor];
+    [self.segmentDays setTitleTextAttributes:@{
+                                               NSFontAttributeName:[UIFont appRegularFontWithSize:19.0f],
+                                               NSForegroundColorAttributeName : [UIColor lightGrayColor]
+                                               }
+                                    forState:UIControlStateNormal];
+    [self.segmentDays setTitleTextAttributes:@{
+                                               NSFontAttributeName:[UIFont appMediumFontWithSize:19.0f],
+                                               NSForegroundColorAttributeName : [UIColor blackColor]
+                                               }
+                                    forState:UIControlStateSelected];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(datasetDidUpdate:)
+                                                 name:APHSevenDayAllocationDataIsReadyNotification object:nil];
+    
     self.showTodaysDataAtViewLoad = YES;
     
     self.navigationItem.hidesBackButton = YES;
     self.navigationItem.leftBarButtonItem = nil;
-    //self.navigationController.navigationBar.topItem.title = NSLocalizedString(@"7-Day Assessment", @"7-Day Assessment");
     
     self.chartView.datasource = self;
     self.chartView.legendPaddingHeight = 60.0;
@@ -65,14 +72,17 @@ static CGFloat metersPerMile = 1609.344;
     self.chartView.titleLabel.text = NSLocalizedString(@"Distance", @"Distance");
     
     if (self.showTodaysDataAtViewLoad) {
-        [self handleToday:self.btnToday];
+        [self handleDays:self.segmentDays];
         self.showTodaysDataAtViewLoad = NO;
     }
-    
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:APHSevenDayAllocationDataIsReadyNotification
+                                                  object:nil];
+    
     [super viewWillDisappear:animated];
 }
 
@@ -82,28 +92,23 @@ static CGFloat metersPerMile = 1609.344;
 
 #pragma mark - Actions
 
-- (IBAction)handleToday:(UIButton *)sender
-{
-    self.btnToday.selected = YES;
-    self.btnWeek.selected = NO;
-    
-    [self showDataForKind:0];
-}
-
-- (IBAction)handleWeek:(UIButton *)sender
-{
-    self.btnToday.selected = NO;
-    self.btnWeek.selected = YES;
-    
-    [self showDataForKind:-7];
-}
-
-- (void)showDataForKind:(NSInteger)kind
+- (IBAction)handleDays:(UISegmentedControl *)sender
 {
     APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    [appDelegate.sevenDayFitnessAllocationData setDelegate:self];
-    [appDelegate.sevenDayFitnessAllocationData allocationForDays:kind];
+    switch (sender.selectedSegmentIndex) {
+        case 0:
+            self.allocationDataset = [appDelegate.sevenDayFitnessAllocationData yesterdaysAllocation];
+            break;
+        case 1:
+            self.allocationDataset = [appDelegate.sevenDayFitnessAllocationData todaysAllocation];
+            break;
+        default:
+            self.allocationDataset = [appDelegate.sevenDayFitnessAllocationData weeksAllocation];
+            break;
+    }
+    
+    [self datasetDidUpdate:nil];
 }
 
 - (void)handleClose:(UIBarButtonItem *)sender
@@ -125,14 +130,24 @@ static CGFloat metersPerMile = 1609.344;
                                                              second:0
                                                              ofDate:[NSDate date]
                                                             options:0];
+    
+    // Disable Yesterday and Week segments when start date is today
+    BOOL startDateIsToday = [startDate isEqualToDate:today];
+    [self.segmentDays setEnabled:!startDateIsToday forSegmentAtIndex:0];
+    [self.segmentDays setEnabled:!startDateIsToday forSegmentAtIndex:2];
+    
     // Compute the remaing days of the 7 day fitness allocation.
     NSDateComponents *numberOfDaysFromStartDate = [[NSCalendar currentCalendar] components:NSCalendarUnitDay
                                                                                   fromDate:startDate
                                                                                     toDate:today
                                                                                    options:NSCalendarWrapComponents];
-    self.numberOfDaysOfFitnessWeek = [numberOfDaysFromStartDate day];
+    self.numberOfDaysOfFitnessWeek = numberOfDaysFromStartDate.day;
     
-    NSUInteger daysRemain = 7 - self.numberOfDaysOfFitnessWeek;
+    NSUInteger daysRemain = 0;
+    
+    if (self.numberOfDaysOfFitnessWeek < 7) {
+        daysRemain = 7 - self.numberOfDaysOfFitnessWeek;
+    }
 
     NSString *days = (daysRemain == 1) ? NSLocalizedString(@"Day", @"Day") : NSLocalizedString(@"Days", @"Days");
     
@@ -154,6 +169,7 @@ static CGFloat metersPerMile = 1609.344;
         
         APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
         appDelegate.sevenDayFitnessAllocationData = [[APHFitnessAllocation alloc] initWithAllocationStartDate:fitnessStartDate];
+        [appDelegate.sevenDayFitnessAllocationData startDataCollection];
     }
     
     return fitnessStartDate;
@@ -170,13 +186,11 @@ static CGFloat metersPerMile = 1609.344;
 
 #pragma mark - Fitness Allocation Delegate
 
-- (void)datasetDidUpdate:(NSArray *)dataset forKind:(NSInteger)kind
+- (void)datasetDidUpdate:(NSNotification *)notif
 {
-    self.allocationDataset = dataset;
-    
     APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    CGFloat totalDistance = [[appDelegate.sevenDayFitnessAllocationData totalDistanceForDays:kind] floatValue];
+    CGFloat totalDistance = [[appDelegate.sevenDayFitnessAllocationData totalDistanceForDays:0] floatValue];
     
     self.chartView.valueLabel.text = [NSString stringWithFormat:@"%0.1f mi", totalDistance/metersPerMile];
     
