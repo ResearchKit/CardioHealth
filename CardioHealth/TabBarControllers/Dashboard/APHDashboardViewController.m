@@ -67,7 +67,8 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
     [super viewDidLoad];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-
+    
+    [self updatePieChart:nil];
     [self prepareScoringObjects];
     [self prepareData];
 }
@@ -84,8 +85,9 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     self.rowItemsOrder = [NSMutableArray arrayWithArray:[defaults objectForKey:kAPCDashboardRowItemsOrder]];
     
-    APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
-    self.allocationDataset = [appDelegate.sevenDayFitnessAllocationData allocationData];
+//    APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
+//    self.allocationDataset = [appDelegate.sevenDayFitnessAllocationData todaysAllocation];
+    [self updatePieChart:nil];
     
     [self prepareScoringObjects];
     [self prepareData];
@@ -116,7 +118,7 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
 - (void)updatePieChart:(NSNotification *)notification
 {
     APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
-    self.allocationDataset = [appDelegate.sevenDayFitnessAllocationData allocationData];
+    self.allocationDataset = [appDelegate.sevenDayFitnessAllocationData todaysAllocation];
     [self.tableView reloadData];
 }
 

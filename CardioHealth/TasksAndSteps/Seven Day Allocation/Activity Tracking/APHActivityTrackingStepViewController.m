@@ -58,13 +58,14 @@ static CGFloat metersPerMile = 1609.344;
 {
     [super viewWillAppear:animated];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(datasetDidUpdate:) name:APHSevenDayAllocationDataIsReadyNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(datasetDidUpdate:)
+                                                 name:APHSevenDayAllocationDataIsReadyNotification object:nil];
     
     self.showTodaysDataAtViewLoad = YES;
     
     self.navigationItem.hidesBackButton = YES;
     self.navigationItem.leftBarButtonItem = nil;
-    //self.navigationController.navigationBar.topItem.title = NSLocalizedString(@"7-Day Assessment", @"7-Day Assessment");
     
     self.chartView.datasource = self;
     self.chartView.legendPaddingHeight = 60.0;
@@ -80,7 +81,9 @@ static CGFloat metersPerMile = 1609.344;
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:APHSevenDayAllocationDataIsReadyNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:APHSevenDayAllocationDataIsReadyNotification
+                                                  object:nil];
     
     [super viewWillDisappear:animated];
 }
@@ -93,17 +96,24 @@ static CGFloat metersPerMile = 1609.344;
 
 - (IBAction)handleDays:(UISegmentedControl *)sender
 {
+    APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
     switch (sender.selectedSegmentIndex) {
         case 0:
-            [self showDataForKind:-1];
+            //[self showDataForKind:-1];
+            self.allocationDataset = [appDelegate.sevenDayFitnessAllocationData yesterdaysAllocation];
             break;
         case 1:
-            [self showDataForKind:0];
+            //[self showDataForKind:0];
+            self.allocationDataset = [appDelegate.sevenDayFitnessAllocationData todaysAllocation];
             break;
         default:
-            [self showDataForKind:-7];
+            //[self showDataForKind:-7];
+            self.allocationDataset = [appDelegate.sevenDayFitnessAllocationData weeksAllocation];
             break;
     }
+    
+    [self datasetDidUpdate:nil];
 }
 
 - (void)showDataForKind:(NSInteger)kind
@@ -194,7 +204,8 @@ static CGFloat metersPerMile = 1609.344;
 {
     APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    self.allocationDataset = [appDelegate.sevenDayFitnessAllocationData allocationData];
+    //self.allocationDataset = [appDelegate.sevenDayFitnessAllocationData allocationData];
+    //[self handleDays:self.segmentDays];
     
     CGFloat totalDistance = [[appDelegate.sevenDayFitnessAllocationData totalDistanceForDays:0] floatValue];
     
