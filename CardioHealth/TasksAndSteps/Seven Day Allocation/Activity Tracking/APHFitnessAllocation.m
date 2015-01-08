@@ -138,27 +138,14 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
                                                                                     toDate:[NSDate date]
                                                                                    options:NSCalendarWrapComponents];
 
-    //numberOfDaysFromStartDate provides the difference of days from now to start of task and therefore if there is no difference we are only getting data for one day.
+    // numberOfDaysFromStartDate provides the difference of days from now to start
+    // of task and therefore if there is no difference we are only getting data for one day.
     numberOfDaysFromStartDate.day += 1;
 
-    [self getRangeOfDataPointsFrom:self.userDayStart andEndDate:self.userDayEnd andNumberOfDays:numberOfDaysFromStartDate.day withQueryType:SevenDayFitnessQueryTypeWake];
-    
-//    for( int i = 0; i < SevenDayFitnessQueryTypeTotal; i++) {
-//        
-//        if (i == SevenDayFitnessQueryTypeWake) {
-//
-//            [self getRangeOfDataPointsFrom:self.userDayStart andEndDate:self.userDayEnd andNumberOfDays:numberOfDaysFromStartDate.day withQueryType:SevenDayFitnessQueryTypeWake];
-//        } else if (i == SevenDayFitnessQueryTypeSleep){
-//            
-//            NSDateComponents *dateComponent = [[NSDateComponents alloc] init];
-//            [dateComponent setDay:-1];
-//            NSDate *newStartDate = [[NSCalendar currentCalendar] dateByAddingComponents:dateComponent
-//                                                                         toDate:self.userDayEnd
-//                                                                        options:0];
-//            
-//            [self getRangeOfDataPointsFrom:newStartDate andEndDate:self.userDayStart andNumberOfDays:numberOfDaysFromStartDate.day withQueryType:SevenDayFitnessQueryTypeSleep];
-//        }
-//    }
+    [self getRangeOfDataPointsFrom:self.userDayStart
+                        andEndDate:self.userDayEnd
+                   andNumberOfDays:numberOfDaysFromStartDate.day
+                     withQueryType:SevenDayFitnessQueryTypeWake];
 }
 
 - (HKHealthStore *) healthStore {
@@ -592,8 +579,6 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
 
 - (void)motionDataGatheringComplete
 {
-    NSLog(@"Motion data gathering completed.");
-    
     for (NSDictionary *day in self.sleepDataset) {
         NSUInteger dayIndex = [self.sleepDataset indexOfObject:day];
         
