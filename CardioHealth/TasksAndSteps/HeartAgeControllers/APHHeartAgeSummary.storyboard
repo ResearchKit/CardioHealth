@@ -143,10 +143,10 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="gko-ru-iNz" firstAttribute="centerX" secondItem="HLn-qW-wSy" secondAttribute="centerX" constant="0.5" id="3yB-JM-xVb"/>
                                                 <constraint firstItem="DsA-ZA-tv9" firstAttribute="top" secondItem="JJQ-2e-TMj" secondAttribute="bottom" constant="7.5" id="6nN-OF-hVS"/>
                                                 <constraint firstItem="gko-ru-iNz" firstAttribute="top" secondItem="HLn-qW-wSy" secondAttribute="bottom" constant="7.5" id="9t1-Oy-NOM"/>
                                                 <constraint firstAttribute="trailing" secondItem="HLn-qW-wSy" secondAttribute="trailing" constant="32" id="HXu-zO-OqX"/>
-                                                <constraint firstAttribute="trailing" secondItem="gko-ru-iNz" secondAttribute="trailing" constant="8" id="Mxr-h2-7tB"/>
                                                 <constraint firstItem="eOS-kG-4Pn" firstAttribute="leading" secondItem="n0S-8H-TRF" secondAttribute="leading" id="Qvt-DW-k4H"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="gko-ru-iNz" secondAttribute="bottom" constant="21" id="R4y-QI-v0P"/>
                                                 <constraint firstItem="HLn-qW-wSy" firstAttribute="top" secondItem="eOS-kG-4Pn" secondAttribute="bottom" constant="19.5" id="RhO-cR-LBB"/>
