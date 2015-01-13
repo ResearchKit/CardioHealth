@@ -9,8 +9,9 @@
 static NSString *kKludgeIdentifierForHeartAgeTaskB = @"APHHeartAgeB-7259AC18-D711-47A6-ADBD-6CFCECDED1DF";
 @interface APHHeartAgeIntroStepViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *getStartedButton;
+@property (weak, nonatomic) IBOutlet UIView *containerView;
 
-@property (weak, nonatomic) IBOutlet UITextView *purposeTextView;
+@property (weak, nonatomic) IBOutlet UILabel *purposeTextView;
 @end
 
 @implementation APHHeartAgeIntroStepViewController

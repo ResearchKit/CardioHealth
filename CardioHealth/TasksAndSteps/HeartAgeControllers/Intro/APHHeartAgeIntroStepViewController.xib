@@ -1,25 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A388a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="APHHeartAgeIntroStepViewController">
-            <connections>
-                <outlet property="getStartedButton" destination="V4s-bA-fin" id="GaB-ZC-Whj"/>
-                <outlet property="purposeTextView" destination="2LI-UD-QOF" id="pUj-7m-y4q"/>
-                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
-            </connections>
-        </placeholder>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="APHHeartAgeIntroStepViewController"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+            <rect key="frame" x="0.0" y="64" width="320" height="700"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V4s-bA-fin">
-                    <rect key="frame" x="0.0" y="440" width="320" height="64"/>
+                    <rect key="frame" x="0.0" y="636" width="320" height="64"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="64" id="BBf-B2-of6"/>
+                        <constraint firstAttribute="height" constant="64" id="poJ-lb-SDj"/>
                     </constraints>
                     <state key="normal" title="Get Started">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -28,90 +23,79 @@
                     <state key="selected">
                         <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <connections>
-                        <action selector="getStartedWasTapped:" destination="-1" eventType="touchUpInside" id="2Vm-cP-hDX"/>
-                    </connections>
                 </button>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c5U-w8-D39">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="323"/>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="49m-ht-PFX">
+                    <rect key="frame" x="0.0" y="0.0" width="319.5" height="636"/>
                     <subviews>
-                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2LI-UD-QOF">
-                            <rect key="frame" x="10" y="30" width="300" height="285"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <string key="text">The American Heart Association and the American College of Cardiology developed a risk score for heart disease and stroke as the first step for prevention. It is based on following healthy individuals for many years to understand which risk factors predicted cardiovascular disease. By entering your own data, requiring blood pressure and cholesterol values, the app will provide a personalized estimate of your risk of heart attack or stroke over the next 10 years, as well as over your lifetime. It will also provide optimal risk scores for someone your age, gender, and race. 
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Purpose" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qfk-xE-3Ij">
+                            <rect key="frame" x="0.0" y="8" width="320" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="kCh-mr-1wK"/>
+                                <constraint firstAttribute="width" constant="320" id="xnU-jO-0Ni"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MGf-Bb-MTY">
+                            <rect key="frame" x="10" y="37" width="302" height="430"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="430" id="5vn-xk-IDY"/>
+                            </constraints>
+                            <mutableString key="text">The American Heart Association and the American College of Cardiology developed a risk score for heart disease and stroke as the first step for prevention. It is based on following healthy individuals for many years to understand which risk factors predicted cardiovascular disease. By entering your own data, requiring blood pressure and cholesterol values, the app will provide a personalized estimate of your risk of heart attack or stroke over the next 10 years, as well as over your lifetime. It will also provide optimal risk scores for someone your age, gender, and race. 
 
-[Note the 10-year risk score only applies to ages 40-79, while the lifetime risk score is calculated for ages 20-59.] </string>
-                            <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+[Note the 10-year risk score only applies to ages 40-79, while the lifetime risk score is calculated for ages 20-59.] </mutableString>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                        </textView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Purpose" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zj6-dc-2BM">
-                            <rect key="frame" x="0.0" y="8" width="320" height="21"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Length" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5RW-B1-aYO">
+                            <rect key="frame" x="134" y="475" width="53.5" height="20.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Entering the data for the risk score should take less than 2 minutes." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I3t-KB-GqF">
+                            <rect key="frame" x="10" y="503" width="302" height="50"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="21" id="okp-A2-DoG"/>
+                                <constraint firstAttribute="height" constant="50" id="h4Z-1n-kE5"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="Zj6-dc-2BM" firstAttribute="top" secondItem="c5U-w8-D39" secondAttribute="top" constant="8" id="KBY-R0-c4E"/>
-                        <constraint firstItem="2LI-UD-QOF" firstAttribute="top" secondItem="Zj6-dc-2BM" secondAttribute="bottom" constant="1" id="UVk-iC-XKV"/>
-                        <constraint firstItem="Zj6-dc-2BM" firstAttribute="leading" secondItem="c5U-w8-D39" secondAttribute="leading" id="Vs0-hF-2Bv"/>
-                        <constraint firstAttribute="trailing" secondItem="Zj6-dc-2BM" secondAttribute="trailing" id="W3h-lk-psG"/>
-                        <constraint firstItem="2LI-UD-QOF" firstAttribute="leading" secondItem="c5U-w8-D39" secondAttribute="leading" constant="10" id="mnw-Xn-mPs"/>
-                        <constraint firstAttribute="bottom" secondItem="2LI-UD-QOF" secondAttribute="bottom" constant="8" id="qVX-HH-zgv"/>
-                        <constraint firstAttribute="trailing" secondItem="2LI-UD-QOF" secondAttribute="trailing" constant="10" id="spU-rV-XTN"/>
+                        <constraint firstItem="MGf-Bb-MTY" firstAttribute="centerX" secondItem="qfk-xE-3Ij" secondAttribute="centerX" constant="1" id="61V-LR-4W2"/>
+                        <constraint firstItem="I3t-KB-GqF" firstAttribute="top" secondItem="5RW-B1-aYO" secondAttribute="bottom" constant="8" id="Jkt-5x-qIR"/>
+                        <constraint firstItem="qfk-xE-3Ij" firstAttribute="leading" secondItem="49m-ht-PFX" secondAttribute="leading" id="KRG-TA-AFr"/>
+                        <constraint firstItem="I3t-KB-GqF" firstAttribute="leading" secondItem="49m-ht-PFX" secondAttribute="leading" constant="10" id="Km6-2S-GKZ"/>
+                        <constraint firstItem="MGf-Bb-MTY" firstAttribute="top" secondItem="qfk-xE-3Ij" secondAttribute="bottom" constant="8" id="U4L-lo-HcM"/>
+                        <constraint firstAttribute="centerX" secondItem="5RW-B1-aYO" secondAttribute="centerX" constant="-0.75" id="bTG-Hv-2JI"/>
+                        <constraint firstAttribute="width" secondItem="49m-ht-PFX" secondAttribute="height" multiplier="320:637" id="bfc-Ze-mbE"/>
+                        <constraint firstAttribute="centerX" secondItem="qfk-xE-3Ij" secondAttribute="centerX" id="dms-dK-P9I"/>
+                        <constraint firstAttribute="trailing" secondItem="MGf-Bb-MTY" secondAttribute="trailing" constant="8" id="kce-bK-6mO"/>
+                        <constraint firstAttribute="trailing" secondItem="I3t-KB-GqF" secondAttribute="trailing" constant="7.5" id="lKR-CO-1re"/>
+                        <constraint firstItem="MGf-Bb-MTY" firstAttribute="leading" secondItem="49m-ht-PFX" secondAttribute="leading" constant="10" id="nAF-Sz-9UQ"/>
+                        <constraint firstAttribute="bottom" secondItem="I3t-KB-GqF" secondAttribute="bottom" constant="74.5" id="o0t-6S-oHN"/>
+                        <constraint firstItem="qfk-xE-3Ij" firstAttribute="top" secondItem="49m-ht-PFX" secondAttribute="top" constant="8" id="o8I-Su-Gel"/>
+                        <constraint firstAttribute="trailing" secondItem="qfk-xE-3Ij" secondAttribute="trailing" id="o9y-H3-RBT"/>
+                        <constraint firstItem="5RW-B1-aYO" firstAttribute="top" secondItem="MGf-Bb-MTY" secondAttribute="bottom" constant="8" id="zbP-Ue-iPR"/>
                     </constraints>
-                </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gyf-xH-RVs">
-                    <rect key="frame" x="0.0" y="324" width="320" height="117"/>
-                    <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Length" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rQl-h2-XT0">
-                            <rect key="frame" x="0.0" y="8" width="320" height="21"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Entering the data for the risk score should take less than 2 minutes." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P5R-2c-akw">
-                            <rect key="frame" x="15" y="34" width="290" height="47"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="47" id="t6G-zA-3qI"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                    </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="trailing" secondItem="P5R-2c-akw" secondAttribute="trailing" constant="15" id="AOO-TQ-01d"/>
-                        <constraint firstItem="P5R-2c-akw" firstAttribute="top" secondItem="rQl-h2-XT0" secondAttribute="bottom" constant="5.5" id="AsB-04-XW3"/>
-                        <constraint firstItem="rQl-h2-XT0" firstAttribute="top" secondItem="Gyf-xH-RVs" secondAttribute="top" constant="8" id="Hpb-Qp-KX4"/>
-                        <constraint firstAttribute="height" constant="117" id="Zfg-VA-wOU"/>
-                        <constraint firstItem="P5R-2c-akw" firstAttribute="leading" secondItem="Gyf-xH-RVs" secondAttribute="leading" constant="15" id="nAd-Z8-o5o"/>
-                        <constraint firstAttribute="trailing" secondItem="rQl-h2-XT0" secondAttribute="trailing" id="qbh-Ic-xjn"/>
-                        <constraint firstItem="rQl-h2-XT0" firstAttribute="leading" secondItem="Gyf-xH-RVs" secondAttribute="leading" id="uxz-ap-gj2"/>
-                    </constraints>
-                </view>
+                </scrollView>
             </subviews>
             <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="Gyf-xH-RVs" firstAttribute="top" secondItem="c5U-w8-D39" secondAttribute="bottom" constant="1" id="HaM-Jo-TC1"/>
-                <constraint firstItem="V4s-bA-fin" firstAttribute="top" secondItem="Gyf-xH-RVs" secondAttribute="bottom" constant="-1" id="HeR-mT-51a"/>
-                <constraint firstItem="c5U-w8-D39" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="KGu-bC-61U"/>
-                <constraint firstAttribute="bottom" secondItem="V4s-bA-fin" secondAttribute="bottom" id="Qnt-Ib-Ssl"/>
-                <constraint firstItem="c5U-w8-D39" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="cmV-Wh-ki3"/>
-                <constraint firstItem="Gyf-xH-RVs" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="eEQ-Ho-hcF"/>
-                <constraint firstAttribute="trailing" secondItem="Gyf-xH-RVs" secondAttribute="trailing" id="ec7-ca-QYF"/>
-                <constraint firstAttribute="trailing" secondItem="V4s-bA-fin" secondAttribute="trailing" id="fOI-xn-26M"/>
-                <constraint firstItem="V4s-bA-fin" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="j3Y-NX-O6R"/>
-                <constraint firstAttribute="trailing" secondItem="c5U-w8-D39" secondAttribute="trailing" id="jv4-O8-M4s"/>
+                <constraint firstItem="49m-ht-PFX" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="1fw-BO-os3"/>
+                <constraint firstItem="49m-ht-PFX" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="4au-du-hM0"/>
+                <constraint firstAttribute="trailing" secondItem="V4s-bA-fin" secondAttribute="trailing" id="Eas-7C-hSh"/>
+                <constraint firstItem="V4s-bA-fin" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Ifj-Q1-kB8"/>
+                <constraint firstItem="V4s-bA-fin" firstAttribute="top" secondItem="49m-ht-PFX" secondAttribute="bottom" id="Mld-Vc-F04"/>
+                <constraint firstAttribute="trailing" secondItem="49m-ht-PFX" secondAttribute="trailing" id="kej-vv-b7e"/>
+                <constraint firstAttribute="bottom" secondItem="V4s-bA-fin" secondAttribute="bottom" id="qJR-s9-Cpq"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="716" y="591"/>
         </view>
     </objects>

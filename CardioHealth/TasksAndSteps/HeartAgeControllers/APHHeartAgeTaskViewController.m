@@ -384,11 +384,12 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
     RKSTStepViewController *stepVC = nil;
     
     if ([step.identifier isEqualToString:kHeartAgeIntroduction]) {
+                
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"APHHeartAgeIntroStepViewController"
+                                                                 bundle:nil];
         
-        NSDictionary  *controllers = @{ kHeartAgeIntroduction : [APHHeartAgeIntroStepViewController class] };
+        APCStepViewController *controller = [mainStoryboard instantiateViewControllerWithIdentifier:@"APHHeartAgeIntroStepViewController"];
         
-        Class  aClass = [controllers objectForKey:step.identifier];
-        APCStepViewController  *controller = [[aClass alloc] initWithNibName:nil bundle:nil];
         
         controller.delegate = self;
         controller.step = step;
