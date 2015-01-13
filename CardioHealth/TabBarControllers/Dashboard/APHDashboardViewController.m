@@ -249,7 +249,7 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
         
         APCTableViewSection *section = [APCTableViewSection new];
         section.rows = [NSArray arrayWithArray:rowItems];
-        section.sectionTitle = NSLocalizedString(@"Past 5 Days", @"");
+        section.sectionTitle = NSLocalizedString(@"Recent Activity", @"");
         [self.items addObject:section];
     }
     
