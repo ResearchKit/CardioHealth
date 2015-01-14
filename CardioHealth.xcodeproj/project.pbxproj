@@ -48,7 +48,6 @@
 		7B5C43951A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B5C43931A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.xib */; };
 		7B5C43A41A3B98EF001A22F5 /* APHWellBeingSurveyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C43A31A3B98EF001A22F5 /* APHWellBeingSurveyController.m */; };
 		7B6753411A01540E005864E6 /* APHHeartAgeIntroStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B67533F1A01540E005864E6 /* APHHeartAgeIntroStepViewController.m */; };
-		7B6753421A01540E005864E6 /* APHHeartAgeIntroStepViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B6753401A01540E005864E6 /* APHHeartAgeIntroStepViewController.xib */; };
 		7B96D7421A02E4DB006D93C1 /* APHImportantDetailsTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B96D7411A02E4DB006D93C1 /* APHImportantDetailsTableViewController.storyboard */; };
 		7B96D7481A0300D8006D93C1 /* APHImportantDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B96D7471A0300D8006D93C1 /* APHImportantDetailsViewController.m */; };
 		7BD73F7B19E8A20600F5DFF3 /* Intro.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 7BD73F7A19E8A20600F5DFF3 /* Intro.mp4 */; };
@@ -185,7 +184,6 @@
 		7B5C43A31A3B98EF001A22F5 /* APHWellBeingSurveyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHWellBeingSurveyController.m; sourceTree = "<group>"; };
 		7B67533E1A01540E005864E6 /* APHHeartAgeIntroStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHHeartAgeIntroStepViewController.h; sourceTree = "<group>"; };
 		7B67533F1A01540E005864E6 /* APHHeartAgeIntroStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHHeartAgeIntroStepViewController.m; sourceTree = "<group>"; };
-		7B6753401A01540E005864E6 /* APHHeartAgeIntroStepViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = APHHeartAgeIntroStepViewController.xib; sourceTree = "<group>"; };
 		7B96D7411A02E4DB006D93C1 /* APHImportantDetailsTableViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = APHImportantDetailsTableViewController.storyboard; sourceTree = "<group>"; };
 		7B96D7461A0300D8006D93C1 /* APHImportantDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHImportantDetailsViewController.h; sourceTree = "<group>"; };
 		7B96D7471A0300D8006D93C1 /* APHImportantDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHImportantDetailsViewController.m; sourceTree = "<group>"; };
@@ -387,7 +385,6 @@
 			children = (
 				7B67533E1A01540E005864E6 /* APHHeartAgeIntroStepViewController.h */,
 				7B67533F1A01540E005864E6 /* APHHeartAgeIntroStepViewController.m */,
-				7B6753401A01540E005864E6 /* APHHeartAgeIntroStepViewController.xib */,
 				7BEA4BE51A65C10300FEAF60 /* APHHeartAgeIntroStepViewController.storyboard */,
 				7BEA4BE71A65D95400FEAF60 /* APHIntroPurposeContainedTableTableViewController.h */,
 				7BEA4BE81A65D95400FEAF60 /* APHIntroPurposeContainedTableTableViewController.m */,
@@ -712,7 +709,6 @@
 				F55BBE6719D362D0003CA0F9 /* Main.storyboard in Resources */,
 				08C56E391A15E7D100D3BF61 /* APHActivityTracking.storyboard in Resources */,
 				7BD73F7B19E8A20600F5DFF3 /* Intro.mp4 in Resources */,
-				7B6753421A01540E005864E6 /* APHHeartAgeIntroStepViewController.xib in Resources */,
 				7B30CFA01A376B3D00625350 /* cardiovascular-staging.pem in Resources */,
 				7B5BEC9D1A34F0B7007CEA94 /* cardio_wellbeing_survey.json in Resources */,
 				5B04326A1A305D3E000DC9ED /* TermsAndConditions.json in Resources */,

@@ -42,9 +42,9 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="430" id="5vn-xk-IDY"/>
                             </constraints>
-                            <mutableString key="text">The American Heart Association and the American College of Cardiology developed a risk score for heart disease and stroke as the first step for prevention. It is based on following healthy individuals for many years to understand which risk factors predicted cardiovascular disease. By entering your own data, requiring blood pressure and cholesterol values, the app will provide a personalized estimate of your risk of heart attack or stroke over the next 10 years, as well as over your lifetime. It will also provide optimal risk scores for someone your age, gender, and race. 
+                            <string key="text">The American Heart Association and the American College of Cardiology developed a risk score for heart disease and stroke as the first step for prevention. It is based on following healthy individuals for many years to understand which risk factors predicted cardiovascular disease. By entering your own data, requiring blood pressure and cholesterol values, the app will provide a personalized estimate of your risk of heart attack or stroke over the next 10 years, as well as over your lifetime. It will also provide optimal risk scores for someone your age, gender, and race. 
 
-[Note the 10-year risk score only applies to ages 40-79, while the lifetime risk score is calculated for ages 20-59.] </mutableString>
+[Note the 10-year risk score only applies to ages 40-79, while the lifetime risk score is calculated for ages 20-59.] </string>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>

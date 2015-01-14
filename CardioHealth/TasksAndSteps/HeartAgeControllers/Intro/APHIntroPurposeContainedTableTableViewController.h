@@ -10,4 +10,6 @@
 
 @interface APHIntroPurposeContainedTableTableViewController : UITableViewController
 
+@property (nonatomic, strong) NSString *purposeText;
+
 @end
