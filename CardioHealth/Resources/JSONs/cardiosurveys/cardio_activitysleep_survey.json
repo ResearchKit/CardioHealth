@@ -9,6 +9,19 @@
                  "prompt":"1. \nDo you do regular work?",
                  "constraints":{
                  "rules":[
+                                   {
+                                   "operator":"eq",
+                                   "value":2,
+                                   "skipTo":"phys_activity",
+                                   "type":"SurveyRule"
+                                   },
+                                   {
+                                   "operator":"de",
+                                   "value":0,
+                                   "skipTo":"phys_activity",
+                                   "type":"SurveyRule"
+                                   }
+                          
                           ],
                  "dataType":"integer",
                  "enumeration":[
@@ -23,8 +36,7 @@
                                 "type":"SurveyQuestionOption"
                                 }
                                 ],
-                 "allowOther":false,
-                 "allowMultiple":false,
+               
                  "type":"MultiValueConstraints"
                  },
                  "uiHint":"list",
@@ -35,7 +47,7 @@
                  {
                  "guid":"1992b80e-912c-4b05-b29b-5c35f02688c5",
                  "identifier":"atwork",
-                 "prompt":"2. \n(Please, skip if you do not do regular work) \nDuring the past month, which statement best describes the kinds of physical activity you usually did as part of your job or work? Do not include activities during breaks or outside of work. Please read all six statements before selecting one.",
+                 "prompt":"2. \nDuring the past month, which statement best describes the kinds of physical activity you usually did as part of your job or work? Do not include activities during breaks or outside of work. Please read all six statements before selecting one.",
                  "constraints":{
                  "rules":[
                  
@@ -133,7 +145,7 @@
                  "type":"IntegerConstraints"
                  },
                  "minValue":"0",
-                 "maxValue":"200",
+                 "maxValue":"2000",
                  "uiHint":"slide",
                  "type":"SurveyQuestion"
                  },
@@ -150,7 +162,7 @@
                  "type":"IntegerConstraints"
                  },
                  "minValue":"0",
-                 "maxValue":"200",
+                 "maxValue":"2000",
                  "uiHint":"slide",
                  "type":"SurveyQuestion"
                  },
@@ -169,7 +181,7 @@
                  "type":"IntegerConstraints"
                  },
                  "minValue":"0",
-                 "maxValue":"20",
+                 "maxValue":"40",
                  "uiHint":"slide",
                  "type":"SurveyQuestion"
                  },
