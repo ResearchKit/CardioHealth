@@ -280,6 +280,7 @@ static CGFloat kSectionHeight = 64.0;
     if (indexPath.section == APHHeartAgeSummarySectionTenYearRiskEstimate) {
         cell.riskEstimateTitle = NSLocalizedString(@"10 Year Risk Estimate", @"10 year risk estimate");
         
+        
         if ([self.tenYearRisk doubleValue] < kOnePercent) {
             calculatedRisk = @"< 1%";
         } else {
@@ -311,6 +312,9 @@ static CGFloat kSectionHeight = 64.0;
     
     if (indexPath.section == APHHeartAgeSummarySectionTenYearRiskEstimate) {
         cell.recommendationContent = NSLocalizedString(@"In general, a 10-year risk >7.5% is considered high and warrants discussion with your doctor. There may be other medical or family history that can increase your risk and these should be discussed with your doctor.", @"Placeholder copy");
+        
+        cell.ASCVDLinkButton.alpha = 0;
+        
     } else {
  
         cell.recommendationContent = NSLocalizedString(@"For official recommendations, please refer to the guide from the American College of Cardiology -", @"Placeholder copy");
