@@ -142,7 +142,7 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
         {
             RKSTNumericAnswerFormat *format = [RKSTNumericAnswerFormat integerAnswerWithUnit:@"mg/dl"];
             format.minimum = @(0);
-            format.maximum = @(240);
+            format.maximum = @(1000);
             
             RKSTFormItem *item = [[RKSTFormItem alloc] initWithIdentifier:kHeartAgeTestDataTotalCholesterol
                                                                  text:NSLocalizedString(@"Total Cholesterol",
@@ -153,7 +153,8 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
         
         {
             RKSTNumericAnswerFormat *format = [RKSTNumericAnswerFormat integerAnswerWithUnit:@"mg/dl"];
-            format.minimum = @(40);
+            format.minimum = @(0);
+            format.maximum = @(1000);
             
             RKSTFormItem *item = [[RKSTFormItem alloc] initWithIdentifier:kHeartAgeTestDataHDL
                                                                  text:NSLocalizedString(@"HDL Cholesterol", @"HDL Cholesterol")
