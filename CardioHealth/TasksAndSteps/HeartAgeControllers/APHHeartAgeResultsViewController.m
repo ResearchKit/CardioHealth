@@ -14,8 +14,7 @@
 
 typedef NS_ENUM(NSUInteger, APHHeartAgeSummarySections)
 {
-    APHHeartAgeSummarySectionTodaysActivities = 0,
-    APHHeartAgeSummarySectionHeartAge,
+    APHHeartAgeSummarySectionHeartAge = 0,
     APHHeartAgeSummarySectionTenYearRiskEstimate,
     APHHeartAgeSummarySectionLifetimeRiskEstimate,
     APHHeartAgeSummaryNumberOfSections
@@ -106,9 +105,8 @@ static CGFloat kSectionHeight = 64.0;
             if ([self.taskViewController.task.identifier isEqualToString:kKludgeIdentifierForHeartAgeTaskB]) {
                 rows = 0;
             }
-        }
-        case APHHeartAgeSummarySectionTodaysActivities:
             break;
+        }
         case APHHeartAgeSummarySectionTenYearRiskEstimate:
         {
             if (self.actualAge <= 40) {
@@ -131,11 +129,6 @@ static CGFloat kSectionHeight = 64.0;
     UITableViewCell *cell = nil;
     
     switch (indexPath.section) {
-        case APHHeartAgeSummarySectionTodaysActivities:
-        {
-            cell = [self configureTodaysActivitiesCellAtIndexPath:indexPath];
-        }
-        break;
         
         case APHHeartAgeSummarySectionHeartAge:
         {
@@ -171,62 +164,58 @@ static CGFloat kSectionHeight = 64.0;
 {
     CGFloat headerHeight;
     
-    if (section == APHHeartAgeSummarySectionTodaysActivities) {
-        headerHeight = kSectionHeight;
-    } else {
-        headerHeight = tableView.sectionHeaderHeight;
-    }
+    headerHeight = tableView.sectionHeaderHeight;
     
     return headerHeight;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    UIView *sectionHeaderView = nil;
-    
-    if (section == APHHeartAgeSummarySectionTodaysActivities) {
-        sectionHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, tableView.sectionHeaderHeight)];
-        
-        UILabel *sectionLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, tableView.sectionHeaderHeight)];
-        [sectionLabel setNumberOfLines:2];
-        [sectionLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
-        [sectionLabel setLineBreakMode:NSLineBreakByWordWrapping];
-        [sectionLabel setFont:[UIFont systemFontOfSize:15.0]];
-        [sectionLabel setTextColor:[UIColor grayColor]];
-        [sectionLabel setText:NSLocalizedString(@"Completing more activities increases the effectiveness of the study.",
-                                                @"Completing more activities increases the effectiveness of the study.")];
-        
-        [sectionHeaderView addSubview:sectionLabel];
-        
-        // Top constraint
-        [sectionHeaderView addConstraint:[NSLayoutConstraint constraintWithItem:sectionLabel
-                                                                      attribute:NSLayoutAttributeTopMargin
-                                                                      relatedBy:NSLayoutRelationEqual
-                                                                         toItem:sectionHeaderView
-                                                                      attribute:NSLayoutAttributeTopMargin
-                                                                     multiplier:1.0
-                                                                       constant:15.0]];
-        
-        // Leading/Trailing constraints
-        [sectionHeaderView addConstraint:[NSLayoutConstraint constraintWithItem:sectionLabel
-                                                                      attribute:NSLayoutAttributeLeadingMargin
-                                                                      relatedBy:NSLayoutRelationEqual
-                                                                         toItem:sectionHeaderView
-                                                                      attribute:NSLayoutAttributeLeadingMargin
-                                                                     multiplier:1.0
-                                                                       constant:20.0]];
-        
-        [sectionHeaderView addConstraint:[NSLayoutConstraint constraintWithItem:sectionHeaderView
-                                                                      attribute:NSLayoutAttributeTrailingMargin
-                                                                      relatedBy:NSLayoutRelationEqual
-                                                                         toItem:sectionLabel
-                                                                      attribute:NSLayoutAttributeTrailingMargin
-                                                                     multiplier:1.0
-                                                                       constant:20.0]];
-    }
-    
-    return sectionHeaderView;
-}
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+//{
+//    UIView *sectionHeaderView = nil;
+//    
+//    if (section == APHHeartAgeSummarySectionHeartAge) {
+//        sectionHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, tableView.sectionHeaderHeight)];
+//        
+//        UILabel *sectionLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, tableView.sectionHeaderHeight)];
+//        [sectionLabel setNumberOfLines:2];
+//        [sectionLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+//        [sectionLabel setLineBreakMode:NSLineBreakByWordWrapping];
+//        [sectionLabel setFont:[UIFont systemFontOfSize:15.0]];
+//        [sectionLabel setTextColor:[UIColor grayColor]];
+//        [sectionLabel setText:NSLocalizedString(@"Completing more activities increases the effectiveness of the study.",
+//                                                @"Completing more activities increases the effectiveness of the study.")];
+//        
+//        [sectionHeaderView addSubview:sectionLabel];
+//        
+//        // Top constraint
+//        [sectionHeaderView addConstraint:[NSLayoutConstraint constraintWithItem:sectionLabel
+//                                                                      attribute:NSLayoutAttributeTopMargin
+//                                                                      relatedBy:NSLayoutRelationEqual
+//                                                                         toItem:sectionHeaderView
+//                                                                      attribute:NSLayoutAttributeTopMargin
+//                                                                     multiplier:1.0
+//                                                                       constant:15.0]];
+//        
+//        // Leading/Trailing constraints
+//        [sectionHeaderView addConstraint:[NSLayoutConstraint constraintWithItem:sectionLabel
+//                                                                      attribute:NSLayoutAttributeLeadingMargin
+//                                                                      relatedBy:NSLayoutRelationEqual
+//                                                                         toItem:sectionHeaderView
+//                                                                      attribute:NSLayoutAttributeLeadingMargin
+//                                                                     multiplier:1.0
+//                                                                       constant:20.0]];
+//        
+//        [sectionHeaderView addConstraint:[NSLayoutConstraint constraintWithItem:sectionHeaderView
+//                                                                      attribute:NSLayoutAttributeTrailingMargin
+//                                                                      relatedBy:NSLayoutRelationEqual
+//                                                                         toItem:sectionLabel
+//                                                                      attribute:NSLayoutAttributeTrailingMargin
+//                                                                     multiplier:1.0
+//                                                                       constant:20.0]];
+//    }
+//    
+//    return sectionHeaderView;
+//}
 
 #pragma mark Cell Configurations
 
