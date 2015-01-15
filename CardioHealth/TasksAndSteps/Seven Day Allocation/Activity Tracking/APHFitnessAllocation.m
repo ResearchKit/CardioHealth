@@ -404,6 +404,7 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
     NSDate *userSleepTime = delegate.dataSubstrate.currentUser.sleepTime;
     NSDate *userWakeTime = delegate.dataSubstrate.currentUser.wakeUpTime;
     
+    
     #warning To avoid the bug with sleep/wak time, we will default to the 7 AM wake time and 9:30 PM sleep time.
     if (!userSleepTime) {
         userSleepTime = [[NSCalendar currentCalendar] dateBySettingHour:21 minute:30 second:0 ofDate:[NSDate date] options:0];
@@ -433,6 +434,18 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
                                          ofDate:[NSDate date]
                                         options:0];
     
+    
+    if (sleepTime.hour < wakeTime.hour) {
+        
+        NSDateComponents *dateComponent = [[NSDateComponents alloc] init];
+        [dateComponent setDay:1];
+        
+        newEndDate = [[NSCalendar currentCalendar] dateByAddingComponents:dateComponent
+                                                                     toDate:newEndDate
+                                                                    options:0];
+        
+    }
+
     self.userDayStart = newStartDate;
     self.userDayEnd = newEndDate;
 }
@@ -441,7 +454,7 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
 - (void) getRangeOfDataPointsFrom:(NSDate *)startDate andEndDate:(NSDate *)endDate andNumberOfDays:(NSInteger)numberOfDays withQueryType:(SevenDayFitnessQueryType)queryType{
     
     //Making this algorithm zero based.
-    numberOfDays = numberOfDays - 1;
+    //numberOfDays = numberOfDays - 1;
     
     self.motionActivityManager = [[CMMotionActivityManager alloc] init];
     
@@ -469,7 +482,7 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
                                                   withHandler:^(NSArray *activities, NSError *error) {
                                                       
 
-                                                      if (numberOfDays >= 0) {
+                                                      if (numberOfDays > 0) {
                                                           
                                                           if ( queryType == SevenDayFitnessQueryTypeSleep) {
                                                               NSInteger sleepForStationaryCounter = 0;

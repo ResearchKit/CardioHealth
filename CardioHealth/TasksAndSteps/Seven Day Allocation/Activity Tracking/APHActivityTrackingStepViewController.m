@@ -108,7 +108,8 @@ static CGFloat metersPerMile = 1609.344;
             break;
     }
     
-    [self datasetDidUpdate:nil];
+    //[self datasetDidUpdate:nil];
+//    [self refreshAllocation];
 }
 
 - (void)handleClose:(UIBarButtonItem *)sender
@@ -188,15 +189,18 @@ static CGFloat metersPerMile = 1609.344;
 
 - (void)datasetDidUpdate:(NSNotification *)notif
 {
+    [self handleDays:self.segmentDays];
+    [self refreshAllocation];
+}
 
+- (void)refreshAllocation
+{
     APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    self.allocationDataset = [appDelegate.sevenDayFitnessAllocationData todaysAllocation];
-    
     CGFloat totalDistance = [[appDelegate.sevenDayFitnessAllocationData totalDistanceForDays:0] floatValue];
-
+    
     self.chartView.valueLabel.text = [NSString stringWithFormat:@"%0.1f mi", totalDistance/metersPerMile];
-
+    
     [self.chartView layoutSubviews];
 }
 
