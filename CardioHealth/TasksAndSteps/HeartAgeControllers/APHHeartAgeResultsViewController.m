@@ -259,7 +259,7 @@ static CGFloat kSectionHeight = 64.0;
     
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setNumberStyle:NSNumberFormatterPercentStyle];
-    [numberFormatter setMaximumFractionDigits:2];
+    [numberFormatter setMaximumFractionDigits:0];
     
     NSString *calculatedRisk = nil;
     NSString *optimalRisk = nil;

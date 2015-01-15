@@ -320,7 +320,7 @@ static NSInteger kUpdatedHeartRateThreshold = 1;
                                                                                                                        bundle:[NSBundle appleCoreBundle]] instantiateInitialViewController];
     APCInstructionStepViewController  *instController = (APCInstructionStepViewController*)controller;
     
-    instController.imagesArray    = @[ @"6minwalk", @"tutorial-2", @"6minwalk-Icon-1", @"6minwalk-Icon-2", @"illustration_dataanalysis@3x 2" ];
+    instController.imagesArray    = @[ @"6minwalk", @"tutorial-2", @"6minwalk-Icon-1", @"6minwalk-Icon-2", @"illustration_dataanalysis@3x" ];
     
     instController.headingsArray  = @[ @"Measure 6-Minute Walk Distance", @"Measure 6-Minute Walk Distance", @"Measure 6-Minute Walk Distance", @"Measure 6-Minute Walk Distance", @"Measure 6-Minute Walk Distance" ];
     
