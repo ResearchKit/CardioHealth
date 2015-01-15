@@ -14,8 +14,7 @@
 
 typedef NS_ENUM(NSUInteger, APHHeartAgeSummarySections)
 {
-    APHHeartAgeSummarySectionTodaysActivities = 0,
-    APHHeartAgeSummarySectionHeartAge,
+    APHHeartAgeSummarySectionHeartAge = 0,
     APHHeartAgeSummarySectionTenYearRiskEstimate,
     APHHeartAgeSummarySectionLifetimeRiskEstimate,
     APHHeartAgeSummaryNumberOfSections
@@ -107,8 +106,6 @@ static CGFloat kSectionHeight = 64.0;
                 rows = 0;
             }
         }
-        case APHHeartAgeSummarySectionTodaysActivities:
-            break;
         case APHHeartAgeSummarySectionTenYearRiskEstimate:
         {
             if (self.actualAge <= 40) {
@@ -131,11 +128,6 @@ static CGFloat kSectionHeight = 64.0;
     UITableViewCell *cell = nil;
     
     switch (indexPath.section) {
-        case APHHeartAgeSummarySectionTodaysActivities:
-        {
-            cell = [self configureTodaysActivitiesCellAtIndexPath:indexPath];
-        }
-        break;
         
         case APHHeartAgeSummarySectionHeartAge:
         {
@@ -171,11 +163,7 @@ static CGFloat kSectionHeight = 64.0;
 {
     CGFloat headerHeight;
     
-    if (section == APHHeartAgeSummarySectionTodaysActivities) {
-        headerHeight = kSectionHeight;
-    } else {
-        headerHeight = tableView.sectionHeaderHeight;
-    }
+    headerHeight = tableView.sectionHeaderHeight;
     
     return headerHeight;
 }
@@ -184,7 +172,7 @@ static CGFloat kSectionHeight = 64.0;
 {
     UIView *sectionHeaderView = nil;
     
-    if (section == APHHeartAgeSummarySectionTodaysActivities) {
+    if (section == APHHeartAgeSummarySectionHeartAge) {
         sectionHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, tableView.sectionHeaderHeight)];
         
         UILabel *sectionLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, tableView.sectionHeaderHeight)];
