@@ -134,10 +134,21 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
     
     [self setMostRecentSleepRangeStartDateAndEndDate];
     
+    NSDate *startDate = [[NSCalendar currentCalendar] dateBySettingHour:0
+                                                         minute:0
+                                                         second:0
+                                                         ofDate:self.allocationStartDate
+                                                        options:0];
+    
     NSDateComponents *numberOfDaysFromStartDate = [[NSCalendar currentCalendar] components:NSCalendarUnitDay
-                                                                                  fromDate:self.allocationStartDate
+                                                                                  fromDate:startDate
                                                                                     toDate:[NSDate date]
                                                                                    options:NSCalendarWrapComponents];
+    
+    
+    
+    // if today number of days will be zero.
+    
 
     // numberOfDaysFromStartDate provides the difference of days from now to start
     // of task and therefore if there is no difference we are only getting data for one day.
@@ -406,9 +417,12 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
     NSDate *userWakeTime = delegate.dataSubstrate.currentUser.wakeUpTime;
     
     
-    #warning To avoid the bug with sleep/wak time, we will default to the 7 AM wake time and 9:30 PM sleep time.
+    #warning To avoid the bug with sleep/wake time, we will default to the 7 AM wake time and 9:30 PM sleep time.
     if (!userSleepTime) {
         userSleepTime = [[NSCalendar currentCalendar] dateBySettingHour:21 minute:30 second:0 ofDate:[NSDate date] options:0];
+    }
+    
+    if (!userWakeTime) {
         userWakeTime = [[NSCalendar currentCalendar] dateBySettingHour:7 minute:0 second:0 ofDate:[NSDate date] options:0];
     }
     
@@ -454,9 +468,6 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
 
 - (void) getRangeOfDataPointsFrom:(NSDate *)startDate andEndDate:(NSDate *)endDate andNumberOfDays:(NSInteger)numberOfDays withQueryType:(SevenDayFitnessQueryType)queryType{
     
-    //Making this algorithm zero based.
-    //numberOfDays = numberOfDays - 1;
-    
     self.motionActivityManager = [[CMMotionActivityManager alloc] init];
     
     NSInteger numberOfDaysBack = numberOfDays * -1;
@@ -489,7 +500,16 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
                                                               NSInteger sleepForStationaryCounter = 0;
                                                           
                                                               for (CMMotionActivity *activity in activities) {
-                                                                  if (activity.stationary && activity.confidence >= 1) {
+                                                                  BOOL noActivity = (
+                                                                                     !activity.stationary &&
+                                                                                     !activity.unknown &&
+                                                                                     !activity.walking &&
+                                                                                     !activity.running &&
+                                                                                     !activity.cycling &&
+                                                                                     !activity.automotive
+                                                                                     );
+                                                                  
+                                                                  if (activity.stationary || noActivity) {
                                                                       sleepForStationaryCounter++;
                                                                   }
                                                               }
@@ -550,9 +570,15 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
                                                           
                                                           if (queryType == SevenDayFitnessQueryTypeWake) {
                                                               
+                                                              NSDate *startDate = [[NSCalendar currentCalendar] dateBySettingHour:0
+                                                                                                                           minute:0
+                                                                                                                           second:0
+                                                                                                                           ofDate:self.allocationStartDate
+                                                                                                                          options:0];
+                                                              
                                                               //Different start date and end date
                                                               NSDateComponents *numberOfDaysFromStartDate = [[NSCalendar currentCalendar] components:NSCalendarUnitDay
-                                                                                                                                            fromDate:self.allocationStartDate
+                                                                                                                                            fromDate:startDate
                                                                                                                                               toDate:[NSDate date]
                                                                                                                                              options:NSCalendarWrapComponents];
                                                               
@@ -630,8 +656,9 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
         } else {
             
             __block NSDictionary *dataPoint = nil;
-            
+            __block double totalValue;
             NSDate *beginDate = startDate;
+            
             [results enumerateStatisticsFromDate:beginDate
                                           toDate:endDate
                                        withBlock:^(HKStatistics *result, BOOL *stop) {
@@ -639,9 +666,11 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
 
                                            if (quantity) {
                                                NSDate *date = result.startDate;
-                                               double totalValue = [quantity doubleValueForUnit:[HKUnit meterUnit]];
+                                               double value = [quantity doubleValueForUnit:[HKUnit meterUnit]];
                                                
-                                                dataPoint = @{
+                                               totalValue += value;
+                                               
+                                               dataPoint = @{
                                                                kDatasetDateHourKey: [dateFormatter stringFromDate:date],
                                                                kDatasetValueKey: [NSNumber numberWithDouble:totalValue]
                                                                };

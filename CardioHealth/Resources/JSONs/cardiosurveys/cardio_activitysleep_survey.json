@@ -9,18 +9,18 @@
                  "prompt":"1. \nDo you do regular work?",
                  "constraints":{
                  "rules":[
-                                   {
-                                   "operator":"eq",
-                                   "value":2,
-                                   "skipTo":"phys_activity",
-                                   "type":"SurveyRule"
-                                   },
-                                   {
-                                   "operator":"de",
-                                   "value":0,
-                                   "skipTo":"phys_activity",
-                                   "type":"SurveyRule"
-                                   }
+                          {
+                          "operator":"eq",
+                          "value":2,
+                          "skipTo":"phys_activity",
+                          "type":"SurveyRule"
+                          },
+                          {
+                          "operator":"de",
+                          "value":0,
+                          "skipTo":"phys_activity",
+                          "type":"SurveyRule"
+                          }
                           
                           ],
                  "dataType":"integer",
@@ -36,7 +36,7 @@
                                 "type":"SurveyQuestionOption"
                                 }
                                 ],
-               
+                 
                  "type":"MultiValueConstraints"
                  },
                  "uiHint":"list",
@@ -47,7 +47,7 @@
                  {
                  "guid":"1992b80e-912c-4b05-b29b-5c35f02688c5",
                  "identifier":"atwork",
-                 "prompt":"2. \nDuring the past month, which statement best describes the kinds of physical activity you usually did as part of your job or work? Do not include activities during breaks or outside of work. Please read all six statements before selecting one.",
+                 "prompt":"2. \nWork Time Activity: \nduring the past month, which statement best describes the kinds of physical activity you usually did as part of your job or work? Do not include activities during breaks or outside of work. Please read all six statements before selecting one.",
                  "constraints":{
                  "rules":[
                  
@@ -82,11 +82,11 @@
                  "uiHint":"list",
                  "type":"SurveyQuestion"
                  },
-
+                 
                  {
                  "guid":"1992b80e-912c-4b05-b29b-5c35f02688d6",
                  "identifier":"phys_activity",
-                 "prompt":"3. \nDuring the past month, which statement best describes the kinds of physical activity you usually did? Do not include the time you spent as part of your work or job. Please read all six statements before selecting one.",
+                 "prompt":"3. \nLeisure Time Activity: \nduring the past month, which statement best describes the kinds of physical activity you usually did? Do not include the time you spent as part of your work or job. Please read all six statements before selecting one.",
                  "constraints":{
                  "rules":[
                  
@@ -166,7 +166,7 @@
                  "uiHint":"slide",
                  "type":"SurveyQuestion"
                  },
-
+                 
                  
                  
                  {
@@ -216,7 +216,7 @@
                  "uiHint":"list",
                  "type":"SurveyQuestion"
                  },
-
+                 
                  
                  {
                  "guid":"1992b80e-912c-4c05-b29b-5c35f02688i1",
@@ -246,7 +246,7 @@
                  "uiHint":"list",
                  "type":"SurveyQuestion"
                  },
-
+                 
                  ],
     "type":"Survey"
 }

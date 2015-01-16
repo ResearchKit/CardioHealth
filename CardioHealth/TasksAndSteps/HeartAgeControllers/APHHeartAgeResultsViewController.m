@@ -34,8 +34,6 @@ static NSString *kRiskEstimateCellIdenfier       = @"RiskEstimateCell";
 static NSString *kRecommendationsCellIdentifier  = @"RecommendationCell";
 static NSString *kKludgeIdentifierForHeartAgeTaskB = @"APHHeartAgeB-7259AC18-D711-47A6-ADBD-6CFCECDED1DF";
 
-static CGFloat kSectionHeight = 64.0;
-
 @interface APHHeartAgeResultsViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -109,7 +107,7 @@ static CGFloat kSectionHeight = 64.0;
         }
         case APHHeartAgeSummarySectionTenYearRiskEstimate:
         {
-            if (self.actualAge <= 40) {
+            if ((self.actualAge < 40) || (self.actualAge > 79)) {
                 rows = 0;
             } else {
                 rows = APHHeartAgeSummaryNumberOfRows;
@@ -117,7 +115,11 @@ static CGFloat kSectionHeight = 64.0;
         }
             break;
         default:
-            rows = APHHeartAgeSummaryNumberOfRows;
+            if ((self.actualAge < 20) || (self.actualAge > 59)) {
+                rows = 0;
+            } else {
+                rows = APHHeartAgeSummaryNumberOfRows;
+            }
             break;
     }
     
