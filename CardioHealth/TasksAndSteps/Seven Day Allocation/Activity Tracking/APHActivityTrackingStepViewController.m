@@ -159,7 +159,6 @@ static CGFloat metersPerMile = 1609.344;
             break;
     }
     
-    //[self datasetDidUpdate:nil];
     [self refreshAllocation];
 }
 
@@ -255,14 +254,6 @@ static CGFloat metersPerMile = 1609.344;
         [appDelegate.sevenDayFitnessAllocationData startDataCollection];
     }
     
-    NSDateComponents *components = [[NSDateComponents alloc] init];
-    [components setDay:-4];
-    
-//    NSDate *dummyDate = [[NSCalendar currentCalendar] dateByAddingComponents:components
-//                                                                     toDate:[NSDate date]
-//                                                                    options:0];
-//
-    
     self.allocationStartDate = fitnessStartDate;
     
     return fitnessStartDate;
@@ -281,7 +272,6 @@ static CGFloat metersPerMile = 1609.344;
 
 - (void)datasetDidUpdate:(NSNotification *)notif
 {
-    //[self refreshAllocation];
     [self handleDays:self.segmentDays];
     
     NSLog(@"Received notification: %@", notif.userInfo);
@@ -289,12 +279,6 @@ static CGFloat metersPerMile = 1609.344;
 
 - (void)refreshAllocation
 {
-    APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
-    
-//    CGFloat totalDistance = [[appDelegate.sevenDayFitnessAllocationData totalDistanceForDays:0] floatValue];
-//    
-//    self.chartView.valueLabel.text = [NSString stringWithFormat:@"%0.1f mi", totalDistance/metersPerMile];
-    
     [self.chartView layoutSubviews];
 }
 
