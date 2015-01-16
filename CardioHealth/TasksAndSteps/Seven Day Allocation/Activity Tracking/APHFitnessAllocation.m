@@ -26,6 +26,7 @@ NSString *const kSevenDayFitnessStartDateKey  = @"sevenDayFitnessStartDateKey";
 
 NSString *const APHSevenDayAllocationDataIsReadyNotification = @"APHSevenDayAllocationDataIsReadyNotification";
 NSString *const APHSevenDayAllocationSleepDataIsReadyNotification = @"APHSevenDayAllocationSleepDataIsReadyNotification";
+NSString *const APHSevenDayAllocationHealthKitDataIsReadyNotification = @"APHSevenDayAllocationHealthKitIsReadyNotification";
 
 NSString *const kDatasetDateKeyFormat   = @"YYYY-MM-dd-hh";
 
@@ -49,7 +50,7 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
 @property (nonatomic, strong) CMMotionActivityManager *motionActivityManager;
 
 @property (nonatomic, strong) NSMutableArray *datasetForToday;
-@property (nonatomic, strong) NSMutableArray *datasetForTheWeek;
+@property (nonatomic, strong) __block NSMutableArray *datasetForTheWeek;
 @property (nonatomic, strong) NSMutableArray *datasetForYesterday;
 
 @property (nonatomic, strong) NSMutableArray *datasetNormalized;
@@ -113,7 +114,7 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
             _datasetNormalized = [NSMutableArray new];
             
             _segmentSleep = NSLocalizedString(@"Sleep", @"Sleep");
-            _segmentInactive = NSLocalizedString(@"Inactive", @"Inactive");
+            _segmentInactive = NSLocalizedString(@"Light", @"Light");
             _segmentSedentary = NSLocalizedString(@"Sedentary", @"Sedentary");
             _segmentModerate = NSLocalizedString(@"Moderate", @"Moderate");
             _segmentVigorous = NSLocalizedString(@"Vigorous", @"Vigorous");
@@ -216,7 +217,7 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
     NSNumber *totalDistance = nil;
     
     if (days == 0) {
-        totalDistance = [self.datasetForToday valueForKeyPath:@"@sum.datasetValueKey"];
+        totalDistance = [self.datasetForTheWeek lastObject];
     } else if (days == -7) {
         totalDistance = [self.datasetForTheWeek valueForKeyPath:@"@sum.datasetValueKey"];
     } else {
@@ -497,9 +498,9 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
                                                                                              self.segmentSleep: @(sleepForStationaryCounter)
                                                                                             }];
                                                           } else if ( queryType == SevenDayFitnessQueryTypeWake) {
-                                                              [self runStatsCollectionQueryForKind:numberOfDaysBack
-                                                                                     fromStartDate:newStartDate
-                                                                                         toEndDate:newEndDate];
+//                                                              [self runStatsCollectionQueryForKind:numberOfDaysBack
+//                                                                                     fromStartDate:newStartDate
+//                                                                                         toEndDate:newEndDate];
                                                               
                                                               NSUInteger inactiveCounter = 0;
                                                               NSUInteger sedentaryCounter = 0;
@@ -571,7 +572,9 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
                                                           
                                                           
                                                           if (queryType == SevenDayFitnessQueryTypeSleep) {
-                                                              [[NSNotificationCenter defaultCenter] postNotificationName:APHSevenDayAllocationSleepDataIsReadyNotification object:nil];
+                                                              dispatch_async(dispatch_get_main_queue(), ^{
+                                                                  [[NSNotificationCenter defaultCenter] postNotificationName:APHSevenDayAllocationSleepDataIsReadyNotification object:nil];
+                                                              });
                                                           }
                                                       }
                                                   }];
@@ -595,9 +598,16 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
     }
     
     self.datasetNormalized = self.wakeDataset;
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:APHSevenDayAllocationDataIsReadyNotification
+                                                            object:nil];
+    });
+    
+
 }
 
-- (void)runStatsCollectionQueryForKind:(NSInteger)kind fromStartDate:(NSDate *)startDate toEndDate:(NSDate *)endDate
+- (void)runStatsCollectionQueryfromStartDate:(NSDate *)startDate toEndDate:(NSDate *)endDate
 {
     NSDateComponents *interval = [[NSDateComponents alloc] init];
     interval.day = kIntervalByHour;
@@ -618,36 +628,31 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
         if (error) {
             APCLogError(@"Error: %@", error.localizedDescription);
         } else {
-
-            NSDate *beginDate = startDate;
             
+            __block NSDictionary *dataPoint = nil;
+            
+            NSDate *beginDate = startDate;
             [results enumerateStatisticsFromDate:beginDate
                                           toDate:endDate
                                        withBlock:^(HKStatistics *result, BOOL *stop) {
                                            HKQuantity *quantity = result.sumQuantity;
-                                           
+
                                            if (quantity) {
                                                NSDate *date = result.startDate;
-                                               double value = [quantity doubleValueForUnit:[HKUnit meterUnit]];
+                                               double totalValue = [quantity doubleValueForUnit:[HKUnit meterUnit]];
                                                
-                                               NSDictionary *dataPoint = @{
-                                                                           kDatasetDateHourKey: [dateFormatter stringFromDate:date],
-                                                                           kDatasetValueKey: [NSNumber numberWithDouble:value]
-                                                                           };
-                                               
-                                               if (kind == 0) {
-                                                   [self.datasetForToday addObject:dataPoint];
-                                               } else if (kind == -7) {
-                                                   [self.datasetForTheWeek addObject:dataPoint];
-                                               } else {
-                                                   [self.datasetForYesterday addObject:dataPoint];
-                                               }
+                                                dataPoint = @{
+                                                               kDatasetDateHourKey: [dateFormatter stringFromDate:date],
+                                                               kDatasetValueKey: [NSNumber numberWithDouble:totalValue]
+                                                               };
                                            }
                                        }];
+            
             dispatch_async(dispatch_get_main_queue(), ^{
-                [[NSNotificationCenter defaultCenter] postNotificationName:APHSevenDayAllocationDataIsReadyNotification
-                                                                    object:nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:APHSevenDayAllocationHealthKitDataIsReadyNotification object:nil userInfo:dataPoint];
             });
+
         }
     };
     

@@ -8,8 +8,6 @@
 #import <Foundation/Foundation.h>
 @import APCAppCore;
 
-@import APCAppCore;
-
 extern NSString *const kDatasetDateKey;
 extern NSString *const kDatasetValueKey;
 extern NSString *const kDatasetSegmentNameKey;
@@ -19,6 +17,7 @@ extern NSString *const kDatasetDateHourKey;
 extern NSString *const kSegmentSumKey;
 extern NSString *const kSevenDayFitnessStartDateKey;
 extern NSString *const APHSevenDayAllocationDataIsReadyNotification;
+extern NSString *const APHSevenDayAllocationHealthKitDataIsReadyNotification;
 
 @interface APHFitnessAllocation : NSObject
 
@@ -28,4 +27,5 @@ extern NSString *const APHSevenDayAllocationDataIsReadyNotification;
 - (NSArray *)weeksAllocation;
 - (NSNumber *)totalDistanceForDays:(NSInteger)days;
 - (void) startDataCollection;
+- (void)runStatsCollectionQueryfromStartDate:(NSDate *)startDate toEndDate:(NSDate *)endDate;
 @end
