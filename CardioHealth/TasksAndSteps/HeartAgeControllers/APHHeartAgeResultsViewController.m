@@ -107,7 +107,7 @@ static NSString *kKludgeIdentifierForHeartAgeTaskB = @"APHHeartAgeB-7259AC18-D71
         }
         case APHHeartAgeSummarySectionTenYearRiskEstimate:
         {
-            if (self.actualAge <= 40) {
+            if ((self.actualAge < 40) || (self.actualAge > 79)) {
                 rows = 0;
             } else {
                 rows = APHHeartAgeSummaryNumberOfRows;
@@ -115,7 +115,11 @@ static NSString *kKludgeIdentifierForHeartAgeTaskB = @"APHHeartAgeB-7259AC18-D71
         }
             break;
         default:
-            rows = APHHeartAgeSummaryNumberOfRows;
+            if ((self.actualAge < 20) || (self.actualAge > 59)) {
+                rows = 0;
+            } else {
+                rows = APHHeartAgeSummaryNumberOfRows;
+            }
             break;
     }
     
