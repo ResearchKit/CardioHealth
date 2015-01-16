@@ -152,7 +152,8 @@ static CGFloat metersPerMile = 1609.344;
                                                                  second:0
                                                                  ofDate:self.allocationStartDate
                                                                 options:0];
-            [appDelegate.sevenDayFitnessAllocationData runStatsCollectionQueryfromStartDate:self.allocationStartDate
+            
+            [appDelegate.sevenDayFitnessAllocationData runStatsCollectionQueryfromStartDate:startDate
                                                                                   toEndDate:[NSDate date]];
 
             break;
@@ -239,13 +240,30 @@ static CGFloat metersPerMile = 1609.344;
     NSDate *fitnessStartDate = [defaults objectForKey:kSevenDayFitnessStartDateKey];
     
     if (!fitnessStartDate) {
-        fitnessStartDate = [NSDate date];
+        
+        NSDate *startDate = [[NSCalendar currentCalendar] dateBySettingHour:0
+                                                                     minute:0
+                                                                     second:0
+                                                                     ofDate:[NSDate date]
+                                                                    options:0];
+        
+        fitnessStartDate = startDate;
         [self saveSevenDayFitnessStartDate:fitnessStartDate];
         
         APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
         appDelegate.sevenDayFitnessAllocationData = [[APHFitnessAllocation alloc] initWithAllocationStartDate:fitnessStartDate];
         [appDelegate.sevenDayFitnessAllocationData startDataCollection];
     }
+    
+    NSDateComponents *components = [[NSDateComponents alloc] init];
+    [components setDay:-4];
+    
+//    NSDate *dummyDate = [[NSCalendar currentCalendar] dateByAddingComponents:components
+//                                                                     toDate:[NSDate date]
+//                                                                    options:0];
+//
+    
+    self.allocationStartDate = fitnessStartDate;
     
     return fitnessStartDate;
 }
