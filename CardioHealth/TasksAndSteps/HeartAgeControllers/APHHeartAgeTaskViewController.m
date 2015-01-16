@@ -142,7 +142,7 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
         {
             RKSTNumericAnswerFormat *format = [RKSTNumericAnswerFormat integerAnswerWithUnit:@"mg/dl"];
             format.minimum = @(0);
-            format.maximum = @(240);
+            format.maximum = @(1000);
             
             RKSTFormItem *item = [[RKSTFormItem alloc] initWithIdentifier:kHeartAgeTestDataTotalCholesterol
                                                                  text:NSLocalizedString(@"Total Cholesterol",
@@ -153,7 +153,8 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
         
         {
             RKSTNumericAnswerFormat *format = [RKSTNumericAnswerFormat integerAnswerWithUnit:@"mg/dl"];
-            format.minimum = @(40);
+            format.minimum = @(0);
+            format.maximum = @(1000);
             
             RKSTFormItem *item = [[RKSTFormItem alloc] initWithIdentifier:kHeartAgeTestDataHDL
                                                                  text:NSLocalizedString(@"HDL Cholesterol", @"HDL Cholesterol")
@@ -384,11 +385,12 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
     RKSTStepViewController *stepVC = nil;
     
     if ([step.identifier isEqualToString:kHeartAgeIntroduction]) {
+                
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"APHHeartAgeIntroStepViewController"
+                                                                 bundle:nil];
         
-        NSDictionary  *controllers = @{ kHeartAgeIntroduction : [APHHeartAgeIntroStepViewController class] };
+        APCStepViewController *controller = [mainStoryboard instantiateViewControllerWithIdentifier:@"APHHeartAgeIntroStepViewController"];
         
-        Class  aClass = [controllers objectForKey:step.identifier];
-        APCStepViewController  *controller = [[aClass alloc] initWithNibName:nil bundle:nil];
         
         controller.delegate = self;
         controller.step = step;

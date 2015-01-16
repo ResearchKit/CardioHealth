@@ -10,7 +10,7 @@
                
                  "dataType":"integer",
                  "minValue":0,
-                 "maxValue":4,
+                 "maxValue":10,
                  "step":null,
                  "type":"IntegerConstraints"
                  },
@@ -26,7 +26,7 @@
                  
                  "dataType":"integer",
                  "minValue":0,
-                 "maxValue":4,
+                 "maxValue":10,
                  "step":null,
                  "type":"IntegerConstraints"
                  },
@@ -40,10 +40,22 @@
                  "prompt":"3.\nDo you eat 2 servings of fish or more weekly?",
                  "constraints":{
                
-                 "dataType":"boolean",
-                 "type":"BooleanConstraints"
+                 "dataType":"integer",
+                 "enumeration": [
+                                 {
+                                 "label": "Yes, I eat 2 servings of fish or more weekly",
+                                 "value": 1,
+                                 "type": "SurveyQuestionOption"
+                                 },
+                                 {
+                                 "label": "No, I eat less than 2 servings of fish weekly ",
+                                 "value": 2,
+                                 "type": "SurveyQuestionOption"
+                                 }
+                                 ],
+                "type": "MultiValueConstraints"
                  },
-                 "uiHint":"checkbox",
+                 "uiHint":"list",
                  "type":"SurveyQuestion"
                  },
                  
@@ -52,41 +64,78 @@
                  "identifier":"grains",
                  "prompt":"4.\nDo you eat 3 servings of whole grains or more daily?",
                  "constraints":{
-               
-                 "dataType":"boolean",
-                 "type":"BooleanConstraints"
+                 
+                 "dataType":"integer",
+                 "enumeration": [
+                                 {
+                                 "label": "Yes, I eat 3 servings of whole grains daily",
+                                 "value": 1,
+                                 "type": "SurveyQuestionOption"
+                                 },
+                                 {
+                                 "label": "No, I eat less than 3 servings of whole grains daily",
+                                 "value": 2,
+                                 "type": "SurveyQuestionOption"
+                                 }
+                                 ],
+                 "type": "MultiValueConstraints"
                  },
-                 "uiHint":"checkbox",
+                 "uiHint":"list",
                  "type":"SurveyQuestion"
                  },
+                 
                  
                  {
                  "guid":"e872f85c-c157-457b-890f-9e28eeed6ea6",
                  "identifier":"bev/sugar",
                  "prompt":"5.\nDo you drink less than 36 ounces (450 calories) of beverages with added sugar weekly?",
                  "constraints":{
-                
-                 "dataType":"boolean",
-                 "type":"BooleanConstraints"
+                 
+                 "dataType":"integer",
+                 "enumeration": [
+                                 {
+                                 "label": "Yes, I drink less than 36 ounces of beverages weekly",
+                                 "value": 1,
+                                 "type": "SurveyQuestionOption"
+                                 },
+                                 {
+                                 "label": "No, I drink more than 36 ounces of beverages weekly",
+                                 "value": 2,
+                                 "type": "SurveyQuestionOption"
+                                 }
+                                 ],
+                 "type": "MultiValueConstraints"
                  },
-                 "uiHint":"checkbox",
+                 "uiHint":"list",
                  "type":"SurveyQuestion"
                  },
+                 
                  {
                  "guid":"e872f85c-c157-457b-890f-9e28eeed6ea1",
                  "identifier":"sodium",
                  "prompt":"6.\nDo you eat less than 1500 mg of sodium daily?",
-                 "constraints":{
+                  "constraints":{
                  
-                 "dataType":"boolean",
-                 "type":"BooleanConstraints"
+                 "dataType":"integer",
+                 "enumeration": [
+                                 {
+                                 "label": "Yes, I eat less than 1500 mg of sodium daily",
+                                 "value": 1,
+                                 "type": "SurveyQuestionOption"
+                                 },
+                                 {
+                                 "label": "No, eat more than 1500 mg of sodium daily",
+                                 "value": 2,
+                                 "type": "SurveyQuestionOption"
+                                 }
+                                 ],
+                 "type":"MultiValueConstraints"
                  },
-                 "uiHint":"checkbox",
+                 "uiHint":"list",
                  "type":"SurveyQuestion"
                  }
-
+                 
                  ],
     "type":"Survey"
 }
-
 

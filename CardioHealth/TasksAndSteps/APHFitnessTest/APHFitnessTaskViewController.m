@@ -23,7 +23,6 @@ static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
 
 static NSInteger kCountDownTimer = 5;
 static NSInteger kUpdatedHeartRateThreshold = 1;
-static NSInteger kUpdatedHeartRateTimeThreshold = 20;
 
 @interface APHFitnessTaskViewController ()
 
@@ -82,13 +81,10 @@ static NSInteger kUpdatedHeartRateTimeThreshold = 20;
     APCAppDelegate *appDelegate = (APCAppDelegate*) [[UIApplication sharedApplication] delegate];
     APCParameters *parameters = appDelegate.dataSubstrate.parameters;
     NSInteger totalUpdates = appDelegate.healthKitTracker.totalUpdates;
-    NSDate *lastUpdate = appDelegate.healthKitTracker.lastUpdate;
-    
-    NSTimeInterval secondsBetween = [[NSDate date] timeIntervalSinceDate:lastUpdate];
-    
+
     BOOL heartIsUpdating = NO;
     
-    if (totalUpdates > kUpdatedHeartRateThreshold && secondsBetween < kUpdatedHeartRateTimeThreshold) {
+    if (totalUpdates > kUpdatedHeartRateThreshold) {
         heartIsUpdating = YES;
     }
 
@@ -299,13 +295,10 @@ static NSInteger kUpdatedHeartRateTimeThreshold = 20;
         //Check if there is a heart rate monitor attached and sending data.
         APCAppDelegate *appDelegate = (APCAppDelegate*) [[UIApplication sharedApplication] delegate];
         NSInteger totalUpdates = appDelegate.healthKitTracker.totalUpdates;
-        NSDate *lastUpdate = appDelegate.healthKitTracker.lastUpdate;
-        
-        NSTimeInterval secondsBetween = [[NSDate date] timeIntervalSinceDate:lastUpdate];
         
         BOOL heartIsUpdating = NO;
         
-        if (totalUpdates > kUpdatedHeartRateThreshold && secondsBetween < kUpdatedHeartRateTimeThreshold) {
+        if (totalUpdates > kUpdatedHeartRateThreshold) {
             heartIsUpdating = YES;
         }
         
@@ -321,40 +314,47 @@ static NSInteger kUpdatedHeartRateTimeThreshold = 20;
     }
 }
 
+- (APCStepViewController *)setupInstructionStepWithStep:(RKSTStep *)step
+{
+    APCStepViewController             *controller     = (APCInstructionStepViewController *)[[UIStoryboard storyboardWithName:@"APCInstructionStep"
+                                                                                                                       bundle:[NSBundle appleCoreBundle]] instantiateInitialViewController];
+    APCInstructionStepViewController  *instController = (APCInstructionStepViewController*)controller;
+    
+    instController.imagesArray    = @[ @"6minwalk", @"tutorial-2", @"6minwalk-Icon-1", @"6minwalk-Icon-2", @"illustration_dataanalysis@3x" ];
+    
+    instController.headingsArray  = @[ @"Measure 6-Minute Walk Distance", @"Measure 6-Minute Walk Distance", @"Measure 6-Minute Walk Distance", @"Measure 6-Minute Walk Distance", @"Measure 6-Minute Walk Distance" ];
+    
+    instController.messagesArray  = @[
+                                      @"Once you tap Get Started, you will have 5 seconds until this test begins tracking your movements.",
+                                      @"If you have a wearable device linked to your phone that can track your heart rate, please put it on and make sure it captures your resting heart rate before you start.",
+                                      @"Begin walking at your fastest possible pace for 6 minutes.",
+                                      @"After 6 minutes expires and you are wearing a heart rate sensing device, you will be asked to sit down and rest for 3 minutes.",
+                                      @"After the test is finished, your results will be analyzed and available on the dashboard."
+                                    ];
+    
+    UIButton  *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    CGRect     frame = CGRectMake(0.0, 0.0, 100.0, 27.0);
+    button.frame = frame;
+    
+    button.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [button setTitle:@"View Important Details" forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor appPrimaryColor] forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(viewImportantDetailButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+    
+    instController.accessoryContent = button;
+    
+    controller.delegate = self;
+    controller.step     = step;
+    
+    return  controller;
+}
+
 - (RKSTStepViewController *)taskViewController:(RKSTTaskViewController *)taskViewController viewControllerForStep:(RKSTStep *)step
 {
     RKSTStepViewController  *controller = nil;
     
     if (step.identifier == kFitnessTestStep101) {
-        controller = (APCInstructionStepViewController *)[[UIStoryboard storyboardWithName:@"APCInstructionStep" bundle:[NSBundle appleCoreBundle]] instantiateInitialViewController];
-        APCInstructionStepViewController  *instController = (APCInstructionStepViewController*)controller;
-        instController.imagesArray = @[ @"6minwalk",
-                                        @"tutorial-2",
-                                        @"6minwalk-Icon-1",
-                                        @"6minwalk-Icon-2",
-                                        @"illustration_dataanalysis@3x 2" ];
-        
-        instController.headingsArray = @[ @"Measure 6-Minute Walk Distance", @"Measure 6-Minute Walk Distance", @"Measure 6-Minute Walk Distance", @"Measure 6-Minute Walk Distance", @"Measure 6-Minute Walk Distance" ];
-        
-        instController.messagesArray  = @[
-                                          @"Once you tap Get Started, you will have 5 seconds until this test begins tracking your movements.",
-                                          @"If you have a wearable device linked to your phone that can track your heart rate, please put it on and make sure it captures your resting heart rate before you start.",
-                                          @"Begin walking at your fastest possible pace for 6 minutes.",
-                                          @"After 6 minutes expires and you are wearing a heart rate sensing device, you will be asked to sit down and rest for 3 minutes.",
-                                          @"After the test is finished, your results will be analyzed and available on the dashboard. You will be notified when analysis is ready."
-                                          ];
-        UIButton  *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        CGRect     frame = CGRectMake(0.0, 0.0, 100.0, 27.0);
-        button.frame = frame;
-        
-        button.titleLabel.textAlignment = NSTextAlignmentCenter;
-        [button setTitle:@"View Important Details" forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor appPrimaryColor] forState:UIControlStateNormal];
-        [button addTarget:self action:@selector(viewImportantDetailButtonTapped) forControlEvents:UIControlEventTouchUpInside];
-        
-        instController.accessoryContent = button;
-        controller.delegate = self;
-        controller.step = step;
+        controller = [self setupInstructionStepWithStep:(RKSTStep *)step];
     }   else if (step.identifier == kFitnessTestStep105) {
         
         APCSimpleTaskSummaryViewController  *simpleTaskSummaryViewController = [[APCSimpleTaskSummaryViewController alloc] initWithNibName:nil bundle:[NSBundle appleCoreBundle]];
