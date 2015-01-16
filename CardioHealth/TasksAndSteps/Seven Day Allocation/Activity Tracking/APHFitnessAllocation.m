@@ -656,8 +656,9 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
         } else {
             
             __block NSDictionary *dataPoint = nil;
-            
+            __block double totalValue;
             NSDate *beginDate = startDate;
+            
             [results enumerateStatisticsFromDate:beginDate
                                           toDate:endDate
                                        withBlock:^(HKStatistics *result, BOOL *stop) {
@@ -665,9 +666,11 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
 
                                            if (quantity) {
                                                NSDate *date = result.startDate;
-                                               double totalValue = [quantity doubleValueForUnit:[HKUnit meterUnit]];
+                                               double value = [quantity doubleValueForUnit:[HKUnit meterUnit]];
                                                
-                                                dataPoint = @{
+                                               totalValue += value;
+                                               
+                                               dataPoint = @{
                                                                kDatasetDateHourKey: [dateFormatter stringFromDate:date],
                                                                kDatasetValueKey: [NSNumber numberWithDouble:totalValue]
                                                                };

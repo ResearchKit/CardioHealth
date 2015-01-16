@@ -130,10 +130,10 @@ static CGFloat metersPerMile = 1609.344;
                                                                          ofDate:[self dateForSpan:-1]
                                                                         options:0];
             endDate = [[NSCalendar currentCalendar] dateBySettingHour:23
-                                                                       minute:59
-                                                                       second:0
-                                                                       ofDate:[NSDate date]
-                                                                      options:0];
+                                                               minute:59
+                                                               second:0
+                                                               ofDate:startDate
+                                                              options:0];
             
             [appDelegate.sevenDayFitnessAllocationData runStatsCollectionQueryfromStartDate:startDate
                                                                                   toEndDate:endDate];
