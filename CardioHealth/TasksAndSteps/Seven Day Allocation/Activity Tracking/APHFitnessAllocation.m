@@ -134,10 +134,21 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
     
     [self setMostRecentSleepRangeStartDateAndEndDate];
     
+    NSDate *startDate = [[NSCalendar currentCalendar] dateBySettingHour:0
+                                                         minute:0
+                                                         second:0
+                                                         ofDate:self.allocationStartDate
+                                                        options:0];
+    
     NSDateComponents *numberOfDaysFromStartDate = [[NSCalendar currentCalendar] components:NSCalendarUnitDay
-                                                                                  fromDate:self.allocationStartDate
+                                                                                  fromDate:startDate
                                                                                     toDate:[NSDate date]
                                                                                    options:NSCalendarWrapComponents];
+    
+    
+    
+    // if today number of days will be zero.
+    
 
     // numberOfDaysFromStartDate provides the difference of days from now to start
     // of task and therefore if there is no difference we are only getting data for one day.
@@ -454,9 +465,6 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
 
 - (void) getRangeOfDataPointsFrom:(NSDate *)startDate andEndDate:(NSDate *)endDate andNumberOfDays:(NSInteger)numberOfDays withQueryType:(SevenDayFitnessQueryType)queryType{
     
-    //Making this algorithm zero based.
-    //numberOfDays = numberOfDays - 1;
-    
     self.motionActivityManager = [[CMMotionActivityManager alloc] init];
     
     NSInteger numberOfDaysBack = numberOfDays * -1;
@@ -550,9 +558,15 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
                                                           
                                                           if (queryType == SevenDayFitnessQueryTypeWake) {
                                                               
+                                                              NSDate *startDate = [[NSCalendar currentCalendar] dateBySettingHour:0
+                                                                                                                           minute:0
+                                                                                                                           second:0
+                                                                                                                           ofDate:self.allocationStartDate
+                                                                                                                          options:0];
+                                                              
                                                               //Different start date and end date
                                                               NSDateComponents *numberOfDaysFromStartDate = [[NSCalendar currentCalendar] components:NSCalendarUnitDay
-                                                                                                                                            fromDate:self.allocationStartDate
+                                                                                                                                            fromDate:startDate
                                                                                                                                               toDate:[NSDate date]
                                                                                                                                              options:NSCalendarWrapComponents];
                                                               
