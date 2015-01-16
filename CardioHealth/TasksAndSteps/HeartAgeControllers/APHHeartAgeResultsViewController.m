@@ -34,8 +34,6 @@ static NSString *kRiskEstimateCellIdenfier       = @"RiskEstimateCell";
 static NSString *kRecommendationsCellIdentifier  = @"RecommendationCell";
 static NSString *kKludgeIdentifierForHeartAgeTaskB = @"APHHeartAgeB-7259AC18-D711-47A6-ADBD-6CFCECDED1DF";
 
-static CGFloat kSectionHeight = 64.0;
-
 @interface APHHeartAgeResultsViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
