@@ -52,6 +52,11 @@ static CGFloat metersPerMile = 1609.344;
                                                NSForegroundColorAttributeName : [UIColor blackColor]
                                                }
                                     forState:UIControlStateSelected];
+    [self.segmentDays setTitleTextAttributes:@{
+                                               NSFontAttributeName:[UIFont appMediumFontWithSize:19.0f],
+                                               NSForegroundColorAttributeName : [UIColor whiteColor]
+                                               }
+                                    forState:UIControlStateDisabled];
 }
 
 - (void)viewWillAppear:(BOOL)animated
