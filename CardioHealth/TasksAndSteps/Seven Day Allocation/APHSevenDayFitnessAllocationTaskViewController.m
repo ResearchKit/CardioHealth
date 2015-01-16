@@ -75,15 +75,13 @@ static NSString *kSevenDayFitnessCompleteStep = @"sevenDayFitnessCompleteStep";
                                                                                   bundle:[NSBundle appleCoreBundle]] instantiateInitialViewController];
         controller.imagesArray = @[@"tutorial-1", @"tutorial-2"];
         controller.headingsArray = @[
-                                     NSLocalizedString(@"7-Day Activity and Sleep Assessment", @"7-Day Activity and Sleep Assessment"),
-                                     NSLocalizedString(@"Keep Your Phone On You", @"Keep Your Phone On You")
-                                     ];
+                                     @"7-Day Activity and Sleep Assessment",
+                                     @"Keep Your Phone On You"
+                                    ];
         controller.messagesArray = @[
-                                     NSLocalizedString(@"During the next week, your fitness allocation will be monitored, analyzed, and available to you in real time.",
-                                                       @"During the next week, your fitness allocation will be monitored, analyzed, and available to you in real time."),
-                                     NSLocalizedString(@"To ensure the accuracy of this task, keep your phone on you at all times.",
-                                                       @"To ensure the accuracy of this task, keep your phone on you at all times.")
-                                     ];
+                                     @"During the next week, your fitness allocation will be monitored, analyzed, and available to you in real time.",
+                                     @"To ensure the accuracy of this task, keep your phone on you at all times."
+                                    ];
         
         controller.delegate = self;
         controller.step = step;

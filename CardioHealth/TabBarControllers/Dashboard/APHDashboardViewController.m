@@ -141,23 +141,7 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
         
         NSUInteger allScheduledTasks = ((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.countOfAllScheduledTasksForToday;
         NSUInteger completedScheduledTasks = ((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.countOfCompletedScheduledTasksForToday;
-        
-        {
-            APCTableViewItem *item = [APCTableViewItem new];
-            item.caption = NSLocalizedString(@"Activities", @"");
-            item.identifier = kAPCRightDetailTableViewCellIdentifier;
-            item.editable = NO;
-            item.textAlignnment = NSTextAlignmentRight;
-
-            
-            item.detailText = [NSString stringWithFormat:@"%lu/%lu", (unsigned long)completedScheduledTasks, (unsigned long)allScheduledTasks];
-            
-            APCTableViewRow *row = [APCTableViewRow new];
-            row.item = item;
-            row.itemType = kAPCTableViewDashboardItemTypeProgress;
-            [rowItems addObject:row];
-        }
-        
+                
         {
             APCTableViewDashboardProgressItem *item = [APCTableViewDashboardProgressItem new];
             item.identifier = kAPCDashboardProgressTableViewCellIdentifier;
@@ -249,7 +233,7 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
         
         APCTableViewSection *section = [APCTableViewSection new];
         section.rows = [NSArray arrayWithArray:rowItems];
-        section.sectionTitle = NSLocalizedString(@"Past 5 Days", @"");
+        section.sectionTitle = NSLocalizedString(@"Recent Activity", @"");
         [self.items addObject:section];
     }
     

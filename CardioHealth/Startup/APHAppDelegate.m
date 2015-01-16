@@ -14,6 +14,7 @@
 /*********************************************************************************/
 static NSString *const kStudyIdentifier = @"Cardiovascular";
 static NSString *const kAppPrefix       = @"cardiovascular";
+static  NSTimeInterval  kPassiveLocationDeferredUpdatesTimeout = 1.0 * 60.0;
 
 static NSString *const kVideoShownKey = @"VideoShown";
 
@@ -60,6 +61,8 @@ static NSString *const kVideoShownKey = @"VideoShown";
                                                    @(kAPCUserInfoItemTypeWakeUpTime),
                                                    @(kAPCUserInfoItemTypeSleepTime),
                                                    ],
+                                           kAnalyticsOnOffKey  : @(YES),
+                                           kAnalyticsFlurryAPIKeyKey : @"9NPWCDZZY6KCXD4SCHWG"
                                            }];
     self.initializationOptions = dictionary;
 }
@@ -100,6 +103,12 @@ static NSString *const kVideoShownKey = @"VideoShown";
 
 -(void)setUpCollectors
 {
+    self.dataSubstrate.passiveLocationTracking = [[APCPassiveLocationTracking alloc]
+                                                  initWithDeferredUpdatesTimeout:kPassiveLocationDeferredUpdatesTimeout
+                                                  andHomeLocationStatus:APCPassiveLocationTrackingHomeLocationAvailable];
+    
+    [self.dataSubstrate.passiveLocationTracking start];
+    
         NSError *error = nil;
         {
             //TODO Need to setup a mechanism to gather sleep data like passive data collection.
@@ -186,7 +195,7 @@ static NSString *const kVideoShownKey = @"VideoShown";
             }
             goto errReturn;
         }
-        
+    
     errReturn:
         return;
     

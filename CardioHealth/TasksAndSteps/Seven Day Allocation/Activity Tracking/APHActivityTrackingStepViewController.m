@@ -19,6 +19,8 @@ static CGFloat metersPerMile = 1609.344;
 
 @property (nonatomic, strong) NSArray *allocationDataset;
 
+@property (nonatomic, strong) NSDate *allocationStartDate;
+
 @property (nonatomic) BOOL showTodaysDataAtViewLoad;
 @property (nonatomic) NSInteger numberOfDaysOfFitnessWeek;
 
@@ -50,6 +52,11 @@ static CGFloat metersPerMile = 1609.344;
                                                NSForegroundColorAttributeName : [UIColor blackColor]
                                                }
                                     forState:UIControlStateSelected];
+    [self.segmentDays setTitleTextAttributes:@{
+                                               NSFontAttributeName:[UIFont appMediumFontWithSize:19.0f],
+                                               NSForegroundColorAttributeName : [UIColor whiteColor]
+                                               }
+                                    forState:UIControlStateDisabled];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -58,7 +65,11 @@ static CGFloat metersPerMile = 1609.344;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(datasetDidUpdate:)
-                                                 name:APHSevenDayAllocationDataIsReadyNotification object:nil];
+                                                 name:APHSevenDayAllocationDataIsReadyNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(TotalDistanceFromHealthKit:) name:APHSevenDayAllocationHealthKitDataIsReadyNotification
+                                               object:nil];
     
     self.showTodaysDataAtViewLoad = YES;
     
@@ -70,10 +81,18 @@ static CGFloat metersPerMile = 1609.344;
     self.chartView.shouldAnimate = YES;
     self.chartView.shouldAnimateLegend = NO;
     self.chartView.titleLabel.text = NSLocalizedString(@"Distance", @"Distance");
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
     
-    if (self.showTodaysDataAtViewLoad) {
-        [self handleDays:self.segmentDays];
-        self.showTodaysDataAtViewLoad = NO;
+    APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
+    if ([appDelegate.sevenDayFitnessAllocationData todaysAllocation]) {
+        if (self.showTodaysDataAtViewLoad) {
+            [self handleDays:self.segmentDays];
+            self.showTodaysDataAtViewLoad = NO;
+        }
     }
 }
 
@@ -81,6 +100,9 @@ static CGFloat metersPerMile = 1609.344;
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:APHSevenDayAllocationDataIsReadyNotification
+                                                  object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:APHSevenDayAllocationHealthKitDataIsReadyNotification
                                                   object:nil];
     
     [super viewWillDisappear:animated];
@@ -95,20 +117,67 @@ static CGFloat metersPerMile = 1609.344;
 - (IBAction)handleDays:(UISegmentedControl *)sender
 {
     APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSDate *startDate = nil;
+    NSDate *endDate = nil;
     
     switch (sender.selectedSegmentIndex) {
         case 0:
             self.allocationDataset = [appDelegate.sevenDayFitnessAllocationData yesterdaysAllocation];
+            
+            startDate = [[NSCalendar currentCalendar] dateBySettingHour:0
+                                                                         minute:0
+                                                                         second:0
+                                                                         ofDate:[self dateForSpan:-1]
+                                                                        options:0];
+            endDate = [[NSCalendar currentCalendar] dateBySettingHour:23
+                                                               minute:59
+                                                               second:0
+                                                               ofDate:startDate
+                                                              options:0];
+            
+            [appDelegate.sevenDayFitnessAllocationData runStatsCollectionQueryfromStartDate:startDate
+                                                                                  toEndDate:endDate];
             break;
         case 1:
             self.allocationDataset = [appDelegate.sevenDayFitnessAllocationData todaysAllocation];
+            startDate = [[NSCalendar currentCalendar] dateBySettingHour:0
+                                                                 minute:0
+                                                                 second:0
+                                                                 ofDate:[NSDate date]
+                                                                options:0];
+            [appDelegate.sevenDayFitnessAllocationData runStatsCollectionQueryfromStartDate:startDate
+                                                                                  toEndDate:[NSDate date]];
+
             break;
         default:
             self.allocationDataset = [appDelegate.sevenDayFitnessAllocationData weeksAllocation];
+            
+            startDate = [[NSCalendar currentCalendar] dateBySettingHour:0
+                                                                 minute:0
+                                                                 second:0
+                                                                 ofDate:self.allocationStartDate
+                                                                options:0];
+            
+            [appDelegate.sevenDayFitnessAllocationData runStatsCollectionQueryfromStartDate:startDate
+                                                                                  toEndDate:[NSDate date]];
+
             break;
     }
     
-    [self datasetDidUpdate:nil];
+    [self refreshAllocation];
+}
+
+- (void)TotalDistanceFromHealthKit:(NSNotification *)notif {
+    
+    NSDictionary *healthKitDict = notif.userInfo;
+    double totalDistance = [[healthKitDict objectForKey:@"datasetValueKey"] doubleValue];
+    
+    self.chartView.valueLabel.alpha = 0;
+    [UIView animateWithDuration:0.3 animations:^{
+        self.chartView.valueLabel.text = [NSString stringWithFormat:@"%0.1f mi", totalDistance/metersPerMile];
+        self.chartView.valueLabel.alpha = 1;
+    }];
+    
 }
 
 - (void)handleClose:(UIBarButtonItem *)sender
@@ -116,6 +185,17 @@ static CGFloat metersPerMile = 1609.344;
     if ([self.delegate respondsToSelector:@selector(stepViewControllerDidFinish:navigationDirection:)] == YES) {
         [self.delegate stepViewControllerDidFinish:self navigationDirection:RKSTStepViewControllerNavigationDirectionForward];
     }
+}
+
+- (NSDate *)dateForSpan:(NSInteger)daySpan
+{
+    NSDateComponents *components = [[NSDateComponents alloc] init];
+    [components setDay:daySpan];
+    
+    NSDate *spanDate = [[NSCalendar currentCalendar] dateByAddingComponents:components
+                                                                     toDate:[NSDate date]
+                                                                    options:0];
+    return spanDate;
 }
 
 - (NSString *)fitnessDaysRemaining
@@ -164,13 +244,22 @@ static CGFloat metersPerMile = 1609.344;
     NSDate *fitnessStartDate = [defaults objectForKey:kSevenDayFitnessStartDateKey];
     
     if (!fitnessStartDate) {
-        fitnessStartDate = [NSDate date];
+        
+        NSDate *startDate = [[NSCalendar currentCalendar] dateBySettingHour:0
+                                                                     minute:0
+                                                                     second:0
+                                                                     ofDate:[NSDate date]
+                                                                    options:0];
+        
+        fitnessStartDate = startDate;
         [self saveSevenDayFitnessStartDate:fitnessStartDate];
         
         APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
         appDelegate.sevenDayFitnessAllocationData = [[APHFitnessAllocation alloc] initWithAllocationStartDate:fitnessStartDate];
         [appDelegate.sevenDayFitnessAllocationData startDataCollection];
     }
+    
+    self.allocationStartDate = fitnessStartDate;
     
     return fitnessStartDate;
 }
@@ -188,12 +277,13 @@ static CGFloat metersPerMile = 1609.344;
 
 - (void)datasetDidUpdate:(NSNotification *)notif
 {
-    APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [self handleDays:self.segmentDays];
     
-    CGFloat totalDistance = [[appDelegate.sevenDayFitnessAllocationData totalDistanceForDays:0] floatValue];
-    
-    self.chartView.valueLabel.text = [NSString stringWithFormat:@"%0.1f mi", totalDistance/metersPerMile];
-    
+    NSLog(@"Received notification: %@", notif.userInfo);
+}
+
+- (void)refreshAllocation
+{
     [self.chartView layoutSubviews];
 }
 
