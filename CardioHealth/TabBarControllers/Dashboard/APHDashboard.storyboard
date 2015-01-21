@@ -480,34 +480,6 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bXM-MT-fM8" id="gUp-V7-jDX">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RNf-yN-6aJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
-                                            <color key="backgroundColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="1" id="UdC-7w-hhc"/>
-                                            </constraints>
-                                        </view>
-                                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="26C-32-vWV">
-                                            <rect key="frame" x="0.0" y="1" width="4" height="54"/>
-                                            <color key="backgroundColor" red="0.01176470588" green="0.62352941179999999" blue="0.87450980389999999" alpha="1" colorSpace="calibratedRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="4" id="2XH-d5-EyB"/>
-                                            </constraints>
-                                        </view>
-                                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lvb-MH-Fgh">
-                                            <rect key="frame" x="0.0" y="55" width="320" height="1"/>
-                                            <color key="backgroundColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="1" id="VAx-Fv-uAr"/>
-                                            </constraints>
-                                        </view>
-                                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S6l-AU-smb">
-                                            <rect key="frame" x="0.0" y="56" width="320" height="3"/>
-                                            <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="3" id="Xqj-UB-hdK"/>
-                                            </constraints>
-                                        </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eEt-gP-2TY">
                                             <rect key="frame" x="19" y="14" width="222" height="31"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="19"/>
@@ -515,24 +487,9 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="bottomMargin" secondItem="26C-32-vWV" secondAttribute="bottom" constant="-5" id="4N1-HB-TFQ"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="S6l-AU-smb" secondAttribute="trailing" constant="-8" id="8Ky-00-saB"/>
-                                        <constraint firstItem="RNf-yN-6aJ" firstAttribute="top" secondItem="gUp-V7-jDX" secondAttribute="topMargin" constant="-8" id="Clc-IY-wXy"/>
-                                        <constraint firstItem="26C-32-vWV" firstAttribute="top" secondItem="gUp-V7-jDX" secondAttribute="topMargin" constant="-7" id="NS8-QC-Jza"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="Lvb-MH-Fgh" secondAttribute="trailing" constant="-8" id="X5D-qP-e84"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="Lvb-MH-Fgh" secondAttribute="bottom" constant="-6" id="dxc-at-tqw"/>
-                                        <constraint firstItem="Lvb-MH-Fgh" firstAttribute="leading" secondItem="gUp-V7-jDX" secondAttribute="leadingMargin" constant="-8" id="mvJ-C3-BKr"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="RNf-yN-6aJ" secondAttribute="trailing" constant="-8" id="sAG-GD-fDJ"/>
-                                        <constraint firstItem="26C-32-vWV" firstAttribute="leading" secondItem="gUp-V7-jDX" secondAttribute="leadingMargin" constant="-8" id="tXB-JG-Vod"/>
-                                        <constraint firstItem="S6l-AU-smb" firstAttribute="leading" secondItem="gUp-V7-jDX" secondAttribute="leadingMargin" constant="-8" id="uu5-aR-wPO"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="S6l-AU-smb" secondAttribute="bottom" constant="-9" id="zCe-h7-TZJ"/>
-                                        <constraint firstItem="RNf-yN-6aJ" firstAttribute="leading" secondItem="gUp-V7-jDX" secondAttribute="leadingMargin" constant="-8" id="zcK-nj-yDG"/>
-                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="textLabel" destination="eEt-gP-2TY" id="xBO-y0-Ct6"/>
-                                    <outlet property="tintView" destination="26C-32-vWV" id="d7d-eu-gYZ"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
