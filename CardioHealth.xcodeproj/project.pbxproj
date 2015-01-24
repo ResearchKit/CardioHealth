@@ -33,7 +33,6 @@
 		7B41047E19E5D94F00592B96 /* APHFitnessTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B41045A19E5D94F00592B96 /* APHFitnessTaskViewController.m */; };
 		7B41048F19E5D94F00592B96 /* APHFitnessTestDistanceTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B41047519E5D94F00592B96 /* APHFitnessTestDistanceTracker.m */; };
 		7B41049019E5D94F00592B96 /* APHFitnessTestHealthKitSampleTypeTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B41047719E5D94F00592B96 /* APHFitnessTestHealthKitSampleTypeTracker.m */; };
-		7B41049119E5D94F00592B96 /* APHFitnessTestRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B41047919E5D94F00592B96 /* APHFitnessTestRecorder.m */; };
 		7B41049E19E5E46800592B96 /* APHFitnessSixMinuteFitnessTestView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B41049619E5E46800592B96 /* APHFitnessSixMinuteFitnessTestView.m */; };
 		7B41049F19E5E46800592B96 /* APHFitnessSixMinuteFitnessTestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B41049719E5E46800592B96 /* APHFitnessSixMinuteFitnessTestView.xib */; };
 		7B4104A019E5E46800592B96 /* APHFitnessTestRestComfortablyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B41049919E5E46800592B96 /* APHFitnessTestRestComfortablyView.m */; };
@@ -162,8 +161,6 @@
 		7B41047519E5D94F00592B96 /* APHFitnessTestDistanceTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHFitnessTestDistanceTracker.m; sourceTree = "<group>"; };
 		7B41047619E5D94F00592B96 /* APHFitnessTestHealthKitSampleTypeTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHFitnessTestHealthKitSampleTypeTracker.h; sourceTree = "<group>"; };
 		7B41047719E5D94F00592B96 /* APHFitnessTestHealthKitSampleTypeTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHFitnessTestHealthKitSampleTypeTracker.m; sourceTree = "<group>"; };
-		7B41047819E5D94F00592B96 /* APHFitnessTestRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHFitnessTestRecorder.h; sourceTree = "<group>"; };
-		7B41047919E5D94F00592B96 /* APHFitnessTestRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHFitnessTestRecorder.m; sourceTree = "<group>"; };
 		7B41049519E5E46800592B96 /* APHFitnessSixMinuteFitnessTestView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APHFitnessSixMinuteFitnessTestView.h; path = CustomViews/APHFitnessSixMinuteFitnessTestView.h; sourceTree = "<group>"; };
 		7B41049619E5E46800592B96 /* APHFitnessSixMinuteFitnessTestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APHFitnessSixMinuteFitnessTestView.m; path = CustomViews/APHFitnessSixMinuteFitnessTestView.m; sourceTree = "<group>"; };
 		7B41049719E5E46800592B96 /* APHFitnessSixMinuteFitnessTestView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = APHFitnessSixMinuteFitnessTestView.xib; path = CustomViews/APHFitnessSixMinuteFitnessTestView.xib; sourceTree = "<group>"; };
@@ -338,8 +335,6 @@
 				7B41047519E5D94F00592B96 /* APHFitnessTestDistanceTracker.m */,
 				7B41047619E5D94F00592B96 /* APHFitnessTestHealthKitSampleTypeTracker.h */,
 				7B41047719E5D94F00592B96 /* APHFitnessTestHealthKitSampleTypeTracker.m */,
-				7B41047819E5D94F00592B96 /* APHFitnessTestRecorder.h */,
-				7B41047919E5D94F00592B96 /* APHFitnessTestRecorder.m */,
 			);
 			path = WalkingTestComponents;
 			sourceTree = "<group>";
@@ -773,7 +768,6 @@
 				7B5C43941A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.m in Sources */,
 				7B96D7481A0300D8006D93C1 /* APHImportantDetailsViewController.m in Sources */,
 				7B0E172D1A3FBDD70079E536 /* APHCardiovascularHealthSurveyController.m in Sources */,
-				7B41049119E5D94F00592B96 /* APHFitnessTestRecorder.m in Sources */,
 				08FA98091A108C33002317C8 /* APHHeartAgeRecommendationCell.m in Sources */,
 				F5F644FF19D35BA2004CFBB2 /* main.m in Sources */,
 				7B6753411A01540E005864E6 /* APHHeartAgeIntroStepViewController.m in Sources */,

@@ -8,7 +8,6 @@
 @import APCAppCore;
 #import "APHFitnessTestHealthKitSampleTypeTracker.h"
 #import "APHFitnessTestDistanceTracker.h"
-#import "APHFitnessTestRecorder.h"
 #import "APHFitnessSixMinuteFitnessTestView.h"
 #import "APHFitnessTestRestComfortablyView.h"
 #import "APHFitnessTestRestView.h"

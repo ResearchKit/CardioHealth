@@ -52,7 +52,7 @@ static NSString *kSevenDayFitnessCompleteStep = @"sevenDayFitnessCompleteStep";
     
     {
         // Seven Day Fitness Allocation Step
-        RKSTActiveStep* step = [[RKSTActiveStep alloc] initWithIdentifier:kSevenDayFitnessActivityStep];
+        RKSTStep* step = [[RKSTStep alloc] initWithIdentifier:kSevenDayFitnessActivityStep];
         step.title = NSLocalizedString(@"Activity Tracking", @"Activity Tracking");
         step.text = NSLocalizedString(@"Get Ready!", @"Get Ready");
         
