@@ -51,6 +51,9 @@ static NSInteger kUpdatedHeartRateThreshold = 1;
     [super viewDidLoad];
     
     self.stepsToAutomaticallyAdvanceOnTimer = @[kFitnessTestStep102, kFitnessTestStep103, kFitnessTestStep104, kFitnessTestStep105];
+    
+    
+    [[UIView appearance] setTintColor:[UIColor appPrimaryColor]];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -77,87 +80,8 @@ static NSInteger kUpdatedHeartRateThreshold = 1;
 }
 
 + (RKSTOrderedTask *)createTask:(APCScheduledTask *)scheduledTask
-{
-//    APCAppDelegate *appDelegate = (APCAppDelegate*) [[UIApplication sharedApplication] delegate];
-//    APCParameters *parameters = appDelegate.dataSubstrate.parameters;
-//    NSInteger totalUpdates = appDelegate.healthKitTracker.totalUpdates;
-//
-//    BOOL heartIsUpdating = NO;
-//    
-//    if (totalUpdates > kUpdatedHeartRateThreshold) {
-//        heartIsUpdating = YES;
-//    }
-//
-    NSMutableArray *steps = [[NSMutableArray alloc] init];
-    steps = [@[] mutableCopy];
-//
-//    {
-//        RKSTInstructionStep *step = [[RKSTInstructionStep alloc] initWithIdentifier:kFitnessTestStep101];
-//        step.title = NSLocalizedString(@"Measure Excercise Tolerance", @"");
-//        step.detailText = NSLocalizedString(@"Once you tap Get Started, you will have 5 seconds until this test begins tracking your movement.", @"");
-//        [steps addObject:step];
-//    }
-//    
-//    {
-//        //Introduction to 6-Minute Walk Test
-//        RKSTActiveStep* step = [[RKSTActiveStep alloc] initWithIdentifier:kFitnessTestStep102];
-//        step.title = NSLocalizedString(@"6-Minute Walk Test", @"");
-//        step.text = NSLocalizedString(@"Get Ready!", @"");
-//        step.countDownInterval = kCountDownTimer;
-//        step.shouldUseNextAsSkipButton = NO;
-//        step.shouldPlaySoundOnStart = YES;
-//        step.shouldSpeakCountDown = YES;
-//        step.shouldStartTimerAutomatically = YES;
-//        
-//        [steps addObject:step];
-//    }
-//    
-//    {
-//        //Walking 6 minutes
-//        RKSTActiveStep* step = [[RKSTActiveStep alloc] initWithIdentifier:kFitnessTestStep103];
-//        step.recorderConfigurations = @[[APHFitnessTestCustomRecorderConfiguration new]];
-//        step.title = NSLocalizedString(@"Start Walking", @"");
-//        step.text = @"   \n      ";
-//        step.shouldPlaySoundOnStart = YES;
-//        step.shouldVibrateOnStart = YES;
-//        step.spokenInstruction = NSLocalizedString(@"Start Walking", @"");
-//        step.countDownInterval = [[parameters numberForKey:@"FT6Min"] doubleValue];
-//        step.shouldUseNextAsSkipButton = NO;
-//        step.shouldStartTimerAutomatically = YES;
-//        
-//        [steps addObject:step];
-//    }
-//    
-//    if (heartIsUpdating) {
-//        {
-//            //Stop and sit in a comfortable position for 3 minutes
-//            RKSTActiveStep* step = [[RKSTActiveStep alloc] initWithIdentifier:kFitnessTestStep104];
-//            step.recorderConfigurations = @[[APHFitnessTestCustomRecorderConfiguration new]];
-//            step.title = NSLocalizedString(@"Good Work!", @"");
-//            step.text = NSLocalizedString(@"Stop walking, and sit in a comfortable position for 3 minutes.", @"");
-//            step.shouldPlaySoundOnStart = YES;
-//            step.shouldVibrateOnStart = YES;
-//            step.spokenInstruction = step.text;
-//            step.countDownInterval = [[parameters numberForKey:@"FT3MinComfPos"] doubleValue];
-//            step.shouldUseNextAsSkipButton = NO;
-//            step.shouldStartTimerAutomatically = YES;
-//            
-//            [steps addObject:step];
-//        }
-//    }
-//    
-//    {
-//        //Finished
-//        RKSTActiveStep* step = [[RKSTActiveStep alloc] initWithIdentifier:kFitnessTestStep105];
-//        
-//        step.recorderConfigurations = @[];
-//        step.title = NSLocalizedString(@"Good job.", @"");
-//        step.text = NSLocalizedString(@"You have completed the task.", @"You have completed the task.");
-//        step.shouldUseNextAsSkipButton = NO;
-//        [steps addObject:step];
-//    }
-
-    RKSTOrderedTask  *task = [[RKSTOrderedTask alloc] initWithIdentifier:@"6-Minute Walk Test" steps:steps];
+{    
+    RKSTOrderedTask  *task = [RKSTOrderedTask fitnessCheckTaskWithIdentifier:@"6-Minute Walk Test" intendedUseDescription:@"BLAH" walkDuration:6.0 * 60.0 restDuration:3.0 * 60.0 options:RKPredefinedTaskOptionNone];
     
     return  task;
 }
