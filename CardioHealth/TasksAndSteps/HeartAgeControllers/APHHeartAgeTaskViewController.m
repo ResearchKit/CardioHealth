@@ -291,7 +291,6 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
     
     for (RKSTQuestionResult *questionResult in questionsFields) {
         
-    #warning this has not been tested. This used to be a questionResult.answer
         if ([questionResult isKindOfClass:[RKSTTextQuestionResult class]]) {
             
             RKSTChoiceQuestionResult *textResult = (RKSTChoiceQuestionResult *)questionResult;
@@ -340,9 +339,6 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
 /*********************************************************************************/
 
 - (void)taskViewControllerDidComplete: (RKSTTaskViewController *)taskViewController{
-    
-    #warning This is commented out below. I have no idea what it's supposed to do.
-//    [taskViewController suspend];
     
     // We need to create three question results that will hold the value of Heart Age,
     // Ten Year Risk, and Lifetime Risk factors. Ideally we would like to simply
@@ -460,24 +456,10 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
                         RKSTChoiceQuestionResult *textResult = (RKSTChoiceQuestionResult *) questionResult;
                         
                         NSString *selectedGender = ([(NSString *)[textResult.choiceAnswers firstObject] isEqualToString:@"HKBiologicalSexFemale"]) ? kHeartAgeTestDataGenderFemale :kHeartAgeTestDataGenderMale;
-                        
-                        
 
-                        
-                        
-                        
-                        
                         [surveyResultsDictionary setObject:selectedGender
                                                     forKey:questionIdentifier];
                     } else if ([questionIdentifier isEqualToString:kHeartAgeTestDataAge]) {
-                        
-                        
-                        
-                        
-                        
-                    #warning Not sure what RKSTDateAnswer is supposed to be. I cannot find a reference for it
-//                        RKSTDateAnswer *dob = questionResult.answer;
-                        
                         RKSTDateQuestionResult *dob = (RKSTDateQuestionResult *) questionResult;
                         
                     
