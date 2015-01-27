@@ -111,6 +111,14 @@ static NSString *const kVideoShownKey = @"VideoShown";
     
     [self.dataSubstrate.passiveLocationTracking start];
     
+    //For the Seven Day Fitness Allocation
+    NSDate *fitnessStartDate = [self checkSevenDayFitnessStartDate];
+    if (fitnessStartDate) {
+        self.sevenDayFitnessAllocationData = [[APHFitnessAllocation alloc] initWithAllocationStartDate:fitnessStartDate];
+        
+        [self.sevenDayFitnessAllocationData startDataCollection];
+    }
+    
     return;
     
 }
