@@ -21,8 +21,8 @@ static  NSString  *kFitnessTestStep104 = @"FitnessStep104";
 static  NSString  *kFitnessTestStep105 = @"FitnessStep105";
 static  NSString  *kFitnessTestStep106 = @"FitnessStep106";
 
-static NSInteger kCountDownTimer = 5;
-static NSInteger kUpdatedHeartRateThreshold = 1;
+static NSInteger kRestDuration = 3.0 * 60.0;
+static NSInteger kWalkDuration = 6.0 * 60.0;
 
 @interface APHFitnessTaskViewController ()
 
@@ -80,8 +80,8 @@ static NSInteger kUpdatedHeartRateThreshold = 1;
 }
 
 + (RKSTOrderedTask *)createTask:(APCScheduledTask *)scheduledTask
-{    
-    RKSTOrderedTask  *task = [RKSTOrderedTask fitnessCheckTaskWithIdentifier:@"6-Minute Walk Test" intendedUseDescription:@"BLAH" walkDuration:6.0 * 60.0 restDuration:3.0 * 60.0 options:RKPredefinedTaskOptionNone];
+{
+    RKSTOrderedTask  *task = [RKSTOrderedTask fitnessCheckTaskWithIdentifier:@"6-Minute Walk Test" intendedUseDescription:@"" walkDuration:kWalkDuration restDuration:kRestDuration options:RKPredefinedTaskOptionNone];
     
     return  task;
 }
