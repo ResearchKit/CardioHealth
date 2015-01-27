@@ -294,8 +294,8 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
     #warning this has not been tested. This used to be a questionResult.answer
         if ([questionResult isKindOfClass:[RKSTTextQuestionResult class]]) {
             
-            RKSTTextQuestionResult *textResult = (RKSTTextQuestionResult *)questionResult;
-            if (textResult.textAnswer == nil) {
+            RKSTChoiceQuestionResult *textResult = (RKSTChoiceQuestionResult *)questionResult;
+            if ([textResult.choiceAnswers firstObject] == nil) {
                 noPass = YES;
                 
                 break;
@@ -310,6 +310,24 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
                 
                 break;
             }
+        } else if ([questionResult isKindOfClass:[RKSTDateQuestionResult class]]) {
+            
+            RKSTDateQuestionResult *dateQuestionResult = (RKSTDateQuestionResult *)questionResult;
+            
+            if (dateQuestionResult.startDate == nil) {
+                noPass = YES;
+                
+                break;
+            }
+        } else if ([questionResult isKindOfClass:[RKSTBooleanQuestionResult class]]) {
+            
+            RKSTBooleanQuestionResult *booleanQuestionResult = (RKSTBooleanQuestionResult *)questionResult;
+            
+            if (booleanQuestionResult.booleanAnswer == nil) {
+                noPass = YES;
+                
+                break;
+            }
         }
     }
     
@@ -320,7 +338,6 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
 /*********************************************************************************/
 #pragma  mark  - TaskViewController delegates
 /*********************************************************************************/
-
 
 - (void)taskViewControllerDidComplete: (RKSTTaskViewController *)taskViewController{
     
@@ -432,16 +449,24 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
                     if ([questionIdentifier isEqualToString:kHeartAgeTestDataEthnicity]) {
                         APCAppDelegate *apcDelegate = (APCAppDelegate*)[[UIApplication sharedApplication] delegate];
 
-                        RKSTTextQuestionResult *textResult = (RKSTTextQuestionResult *) questionResult;
-                        NSString *ethnicity = (NSString *)textResult.textAnswer;
+                        RKSTChoiceQuestionResult *textResult = (RKSTChoiceQuestionResult *) questionResult;
+                        NSString *ethnicity = (NSString *)[textResult.choiceAnswers firstObject];
                         
                         // persist ethnicity to the datastore
                         [apcDelegate.dataSubstrate.currentUser setEthnicity:ethnicity];
                         
                         [surveyResultsDictionary setObject:ethnicity forKey:questionIdentifier];
                     } else if ([questionIdentifier isEqualToString:kHeartAgeTestDataGender]) {
-                        RKSTTextQuestionResult *textResult = (RKSTTextQuestionResult *) questionResult;
-                        NSString *selectedGender = ([(NSString *)textResult.textAnswer isEqualToString:@"HKBiologicalSexFemale"]) ? kHeartAgeTestDataGenderFemale :kHeartAgeTestDataGenderMale;
+                        RKSTChoiceQuestionResult *textResult = (RKSTChoiceQuestionResult *) questionResult;
+                        
+                        NSString *selectedGender = ([(NSString *)[textResult.choiceAnswers firstObject] isEqualToString:@"HKBiologicalSexFemale"]) ? kHeartAgeTestDataGenderFemale :kHeartAgeTestDataGenderMale;
+                        
+                        
+
+                        
+                        
+                        
+                        
                         [surveyResultsDictionary setObject:selectedGender
                                                     forKey:questionIdentifier];
                     } else if ([questionIdentifier isEqualToString:kHeartAgeTestDataAge]) {
@@ -464,7 +489,11 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
                         
                         NSUInteger usersAge = [ageComponents year];
                         [surveyResultsDictionary setObject:[NSNumber numberWithInteger:usersAge] forKey:questionIdentifier];
-                    } else {
+                    } else if ([questionResult isKindOfClass:[RKSTBooleanQuestionResult class]]) {
+                        RKSTBooleanQuestionResult *numericResult = (RKSTBooleanQuestionResult *) questionResult;
+                        
+                        [surveyResultsDictionary setObject:numericResult.booleanAnswer forKey:questionIdentifier];
+                    } else if ([questionResult isKindOfClass:[RKSTNumericQuestionResult class]]) {
                         RKSTNumericQuestionResult *numericResult = (RKSTNumericQuestionResult *) questionResult;
                         
                         [surveyResultsDictionary setObject:numericResult.numericAnswer forKey:questionIdentifier];
