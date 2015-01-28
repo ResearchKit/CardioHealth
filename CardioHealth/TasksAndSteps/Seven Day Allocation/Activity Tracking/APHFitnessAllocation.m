@@ -410,59 +410,59 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
 
 - (void)setMostRecentSleepRangeStartDateAndEndDate {
     
-    // Extract hour from sleep and wake time
-    APCAppDelegate *delegate = (APCAppDelegate*)[UIApplication sharedApplication].delegate;
+    APCAppDelegate*         delegate        =   (APCAppDelegate *)[UIApplication sharedApplication].delegate;
+            NSDate*         userSleepTime   =                   delegate.dataSubstrate.currentUser.sleepTime;
+            NSDate*         userWakeTime    =                  delegate.dataSubstrate.currentUser.wakeUpTime;
     
-    NSDate *userSleepTime = delegate.dataSubstrate.currentUser.sleepTime;
-    NSDate *userWakeTime = delegate.dataSubstrate.currentUser.wakeUpTime;
-    
-    
-    #warning To avoid the bug with sleep/wake time, we will default to the 7 AM wake time and 9:30 PM sleep time.
-    if (!userSleepTime) {
-        userSleepTime = [[NSCalendar currentCalendar] dateBySettingHour:21 minute:30 second:0 ofDate:[NSDate date] options:0];
-    }
-    
-    if (!userWakeTime) {
-        userWakeTime = [[NSCalendar currentCalendar] dateBySettingHour:7 minute:0 second:0 ofDate:[NSDate date] options:0];
-    }
-    
-    NSCalendar *cal = [[NSCalendar alloc] initWithCalendarIdentifier:[NSCalendar currentCalendar].calendarIdentifier];
-    
-    NSCalendarUnit units = (NSCalendarUnitHour | NSCalendarUnitMinute);
-    NSDateComponents* sleepTime = [cal components:units
-                                         fromDate:userSleepTime];
-    
-    NSDateComponents* wakeTime = [cal components:units
-                                         fromDate:userWakeTime];
 
-    // Most recent sleep time components
-    NSDate *newEndDate = [cal dateBySettingHour:sleepTime.hour
-                                           minute:sleepTime.minute
-                                           second:0
-                                           ofDate:[NSDate date]
-                                          options:0];
+    #warning To avoid the bug with sleep/wake time, we will default to the 7 AM wake time and 9:30 PM sleep time.
+    if (!userSleepTime)
+    {
+        userSleepTime                       = [[NSCalendar currentCalendar] dateBySettingHour:21
+                                                                                       minute:30
+                                                                                       second:0
+                                                                                       ofDate:[NSDate date]
+                                                                                      options:0];
+    }
     
-    // Most recent wake time components
-    NSDate *newStartDate = [cal dateBySettingHour:wakeTime.hour
-                                         minute:wakeTime.minute
-                                         second:0
-                                         ofDate:[NSDate date]
-                                        options:0];
+    if (!userWakeTime)
+    {
+        userWakeTime                        = [[NSCalendar currentCalendar] dateBySettingHour:7
+                                                                                       minute:0
+                                                                                       second:0
+                                                                                       ofDate:[NSDate date]
+                                                                                      options:0];
+    }
+    
+            NSCalendar*         cal         =   [[NSCalendar alloc] initWithCalendarIdentifier:[NSCalendar currentCalendar].calendarIdentifier];
+        NSCalendarUnit          units       =   (NSCalendarUnitHour | NSCalendarUnitMinute);
+      NSDateComponents*         sleepTime   =   [cal components:units fromDate: userSleepTime];
+      NSDateComponents*         wakeTime    =   [cal components:units  fromDate: userWakeTime];
+                NSDate*         newEndDate  =   [cal dateBySettingHour:  sleepTime.hour
+                                                                minute:  sleepTime.minute
+                                                                second:  0
+                                                                ofDate:  [NSDate date]
+                                                               options:  0];
+    
+                NSDate*         newStartDate =  [cal dateBySettingHour: wakeTime.hour
+                                                                minute: wakeTime.minute
+                                                                second: 0
+                                                                ofDate: [NSDate date]
+                                                               options: 0];
     
     
     if (sleepTime.hour < wakeTime.hour) {
         
-        NSDateComponents *dateComponent = [[NSDateComponents alloc] init];
-        [dateComponent setDay:1];
+        NSDateComponents*    dateComponent  = [[NSDateComponents alloc] init];
+                                                    [dateComponent setDay:1];
         
-        newEndDate = [[NSCalendar currentCalendar] dateByAddingComponents:dateComponent
-                                                                     toDate:newEndDate
-                                                                    options:0];
-        
+        newEndDate                          = [[NSCalendar currentCalendar] dateByAddingComponents:  dateComponent
+                                                                                           toDate:  newEndDate
+                                                                                          options:  0];
     }
 
-    self.userDayStart = newStartDate;
-    self.userDayEnd = newEndDate;
+    self.userDayStart                       = newStartDate;
+    self.userDayEnd                         =   newEndDate;
 }
 
 
@@ -470,23 +470,22 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
     
     self.motionActivityManager = [[CMMotionActivityManager alloc] init];
     
-    NSInteger numberOfDaysBack = numberOfDays * -1;
-    
-    NSDateComponents *components = [[NSDateComponents alloc] init];
+    NSInteger               numberOfDaysBack = numberOfDays * -1;
+    NSDateComponents        *components = [[NSDateComponents alloc] init];
     [components setDay:numberOfDaysBack];
     
-    NSDate *newStartDate = [[NSCalendar currentCalendar] dateByAddingComponents:components
-                                                                      toDate:startDate
-                                                                     options:0];
+    NSDate                  *newStartDate = [[NSCalendar currentCalendar] dateByAddingComponents:components
+                                                                                          toDate:startDate
+                                                                                         options:0];
     
-    NSInteger numberOfDaysBackForEndDate = numberOfDays * -1;
+    NSInteger               numberOfDaysBackForEndDate = numberOfDays * -1;
     
-    NSDateComponents *endDateComponent = [[NSDateComponents alloc] init];
+    NSDateComponents        *endDateComponent = [[NSDateComponents alloc] init];
     [endDateComponent setDay:numberOfDaysBackForEndDate];
     
-    NSDate *newEndDate = [[NSCalendar currentCalendar] dateByAddingComponents:endDateComponent
-                                                                         toDate:endDate
-                                                                        options:0];
+    NSDate                  *newEndDate = [[NSCalendar currentCalendar] dateByAddingComponents:endDateComponent
+                                                                                         toDate:endDate
+                                                                                        options:0];
     
     [self.motionActivityManager queryActivityStartingFromDate:newStartDate
                                                        toDate:newEndDate

@@ -10,6 +10,7 @@
 static NSInteger const  kRestDuration              = 3.0 * 60.0;
 static NSInteger const  kWalkDuration              = 6.0 * 60.0;
 static NSString *const  kFitnessTestIdentifier     = @"6-Minute Walk Test";
+#warning The intended use description is using placeholder text.
 static NSString *const  kIntendedUseDescription    = @"This is placeholder text.";
 
 @interface APHFitnessTaskViewController ()
