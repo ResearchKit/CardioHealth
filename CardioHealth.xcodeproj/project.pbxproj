@@ -45,14 +45,6 @@
 		7B30CFA01A376B3D00625350 /* cardiovascular-staging.pem in Resources */ = {isa = PBXBuildFile; fileRef = 7B30CF9E1A376B3D00625350 /* cardiovascular-staging.pem */; };
 		7B30CFA11A376B3D00625350 /* cardiovascular.pem in Resources */ = {isa = PBXBuildFile; fileRef = 7B30CF9F1A376B3D00625350 /* cardiovascular.pem */; };
 		7B41047E19E5D94F00592B96 /* APHFitnessTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B41045A19E5D94F00592B96 /* APHFitnessTaskViewController.m */; };
-		7B41048F19E5D94F00592B96 /* APHFitnessTestDistanceTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B41047519E5D94F00592B96 /* APHFitnessTestDistanceTracker.m */; };
-		7B41049019E5D94F00592B96 /* APHFitnessTestHealthKitSampleTypeTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B41047719E5D94F00592B96 /* APHFitnessTestHealthKitSampleTypeTracker.m */; };
-		7B41049E19E5E46800592B96 /* APHFitnessSixMinuteFitnessTestView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B41049619E5E46800592B96 /* APHFitnessSixMinuteFitnessTestView.m */; };
-		7B41049F19E5E46800592B96 /* APHFitnessSixMinuteFitnessTestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B41049719E5E46800592B96 /* APHFitnessSixMinuteFitnessTestView.xib */; };
-		7B4104A019E5E46800592B96 /* APHFitnessTestRestComfortablyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B41049919E5E46800592B96 /* APHFitnessTestRestComfortablyView.m */; };
-		7B4104A119E5E46800592B96 /* APHFitnessTestRestComfortablyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B41049A19E5E46800592B96 /* APHFitnessTestRestComfortablyView.xib */; };
-		7B4104A219E5E46800592B96 /* APHFitnessTestRestView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B41049C19E5E46800592B96 /* APHFitnessTestRestView.m */; };
-		7B4104A319E5E46800592B96 /* APHFitnessTestRestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B41049D19E5E46800592B96 /* APHFitnessTestRestView.xib */; };
 		7B5BEC9A1A34F0B7007CEA94 /* cardio_activitysleep_survey.json in Resources */ = {isa = PBXBuildFile; fileRef = 7B5BEC961A34F0B7007CEA94 /* cardio_activitysleep_survey.json */; };
 		7B5BEC9B1A34F0B7007CEA94 /* cardio_CVhealth_survey.json in Resources */ = {isa = PBXBuildFile; fileRef = 7B5BEC971A34F0B7007CEA94 /* cardio_CVhealth_survey.json */; };
 		7B5BEC9C1A34F0B7007CEA94 /* cardio_diet_survey.json in Resources */ = {isa = PBXBuildFile; fileRef = 7B5BEC981A34F0B7007CEA94 /* cardio_diet_survey.json */; };
@@ -61,8 +53,6 @@
 		7B5C43951A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B5C43931A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.xib */; };
 		7B5C43A41A3B98EF001A22F5 /* APHWellBeingSurveyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C43A31A3B98EF001A22F5 /* APHWellBeingSurveyController.m */; };
 		7B6753411A01540E005864E6 /* APHHeartAgeIntroStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B67533F1A01540E005864E6 /* APHHeartAgeIntroStepViewController.m */; };
-		7B96D7421A02E4DB006D93C1 /* APHImportantDetailsTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B96D7411A02E4DB006D93C1 /* APHImportantDetailsTableViewController.storyboard */; };
-		7B96D7481A0300D8006D93C1 /* APHImportantDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B96D7471A0300D8006D93C1 /* APHImportantDetailsViewController.m */; };
 		7BD73F7B19E8A20600F5DFF3 /* Intro.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 7BD73F7A19E8A20600F5DFF3 /* Intro.mp4 */; };
 		7BEA4BE61A65C10300FEAF60 /* APHHeartAgeIntroStepViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BEA4BE51A65C10300FEAF60 /* APHHeartAgeIntroStepViewController.storyboard */; };
 		7BEA4BE91A65D95400FEAF60 /* APHIntroPurposeContainedTableTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BEA4BE81A65D95400FEAF60 /* APHIntroPurposeContainedTableTableViewController.m */; };
@@ -185,19 +175,6 @@
 		7B30CF9F1A376B3D00625350 /* cardiovascular.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cardiovascular.pem; sourceTree = "<group>"; };
 		7B41045919E5D94F00592B96 /* APHFitnessTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHFitnessTaskViewController.h; sourceTree = "<group>"; };
 		7B41045A19E5D94F00592B96 /* APHFitnessTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHFitnessTaskViewController.m; sourceTree = "<group>"; };
-		7B41047419E5D94F00592B96 /* APHFitnessTestDistanceTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHFitnessTestDistanceTracker.h; sourceTree = "<group>"; };
-		7B41047519E5D94F00592B96 /* APHFitnessTestDistanceTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHFitnessTestDistanceTracker.m; sourceTree = "<group>"; };
-		7B41047619E5D94F00592B96 /* APHFitnessTestHealthKitSampleTypeTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHFitnessTestHealthKitSampleTypeTracker.h; sourceTree = "<group>"; };
-		7B41047719E5D94F00592B96 /* APHFitnessTestHealthKitSampleTypeTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHFitnessTestHealthKitSampleTypeTracker.m; sourceTree = "<group>"; };
-		7B41049519E5E46800592B96 /* APHFitnessSixMinuteFitnessTestView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APHFitnessSixMinuteFitnessTestView.h; path = CustomViews/APHFitnessSixMinuteFitnessTestView.h; sourceTree = "<group>"; };
-		7B41049619E5E46800592B96 /* APHFitnessSixMinuteFitnessTestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APHFitnessSixMinuteFitnessTestView.m; path = CustomViews/APHFitnessSixMinuteFitnessTestView.m; sourceTree = "<group>"; };
-		7B41049719E5E46800592B96 /* APHFitnessSixMinuteFitnessTestView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = APHFitnessSixMinuteFitnessTestView.xib; path = CustomViews/APHFitnessSixMinuteFitnessTestView.xib; sourceTree = "<group>"; };
-		7B41049819E5E46800592B96 /* APHFitnessTestRestComfortablyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APHFitnessTestRestComfortablyView.h; path = CustomViews/APHFitnessTestRestComfortablyView.h; sourceTree = "<group>"; };
-		7B41049919E5E46800592B96 /* APHFitnessTestRestComfortablyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APHFitnessTestRestComfortablyView.m; path = CustomViews/APHFitnessTestRestComfortablyView.m; sourceTree = "<group>"; };
-		7B41049A19E5E46800592B96 /* APHFitnessTestRestComfortablyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = APHFitnessTestRestComfortablyView.xib; path = CustomViews/APHFitnessTestRestComfortablyView.xib; sourceTree = "<group>"; };
-		7B41049B19E5E46800592B96 /* APHFitnessTestRestView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APHFitnessTestRestView.h; path = CustomViews/APHFitnessTestRestView.h; sourceTree = "<group>"; };
-		7B41049C19E5E46800592B96 /* APHFitnessTestRestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APHFitnessTestRestView.m; path = CustomViews/APHFitnessTestRestView.m; sourceTree = "<group>"; };
-		7B41049D19E5E46800592B96 /* APHFitnessTestRestView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = APHFitnessTestRestView.xib; path = CustomViews/APHFitnessTestRestView.xib; sourceTree = "<group>"; };
 		7B5BEC961A34F0B7007CEA94 /* cardio_activitysleep_survey.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cardio_activitysleep_survey.json; sourceTree = "<group>"; };
 		7B5BEC971A34F0B7007CEA94 /* cardio_CVhealth_survey.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cardio_CVhealth_survey.json; sourceTree = "<group>"; };
 		7B5BEC981A34F0B7007CEA94 /* cardio_diet_survey.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cardio_diet_survey.json; sourceTree = "<group>"; };
@@ -209,9 +186,6 @@
 		7B5C43A31A3B98EF001A22F5 /* APHWellBeingSurveyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHWellBeingSurveyController.m; sourceTree = "<group>"; };
 		7B67533E1A01540E005864E6 /* APHHeartAgeIntroStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHHeartAgeIntroStepViewController.h; sourceTree = "<group>"; };
 		7B67533F1A01540E005864E6 /* APHHeartAgeIntroStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHHeartAgeIntroStepViewController.m; sourceTree = "<group>"; };
-		7B96D7411A02E4DB006D93C1 /* APHImportantDetailsTableViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = APHImportantDetailsTableViewController.storyboard; sourceTree = "<group>"; };
-		7B96D7461A0300D8006D93C1 /* APHImportantDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHImportantDetailsViewController.h; sourceTree = "<group>"; };
-		7B96D7471A0300D8006D93C1 /* APHImportantDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHImportantDetailsViewController.m; sourceTree = "<group>"; };
 		7BD73F7A19E8A20600F5DFF3 /* Intro.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Intro.mp4; sourceTree = "<group>"; };
 		7BEA4BE51A65C10300FEAF60 /* APHHeartAgeIntroStepViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = APHHeartAgeIntroStepViewController.storyboard; sourceTree = "<group>"; };
 		7BEA4BE71A65D95400FEAF60 /* APHIntroPurposeContainedTableTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHIntroPurposeContainedTableTableViewController.h; sourceTree = "<group>"; };
@@ -394,38 +368,8 @@
 			children = (
 				7B41045919E5D94F00592B96 /* APHFitnessTaskViewController.h */,
 				7B41045A19E5D94F00592B96 /* APHFitnessTaskViewController.m */,
-				7B8E912519F9B58D0040F77F /* Intro */,
-				7B41047319E5D94F00592B96 /* WalkingTestComponents */,
-				7B41049419E5E37700592B96 /* CustomViews */,
 			);
 			path = APHFitnessTest;
-			sourceTree = "<group>";
-		};
-		7B41047319E5D94F00592B96 /* WalkingTestComponents */ = {
-			isa = PBXGroup;
-			children = (
-				7B41047419E5D94F00592B96 /* APHFitnessTestDistanceTracker.h */,
-				7B41047519E5D94F00592B96 /* APHFitnessTestDistanceTracker.m */,
-				7B41047619E5D94F00592B96 /* APHFitnessTestHealthKitSampleTypeTracker.h */,
-				7B41047719E5D94F00592B96 /* APHFitnessTestHealthKitSampleTypeTracker.m */,
-			);
-			path = WalkingTestComponents;
-			sourceTree = "<group>";
-		};
-		7B41049419E5E37700592B96 /* CustomViews */ = {
-			isa = PBXGroup;
-			children = (
-				7B41049519E5E46800592B96 /* APHFitnessSixMinuteFitnessTestView.h */,
-				7B41049619E5E46800592B96 /* APHFitnessSixMinuteFitnessTestView.m */,
-				7B41049719E5E46800592B96 /* APHFitnessSixMinuteFitnessTestView.xib */,
-				7B41049819E5E46800592B96 /* APHFitnessTestRestComfortablyView.h */,
-				7B41049919E5E46800592B96 /* APHFitnessTestRestComfortablyView.m */,
-				7B41049A19E5E46800592B96 /* APHFitnessTestRestComfortablyView.xib */,
-				7B41049B19E5E46800592B96 /* APHFitnessTestRestView.h */,
-				7B41049C19E5E46800592B96 /* APHFitnessTestRestView.m */,
-				7B41049D19E5E46800592B96 /* APHFitnessTestRestView.xib */,
-			);
-			name = CustomViews;
 			sourceTree = "<group>";
 		};
 		7B5BEC951A34F0B7007CEA94 /* cardiosurveys */ = {
@@ -458,16 +402,6 @@
 				7BEA4BE81A65D95400FEAF60 /* APHIntroPurposeContainedTableTableViewController.m */,
 				0865F8B21A65E8C7005770ED /* APHIntroCellTableViewCell.h */,
 				0865F8B31A65E8C7005770ED /* APHIntroCellTableViewCell.m */,
-			);
-			path = Intro;
-			sourceTree = "<group>";
-		};
-		7B8E912519F9B58D0040F77F /* Intro */ = {
-			isa = PBXGroup;
-			children = (
-				7B96D7461A0300D8006D93C1 /* APHImportantDetailsViewController.h */,
-				7B96D7471A0300D8006D93C1 /* APHImportantDetailsViewController.m */,
-				7B96D7411A02E4DB006D93C1 /* APHImportantDetailsTableViewController.storyboard */,
 			);
 			path = Intro;
 			sourceTree = "<group>";
@@ -770,7 +704,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B96D7421A02E4DB006D93C1 /* APHImportantDetailsTableViewController.storyboard in Resources */,
 				F5165E7A19E86581003836CA /* APCParameters.json in Resources */,
 				7B5BEC9B1A34F0B7007CEA94 /* cardio_CVhealth_survey.json in Resources */,
 				7B1708401A7824B600251204 /* consent_06@2x.m4v in Resources */,
@@ -795,9 +728,7 @@
 				F573809319E45D62008A8354 /* StudyOverview.json in Resources */,
 				7B1708461A7824B600251204 /* consent_05@3x.m4v in Resources */,
 				7B17083D1A7824B600251204 /* consent_03@2x.m4v in Resources */,
-				7B4104A319E5E46800592B96 /* APHFitnessTestRestView.xib in Resources */,
 				7B1708411A7824B600251204 /* consent_07@2x.m4v in Resources */,
-				7B41049F19E5E46800592B96 /* APHFitnessSixMinuteFitnessTestView.xib in Resources */,
 				7B5C43951A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.xib in Resources */,
 				5BB2BAA41A10157B00684CCE /* Learn.json in Resources */,
 				7B1708431A7824B600251204 /* consent_02@3x.m4v in Resources */,
@@ -806,7 +737,6 @@
 				F55BBE6619D362D0003CA0F9 /* LaunchScreen.xib in Resources */,
 				7BEA4BE61A65C10300FEAF60 /* APHHeartAgeIntroStepViewController.storyboard in Resources */,
 				7B1708481A7824B600251204 /* consent_07@3x.m4v in Resources */,
-				7B4104A119E5E46800592B96 /* APHFitnessTestRestComfortablyView.xib in Resources */,
 				7B17083C1A7824B600251204 /* consent_02@2x.m4v in Resources */,
 				7B17083E1A7824B600251204 /* consent_04@2x.m4v in Resources */,
 				F5F6450A19D35BA2004CFBB2 /* Images.xcassets in Resources */,
@@ -843,18 +773,13 @@
 				08FA98061A108A46002317C8 /* APHHeartAgeRiskEstimateCell.m in Sources */,
 				08D3A10219E4A08C00A3D20D /* APHHeartAgeAndRiskFactors.m in Sources */,
 				7BEA4BE91A65D95400FEAF60 /* APHIntroPurposeContainedTableTableViewController.m in Sources */,
-				7B41049E19E5E46800592B96 /* APHFitnessSixMinuteFitnessTestView.m in Sources */,
 				08FA97FF1A108680002317C8 /* APHHeartAgeTodaysActivitiesCell.m in Sources */,
-				7B41049019E5D94F00592B96 /* APHFitnessTestHealthKitSampleTypeTracker.m in Sources */,
 				08B9724F1A1FB47B00316D49 /* APHHealthyHeartSummaryStepViewController.m in Sources */,
 				08C56E361A15E75400D3BF61 /* APHActivityTrackingStepViewController.m in Sources */,
-				7B4104A019E5E46800592B96 /* APHFitnessTestRestComfortablyView.m in Sources */,
 				5B4633851A15917000E68B82 /* APHDashboardEditViewController.m in Sources */,
 				F55BBE6519D362D0003CA0F9 /* APHAppDelegate.m in Sources */,
-				7B4104A219E5E46800592B96 /* APHFitnessTestRestView.m in Sources */,
 				7BEEFA601A003E04004F6C87 /* APHHeartAgeResultsViewController.m in Sources */,
 				7B5C43941A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.m in Sources */,
-				7B96D7481A0300D8006D93C1 /* APHImportantDetailsViewController.m in Sources */,
 				7B0E172D1A3FBDD70079E536 /* APHCardiovascularHealthSurveyController.m in Sources */,
 				08FA98091A108C33002317C8 /* APHHeartAgeRecommendationCell.m in Sources */,
 				F5F644FF19D35BA2004CFBB2 /* main.m in Sources */,
@@ -868,7 +793,6 @@
 				08547C121A11899C00DC6E7C /* APHTheme.m in Sources */,
 				F5778E7219F0613D0079F1B2 /* APHInclusionCriteriaViewController.m in Sources */,
 				08C2328A1A15796E00DB4EF9 /* APHSevenDayFitnessAllocationTaskViewController.m in Sources */,
-				7B41048F19E5D94F00592B96 /* APHFitnessTestDistanceTracker.m in Sources */,
 				F55BBE6B19D362D0003CA0F9 /* APHDashboardViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
