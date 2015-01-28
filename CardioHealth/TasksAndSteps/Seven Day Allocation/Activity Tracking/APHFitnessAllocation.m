@@ -6,7 +6,6 @@
 //
 
 #import "APHFitnessAllocation.h"
-//#import <HealthKit/HealthKit.h>
 #import <CoreMotion/CoreMotion.h>
 #import "APHTheme.h"
 
@@ -517,14 +516,11 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
                                                                                              self.segmentSleep: @(sleepForStationaryCounter)
                                                                                             }];
                                                           } else if ( queryType == SevenDayFitnessQueryTypeWake) {
-//                                                              [self runStatsCollectionQueryForKind:numberOfDaysBack
-//                                                                                     fromStartDate:newStartDate
-//                                                                                         toEndDate:newEndDate];
                                                               
-                                                              NSUInteger inactiveCounter = 0;
-                                                              NSUInteger sedentaryCounter = 0;
-                                                              NSUInteger moderateCounter = 0;
-                                                              NSUInteger vigorousCounter = 0;
+                                                              NSUInteger inactiveCounter    = 0;
+                                                              NSUInteger sedentaryCounter   = 0;
+                                                              NSUInteger moderateCounter    = 0;
+                                                              NSUInteger vigorousCounter    = 0;
                                                               
                                                               for (CMMotionActivity *activity in activities) {
                                                                   if (activity.stationary) {
