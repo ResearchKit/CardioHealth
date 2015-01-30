@@ -9,9 +9,17 @@
 
 static NSInteger const  kRestDuration              = 3.0 * 60.0;
 static NSInteger const  kWalkDuration              = 6.0 * 60.0;
-static NSString *const  kFitnessTestIdentifier     = @"6-Minute Walk Test";
+static NSString* const  kFitnessTestIdentifier     = @"6-Minute Walk Test";
 #warning The intended use description is using placeholder text.
-static NSString *const  kIntendedUseDescription    = @"This is placeholder text.";
+static NSString* const  kIntendedUseDescription    = @"This is placeholder text.";
+
+
+static NSString* const  kIntroStep                 = @"instruction";
+static NSString* const  kIntroOneStep              = @"instruction1";
+static NSString* const  kCountdownStep             = @"countdown";
+static NSString* const  kWalkStep                  = @"fitness.walk";
+static NSString* const  kRestStep                  = @"fitness.rest";
+static NSString* const  kConclusionStep            = @"conclusion";
 
 @interface APHFitnessTaskViewController ()
 
@@ -27,7 +35,16 @@ static NSString *const  kIntendedUseDescription    = @"This is placeholder text.
 {
     RKSTOrderedTask  *task = [RKSTOrderedTask fitnessCheckTaskWithIdentifier:kFitnessTestIdentifier intendedUseDescription:kIntendedUseDescription walkDuration:kWalkDuration restDuration:kRestDuration options:RKPredefinedTaskOptionNone];
     
+    [[UIView appearance] setTintColor:[UIColor appPrimaryColor]];
+    
     return  task;
+}
+
+- (void)taskViewController:(RKSTTaskViewController *)taskViewController stepViewControllerWillAppear:(RKSTStepViewController *)stepViewController {
+    
+    if ([stepViewController.step.identifier isEqualToString:kConclusionStep]) {
+        [[UIView appearance] setTintColor:[UIColor appTertiaryColor1]];
+    }
 }
 
 @end
