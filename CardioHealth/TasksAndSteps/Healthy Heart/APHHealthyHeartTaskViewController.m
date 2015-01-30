@@ -35,13 +35,14 @@ static NSString *kHealthyHeartSummary = @"healthyHeartSummary";
         [steps addObject:step];
     }
     {
-        RKSTAnswerFormat *format = [RKSTChoiceAnswerFormat choiceAnswerWithTextOptions:@[
-                                                                                               @"Within the past year",
-                                                                                               @"Within the past 2 years",
-                                                                                               @"Within the past 5 years",
-                                                                                               @"Don't Know",
-                                                                                               @"Never had it checked."]
-                                                                                       style:RKChoiceAnswerStyleSingleChoice];
+        NSArray *choices = @[@"Within the past year",
+                             @"Within the past 2 years",
+                             @"Within the past 5 years",
+                             @"Don't Know",
+                             @"Never had it checked."
+                             ];
+        
+        RKSTAnswerFormat *format =  [RKSTTextChoiceAnswerFormat choiceAnswerFormatWithStyle:RKChoiceAnswerStyleSingleChoice textChoices:choices];
         
         RKSTQuestionStep *step = [RKSTQuestionStep questionStepWithIdentifier:kBloodPressureChecked
                                                                         title:@"When was the last time you had your blood pressure checked?"
@@ -50,11 +51,11 @@ static NSString *kHealthyHeartSummary = @"healthyHeartSummary";
         [steps addObject:step];
     }
     {
-        RKSTAnswerFormat *format = [RKSTChoiceAnswerFormat choiceAnswerWithTextOptions:@[
-                                                                                 @"Normal",
-                                                                                 @"High",
-                                                                                 @"Don't Know"]
-                                                                         style:RKChoiceAnswerStyleSingleChoice];
+        NSArray *choices = @[@"Normal",
+                             @"High",
+                             @"Don't Know"];
+        
+        RKSTAnswerFormat *format =  [RKSTTextChoiceAnswerFormat choiceAnswerFormatWithStyle:RKChoiceAnswerStyleSingleChoice textChoices:choices];
         
         RKSTQuestionStep *step = [RKSTQuestionStep questionStepWithIdentifier:kBloodPressureLevel
                                                                         title:@"The Last time you had your blood pressure checked, was it normal or high?"
@@ -70,12 +71,10 @@ static NSString *kHealthyHeartSummary = @"healthyHeartSummary";
     }
     {
         //Finished
-        RKSTActiveStep* step = [[RKSTActiveStep alloc] initWithIdentifier:kHealthyHeartSummary];
-        step.recorderConfigurations = @[];
+        RKSTStep* step = [[RKSTStep alloc] initWithIdentifier:kHealthyHeartSummary];
         step.title = NSLocalizedString(@"Good job.", @"");
         step.text = NSLocalizedString(@"Great job.", @"");
         
-        step.shouldUseNextAsSkipButton = NO;
         [steps addObject:step];
     }
     
