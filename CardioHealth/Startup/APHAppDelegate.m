@@ -50,7 +50,8 @@ static NSString *const kVideoShownKey = @"VideoShown";
                                                    ],
                                            kAppServicesListRequiredKey           : @[
                                                    @(kSignUpPermissionsTypeLocation),
-                                                   @(kSignUpPermissionsTypeCoremotion)
+                                                   @(kSignUpPermissionsTypeCoremotion),
+                                                   @(kSignUpPermissionsTypeLocalNotifications)
                                                    ],
                                            kAppProfileElementsListKey            : @[
                                                    @(kAPCUserInfoItemTypeEmail),
