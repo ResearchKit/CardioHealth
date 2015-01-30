@@ -16,18 +16,6 @@ static NSString *kKludgeIdentifierForHeartAgeTaskB = @"APHHeartAgeB-7259AC18-D71
 
 @implementation APHHeartAgeIntroStepViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    UIColor *viewBackgroundColor = [UIColor appSecondaryColor4];
-    
-    [self.view setBackgroundColor:viewBackgroundColor];
-
-  [self.getStartedButton setBackgroundImage:[UIImage imageWithColor:[UIColor appPrimaryColor]] forState:UIControlStateNormal];
-    
-
-}
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([self.taskViewController.task.identifier isEqualToString:kKludgeIdentifierForHeartAgeTaskB]) {

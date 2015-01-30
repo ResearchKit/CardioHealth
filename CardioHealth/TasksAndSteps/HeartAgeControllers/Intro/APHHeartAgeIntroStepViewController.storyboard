@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A388a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -23,10 +23,11 @@
                                     <segue destination="4QJ-UB-cY1" kind="embed" identifier="APHHeartAgeIntroStepViewControllerSegue" id="Ohi-QD-fvb"/>
                                 </connections>
                             </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NlX-LO-Vtw">
-                                <rect key="frame" x="-16" y="608" width="446" height="64"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NlX-LO-Vtw" customClass="APCButton">
+                                <rect key="frame" x="134" y="620" width="146" height="44"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="64" id="TNC-X7-qE8"/>
+                                    <constraint firstAttribute="width" constant="146" id="DHN-Nx-jwz"/>
+                                    <constraint firstAttribute="height" constant="44" id="Izv-jc-pch"/>
                                 </constraints>
                                 <state key="normal" title="Get Started">
                                     <color key="titleColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -40,12 +41,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="IQo-7y-nQ1" secondAttribute="trailing" constant="-16" id="2j3-P5-Aj3"/>
-                            <constraint firstAttribute="trailing" secondItem="NlX-LO-Vtw" secondAttribute="trailing" constant="-16" id="7A1-gK-K7c"/>
+                            <constraint firstAttribute="centerX" secondItem="NlX-LO-Vtw" secondAttribute="centerX" id="ClJ-ZU-uoY"/>
+                            <constraint firstItem="NlX-LO-Vtw" firstAttribute="top" secondItem="IQo-7y-nQ1" secondAttribute="bottom" constant="12" id="EHP-8c-hTu"/>
                             <constraint firstItem="IQo-7y-nQ1" firstAttribute="leading" secondItem="q4C-B9-6lI" secondAttribute="leading" constant="-16" id="d3k-rT-p27"/>
                             <constraint firstItem="IQo-7y-nQ1" firstAttribute="top" secondItem="vs9-XJ-bxJ" secondAttribute="bottom" id="fH7-0I-PQd"/>
-                            <constraint firstItem="NlX-LO-Vtw" firstAttribute="leading" secondItem="q4C-B9-6lI" secondAttribute="leading" constant="-16" id="pF7-tw-35h"/>
-                            <constraint firstItem="NlX-LO-Vtw" firstAttribute="top" secondItem="IQo-7y-nQ1" secondAttribute="bottom" id="tqF-LS-IyC"/>
-                            <constraint firstItem="KEJ-u3-AWE" firstAttribute="top" secondItem="NlX-LO-Vtw" secondAttribute="bottom" id="wV6-UY-LUb"/>
+                            <constraint firstItem="KEJ-u3-AWE" firstAttribute="top" secondItem="NlX-LO-Vtw" secondAttribute="bottom" constant="8" id="yjI-gn-YSd"/>
                         </constraints>
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
