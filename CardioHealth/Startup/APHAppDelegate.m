@@ -236,23 +236,23 @@ static NSString *const kVideoShownKey = @"VideoShown";
 
             case RKSTConsentSectionTypeCustom:
             {
-                if (i == 7) {
+                if (i == 8) {
                     section.title = NSLocalizedString(@"Potential Benefits", @"");
                     section.summary = NSLocalizedString(@"You will be able to visualize your data and potentially learn more about trends in your health.", @"");
                     section.customImage = [UIImage imageNamed:@"consent_visualize"];
                     section.content = NSLocalizedString(@"We will provide you with personalized feedback about your activity, your fitness, and your risk score and how they relate to national guidelines.", @"");
                     
-                } else if (i == 8){
+                } else if (i == 9){
                     section.title = NSLocalizedString(@"Risk to Privacy", @"");
                     section.summary = NSLocalizedString(@"Some of the data that you provide may be sensitive. We will de-identify your data and use secure computers, but we cannot ensure complete privacy.", @"");
                     section.customImage = [UIImage imageNamed:@"consent_privacy"];
                     section.content = NSLocalizedString(@"We view your privacy very strongly. Thus, we are requesting the least amount of personal data possible. Also, we are using strict security protocols to protect your data. Importantly, your personal identifiers will be removed before the data goes to the large computer for storage and later analysis. We cannot completely guarantee that someone can gain access to your private data, but importantly the main data storage is de-identified.", @"");
-                } else if (i == 9){
+                } else if (i == 10){
                     section.title = NSLocalizedString(@"Issues to Consider", @"");
                     section.summary = NSLocalizedString(@"Some questions may make you uncomfortable. Simply do not respond.", @"");
                     section.customImage = [UIImage imageNamed:@"consent_uncomfortablequestions"];
                     section.content = NSLocalizedString(@"We do ask survey questions about your health history. You may decline to answer if that makes you uncomfortable.", @"");
-                }else if (i == 10){
+                }else if (i == 11){
                     section.title = NSLocalizedString(@"Risk and Benefits", @"");
                     section.summary = NSLocalizedString(@"Participating in this study may change how you feel. You may feel more tired, sad, energized, or happy.", @"");
                     section.customImage = [UIImage imageNamed:@"consent_mood"];
