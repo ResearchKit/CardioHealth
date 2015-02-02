@@ -12,11 +12,10 @@
 /*********************************************************************************/
 #pragma mark - Initializations Options
 /*********************************************************************************/
-static NSString *const kStudyIdentifier = @"Cardiovascular";
-static NSString *const kAppPrefix       = @"cardiovascular";
-static  NSTimeInterval  kPassiveLocationDeferredUpdatesTimeout = 1.0 * 60.0;
-
-static NSString *const kVideoShownKey = @"VideoShown";
+static  NSString*       const   kStudyIdentifier                        = @"Cardiovascular";
+static  NSString*       const   kAppPrefix                              = @"cardiovascular";
+static  NSString*       const   kVideoShownKey                          = @"VideoShown";
+static  NSTimeInterval          kPassiveLocationDeferredUpdatesTimeout  = 1.0 * 60.0;
 
 @interface APHAppDelegate ()
 
