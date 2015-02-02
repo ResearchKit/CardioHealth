@@ -46,4 +46,16 @@ static NSString* const  kConclusionStep            = @"conclusion";
     }
 }
 
+- (void)taskViewControllerDidComplete:(RKSTTaskViewController *)taskViewController {
+    [[UIView appearance] setTintColor:[UIColor appPrimaryColor]];
+    
+    [super taskViewControllerDidComplete:taskViewController];
+    
+}
+
+- (void)taskViewControllerDidCancel:(RKSTTaskViewController *)taskViewController {
+    [[UIView appearance] setTintColor:[UIColor appPrimaryColor]];
+    
+    [super taskViewControllerDidCancel:taskViewController];
+}
 @end
