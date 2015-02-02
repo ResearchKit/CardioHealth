@@ -12,21 +12,20 @@
 #import "APHAppDelegate.h"
 #import "APHDashboardWalkTestTableViewCell.h"
 
-static NSString * const kAPCBasicTableViewCellIdentifier       = @"APCBasicTableViewCell";
-static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetailTableViewCell";
+static NSString*  const kAPCBasicTableViewCellIdentifier       = @"APCBasicTableViewCell";
+static NSString*  const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetailTableViewCell";
+static NSInteger  const kDataCountLimit                        = 1;
 
 @interface APHDashboardViewController ()<UIViewControllerTransitioningDelegate, APCPieGraphViewDatasource, APHDashboardWalkTestTableViewCellDelegate>
 
-@property (nonatomic, strong) NSMutableArray *rowItemsOrder;
+@property (nonatomic)           NSInteger           dataCount;
+@property (nonatomic, strong)   NSArray*            allocationDataset;
+@property (nonatomic, strong)   APCScoring*         stepScoring;
+@property (nonatomic, strong)   APCScoring*         heartRateScoring;
+@property (nonatomic, strong)   NSMutableArray*     rowItemsOrder;
+@property (nonatomic, strong)   NSDateFormatter*    dateFormatter;
+@property (nonatomic, strong)   APCPresentAnimator* presentAnimator;
 
-@property (nonatomic, strong) APCPresentAnimator *presentAnimator;
-
-@property (nonatomic, strong) NSArray *allocationDataset;
-
-@property (nonatomic, strong) NSDateFormatter *dateFormatter;
-
-@property (nonatomic, strong) APCScoring *stepScoring;
-@property (nonatomic, strong) APCScoring *heartRateScoring;
 @end
 
 @implementation APHDashboardViewController
@@ -90,6 +89,9 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
     
     [self prepareScoringObjects];
     [self prepareData];
+    
+    //Every time the cells are reloaded this variable is checked and used to prevent unnecessary drawing of the pie graph.
+    self.dataCount = 0;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -109,6 +111,9 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
 #pragma mark - APCDashboardGraphTableViewCellDelegate methods
 - (void)updateVisibleRowsInTableView:(NSNotification *)notification
 {
+    //Every time the cells are reloaded this variable is added to and used as a flag to prevent unnecessary drawing of the pie graph.
+    self.dataCount++;
+    
     [self prepareData];
 }
 
@@ -279,7 +284,12 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
         pieGraphCell.titleLabel.text = fitnessItem.caption;
         pieGraphCell.tintColor = fitnessItem.tintColor;
         pieGraphCell.pieGraphView.shouldAnimateLegend = NO;
-        [pieGraphCell.pieGraphView setNeedsLayout];
+        
+        //Every time the cells are reloaded this variable is checked and used to prevent unnecessary drawing of the pie graph.
+        if (self.dataCount < kDataCountLimit) {
+            [pieGraphCell.pieGraphView setNeedsLayout];
+        }
+        
         
     } else if ([dashboardItem isKindOfClass:[APHTableViewDashboardWalkingTestItem class]]){
         APHTableViewDashboardWalkingTestItem *walkingTestItem = (APHTableViewDashboardWalkingTestItem *)dashboardItem;
