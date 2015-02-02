@@ -10,11 +10,12 @@
 #import "APHDashboardEditViewController.h"
 #import "APHFitnessAllocation.h"
 #import "APHAppDelegate.h"
+#import "APHDashboardWalkTestTableViewCell.h"
 
 static NSString * const kAPCBasicTableViewCellIdentifier       = @"APCBasicTableViewCell";
 static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetailTableViewCell";
 
-@interface APHDashboardViewController ()<UIViewControllerTransitioningDelegate, APCPieGraphViewDatasource>
+@interface APHDashboardViewController ()<UIViewControllerTransitioningDelegate, APCPieGraphViewDatasource, APHDashboardWalkTestTableViewCellDelegate>
 
 @property (nonatomic, strong) NSMutableArray *rowItemsOrder;
 
@@ -43,7 +44,7 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
             _rowItemsOrder = [[NSMutableArray alloc] initWithArray:@[
                                                                      @(kAPHDashboardItemTypeDistance),
                                                                      @(kAPHDashboardItemTypeHeartRate),
-                                                                     @(kAPHDashboardItemTypeSevenDayFitness)
+                                                                     @(kAPHDashboardItemTypeSevenDayFitness), @(kAPHDashboardItemTypeWalkingTest)
                                                                      ]];
             
             [defaults setObject:[NSArray arrayWithArray:_rowItemsOrder] forKey:kAPCDashboardRowItemsOrder];
@@ -223,7 +224,29 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
                     [rowItems addObject:row];
                 }
                     break;
-                
+                    
+                case kAPHDashboardItemTypeWalkingTest:
+                {
+                    APHTableViewDashboardWalkingTestItem *item = [APHTableViewDashboardWalkingTestItem new];
+                    item.caption = NSLocalizedString(@"6-minute Walking Test", @"");
+                    item.identifier = kAPHDashboardWalkTestTableViewCellIdentifier;
+                    
+                    /* Placeholder values.-- */
+                    item.distanceWalked = 2100;
+                    item.peakHeartRate = 110;
+                    item.finalHeartRate = 86;
+                    item.lastPerformedDate = [NSDate date];
+                    /* -- Pull the actual values from the corresponding activity*/
+                    
+                    item.tintColor = [UIColor appTertiaryRedColor];
+                    item.editable = YES;
+                    
+                    APCTableViewRow *row = [APCTableViewRow new];
+                    row.item = item;
+                    row.itemType = rowType;
+                    [rowItems addObject:row];
+                }
+                    break;
 
                 default:
                     break;
@@ -257,6 +280,22 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
         pieGraphCell.tintColor = fitnessItem.tintColor;
         pieGraphCell.pieGraphView.shouldAnimateLegend = NO;
         [pieGraphCell.pieGraphView setNeedsLayout];
+        
+    } else if ([dashboardItem isKindOfClass:[APHTableViewDashboardWalkingTestItem class]]){
+        APHTableViewDashboardWalkingTestItem *walkingTestItem = (APHTableViewDashboardWalkingTestItem *)dashboardItem;
+        
+        APHDashboardWalkTestTableViewCell *walkingTestCell = (APHDashboardWalkTestTableViewCell *)cell;
+        
+        walkingTestCell.textLabel.text = @"";
+        walkingTestCell.titleLabel.text = walkingTestItem.caption;
+        walkingTestCell.distanceLabel.text = [NSString stringWithFormat:@"Distance Walked: %ld ft", (long)walkingTestItem.distanceWalked];
+        walkingTestCell.peakHeartRateLabel.text = [NSString stringWithFormat:@"Peak Heart Rate: %ld bpm", (long)walkingTestItem.peakHeartRate];
+        walkingTestCell.finalHeartRateLabel.text = [NSString stringWithFormat:@"Final Heart Rate: %ld bpm", (long)walkingTestItem.finalHeartRate];
+        
+        
+        self.dateFormatter.dateFormat = @"MMM. d";
+        walkingTestCell.lastPerformedDateLabel.text = [NSString stringWithFormat:@"Last performed %@", [self.dateFormatter stringFromDate:walkingTestItem.lastPerformedDate]];
+        walkingTestCell.tintColor = walkingTestItem.tintColor;
     }
     
     return cell;
@@ -270,6 +309,8 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
     
     if ([dashboardItem isKindOfClass:[APHTableViewDashboardFitnessControlItem class]]){
         height = 255.0f;
+    } else if ([dashboardItem isKindOfClass:[APHTableViewDashboardWalkingTestItem class]]) {
+        height = 138.0;
     }
     
     return height;
@@ -333,8 +374,20 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
     return [[[self.allocationDataset valueForKey:kSegmentSumKey] objectAtIndex:index] floatValue];
 }
 
+#pragma mark - APHDashboardWalkTestTableViewCellDelegate methods
+
+- (void)dashboardWalkTestTableViewCellDidTapExpand:(APHDashboardWalkTestTableViewCell *)cell
+{
+    //Show details of Walking Test
+}
+
 @end
 
 @implementation APHTableViewDashboardFitnessControlItem
 
 @end
+
+@implementation APHTableViewDashboardWalkingTestItem
+
+@end
+
