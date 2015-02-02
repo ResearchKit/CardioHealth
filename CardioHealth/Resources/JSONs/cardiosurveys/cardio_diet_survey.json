@@ -5,7 +5,7 @@
                  {
                  "guid":"21987ad2-4846-48a4-aa80-27c3371186a2",
                  "identifier":"fruit",
-                 "prompt":"1.\nHow many cups of fruit do you eat in an average day?",
+                 "prompt":"How many cups of fruit do you eat in an average day?",
                  "constraints":{
                
                  "dataType":"integer",
@@ -21,7 +21,7 @@
                  {
                  "guid":"21987af2-4846-48a4-aa80-27c3371186a3",
                  "identifier":"vegetable",
-                 "prompt":"2.\nHow many cups of vegetables do you eat in an average day?",
+                 "prompt":"How many cups of vegetables do you eat in an average day?",
                  "constraints":{
                  
                  "dataType":"integer",
@@ -37,7 +37,7 @@
                  {
                  "guid":"a872f85a-c157-457b-890e-9e28eeed6ea4",
                  "identifier":"fish",
-                 "prompt":"3.\nDo you eat 2 servings of fish or more weekly?",
+                 "prompt":"Do you eat 2 servings of fish or more weekly?",
                  "constraints":{
                
                  "dataType":"integer",
@@ -62,7 +62,7 @@
                  {
                  "guid":"e872f85a-c157-457f-890f-9e28eeed6ea5",
                  "identifier":"grains",
-                 "prompt":"4.\nDo you eat 3 servings of whole grains or more daily?",
+                 "prompt":"Do you eat 3 servings of whole grains or more daily?",
                  "constraints":{
                  
                  "dataType":"integer",
@@ -88,7 +88,7 @@
                  {
                  "guid":"e872f85c-c157-457b-890f-9e28eeed6ea6",
                  "identifier":"bev/sugar",
-                 "prompt":"5.\nDo you drink less than 36 ounces (450 calories) of beverages with added sugar weekly?",
+                 "prompt":"Do you drink less than 36 ounces (450 calories) of beverages with added sugar weekly?",
                  "constraints":{
                  
                  "dataType":"integer",
@@ -113,7 +113,7 @@
                  {
                  "guid":"e872f85c-c157-457b-890f-9e28eeed6ea1",
                  "identifier":"sodium",
-                 "prompt":"6.\nDo you eat less than 1500 mg of sodium daily?",
+                 "prompt":"Do you eat less than 1500 mg of sodium daily?",
                   "constraints":{
                  
                  "dataType":"integer",

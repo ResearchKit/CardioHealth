@@ -26,6 +26,7 @@
 		5B04326A1A305D3E000DC9ED /* TermsAndConditions.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B0432691A305D3E000DC9ED /* TermsAndConditions.json */; };
 		5B4633851A15917000E68B82 /* APHDashboardEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B4633841A15917000E68B82 /* APHDashboardEditViewController.m */; };
 		5B5A31341A10A78600552F7D /* WithdrawStudy.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B5A31331A10A78600552F7D /* WithdrawStudy.json */; };
+		5B827B451A7F837700C685A3 /* APHDashboardWalkTestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B827B441A7F837700C685A3 /* APHDashboardWalkTestTableViewCell.m */; };
 		5BB2BAA41A10157B00684CCE /* Learn.json in Resources */ = {isa = PBXBuildFile; fileRef = 5BB2BAA31A10157B00684CCE /* Learn.json */; };
 		7B0E172D1A3FBDD70079E536 /* APHCardiovascularHealthSurveyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0E172C1A3FBDD70079E536 /* APHCardiovascularHealthSurveyController.m */; };
 		7B17083B1A7824B600251204 /* consent_01@2x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 7B17082C1A7824B600251204 /* consent_01@2x.m4v */; };
@@ -154,6 +155,8 @@
 		5B4633831A15917000E68B82 /* APHDashboardEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHDashboardEditViewController.h; sourceTree = "<group>"; };
 		5B4633841A15917000E68B82 /* APHDashboardEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHDashboardEditViewController.m; sourceTree = "<group>"; };
 		5B5A31331A10A78600552F7D /* WithdrawStudy.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = WithdrawStudy.json; sourceTree = "<group>"; };
+		5B827B431A7F837700C685A3 /* APHDashboardWalkTestTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHDashboardWalkTestTableViewCell.h; sourceTree = "<group>"; };
+		5B827B441A7F837700C685A3 /* APHDashboardWalkTestTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHDashboardWalkTestTableViewCell.m; sourceTree = "<group>"; };
 		5BB2BAA31A10157B00684CCE /* Learn.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Learn.json; sourceTree = "<group>"; };
 		7B0E172B1A3FBDD70079E536 /* APHCardiovascularHealthSurveyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHCardiovascularHealthSurveyController.h; sourceTree = "<group>"; };
 		7B0E172C1A3FBDD70079E536 /* APHCardiovascularHealthSurveyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHCardiovascularHealthSurveyController.m; sourceTree = "<group>"; };
@@ -298,6 +301,15 @@
 				08FA98081A108C33002317C8 /* APHHeartAgeRecommendationCell.m */,
 			);
 			name = "Heart Age Summary Cells";
+			sourceTree = "<group>";
+		};
+		5B827B421A7F837700C685A3 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				5B827B431A7F837700C685A3 /* APHDashboardWalkTestTableViewCell.h */,
+				5B827B441A7F837700C685A3 /* APHDashboardWalkTestTableViewCell.m */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		7B0E17291A3FBDAB0079E536 /* Cardiovascular Health Survey */ = {
@@ -499,6 +511,7 @@
 		F55BBE0019D362D0003CA0F9 /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
+				5B827B421A7F837700C685A3 /* Cells */,
 				F55BBE0119D362D0003CA0F9 /* APHDashboard.storyboard */,
 				F55BBE0219D362D0003CA0F9 /* APHDashboardViewController.h */,
 				F55BBE0319D362D0003CA0F9 /* APHDashboardViewController.m */,
@@ -780,6 +793,7 @@
 				F55BBE6519D362D0003CA0F9 /* APHAppDelegate.m in Sources */,
 				7BEEFA601A003E04004F6C87 /* APHHeartAgeResultsViewController.m in Sources */,
 				7B5C43941A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.m in Sources */,
+				5B827B451A7F837700C685A3 /* APHDashboardWalkTestTableViewCell.m in Sources */,
 				7B0E172D1A3FBDD70079E536 /* APHCardiovascularHealthSurveyController.m in Sources */,
 				08FA98091A108C33002317C8 /* APHHeartAgeRecommendationCell.m in Sources */,
 				F5F644FF19D35BA2004CFBB2 /* main.m in Sources */,
@@ -808,6 +822,68 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		36DBC4FC1A7FD9FF00720345 /* DebugAndSendToDataVerificationServer */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = DebugAndSendToDataVerificationServer;
+		};
+		36DBC4FD1A7FD9FF00720345 /* DebugAndSendToDataVerificationServer */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = CardioHealth/CardioHealth.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/AppCore/APCAppCore/**",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				INFOPLIST_FILE = CardioHealth/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = DebugAndSendToDataVerificationServer;
+		};
 		F58767F819E4A49D00254897 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -997,6 +1073,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F5F6451A19D35BA2004CFBB2 /* Debug */,
+				36DBC4FC1A7FD9FF00720345 /* DebugAndSendToDataVerificationServer */,
 				F58767F819E4A49D00254897 /* Development */,
 				F5F6451B19D35BA2004CFBB2 /* Release */,
 			);
@@ -1007,6 +1084,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F5F6451D19D35BA2004CFBB2 /* Debug */,
+				36DBC4FD1A7FD9FF00720345 /* DebugAndSendToDataVerificationServer */,
 				F58767F919E4A49D00254897 /* Development */,
 				F5F6451E19D35BA2004CFBB2 /* Release */,
 			);

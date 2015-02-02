@@ -9,13 +9,18 @@
 #import "APHAppDelegate.h"
 #import "APHFitnessAllocation.h"
 
-static CGFloat metersPerMile = 1609.344;
+static   CGFloat const metersPerMile             = 1609.344;
+static NSInteger const kYesterdaySegmentIndex    = 0;
+static NSInteger const kTodaySegmentIndex        = 1;
+static NSInteger const kWeekSegmentIndex         = 2;
 
 @interface APHActivityTrackingStepViewController () <APCPieGraphViewDatasource>
 
 @property (weak, nonatomic) IBOutlet UILabel *daysRemaining;
 @property (weak, nonatomic) IBOutlet APCPieGraphView *chartView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentDays;
+
+@property (nonatomic) NSInteger previouslySelectedSegment;
 
 @property (nonatomic, strong) NSArray *allocationDataset;
 
@@ -63,6 +68,8 @@ static CGFloat metersPerMile = 1609.344;
                                     forState:UIControlStateDisabled];
     
     [[UIView appearance] setTintColor:[UIColor whiteColor]];
+    
+    self.previouslySelectedSegment = kTodaySegmentIndex;
     
 }
 
@@ -295,11 +302,17 @@ static CGFloat metersPerMile = 1609.344;
 
 - (void)refreshAllocation:(NSInteger)segmentIndex
 {
-    if(segmentIndex == 0) {
+    if (segmentIndex == kYesterdaySegmentIndex && self.previouslySelectedSegment == kTodaySegmentIndex) {
         self.chartView.shouldDrawClockwise = NO;
-    } else {
+    } else if (segmentIndex == kWeekSegmentIndex && self.previouslySelectedSegment == kTodaySegmentIndex) {
         self.chartView.shouldDrawClockwise = YES;
+    } else if (self.previouslySelectedSegment == kYesterdaySegmentIndex) {
+        self.chartView.shouldDrawClockwise = YES;
+    } else if (self.previouslySelectedSegment == kWeekSegmentIndex) {
+        self.chartView.shouldDrawClockwise = NO;
     }
+    
+    self.previouslySelectedSegment = segmentIndex;
     
     [self.chartView layoutSubviews];
 }

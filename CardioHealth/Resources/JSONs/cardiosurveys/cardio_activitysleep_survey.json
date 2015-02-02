@@ -6,7 +6,7 @@
                  {
                  "guid":"1992b80e-912c-4b05-b29b-5c35f02688b4",
                  "identifier":"work",
-                 "prompt":"1. \nDo you do regular work?",
+                 "prompt":"Do you do regular work?",
                  "constraints":{
                  "rules":[
                           {
@@ -47,7 +47,7 @@
                  {
                  "guid":"1992b80e-912c-4b05-b29b-5c35f02688c5",
                  "identifier":"atwork",
-                 "prompt":"2. \nWork Time Activity: \nduring the past month, which statement best describes the kinds of physical activity you usually did as part of your job or work? Do not include activities during breaks or outside of work. Please read all six statements before selecting one.",
+                 "prompt":"Work Time Activity: \nduring the past month, which statement best describes the kinds of physical activity you usually did as part of your job or work? Do not include activities during breaks or outside of work. Please read all six statements before selecting one.",
                  "constraints":{
                  "rules":[
                  
@@ -86,7 +86,7 @@
                  {
                  "guid":"1992b80e-912c-4b05-b29b-5c35f02688d6",
                  "identifier":"phys_activity",
-                 "prompt":"3. \nLeisure Time Activity: \nduring the past month, which statement best describes the kinds of physical activity you usually did? Do not include the time you spent as part of your work or job. Please read all six statements before selecting one.",
+                 "prompt":"Leisure Time Activity: \nduring the past month, which statement best describes the kinds of physical activity you usually did? Do not include the time you spent as part of your work or job. Please read all six statements before selecting one.",
                  "constraints":{
                  "rules":[
                  
@@ -136,7 +136,7 @@
                  {
                  "guid":"c374b293-a062-47c9-bd99-2738837967e7",
                  "identifier":"moderate_act",
-                 "prompt":"4. \nOverall, how many minutes of moderate activity do you get in a week? [Moderate intensity: A person doing moderate-intensity activity, such as a brisk walk, can usually talk but not sing during the activity.] ",
+                 "prompt":"Overall, how many minutes of moderate activity do you get in a week? [Moderate intensity: A person doing moderate-intensity activity, such as a brisk walk, can usually talk but not sing during the activity.] ",
                  "constraints":{
                  "rules":[
                  
@@ -153,7 +153,7 @@
                  {
                  "guid":"c374b293-a063-47c9-bd99-2738837967f8",
                  "identifier":"vigorous_act",
-                 "prompt":"5. \nOverall, how many minutes of vigorous activity do you get in a week? [Vigorous intensity: A person doing vigorous-intensity activity, such as running, usually cannot say more than a few words without pausing for a breath.] ",
+                 "prompt":"Overall, how many minutes of vigorous activity do you get in a week? [Vigorous intensity: A person doing vigorous-intensity activity, such as running, usually cannot say more than a few words without pausing for a breath.] ",
                  "constraints":{
                  "rules":[
                  
@@ -172,7 +172,7 @@
                  {
                  "guid":"c374b293-a063-47c9-bd99-2738837967g9",
                  "identifier":"sleep_time",
-                 "prompt":"6. \nHow much sleep do you usually get at night on weekdays or workdays? (in hours)",
+                 "prompt":"How much sleep do you usually get at night on weekdays or workdays? (in hours)",
                  "constraints":{
                  "rules":[
                  
@@ -191,7 +191,7 @@
                  {
                  "guid":"1992b80e-912c-4c05-b29b-5c35f02688h0",
                  "identifier":"sleep_trouble",
-                 "prompt":"7. \nHave you ever told a doctor or other health professional that you have trouble sleeping?",
+                 "prompt":"Have you ever told a doctor or other health professional that you have trouble sleeping?",
                  "constraints":{
                  "rules":[
                  
@@ -221,7 +221,7 @@
                  {
                  "guid":"1992b80e-912c-4c05-b29b-5c35f02688i1",
                  "identifier":"sleep_diagnosis",
-                 "prompt":"8. \nHave you ever been told BY A DOCTOR or other HEALTH PROFESSIONAL that you have a sleep disorder? ",
+                 "prompt":"Have you ever been told BY A DOCTOR or other HEALTH PROFESSIONAL that you have a sleep disorder? ",
                  "constraints":{
                  "rules":[
                  
