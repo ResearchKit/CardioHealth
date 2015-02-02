@@ -71,6 +71,15 @@
                     [self.items addObject:item];
                 }
                     break;
+                    
+                case kAPHDashboardItemTypeWalkingTest:
+                {
+                    APCTableViewDashboardItem *item = [APCTableViewDashboardItem new];
+                    item.caption = NSLocalizedString(@"6-minute Walking Test", @"");
+                    item.tintColor = [UIColor appTertiaryRedColor];
+                    [self.items addObject:item];
+                }
+                    
                 default:
                     break;
             }
