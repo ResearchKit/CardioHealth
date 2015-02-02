@@ -14,19 +14,22 @@
 
 static NSString * const kAPCBasicTableViewCellIdentifier       = @"APCBasicTableViewCell";
 static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetailTableViewCell";
+static NSInteger  const kDataCountLimit                        = 1;
 
 @interface APHDashboardViewController ()<UIViewControllerTransitioningDelegate, APCPieGraphViewDatasource, APHDashboardWalkTestTableViewCellDelegate>
 
-@property (nonatomic, strong) NSMutableArray *rowItemsOrder;
+@property (nonatomic, strong)   NSMutableArray*     rowItemsOrder;
 
-@property (nonatomic, strong) APCPresentAnimator *presentAnimator;
+@property (nonatomic, strong)   APCPresentAnimator* presentAnimator;
 
-@property (nonatomic, strong) NSArray *allocationDataset;
+@property (nonatomic, strong)   NSArray*            allocationDataset;
 
-@property (nonatomic, strong) NSDateFormatter *dateFormatter;
+@property (nonatomic, strong)   NSDateFormatter*    dateFormatter;
 
-@property (nonatomic, strong) APCScoring *stepScoring;
-@property (nonatomic, strong) APCScoring *heartRateScoring;
+@property (nonatomic, strong)   APCScoring*         stepScoring;
+@property (nonatomic, strong)   APCScoring*         heartRateScoring;
+
+@property (nonatomic)           NSInteger           dataCount;
 @end
 
 @implementation APHDashboardViewController
@@ -90,6 +93,8 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
     
     [self prepareScoringObjects];
     [self prepareData];
+    
+    self.dataCount = 0;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -109,6 +114,7 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
 #pragma mark - APCDashboardGraphTableViewCellDelegate methods
 - (void)updateVisibleRowsInTableView:(NSNotification *)notification
 {
+    self.dataCount++;
     [self prepareData];
 }
 
@@ -279,7 +285,11 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
         pieGraphCell.titleLabel.text = fitnessItem.caption;
         pieGraphCell.tintColor = fitnessItem.tintColor;
         pieGraphCell.pieGraphView.shouldAnimateLegend = NO;
-        [pieGraphCell.pieGraphView setNeedsLayout];
+        
+        if (self.dataCount < kDataCountLimit) {
+            [pieGraphCell.pieGraphView setNeedsLayout];
+        }
+        
         
     } else if ([dashboardItem isKindOfClass:[APHTableViewDashboardWalkingTestItem class]]){
         APHTableViewDashboardWalkingTestItem *walkingTestItem = (APHTableViewDashboardWalkingTestItem *)dashboardItem;
