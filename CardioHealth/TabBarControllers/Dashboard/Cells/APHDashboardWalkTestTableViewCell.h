@@ -1,8 +1,7 @@
 //
 //  APHDashboardWalkTestTableViewCell.h
-//  CardioHealth
+//  MyHeartCounts
 //
-//  Created by Ramsundar Shandilya on 2/2/15.
 //  Copyright (c) 2015 Apple, Inc. All rights reserved.
 //
 

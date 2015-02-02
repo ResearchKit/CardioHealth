@@ -230,10 +230,14 @@ static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetai
                     APHTableViewDashboardWalkingTestItem *item = [APHTableViewDashboardWalkingTestItem new];
                     item.caption = NSLocalizedString(@"6-minute Walking Test", @"");
                     item.identifier = kAPHDashboardWalkTestTableViewCellIdentifier;
+                    
+                    /* Placeholder values.-- */
                     item.distanceWalked = 2100;
                     item.peakHeartRate = 110;
                     item.finalHeartRate = 86;
                     item.lastPerformedDate = [NSDate date];
+                    /* -- Pull the actual values from the corresponding activity*/
+                    
                     item.tintColor = [UIColor appTertiaryRedColor];
                     item.editable = YES;
                     
