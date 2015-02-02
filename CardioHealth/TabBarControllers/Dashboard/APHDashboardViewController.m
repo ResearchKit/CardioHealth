@@ -90,6 +90,7 @@ static NSInteger  const kDataCountLimit                        = 1;
     [self prepareScoringObjects];
     [self prepareData];
     
+    //Every time the cells are reloaded this variable is checked and used to prevent unnecessary drawing of the pie graph.
     self.dataCount = 0;
 }
 
@@ -110,7 +111,9 @@ static NSInteger  const kDataCountLimit                        = 1;
 #pragma mark - APCDashboardGraphTableViewCellDelegate methods
 - (void)updateVisibleRowsInTableView:(NSNotification *)notification
 {
+    //Every time the cells are reloaded this variable is added to and used as a flag to prevent unnecessary drawing of the pie graph.
     self.dataCount++;
+    
     [self prepareData];
 }
 
@@ -282,6 +285,7 @@ static NSInteger  const kDataCountLimit                        = 1;
         pieGraphCell.tintColor = fitnessItem.tintColor;
         pieGraphCell.pieGraphView.shouldAnimateLegend = NO;
         
+        //Every time the cells are reloaded this variable is checked and used to prevent unnecessary drawing of the pie graph.
         if (self.dataCount < kDataCountLimit) {
             [pieGraphCell.pieGraphView setNeedsLayout];
         }
