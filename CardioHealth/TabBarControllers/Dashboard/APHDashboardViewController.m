@@ -12,24 +12,20 @@
 #import "APHAppDelegate.h"
 #import "APHDashboardWalkTestTableViewCell.h"
 
-static NSString * const kAPCBasicTableViewCellIdentifier       = @"APCBasicTableViewCell";
-static NSString * const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetailTableViewCell";
+static NSString*  const kAPCBasicTableViewCellIdentifier       = @"APCBasicTableViewCell";
+static NSString*  const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetailTableViewCell";
 static NSInteger  const kDataCountLimit                        = 1;
 
 @interface APHDashboardViewController ()<UIViewControllerTransitioningDelegate, APCPieGraphViewDatasource, APHDashboardWalkTestTableViewCellDelegate>
 
-@property (nonatomic, strong)   NSMutableArray*     rowItemsOrder;
-
-@property (nonatomic, strong)   APCPresentAnimator* presentAnimator;
-
+@property (nonatomic)           NSInteger           dataCount;
 @property (nonatomic, strong)   NSArray*            allocationDataset;
-
-@property (nonatomic, strong)   NSDateFormatter*    dateFormatter;
-
 @property (nonatomic, strong)   APCScoring*         stepScoring;
 @property (nonatomic, strong)   APCScoring*         heartRateScoring;
+@property (nonatomic, strong)   NSMutableArray*     rowItemsOrder;
+@property (nonatomic, strong)   NSDateFormatter*    dateFormatter;
+@property (nonatomic, strong)   APCPresentAnimator* presentAnimator;
 
-@property (nonatomic)           NSInteger           dataCount;
 @end
 
 @implementation APHDashboardViewController
