@@ -6,7 +6,7 @@
       {
       "guid":"e872f85a-e157-457b-890f-9e28eeed6efa",
       "identifier":"family_history",
-      "prompt":"1.\nDo you have a family history of heart disease (if yes, indicate all that apply)?",
+      "prompt":"Do you have a family history of heart disease (if yes, indicate all that apply)?",
       "constraints": {
       "dataType": "integer",
       "enumeration": [
@@ -31,7 +31,7 @@
       {
       "guid": "854aed00-3a2c-41c2-9b36-17b72287819b",
       "identifier": "medications_to_treat",
-      "prompt": "2. \nDo you take medications to treat the following risk factors (indicate all that apply)",
+      "prompt": "Do you take medications to treat the following risk factors (indicate all that apply)",
       "constraints": {
       "dataType": "integer",
       "enumeration": [
@@ -60,7 +60,7 @@
       {
       "guid": "854aed00-3c2c-41c2-9b36-17b72287819b",
       "identifier": "heart_disease",
-      "prompt": "3. \nHave you been diagnosed with heart disease (if yes, indicate all that apply)? ",
+      "prompt": "Have you been diagnosed with heart disease (if yes, indicate all that apply)? ",
       "constraints": {
       "dataType": "integer",
       "enumeration": [
@@ -114,7 +114,7 @@
       {
       "guid": "854aed00-3c2c-41c2-9b36-17b72287819b",
       "identifier": "vascular",
-      "prompt": "4. \nHave you been diagnosed with vascular disease (if yes, indicate all that apply)?",
+      "prompt": "Have you been diagnosed with vascular disease (if yes, indicate all that apply)?",
       "constraints": {
       "dataType": "integer",
       "enumeration": [

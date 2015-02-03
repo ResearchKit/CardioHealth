@@ -52,7 +52,7 @@ static NSString *kSevenDayFitnessCompleteStep = @"sevenDayFitnessCompleteStep";
     
     {
         // Seven Day Fitness Allocation Step
-        RKSTActiveStep* step = [[RKSTActiveStep alloc] initWithIdentifier:kSevenDayFitnessActivityStep];
+        RKSTStep* step = [[RKSTStep alloc] initWithIdentifier:kSevenDayFitnessActivityStep];
         step.title = NSLocalizedString(@"Activity Tracking", @"Activity Tracking");
         step.text = NSLocalizedString(@"Get Ready!", @"Get Ready");
         
@@ -98,6 +98,18 @@ static NSString *kSevenDayFitnessCompleteStep = @"sevenDayFitnessCompleteStep";
     }
     
     return stepVC;
+}
+
+- (void)taskViewControllerDidCancel:(RKSTTaskViewController *)taskViewController {
+    [[UIView appearance] setTintColor:[UIColor appPrimaryColor]];
+    
+    [super taskViewControllerDidCancel:self];
+}
+
+- (void)taskViewControllerDidComplete:(RKSTTaskViewController *)taskViewController {
+    [[UIView appearance] setTintColor:[UIColor appPrimaryColor]];
+    
+    [super taskViewControllerDidComplete:self];
 }
 
 @end

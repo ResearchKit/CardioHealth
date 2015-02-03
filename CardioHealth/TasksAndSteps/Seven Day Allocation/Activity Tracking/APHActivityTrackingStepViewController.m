@@ -9,13 +9,18 @@
 #import "APHAppDelegate.h"
 #import "APHFitnessAllocation.h"
 
-static CGFloat metersPerMile = 1609.344;
+static   CGFloat const metersPerMile             = 1609.344;
+static NSInteger const kYesterdaySegmentIndex    = 0;
+static NSInteger const kTodaySegmentIndex        = 1;
+static NSInteger const kWeekSegmentIndex         = 2;
 
 @interface APHActivityTrackingStepViewController () <APCPieGraphViewDatasource>
 
 @property (weak, nonatomic) IBOutlet UILabel *daysRemaining;
 @property (weak, nonatomic) IBOutlet APCPieGraphView *chartView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentDays;
+
+@property (nonatomic) NSInteger previouslySelectedSegment;
 
 @property (nonatomic, strong) NSArray *allocationDataset;
 
@@ -39,17 +44,21 @@ static CGFloat metersPerMile = 1609.344;
                                                                              target:self
                                                                              action:@selector(handleClose:)];
     
+
     self.view.layer.backgroundColor = [UIColor colorWithWhite:0.973 alpha:1.000].CGColor;
     
     self.segmentDays.tintColor = [UIColor clearColor];
+
     [self.segmentDays setTitleTextAttributes:@{
                                                NSFontAttributeName:[UIFont appRegularFontWithSize:19.0f],
                                                NSForegroundColorAttributeName : [UIColor lightGrayColor]
+                                               
                                                }
                                     forState:UIControlStateNormal];
     [self.segmentDays setTitleTextAttributes:@{
                                                NSFontAttributeName:[UIFont appMediumFontWithSize:19.0f],
                                                NSForegroundColorAttributeName : [UIColor blackColor]
+                                               
                                                }
                                     forState:UIControlStateSelected];
     [self.segmentDays setTitleTextAttributes:@{
@@ -57,6 +66,11 @@ static CGFloat metersPerMile = 1609.344;
                                                NSForegroundColorAttributeName : [UIColor whiteColor]
                                                }
                                     forState:UIControlStateDisabled];
+    
+    [[UIView appearance] setTintColor:[UIColor whiteColor]];
+    
+    self.previouslySelectedSegment = kTodaySegmentIndex;
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -81,6 +95,10 @@ static CGFloat metersPerMile = 1609.344;
     self.chartView.shouldAnimate = YES;
     self.chartView.shouldAnimateLegend = NO;
     self.chartView.titleLabel.text = NSLocalizedString(@"Distance", @"Distance");
+    
+
+    
+
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -164,7 +182,7 @@ static CGFloat metersPerMile = 1609.344;
             break;
     }
     
-    [self refreshAllocation];
+    [self refreshAllocation:sender.selectedSegmentIndex];
 }
 
 - (void)TotalDistanceFromHealthKit:(NSNotification *)notif {
@@ -182,8 +200,8 @@ static CGFloat metersPerMile = 1609.344;
 
 - (void)handleClose:(UIBarButtonItem *)sender
 {
-    if ([self.delegate respondsToSelector:@selector(stepViewControllerDidFinish:navigationDirection:)] == YES) {
-        [self.delegate stepViewControllerDidFinish:self navigationDirection:RKSTStepViewControllerNavigationDirectionForward];
+    if ([self.delegate respondsToSelector:@selector(stepViewController:didFinishWithNavigationDirection:)] == YES) {
+        [self.delegate stepViewController:self didFinishWithNavigationDirection:RKSTStepViewControllerNavigationDirectionForward];
     }
 }
 
@@ -282,8 +300,20 @@ static CGFloat metersPerMile = 1609.344;
     NSLog(@"Received notification: %@", notif.userInfo);
 }
 
-- (void)refreshAllocation
+- (void)refreshAllocation:(NSInteger)segmentIndex
 {
+    if (segmentIndex == kYesterdaySegmentIndex && self.previouslySelectedSegment == kTodaySegmentIndex) {
+        self.chartView.shouldDrawClockwise = NO;
+    } else if (segmentIndex == kWeekSegmentIndex && self.previouslySelectedSegment == kTodaySegmentIndex) {
+        self.chartView.shouldDrawClockwise = YES;
+    } else if (self.previouslySelectedSegment == kYesterdaySegmentIndex) {
+        self.chartView.shouldDrawClockwise = YES;
+    } else if (self.previouslySelectedSegment == kWeekSegmentIndex) {
+        self.chartView.shouldDrawClockwise = NO;
+    }
+    
+    self.previouslySelectedSegment = segmentIndex;
+    
     [self.chartView layoutSubviews];
 }
 

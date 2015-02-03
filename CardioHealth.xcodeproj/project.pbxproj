@@ -26,20 +26,26 @@
 		5B04326A1A305D3E000DC9ED /* TermsAndConditions.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B0432691A305D3E000DC9ED /* TermsAndConditions.json */; };
 		5B4633851A15917000E68B82 /* APHDashboardEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B4633841A15917000E68B82 /* APHDashboardEditViewController.m */; };
 		5B5A31341A10A78600552F7D /* WithdrawStudy.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B5A31331A10A78600552F7D /* WithdrawStudy.json */; };
+		5B827B451A7F837700C685A3 /* APHDashboardWalkTestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B827B441A7F837700C685A3 /* APHDashboardWalkTestTableViewCell.m */; };
 		5BB2BAA41A10157B00684CCE /* Learn.json in Resources */ = {isa = PBXBuildFile; fileRef = 5BB2BAA31A10157B00684CCE /* Learn.json */; };
 		7B0E172D1A3FBDD70079E536 /* APHCardiovascularHealthSurveyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0E172C1A3FBDD70079E536 /* APHCardiovascularHealthSurveyController.m */; };
+		7B17083B1A7824B600251204 /* consent_01@2x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 7B17082C1A7824B600251204 /* consent_01@2x.m4v */; };
+		7B17083C1A7824B600251204 /* consent_02@2x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 7B17082D1A7824B600251204 /* consent_02@2x.m4v */; };
+		7B17083D1A7824B600251204 /* consent_03@2x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 7B17082E1A7824B600251204 /* consent_03@2x.m4v */; };
+		7B17083E1A7824B600251204 /* consent_04@2x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 7B17082F1A7824B600251204 /* consent_04@2x.m4v */; };
+		7B17083F1A7824B600251204 /* consent_05@2x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 7B1708301A7824B600251204 /* consent_05@2x.m4v */; };
+		7B1708401A7824B600251204 /* consent_06@2x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 7B1708311A7824B600251204 /* consent_06@2x.m4v */; };
+		7B1708411A7824B600251204 /* consent_07@2x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 7B1708321A7824B600251204 /* consent_07@2x.m4v */; };
+		7B1708421A7824B600251204 /* consent_01@3x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 7B1708341A7824B600251204 /* consent_01@3x.m4v */; };
+		7B1708431A7824B600251204 /* consent_02@3x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 7B1708351A7824B600251204 /* consent_02@3x.m4v */; };
+		7B1708441A7824B600251204 /* consent_03@3x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 7B1708361A7824B600251204 /* consent_03@3x.m4v */; };
+		7B1708451A7824B600251204 /* consent_04@3x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 7B1708371A7824B600251204 /* consent_04@3x.m4v */; };
+		7B1708461A7824B600251204 /* consent_05@3x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 7B1708381A7824B600251204 /* consent_05@3x.m4v */; };
+		7B1708471A7824B600251204 /* consent_06@3x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 7B1708391A7824B600251204 /* consent_06@3x.m4v */; };
+		7B1708481A7824B600251204 /* consent_07@3x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 7B17083A1A7824B600251204 /* consent_07@3x.m4v */; };
 		7B30CFA01A376B3D00625350 /* cardiovascular-staging.pem in Resources */ = {isa = PBXBuildFile; fileRef = 7B30CF9E1A376B3D00625350 /* cardiovascular-staging.pem */; };
 		7B30CFA11A376B3D00625350 /* cardiovascular.pem in Resources */ = {isa = PBXBuildFile; fileRef = 7B30CF9F1A376B3D00625350 /* cardiovascular.pem */; };
 		7B41047E19E5D94F00592B96 /* APHFitnessTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B41045A19E5D94F00592B96 /* APHFitnessTaskViewController.m */; };
-		7B41048F19E5D94F00592B96 /* APHFitnessTestDistanceTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B41047519E5D94F00592B96 /* APHFitnessTestDistanceTracker.m */; };
-		7B41049019E5D94F00592B96 /* APHFitnessTestHealthKitSampleTypeTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B41047719E5D94F00592B96 /* APHFitnessTestHealthKitSampleTypeTracker.m */; };
-		7B41049119E5D94F00592B96 /* APHFitnessTestRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B41047919E5D94F00592B96 /* APHFitnessTestRecorder.m */; };
-		7B41049E19E5E46800592B96 /* APHFitnessSixMinuteFitnessTestView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B41049619E5E46800592B96 /* APHFitnessSixMinuteFitnessTestView.m */; };
-		7B41049F19E5E46800592B96 /* APHFitnessSixMinuteFitnessTestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B41049719E5E46800592B96 /* APHFitnessSixMinuteFitnessTestView.xib */; };
-		7B4104A019E5E46800592B96 /* APHFitnessTestRestComfortablyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B41049919E5E46800592B96 /* APHFitnessTestRestComfortablyView.m */; };
-		7B4104A119E5E46800592B96 /* APHFitnessTestRestComfortablyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B41049A19E5E46800592B96 /* APHFitnessTestRestComfortablyView.xib */; };
-		7B4104A219E5E46800592B96 /* APHFitnessTestRestView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B41049C19E5E46800592B96 /* APHFitnessTestRestView.m */; };
-		7B4104A319E5E46800592B96 /* APHFitnessTestRestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B41049D19E5E46800592B96 /* APHFitnessTestRestView.xib */; };
 		7B5BEC9A1A34F0B7007CEA94 /* cardio_activitysleep_survey.json in Resources */ = {isa = PBXBuildFile; fileRef = 7B5BEC961A34F0B7007CEA94 /* cardio_activitysleep_survey.json */; };
 		7B5BEC9B1A34F0B7007CEA94 /* cardio_CVhealth_survey.json in Resources */ = {isa = PBXBuildFile; fileRef = 7B5BEC971A34F0B7007CEA94 /* cardio_CVhealth_survey.json */; };
 		7B5BEC9C1A34F0B7007CEA94 /* cardio_diet_survey.json in Resources */ = {isa = PBXBuildFile; fileRef = 7B5BEC981A34F0B7007CEA94 /* cardio_diet_survey.json */; };
@@ -48,8 +54,6 @@
 		7B5C43951A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B5C43931A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.xib */; };
 		7B5C43A41A3B98EF001A22F5 /* APHWellBeingSurveyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C43A31A3B98EF001A22F5 /* APHWellBeingSurveyController.m */; };
 		7B6753411A01540E005864E6 /* APHHeartAgeIntroStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B67533F1A01540E005864E6 /* APHHeartAgeIntroStepViewController.m */; };
-		7B96D7421A02E4DB006D93C1 /* APHImportantDetailsTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B96D7411A02E4DB006D93C1 /* APHImportantDetailsTableViewController.storyboard */; };
-		7B96D7481A0300D8006D93C1 /* APHImportantDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B96D7471A0300D8006D93C1 /* APHImportantDetailsViewController.m */; };
 		7BD73F7B19E8A20600F5DFF3 /* Intro.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 7BD73F7A19E8A20600F5DFF3 /* Intro.mp4 */; };
 		7BEA4BE61A65C10300FEAF60 /* APHHeartAgeIntroStepViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BEA4BE51A65C10300FEAF60 /* APHHeartAgeIntroStepViewController.storyboard */; };
 		7BEA4BE91A65D95400FEAF60 /* APHIntroPurposeContainedTableTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BEA4BE81A65D95400FEAF60 /* APHIntroPurposeContainedTableTableViewController.m */; };
@@ -151,28 +155,29 @@
 		5B4633831A15917000E68B82 /* APHDashboardEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHDashboardEditViewController.h; sourceTree = "<group>"; };
 		5B4633841A15917000E68B82 /* APHDashboardEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHDashboardEditViewController.m; sourceTree = "<group>"; };
 		5B5A31331A10A78600552F7D /* WithdrawStudy.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = WithdrawStudy.json; sourceTree = "<group>"; };
+		5B827B431A7F837700C685A3 /* APHDashboardWalkTestTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHDashboardWalkTestTableViewCell.h; sourceTree = "<group>"; };
+		5B827B441A7F837700C685A3 /* APHDashboardWalkTestTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHDashboardWalkTestTableViewCell.m; sourceTree = "<group>"; };
 		5BB2BAA31A10157B00684CCE /* Learn.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Learn.json; sourceTree = "<group>"; };
 		7B0E172B1A3FBDD70079E536 /* APHCardiovascularHealthSurveyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHCardiovascularHealthSurveyController.h; sourceTree = "<group>"; };
 		7B0E172C1A3FBDD70079E536 /* APHCardiovascularHealthSurveyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHCardiovascularHealthSurveyController.m; sourceTree = "<group>"; };
+		7B17082C1A7824B600251204 /* consent_01@2x.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = "consent_01@2x.m4v"; sourceTree = "<group>"; };
+		7B17082D1A7824B600251204 /* consent_02@2x.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = "consent_02@2x.m4v"; sourceTree = "<group>"; };
+		7B17082E1A7824B600251204 /* consent_03@2x.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = "consent_03@2x.m4v"; sourceTree = "<group>"; };
+		7B17082F1A7824B600251204 /* consent_04@2x.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = "consent_04@2x.m4v"; sourceTree = "<group>"; };
+		7B1708301A7824B600251204 /* consent_05@2x.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = "consent_05@2x.m4v"; sourceTree = "<group>"; };
+		7B1708311A7824B600251204 /* consent_06@2x.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = "consent_06@2x.m4v"; sourceTree = "<group>"; };
+		7B1708321A7824B600251204 /* consent_07@2x.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = "consent_07@2x.m4v"; sourceTree = "<group>"; };
+		7B1708341A7824B600251204 /* consent_01@3x.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = "consent_01@3x.m4v"; sourceTree = "<group>"; };
+		7B1708351A7824B600251204 /* consent_02@3x.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = "consent_02@3x.m4v"; sourceTree = "<group>"; };
+		7B1708361A7824B600251204 /* consent_03@3x.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = "consent_03@3x.m4v"; sourceTree = "<group>"; };
+		7B1708371A7824B600251204 /* consent_04@3x.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = "consent_04@3x.m4v"; sourceTree = "<group>"; };
+		7B1708381A7824B600251204 /* consent_05@3x.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = "consent_05@3x.m4v"; sourceTree = "<group>"; };
+		7B1708391A7824B600251204 /* consent_06@3x.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = "consent_06@3x.m4v"; sourceTree = "<group>"; };
+		7B17083A1A7824B600251204 /* consent_07@3x.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = "consent_07@3x.m4v"; sourceTree = "<group>"; };
 		7B30CF9E1A376B3D00625350 /* cardiovascular-staging.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "cardiovascular-staging.pem"; sourceTree = "<group>"; };
 		7B30CF9F1A376B3D00625350 /* cardiovascular.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cardiovascular.pem; sourceTree = "<group>"; };
 		7B41045919E5D94F00592B96 /* APHFitnessTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHFitnessTaskViewController.h; sourceTree = "<group>"; };
 		7B41045A19E5D94F00592B96 /* APHFitnessTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHFitnessTaskViewController.m; sourceTree = "<group>"; };
-		7B41047419E5D94F00592B96 /* APHFitnessTestDistanceTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHFitnessTestDistanceTracker.h; sourceTree = "<group>"; };
-		7B41047519E5D94F00592B96 /* APHFitnessTestDistanceTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHFitnessTestDistanceTracker.m; sourceTree = "<group>"; };
-		7B41047619E5D94F00592B96 /* APHFitnessTestHealthKitSampleTypeTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHFitnessTestHealthKitSampleTypeTracker.h; sourceTree = "<group>"; };
-		7B41047719E5D94F00592B96 /* APHFitnessTestHealthKitSampleTypeTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHFitnessTestHealthKitSampleTypeTracker.m; sourceTree = "<group>"; };
-		7B41047819E5D94F00592B96 /* APHFitnessTestRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHFitnessTestRecorder.h; sourceTree = "<group>"; };
-		7B41047919E5D94F00592B96 /* APHFitnessTestRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHFitnessTestRecorder.m; sourceTree = "<group>"; };
-		7B41049519E5E46800592B96 /* APHFitnessSixMinuteFitnessTestView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APHFitnessSixMinuteFitnessTestView.h; path = CustomViews/APHFitnessSixMinuteFitnessTestView.h; sourceTree = "<group>"; };
-		7B41049619E5E46800592B96 /* APHFitnessSixMinuteFitnessTestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APHFitnessSixMinuteFitnessTestView.m; path = CustomViews/APHFitnessSixMinuteFitnessTestView.m; sourceTree = "<group>"; };
-		7B41049719E5E46800592B96 /* APHFitnessSixMinuteFitnessTestView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = APHFitnessSixMinuteFitnessTestView.xib; path = CustomViews/APHFitnessSixMinuteFitnessTestView.xib; sourceTree = "<group>"; };
-		7B41049819E5E46800592B96 /* APHFitnessTestRestComfortablyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APHFitnessTestRestComfortablyView.h; path = CustomViews/APHFitnessTestRestComfortablyView.h; sourceTree = "<group>"; };
-		7B41049919E5E46800592B96 /* APHFitnessTestRestComfortablyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APHFitnessTestRestComfortablyView.m; path = CustomViews/APHFitnessTestRestComfortablyView.m; sourceTree = "<group>"; };
-		7B41049A19E5E46800592B96 /* APHFitnessTestRestComfortablyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = APHFitnessTestRestComfortablyView.xib; path = CustomViews/APHFitnessTestRestComfortablyView.xib; sourceTree = "<group>"; };
-		7B41049B19E5E46800592B96 /* APHFitnessTestRestView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APHFitnessTestRestView.h; path = CustomViews/APHFitnessTestRestView.h; sourceTree = "<group>"; };
-		7B41049C19E5E46800592B96 /* APHFitnessTestRestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APHFitnessTestRestView.m; path = CustomViews/APHFitnessTestRestView.m; sourceTree = "<group>"; };
-		7B41049D19E5E46800592B96 /* APHFitnessTestRestView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = APHFitnessTestRestView.xib; path = CustomViews/APHFitnessTestRestView.xib; sourceTree = "<group>"; };
 		7B5BEC961A34F0B7007CEA94 /* cardio_activitysleep_survey.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cardio_activitysleep_survey.json; sourceTree = "<group>"; };
 		7B5BEC971A34F0B7007CEA94 /* cardio_CVhealth_survey.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cardio_CVhealth_survey.json; sourceTree = "<group>"; };
 		7B5BEC981A34F0B7007CEA94 /* cardio_diet_survey.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cardio_diet_survey.json; sourceTree = "<group>"; };
@@ -184,9 +189,6 @@
 		7B5C43A31A3B98EF001A22F5 /* APHWellBeingSurveyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHWellBeingSurveyController.m; sourceTree = "<group>"; };
 		7B67533E1A01540E005864E6 /* APHHeartAgeIntroStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHHeartAgeIntroStepViewController.h; sourceTree = "<group>"; };
 		7B67533F1A01540E005864E6 /* APHHeartAgeIntroStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHHeartAgeIntroStepViewController.m; sourceTree = "<group>"; };
-		7B96D7411A02E4DB006D93C1 /* APHImportantDetailsTableViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = APHImportantDetailsTableViewController.storyboard; sourceTree = "<group>"; };
-		7B96D7461A0300D8006D93C1 /* APHImportantDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHImportantDetailsViewController.h; sourceTree = "<group>"; };
-		7B96D7471A0300D8006D93C1 /* APHImportantDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHImportantDetailsViewController.m; sourceTree = "<group>"; };
 		7BD73F7A19E8A20600F5DFF3 /* Intro.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Intro.mp4; sourceTree = "<group>"; };
 		7BEA4BE51A65C10300FEAF60 /* APHHeartAgeIntroStepViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = APHHeartAgeIntroStepViewController.storyboard; sourceTree = "<group>"; };
 		7BEA4BE71A65D95400FEAF60 /* APHIntroPurposeContainedTableTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHIntroPurposeContainedTableTableViewController.h; sourceTree = "<group>"; };
@@ -301,6 +303,15 @@
 			name = "Heart Age Summary Cells";
 			sourceTree = "<group>";
 		};
+		5B827B421A7F837700C685A3 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				5B827B431A7F837700C685A3 /* APHDashboardWalkTestTableViewCell.h */,
+				5B827B441A7F837700C685A3 /* APHDashboardWalkTestTableViewCell.m */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		7B0E17291A3FBDAB0079E536 /* Cardiovascular Health Survey */ = {
 			isa = PBXGroup;
 			children = (
@@ -308,6 +319,51 @@
 				7B0E172C1A3FBDD70079E536 /* APHCardiovascularHealthSurveyController.m */,
 			);
 			name = "Cardiovascular Health Survey";
+			sourceTree = "<group>";
+		};
+		7B1708291A7824B600251204 /* ResearchKit-Assets */ = {
+			isa = PBXGroup;
+			children = (
+				7B17082A1A7824B600251204 /* Consent */,
+			);
+			path = "ResearchKit-Assets";
+			sourceTree = "<group>";
+		};
+		7B17082A1A7824B600251204 /* Consent */ = {
+			isa = PBXGroup;
+			children = (
+				7B17082B1A7824B600251204 /* phone@2x */,
+				7B1708331A7824B600251204 /* phone@3x */,
+			);
+			path = Consent;
+			sourceTree = "<group>";
+		};
+		7B17082B1A7824B600251204 /* phone@2x */ = {
+			isa = PBXGroup;
+			children = (
+				7B17082C1A7824B600251204 /* consent_01@2x.m4v */,
+				7B17082D1A7824B600251204 /* consent_02@2x.m4v */,
+				7B17082E1A7824B600251204 /* consent_03@2x.m4v */,
+				7B17082F1A7824B600251204 /* consent_04@2x.m4v */,
+				7B1708301A7824B600251204 /* consent_05@2x.m4v */,
+				7B1708311A7824B600251204 /* consent_06@2x.m4v */,
+				7B1708321A7824B600251204 /* consent_07@2x.m4v */,
+			);
+			path = "phone@2x";
+			sourceTree = "<group>";
+		};
+		7B1708331A7824B600251204 /* phone@3x */ = {
+			isa = PBXGroup;
+			children = (
+				7B1708341A7824B600251204 /* consent_01@3x.m4v */,
+				7B1708351A7824B600251204 /* consent_02@3x.m4v */,
+				7B1708361A7824B600251204 /* consent_03@3x.m4v */,
+				7B1708371A7824B600251204 /* consent_04@3x.m4v */,
+				7B1708381A7824B600251204 /* consent_05@3x.m4v */,
+				7B1708391A7824B600251204 /* consent_06@3x.m4v */,
+				7B17083A1A7824B600251204 /* consent_07@3x.m4v */,
+			);
+			path = "phone@3x";
 			sourceTree = "<group>";
 		};
 		7B30CF9D1A376B3D00625350 /* Certificates */ = {
@@ -324,40 +380,8 @@
 			children = (
 				7B41045919E5D94F00592B96 /* APHFitnessTaskViewController.h */,
 				7B41045A19E5D94F00592B96 /* APHFitnessTaskViewController.m */,
-				7B8E912519F9B58D0040F77F /* Intro */,
-				7B41047319E5D94F00592B96 /* WalkingTestComponents */,
-				7B41049419E5E37700592B96 /* CustomViews */,
 			);
 			path = APHFitnessTest;
-			sourceTree = "<group>";
-		};
-		7B41047319E5D94F00592B96 /* WalkingTestComponents */ = {
-			isa = PBXGroup;
-			children = (
-				7B41047419E5D94F00592B96 /* APHFitnessTestDistanceTracker.h */,
-				7B41047519E5D94F00592B96 /* APHFitnessTestDistanceTracker.m */,
-				7B41047619E5D94F00592B96 /* APHFitnessTestHealthKitSampleTypeTracker.h */,
-				7B41047719E5D94F00592B96 /* APHFitnessTestHealthKitSampleTypeTracker.m */,
-				7B41047819E5D94F00592B96 /* APHFitnessTestRecorder.h */,
-				7B41047919E5D94F00592B96 /* APHFitnessTestRecorder.m */,
-			);
-			path = WalkingTestComponents;
-			sourceTree = "<group>";
-		};
-		7B41049419E5E37700592B96 /* CustomViews */ = {
-			isa = PBXGroup;
-			children = (
-				7B41049519E5E46800592B96 /* APHFitnessSixMinuteFitnessTestView.h */,
-				7B41049619E5E46800592B96 /* APHFitnessSixMinuteFitnessTestView.m */,
-				7B41049719E5E46800592B96 /* APHFitnessSixMinuteFitnessTestView.xib */,
-				7B41049819E5E46800592B96 /* APHFitnessTestRestComfortablyView.h */,
-				7B41049919E5E46800592B96 /* APHFitnessTestRestComfortablyView.m */,
-				7B41049A19E5E46800592B96 /* APHFitnessTestRestComfortablyView.xib */,
-				7B41049B19E5E46800592B96 /* APHFitnessTestRestView.h */,
-				7B41049C19E5E46800592B96 /* APHFitnessTestRestView.m */,
-				7B41049D19E5E46800592B96 /* APHFitnessTestRestView.xib */,
-			);
-			name = CustomViews;
 			sourceTree = "<group>";
 		};
 		7B5BEC951A34F0B7007CEA94 /* cardiosurveys */ = {
@@ -390,16 +414,6 @@
 				7BEA4BE81A65D95400FEAF60 /* APHIntroPurposeContainedTableTableViewController.m */,
 				0865F8B21A65E8C7005770ED /* APHIntroCellTableViewCell.h */,
 				0865F8B31A65E8C7005770ED /* APHIntroCellTableViewCell.m */,
-			);
-			path = Intro;
-			sourceTree = "<group>";
-		};
-		7B8E912519F9B58D0040F77F /* Intro */ = {
-			isa = PBXGroup;
-			children = (
-				7B96D7461A0300D8006D93C1 /* APHImportantDetailsViewController.h */,
-				7B96D7471A0300D8006D93C1 /* APHImportantDetailsViewController.m */,
-				7B96D7411A02E4DB006D93C1 /* APHImportantDetailsTableViewController.storyboard */,
 			);
 			path = Intro;
 			sourceTree = "<group>";
@@ -450,6 +464,7 @@
 		F55BBDEF19D362D0003CA0F9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7B1708291A7824B600251204 /* ResearchKit-Assets */,
 				7B30CF9D1A376B3D00625350 /* Certificates */,
 				5B0432601A305742000DC9ED /* HTMLContent */,
 				08547C101A11899C00DC6E7C /* APHTheme.h */,
@@ -496,6 +511,7 @@
 		F55BBE0019D362D0003CA0F9 /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
+				5B827B421A7F837700C685A3 /* Cells */,
 				F55BBE0119D362D0003CA0F9 /* APHDashboard.storyboard */,
 				F55BBE0219D362D0003CA0F9 /* APHDashboardViewController.h */,
 				F55BBE0319D362D0003CA0F9 /* APHDashboardViewController.m */,
@@ -701,34 +717,44 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B96D7421A02E4DB006D93C1 /* APHImportantDetailsTableViewController.storyboard in Resources */,
 				F5165E7A19E86581003836CA /* APCParameters.json in Resources */,
 				7B5BEC9B1A34F0B7007CEA94 /* cardio_CVhealth_survey.json in Resources */,
+				7B1708401A7824B600251204 /* consent_06@2x.m4v in Resources */,
 				08B972511A1FB4AF00316D49 /* APHHealthyHeartSummaryStepViewController.xib in Resources */,
 				5B5A31341A10A78600552F7D /* WithdrawStudy.json in Resources */,
 				F55BBE6719D362D0003CA0F9 /* Main.storyboard in Resources */,
 				08C56E391A15E7D100D3BF61 /* APHActivityTracking.storyboard in Resources */,
 				7BD73F7B19E8A20600F5DFF3 /* Intro.mp4 in Resources */,
 				7B30CFA01A376B3D00625350 /* cardiovascular-staging.pem in Resources */,
+				7B17083F1A7824B600251204 /* consent_05@2x.m4v in Resources */,
 				7B5BEC9D1A34F0B7007CEA94 /* cardio_wellbeing_survey.json in Resources */,
 				5B04326A1A305D3E000DC9ED /* TermsAndConditions.json in Resources */,
 				F55BBE6A19D362D0003CA0F9 /* APHDashboard.storyboard in Resources */,
+				7B1708451A7824B600251204 /* consent_04@3x.m4v in Resources */,
 				F55BBE6119D362D0003CA0F9 /* APHTasksAndSchedules.json in Resources */,
+				7B1708421A7824B600251204 /* consent_01@3x.m4v in Resources */,
 				08FA97FB1A10630F002317C8 /* APHHeartAgeSummary.storyboard in Resources */,
+				7B1708441A7824B600251204 /* consent_03@3x.m4v in Resources */,
 				5B0432611A305742000DC9ED /* HTMLContent in Resources */,
 				F5778E7519F0613D0079F1B2 /* APHOnboarding.storyboard in Resources */,
 				7B30CFA11A376B3D00625350 /* cardiovascular.pem in Resources */,
 				F573809319E45D62008A8354 /* StudyOverview.json in Resources */,
-				7B4104A319E5E46800592B96 /* APHFitnessTestRestView.xib in Resources */,
-				7B41049F19E5E46800592B96 /* APHFitnessSixMinuteFitnessTestView.xib in Resources */,
+				7B1708461A7824B600251204 /* consent_05@3x.m4v in Resources */,
+				7B17083D1A7824B600251204 /* consent_03@2x.m4v in Resources */,
+				7B1708411A7824B600251204 /* consent_07@2x.m4v in Resources */,
 				7B5C43951A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.xib in Resources */,
 				5BB2BAA41A10157B00684CCE /* Learn.json in Resources */,
+				7B1708431A7824B600251204 /* consent_02@3x.m4v in Resources */,
 				7B5BEC9C1A34F0B7007CEA94 /* cardio_diet_survey.json in Resources */,
 				7B5BEC9A1A34F0B7007CEA94 /* cardio_activitysleep_survey.json in Resources */,
 				F55BBE6619D362D0003CA0F9 /* LaunchScreen.xib in Resources */,
 				7BEA4BE61A65C10300FEAF60 /* APHHeartAgeIntroStepViewController.storyboard in Resources */,
-				7B4104A119E5E46800592B96 /* APHFitnessTestRestComfortablyView.xib in Resources */,
+				7B1708481A7824B600251204 /* consent_07@3x.m4v in Resources */,
+				7B17083C1A7824B600251204 /* consent_02@2x.m4v in Resources */,
+				7B17083E1A7824B600251204 /* consent_04@2x.m4v in Resources */,
 				F5F6450A19D35BA2004CFBB2 /* Images.xcassets in Resources */,
+				7B17083B1A7824B600251204 /* consent_01@2x.m4v in Resources */,
+				7B1708471A7824B600251204 /* consent_06@3x.m4v in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -760,20 +786,15 @@
 				08FA98061A108A46002317C8 /* APHHeartAgeRiskEstimateCell.m in Sources */,
 				08D3A10219E4A08C00A3D20D /* APHHeartAgeAndRiskFactors.m in Sources */,
 				7BEA4BE91A65D95400FEAF60 /* APHIntroPurposeContainedTableTableViewController.m in Sources */,
-				7B41049E19E5E46800592B96 /* APHFitnessSixMinuteFitnessTestView.m in Sources */,
 				08FA97FF1A108680002317C8 /* APHHeartAgeTodaysActivitiesCell.m in Sources */,
-				7B41049019E5D94F00592B96 /* APHFitnessTestHealthKitSampleTypeTracker.m in Sources */,
 				08B9724F1A1FB47B00316D49 /* APHHealthyHeartSummaryStepViewController.m in Sources */,
 				08C56E361A15E75400D3BF61 /* APHActivityTrackingStepViewController.m in Sources */,
-				7B4104A019E5E46800592B96 /* APHFitnessTestRestComfortablyView.m in Sources */,
 				5B4633851A15917000E68B82 /* APHDashboardEditViewController.m in Sources */,
 				F55BBE6519D362D0003CA0F9 /* APHAppDelegate.m in Sources */,
-				7B4104A219E5E46800592B96 /* APHFitnessTestRestView.m in Sources */,
 				7BEEFA601A003E04004F6C87 /* APHHeartAgeResultsViewController.m in Sources */,
 				7B5C43941A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.m in Sources */,
-				7B96D7481A0300D8006D93C1 /* APHImportantDetailsViewController.m in Sources */,
+				5B827B451A7F837700C685A3 /* APHDashboardWalkTestTableViewCell.m in Sources */,
 				7B0E172D1A3FBDD70079E536 /* APHCardiovascularHealthSurveyController.m in Sources */,
-				7B41049119E5D94F00592B96 /* APHFitnessTestRecorder.m in Sources */,
 				08FA98091A108C33002317C8 /* APHHeartAgeRecommendationCell.m in Sources */,
 				F5F644FF19D35BA2004CFBB2 /* main.m in Sources */,
 				7B6753411A01540E005864E6 /* APHHeartAgeIntroStepViewController.m in Sources */,
@@ -786,7 +807,6 @@
 				08547C121A11899C00DC6E7C /* APHTheme.m in Sources */,
 				F5778E7219F0613D0079F1B2 /* APHInclusionCriteriaViewController.m in Sources */,
 				08C2328A1A15796E00DB4EF9 /* APHSevenDayFitnessAllocationTaskViewController.m in Sources */,
-				7B41048F19E5D94F00592B96 /* APHFitnessTestDistanceTracker.m in Sources */,
 				F55BBE6B19D362D0003CA0F9 /* APHDashboardViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -802,6 +822,68 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		36DBC4FC1A7FD9FF00720345 /* DebugAndSendToDataVerificationServer */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = DebugAndSendToDataVerificationServer;
+		};
+		36DBC4FD1A7FD9FF00720345 /* DebugAndSendToDataVerificationServer */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = CardioHealth/CardioHealth.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/AppCore/APCAppCore/**",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				INFOPLIST_FILE = CardioHealth/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = DebugAndSendToDataVerificationServer;
+		};
 		F58767F819E4A49D00254897 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -991,6 +1073,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F5F6451A19D35BA2004CFBB2 /* Debug */,
+				36DBC4FC1A7FD9FF00720345 /* DebugAndSendToDataVerificationServer */,
 				F58767F819E4A49D00254897 /* Development */,
 				F5F6451B19D35BA2004CFBB2 /* Release */,
 			);
@@ -1001,6 +1084,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F5F6451D19D35BA2004CFBB2 /* Debug */,
+				36DBC4FD1A7FD9FF00720345 /* DebugAndSendToDataVerificationServer */,
 				F58767F919E4A49D00254897 /* Development */,
 				F5F6451E19D35BA2004CFBB2 /* Release */,
 			);
