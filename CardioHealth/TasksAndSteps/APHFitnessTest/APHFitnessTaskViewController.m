@@ -8,10 +8,8 @@
 #import "APHFitnessTaskViewController.h"
 #import <CoreLocation/CoreLocation.h>
 
-static NSInteger const  kRestDuration              = 15.0;
-static NSInteger const  kWalkDuration              = 15.0;
-//static NSInteger const  kRestDuration              = 3.0 * 60.0;
-//static NSInteger const  kWalkDuration              = 6.0 * 60.0;
+static NSInteger const  kRestDuration              = 3.0 * 60.0;
+static NSInteger const  kWalkDuration              = 6.0 * 60.0;
 static NSString* const  kFitnessTestIdentifier     = @"6-Minute Walk Test";
 #warning The intended use description is using placeholder text.
 static NSString* const  kIntendedUseDescription    = @"Once you tap Get Started begin walking at your fastest possible pace. If you have a wearable device linked to your phone that can track your heart rate, please put it on. After the test is finished, your results will be analyzed and available on the dashboard.";
@@ -25,15 +23,16 @@ static NSString* const  kConclusionStep            = @"conclusion";
 
 static NSString* const  kHeartRateFileNameComp     = @"HKQuantityTypeIdentifierHeartRate";
 static NSString* const  kLocationFileNameComp      = @"location";
-static NSString* const kFileResultsKey             = @"items";
-static NSString* const kHeartRateValueKey          = @"value";
+static NSString* const  kFileResultsKey            = @"items";
+static NSString* const  kHeartRateValueKey         = @"value";
+static NSString* const  kLongitude                 = @"longitude";
+static NSString* const  kLatitude                  = @"latitude";
 
 static NSString* const kCompletedKeyForDashboard   = @"completed";
 static NSString* const kPeakHeartRateForDashboard  = @"peakHeartRate";
 static NSString* const kAvgHeartRateForDashboard   = @"avgHeartRate";
 static NSString* const kLastHeartRateForDashboard  = @"lastHeartRate";
-static NSString* const kLongitude                  = @"longitude";
-static NSString* const kLatitude                   = @"latitude";
+
 
 
 @interface APHFitnessTaskViewController ()
@@ -124,8 +123,8 @@ static NSString* const kLatitude                   = @"latitude";
     NSArray*        locations           = [distanceResults objectForKey:kFileResultsKey];
     
     
-    CLLocation *previousCoor = nil;
-    CLLocationDistance totalDistance = 0;
+    CLLocation*     previousCoor        = nil;
+    CLLocationDistance totalDistance    = 0;
     
     for (NSDictionary *location in locations) {
         float               lon = [[location objectForKey:kLongitude] floatValue];
@@ -159,7 +158,7 @@ static NSString* const kLatitude                   = @"latitude";
 
 - (NSDictionary *) readFileResultsFor:(NSURL *)fileURL {
 
-     NSError*       error       = nil;
+    NSError*        error       = nil;
     NSString*       contents    = [NSString stringWithContentsOfURL:fileURL encoding:NSUTF8StringEncoding error:&error];
     NSDictionary*   results     = nil;
 
