@@ -281,7 +281,8 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
                                                                                                 error:&error];
                         APCLogError2(error);
                     }
-                    
+
+#warning Distance is in yards at this point, however, 'ft' is being appended instead. Which should it be?
                     item.distanceWalked     = [[result objectForKey:kFitTestTotalDistDataSourceKey]     integerValue];
                     item.peakHeartRate      = [[result objectForKey:kFitTestpeakHeartRateDataSourceKey] integerValue];
                     item.finalHeartRate     = [[result objectForKey:kFitTestlastHeartRateDataSourceKey] integerValue];
