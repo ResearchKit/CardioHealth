@@ -12,9 +12,14 @@
 #import "APHAppDelegate.h"
 #import "APHDashboardWalkTestTableViewCell.h"
 
-static NSString*  const kAPCBasicTableViewCellIdentifier       = @"APCBasicTableViewCell";
-static NSString*  const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetailTableViewCell";
-static NSInteger  const kDataCountLimit                        = 1;
+static NSString*  const kAPCBasicTableViewCellIdentifier        = @"APCBasicTableViewCell";
+static NSString*  const kAPCRightDetailTableViewCellIdentifier  = @"APCRightDetailTableViewCell";
+static NSInteger  const kDataCountLimit                         = 1;
+static NSString*  const kFitnessTestTaskId                      = @"APHFitnessTest-00000000-1111-1111-1111-F810BE28D995";
+static NSString*  const kAPCTaskAttributeUpdatedAt              = @"updatedAt";
+static NSString*  const kFitTestTotalDistDataSourceKey          = @"totalDistance";
+static NSString*  const kFitTestpeakHeartRateDataSourceKey      = @"peakHeartRate";
+static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRate";
 
 @interface APHDashboardViewController ()<UIViewControllerTransitioningDelegate, APCPieGraphViewDatasource, APHDashboardWalkTestTableViewCellDelegate>
 
@@ -235,13 +240,52 @@ static NSInteger  const kDataCountLimit                        = 1;
                     APHTableViewDashboardWalkingTestItem *item = [APHTableViewDashboardWalkingTestItem new];
                     item.caption = NSLocalizedString(@"6-minute Walking Test", @"");
                     item.identifier = kAPHDashboardWalkTestTableViewCellIdentifier;
+
+                    NSString*               taskId          = kFitnessTestTaskId;
+                    APCAppDelegate*         appDelegate     = (APCAppDelegate *)[[UIApplication sharedApplication] delegate];
+                    NSSortDescriptor*       sortDescriptor  = [[NSSortDescriptor alloc] initWithKey:kAPCTaskAttributeUpdatedAt
+                                                                                          ascending:NO];
+                    NSFetchRequest*         request         = [APCScheduledTask request];
+                    NSPredicate*            predicate       = [NSPredicate predicateWithFormat:@"(task.taskID == %@) AND (completed == 1)", taskId];
+                    request.predicate                       = predicate;
+                    request.sortDescriptors                 = @[sortDescriptor];
+                    NSError*                error           = nil;
+                    NSArray*                tasks           = [appDelegate.dataSubstrate.mainContext executeFetchRequest:request error:&error];
                     
-                    /* Placeholder values.-- */
-                    item.distanceWalked = 2100;
-                    item.peakHeartRate = 110;
-                    item.finalHeartRate = 86;
-                    item.lastPerformedDate = [NSDate date];
-                    /* -- Pull the actual values from the corresponding activity*/
+                    APCLogError2(error);
+
+                    APCScheduledTask*       task            = [tasks firstObject];
+                    NSDictionary*           result          = nil;
+                    NSArray*                schedTaskResult = [task.results allObjects];
+                    NSSortDescriptor*       sorDescrip      = [[NSSortDescriptor alloc] initWithKey:kAPCTaskAttributeUpdatedAt
+                                                                                          ascending:NO];
+                    
+                    NSArray*                taskResults     = [schedTaskResult sortedArrayUsingDescriptors:@[sorDescrip]];
+                    NSString*               resultSummary   = nil;
+                    
+                    APCResult*              apcResult = nil;
+                    
+                    for (APCResult* result in taskResults) {
+                        apcResult = result;
+                        resultSummary = [result resultSummary];
+                        if (resultSummary) {
+                            break;
+                        }
+                    }
+                    
+                    if (resultSummary) {
+                        NSData*             resultData      = [resultSummary dataUsingEncoding:NSUTF8StringEncoding];
+                        NSError*            error           = nil;
+                        result                              = [NSJSONSerialization JSONObjectWithData:resultData
+                                                                                              options:NSJSONReadingAllowFragments
+                                                                                                error:&error];
+                        APCLogError2(error);
+                    }
+                    
+                    item.distanceWalked     = [[result objectForKey:kFitTestTotalDistDataSourceKey]     integerValue];
+                    item.peakHeartRate      = [[result objectForKey:kFitTestpeakHeartRateDataSourceKey] integerValue];
+                    item.finalHeartRate     = [[result objectForKey:kFitTestlastHeartRateDataSourceKey] integerValue];
+                    item.lastPerformedDate  = apcResult.updatedAt;
                     
                     item.tintColor = [UIColor appTertiaryRedColor];
                     item.editable = YES;
