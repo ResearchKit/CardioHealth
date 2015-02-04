@@ -24,8 +24,6 @@ static NSInteger  const kDataCountLimit                        = 1;
 @property (nonatomic, strong)   APCScoring*         heartRateScoring;
 @property (nonatomic, strong)   NSMutableArray*     rowItemsOrder;
 @property (nonatomic, strong)   NSDateFormatter*    dateFormatter;
-@property (nonatomic, strong)   APCPresentAnimator* presentAnimator;
-@property (nonatomic, strong)   APCFadeAnimator*    fadeAnimator;
 
 @end
 
@@ -54,8 +52,6 @@ static NSInteger  const kDataCountLimit                        = 1;
         
         self.title = NSLocalizedString(@"Dashboard", @"Dashboard");
         
-        _presentAnimator = [APCPresentAnimator new];
-        _fadeAnimator = [APCFadeAnimator new];
         _dateFormatter = [NSDateFormatter new];
     }
     
@@ -192,6 +188,9 @@ static NSInteger  const kDataCountLimit                        = 1;
                     item.editable = YES;
                     item.tintColor = [UIColor appTertiaryPurpleColor];
                     
+                    /* Placeholder values.-- */
+                    item.info = NSLocalizedString(@"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", @"");
+                    
                     APCTableViewRow *row = [APCTableViewRow new];
                     row.item = item;
                     row.itemType = rowType;
@@ -209,6 +208,9 @@ static NSInteger  const kDataCountLimit                        = 1;
                     item.identifier = kAPCDashboardGraphTableViewCellIdentifier;
                     item.editable = YES;
                     item.tintColor = [UIColor appTertiaryYellowColor];
+                    
+                    /* Placeholder values.-- */
+                    item.info = NSLocalizedString(@"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", @"");
                     
                     APCTableViewRow *row = [APCTableViewRow new];
                     row.item = item;
@@ -340,56 +342,6 @@ static NSInteger  const kDataCountLimit                        = 1;
     
 }
 
-- (void)dashboardGraphViewCellDidTapExpandForCell:(APCDashboardLineGraphTableViewCell *)cell
-{
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    
-    APCTableViewDashboardGraphItem *graphItem = (APCTableViewDashboardGraphItem *)[self itemForIndexPath:indexPath];
-    
-    CGRect initialFrame = [cell convertRect:cell.bounds toView:self.view.window];
-    self.presentAnimator.initialFrame = initialFrame;
-
-    APCLineGraphViewController *graphViewController = [[UIStoryboard storyboardWithName:@"APHDashboard" bundle:nil] instantiateViewControllerWithIdentifier:@"GraphVC"];
-    graphViewController.graphItem = graphItem;
-//    graphViewController.transitioningDelegate = self;
-//    graphViewController.modalPresentationStyle = UIModalPresentationCustom;
-    [self.navigationController presentViewController:graphViewController animated:YES completion:nil];
-}
-
-#pragma mark - UIViewControllerTransitioningDelegate methods
-
-- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
-                                                                  presentingController:(UIViewController *)presenting
-                                                                      sourceController:(UIViewController *)source
-{
-    id<UIViewControllerAnimatedTransitioning> animationController;
-    
-    if ([presented isKindOfClass:[APCLineGraphViewController class]]) {
-        animationController = self.presentAnimator;
-        self.presentAnimator.presenting = YES;
-    } else if ([presented isKindOfClass:[APCDashboardMoreInfoViewController class]]){
-        animationController = self.fadeAnimator;
-        self.fadeAnimator.presenting = YES;
-    }
-    
-    return animationController;
-}
-
-- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
-    
-    id<UIViewControllerAnimatedTransitioning> animationController;
-    
-    if ([dismissed isKindOfClass:[APCLineGraphViewController class]]) {
-        animationController = self.presentAnimator;
-        self.presentAnimator.presenting = NO;
-    } else if ([dismissed isKindOfClass:[APCDashboardMoreInfoViewController class]]){
-        animationController = self.fadeAnimator;
-        self.fadeAnimator.presenting = NO;
-    }
-    
-    return animationController;
-}
-
 #pragma mark - Pie Graph View delegates
 
 -(NSInteger)numberOfSegmentsInPieGraphView
@@ -411,14 +363,6 @@ static NSInteger  const kDataCountLimit                        = 1;
 {
     return [[[self.allocationDataset valueForKey:kSegmentSumKey] objectAtIndex:index] floatValue];
 }
-
-@end
-
-@implementation APHTableViewDashboardFitnessControlItem
-
-@end
-
-@implementation APHTableViewDashboardWalkingTestItem
 
 @end
 
