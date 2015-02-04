@@ -416,6 +416,7 @@
                                             <state key="normal" image="info_icon">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
+                                            <state key="highlighted" image="info_icon_selected"/>
                                             <connections>
                                                 <action selector="infoTapped:" destination="A3B-AT-n0j" eventType="touchUpInside" id="8eo-XZ-14g"/>
                                             </connections>
@@ -746,6 +747,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pNk-P8-Xv6">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JGh-Ag-1BS">
                                 <rect key="frame" x="0.0" y="283" width="320" height="192"/>
                                 <constraints>
@@ -780,17 +784,22 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="pNk-P8-Xv6" secondAttribute="trailing" id="3WH-n2-jBc"/>
                             <constraint firstItem="1Xl-EH-qEg" firstAttribute="leading" secondItem="o4n-9O-Yds" secondAttribute="leadingMargin" id="3Wu-jY-r3S"/>
                             <constraint firstItem="JGh-Ag-1BS" firstAttribute="leading" secondItem="o4n-9O-Yds" secondAttribute="leading" id="5Ac-9f-uYV"/>
                             <constraint firstAttribute="centerX" secondItem="1Xl-EH-qEg" secondAttribute="centerX" constant="-0.5" id="67q-fz-wGP"/>
                             <constraint firstItem="JGh-Ag-1BS" firstAttribute="top" secondItem="1Xl-EH-qEg" secondAttribute="bottom" constant="2" id="EP4-I6-ADR"/>
                             <constraint firstItem="JGh-Ag-1BS" firstAttribute="top" secondItem="so3-7E-Fqu" secondAttribute="bottom" constant="263" id="JDI-YY-pVA"/>
+                            <constraint firstItem="EvE-Ho-iZ3" firstAttribute="top" secondItem="pNk-P8-Xv6" secondAttribute="bottom" id="Mmg-AD-7ki"/>
+                            <constraint firstItem="pNk-P8-Xv6" firstAttribute="top" secondItem="so3-7E-Fqu" secondAttribute="bottom" constant="-20" id="Soi-cm-gef"/>
                             <constraint firstAttribute="trailing" secondItem="JGh-Ag-1BS" secondAttribute="trailing" id="hwQ-wi-Nkr"/>
                             <constraint firstItem="1Xl-EH-qEg" firstAttribute="trailing" secondItem="o4n-9O-Yds" secondAttribute="trailingMargin" id="iQg-ck-Ms1"/>
+                            <constraint firstItem="pNk-P8-Xv6" firstAttribute="leading" secondItem="o4n-9O-Yds" secondAttribute="leading" id="ubm-b5-Zp0"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="backgroundImageView" destination="pNk-P8-Xv6" id="rcg-0R-qI7"/>
                         <outlet property="bubbleImageView" destination="q4l-57-kvp" id="5Yg-9z-7uF"/>
                         <outlet property="cellHeightConstraint" destination="I5T-z4-wcg" id="zIu-to-M3F"/>
                         <outlet property="cellSnapshotImageView" destination="JGh-Ag-1BS" id="H9g-zN-21o"/>
@@ -809,5 +818,6 @@
         <image name="collapse_icon" width="44" height="44"/>
         <image name="expand_icon" width="44" height="44"/>
         <image name="info_icon" width="44" height="44"/>
+        <image name="info_icon_selected" width="44" height="44"/>
     </resources>
 </document>
