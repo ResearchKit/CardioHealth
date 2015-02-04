@@ -16,7 +16,7 @@ static NSString*  const kAPCBasicTableViewCellIdentifier       = @"APCBasicTable
 static NSString*  const kAPCRightDetailTableViewCellIdentifier = @"APCRightDetailTableViewCell";
 static NSInteger  const kDataCountLimit                        = 1;
 
-@interface APHDashboardViewController ()<UIViewControllerTransitioningDelegate, APCPieGraphViewDatasource, APHDashboardWalkTestTableViewCellDelegate>
+@interface APHDashboardViewController ()<APCPieGraphViewDatasource>
 
 @property (nonatomic)           NSInteger           dataCount;
 @property (nonatomic, strong)   NSArray*            allocationDataset;
@@ -25,6 +25,7 @@ static NSInteger  const kDataCountLimit                        = 1;
 @property (nonatomic, strong)   NSMutableArray*     rowItemsOrder;
 @property (nonatomic, strong)   NSDateFormatter*    dateFormatter;
 @property (nonatomic, strong)   APCPresentAnimator* presentAnimator;
+@property (nonatomic, strong)   APCFadeAnimator*    fadeAnimator;
 
 @end
 
@@ -54,6 +55,7 @@ static NSInteger  const kDataCountLimit                        = 1;
         self.title = NSLocalizedString(@"Dashboard", @"Dashboard");
         
         _presentAnimator = [APCPresentAnimator new];
+        _fadeAnimator = [APCFadeAnimator new];
         _dateFormatter = [NSDateFormatter new];
     }
     
@@ -237,6 +239,7 @@ static NSInteger  const kDataCountLimit                        = 1;
                     item.identifier = kAPHDashboardWalkTestTableViewCellIdentifier;
                     
                     /* Placeholder values.-- */
+                    item.info = NSLocalizedString(@"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", @"");
                     item.distanceWalked = 2100;
                     item.peakHeartRate = 110;
                     item.finalHeartRate = 86;
@@ -297,7 +300,7 @@ static NSInteger  const kDataCountLimit                        = 1;
         APHDashboardWalkTestTableViewCell *walkingTestCell = (APHDashboardWalkTestTableViewCell *)cell;
         
         walkingTestCell.textLabel.text = @"";
-        walkingTestCell.titleLabel.text = walkingTestItem.caption;
+        walkingTestCell.title = walkingTestItem.caption;
         walkingTestCell.distanceLabel.text = [NSString stringWithFormat:@"Distance Walked: %ld ft", (long)walkingTestItem.distanceWalked];
         walkingTestCell.peakHeartRateLabel.text = [NSString stringWithFormat:@"Peak Heart Rate: %ld bpm", (long)walkingTestItem.peakHeartRate];
         walkingTestCell.finalHeartRateLabel.text = [NSString stringWithFormat:@"Final Heart Rate: %ld bpm", (long)walkingTestItem.finalHeartRate];
@@ -306,6 +309,7 @@ static NSInteger  const kDataCountLimit                        = 1;
         self.dateFormatter.dateFormat = @"MMM. d";
         walkingTestCell.lastPerformedDateLabel.text = [NSString stringWithFormat:@"Last performed %@", [self.dateFormatter stringFromDate:walkingTestItem.lastPerformedDate]];
         walkingTestCell.tintColor = walkingTestItem.tintColor;
+        walkingTestCell.delegate = self;
     }
     
     return cell;
@@ -351,15 +355,34 @@ static NSInteger  const kDataCountLimit                        = 1;
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
                                                                   presentingController:(UIViewController *)presenting
-                                                                      sourceController:(UIViewController *)source {
-    self.presentAnimator.presenting = YES;
-    return self.presentAnimator;
+                                                                      sourceController:(UIViewController *)source
+{
+    id<UIViewControllerAnimatedTransitioning> animationController;
+    
+    if ([presented isKindOfClass:[APCLineGraphViewController class]]) {
+        animationController = self.presentAnimator;
+        self.presentAnimator.presenting = YES;
+    } else if ([presented isKindOfClass:[APCDashboardMoreInfoViewController class]]){
+        animationController = self.fadeAnimator;
+        self.fadeAnimator.presenting = YES;
+    }
+    
+    return animationController;
 }
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
     
-    self.presentAnimator.presenting = NO;
-    return self.presentAnimator;
+    id<UIViewControllerAnimatedTransitioning> animationController;
+    
+    if ([dismissed isKindOfClass:[APCLineGraphViewController class]]) {
+        animationController = self.presentAnimator;
+        self.presentAnimator.presenting = NO;
+    } else if ([dismissed isKindOfClass:[APCDashboardMoreInfoViewController class]]){
+        animationController = self.fadeAnimator;
+        self.fadeAnimator.presenting = NO;
+    }
+    
+    return animationController;
 }
 
 #pragma mark - Pie Graph View delegates
@@ -382,13 +405,6 @@ static NSInteger  const kDataCountLimit                        = 1;
 - (CGFloat)pieGraphView:(APCPieGraphView *)pieGraphView valueForSegmentAtIndex:(NSInteger)index
 {
     return [[[self.allocationDataset valueForKey:kSegmentSumKey] objectAtIndex:index] floatValue];
-}
-
-#pragma mark - APHDashboardWalkTestTableViewCellDelegate methods
-
-- (void)dashboardWalkTestTableViewCellDidTapExpand:(APHDashboardWalkTestTableViewCell *)cell
-{
-    //Show details of Walking Test
 }
 
 @end
