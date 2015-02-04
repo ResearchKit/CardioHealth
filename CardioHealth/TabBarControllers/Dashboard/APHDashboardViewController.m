@@ -225,6 +225,9 @@ static NSInteger  const kDataCountLimit                        = 1;
                     item.tintColor = [UIColor appTertiaryGreenColor];
                     item.editable = YES;
                     
+                    /* Placeholder values.-- */
+                    item.info = NSLocalizedString(@"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", @"");
+                    
                     APCTableViewRow *row = [APCTableViewRow new];
                     row.item = item;
                     row.itemType = rowType;
@@ -284,7 +287,7 @@ static NSInteger  const kDataCountLimit                        = 1;
         
         pieGraphCell.pieGraphView.datasource = self;
         pieGraphCell.textLabel.text = @"";
-        pieGraphCell.titleLabel.text = fitnessItem.caption;
+        pieGraphCell.title = fitnessItem.caption;
         pieGraphCell.tintColor = fitnessItem.tintColor;
         pieGraphCell.pieGraphView.shouldAnimateLegend = NO;
         
@@ -292,6 +295,8 @@ static NSInteger  const kDataCountLimit                        = 1;
         if (self.dataCount < kDataCountLimit) {
             [pieGraphCell.pieGraphView setNeedsLayout];
         }
+        
+        pieGraphCell.delegate = self;
         
         
     } else if ([dashboardItem isKindOfClass:[APHTableViewDashboardWalkingTestItem class]]){
