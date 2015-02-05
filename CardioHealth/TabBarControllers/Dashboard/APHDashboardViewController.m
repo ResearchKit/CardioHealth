@@ -188,7 +188,7 @@ static NSInteger  const kDataCountLimit                        = 1;
                     item.editable = YES;
                     item.tintColor = [UIColor appTertiaryPurpleColor];
                     
-                    /* Placeholder values.-- */
+                    #warning Replace Placeholder Values - APPLE-1576
                     item.info = NSLocalizedString(@"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", @"");
                     
                     APCTableViewRow *row = [APCTableViewRow new];
@@ -209,7 +209,7 @@ static NSInteger  const kDataCountLimit                        = 1;
                     item.editable = YES;
                     item.tintColor = [UIColor appTertiaryYellowColor];
                     
-                    /* Placeholder values.-- */
+                    #warning Replace Placeholder Values - APPLE-1576
                     item.info = NSLocalizedString(@"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", @"");
                     
                     APCTableViewRow *row = [APCTableViewRow new];
@@ -227,7 +227,7 @@ static NSInteger  const kDataCountLimit                        = 1;
                     item.tintColor = [UIColor appTertiaryGreenColor];
                     item.editable = YES;
                     
-                    /* Placeholder values.-- */
+                    #warning Replace Placeholder Values - APPLE-1576
                     item.info = NSLocalizedString(@"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", @"");
                     
                     APCTableViewRow *row = [APCTableViewRow new];
@@ -243,7 +243,7 @@ static NSInteger  const kDataCountLimit                        = 1;
                     item.caption = NSLocalizedString(@"6-minute Walking Test", @"");
                     item.identifier = kAPHDashboardWalkTestTableViewCellIdentifier;
                     
-                    /* Placeholder values.-- */
+                    #warning Replace Placeholder Values - APPLE-1576
                     item.info = NSLocalizedString(@"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", @"");
                     item.distanceWalked = 2100;
                     item.peakHeartRate = 110;
