@@ -7,20 +7,9 @@
  
 @import APCAppCore;
 
+#import "APHTableViewItem.h"
+
 @interface APHDashboardViewController : APCDashboardViewController
 
-
-@end
-
-@interface APHTableViewDashboardFitnessControlItem : APCTableViewDashboardItem
-
-@end
-
-@interface APHTableViewDashboardWalkingTestItem : APCTableViewDashboardItem
-
-@property (nonatomic) NSInteger distanceWalked;
-@property (nonatomic) NSInteger peakHeartRate;
-@property (nonatomic) NSInteger finalHeartRate;
-@property (nonatomic, strong) NSDate *lastPerformedDate;
 
 @end
