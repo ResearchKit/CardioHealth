@@ -376,7 +376,7 @@ static CGFloat    const kMetersToYardConversion                 = 1.093f;
         
         walkingTestCell.textLabel.text = @"";
         walkingTestCell.title = walkingTestItem.caption;
-        walkingTestCell.distanceLabel.text = [NSString stringWithFormat:@"Distance Walked: %ld ft", (long)walkingTestItem.distanceWalked];
+        walkingTestCell.distanceLabel.text = [NSString stringWithFormat:@"Distance Walked: %ld yd", (long)walkingTestItem.distanceWalked];
         walkingTestCell.peakHeartRateLabel.text = [NSString stringWithFormat:@"Peak Heart Rate: %ld bpm", (long)walkingTestItem.peakHeartRate];
         walkingTestCell.finalHeartRateLabel.text = [NSString stringWithFormat:@"Final Heart Rate: %ld bpm", (long)walkingTestItem.finalHeartRate];
         
