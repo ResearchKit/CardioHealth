@@ -22,7 +22,7 @@ static NSString*  const kFitTestpeakHeartRateDataSourceKey      = @"peakHeartRat
 static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRate";
 static CGFloat    const kMetersToYardConversion                 = 1.093f;
 
-@interface APHDashboardViewController ()<UIViewControllerTransitioningDelegate, APCPieGraphViewDatasource, APHDashboardWalkTestTableViewCellDelegate>
+@interface APHDashboardViewController ()<APCPieGraphViewDatasource>
 
 @property (nonatomic)           NSInteger           dataCount;
 @property (nonatomic, strong)   NSArray*            allocationDataset;
@@ -30,7 +30,6 @@ static CGFloat    const kMetersToYardConversion                 = 1.093f;
 @property (nonatomic, strong)   APCScoring*         heartRateScoring;
 @property (nonatomic, strong)   NSMutableArray*     rowItemsOrder;
 @property (nonatomic, strong)   NSDateFormatter*    dateFormatter;
-@property (nonatomic, strong)   APCPresentAnimator* presentAnimator;
 
 @end
 
@@ -59,7 +58,6 @@ static CGFloat    const kMetersToYardConversion                 = 1.093f;
         
         self.title = NSLocalizedString(@"Dashboard", @"Dashboard");
         
-        _presentAnimator = [APCPresentAnimator new];
         _dateFormatter = [NSDateFormatter new];
     }
     
@@ -196,6 +194,9 @@ static CGFloat    const kMetersToYardConversion                 = 1.093f;
                     item.editable = YES;
                     item.tintColor = [UIColor appTertiaryPurpleColor];
                     
+                    #warning Replace Placeholder Values - APPLE-1576
+                    item.info = NSLocalizedString(@"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", @"");
+                    
                     APCTableViewRow *row = [APCTableViewRow new];
                     row.item = item;
                     row.itemType = rowType;
@@ -214,6 +215,9 @@ static CGFloat    const kMetersToYardConversion                 = 1.093f;
                     item.editable = YES;
                     item.tintColor = [UIColor appTertiaryYellowColor];
                     
+                    #warning Replace Placeholder Values - APPLE-1576
+                    item.info = NSLocalizedString(@"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", @"");
+                    
                     APCTableViewRow *row = [APCTableViewRow new];
                     row.item = item;
                     row.itemType = rowType;
@@ -228,6 +232,9 @@ static CGFloat    const kMetersToYardConversion                 = 1.093f;
                     item.identifier = kAPCDashboardPieGraphTableViewCellIdentifier;
                     item.tintColor = [UIColor appTertiaryGreenColor];
                     item.editable = YES;
+                    
+                    #warning Replace Placeholder Values - APPLE-1576
+                    item.info = NSLocalizedString(@"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", @"");
                     
                     APCTableViewRow *row = [APCTableViewRow new];
                     row.item = item;
@@ -350,7 +357,7 @@ static CGFloat    const kMetersToYardConversion                 = 1.093f;
         
         pieGraphCell.pieGraphView.datasource = self;
         pieGraphCell.textLabel.text = @"";
-        pieGraphCell.titleLabel.text = fitnessItem.caption;
+        pieGraphCell.title = fitnessItem.caption;
         pieGraphCell.tintColor = fitnessItem.tintColor;
         pieGraphCell.pieGraphView.shouldAnimateLegend = NO;
         
@@ -359,6 +366,8 @@ static CGFloat    const kMetersToYardConversion                 = 1.093f;
             [pieGraphCell.pieGraphView setNeedsLayout];
         }
         
+        pieGraphCell.delegate = self;
+        
         
     } else if ([dashboardItem isKindOfClass:[APHTableViewDashboardWalkingTestItem class]]){
         APHTableViewDashboardWalkingTestItem *walkingTestItem = (APHTableViewDashboardWalkingTestItem *)dashboardItem;
@@ -366,7 +375,7 @@ static CGFloat    const kMetersToYardConversion                 = 1.093f;
         APHDashboardWalkTestTableViewCell *walkingTestCell = (APHDashboardWalkTestTableViewCell *)cell;
         
         walkingTestCell.textLabel.text = @"";
-        walkingTestCell.titleLabel.text = walkingTestItem.caption;
+        walkingTestCell.title = walkingTestItem.caption;
         walkingTestCell.distanceLabel.text = [NSString stringWithFormat:@"Distance Walked: %ld ft", (long)walkingTestItem.distanceWalked];
         walkingTestCell.peakHeartRateLabel.text = [NSString stringWithFormat:@"Peak Heart Rate: %ld bpm", (long)walkingTestItem.peakHeartRate];
         walkingTestCell.finalHeartRateLabel.text = [NSString stringWithFormat:@"Final Heart Rate: %ld bpm", (long)walkingTestItem.finalHeartRate];
@@ -375,6 +384,7 @@ static CGFloat    const kMetersToYardConversion                 = 1.093f;
         self.dateFormatter.dateFormat = @"MMM. d";
         walkingTestCell.lastPerformedDateLabel.text = [NSString stringWithFormat:@"Last performed %@", [self.dateFormatter stringFromDate:walkingTestItem.lastPerformedDate]];
         walkingTestCell.tintColor = walkingTestItem.tintColor;
+        walkingTestCell.delegate = self;
     }
     
     return cell;
@@ -400,37 +410,6 @@ static CGFloat    const kMetersToYardConversion                 = 1.093f;
     
 }
 
-- (void)dashboardGraphViewCellDidTapExpandForCell:(APCDashboardLineGraphTableViewCell *)cell
-{
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    
-    APCTableViewDashboardGraphItem *graphItem = (APCTableViewDashboardGraphItem *)[self itemForIndexPath:indexPath];
-    
-    CGRect initialFrame = [cell convertRect:cell.bounds toView:self.view.window];
-    self.presentAnimator.initialFrame = initialFrame;
-
-    APCLineGraphViewController *graphViewController = [[UIStoryboard storyboardWithName:@"APHDashboard" bundle:nil] instantiateViewControllerWithIdentifier:@"GraphVC"];
-    graphViewController.graphItem = graphItem;
-//    graphViewController.transitioningDelegate = self;
-//    graphViewController.modalPresentationStyle = UIModalPresentationCustom;
-    [self.navigationController presentViewController:graphViewController animated:YES completion:nil];
-}
-
-#pragma mark - UIViewControllerTransitioningDelegate methods
-
-- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
-                                                                  presentingController:(UIViewController *)presenting
-                                                                      sourceController:(UIViewController *)source {
-    self.presentAnimator.presenting = YES;
-    return self.presentAnimator;
-}
-
-- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
-    
-    self.presentAnimator.presenting = NO;
-    return self.presentAnimator;
-}
-
 #pragma mark - Pie Graph View delegates
 
 -(NSInteger)numberOfSegmentsInPieGraphView
@@ -452,21 +431,6 @@ static CGFloat    const kMetersToYardConversion                 = 1.093f;
 {
     return [[[self.allocationDataset valueForKey:kSegmentSumKey] objectAtIndex:index] floatValue];
 }
-
-#pragma mark - APHDashboardWalkTestTableViewCellDelegate methods
-
-- (void)dashboardWalkTestTableViewCellDidTapExpand:(APHDashboardWalkTestTableViewCell *)cell
-{
-    //Show details of Walking Test
-}
-
-@end
-
-@implementation APHTableViewDashboardFitnessControlItem
-
-@end
-
-@implementation APHTableViewDashboardWalkingTestItem
 
 @end
 
