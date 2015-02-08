@@ -20,6 +20,7 @@ static NSString*  const kAPCTaskAttributeUpdatedAt              = @"updatedAt";
 static NSString*  const kFitTestTotalDistDataSourceKey          = @"totalDistance";
 static NSString*  const kFitTestpeakHeartRateDataSourceKey      = @"peakHeartRate";
 static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRate";
+static CGFloat    const kMetersToYardConversion                 = 1.093f;
 
 @interface APHDashboardViewController ()<UIViewControllerTransitioningDelegate, APCPieGraphViewDatasource, APHDashboardWalkTestTableViewCellDelegate>
 
@@ -282,11 +283,34 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
                         APCLogError2(error);
                     }
 
-#warning Distance is in yards at this point, however, 'ft' is being appended instead. Which should it be?
-                    item.distanceWalked     = [[result objectForKey:kFitTestTotalDistDataSourceKey]     integerValue];
-                    item.peakHeartRate      = [[result objectForKey:kFitTestpeakHeartRateDataSourceKey] integerValue];
-                    item.finalHeartRate     = [[result objectForKey:kFitTestlastHeartRateDataSourceKey] integerValue];
-                    item.lastPerformedDate  = apcResult.updatedAt;
+                    float yards;
+
+                    if ([result objectForKey:kFitTestTotalDistDataSourceKey]) {
+                        yards = [[result objectForKey:kFitTestTotalDistDataSourceKey] integerValue] * kMetersToYardConversion;
+                    }
+                    
+                    NSInteger peakHeartRate;
+                    
+                    if ([result objectForKey:kFitTestpeakHeartRateDataSourceKey]) {
+                        peakHeartRate = [[result objectForKey:kFitTestpeakHeartRateDataSourceKey] integerValue];
+                    }
+                    
+                    NSInteger finalHeartRate;
+
+                    if ([result objectForKey:kFitTestlastHeartRateDataSourceKey]) {
+                        finalHeartRate = [[result objectForKey:kFitTestpeakHeartRateDataSourceKey] integerValue];
+                    }
+                    
+                    NSDate *completionDate = nil;
+                    
+                    if (apcResult.updatedAt) {
+                        completionDate = apcResult.updatedAt;
+                    }
+                    
+                    item.distanceWalked     = yards;
+                    item.peakHeartRate      = peakHeartRate;
+                    item.finalHeartRate     = finalHeartRate;
+                    item.lastPerformedDate  = completionDate;
                     
                     item.tintColor = [UIColor appTertiaryRedColor];
                     item.editable = YES;
