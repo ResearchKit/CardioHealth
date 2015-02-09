@@ -242,7 +242,7 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
 - (NSArray *)buildSegmentArrayForData:(NSDictionary *)data
 {
     NSMutableArray *allocationData = [NSMutableArray new];
-    NSArray *segments = @[self.segmentSleep, self.segmentInactive, self.segmentSedentary, self.segmentModerate, self.segmentVigorous];
+    NSArray *segments = @[self.segmentSleep, self.segmentSedentary, self.segmentInactive, self.segmentModerate, self.segmentVigorous];
     UIColor *segmentColor = nil;
     
     for (NSString *segmentId in segments) {

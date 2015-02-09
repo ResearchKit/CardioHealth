@@ -15,7 +15,6 @@
 static  NSString*       const   kStudyIdentifier                        = @"Cardiovascular";
 static  NSString*       const   kAppPrefix                              = @"cardiovascular";
 static  NSString*       const   kVideoShownKey                          = @"VideoShown";
-static  NSTimeInterval          kPassiveLocationDeferredUpdatesTimeout  = 1.0 * 60.0;
 
 @interface APHAppDelegate ()
 
@@ -105,12 +104,6 @@ static  NSTimeInterval          kPassiveLocationDeferredUpdatesTimeout  = 1.0 * 
 
 -(void)setUpCollectors
 {
-    self.dataSubstrate.passiveLocationTracking = [[APCPassiveLocationTracking alloc]
-                                                  initWithDeferredUpdatesTimeout:kPassiveLocationDeferredUpdatesTimeout
-                                                  andHomeLocationStatus:APCPassiveLocationTrackingHomeLocationAvailable];
-    
-    [self.dataSubstrate.passiveLocationTracking start];
-    
     //For the Seven Day Fitness Allocation
     NSDate *fitnessStartDate = [self checkSevenDayFitnessStartDate];
     if (fitnessStartDate) {
