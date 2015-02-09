@@ -68,7 +68,7 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
         [steps addObject:step];
     }
     
-    // Biographic and Demogrphic
+    // Biographic and Demographic
     {
         NSMutableArray *stepQuestions = [NSMutableArray array];
         

@@ -16,11 +16,6 @@ static  NSString*       const   kStudyIdentifier                        = @"Card
 static  NSString*       const   kAppPrefix                              = @"cardiovascular";
 static  NSString*       const   kVideoShownKey                          = @"VideoShown";
 
-/*
- Required by the commented-out code in -setupCollectors.
- */
-// static  NSTimeInterval          kPassiveLocationDeferredUpdatesTimeout  = 1.0 * 60.0;
-
 @interface APHAppDelegate ()
 
 @end
@@ -109,17 +104,6 @@ static  NSString*       const   kVideoShownKey                          = @"Vide
 
 -(void)setUpCollectors
 {
-
-	/*
-	 Note:  when you uncomment this, you'll also
-	 need to uncomment the kPassiveLocationDeferredUpdatesTimeout
-	 variable at the top of this file.
-	 */
-//    self.dataSubstrate.passiveLocationTracking = [[APCPassiveLocationTracking alloc]
-//                                                  initWithDeferredUpdatesTimeout:kPassiveLocationDeferredUpdatesTimeout
-//                                                  andHomeLocationStatus:APCPassiveLocationTrackingHomeLocationAvailable];
-//    
-//    [self.dataSubstrate.passiveLocationTracking start];
 
     //For the Seven Day Fitness Allocation
     NSDate *fitnessStartDate = [self checkSevenDayFitnessStartDate];
