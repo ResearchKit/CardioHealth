@@ -281,58 +281,6 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
     
 }
 
-- (BOOL)questionStepResultFieldsAreComplete:(NSString *)stepIdentifier {
-
-   BOOL noPass = NO;
-
-    RKSTStepResult *stepResult = [self.result stepResultForStepIdentifier:stepIdentifier];
-    
-    NSArray *questionsFields = stepResult.results;
-    
-    for (RKSTQuestionResult *questionResult in questionsFields) {
-        
-        if ([questionResult isKindOfClass:[RKSTTextQuestionResult class]]) {
-            
-            RKSTChoiceQuestionResult *textResult = (RKSTChoiceQuestionResult *)questionResult;
-            if ([textResult.choiceAnswers firstObject] == nil) {
-                noPass = YES;
-                
-                break;
-            }
-            
-        } else if ([questionResult isKindOfClass:[RKSTNumericQuestionResult class]]) {
-         
-            RKSTNumericQuestionResult *numericResult = (RKSTNumericQuestionResult *)questionResult;
-            
-            if (numericResult.numericAnswer == nil) {
-                noPass = YES;
-                
-                break;
-            }
-        } else if ([questionResult isKindOfClass:[RKSTDateQuestionResult class]]) {
-            
-            RKSTDateQuestionResult *dateQuestionResult = (RKSTDateQuestionResult *)questionResult;
-            
-            if (dateQuestionResult.startDate == nil) {
-                noPass = YES;
-                
-                break;
-            }
-        } else if ([questionResult isKindOfClass:[RKSTBooleanQuestionResult class]]) {
-            
-            RKSTBooleanQuestionResult *booleanQuestionResult = (RKSTBooleanQuestionResult *)questionResult;
-            
-            if (booleanQuestionResult.booleanAnswer == nil) {
-                noPass = YES;
-                
-                break;
-            }
-        }
-    }
-    
-    return !noPass ? YES : NO;
-}
-
 
 /*********************************************************************************/
 #pragma  mark  - TaskViewController delegates
@@ -375,41 +323,6 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
     self.result.results = questionResultsForSurvey;
     
     [super taskViewControllerDidComplete:taskViewController];
-}
-
-
-- (BOOL)taskViewController:(RKSTTaskViewController *)taskViewController shouldPresentStep:(RKSTStep *)step
-{
-    BOOL shouldShowStep = YES;
-    
-    if ([step.identifier isEqualToString:@"HeartAgeResult"]) {
-        
-        shouldShowStep = [self questionStepResultFieldsAreComplete:self.currentStepViewController.step.identifier];
-        
-        if (!shouldShowStep) {
-            
-            [self showAlert:NSLocalizedString(@"Missing Information", @"Missing Information") andMessage:NSLocalizedString(@"An answer is required.", @"An answer is required.")];
-            
-        } else if (!self.shouldShowResultsStep) {
-            [self showAlert:NSLocalizedString(@"There are missing answers from the previous step.", @"There are missing answers from the previous step.") andMessage:NSLocalizedString(@"All fields are required.", @"All fields are required.")];
-            
-            //Set shouldShowStep to NO so we do not show the next step.
-            shouldShowStep = self.shouldShowResultsStep;
-        } else {
-            taskViewController.navigationBar.topItem.title = NSLocalizedString(@"Activity Complete", @"Activity Complete");
-        }
-
-    } else if (![step.identifier isEqualToString:kHeartAgeIntroduction] && ![step.identifier isEqualToString:kHeartAgeFormStepBiographicAndDemographic]) {
-        
-        shouldShowStep = [self questionStepResultFieldsAreComplete:self.currentStepViewController.step.identifier];
-        
-        if (!shouldShowStep) {
-            
-            [self showAlert:NSLocalizedString(@"Missing Information", @"Missing Information") andMessage:NSLocalizedString(@"An answer is required.", @"An answer is required.")];
-        }
-    }
-
-    return shouldShowStep;
 }
 
 - (RKSTStepViewController *)taskViewController:(RKSTTaskViewController *)taskViewController viewControllerForStep:(RKSTStep *)step
@@ -507,21 +420,6 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
     }
     
     return stepVC;
-}
-
-- (void)taskViewController:(RKSTTaskViewController *)taskViewController stepViewControllerWillAppear:(RKSTStepViewController *)stepViewController {
-    
-    self.shouldShowResultsStep = YES;
-    
-    if ([stepViewController.step.identifier isEqualToString:kHeartAgeFormStepMedicalHistory] ) {
-        
-        self.shouldShowResultsStep = [self questionStepResultFieldsAreComplete:kHeartAgeFormStepCholesterolHdlSystolic];
-        
-        if (!self.shouldShowResultsStep) {
-            
-            [self showAlert:NSLocalizedString(@"There are missing answers from the previous step.", @"There are missing answers from the previous step.") andMessage:NSLocalizedString(@"All fields are required.", @"All fields are required.")];
-        }
-    }
 }
 
 @end
