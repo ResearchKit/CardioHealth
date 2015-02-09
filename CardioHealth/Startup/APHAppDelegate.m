@@ -104,7 +104,6 @@ static  NSString*       const   kVideoShownKey                          = @"Vide
 
 -(void)setUpCollectors
 {
-
     //For the Seven Day Fitness Allocation
     NSDate *fitnessStartDate = [self checkSevenDayFitnessStartDate];
     if (fitnessStartDate) {
