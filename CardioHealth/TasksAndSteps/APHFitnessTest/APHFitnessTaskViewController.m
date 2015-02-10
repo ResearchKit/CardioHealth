@@ -8,8 +8,10 @@
 #import "APHFitnessTaskViewController.h"
 #import <CoreLocation/CoreLocation.h>
 
-static NSInteger const  kRestDuration              = 3.0 * 60.0;
-static NSInteger const  kWalkDuration              = 6.0 * 60.0;
+//static NSInteger const  kRestDuration              = 3.0 * 60.0;
+//static NSInteger const  kWalkDuration              = 6.0 * 60.0;
+static NSInteger const  kRestDuration              = 3.0;// * 60.0;
+static NSInteger const  kWalkDuration              = 60.0;// * 60.0;
 static NSString* const  kFitnessTestIdentifier     = @"6-Minute Walk Test";
 #warning The intended use description is using placeholder text.
 static NSString* const  kIntendedUseDescription    = @"Once you tap Get Started begin walking at your fastest possible pace. If you have a wearable device linked to your phone that can track your heart rate, please put it on. After the test is finished, your results will be analyzed and available on the dashboard.";
@@ -25,6 +27,7 @@ static NSString* const  kHeartRateFileNameComp     = @"HKQuantityTypeIdentifierH
 static NSString* const  kLocationFileNameComp      = @"location";
 static NSString* const  kFileResultsKey            = @"items";
 static NSString* const  kHeartRateValueKey         = @"value";
+static NSString* const  kCoordinate                 = @"coordinate";
 static NSString* const  kLongitude                 = @"longitude";
 static NSString* const  kLatitude                  = @"latitude";
 
@@ -127,16 +130,17 @@ static NSString* const kLastHeartRateForDashboard  = @"lastHeartRate";
     CLLocationDistance totalDistance    = 0;
     
     for (NSDictionary *location in locations) {
-        float               lon = [[location objectForKey:kLongitude] floatValue];
-        float               lat = [[location objectForKey:kLatitude] floatValue];
+        float               lon = [[[location objectForKey:kCoordinate] objectForKey:kLongitude] floatValue];
+        float               lat = [[[location objectForKey:kCoordinate] objectForKey:kLatitude] floatValue];
         
         CLLocation *currentCoor = [[CLLocation alloc] initWithLatitude:lat longitude:lon];
         
-        if(!previousCoor) {
-            previousCoor        = currentCoor;
-        } else {
+        if(previousCoor) {
             totalDistance       += [currentCoor distanceFromLocation:previousCoor];
+            previousCoor        = currentCoor;
         }
+        
+        previousCoor        = currentCoor;
     }
 
     return @{@"totalDistance" : @(totalDistance)};
