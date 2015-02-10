@@ -164,6 +164,8 @@ static  NSString*       const   kVideoShownKey                          = @"Vide
     RKSTConsentSignature *participantSig = [RKSTConsentSignature signatureForPersonWithTitle:@"Participant"
                                                                             dateFormatString:nil
                                                                                   identifier:@"participant"];
+    participantSig.requiresSignatureImage = NO;
+    
     [consent addSignature:participantSig];
     
     
@@ -284,6 +286,7 @@ static  NSString*       const   kVideoShownKey                          = @"Vide
         reviewStep = [[RKSTConsentReviewStep alloc] initWithIdentifier:@"reviewStep"
                                                              signature:participantSig
                                                             inDocument:consent];
+
         reviewStep.reasonForConsent = @"By agreeing you are consenting to take part in this research study.";
         
         [consentSteps addObject:reviewStep];
