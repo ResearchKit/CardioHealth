@@ -11,15 +11,19 @@
 #import "APHFitnessAllocation.h"
 #import "APHAppDelegate.h"
 #import "APHDashboardWalkTestTableViewCell.h"
+#import "APHWalkTestViewController.h"
+#import "APHWalkingTestResults.h"
 
 static NSString*  const kAPCBasicTableViewCellIdentifier        = @"APCBasicTableViewCell";
 static NSString*  const kAPCRightDetailTableViewCellIdentifier  = @"APCRightDetailTableViewCell";
 static NSInteger  const kDataCountLimit                         = 1;
+
 static NSString*  const kFitnessTestTaskId                      = @"APHFitnessTest-00000000-1111-1111-1111-F810BE28D995";
 static NSString*  const kAPCTaskAttributeUpdatedAt              = @"updatedAt";
 static NSString*  const kFitTestTotalDistDataSourceKey          = @"totalDistance";
 static NSString*  const kFitTestpeakHeartRateDataSourceKey      = @"peakHeartRate";
 static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRate";
+
 static CGFloat    const kMetersToYardConversion                 = 1.093f;
 
 @interface APHDashboardViewController ()<APCPieGraphViewDatasource>
@@ -164,14 +168,12 @@ static CGFloat    const kMetersToYardConversion                 = 1.093f;
             [rowItems addObject:row];
         }
         
-        
         APCTableViewSection *section = [APCTableViewSection new];
         NSDate *dateToday = [NSDate date];
         
         self.dateFormatter.dateFormat = @"MMMM d";
         
         section.sectionTitle = [NSString stringWithFormat:@"%@, %@", NSLocalizedString(@"Today", @""), [self.dateFormatter stringFromDate:dateToday]];
-        section.rows = [NSArray arrayWithArray:rowItems];
         section.rows = [NSArray arrayWithArray:rowItems];
         [self.items addObject:section];
     }
@@ -305,7 +307,7 @@ static CGFloat    const kMetersToYardConversion                 = 1.093f;
                     NSInteger finalHeartRate;
 
                     if ([result objectForKey:kFitTestlastHeartRateDataSourceKey]) {
-                        finalHeartRate = [[result objectForKey:kFitTestpeakHeartRateDataSourceKey] integerValue];
+                        finalHeartRate = [[result objectForKey:kFitTestlastHeartRateDataSourceKey] integerValue];
                     }
                     
                     NSDate *completionDate = nil;
@@ -317,7 +319,7 @@ static CGFloat    const kMetersToYardConversion                 = 1.093f;
                     item.distanceWalked     = yards;
                     item.peakHeartRate      = peakHeartRate;
                     item.finalHeartRate     = finalHeartRate;
-                    item.lastPerformedDate  = completionDate;
+                    item.activityDate  = completionDate;
                     
                     item.tintColor = [UIColor appTertiaryRedColor];
                     item.editable = YES;
@@ -382,7 +384,7 @@ static CGFloat    const kMetersToYardConversion                 = 1.093f;
         
         
         self.dateFormatter.dateFormat = @"MMM. d";
-        walkingTestCell.lastPerformedDateLabel.text = [NSString stringWithFormat:@"Last performed %@", [self.dateFormatter stringFromDate:walkingTestItem.lastPerformedDate]];
+        walkingTestCell.lastPerformedDateLabel.text = [NSString stringWithFormat:@"Last performed %@", [self.dateFormatter stringFromDate:walkingTestItem.activityDate]];
         walkingTestCell.tintColor = walkingTestItem.tintColor;
         walkingTestCell.delegate = self;
     }
@@ -432,5 +434,24 @@ static CGFloat    const kMetersToYardConversion                 = 1.093f;
     return [[[self.allocationDataset valueForKey:kSegmentSumKey] objectAtIndex:index] floatValue];
 }
 
+#pragma mark - APCDashboardTableViewCellDelegate methods
+
+- (void)dashboardTableViewCellDidTapExpand:(APCDashboardTableViewCell *)cell
+{
+    [super dashboardTableViewCellDidTapExpand:cell];
+    
+    if ([cell isKindOfClass:[APHDashboardWalkTestTableViewCell class]]) {
+       
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+        
+        APHTableViewDashboardWalkingTestItem *item = (APHTableViewDashboardWalkingTestItem *)[self itemForIndexPath:indexPath];
+        
+        APHWalkTestViewController *walkTestViewController = [[UIStoryboard storyboardWithName:@"APHDashboard" bundle:nil] instantiateViewControllerWithIdentifier:@"APHWalkTestViewController"];
+        walkTestViewController.tintColor = item.tintColor;
+        
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:walkTestViewController];
+        [self.navigationController presentViewController:navController animated:YES completion:nil];
+    }
+}
 @end
 
