@@ -101,7 +101,18 @@ static  NSString*       const   kVideoShownKey                          = @"Vide
 /*********************************************************************************/
 #pragma mark - Datasubstrate Delegate Methods
 /*********************************************************************************/
-
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    [super applicationDidBecomeActive:application];
+    
+    //For the Seven Day Fitness Allocation
+    NSDate *fitnessStartDate = [self checkSevenDayFitnessStartDate];
+    if (fitnessStartDate) {
+        self.sevenDayFitnessAllocationData = [[APHFitnessAllocation alloc] initWithAllocationStartDate:fitnessStartDate];
+        
+        [self.sevenDayFitnessAllocationData startDataCollection];
+    }
+    
+}
 -(void)setUpCollectors
 {
     //For the Seven Day Fitness Allocation
