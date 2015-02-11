@@ -7,6 +7,8 @@
  
 #import <APCAppCore/APCAppCore.h>
 
-@interface APHHeartAgeIntroStepViewController : APCStepViewController
+@interface APHHeartAgeIntroStepViewController : UIViewController
+
+@property (nonatomic, strong) NSString *taskIdentifier;
 
 @end
