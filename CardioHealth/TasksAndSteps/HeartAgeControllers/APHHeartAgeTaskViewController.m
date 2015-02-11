@@ -116,22 +116,9 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
     }
     
     {
-        NSMutableArray *stepQuestions = [NSMutableArray array];
-        RKSTFormStep *step = [[RKSTFormStep alloc] initWithIdentifier:kHeartAgeFormStepSmokingHistory
-                                                            title:nil
-                                                             text:NSLocalizedString(@"Smoking History",
-                                                                                    @"Smoking History")];
+        RKSTQuestionStep *step = [RKSTQuestionStep questionStepWithIdentifier:kHeartAgeFormStepSmokingHistory title:NSLocalizedString(@"Smoking History", @"Smoking History") answer:[RKSTBooleanAnswerFormat new]];
+
         step.optional = NO;
-        
-        {
-            RKSTFormItem *item = [[RKSTFormItem alloc] initWithIdentifier:kHeartAgeTestDataSmoke
-                                                                 text:NSLocalizedString(@"Do you smoke cigarettes?",
-                                                                                        @"Do you smoke cigarettes?")
-                                                         answerFormat:[RKSTBooleanAnswerFormat new]];
-            [stepQuestions addObject:item];
-        }
-        
-        [step setFormItems:stepQuestions];
         
         [steps addObject:step];
     }
