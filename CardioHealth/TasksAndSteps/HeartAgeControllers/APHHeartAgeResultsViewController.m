@@ -163,16 +163,6 @@ static NSString *kKludgeIdentifierForHeartAgeTaskB = @"APHHeartAgeB-7259AC18-D71
     return cell;
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-//{
-//    CGFloat headerHeight;
-//    
-//    headerHeight = tableView.sectionHeaderHeight;
-//    
-//    return 0;
-//}
-
-
 #pragma mark Cell Configurations
 
 - (APHHeartAgeTodaysActivitiesCell *)configureTodaysActivitiesCellAtIndexPath:(NSIndexPath *)indexPath
