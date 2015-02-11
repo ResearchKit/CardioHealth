@@ -10,7 +10,7 @@
 
 @interface APHWalkTestViewController : UITableViewController
 
-@property (nonatomic, strong) NSArray *items;
+@property (nonatomic, strong) NSArray *results;
 @property (nonatomic, strong) UIColor *tintColor;
 
 @end
