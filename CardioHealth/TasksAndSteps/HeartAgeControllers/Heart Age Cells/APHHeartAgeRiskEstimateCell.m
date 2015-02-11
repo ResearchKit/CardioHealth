@@ -97,6 +97,11 @@
     UIColor *sidebarColor = [APHTheme colorForRightCellBorder];
     [sidebarColor setFill];
     UIRectFill(sidebar);
+    
+    CGRect blockDivider = CGRectMake(0, 0, rect.size.width, 20.0);
+    UIColor *blockDivderColor = [UIColor appSecondaryColor4];
+    [blockDivderColor setFill];
+    UIRectFill(blockDivider);
 }
 
 @end
