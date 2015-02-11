@@ -34,4 +34,11 @@
     self.recommendationCellContent.text = _recommendationContent;
 }
 
+- (void)drawRect:(CGRect)rect {
+    CGRect blockDivider = CGRectMake(0, 0, rect.size.width, 20.0);
+    UIColor *blockDivderColor = [UIColor appSecondaryColor4];
+    [blockDivderColor setFill];
+    UIRectFill(blockDivider);
+}
+
 @end
