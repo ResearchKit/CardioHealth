@@ -133,7 +133,7 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
         
         {
             RKSTNumericAnswerFormat *format = [RKSTNumericAnswerFormat integerAnswerFormatWithUnit:@"mg/dl"];
-            format.minimum = @(0);
+            format.minimum = @(1);
             format.maximum = @(1000);
             
             RKSTFormItem *item = [[RKSTFormItem alloc] initWithIdentifier:kHeartAgeTestDataTotalCholesterol
@@ -145,8 +145,8 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
         
         {
             RKSTNumericAnswerFormat *format = [RKSTNumericAnswerFormat integerAnswerFormatWithUnit:@"mg/dl"];
-            format.minimum = @(0);
-            format.maximum = @(1000);
+            format.minimum = @(1);
+            format.maximum = @(250);
             
             RKSTFormItem *item = [[RKSTFormItem alloc] initWithIdentifier:kHeartAgeTestDataHDL
                                                                  text:NSLocalizedString(@"HDL Cholesterol", @"HDL Cholesterol")
@@ -158,6 +158,8 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
             RKSTHealthKitQuantityTypeAnswerFormat *format = [RKSTHealthKitQuantityTypeAnswerFormat answerFormatWithQuantityType:[HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierBloodPressureSystolic]
                                                                                                                            unit:[HKUnit unitFromString:@"mmHg"]
                                                                                                                           style:RKNumericAnswerStyleInteger];
+            
+            
             
             RKSTFormItem *item = [[RKSTFormItem alloc] initWithIdentifier:kHeartAgeTestDataSystolicBloodPressure
                                                                  text:NSLocalizedString(@"Systolic Blood Pressure",
