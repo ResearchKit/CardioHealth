@@ -7,7 +7,7 @@
  
 #import <APCAppCore/APCAppCore.h>
 
-@interface APHHeartAgeIntroStepViewController : UIViewController
+@interface APHHeartAgeLearnMoreViewController : UIViewController
 
 @property (nonatomic, strong) NSString *taskIdentifier;
 

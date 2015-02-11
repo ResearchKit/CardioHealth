@@ -8,7 +8,7 @@
 #import "APHHeartAgeTaskViewController.h"
 #import "APHHeartAgeAndRiskFactors.h"
 #import "APHHeartAgeResultsViewController.h"
-#import "APHHeartAgeIntroStepViewController.h"
+#import "APHHeartAgeLearnMoreViewController.h"
 
 static NSString *MainStudyIdentifier = @"com.cardiovascular.heartAgeTest";
 static NSString *kKludgeIdentifierForHeartAgeTaskB = @"APHHeartAgeB-7259AC18-D711-47A6-ADBD-6CFCECDED1DF";
@@ -430,10 +430,10 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
     
     if ([stepViewController.step.identifier isEqualToString:kHeartAgeIntroduction]) {
         
-        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"APHHeartAgeIntroStepViewController"
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"APHHeartAgeLearnMoreViewController"
                                                                  bundle:nil];
         
-        APHHeartAgeIntroStepViewController *controller = [mainStoryboard instantiateViewControllerWithIdentifier:@"APHHeartAgeIntroStepViewController"];
+        APHHeartAgeLearnMoreViewController *controller = [mainStoryboard instantiateViewControllerWithIdentifier:@"APHHeartAgeLearnMoreViewController"];
         
         controller.taskIdentifier = self.scheduledTask.task.taskID;
     

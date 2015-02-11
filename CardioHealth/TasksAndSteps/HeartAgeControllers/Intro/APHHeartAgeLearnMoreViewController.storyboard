@@ -5,10 +5,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Heart Age Intro Step View Controller-->
+        <!--Heart Age Learn More View Controller-->
         <scene sceneID="mkA-B8-ZFg">
             <objects>
-                <viewController storyboardIdentifier="APHHeartAgeIntroStepViewController" id="gNQ-yk-P1l" customClass="APHHeartAgeIntroStepViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="APHHeartAgeLearnMoreViewController" id="gNQ-yk-P1l" customClass="APHHeartAgeLearnMoreViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="vs9-XJ-bxJ"/>
                         <viewControllerLayoutGuide type="bottom" id="KEJ-u3-AWE"/>
