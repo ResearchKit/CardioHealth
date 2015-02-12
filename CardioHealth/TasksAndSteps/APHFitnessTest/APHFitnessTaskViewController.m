@@ -8,10 +8,8 @@
 #import "APHFitnessTaskViewController.h"
 #import <CoreLocation/CoreLocation.h>
 
-//static NSInteger const  kRestDuration              = 3.0 * 60.0;
-//static NSInteger const  kWalkDuration              = 6.0 * 60.0;
-static NSInteger const  kRestDuration              = 3.0;// * 60.0;
-static NSInteger const  kWalkDuration              = 10.0;// * 60.0;
+static NSInteger const  kRestDuration              = 3.0 * 60.0;
+static NSInteger const  kWalkDuration              = 6.0 * 60.0;
 static NSString* const  kFitnessTestIdentifier     = @"6-Minute Walk Test";
 
 static NSString* const  kIntroStep                 = @"instruction";
