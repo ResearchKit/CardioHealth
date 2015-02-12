@@ -15,11 +15,17 @@
 
 @end
 
+typedef NS_ENUM(NSUInteger, APHWalkingTestRowType) {
+    kAPHWalkingTestRowTypeDistanceWalked,
+    kAPHWalkingTestRowTypePeakHeartRate,
+    kAPHWalkingTestRowTypeFinalHeartRate,
+};
+
 @interface APHTableViewDashboardWalkingTestItem : APCTableViewDashboardItem
 
 @property (nonatomic) NSInteger distanceWalked;
 @property (nonatomic) NSInteger peakHeartRate;
 @property (nonatomic) NSInteger finalHeartRate;
-@property (nonatomic, strong) NSDate *lastPerformedDate;
+@property (nonatomic, strong) NSDate *activityDate;
 
 @end
