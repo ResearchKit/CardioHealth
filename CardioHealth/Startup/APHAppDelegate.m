@@ -8,6 +8,7 @@
 @import APCAppCore;
 #import "APHAppDelegate.h"
 #import "APHFitnessAllocation.h"
+#import <CoreMotion/CoreMotion.h>
 
 /*********************************************************************************/
 #pragma mark - Initializations Options
@@ -25,6 +26,7 @@ static  NSString*       const   kVideoShownKey                          = @"Vide
 - (void) setUpInitializationOptions
 {
     NSMutableDictionary * dictionary = [super defaultInitializationOptions];
+    dictionary = [self updateOptionsForNoM7Chip:dictionary];
     [dictionary addEntriesFromDictionary:@{
                                            kStudyIdentifierKey                  : kStudyIdentifier,
                                            kAppPrefixKey                        : kAppPrefix,
@@ -98,10 +100,28 @@ static  NSString*       const   kVideoShownKey                          = @"Vide
     return [[NSUserDefaults standardUserDefaults] boolForKey:kVideoShownKey];
 }
 
+- (NSMutableDictionary *) updateOptionsForNoM7Chip:(NSMutableDictionary *)initializationOptions {
+    if (![CMPedometer isStepCountingAvailable] || ![CMMotionActivityManager isActivityAvailable]) {
+        [initializationOptions setValue:@"APHTasksAndSchedules_NoM7" forKey:kTasksAndSchedulesJSONFileNameKey];
+    }
+    return initializationOptions;
+}
+
 /*********************************************************************************/
 #pragma mark - Datasubstrate Delegate Methods
 /*********************************************************************************/
-
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    [super applicationDidBecomeActive:application];
+    
+    //For the Seven Day Fitness Allocation
+    NSDate *fitnessStartDate = [self checkSevenDayFitnessStartDate];
+    if (fitnessStartDate) {
+        self.sevenDayFitnessAllocationData = [[APHFitnessAllocation alloc] initWithAllocationStartDate:fitnessStartDate];
+        
+        [self.sevenDayFitnessAllocationData startDataCollection];
+    }
+    
+}
 -(void)setUpCollectors
 {
     //For the Seven Day Fitness Allocation
@@ -153,6 +173,8 @@ static  NSString*       const   kVideoShownKey                          = @"Vide
     RKSTConsentSignature *participantSig = [RKSTConsentSignature signatureForPersonWithTitle:@"Participant"
                                                                             dateFormatString:nil
                                                                                   identifier:@"participant"];
+    participantSig.requiresSignatureImage = NO;
+    
     [consent addSignature:participantSig];
     
     
@@ -273,6 +295,7 @@ static  NSString*       const   kVideoShownKey                          = @"Vide
         reviewStep = [[RKSTConsentReviewStep alloc] initWithIdentifier:@"reviewStep"
                                                              signature:participantSig
                                                             inDocument:consent];
+
         reviewStep.reasonForConsent = @"By agreeing you are consenting to take part in this research study.";
         
         [consentSteps addObject:reviewStep];

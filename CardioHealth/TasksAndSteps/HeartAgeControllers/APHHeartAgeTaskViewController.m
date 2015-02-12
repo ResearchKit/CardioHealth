@@ -8,7 +8,7 @@
 #import "APHHeartAgeTaskViewController.h"
 #import "APHHeartAgeAndRiskFactors.h"
 #import "APHHeartAgeResultsViewController.h"
-#import "APHHeartAgeIntroStepViewController.h"
+#import "APHHeartAgeLearnMoreViewController.h"
 
 static NSString *MainStudyIdentifier = @"com.cardiovascular.heartAgeTest";
 static NSString *kKludgeIdentifierForHeartAgeTaskB = @"APHHeartAgeB-7259AC18-D711-47A6-ADBD-6CFCECDED1DF";
@@ -62,6 +62,8 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
         step.title = NSLocalizedString(@"Heart Age Test", @"Heart Age Test");
         step.text = NSLocalizedString(@"The following few details about you will be used to calculate your heart age.",
                                       @"Requesting user to provide information to calculate their heart age.");
+        
+
         step.detailText = nil;
         
         
@@ -114,22 +116,9 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
     }
     
     {
-        NSMutableArray *stepQuestions = [NSMutableArray array];
-        RKSTFormStep *step = [[RKSTFormStep alloc] initWithIdentifier:kHeartAgeFormStepSmokingHistory
-                                                            title:nil
-                                                             text:NSLocalizedString(@"Smoking History",
-                                                                                    @"Smoking History")];
+        RKSTQuestionStep *step = [RKSTQuestionStep questionStepWithIdentifier:kHeartAgeFormStepSmokingHistory title:NSLocalizedString(@"Smoking History", @"Smoking History") answer:[RKSTBooleanAnswerFormat new]];
+
         step.optional = NO;
-        
-        {
-            RKSTFormItem *item = [[RKSTFormItem alloc] initWithIdentifier:kHeartAgeTestDataSmoke
-                                                                 text:NSLocalizedString(@"Do you smoke cigarettes?",
-                                                                                        @"Do you smoke cigarettes?")
-                                                         answerFormat:[RKSTBooleanAnswerFormat new]];
-            [stepQuestions addObject:item];
-        }
-        
-        [step setFormItems:stepQuestions];
         
         [steps addObject:step];
     }
@@ -144,7 +133,7 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
         
         {
             RKSTNumericAnswerFormat *format = [RKSTNumericAnswerFormat integerAnswerFormatWithUnit:@"mg/dl"];
-            format.minimum = @(0);
+            format.minimum = @(1);
             format.maximum = @(1000);
             
             RKSTFormItem *item = [[RKSTFormItem alloc] initWithIdentifier:kHeartAgeTestDataTotalCholesterol
@@ -156,8 +145,8 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
         
         {
             RKSTNumericAnswerFormat *format = [RKSTNumericAnswerFormat integerAnswerFormatWithUnit:@"mg/dl"];
-            format.minimum = @(0);
-            format.maximum = @(1000);
+            format.minimum = @(1);
+            format.maximum = @(250);
             
             RKSTFormItem *item = [[RKSTFormItem alloc] initWithIdentifier:kHeartAgeTestDataHDL
                                                                  text:NSLocalizedString(@"HDL Cholesterol", @"HDL Cholesterol")
@@ -169,6 +158,8 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
             RKSTHealthKitQuantityTypeAnswerFormat *format = [RKSTHealthKitQuantityTypeAnswerFormat answerFormatWithQuantityType:[HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierBloodPressureSystolic]
                                                                                                                            unit:[HKUnit unitFromString:@"mmHg"]
                                                                                                                           style:RKNumericAnswerStyleInteger];
+            
+            
             
             RKSTFormItem *item = [[RKSTFormItem alloc] initWithIdentifier:kHeartAgeTestDataSystolicBloodPressure
                                                                  text:NSLocalizedString(@"Systolic Blood Pressure",
@@ -330,20 +321,7 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
     
     RKSTStepViewController *stepVC = nil;
     
-    if ([step.identifier isEqualToString:kHeartAgeIntroduction]) {
-                
-        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"APHHeartAgeIntroStepViewController"
-                                                                 bundle:nil];
-        
-        APCStepViewController *controller = [mainStoryboard instantiateViewControllerWithIdentifier:@"APHHeartAgeIntroStepViewController"];
-        
-        
-        controller.delegate = self;
-        controller.step = step;
-        
-        stepVC = controller;
-    
-    } else if ([step.identifier isEqualToString:kHeartAgeResult]) {
+ if ([step.identifier isEqualToString:kHeartAgeResult]) {
         
         NSMutableDictionary *surveyResultsDictionary = [NSMutableDictionary dictionary];
         
@@ -421,5 +399,38 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
     
     return stepVC;
 }
+
+
+- (BOOL)taskViewController:(RKSTTaskViewController *)taskViewController hasLearnMoreForStep:(RKSTStep *)step {
+    
+    BOOL hasLearnMore = NO;
+    
+    if ([step.identifier isEqualToString:kHeartAgeIntroduction])
+    {
+        hasLearnMore = YES;
+        
+    }
+    
+    return hasLearnMore;
+}
+
+- (void)taskViewController:(RKSTTaskViewController *)taskViewController learnMoreForStep:(RKSTStepViewController *)stepViewController {
+    
+    
+    if ([stepViewController.step.identifier isEqualToString:kHeartAgeIntroduction]) {
+        
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"APHHeartAgeLearnMoreViewController"
+                                                                 bundle:nil];
+        
+        APHHeartAgeLearnMoreViewController *controller = [mainStoryboard instantiateViewControllerWithIdentifier:@"APHHeartAgeLearnMoreViewController"];
+        
+        controller.taskIdentifier = self.scheduledTask.task.taskID;
+    
+        
+        [self presentViewController:controller animated:YES completion:nil];
+    
+    }
+}
+
 
 @end

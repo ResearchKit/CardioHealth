@@ -13,8 +13,6 @@
 static NSInteger const  kRestDuration              = 3.0;// * 60.0;
 static NSInteger const  kWalkDuration              = 10.0;// * 60.0;
 static NSString* const  kFitnessTestIdentifier     = @"6-Minute Walk Test";
-#warning The intended use description is using placeholder text.
-static NSString* const  kIntendedUseDescription    = @"Once you tap Get Started begin walking at your fastest possible pace. If you have a wearable device linked to your phone that can track your heart rate, please put it on. After the test is finished, your results will be analyzed and available on the dashboard.";
 
 static NSString* const  kIntroStep                 = @"instruction";
 static NSString* const  kIntroOneStep              = @"instruction1";
@@ -50,7 +48,7 @@ static NSString* const kLastHeartRateForDashboard  = @"lastHeartRate";
 
 + (RKSTOrderedTask *)createTask:(APCScheduledTask *)scheduledTask
 {
-    RKSTOrderedTask  *task = [RKSTOrderedTask fitnessCheckTaskWithIdentifier:kFitnessTestIdentifier intendedUseDescription:kIntendedUseDescription walkDuration:kWalkDuration restDuration:kRestDuration options:RKPredefinedTaskOptionNone];
+    RKSTOrderedTask  *task = [RKSTOrderedTask fitnessCheckTaskWithIdentifier:kFitnessTestIdentifier intendedUseDescription:nil walkDuration:kWalkDuration restDuration:kRestDuration options:RKPredefinedTaskOptionNone];
     
     [[UIView appearance] setTintColor:[UIColor appPrimaryColor]];
     

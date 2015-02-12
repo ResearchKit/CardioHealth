@@ -47,7 +47,7 @@
                  {
                  "guid":"1992b80e-912c-4b05-b29b-5c35f02688c5",
                  "identifier":"atwork",
-                 "prompt":"Work Time Activity: \nduring the past month, which statement best describes the kinds of physical activity you usually did as part of your job or work? Do not include activities during breaks or outside of work. Please read all six statements before selecting one.",
+                 "prompt":"Work Time Activity: \nduring the past month, which statement best describes the kinds of physical activity you usually did as part of your job or work? Do not include activities during breaks or outside of work. Please read all four statements before selecting one.",
                  "constraints":{
                  "rules":[
                  
