@@ -22,6 +22,7 @@
 		08FA98031A108839002317C8 /* APHHeartAgeSummaryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FA98021A108839002317C8 /* APHHeartAgeSummaryCell.m */; };
 		08FA98061A108A46002317C8 /* APHHeartAgeRiskEstimateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FA98051A108A46002317C8 /* APHHeartAgeRiskEstimateCell.m */; };
 		08FA98091A108C33002317C8 /* APHHeartAgeRecommendationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FA98081A108C33002317C8 /* APHHeartAgeRecommendationCell.m */; };
+		21B8E3A11A8AAACB00CCDD48 /* APHTasksAndSchedules_NoM7.json in Resources */ = {isa = PBXBuildFile; fileRef = 21B8E3A01A8AAACB00CCDD48 /* APHTasksAndSchedules_NoM7.json */; };
 		5B0432611A305742000DC9ED /* HTMLContent in Resources */ = {isa = PBXBuildFile; fileRef = 5B0432601A305742000DC9ED /* HTMLContent */; };
 		5B04326A1A305D3E000DC9ED /* TermsAndConditions.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B0432691A305D3E000DC9ED /* TermsAndConditions.json */; };
 		5B4633851A15917000E68B82 /* APHDashboardEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B4633841A15917000E68B82 /* APHDashboardEditViewController.m */; };
@@ -151,6 +152,7 @@
 		08FA98051A108A46002317C8 /* APHHeartAgeRiskEstimateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APHHeartAgeRiskEstimateCell.m; path = "Heart Age Cells/APHHeartAgeRiskEstimateCell.m"; sourceTree = "<group>"; };
 		08FA98071A108C33002317C8 /* APHHeartAgeRecommendationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APHHeartAgeRecommendationCell.h; path = "Heart Age Cells/APHHeartAgeRecommendationCell.h"; sourceTree = "<group>"; };
 		08FA98081A108C33002317C8 /* APHHeartAgeRecommendationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APHHeartAgeRecommendationCell.m; path = "Heart Age Cells/APHHeartAgeRecommendationCell.m"; sourceTree = "<group>"; };
+		21B8E3A01A8AAACB00CCDD48 /* APHTasksAndSchedules_NoM7.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = APHTasksAndSchedules_NoM7.json; sourceTree = "<group>"; };
 		5B0432601A305742000DC9ED /* HTMLContent */ = {isa = PBXFileReference; lastKnownFileType = folder; path = HTMLContent; sourceTree = "<group>"; };
 		5B0432691A305D3E000DC9ED /* TermsAndConditions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TermsAndConditions.json; sourceTree = "<group>"; };
 		5B4633831A15917000E68B82 /* APHDashboardEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHDashboardEditViewController.h; sourceTree = "<group>"; };
@@ -497,6 +499,7 @@
 				5BB2BAA31A10157B00684CCE /* Learn.json */,
 				F5165E7919E86581003836CA /* APCParameters.json */,
 				F573809219E45D62008A8354 /* StudyOverview.json */,
+				21B8E3A01A8AAACB00CCDD48 /* APHTasksAndSchedules_NoM7.json */,
 				F55BBDF119D362D0003CA0F9 /* APHTasksAndSchedules.json */,
 			);
 			path = JSONs;
@@ -734,6 +737,7 @@
 				7B5BEC9B1A34F0B7007CEA94 /* cardio_CVhealth_survey.json in Resources */,
 				7B1708401A7824B600251204 /* consent_06@2x.m4v in Resources */,
 				08B972511A1FB4AF00316D49 /* APHHealthyHeartSummaryStepViewController.xib in Resources */,
+				21B8E3A11A8AAACB00CCDD48 /* APHTasksAndSchedules_NoM7.json in Resources */,
 				5B5A31341A10A78600552F7D /* WithdrawStudy.json in Resources */,
 				F55BBE6719D362D0003CA0F9 /* Main.storyboard in Resources */,
 				08C56E391A15E7D100D3BF61 /* APHActivityTracking.storyboard in Resources */,
