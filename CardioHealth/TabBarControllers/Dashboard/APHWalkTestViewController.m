@@ -66,18 +66,21 @@ static NSInteger const numberOfRows = 3;
         {
             cell.textLabel.text = NSLocalizedString(@"Distance Walked", @"");
             cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld yd", (long)item.distanceWalked];
+            cell.imageView.image = [[UIImage imageNamed:@"6min_distance_walked"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         }
             break;
         case kAPHWalkingTestRowTypePeakHeartRate:
         {
             cell.textLabel.text = NSLocalizedString(@"Peak Heart Rate", @"");
             cell.detailTextLabel.text = (item.peakHeartRate != 0) ? [NSString stringWithFormat:@"%ld bpm", (long)item.peakHeartRate] : @"N/A";
+            cell.imageView.image = [[UIImage imageNamed:@"6min_peak_heartrate"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         }
             break;
         case kAPHWalkingTestRowTypeFinalHeartRate:
         {
-            cell.textLabel.text = NSLocalizedString(@"Final Hear Rate", @"");
+            cell.textLabel.text = NSLocalizedString(@"Final Heart Rate", @"");
             cell.detailTextLabel.text = (item.finalHeartRate != 0) ? [NSString stringWithFormat:@"%ld bpm", (long)item.finalHeartRate] : @"N/A";
+            cell.imageView.image = [[UIImage imageNamed:@"6min_resting_heartrate"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         }
             break;
             
