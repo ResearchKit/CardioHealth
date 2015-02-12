@@ -11,15 +11,19 @@
 #import "APHFitnessAllocation.h"
 #import "APHAppDelegate.h"
 #import "APHDashboardWalkTestTableViewCell.h"
+#import "APHWalkTestViewController.h"
+#import "APHWalkingTestResults.h"
 
 static NSString*  const kAPCBasicTableViewCellIdentifier        = @"APCBasicTableViewCell";
 static NSString*  const kAPCRightDetailTableViewCellIdentifier  = @"APCRightDetailTableViewCell";
 static NSInteger  const kDataCountLimit                         = 1;
+
 static NSString*  const kFitnessTestTaskId                      = @"APHFitnessTest-00000000-1111-1111-1111-F810BE28D995";
 static NSString*  const kAPCTaskAttributeUpdatedAt              = @"updatedAt";
 static NSString*  const kFitTestTotalDistDataSourceKey          = @"totalDistance";
 static NSString*  const kFitTestpeakHeartRateDataSourceKey      = @"peakHeartRate";
 static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRate";
+
 static CGFloat    const kMetersToYardConversion                 = 1.093f;
 
 @interface APHDashboardViewController ()<APCPieGraphViewDatasource>
@@ -30,7 +34,7 @@ static CGFloat    const kMetersToYardConversion                 = 1.093f;
 @property (nonatomic, strong)   APCScoring*         heartRateScoring;
 @property (nonatomic, strong)   NSMutableArray*     rowItemsOrder;
 @property (nonatomic, strong)   NSDateFormatter*    dateFormatter;
-
+@property (nonatomic, strong)  APHWalkingTestResults *walkingResults;
 @end
 
 @implementation APHDashboardViewController
@@ -164,14 +168,12 @@ static CGFloat    const kMetersToYardConversion                 = 1.093f;
             [rowItems addObject:row];
         }
         
-        
         APCTableViewSection *section = [APCTableViewSection new];
         NSDate *dateToday = [NSDate date];
         
         self.dateFormatter.dateFormat = @"MMMM d";
         
         section.sectionTitle = [NSString stringWithFormat:@"%@, %@", NSLocalizedString(@"Today", @""), [self.dateFormatter stringFromDate:dateToday]];
-        section.rows = [NSArray arrayWithArray:rowItems];
         section.rows = [NSArray arrayWithArray:rowItems];
         [self.items addObject:section];
     }
@@ -245,82 +247,27 @@ static CGFloat    const kMetersToYardConversion                 = 1.093f;
                     
                 case kAPHDashboardItemTypeWalkingTest:
                 {
-                    APHTableViewDashboardWalkingTestItem *item = [APHTableViewDashboardWalkingTestItem new];
+                    if (self.walkingResults) {
+                        self.walkingResults = nil;
+                    }
+                    
+                    self.walkingResults = [APHWalkingTestResults new];
+                    
+                    APHTableViewDashboardWalkingTestItem *item;
+                    
+                    if (self.walkingResults.results.count) {
+                        item = [self.walkingResults.results firstObject];
+                    } else {
+                        item = [APHTableViewDashboardWalkingTestItem new];
+                    }
+                    
                     item.caption = NSLocalizedString(@"6-minute Walking Test", @"");
                     item.identifier = kAPHDashboardWalkTestTableViewCellIdentifier;
-
-                    NSString*               taskId          = kFitnessTestTaskId;
-                    APCAppDelegate*         appDelegate     = (APCAppDelegate *)[[UIApplication sharedApplication] delegate];
-                    NSSortDescriptor*       sortDescriptor  = [[NSSortDescriptor alloc] initWithKey:kAPCTaskAttributeUpdatedAt
-                                                                                          ascending:NO];
-                    NSFetchRequest*         request         = [APCScheduledTask request];
-                    NSPredicate*            predicate       = [NSPredicate predicateWithFormat:@"(task.taskID == %@) AND (completed == 1)", taskId];
-                    request.predicate                       = predicate;
-                    request.sortDescriptors                 = @[sortDescriptor];
-                    NSError*                error           = nil;
-                    NSArray*                tasks           = [appDelegate.dataSubstrate.mainContext executeFetchRequest:request error:&error];
-                    
-                    APCLogError2(error);
-
-                    APCScheduledTask*       task            = [tasks firstObject];
-                    NSDictionary*           result          = nil;
-                    NSArray*                schedTaskResult = [task.results allObjects];
-                    NSSortDescriptor*       sorDescrip      = [[NSSortDescriptor alloc] initWithKey:kAPCTaskAttributeUpdatedAt
-                                                                                          ascending:NO];
-                    
-                    NSArray*                taskResults     = [schedTaskResult sortedArrayUsingDescriptors:@[sorDescrip]];
-                    NSString*               resultSummary   = nil;
-                    
-                    APCResult*              apcResult = nil;
-                    
-                    for (APCResult* result in taskResults) {
-                        apcResult = result;
-                        resultSummary = [result resultSummary];
-                        if (resultSummary) {
-                            break;
-                        }
-                    }
-                    
-                    if (resultSummary) {
-                        NSData*             resultData      = [resultSummary dataUsingEncoding:NSUTF8StringEncoding];
-                        NSError*            error           = nil;
-                        result                              = [NSJSONSerialization JSONObjectWithData:resultData
-                                                                                              options:NSJSONReadingAllowFragments
-                                                                                                error:&error];
-                        APCLogError2(error);
-                    }
-
-                    float yards;
-
-                    if ([result objectForKey:kFitTestTotalDistDataSourceKey]) {
-                        yards = [[result objectForKey:kFitTestTotalDistDataSourceKey] integerValue] * kMetersToYardConversion;
-                    }
-                    
-                    NSInteger peakHeartRate;
-                    
-                    if ([result objectForKey:kFitTestpeakHeartRateDataSourceKey]) {
-                        peakHeartRate = [[result objectForKey:kFitTestpeakHeartRateDataSourceKey] integerValue];
-                    }
-                    
-                    NSInteger finalHeartRate;
-
-                    if ([result objectForKey:kFitTestlastHeartRateDataSourceKey]) {
-                        finalHeartRate = [[result objectForKey:kFitTestpeakHeartRateDataSourceKey] integerValue];
-                    }
-                    
-                    NSDate *completionDate = nil;
-                    
-                    if (apcResult.updatedAt) {
-                        completionDate = apcResult.updatedAt;
-                    }
-                    
-                    item.distanceWalked     = yards;
-                    item.peakHeartRate      = peakHeartRate;
-                    item.finalHeartRate     = finalHeartRate;
-                    item.lastPerformedDate  = completionDate;
-                    
                     item.tintColor = [UIColor appTertiaryRedColor];
                     item.editable = YES;
+                    
+#warning Replace Placeholder Values - APPLE-1576
+                    item.info = NSLocalizedString(@"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", @"");
                     
                     APCTableViewRow *row = [APCTableViewRow new];
                     row.item = item;
@@ -377,14 +324,17 @@ static CGFloat    const kMetersToYardConversion                 = 1.093f;
         walkingTestCell.textLabel.text = @"";
         walkingTestCell.title = walkingTestItem.caption;
         walkingTestCell.distanceLabel.text = [NSString stringWithFormat:@"Distance Walked: %ld yd", (long)walkingTestItem.distanceWalked];
-        walkingTestCell.peakHeartRateLabel.text = [NSString stringWithFormat:@"Peak Heart Rate: %ld bpm", (long)walkingTestItem.peakHeartRate];
-        walkingTestCell.finalHeartRateLabel.text = [NSString stringWithFormat:@"Final Heart Rate: %ld bpm", (long)walkingTestItem.finalHeartRate];
+
+        walkingTestCell.peakHeartRateLabel.text = (walkingTestItem.peakHeartRate != 0) ? [NSString stringWithFormat:@"Peak Heart Rate: %ld bpm", (long)walkingTestItem.peakHeartRate] : @"Peak Heart Rate: N/A";
         
+        walkingTestCell.finalHeartRateLabel.text = (walkingTestItem.finalHeartRate != 0) ? [NSString stringWithFormat:@"Final Heart Rate: %ld bpm", (long)walkingTestItem.finalHeartRate] : @"Final Heart Rate: N/A";
         
         self.dateFormatter.dateFormat = @"MMM. d";
-        walkingTestCell.lastPerformedDateLabel.text = [NSString stringWithFormat:@"Last performed %@", [self.dateFormatter stringFromDate:walkingTestItem.lastPerformedDate]];
+        walkingTestCell.lastPerformedDateLabel.text = (walkingTestItem.activityDate) ?  [NSString stringWithFormat:@"Last performed %@", [self.dateFormatter stringFromDate:walkingTestItem.activityDate]] : @"Last performed - N/A";
         walkingTestCell.tintColor = walkingTestItem.tintColor;
         walkingTestCell.delegate = self;
+        
+        walkingTestCell.resizeButton.hidden = (self.walkingResults.results.count == 0);
     }
     
     return cell;
@@ -432,5 +382,25 @@ static CGFloat    const kMetersToYardConversion                 = 1.093f;
     return [[[self.allocationDataset valueForKey:kSegmentSumKey] objectAtIndex:index] floatValue];
 }
 
+#pragma mark - APCDashboardTableViewCellDelegate methods
+
+- (void)dashboardTableViewCellDidTapExpand:(APCDashboardTableViewCell *)cell
+{
+    [super dashboardTableViewCellDidTapExpand:cell];
+    
+    if ([cell isKindOfClass:[APHDashboardWalkTestTableViewCell class]]) {
+       
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+        
+        APHTableViewDashboardWalkingTestItem *item = (APHTableViewDashboardWalkingTestItem *)[self itemForIndexPath:indexPath];
+        
+        APHWalkTestViewController *walkTestViewController = [[UIStoryboard storyboardWithName:@"APHDashboard" bundle:nil] instantiateViewControllerWithIdentifier:@"APHWalkTestViewController"];
+        walkTestViewController.tintColor = item.tintColor;
+        walkTestViewController.results = self.walkingResults.results;
+        
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:walkTestViewController];
+        [self.navigationController presentViewController:navController animated:YES completion:nil];
+    }
+}
 @end
 

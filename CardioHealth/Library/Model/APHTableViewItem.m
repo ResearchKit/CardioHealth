@@ -17,4 +17,23 @@
 
 @implementation APHTableViewDashboardWalkingTestItem
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _distanceWalked = 0;
+        _peakHeartRate = 0;
+        _finalHeartRate = 0;
+    }
+    return self;
+}
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"\
+            DistanceWalked : %ld\n\
+            PeakHearRate : %ld\n\
+            FinalHearRate : %ld\n\
+            Date : %@\n", (long)self.distanceWalked, (long)self.peakHeartRate, (long)self.finalHeartRate, self.activityDate];
+}
 @end

@@ -23,6 +23,7 @@ static NSString* const  kHeartRateFileNameComp     = @"HKQuantityTypeIdentifierH
 static NSString* const  kLocationFileNameComp      = @"location";
 static NSString* const  kFileResultsKey            = @"items";
 static NSString* const  kHeartRateValueKey         = @"value";
+static NSString* const  kCoordinate                 = @"coordinate";
 static NSString* const  kLongitude                 = @"longitude";
 static NSString* const  kLatitude                  = @"latitude";
 
@@ -125,16 +126,17 @@ static NSString* const kLastHeartRateForDashboard  = @"lastHeartRate";
     CLLocationDistance totalDistance    = 0;
     
     for (NSDictionary *location in locations) {
-        float               lon = [[location objectForKey:kLongitude] floatValue];
-        float               lat = [[location objectForKey:kLatitude] floatValue];
+        float               lon = [[[location objectForKey:kCoordinate] objectForKey:kLongitude] floatValue];
+        float               lat = [[[location objectForKey:kCoordinate] objectForKey:kLatitude] floatValue];
         
         CLLocation *currentCoor = [[CLLocation alloc] initWithLatitude:lat longitude:lon];
         
-        if(!previousCoor) {
-            previousCoor        = currentCoor;
-        } else {
+        if(previousCoor) {
             totalDistance       += [currentCoor distanceFromLocation:previousCoor];
+            previousCoor        = currentCoor;
         }
+        
+        previousCoor        = currentCoor;
     }
 
     return @{@"totalDistance" : @(totalDistance)};
