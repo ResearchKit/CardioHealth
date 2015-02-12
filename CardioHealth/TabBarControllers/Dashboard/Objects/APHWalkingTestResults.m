@@ -44,7 +44,10 @@ static CGFloat    const kMetersToYardConversion                 = 1.093f;
     NSError *error = nil;
     NSArray *tasks = [appDelegate.dataSubstrate.mainContext executeFetchRequest:request error:&error];
     
-    APCLogError2(error);
+    if (error) {
+        APCLogError2(error);
+    }
+    
     
     APCScheduledTask *task = [tasks firstObject];
     NSDictionary *result = nil;
@@ -63,7 +66,9 @@ static CGFloat    const kMetersToYardConversion                 = 1.093f;
             NSData *resultData = [resultSummary dataUsingEncoding:NSUTF8StringEncoding];
             NSError *error = nil;
             result = [NSJSONSerialization JSONObjectWithData:resultData options:NSJSONReadingAllowFragments error:&error];
-            APCLogError2(error);
+            if (error) {
+                APCLogError2(error);
+            }
         }
         
         
