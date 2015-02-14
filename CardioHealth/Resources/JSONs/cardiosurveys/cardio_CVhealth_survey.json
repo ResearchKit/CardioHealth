@@ -1,160 +1,232 @@
 {
    "name": "Cardiovascular_Health_Survey1",
     "identifier": "risk_factors",
-  "questions": [
-     
+    "questions": 
+    [
       {
-      "guid":"e872f85a-e157-457b-890f-9e28eeed6efa",
-      "identifier":"family_history",
-      "prompt":"Do you have a family history of heart disease (if yes, indicate all that apply)?",
-      "constraints": {
-      "dataType": "integer",
-      "enumeration": [
-                      {
-                      "label": "Father or brother with heart attack or coronary artery disease before age 55",
-                      "value": 1,
-                      "type": "SurveyQuestionOption"
-                      },
-                      {
-                      "label": "Mother or sister with heart attack or coronary artery disease before age 65",
-                      "value": 2,
-                      "type": "SurveyQuestionOption"
-                      }
-                    
-                      ],
-      "allowMultiple": true,
-      "type": "MultiValueConstraints"
-      },
-      "uiHint": "MultiValueConstraints",
-      "type": "SurveyQuestion"
+        "guid":"e872f85a-e157-457b-890f-9e28eeed6ef0",
+        "identifier":"family_history_q",
+        "prompt":"Do you have a family history of heart disease?",
+        "constraints" : 
+        {
+          "rules" :
+          [
+            {
+                "operator" : "ot",
+                "value" : 1,
+                "skipTo" : "medications_to_treat",
+                "type" : "SurveyRule"
+            }
+          ],
+          "dataType" : "boolean",
+          "type" : "BooleanConstraints"
+        },
+        "uiHint" : "checkbox",
+        "type" : "SurveyQuestion"
       },
       {
-      "guid": "854aed00-3a2c-41c2-9b36-17b72287819b",
-      "identifier": "medications_to_treat",
-      "prompt": "Do you take medications to treat the following risk factors (indicate all that apply)",
-      "constraints": {
-      "dataType": "integer",
-      "enumeration": [
-                      {
-                      "label": "To treat and lower cholesterol",
-                      "value": 1,
-                      "type": "SurveyQuestionOption"
-                      },
-                      {
-                      "label": "To treat hypertension and lower blood pressure",
-                      "value": 2,
-                      "type": "SurveyQuestionOption"
-                      },
-                      {
-                      "label": "To treat diabetes/pre-diabetes and lower blood sugar",
-                      "value": 3,
-                      "type": "SurveyQuestionOption"
-                      }
-                      ],
-      "allowMultiple": true,
-      "type": "MultiValueConstraints"
-      },
-      "uiHint": "MultiValueConstraints",
-      "type": "SurveyQuestion"
-      },
-      {
-      "guid": "854aed00-3c2c-41c2-9b36-17b72287819b",
-      "identifier": "heart_disease",
-      "prompt": "Have you been diagnosed with heart disease (if yes, indicate all that apply)? ",
-      "constraints": {
-      "dataType": "integer",
-      "enumeration": [
-                      {
-                      "label": "Heart Attack/Myocardial Infarction ",
-                      "value": 1,
-                      "type": "SurveyQuestionOption"
-                      },
-                      {
-                      "label": "Heart Bypass Surgery",
-                      "value": 2,
-                      "type": "SurveyQuestionOption"
-                      },
-                      {
-                      "label": "Coronary Blockage/Stenosis",
-                      "value": 3,
-                      "type": "SurveyQuestionOption"
-                      },
-                      {
-                      "label": "Coronary Stent/Angioplasty",
-                      "value": 4,
-                      "type": "SurveyQuestionOption"
-                      },
-                      {
-                      "label": "Angina (heart chest pains)",
-                      "value": 5,
-                      "type": "SurveyQuestionOption"
-                      },
-                      {
-                      "label": "High Coronary Calcium Score",
-                      "value": 6,
-                      "type": "SurveyQuestionOption"
-                      },
-                      {
-                      "label": "Heart Failure or CHF",
-                      "value": 7,
-                      "type": "SurveyQuestionOption"
-                      },
-                      {
-                      "label": "Atrial fibrillation (Afib)",
-                      "value": 8,
-                      "type": "SurveyQuestionOption"
-                      }
-                      ],
-      "allowMultiple": true,
-      "type": "MultiValueConstraints"
-      },
-      "uiHint": "MultiValueConstraints",
-      "type": "SurveyQuestion"
+        "guid":"e872f85a-e157-457b-890f-9e28eeed6efa",
+        "identifier":"family_history",
+        "prompt":"Indicate all family members with a history of heart disease?",
+        "constraints":
+        {
+          "dataType": "integer",
+          "enumeration":
+          [
+            {
+              "label": "Father or brother",
+              "detail": "Heart attack or coronary artery disease before age 55",
+              "value": 1,
+              "type": "SurveyQuestionOption"
+            },
+            {
+              "label": "Mother or sister",
+              "detail": "Heart attack or coronary artery disease before age 65",
+              "value": 2,
+              "type": "SurveyQuestionOption"
+            }
+          ],
+          "allowMultiple": true,
+          "type": "MultiValueConstraints"
+        },
+        "uiHint": "MultiValueConstraints",
+        "type": "SurveyQuestion"
       },
       {
-      "guid": "854aed00-3c2c-41c2-9b36-17b72287819b",
-      "identifier": "vascular",
-      "prompt": "Have you been diagnosed with vascular disease (if yes, indicate all that apply)?",
-      "constraints": {
-      "dataType": "integer",
-      "enumeration": [
-                      {
-                      "label": "Stroke",
-                      "value": 1,
-                      "type": "SurveyQuestionOption"
-                      },
-                      {
-                      "label": "Transient Ischemic Attack (TIA)",
-                      "value": 2,
-                      "type": "SurveyQuestionOption"
-                      },
-                      {
-                      "label": "Carotid Artery Blockage/Stenosis",
-                      "value": 3,
-                      "type": "SurveyQuestionOption"
-                      },
-                      {
-                      "label": "Carotid Artery Surgery or Stent",
-                      "value": 4,
-                      "type": "SurveyQuestionOption"
-                      },
-                      {
-                      "label": "Peripheral Vascular Disease (Blockage/Stenosis, Surgery, or Stent)",
-                      "value": 5,
-                      "type": "SurveyQuestionOption"
-                      },
-                      {
-                      "label": "Abdominal Aortic Aneurysm",
-                      "value": 6,
-                      "type": "SurveyQuestionOption"
-                      }
-                      ],
-      "allowMultiple": true,
-      "type": "MultiValueConstraints"
+        "guid": "854aed00-3a2c-41c2-9b36-17b72287819b",
+        "identifier": "medications_to_treat",
+        "prompt": "Do you take medications to treat the following risk factors (indicate all that apply)",
+        "constraints":
+        {
+          "dataType": "integer",
+          "enumeration":
+          [
+            {
+              "label": "To treat and lower cholesterol",
+              "value": 1,
+              "type": "SurveyQuestionOption"
+            },
+            {
+              "label": "To treat hypertension and lower blood pressure",
+              "value": 2,
+              "type": "SurveyQuestionOption"
+            },
+            {
+              "label": "To treat diabetes/pre-diabetes and lower blood sugar",
+              "value": 3,
+              "type": "SurveyQuestionOption"
+            }
+          ],
+          "allowMultiple": true,
+          "type": "MultiValueConstraints"
+        },
+        "uiHint": "MultiValueConstraints",
+        "type": "SurveyQuestion"
       },
-      "uiHint": "MultiValueConstraints",
-      "type": "SurveyQuestion"
+      {
+        "guid":"854aed00-3c2c-41c2-9b36-17b722878190",
+        "identifier":"heart_disease_q",
+        "prompt":"Have you been diagnosed with heart disease?",
+        "constraints" : 
+        {
+          "rules" :
+          [
+            {
+                "operator" : "ot",
+                "value" : 1,
+                "skipTo" : "vascular_q",
+                "type" : "SurveyRule"
+            }
+          ],
+          "dataType" : "boolean",
+          "type" : "BooleanConstraints"
+        },
+        "uiHint" : "checkbox",
+        "type" : "SurveyQuestion"
+      },
+      {
+        "guid": "854aed00-3c2c-41c2-9b36-17b72287819b",
+        "identifier": "heart_disease",
+        "prompt": "Which heart disease diagnosis have you received?",
+        "constraints":
+        {
+          "dataType": "integer",
+          "enumeration": 
+          [
+            {
+              "label": "Heart Attack/Myocardial Infarction ",
+              "value": 1,
+              "type": "SurveyQuestionOption"
+            },
+            {
+              "label": "Heart Bypass Surgery",
+              "value": 2,
+              "type": "SurveyQuestionOption"
+            },
+            {
+              "label": "Coronary Blockage/Stenosis",
+              "value": 3,
+              "type": "SurveyQuestionOption"
+            },
+            {
+              "label": "Coronary Stent/Angioplasty",
+              "value": 4,
+              "type": "SurveyQuestionOption"
+            },
+            {
+              "label": "Angina (heart chest pains)",
+              "value": 5,
+              "type": "SurveyQuestionOption"
+            },
+            {
+              "label": "High Coronary Calcium Score",
+              "value": 6,
+              "type": "SurveyQuestionOption"
+            },
+            {
+              "label": "Heart Failure or CHF",
+              "value": 7,
+              "type": "SurveyQuestionOption"
+            },
+            {
+              "label": "Atrial fibrillation (Afib)",
+              "value": 8,
+              "type": "SurveyQuestionOption"
+            }
+          ],
+        "allowMultiple": true,
+        "type": "MultiValueConstraints"
+        },
+        "uiHint": "MultiValueConstraints",
+        "type": "SurveyQuestion"
+      },
+      {
+        "guid":"854aed00-3c2c-41c2-9b36-17b722878190",
+        "identifier":"vascular_q",
+        "prompt":"Have you been diagnosed with vascular disease?",
+        "constraints" : 
+        {
+          "rules" :
+          [
+            {
+                "operator" : "ot",
+                "value" : 1,
+                "skipTo" : "END_OF_SURVEY",
+                "type" : "SurveyRule"
+            }
+          ],
+          "dataType" : "boolean",
+          "type" : "BooleanConstraints"
+        },
+        "uiHint" : "checkbox",
+        "type" : "SurveyQuestion"
+      },
+      {
+        "guid": "854aed00-3c2c-41c2-9b36-17b72287819b",
+        "identifier": "vascular",
+        "prompt": "Which vascular disease diagnosis have you received?",
+        "constraints": 
+        {
+          "dataType": "integer",
+          "enumeration": 
+          [
+            {
+              "label": "Stroke",
+              "value": 1,
+              "type": "SurveyQuestionOption"
+            },
+            {
+              "label": "Transient Ischemic Attack (TIA)",
+              "value": 2,
+              "type": "SurveyQuestionOption"
+            },
+            {
+              "label": "Carotid Artery Blockage/Stenosis",
+              "value": 3,
+              "type": "SurveyQuestionOption"
+            },
+            {
+              "label": "Carotid Artery Surgery or Stent",
+              "value": 4,
+              "type": "SurveyQuestionOption"
+            },
+            {
+              "label": "Peripheral Vascular Disease (Blockage/Stenosis, Surgery, or Stent)",
+              "value": 5,
+              "type": "SurveyQuestionOption"
+            },
+            {
+              "label": "Abdominal Aortic Aneurysm",
+              "value": 6,
+              "type": "SurveyQuestionOption"
+            }
+          ],
+          "allowMultiple": true,
+          "type": "MultiValueConstraints"
+        },
+        "uiHint": "MultiValueConstraints",
+        "type": "SurveyQuestion"
       }
-        ],
-"type": "Survey"
+    ],
+  "type": "Survey"
 }
