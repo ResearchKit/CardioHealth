@@ -87,7 +87,7 @@
                  
                  {
                  "guid":"e872f85c-c157-457b-890f-9e28eeed6ea6",
-                 "identifier":"bev/sugar",
+                 "identifier":"sugar",
                  "prompt":"Do you drink less than 36 ounces (450 calories) of beverages with added sugar weekly?",
                  "constraints":{
                  
