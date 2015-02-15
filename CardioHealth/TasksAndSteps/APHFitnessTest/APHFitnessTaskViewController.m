@@ -44,30 +44,30 @@ static NSString* const kLastHeartRateForDashboard  = @"lastHeartRate";
 #pragma  mark  -  Initialisation
 /*********************************************************************************/
 
-+ (RKSTOrderedTask *)createTask:(APCScheduledTask *)scheduledTask
++ (ORKOrderedTask *)createTask:(APCScheduledTask *)scheduledTask
 {
-    RKSTOrderedTask  *task = [RKSTOrderedTask fitnessCheckTaskWithIdentifier:kFitnessTestIdentifier intendedUseDescription:nil walkDuration:kWalkDuration restDuration:kRestDuration options:RKPredefinedTaskOptionNone];
+    ORKOrderedTask  *task = [ORKOrderedTask fitnessCheckTaskWithIdentifier:kFitnessTestIdentifier intendedUseDescription:nil walkDuration:kWalkDuration restDuration:kRestDuration options:ORKPredefinedTaskOptionNone];
     
     [[UIView appearance] setTintColor:[UIColor appPrimaryColor]];
     
     return  task;
 }
 
-- (void)taskViewController:(RKSTTaskViewController *)taskViewController stepViewControllerWillAppear:(RKSTStepViewController *)stepViewController {
+- (void)taskViewController:(ORKTaskViewController *)taskViewController stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     
     if ([stepViewController.step.identifier isEqualToString:kConclusionStep]) {
         [[UIView appearance] setTintColor:[UIColor appTertiaryColor1]];
     }
 }
 
-- (void)taskViewControllerDidComplete:(RKSTTaskViewController *)taskViewController {
+- (void)taskViewControllerDidComplete:(ORKTaskViewController *)taskViewController {
     [[UIView appearance] setTintColor:[UIColor appPrimaryColor]];
     
     [super taskViewControllerDidComplete:taskViewController];
     
 }
 
-- (void)taskViewControllerDidCancel:(RKSTTaskViewController *)taskViewController {
+- (void)taskViewControllerDidCancel:(ORKTaskViewController *)taskViewController {
     [[UIView appearance] setTintColor:[UIColor appPrimaryColor]];
     
     [super taskViewControllerDidCancel:taskViewController];
@@ -83,9 +83,9 @@ static NSString* const kLastHeartRateForDashboard  = @"lastHeartRate";
     NSDictionary* distanceResults = nil;
     NSDictionary* heartRateResults = nil;
     
-    RKSTStepResult* stepResult = (RKSTStepResult *)[self.result resultForIdentifier:kWalkStep];
+    ORKStepResult* stepResult = (ORKStepResult *)[self.result resultForIdentifier:kWalkStep];
     
-    for (RKSTFileResult* fileResult in stepResult.results) {
+    for (ORKFileResult* fileResult in stepResult.results) {
         NSString* fileString = [fileResult.fileURL lastPathComponent];
         NSArray* nameComponents = [fileString componentsSeparatedByString:@"_"];
         

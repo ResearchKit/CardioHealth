@@ -163,16 +163,16 @@ static  NSString*       const   kVideoShownKey                          = @"Vide
 #pragma mark - Consent
 /*********************************************************************************/
 
-- (id<RKSTTask>)makeConsent
+- (id<ORKTask>)makeConsent
 {
-    RKSTConsentDocument* consent = [[RKSTConsentDocument alloc] init];
+    ORKConsentDocument* consent = [[ORKConsentDocument alloc] init];
     consent.title = @"Consent";
     consent.signaturePageTitle = @"Consent";
     consent.signaturePageContent = @"I agree to participate in this research Study.";
     
-    RKSTConsentSignature *participantSig = [RKSTConsentSignature signatureForPersonWithTitle:@"Participant"
-                                                                            dateFormatString:nil
-                                                                                  identifier:@"participant"];
+    ORKConsentSignature *participantSig = [ORKConsentSignature signatureForPersonWithTitle:@"Participant"
+                                                                        dateFormatString:nil
+                                                                                identifier:@"participant"];
     participantSig.requiresSignatureImage = NO;
     
     [consent addSignature:participantSig];
@@ -181,73 +181,73 @@ static  NSString*       const   kVideoShownKey                          = @"Vide
     NSMutableArray* components = [NSMutableArray new];
     
     NSArray* scenes = @[
-                        @(RKSTConsentSectionTypeOverview),
-                        @(RKSTConsentSectionTypeDataGathering),
-                        @(RKSTConsentSectionTypePrivacy),
-                        @(RKSTConsentSectionTypeDataUse),
-                        @(RKSTConsentSectionTypeTimeCommitment),
-                        @(RKSTConsentSectionTypeStudySurvey),
-                        @(RKSTConsentSectionTypeStudyTasks),
-                        @(RKSTConsentSectionTypeWithdrawing),
-                        @(RKSTConsentSectionTypeCustom),
-                        @(RKSTConsentSectionTypeCustom),
-                        @(RKSTConsentSectionTypeCustom),
-                        @(RKSTConsentSectionTypeCustom)
+                        @(ORKConsentSectionTypeOverview),
+                        @(ORKConsentSectionTypeDataGathering),
+                        @(ORKConsentSectionTypePrivacy),
+                        @(ORKConsentSectionTypeDataUse),
+                        @(ORKConsentSectionTypeTimeCommitment),
+                        @(ORKConsentSectionTypeStudySurvey),
+                        @(ORKConsentSectionTypeStudyTasks),
+                        @(ORKConsentSectionTypeWithdrawing),
+                        @(ORKConsentSectionTypeCustom),
+                        @(ORKConsentSectionTypeCustom),
+                        @(ORKConsentSectionTypeCustom),
+                        @(ORKConsentSectionTypeCustom)
                         ];
     
     for (int i = 0; i<scenes.count; i ++) {
         
         
-        RKSTConsentSectionType sectionType = [scenes[i] integerValue];
-        RKSTConsentSection *section = [[RKSTConsentSection alloc] initWithType:sectionType];
+        ORKConsentSectionType sectionType = [scenes[i] integerValue];
+        ORKConsentSection *section = [[ORKConsentSection alloc] initWithType:sectionType];
         
         switch (sectionType) {
-            case RKSTConsentSectionTypeStudySurvey:
+            case ORKConsentSectionTypeStudySurvey:
             {
                 section.summary = NSLocalizedString(@"By analyzing de-identified data across all app users, researchers will be able to better understand the relationships.", @"");
             }
                 break;
-            case RKSTConsentSectionTypeOverview:
+            case ORKConsentSectionTypeOverview:
             {
                 section.title = NSLocalizedString(@"Welcome", nil);
                 section.summary = NSLocalizedString(@"This simple walkthrough will help you to understand the study, the impact it will have on your life, and will allow you to provide consent to participate.", @"");
             }
                 break;
-            case RKSTConsentSectionTypeStudyTasks:
+            case ORKConsentSectionTypeStudyTasks:
             {
                 section.content = NSLocalizedString(@"The MyHeartCounts app will ask you to do 3 activities:\n1) use your phone, or any wearable activity device you have, to collect activity data for 7 days;\n2) perform a 6-minute walk test of fitness; and\n3) enter information about risk factors and blood tests to calculate your American Heart Association risk score.", @"");
             }
                 break;
-            case RKSTConsentSectionTypeDataUse:
+            case ORKConsentSectionTypeDataUse:
             {
                 section.title = NSLocalizedString(@"Sensor and Health Data", "");
                 section.summary = NSLocalizedString(@"This study will gather sensor and health data from your phone.", @"");
             }
                 break;
-            case RKSTConsentSectionTypePrivacy:
+            case ORKConsentSectionTypePrivacy:
             {
                 section.content = NSLocalizedString(@"De-identification: Your research data from the phone will go to a secure computer where your personal identifiers will be removed to protect your privacy.\n\nCombining Data: Once your data have had personal identifiers removed, it will go to another secure computer, with the data from other subjects, to be analyzed.\n\nUsing Data: Your de-identified data, when combined with data from many other people, serves as a rich database for research analysis. It also provides a safe way to share the data with other researchers.", @"");
             }
                 break;
-            case RKSTConsentSectionTypeDataGathering:
+            case ORKConsentSectionTypeDataGathering:
             {
                 section.content = NSLocalizedString(@"De-identification: Your research data from the phone will go to a secure computer where your personal identifiers will be removed to protect your privacy.\n\nCombining Data: Once your data have had personal identifiers removed, it will go to another secure computer, with the data from other subjects, to be analyzed.\n\nUsing Data: Your de-identified data, when combined with data from many other people, serves as a rich database for research analysis. It also provides a safe way to share the data with other researchers.", @"");
             }
                 break;
-            case RKSTConsentSectionTypeTimeCommitment:
+            case ORKConsentSectionTypeTimeCommitment:
             {
                 section.title = NSLocalizedString(@"Issues to Consider", @"");
                 section.summary = NSLocalizedString(@"This study will take about 1 week every 3 months.", @"");
                 section.content = NSLocalizedString(@"The 3 activities can be done in one week:\n1) use your phone, or any wearable activity device you have, to collect activity data for 7 days;\n2) perform a 6-minute walk test of fitness; and\n3) enter information about risk factors and blood tests to calculate your American Heart Association risk score. We will ask you to update these activities every 3 months.", @"");
             }
                 break;
-            case RKSTConsentSectionTypeWithdrawing:
+            case ORKConsentSectionTypeWithdrawing:
             {
                 section.content = NSLocalizedString(@"Your authorization for the use and/or disclosure of your health information will expire December 31, 2060.\n\nVOLUNTARY PARTICIPATION AND WITHDRAWAL\nYour participation in this study is voluntary. You do not have to sign this consent form. But if you do not, you will not be able to participate in this research study. You may decide not to participate or you may leave the study at any time. Your decision will not result in any penalty or loss of benefits to which you are entitled.\n● You are not obligated to participate in this study.\n● Your questions should be answered clearly and to your satisfaction, before you choose to participate in the study.\n● You have a right to download or transfer a copy of all of your study data.\n● By agreeing to participate you do not waive any of your legal rights.\n\nIf you choose to withdraw from the research study, we will stop collecting your study data. At the end of the study period we will stop collecting your data, even if the application remains on your phone and you keep using it. If you were interested in joining another study afterward, we would ask you to complete another consent, like this one, explaining the risks and benefits of the new study.\n\nThe Study Principal Investigator or the sponsor may also withdraw you from the study without your consent at any time for any reason, including if it is in your best interest, you do not consent to continue in the study after being told of changes in the research that may affect you, or if the study is cancelled.", @"");
             }
                 break;
 
-            case RKSTConsentSectionTypeCustom:
+            case ORKConsentSectionTypeCustom:
             {
                 if (i == 8) {
                     section.title = NSLocalizedString(@"Potential Benefits", @"");
@@ -283,34 +283,34 @@ static  NSString*       const   kVideoShownKey                          = @"Vide
     
     consent.sections = [components copy];
     
-    RKSTVisualConsentStep *consentStep = [[RKSTVisualConsentStep alloc] initWithIdentifier:@"visual"
-                                                                                  document:consent];
-    RKSTConsentReviewStep *reviewStep = nil;
+    ORKVisualConsentStep *consentStep = [[ORKVisualConsentStep alloc] initWithIdentifier:@"visual"
+                                                                                document:consent];
+    ORKConsentReviewStep *reviewStep = nil;
     
     NSMutableArray *consentSteps = [NSMutableArray new];
     
     [consentSteps addObject:consentStep];
     
     if (!self.dataSubstrate.currentUser.isSignedIn) {
-        reviewStep = [[RKSTConsentReviewStep alloc] initWithIdentifier:@"reviewStep"
-                                                             signature:participantSig
-                                                            inDocument:consent];
+        reviewStep = [[ORKConsentReviewStep alloc] initWithIdentifier:@"reviewStep"
+                                                            signature:participantSig
+                                                        inDocument:consent];
 
         reviewStep.reasonForConsent = @"By agreeing you are consenting to take part in this research study.";
         
         [consentSteps addObject:reviewStep];
     }
     
-    RKSTOrderedTask *task = [[RKSTOrderedTask alloc] initWithIdentifier:@"consent"
-                                                                  steps:consentSteps];
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:@"consent"
+                                                                steps:consentSteps];
     return task;
 }
 
-- (RKSTTaskViewController *)consentViewController
+- (ORKTaskViewController *)consentViewController
 {
-    id<RKSTTask> task = [self makeConsent];
+    id<ORKTask> task = [self makeConsent];
     
-    RKSTTaskViewController *consentVC = [[RKSTTaskViewController alloc] initWithTask:task
+    ORKTaskViewController *consentVC = [[ORKTaskViewController alloc] initWithTask:task
                                                                          taskRunUUID:[NSUUID UUID]];
     
     return consentVC;

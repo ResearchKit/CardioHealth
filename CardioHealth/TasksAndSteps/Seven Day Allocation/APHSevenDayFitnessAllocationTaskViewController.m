@@ -38,12 +38,12 @@ static NSString *kSevenDayFitnessCompleteStep = @"sevenDayFitnessCompleteStep";
 
 #pragma mark - Task
 
-+ (RKSTOrderedTask *)createTask:(APCScheduledTask *)scheduledTask
++ (ORKOrderedTask *)createTask:(APCScheduledTask *)scheduledTask
 {
     NSMutableArray *steps = [[NSMutableArray alloc] init];
     
     {
-        RKSTInstructionStep *step = [[RKSTInstructionStep alloc] initWithIdentifier:kSevenDayFitnessInstructionStep];
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:kSevenDayFitnessInstructionStep];
         step.title = NSLocalizedString(@"7-Day Activity and Sleep Assessment", @"7-Day Activity and Sleep Assessment");
         step.detailText = @"Some instructions";
         
@@ -52,23 +52,23 @@ static NSString *kSevenDayFitnessCompleteStep = @"sevenDayFitnessCompleteStep";
     
     {
         // Seven Day Fitness Allocation Step
-        RKSTStep* step = [[RKSTStep alloc] initWithIdentifier:kSevenDayFitnessActivityStep];
+        ORKStep* step = [[ORKStep alloc] initWithIdentifier:kSevenDayFitnessActivityStep];
         step.title = NSLocalizedString(@"Activity Tracking", @"Activity Tracking");
         step.text = NSLocalizedString(@"Get Ready!", @"Get Ready");
         
         [steps addObject:step];
     }
     
-    RKSTOrderedTask  *task = [[RKSTOrderedTask alloc] initWithIdentifier:@"sevenDayFitnessAllocation" steps:steps];
+    ORKOrderedTask  *task = [[ORKOrderedTask alloc] initWithIdentifier:@"sevenDayFitnessAllocation" steps:steps];
     
     return task;
 }
 
 #pragma mark - Task View Delegates
 
-- (RKSTStepViewController *)taskViewController:(RKSTTaskViewController *)taskViewController viewControllerForStep:(RKSTStep *)step
+- (ORKStepViewController *)taskViewController:(ORKTaskViewController *)taskViewController viewControllerForStep:(ORKStep *)step
 {
-    RKSTStepViewController *stepVC = nil;
+    ORKStepViewController *stepVC = nil;
     
     if (step.identifier == kSevenDayFitnessInstructionStep) {
         APCInstructionStepViewController *controller = [[UIStoryboard storyboardWithName:@"APCInstructionStep"
@@ -100,13 +100,13 @@ static NSString *kSevenDayFitnessCompleteStep = @"sevenDayFitnessCompleteStep";
     return stepVC;
 }
 
-- (void)taskViewControllerDidCancel:(RKSTTaskViewController *)taskViewController {
+- (void)taskViewControllerDidCancel:(ORKTaskViewController *)taskViewController {
     [[UIView appearance] setTintColor:[UIColor appPrimaryColor]];
     
     [super taskViewControllerDidCancel:self];
 }
 
-- (void)taskViewControllerDidComplete:(RKSTTaskViewController *)taskViewController {
+- (void)taskViewControllerDidComplete:(ORKTaskViewController *)taskViewController {
     [[UIView appearance] setTintColor:[UIColor appPrimaryColor]];
     
     [super taskViewControllerDidComplete:self];

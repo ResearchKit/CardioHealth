@@ -22,12 +22,12 @@ static NSString *kHealthyHeartSummary = @"healthyHeartSummary";
 
 #pragma mark - Task
 
-+ (RKSTOrderedTask *)createTask:(APCScheduledTask *)scheduledTask
++ (ORKOrderedTask *)createTask:(APCScheduledTask *)scheduledTask
 {
     NSMutableArray *steps = [NSMutableArray array];
     
     {
-        RKSTInstructionStep *step = [[RKSTInstructionStep alloc] initWithIdentifier:kHealthyHeartIntroduction];
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:kHealthyHeartIntroduction];
         
         step.title = NSLocalizedString(@"Healthy Heart", @"");
         step.detailText = NSLocalizedString(@"The purpose of this survey is to learn about your heart health.",
@@ -42,9 +42,9 @@ static NSString *kHealthyHeartSummary = @"healthyHeartSummary";
                              @"Never had it checked."
                              ];
         
-        RKSTAnswerFormat *format =  [RKSTTextChoiceAnswerFormat choiceAnswerFormatWithStyle:RKChoiceAnswerStyleSingleChoice textChoices:choices];
+        ORKAnswerFormat *format =  [ORKTextChoiceAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:choices];
         
-        RKSTQuestionStep *step = [RKSTQuestionStep questionStepWithIdentifier:kBloodPressureChecked
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:kBloodPressureChecked
                                                                         title:@"When was the last time you had your blood pressure checked?"
                                                                        answer:format];
         
@@ -55,30 +55,30 @@ static NSString *kHealthyHeartSummary = @"healthyHeartSummary";
                              @"High",
                              @"Don't Know"];
         
-        RKSTAnswerFormat *format =  [RKSTTextChoiceAnswerFormat choiceAnswerFormatWithStyle:RKChoiceAnswerStyleSingleChoice textChoices:choices];
+        ORKAnswerFormat *format =  [ORKTextChoiceAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:choices];
         
-        RKSTQuestionStep *step = [RKSTQuestionStep questionStepWithIdentifier:kBloodPressureLevel
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:kBloodPressureLevel
                                                                         title:@"The Last time you had your blood pressure checked, was it normal or high?"
                                                                        answer:format];
         
         [steps addObject:step];
     }
     {
-        RKSTQuestionStep *step = [RKSTQuestionStep questionStepWithIdentifier:kHaveHighBloodPressure
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:kHaveHighBloodPressure
                                                                         title:@"Do you have high blood pressure?"
-                                                                       answer:[RKSTBooleanAnswerFormat new]];
+                                                                       answer:[ORKBooleanAnswerFormat new]];
         [steps addObject:step];
     }
     {
         //Finished
-        RKSTStep* step = [[RKSTStep alloc] initWithIdentifier:kHealthyHeartSummary];
+        ORKStep* step = [[ORKStep alloc] initWithIdentifier:kHealthyHeartSummary];
         step.title = NSLocalizedString(@"Good job.", @"");
         step.text = NSLocalizedString(@"Great job.", @"");
         
         [steps addObject:step];
     }
     
-    RKSTOrderedTask *task = [[RKSTOrderedTask alloc] initWithIdentifier:NSLocalizedString(@"Healthy Heart", @"Healthy Heart")
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:NSLocalizedString(@"Healthy Heart", @"Healthy Heart")
                                                                   steps:steps];
     
     return task;
@@ -95,9 +95,9 @@ static NSString *kHealthyHeartSummary = @"healthyHeartSummary";
     [super didReceiveMemoryWarning];
 }
 
-- (RKSTStepViewController *)taskViewController:(RKSTTaskViewController *)taskViewController viewControllerForStep:(RKSTStep *)step
+- (ORKStepViewController *)taskViewController:(ORKTaskViewController *)taskViewController viewControllerForStep:(ORKStep *)step
 {
-    RKSTStepViewController *stepVC = nil;
+    ORKStepViewController *stepVC = nil;
     
     if (step.identifier == kHealthyHeartSummary) {
         
