@@ -8,7 +8,6 @@
 @import APCAppCore;
 #import "APHAppDelegate.h"
 #import "APHFitnessAllocation.h"
-#import <CoreMotion/CoreMotion.h>
 
 /*********************************************************************************/
 #pragma mark - Initializations Options
@@ -26,7 +25,7 @@ static  NSString*       const   kVideoShownKey                          = @"Vide
 - (void) setUpInitializationOptions
 {
     NSMutableDictionary * dictionary = [super defaultInitializationOptions];
-    dictionary = [self updateOptionsForNoM7Chip:dictionary];
+    dictionary = [self updateOptionsFor5OrOlder:dictionary];
     [dictionary addEntriesFromDictionary:@{
                                            kStudyIdentifierKey                  : kStudyIdentifier,
                                            kAppPrefixKey                        : kAppPrefix,
@@ -100,8 +99,8 @@ static  NSString*       const   kVideoShownKey                          = @"Vide
     return [[NSUserDefaults standardUserDefaults] boolForKey:kVideoShownKey];
 }
 
-- (NSMutableDictionary *) updateOptionsForNoM7Chip:(NSMutableDictionary *)initializationOptions {
-    if (![CMPedometer isStepCountingAvailable] || ![CMMotionActivityManager isActivityAvailable]) {
+- (NSMutableDictionary *) updateOptionsFor5OrOlder:(NSMutableDictionary *)initializationOptions {
+    if (![APCDeviceHardware isiPhone5SOrNewer]) {
         [initializationOptions setValue:@"APHTasksAndSchedules_NoM7" forKey:kTasksAndSchedulesJSONFileNameKey];
     }
     return initializationOptions;
