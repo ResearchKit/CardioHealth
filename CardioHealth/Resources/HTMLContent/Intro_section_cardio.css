@@ -44,6 +44,7 @@ h1 {
 
 
 
+
 .footer {
 	background-color: #FFFFFF;
 	width: 20%;
@@ -60,7 +61,7 @@ h1 {
 
 
 .content ul, .content ol { 
-	padding: 0 15px 15px 23px; 
+	padding: 0 15px 15px 40px; 
 }
 
 
