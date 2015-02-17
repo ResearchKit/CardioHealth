@@ -1,0 +1,92 @@
+@charset "UTF-8";
+
+a  {
+	
+	color:#b91f4b;
+	
+}
+
+
+a:active {
+    color:#b91f4b;
+	background-color: #ffffff;
+}
+
+body {
+	font-family: "Helvetica Neue Light", 'HelveticaNeue-Light', 'HelveticaNeue Light', 'HelveticaNeue', 'Helvetica Neue';
+	font-size:22px; 
+	color:#000000; 
+	line-height:normal; 
+	font-weight:normal;
+	padding-top:0px;
+	padding-bottom:20px;
+}
+
+p,  h2 {
+	margin-top: 0;	 
+	padding-right: 0px;
+	padding-left: 0px; 
+	
+}
+
+h1 {
+	text-align:center;	
+	
+}
+
+
+.content {
+	width:95%;
+}
+
+
+.footer {
+	background-color: #FFFFFF;
+	width: 100%;
+	margin: auto ;
+	
+	
+	
+}
+
+
+.content {
+	padding: 10px 0;
+}
+
+
+.content ul, .content ol { 
+	padding: 0 15px 15px 25px; 
+}
+
+
+IMG.displayed {
+    display: block;
+    margin-left: auto;
+    margin-right: auto }
+
+
+
+boldie
+	{
+		font-family:'HelveticaNeue-Medium', 'Helvetica Neue Medium', Helvetica;
+		font-size:22px; 
+		color:#000000; 
+		line-height:normal; 
+		font-weight:normal;
+		padding-top:0px;
+		padding-bottom:0px;
+	
+	}
+
+ul, ol {
+	font-family: 'HelveticaNeue-Light', 'HelveticaNeue', 'Helvetica Neue';
+	font-size:22px; 
+	color:#000000; 
+	list-style-type: square;
+	list-style-position: outside;
+	line-height:120%;
+	
+}
+
+ .ExternalClass * {line-height: 100%} 

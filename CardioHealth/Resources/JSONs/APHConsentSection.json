@@ -1,70 +1,117 @@
 {
-	"sections":
-	[
-		{
-			"sectionType" : "overview",
-			"sectionSummary" : "This simple walkthrough will help you to understand the study, the impact it will have on your life, and will allow you to provide consent to participate.",
-		},
-		{
-			"sectionType" : "dataGathering",
-			"sectionContent" : "De-identification: Your research data from the phone will go to a secure computer where your personal identifiers will be removed to protect your privacy.\n\nCombining Data: Once your data have had personal identifiers removed, it will go to another secure computer, with the data from other subjects, to be analyzed.\n\nUsing Data: Your de-identified data, when combined with data from many other people, serves as a rich database for research analysis. It also provides a safe way to share the data with other researchers."
-		},
-		{
-			"sectionType" : "privacy",
-			"sectionContent" : "De-identification: Your research data from the phone will go to a secure computer where your personal identifiers will be removed to protect your privacy.\n\nCombining Data: Once your data have had personal identifiers removed, it will go to another secure computer, with the data from other subjects, to be analyzed.\n\nUsing Data: Your de-identified data, when combined with data from many other people, serves as a rich database for research analysis. It also provides a safe way to share the data with other researchers."
-		},
-		{
-			"sectionType" : "dataUse",
-			"sectionContent" : "This study will gather sensor and health data from your phone."
-		},
-		{
-			"sectionType" : "timeCommitment",
-			"sectionTitle" : "Issues to Consider",
-			"sectionSummary" : "This study will take about 1 week every 3 months.",
-			"sectionContent" : "The 3 activities can be done in one week:\n1) use your phone, or any wearable activity device you have, to collect activity data for 7 days;\n2) perform a 6-minute walk test of fitness; and\n3) enter information about risk factors and blood tests to calculate your American Heart Association risk score. We will ask you to update these activities every 3 months."
-		},
-		{
-			"sectionType" : "studySurvey",
-			"sectionSummary" : "By analyzing de-identified data across all app users, researchers will be able to better understand the relationships.",
-		},
-		{
-			"sectionType" : "studyTasks",
-			"sectionContent" : "The MyHeartCounts app will ask you to do 3 activities:\n1) use your phone, or any wearable activity device you have, to collect activity data for 7 days;\n2) perform a 6-minute walk test of fitness; and\n3) enter information about risk factors and blood tests to calculate your American Heart Association risk score."
-		},
-		{
-			"sectionType" : "withdrawing",
-			"sectionContent" : "Your authorization for the use and/or disclosure of your health information will expire December 31, 2060.\n\nVOLUNTARY PARTICIPATION AND WITHDRAWAL\nYour participation in this study is voluntary. You do not have to sign this consent form. But if you do not, you will not be able to participate in this research study. You may decide not to participate or you may leave the study at any time. Your decision will not result in any penalty or loss of benefits to which you are entitled.\n● You are not obligated to participate in this study.\n● Your questions should be answered clearly and to your satisfaction, before you choose to participate in the study.\n● You have a right to download or transfer a copy of all of your study data.\n● By agreeing to participate you do not waive any of your legal rights.\n\nIf you choose to withdraw from the research study, we will stop collecting your study data. At the end of the study period we will stop collecting your data, even if the application remains on your phone and you keep using it. If you were interested in joining another study afterward, we would ask you to complete another consent, like this one, explaining the risks and benefits of the new study.\n\nThe Study Principal Investigator or the sponsor may also withdraw you from the study without your consent at any time for any reason, including if it is in your best interest, you do not consent to continue in the study after being told of changes in the research that may affect you, or if the study is cancelled."
-		},
-		{
-			"sectionType" : "custom",
-			"sectionTitle": "Risk and Benefits",
-			"sectionSummary": "Participating in this study may change how you feel. You may feel more tired, sad, energized, or happy.",
-			"sectionContent": "The MyHeartCounts app will provide data about your activity, fitness, and cardiovascular risk. These results could certainly generate a wide range of emotions.",
-			"sectionAnimationUrl": "Animation URL"
-		},
-		{
-			"sectionType" : "custom",
-			"sectionTitle": "Risk to Privacy",
-			"sectionSummary": "Some of the data that you provide may be sensitive. We will de-identify your data and use secure computers, but we cannot ensure complete privacy.",
-			"sectionContent": "We view your privacy very strongly. Thus, we are requesting the least amount of personal data possible. Also, we are using strict security protocols to protect your data. Importantly, your personal identifiers will be removed before the data goes to the large computer for storage and later analysis. We cannot completely guarantee that someone can gain access to your private data, but importantly the main data storage is de-identified.",
-			"sectionImage": "consent_privacy",
-			"sectionAnimationUrl": "Animation URL"
-		},
-		{
-			"sectionType" : "custom",
-			"sectionTitle": "Issues to Consider",
-			"sectionSummary": "Some questions may make you uncomfortable. Simply do not respond.",
-			"sectionContent": "We do ask survey questions about your health history. You may decline to answer if that makes you uncomfortable.",
-			"sectionImage": "consent_uncomfortablequestions",
-			"sectionAnimationUrl": "Animation URL"
-		},
-		{
-			"sectionType" : "custom",
-			"sectionTitle": "Issues to Consider",
-			"sectionSummary": "Participating in this study may alter how you feel. You may feel more tired, sad, energized, or happy.",
-			"sectionContent": "Participation in this study may involve risks that are not known at this time.\n\nYou will be told about any new information that might change your decision to be in this study.\n\nSince no medical treatments are provided during this study there are no alternative therapies. The only alternative is to not participate.",
-			"sectionImage": "consent_mood",
-			"sectionAnimationUrl": "Animation URL"
-		}
-	]
+    "sections":
+    [
+     {
+     "sectionType" : "overview",
+     "sectionSummary" : "This simple walkthrough will explain the research study, the impact it may have on your life and will allow you to provide your consent to participate.",
+     "sectionHtmlContent" : "1welcome"
+     },
+     
+     
+     {
+     "sectionType" : "custom",
+     "sectionTitle": "Activities",
+     "sectionSummary": "This study will ask you to perform tasks and respond to surveys.",
+     "sectionHtmlContent" : "3activities",
+     "sectionImage": "00_Blank_to_Activities"
+     
+     },
+     
+     {
+     "sectionType" : "custom",
+     "sectionTitle": "Sensor Data",
+     "sectionSummary": "This study will also gather sensor data from your iPhone and personal devices with your permission.",
+     "sectionHtmlContent" : "4sensordata",
+     "sectionImage": "01_Activities_to_SensorData"
+     
+     },
+     
+     
+     {
+     "sectionType" : "dataGathering",
+     "sectionTitle": "Data Processing",
+     "sectionSummary" : "Collected data may allow researchers, as well as you, to understand patterns and details about Cardiovascular health.",
+     "sectionHtmlContent" : "5dataprocessing"
+     },
+     
+     {
+     "sectionType" : "privacy",
+     "sectionTitle": "Protecting your data",
+     "sectionSummary": "Your data will be sent to a secure database, where it will be separated from your personal identity",
+     "sectionHtmlContent" : "6protectingdata"
+     },
+     {
+     "sectionType" : "dataUse",
+     "sectionTitle": "Data Use",
+     "sectionSummary": "Your de-identified data will be used for research and may be shared with other researchers.",
+     "sectionHtmlContent" : "7datause"
+     
+     },
+     {
+     "sectionType" : "timeCommitment",
+     "sectionTitle" : "Issues to Consider",
+     "sectionSummary": "Your participation in this study will take no more than 20 minutes per week.  We hope that you can participate at least for one week every three months.",
+     "sectionHtmlContent" : "8time"
+     
+     },
+     
+     {
+     "sectionType" : "studySurvey",
+     "sectionTitle" : "Study Survey",
+     "sectionSummary": "Some of the tasks in this study will require you to answer to survey questions about various health and lifestyle factors.",
+     "sectionHtmlContent" : "9study_survey"
+     
+     },
+     
+     {
+     "sectionType" : "studyTasks",
+     "sectionTitle" : "Study Tasks",
+     "sectionSummary": "Other tasks will ask you to complete active tasks that may require some light physical activity.",
+     "sectionHtmlContent" : "10study_task"
+     },
+     {
+     "sectionType" : "withdrawing",
+     "sectionTitle" : "Withdrawing",
+     "sectionSummary" : "You may withdraw your consent and discontinue participation at any time.",
+     "sectionHtmlContent" : "11withdrawing"
+     
+     },
+     
+     {
+     "sectionType" : "custom",
+     "sectionTitle": "Potential Benefits",
+     "sectionSummary": "The information collected by this study may help you better track and monitor your Cardiovascular health.",
+     "sectionHtmlContent" : "12potentialbenefits1",
+     "sectionImage": "10_PotentialBenifits"
+     
+     },
+     {
+     "sectionType" : "custom",
+     "sectionTitle": "Issues to Consider",
+     "sectionSummary": "Some questions may make you uncomfortable.  Simply do not respond.",
+     "sectionHtmlContent" : "13issues_survey",
+     "sectionImage": "11_IssuesToConsider1"
+     
+     },
+     
+     {
+     "sectionType" : "custom",
+     "sectionTitle": "Issues to Consider",
+     "sectionSummary": "Participating in this study may change how you feel.  You may feel more tired, sad, energized, or happy.",
+     "sectionHtmlContent" : "14issues_mood",
+     "sectionImage": "12_IssuesToConsider2"
+     
+     },
+     
+     {
+     "sectionType" : "custom",
+     "sectionTitle": "Risk to Privacy",
+     "sectionSummary": "Some of the data that you provide may be sensitive.  We will de-identify your data and use secure computers, but we cannot ensure complete privacy.",
+     "sectionHtmlContent" : "15privacy_risk",
+     "sectionImage": "13_RiskToPrivacy"
+     
+     }
+     
+     
+     ]
 }
