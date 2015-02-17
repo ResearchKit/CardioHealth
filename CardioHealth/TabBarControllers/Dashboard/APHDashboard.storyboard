@@ -397,7 +397,7 @@
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I4S-gd-yXF" customClass="APCLineGraphView">
-                                            <rect key="frame" x="4" y="55" width="316" height="144"/>
+                                            <rect key="frame" x="4" y="57" width="316" height="142"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wNA-sE-JNK">
@@ -431,9 +431,9 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Average Score: 222" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AvC-sI-fJI">
-                                            <rect key="frame" x="19" y="36" width="245" height="17"/>
+                                            <rect key="frame" x="19" y="34" width="245" height="20"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="17" id="UBw-Ll-pt4"/>
+                                                <constraint firstAttribute="height" constant="20" id="UBw-Ll-pt4"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -462,14 +462,14 @@
                                         <constraint firstAttribute="bottomMargin" secondItem="074-cM-7MC" secondAttribute="bottom" constant="-4" id="8xs-WO-vmy"/>
                                         <constraint firstItem="wNA-sE-JNK" firstAttribute="leading" secondItem="1nu-0w-pk2" secondAttribute="leadingMargin" constant="-8" id="Dnf-0A-cmN"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="I4S-gd-yXF" secondAttribute="bottom" constant="-3" id="Fir-vH-rOx"/>
-                                        <constraint firstItem="I4S-gd-yXF" firstAttribute="top" secondItem="1nu-0w-pk2" secondAttribute="topMargin" constant="47" id="GLh-W9-9Rg"/>
+                                        <constraint firstItem="I4S-gd-yXF" firstAttribute="top" secondItem="1nu-0w-pk2" secondAttribute="topMargin" constant="49" id="GLh-W9-9Rg"/>
                                         <constraint firstItem="l0c-vF-6VV" firstAttribute="top" secondItem="1nu-0w-pk2" secondAttribute="topMargin" constant="-7" id="HmM-or-krr"/>
                                         <constraint firstItem="AvC-sI-fJI" firstAttribute="leading" secondItem="1nu-0w-pk2" secondAttribute="leadingMargin" constant="11" id="LL5-Nj-DCZ"/>
                                         <constraint firstItem="wNA-sE-JNK" firstAttribute="top" secondItem="1nu-0w-pk2" secondAttribute="topMargin" constant="-7" id="NS6-PI-qMj"/>
                                         <constraint firstItem="z8W-PW-flN" firstAttribute="top" secondItem="1nu-0w-pk2" secondAttribute="topMargin" constant="-8" id="P5a-uh-dgt"/>
                                         <constraint firstItem="z8W-PW-flN" firstAttribute="leading" secondItem="1nu-0w-pk2" secondAttribute="leadingMargin" constant="-8" id="S7V-ZB-04j"/>
                                         <constraint firstItem="074-cM-7MC" firstAttribute="leading" secondItem="1nu-0w-pk2" secondAttribute="leadingMargin" constant="-8" id="WHm-4b-dxM"/>
-                                        <constraint firstItem="AvC-sI-fJI" firstAttribute="top" secondItem="UMa-fl-nGM" secondAttribute="bottom" constant="2" id="ZKu-ur-jSu"/>
+                                        <constraint firstItem="AvC-sI-fJI" firstAttribute="top" secondItem="UMa-fl-nGM" secondAttribute="bottom" id="ZKu-ur-jSu"/>
                                         <constraint firstItem="UMa-fl-nGM" firstAttribute="top" secondItem="1nu-0w-pk2" secondAttribute="topMargin" id="aow-J4-wPw"/>
                                         <constraint firstAttribute="trailing" secondItem="I4S-gd-yXF" secondAttribute="trailing" id="bEy-em-Zdr"/>
                                         <constraint firstItem="eRl-0x-wJt" firstAttribute="top" secondItem="1nu-0w-pk2" secondAttribute="topMargin" constant="6" id="dHC-tN-rO1"/>
