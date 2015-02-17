@@ -53,12 +53,12 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
 #pragma mark - Initialize
 /*********************************************************************************/
 
-+ (RKSTOrderedTask *)createTask:(APCScheduledTask *)scheduledTask
++ (ORKOrderedTask *)createTask:(APCScheduledTask *)scheduledTask
 {
     NSMutableArray *steps = [NSMutableArray array];
     
     {
-        RKSTInstructionStep *step = [[RKSTInstructionStep alloc] initWithIdentifier:kHeartAgeIntroduction];
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:kHeartAgeIntroduction];
         step.title = NSLocalizedString(@"Heart Age Test", @"Heart Age Test");
         step.text = NSLocalizedString(@"The following few details about you will be used to calculate your heart age.",
                                       @"Requesting user to provide information to calculate their heart age.");
@@ -75,24 +75,24 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
         NSMutableArray *stepQuestions = [NSMutableArray array];
         
         
-        RKSTFormStep *step = [[RKSTFormStep alloc] initWithIdentifier:kHeartAgeFormStepBiographicAndDemographic title:nil text:NSLocalizedString(@"To calculate your heart age, please enter a few details about yourself.",
+        ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:kHeartAgeFormStepBiographicAndDemographic title:nil text:NSLocalizedString(@"To calculate your heart age, please enter a few details about yourself.",
                                                                                                                             @"To calculate your heart age, please enter a few details about yourself.")];
         
         step.optional = NO;
         
         {
-            RKSTHealthKitCharacteristicTypeAnswerFormat *format = [RKSTHealthKitCharacteristicTypeAnswerFormat answerFormatWithCharacteristicType:[HKCharacteristicType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierDateOfBirth]];
+            ORKHealthKitCharacteristicTypeAnswerFormat *format = [ORKHealthKitCharacteristicTypeAnswerFormat answerFormatWithCharacteristicType:[HKCharacteristicType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierDateOfBirth]];
             
-            RKSTFormItem *item = [[RKSTFormItem alloc] initWithIdentifier:kHeartAgeTestDataAge
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:kHeartAgeTestDataAge
                                                                  text:NSLocalizedString(@"Date of birth", @"Date of birth")
                                                          answerFormat:format];
             [stepQuestions addObject:item];
         }
         
         {
-            RKSTHealthKitCharacteristicTypeAnswerFormat *format = [RKSTHealthKitCharacteristicTypeAnswerFormat answerFormatWithCharacteristicType:[HKCharacteristicType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierBiologicalSex]];
+            ORKHealthKitCharacteristicTypeAnswerFormat *format = [ORKHealthKitCharacteristicTypeAnswerFormat answerFormatWithCharacteristicType:[HKCharacteristicType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierBiologicalSex]];
             
-            RKSTFormItem *item = [[RKSTFormItem alloc] initWithIdentifier:kHeartAgeTestDataGender
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:kHeartAgeTestDataGender
                                                                  text:NSLocalizedString(@"Gender", @"Gender")
                                                          answerFormat:format];
             [stepQuestions addObject:item];
@@ -102,9 +102,9 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
             
             NSArray *choices = @[@"I prefer not to indicate an ethnicity", @"Alaska Native", @"American Indian", @"Asian", @"Black", @"Hispanic", @"Pacific Islander", @"White", @"Other"];
             
-            RKSTAnswerFormat *format = [RKSTTextChoiceAnswerFormat choiceAnswerFormatWithStyle:RKChoiceAnswerStyleSingleChoice textChoices:choices];
+            ORKAnswerFormat *format = [ORKTextChoiceAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:choices];
             
-            RKSTFormItem *item = [[RKSTFormItem alloc] initWithIdentifier:kHeartAgeTestDataEthnicity
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:kHeartAgeTestDataEthnicity
                                                                  text:NSLocalizedString(@"Ethnicity", @"Ethnicity")
                                                          answerFormat:format];
             [stepQuestions addObject:item];
@@ -116,7 +116,7 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
     }
     
     {
-        RKSTQuestionStep *step = [RKSTQuestionStep questionStepWithIdentifier:kHeartAgeFormStepSmokingHistory title:NSLocalizedString(@"Smoking History", @"Smoking History") answer:[RKSTBooleanAnswerFormat new]];
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:kHeartAgeFormStepSmokingHistory title:NSLocalizedString(@"Smoking History", @"Smoking History") answer:[ORKBooleanAnswerFormat new]];
 
         step.optional = NO;
         
@@ -125,18 +125,18 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
     
     {
         NSMutableArray *stepQuestions = [NSMutableArray array];
-        RKSTFormStep *step = [[RKSTFormStep alloc] initWithIdentifier:kHeartAgeFormStepCholesterolHdlSystolic
+        ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:kHeartAgeFormStepCholesterolHdlSystolic
                                                                 title:nil
                                                                  text:NSLocalizedString(@"Cholesterol & Blood Pressure",
                                                                                         @"Cholesterol & Blood Pressure")];
         step.optional = NO;
         
         {
-            RKSTNumericAnswerFormat *format = [RKSTNumericAnswerFormat integerAnswerFormatWithUnit:@"mg/dl"];
+            ORKNumericAnswerFormat *format = [ORKNumericAnswerFormat integerAnswerFormatWithUnit:@"mg/dl"];
             format.minimum = @(1);
             format.maximum = @(1000);
             
-            RKSTFormItem *item = [[RKSTFormItem alloc] initWithIdentifier:kHeartAgeTestDataTotalCholesterol
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:kHeartAgeTestDataTotalCholesterol
                                                                  text:NSLocalizedString(@"Total Cholesterol",
                                                                                         @"Total Cholesterol")
                                                          answerFormat:format];
@@ -144,24 +144,24 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
         }
         
         {
-            RKSTNumericAnswerFormat *format = [RKSTNumericAnswerFormat integerAnswerFormatWithUnit:@"mg/dl"];
+            ORKNumericAnswerFormat *format = [ORKNumericAnswerFormat integerAnswerFormatWithUnit:@"mg/dl"];
             format.minimum = @(1);
             format.maximum = @(250);
             
-            RKSTFormItem *item = [[RKSTFormItem alloc] initWithIdentifier:kHeartAgeTestDataHDL
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:kHeartAgeTestDataHDL
                                                                  text:NSLocalizedString(@"HDL Cholesterol", @"HDL Cholesterol")
                                                          answerFormat:format];
             [stepQuestions addObject:item];
         }
         
         {
-            RKSTHealthKitQuantityTypeAnswerFormat *format = [RKSTHealthKitQuantityTypeAnswerFormat answerFormatWithQuantityType:[HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierBloodPressureSystolic]
+            ORKHealthKitQuantityTypeAnswerFormat *format = [ORKHealthKitQuantityTypeAnswerFormat answerFormatWithQuantityType:[HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierBloodPressureSystolic]
                                                                                                                            unit:[HKUnit unitFromString:@"mmHg"]
-                                                                                                                          style:RKNumericAnswerStyleInteger];
+                                                                                                                          style:ORKNumericAnswerStyleInteger];
             
             
             
-            RKSTFormItem *item = [[RKSTFormItem alloc] initWithIdentifier:kHeartAgeTestDataSystolicBloodPressure
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:kHeartAgeTestDataSystolicBloodPressure
                                                                  text:NSLocalizedString(@"Systolic Blood Pressure",
                                                                                         @"Systolic Blood Pressure")
                                                          answerFormat:format];
@@ -175,24 +175,24 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
     
     {
         NSMutableArray *stepQuestions = [NSMutableArray array];
-        RKSTFormStep *step = [[RKSTFormStep alloc] initWithIdentifier:kHeartAgeFormStepMedicalHistory
+        ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:kHeartAgeFormStepMedicalHistory
                                                                 title:nil
                                                                  text:NSLocalizedString(@"Your Medical History",
                                                                                         @"Your medical history")];
         step.optional = NO;
         {
-            RKSTFormItem *item = [[RKSTFormItem alloc] initWithIdentifier:kHeartAgeTestDataDiabetes
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:kHeartAgeTestDataDiabetes
                                                                  text:NSLocalizedString(@"Do you have Diabetes?",
                                                                                         @"Do you have Diabetes?")
-                                                         answerFormat:[RKSTBooleanAnswerFormat new]];
+                                                         answerFormat:[ORKBooleanAnswerFormat new]];
             [stepQuestions addObject:item];
         }
         
         {
-            RKSTFormItem *item = [[RKSTFormItem alloc] initWithIdentifier:kHeartAgeTestDataHypertension
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:kHeartAgeTestDataHypertension
                                                                  text:NSLocalizedString(@"Are you being treated for Hypertension (High Blood Pressure)?",
                                                                                         @"Are you being treated for Hypertension (High Blood Pressure)?")
-                                                         answerFormat:[RKSTBooleanAnswerFormat new]];
+                                                         answerFormat:[ORKBooleanAnswerFormat new]];
             [stepQuestions addObject:item];
         }
         
@@ -202,15 +202,15 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
     }
     
     {
-        RKSTQuestionStep *step = [RKSTQuestionStep questionStepWithIdentifier:kHeartAgeResult
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:kHeartAgeResult
                                                                         title:@"No question"
-                                                                       answer:[RKSTBooleanAnswerFormat new]];
+                                                                       answer:[ORKBooleanAnswerFormat new]];
         step.optional = NO;
         
         [steps addObject:step];
     }
     
-    RKSTOrderedTask *task = [[RKSTOrderedTask alloc] initWithIdentifier:scheduledTask.task.taskID steps:steps];
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:scheduledTask.task.taskID steps:steps];
     
     return task;
 }
@@ -277,7 +277,7 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
 #pragma  mark  - TaskViewController delegates
 /*********************************************************************************/
 
-- (void)taskViewControllerDidComplete: (RKSTTaskViewController *)taskViewController{
+- (void)taskViewControllerDidComplete: (ORKTaskViewController *)taskViewController{
     
     // We need to create three question results that will hold the value of Heart Age,
     // Ten Year Risk, and Lifetime Risk factors. Ideally we would like to simply
@@ -287,26 +287,26 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
     
     NSMutableArray *questionResultsForSurvey = [NSMutableArray array];
     
-    for (RKSTStepResult *stepResult in self.result.results) {
-        for (RKSTQuestionResult *surveyQuestionResult in stepResult.results) {
+    for (ORKStepResult *stepResult in self.result.results) {
+        for (ORKQuestionResult *surveyQuestionResult in stepResult.results) {
             [questionResultsForSurvey addObject:surveyQuestionResult];
         }
     }
     
-    RKSTNumericQuestionResult *qrHeartAge = [[RKSTNumericQuestionResult alloc] initWithIdentifier:kSummaryHeartAge];
-    qrHeartAge.questionType = RKQuestionTypeInteger;
+    ORKNumericQuestionResult *qrHeartAge = [[ORKNumericQuestionResult alloc] initWithIdentifier:kSummaryHeartAge];
+    qrHeartAge.questionType = ORKQuestionTypeInteger;
     qrHeartAge.numericAnswer = self.heartAgeInfo[kSummaryHeartAge];
     [questionResultsForSurvey addObject:qrHeartAge];
     
     
-    RKSTNumericQuestionResult *qrTenYearRisk = [[RKSTNumericQuestionResult alloc] initWithIdentifier:kSummaryTenYearRisk];
-    qrTenYearRisk.questionType = RKQuestionTypeDecimal;
+    ORKNumericQuestionResult *qrTenYearRisk = [[ORKNumericQuestionResult alloc] initWithIdentifier:kSummaryTenYearRisk];
+    qrTenYearRisk.questionType = ORKQuestionTypeDecimal;
     qrTenYearRisk.numericAnswer = self.heartAgeInfo[kSummaryTenYearRisk];
     
     [questionResultsForSurvey addObject:qrTenYearRisk];
     
-    RKSTNumericQuestionResult *qrLifetimeRisk = [[RKSTNumericQuestionResult alloc] initWithIdentifier:kSummaryLifetimeRisk];
-    qrLifetimeRisk.questionType = RKQuestionTypeDecimal;
+    ORKNumericQuestionResult *qrLifetimeRisk = [[ORKNumericQuestionResult alloc] initWithIdentifier:kSummaryLifetimeRisk];
+    qrLifetimeRisk.questionType = ORKQuestionTypeDecimal;
     qrLifetimeRisk.numericAnswer = self.heartAgeInfo[kSummaryLifetimeRisk];
     
     [questionResultsForSurvey addObject:qrLifetimeRisk];
@@ -316,27 +316,27 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
     [super taskViewControllerDidComplete:taskViewController];
 }
 
-- (RKSTStepViewController *)taskViewController:(RKSTTaskViewController *)taskViewController viewControllerForStep:(RKSTStep *)step
+- (ORKStepViewController *)taskViewController:(ORKTaskViewController *)taskViewController viewControllerForStep:(ORKStep *)step
 {
     
-    RKSTStepViewController *stepVC = nil;
+    ORKStepViewController *stepVC = nil;
     
  if ([step.identifier isEqualToString:kHeartAgeResult]) {
         
         NSMutableDictionary *surveyResultsDictionary = [NSMutableDictionary dictionary];
         
         // Normalize survey results into dictionary.
-        for (RKSTStepResult *survey in taskViewController.result.results) {
+        for (ORKStepResult *survey in taskViewController.result.results) {
             if (![survey.identifier isEqualToString:kHeartAgeIntroduction]) {
                 NSArray *qrIdentifiers = self.heartAgeTaskQuestionIndex[survey.identifier];
                 
-                [survey.results enumerateObjectsUsingBlock:^(RKSTQuestionResult *questionResult, NSUInteger idx, BOOL *stop) {
+                [survey.results enumerateObjectsUsingBlock:^(ORKQuestionResult *questionResult, NSUInteger idx, BOOL *stop) {
                     NSString *questionIdentifier = [qrIdentifiers objectAtIndex:idx];
                     
                     if ([questionIdentifier isEqualToString:kHeartAgeTestDataEthnicity]) {
                         APCAppDelegate *apcDelegate = (APCAppDelegate*)[[UIApplication sharedApplication] delegate];
 
-                        RKSTChoiceQuestionResult *textResult = (RKSTChoiceQuestionResult *) questionResult;
+                        ORKChoiceQuestionResult *textResult = (ORKChoiceQuestionResult *) questionResult;
                         NSString *ethnicity = (NSString *)[textResult.choiceAnswers firstObject];
                         
                         // persist ethnicity to the datastore
@@ -344,14 +344,14 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
                         
                         [surveyResultsDictionary setObject:ethnicity forKey:questionIdentifier];
                     } else if ([questionIdentifier isEqualToString:kHeartAgeTestDataGender]) {
-                        RKSTChoiceQuestionResult *textResult = (RKSTChoiceQuestionResult *) questionResult;
+                        ORKChoiceQuestionResult *textResult = (ORKChoiceQuestionResult *) questionResult;
                         
                         NSString *selectedGender = ([(NSString *)[textResult.choiceAnswers firstObject] isEqualToString:@"HKBiologicalSexFemale"]) ? kHeartAgeTestDataGenderFemale :kHeartAgeTestDataGenderMale;
 
                         [surveyResultsDictionary setObject:selectedGender
                                                     forKey:questionIdentifier];
                     } else if ([questionIdentifier isEqualToString:kHeartAgeTestDataAge]) {
-                        RKSTDateQuestionResult *dob = (RKSTDateQuestionResult *) questionResult;
+                        ORKDateQuestionResult *dob = (ORKDateQuestionResult *) questionResult;
                         
                     
                         NSDate *dateOfBirth = dob.dateAnswer;                        // Compute the age of the user.
@@ -362,12 +362,12 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
                         
                         NSUInteger usersAge = [ageComponents year];
                         [surveyResultsDictionary setObject:[NSNumber numberWithInteger:usersAge] forKey:questionIdentifier];
-                    } else if ([questionResult isKindOfClass:[RKSTBooleanQuestionResult class]]) {
-                        RKSTBooleanQuestionResult *numericResult = (RKSTBooleanQuestionResult *) questionResult;
+                    } else if ([ORKQuestionResult isKindOfClass:[ORKBooleanQuestionResult class]]) {
+                        ORKBooleanQuestionResult *numericResult = (ORKBooleanQuestionResult *) questionResult;
                         
                         [surveyResultsDictionary setObject:numericResult.booleanAnswer forKey:questionIdentifier];
-                    } else if ([questionResult isKindOfClass:[RKSTNumericQuestionResult class]]) {
-                        RKSTNumericQuestionResult *numericResult = (RKSTNumericQuestionResult *) questionResult;
+                    } else if ([ORKQuestionResult isKindOfClass:[ORKNumericQuestionResult class]]) {
+                        ORKNumericQuestionResult *numericResult = (ORKNumericQuestionResult *) questionResult;
                         
                         [surveyResultsDictionary setObject:numericResult.numericAnswer forKey:questionIdentifier];
                     }
@@ -401,7 +401,7 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
 }
 
 
-- (BOOL)taskViewController:(RKSTTaskViewController *)taskViewController hasLearnMoreForStep:(RKSTStep *)step {
+- (BOOL)taskViewController:(ORKTaskViewController *)taskViewController hasLearnMoreForStep:(ORKStep *)step {
     
     BOOL hasLearnMore = NO;
     
@@ -414,7 +414,7 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
     return hasLearnMore;
 }
 
-- (void)taskViewController:(RKSTTaskViewController *)taskViewController learnMoreForStep:(RKSTStepViewController *)stepViewController {
+- (void)taskViewController:(ORKTaskViewController *)taskViewController learnMoreForStep:(ORKStepViewController *)stepViewController {
     
     
     if ([stepViewController.step.identifier isEqualToString:kHeartAgeIntroduction]) {
