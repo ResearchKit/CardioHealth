@@ -161,6 +161,20 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
             [stepQuestions addObject:item];
         }
         
+        {
+            ORKHealthKitQuantityTypeAnswerFormat *format = [ORKHealthKitQuantityTypeAnswerFormat answerFormatWithQuantityType:[HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierBloodPressureDiastolic]
+                                                                                                                         unit:[HKUnit unitFromString:@"mmHg"]
+                                                                                                                        style:ORKNumericAnswerStyleInteger];
+            
+            
+            
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:kHeartAgeTestDataSystolicBloodPressure
+                                                                   text:NSLocalizedString(@"Diastolic Blood Pressure",
+                                                                                          @"Diastolic Blood Pressure")
+                                                           answerFormat:format];
+            [stepQuestions addObject:item];
+        }
+        
         [step setFormItems:stepQuestions];
         
         [steps addObject:step];
