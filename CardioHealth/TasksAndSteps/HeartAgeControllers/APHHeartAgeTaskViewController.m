@@ -22,6 +22,8 @@ static NSString *kHeartAgeResult = @"HeartAgeResult";
 static NSString *kHeartAgeFormStepBiographicAndDemographic = @"biographicAndDemographic";
 static NSString *kHeartAgeFormStepSmokingHistory = @"smokingHistory";
 static NSString *kHeartAgeFormStepCholesterolHdlSystolic = @"cholesterolHdlSystolic";
+static NSString *kHeartAgeTestDataDiastolicBloodPressure = @"cholesterolHdlDiastolic";
+
 static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
 
 @interface APHHeartAgeTaskViewController ()
@@ -161,6 +163,20 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
             [stepQuestions addObject:item];
         }
         
+        {
+            ORKHealthKitQuantityTypeAnswerFormat *format = [ORKHealthKitQuantityTypeAnswerFormat answerFormatWithQuantityType:[HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierBloodPressureDiastolic]
+                                                                                                                         unit:[HKUnit unitFromString:@"mmHg"]
+                                                                                                                        style:ORKNumericAnswerStyleInteger];
+            
+            
+            
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:kHeartAgeTestDataDiastolicBloodPressure
+                                                                   text:NSLocalizedString(@"Diastolic Blood Pressure",
+                                                                                          @"Diastolic Blood Pressure")
+                                                           answerFormat:format];
+            [stepQuestions addObject:item];
+        }
+        
         [step setFormItems:stepQuestions];
         
         [steps addObject:step];
@@ -227,7 +243,8 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
                                        kHeartAgeFormStepCholesterolHdlSystolic: @[
                                                kHeartAgeTestDataTotalCholesterol,
                                                kHeartAgeTestDataHDL,
-                                               kHeartAgeTestDataSystolicBloodPressure],
+                                               kHeartAgeTestDataSystolicBloodPressure,
+                                               kHeartAgeTestDataDiastolicBloodPressure],
                                        kHeartAgeFormStepSmokingHistory: @[
                                                kHeartAgeTestDataSmoke,
                                                kHeartAgeTestDataCurrentlySmoke]
@@ -330,8 +347,13 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
                         APCAppDelegate *apcDelegate = (APCAppDelegate*)[[UIApplication sharedApplication] delegate];
 
                         ORKChoiceQuestionResult *textResult = (ORKChoiceQuestionResult *) questionResult;
-                        NSString *ethnicity = (NSString *)[textResult.choiceAnswers firstObject];
+
+                        NSString *ethnicity = @"";
+                        if ([textResult.choiceAnswers firstObject] != nil) {
                         
+                            ethnicity = (NSString *)[textResult.choiceAnswers firstObject];
+                        }
+
                         // persist ethnicity to the datastore
                         [apcDelegate.dataSubstrate.currentUser setEthnicity:ethnicity];
                         
@@ -339,15 +361,24 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
                     } else if ([questionIdentifier isEqualToString:kHeartAgeTestDataGender]) {
                         ORKChoiceQuestionResult *textResult = (ORKChoiceQuestionResult *) questionResult;
                         
-                        NSString *selectedGender = ([(NSString *)[textResult.choiceAnswers firstObject] isEqualToString:@"HKBiologicalSexFemale"]) ? kHeartAgeTestDataGenderFemale :kHeartAgeTestDataGenderMale;
-
+                        NSString *selectedGender = @"";
+                        if ([textResult.choiceAnswers firstObject] != nil) {
+                            
+                            selectedGender = ([(NSString *)[textResult.choiceAnswers firstObject] isEqualToString:@"HKBiologicalSexFemale"]) ? kHeartAgeTestDataGenderFemale :kHeartAgeTestDataGenderMale;
+                        }
+                        
                         [surveyResultsDictionary setObject:selectedGender
                                                     forKey:questionIdentifier];
                     } else if ([questionIdentifier isEqualToString:kHeartAgeTestDataAge]) {
                         ORKDateQuestionResult *dob = (ORKDateQuestionResult *) questionResult;
                         
+                        //Default date
+                        NSDate *dateOfBirth = [NSDate date];
+                        
+                        if (dob.dateAnswer != nil) {
+                            dateOfBirth = dob.dateAnswer;                        // Compute the age of the user.
+                        }
                     
-                        NSDate *dateOfBirth = dob.dateAnswer;                        // Compute the age of the user.
                         NSDateComponents *ageComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitYear
                                                                                           fromDate:dateOfBirth
                                                                                             toDate:[NSDate date] // today
@@ -358,11 +389,23 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
                     } else if ([ORKQuestionResult isKindOfClass:[ORKBooleanQuestionResult class]]) {
                         ORKBooleanQuestionResult *numericResult = (ORKBooleanQuestionResult *) questionResult;
                         
-                        [surveyResultsDictionary setObject:numericResult.booleanAnswer forKey:questionIdentifier];
+                        NSNumber *answer = @(0);
+                        
+                        if (numericResult.booleanAnswer != nil) {
+                            answer = numericResult.booleanAnswer;
+                        }
+                        
+                        [surveyResultsDictionary setObject:answer forKey:questionIdentifier];
                     } else if ([ORKQuestionResult isKindOfClass:[ORKNumericQuestionResult class]]) {
                         ORKNumericQuestionResult *numericResult = (ORKNumericQuestionResult *) questionResult;
                         
-                        [surveyResultsDictionary setObject:numericResult.numericAnswer forKey:questionIdentifier];
+                        NSNumber *answer = @(0);
+                        
+                        if (numericResult.numericAnswer != nil) {
+                            answer = numericResult.numericAnswer;
+                        }
+                        
+                        [surveyResultsDictionary setObject:answer forKey:questionIdentifier];
                     }
                 }];
             }
