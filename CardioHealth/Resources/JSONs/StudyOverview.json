@@ -7,21 +7,21 @@
     [
      {
      "title":"About this Study",
-     "details":"AboutStudy",
+     "details":"AboutStudy_intro",
      "icon_image":"paperplus_icon",
      "tint_color" : "blue"
      },
      
      {
      "title":"How this Study works",
-     "details":"howstudyworks",
+     "details":"howstudyworks_intro",
      "icon_image":"rulerpencil_icon",
      "tint_color" : "purple"
      },
      
      {
      "title":"Who is Eligible to Participate",
-     "details":"EligibleToParticipate",
+     "details":"EligibleToParticipate_intro",
      "icon_image":"clipboard_icon",
      "tint_color" : "green"
      } 
