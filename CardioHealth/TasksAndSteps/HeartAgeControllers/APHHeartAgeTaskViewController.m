@@ -40,13 +40,6 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    self.navigationBar.topItem.title = NSLocalizedString(@"Heart Age Test", nil);
-    
-    if ([self.task.identifier isEqualToString:kKludgeIdentifierForHeartAgeTaskB]) {
-        
-        self.navigationBar.topItem.title = NSLocalizedString(@"Heart and Stroke Risk", nil);
-    }
 }
 
 /*********************************************************************************/
