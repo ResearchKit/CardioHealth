@@ -16,7 +16,6 @@
 - (void)viewWillAppear:(BOOL)animated  {
     [super viewWillAppear:animated];
 
-    self.navigationBar.topItem.title = NSLocalizedString(@"Well-Being Survey", nil);
 }
 
 
