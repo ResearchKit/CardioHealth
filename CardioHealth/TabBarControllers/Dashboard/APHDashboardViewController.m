@@ -52,8 +52,12 @@ static CGFloat    const kMetersToYardConversion                 = 1.093f;
             _rowItemsOrder = [[NSMutableArray alloc] initWithArray:@[
                                                                      @(kAPHDashboardItemTypeDistance),
                                                                      @(kAPHDashboardItemTypeHeartRate),
-                                                                     @(kAPHDashboardItemTypeSevenDayFitness), @(kAPHDashboardItemTypeWalkingTest)
                                                                      ]];
+            if ([APCDeviceHardware isiPhone5SOrNewer]) {
+                [_rowItemsOrder addObjectsFromArray:@[@(kAPHDashboardItemTypeSevenDayFitness), @(kAPHDashboardItemTypeWalkingTest)]];
+            } else {
+                [_rowItemsOrder addObjectsFromArray:@[@(kAPHDashboardItemTypeWalkingTest)]];
+            }
             
             [defaults setObject:[NSArray arrayWithArray:_rowItemsOrder] forKey:kAPCDashboardRowItemsOrder];
             [defaults synchronize];

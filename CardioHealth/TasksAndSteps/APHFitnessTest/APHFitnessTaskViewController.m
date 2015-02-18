@@ -55,7 +55,11 @@ static NSString* const kLastHeartRateForDashboard  = @"lastHeartRate";
 
 - (void)taskViewController:(ORKTaskViewController *)taskViewController stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     
-    if ([stepViewController.step.identifier isEqualToString:kConclusionStep]) {
+    if ([stepViewController.step.identifier isEqualToString:kIntroStep] || [stepViewController.step.identifier isEqualToString:kIntroOneStep]) {
+        ORKInstructionStep *introStep = ((ORKInstructionStep *)stepViewController.step);
+        introStep.title = NSLocalizedString(@"6-Minute Walk Test", @"6-Minute Walk Test");
+        stepViewController.step = introStep;
+    } else if ([stepViewController.step.identifier isEqualToString:kConclusionStep]) {
         [[UIView appearance] setTintColor:[UIColor appTertiaryColor1]];
     }
 }
