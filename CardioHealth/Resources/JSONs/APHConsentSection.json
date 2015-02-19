@@ -13,8 +13,8 @@
      "sectionTitle": "Activities",
      "sectionSummary": "This study will ask you to perform tasks and respond to surveys.",
      "sectionHtmlContent" : "3activities",
-     "sectionImage": "00_Blank_to_Activities"
-     
+     "sectionImage": "00_Blank_to_Activities",
+     "sectionAnimationUrl": "00_Blank_to_Activities"
      },
      
      {
@@ -22,7 +22,8 @@
      "sectionTitle": "Sensor Data",
      "sectionSummary": "This study will also gather sensor data from your iPhone and personal devices with your permission.",
      "sectionHtmlContent" : "4sensordata",
-     "sectionImage": "01_Activities_to_SensorData"
+     "sectionImage": "01_Activities_to_SensorData",
+     "sectionAnimationUrl":"01_Activities_to_SensorData"
      
      },
      
@@ -31,7 +32,8 @@
      "sectionType" : "dataGathering",
      "sectionTitle": "Data Processing",
      "sectionSummary" : "Collected data may allow researchers, as well as you, to understand patterns and details about Cardiovascular health.",
-     "sectionHtmlContent" : "5dataprocessing"
+     "sectionHtmlContent" : "5dataprocessing",
+     "sectionAnimationUrl":"02_SensorData_to_DataGathering"
      },
      
      {
@@ -82,7 +84,8 @@
      "sectionTitle": "Potential Benefits",
      "sectionSummary": "The information collected by this study may help you better track and monitor your Cardiovascular health.",
      "sectionHtmlContent" : "12potentialbenefits1",
-     "sectionImage": "10_PotentialBenifits"
+     "sectionImage": "10_PotentialBenifits",
+     "sectionAnimationUrl":"10_PotentialBenifits"
      
      },
      {
@@ -90,7 +93,8 @@
      "sectionTitle": "Issues to Consider",
      "sectionSummary": "Some questions may make you uncomfortable.  Simply do not respond.",
      "sectionHtmlContent" : "13issues_survey",
-     "sectionImage": "11_IssuesToConsider1"
+     "sectionImage": "11_IssuesToConsider1",
+     "sectionAnimationUrl":"11_IssuesToConsider1"
      
      },
      
@@ -99,7 +103,8 @@
      "sectionTitle": "Issues to Consider",
      "sectionSummary": "Participating in this study may change how you feel.  You may feel more tired, sad, energized, or happy.",
      "sectionHtmlContent" : "14issues_mood",
-     "sectionImage": "12_IssuesToConsider2"
+     "sectionImage": "12_IssuesToConsider2",
+     "sectionAnimationUrl":"12_IssuesToConside2"
      
      },
      
@@ -108,7 +113,8 @@
      "sectionTitle": "Risk to Privacy",
      "sectionSummary": "Some of the data that you provide may be sensitive.  We will de-identify your data and use secure computers, but we cannot ensure complete privacy.",
      "sectionHtmlContent" : "15privacy_risk",
-     "sectionImage": "13_RiskToPrivacy"
+     "sectionImage": "13_RiskToPrivacy",
+     "sectionAnimationUrl":"13_RiskToPrivacy"
      
      }
      
