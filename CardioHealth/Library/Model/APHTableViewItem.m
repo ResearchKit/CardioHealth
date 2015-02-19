@@ -37,3 +37,23 @@
             Date : %@\n", (long)self.distanceWalked, (long)self.peakHeartRate, (long)self.finalHeartRate, self.activityDate];
 }
 @end
+
+@implementation APHTableViewDashboardSevenDayFitnessItem
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _distanceTraveledString = @"";
+        _numberOfDaysString = @"";
+    }
+    return self;
+}
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"\
+            numberOfDaysString : %@\n\
+            distanceTraveledString : %@", self.numberOfDaysString, self.distanceTraveledString];
+}
+@end
