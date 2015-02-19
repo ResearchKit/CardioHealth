@@ -33,7 +33,6 @@ static CGFloat    const kMetersToYardConversion                 = 1.093f;
 @property (nonatomic, strong)   APCScoring*         stepScoring;
 @property (nonatomic, strong)   APCScoring*         heartRateScoring;
 @property (nonatomic, strong)   NSMutableArray*     rowItemsOrder;
-@property (nonatomic, strong)   NSDateFormatter*    dateFormatter;
 @property (nonatomic, strong)  APHWalkingTestResults *walkingResults;
 @end
 
@@ -65,8 +64,6 @@ static CGFloat    const kMetersToYardConversion                 = 1.093f;
         }
         
         self.title = NSLocalizedString(@"Dashboard", @"Dashboard");
-        
-        _dateFormatter = [NSDateFormatter new];
     }
     
     return self;
@@ -142,11 +139,11 @@ static CGFloat    const kMetersToYardConversion                 = 1.093f;
     
 
     HKQuantityType *stepQuantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierStepCount];
-    self.stepScoring= [[APCScoring alloc] initWithHealthKitQuantityType:stepQuantityType unit:[HKUnit countUnit] numberOfDays:-5];
+    self.stepScoring = [[APCScoring alloc] initWithHealthKitQuantityType:stepQuantityType unit:[HKUnit countUnit] numberOfDays:-kNumberOfDaysToDisplay];
 
     HKQuantityType *heartRateQuantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierHeartRate];
     
-    self.heartRateScoring = [[APCScoring alloc] initWithHealthKitQuantityType:heartRateQuantityType unit:[[HKUnit countUnit] unitDividedByUnit:[HKUnit minuteUnit]] numberOfDays:-5];
+    self.heartRateScoring = [[APCScoring alloc] initWithHealthKitQuantityType:heartRateQuantityType unit:[[HKUnit countUnit] unitDividedByUnit:[HKUnit minuteUnit]] numberOfDays:-kNumberOfDaysToDisplay];
 
 }
 
@@ -171,19 +168,6 @@ static CGFloat    const kMetersToYardConversion                 = 1.093f;
             row.itemType = kAPCTableViewDashboardItemTypeProgress;
             [rowItems addObject:row];
         }
-        
-        APCTableViewSection *section = [APCTableViewSection new];
-        NSDate *dateToday = [NSDate date];
-        
-        self.dateFormatter.dateFormat = @"MMMM d";
-        
-        section.sectionTitle = [NSString stringWithFormat:@"%@, %@", NSLocalizedString(@"Today", @""), [self.dateFormatter stringFromDate:dateToday]];
-        section.rows = [NSArray arrayWithArray:rowItems];
-        [self.items addObject:section];
-    }
-    
-    {
-        NSMutableArray *rowItems = [NSMutableArray new];
         
         for (NSNumber *typeNumber in self.rowItemsOrder) {
             
