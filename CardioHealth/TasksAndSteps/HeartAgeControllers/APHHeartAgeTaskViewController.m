@@ -275,6 +275,15 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
 #pragma  mark  - TaskViewController delegates
 /*********************************************************************************/
 
+- (void)taskViewController:(ORKTaskViewController *)taskViewController didFinishWithResult:(ORKTaskViewControllerResult)result error:(NSError *)error
+{
+    if (result == ORKTaskViewControllerResultCompleted)
+    {
+        [self taskViewControllerDidComplete:taskViewController];
+        [super taskViewController:taskViewController didFinishWithResult:result error:error];
+    }
+}
+
 - (void)taskViewControllerDidComplete: (ORKTaskViewController *)taskViewController{
     
     // We need to create three question results that will hold the value of Heart Age,
@@ -310,8 +319,6 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
     [questionResultsForSurvey addObject:qrLifetimeRisk];
     
     self.result.results = questionResultsForSurvey;
-    
-    [super taskViewControllerDidComplete:taskViewController];
 }
 
 - (ORKStepViewController *)taskViewController:(ORKTaskViewController *)taskViewController viewControllerForStep:(ORKStep *)step
