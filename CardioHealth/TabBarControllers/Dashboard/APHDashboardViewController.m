@@ -14,6 +14,8 @@
 #import "APHWalkTestViewController.h"
 #import "APHWalkingTestResults.h"
 
+
+static   CGFloat const metersPerMile             = 1609.344;
 static NSString*  const kAPCBasicTableViewCellIdentifier        = @"APCBasicTableViewCell";
 static NSString*  const kAPCRightDetailTableViewCellIdentifier  = @"APCRightDetailTableViewCell";
 static NSInteger  const kDataCountLimit                         = 1;
@@ -28,13 +30,16 @@ static CGFloat    const kMetersToYardConversion                 = 1.093f;
 
 @interface APHDashboardViewController ()<APCPieGraphViewDatasource>
 
-@property (nonatomic)           NSInteger           dataCount;
-@property (nonatomic, strong)   NSArray*            allocationDataset;
-@property (nonatomic, strong)   APCScoring*         stepScoring;
-@property (nonatomic, strong)   APCScoring*         heartRateScoring;
-@property (nonatomic, strong)   NSMutableArray*     rowItemsOrder;
-@property (nonatomic, strong)   NSDateFormatter*    dateFormatter;
-@property (nonatomic, strong)  APHWalkingTestResults *walkingResults;
+@property (nonatomic)           NSInteger               dataCount;
+@property (nonatomic, strong)   NSArray*                allocationDataset;
+@property (nonatomic, strong)   APCScoring*             stepScoring;
+@property (nonatomic, strong)   APCScoring*             heartRateScoring;
+@property (nonatomic, strong)   NSMutableArray*         rowItemsOrder;
+@property (nonatomic, strong)   NSDateFormatter*        dateFormatter;
+@property (nonatomic, strong)   APHWalkingTestResults*  walkingResults;
+@property (nonatomic)           NSNumber*               totalDistanceForSevenDay;
+@property (nonatomic)           NSIndexPath*            currentPieGraphIndexPath;
+
 @end
 
 @implementation APHDashboardViewController
@@ -92,6 +97,10 @@ static CGFloat    const kMetersToYardConversion                 = 1.093f;
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(updatePieChart:)
                                                  name:APHSevenDayAllocationDataIsReadyNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(TotalDistanceFromHealthKit:) name:APHSevenDayAllocationHealthKitDataIsReadyNotification
                                                object:nil];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -233,8 +242,29 @@ static CGFloat    const kMetersToYardConversion                 = 1.093f;
                 
                 case kAPHDashboardItemTypeSevenDayFitness:
                 {
-                    APHTableViewDashboardFitnessControlItem *item = [APHTableViewDashboardFitnessControlItem new];
+                    APHTableViewDashboardSevenDayFitnessItem *item = [APHTableViewDashboardSevenDayFitnessItem new];
                     item.caption = NSLocalizedString(@"7-Day Assessment", @"");
+                    item.numberOfDaysString = NSLocalizedString([self fitnessDaysRemaining], @"");
+                    
+                    NSDate *startDate = [[NSCalendar currentCalendar] dateBySettingHour:0
+                                                                                 minute:0
+                                                                                 second:0
+                                                                                 ofDate:[NSDate date]
+                                                                                options:0];
+                    
+
+                    APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
+                    [appDelegate.sevenDayFitnessAllocationData runStatsCollectionQueryfromStartDate:startDate toEndDate:[NSDate date]];
+                    
+                    
+                    NSString *sevenDayDistanceStr = nil;
+
+                    //If healthkit updated quickly enough then fill in the data.
+                    if (self.totalDistanceForSevenDay != nil) {
+                        sevenDayDistanceStr = [NSString stringWithFormat:@"%.2f Miles", [self.totalDistanceForSevenDay floatValue]/metersPerMile];
+                    }
+                    
+                    item.distanceTraveledString = sevenDayDistanceStr;
                     item.identifier = kAPCDashboardPieGraphTableViewCellIdentifier;
                     item.tintColor = [UIColor appTertiaryGreenColor];
                     item.editable = YES;
@@ -302,12 +332,29 @@ static CGFloat    const kMetersToYardConversion                 = 1.093f;
     APCTableViewDashboardItem *dashboardItem = (APCTableViewDashboardItem *)[self itemForIndexPath:indexPath];
     
     if ([dashboardItem isKindOfClass:[APHTableViewDashboardFitnessControlItem class]]){
-        APHTableViewDashboardFitnessControlItem *fitnessItem = (APHTableViewDashboardFitnessControlItem *)dashboardItem;
+
         
+    } else if ([dashboardItem isKindOfClass:[APHTableViewDashboardSevenDayFitnessItem class]]){
+        APHTableViewDashboardSevenDayFitnessItem *fitnessItem = (APHTableViewDashboardSevenDayFitnessItem *)dashboardItem;
+        self.currentPieGraphIndexPath = indexPath;
         APCDashboardPieGraphTableViewCell *pieGraphCell = (APCDashboardPieGraphTableViewCell *)cell;
         
         pieGraphCell.pieGraphView.datasource = self;
         pieGraphCell.textLabel.text = @"";
+        pieGraphCell.daysRemainingLabel.text = fitnessItem.numberOfDaysString;
+        
+        if (fitnessItem.distanceTraveledString == nil) {
+            fitnessItem.distanceTraveledString = [NSString stringWithFormat:@"%0.1f miles", [self.totalDistanceForSevenDay floatValue]/metersPerMile];
+            
+            pieGraphCell.distanceLabel.alpha = 0;
+            [UIView animateWithDuration:0.2 animations:^{
+                pieGraphCell.distanceLabel.text = fitnessItem.distanceTraveledString;
+                pieGraphCell.distanceLabel.alpha = 1;
+            }];
+        }
+        
+        pieGraphCell.distanceLabel.text = fitnessItem.distanceTraveledString;
+        
         pieGraphCell.title = fitnessItem.caption;
         pieGraphCell.tintColor = fitnessItem.tintColor;
         pieGraphCell.pieGraphView.shouldAnimateLegend = NO;
@@ -318,7 +365,7 @@ static CGFloat    const kMetersToYardConversion                 = 1.093f;
         }
         
         pieGraphCell.delegate = self;
-        
+    
         
     } else if ([dashboardItem isKindOfClass:[APHTableViewDashboardWalkingTestItem class]]){
         APHTableViewDashboardWalkingTestItem *walkingTestItem = (APHTableViewDashboardWalkingTestItem *)dashboardItem;
@@ -354,6 +401,8 @@ static CGFloat    const kMetersToYardConversion                 = 1.093f;
         height = 255.0f;
     } else if ([dashboardItem isKindOfClass:[APHTableViewDashboardWalkingTestItem class]]) {
         height = 138.0;
+    } else if ([dashboardItem isKindOfClass:[APHTableViewDashboardSevenDayFitnessItem class]]) {
+        height = 285.0;
     }
     
     return height;
@@ -406,5 +455,93 @@ static CGFloat    const kMetersToYardConversion                 = 1.093f;
         [self.navigationController presentViewController:navController animated:YES completion:nil];
     }
 }
+
+#pragma mark - Helper Methods
+
+- (NSString *)fitnessDaysRemaining
+{
+    NSDate *startDate = [[NSCalendar currentCalendar] dateBySettingHour:0
+                                                                 minute:0
+                                                                 second:0
+                                                                 ofDate:[self checkSevenDayFitnessStartDate]
+                                                                options:0];
+    NSDate *today = [[NSCalendar currentCalendar] dateBySettingHour:0
+                                                             minute:0
+                                                             second:0
+                                                             ofDate:[NSDate date]
+                                                            options:0];
+    
+    
+    // Compute the remaing days of the 7 day fitness allocation.
+    NSDateComponents *numberOfDaysFromStartDate = [[NSCalendar currentCalendar] components:NSCalendarUnitDay
+                                                                                  fromDate:startDate
+                                                                                    toDate:today
+                                                                                   options:NSCalendarWrapComponents];
+    
+    NSUInteger daysRemain = 0;
+    
+    if (numberOfDaysFromStartDate.day < 7) {
+        daysRemain = 7 - numberOfDaysFromStartDate.day;
+    }
+    
+    NSString *days = (daysRemain == 1) ? NSLocalizedString(@"Day", @"Day") : NSLocalizedString(@"Days", @"Days");
+    
+    NSString *remaining = [NSString stringWithFormat:NSLocalizedString(@"%lu %@ Remaining",
+                                                                       @"{count} {day/s} Remaining"), daysRemain, days];
+    
+    return remaining;
+}
+
+- (NSDate *)checkSevenDayFitnessStartDate
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    NSDate *fitnessStartDate = [defaults objectForKey:kSevenDayFitnessStartDateKey];
+    
+    if (!fitnessStartDate) {
+        
+        NSDate *startDate = [[NSCalendar currentCalendar] dateBySettingHour:0
+                                                                     minute:0
+                                                                     second:0
+                                                                     ofDate:[NSDate date]
+                                                                    options:0];
+        
+        fitnessStartDate = startDate;
+        
+        APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
+        appDelegate.sevenDayFitnessAllocationData = [[APHFitnessAllocation alloc] initWithAllocationStartDate:fitnessStartDate];
+        [appDelegate.sevenDayFitnessAllocationData startDataCollection];
+    }
+    
+    return fitnessStartDate;
+}
+
+- (void)TotalDistanceFromHealthKit:(NSNotification *)notif {
+    
+    NSDictionary *healthKitDict = notif.userInfo;
+    self.totalDistanceForSevenDay = (NSNumber *)[healthKitDict objectForKey:@"datasetValueKey"];
+    
+    NSIndexPath *indexPath = nil;
+    
+    if (self.currentPieGraphIndexPath) {
+        indexPath = self.currentPieGraphIndexPath;
+    } else {
+        for (NSNumber *number in self.rowItemsOrder) {
+            if ([number intValue] == kAPHDashboardItemTypeSevenDayFitness) {
+                NSInteger row = [self.rowItemsOrder indexOfObject:number];
+                
+                indexPath = [NSIndexPath indexPathForRow:row inSection:1];
+                
+                break;
+            }
+        }
+    }
+    
+    if (self.totalDistanceForSevenDay == nil) {
+        [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }
+
+}
+
 @end
 

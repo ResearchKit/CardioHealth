@@ -522,24 +522,7 @@
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JgR-Qz-IV8" customClass="APCPieGraphView">
-                                            <rect key="frame" x="4" y="57" width="316" height="193"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7.40 Miles" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lNq-ij-jkO">
-                                                    <rect key="frame" x="18" y="133" width="245" height="21"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="21" id="61F-e0-7Iu"/>
-                                                        <constraint firstAttribute="width" constant="245" id="M3K-NU-FPD"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="lNq-ij-jkO" firstAttribute="leading" secondItem="JgR-Qz-IV8" secondAttribute="leading" constant="18" id="QTd-pR-4n3"/>
-                                                <constraint firstAttribute="centerY" secondItem="lNq-ij-jkO" secondAttribute="centerY" constant="-47" id="SCF-PT-ZpB"/>
-                                                <constraint firstAttribute="trailing" secondItem="lNq-ij-jkO" secondAttribute="trailing" constant="53" id="nCO-y7-rMV"/>
-                                            </constraints>
+                                            <rect key="frame" x="4" y="87" width="316" height="193"/>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hDo-fs-vDe">
                                             <rect key="frame" x="0.0" y="281" width="320" height="4"/>
@@ -573,10 +556,16 @@
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 Days Remaining" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W6c-wS-SxS">
-                                            <rect key="frame" x="18" y="29" width="245" height="34"/>
+                                            <rect key="frame" x="18" y="39" width="245" height="19"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="34" id="P7k-sI-zYh"/>
+                                                <constraint firstAttribute="height" constant="19" id="P7k-sI-zYh"/>
                                             </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7.40 Miles" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lNq-ij-jkO">
+                                            <rect key="frame" x="18" y="58" width="245" height="18"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
@@ -584,9 +573,10 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="PkW-KS-AjZ" firstAttribute="top" secondItem="Cmb-op-73b" secondAttribute="bottom" constant="-26" id="0N6-bf-PBM"/>
-                                        <constraint firstItem="W6c-wS-SxS" firstAttribute="top" secondItem="Cmb-op-73b" secondAttribute="bottom" constant="-5" id="3LA-P5-dfF"/>
+                                        <constraint firstItem="W6c-wS-SxS" firstAttribute="top" secondItem="Cmb-op-73b" secondAttribute="bottom" constant="5" id="3LA-P5-dfF"/>
                                         <constraint firstItem="Cmb-op-73b" firstAttribute="top" secondItem="T4z-mu-a4I" secondAttribute="topMargin" id="8mU-FD-7FH"/>
                                         <constraint firstItem="W6c-wS-SxS" firstAttribute="leading" secondItem="T4z-mu-a4I" secondAttribute="leadingMargin" constant="10" id="DEG-iU-G7n"/>
+                                        <constraint firstItem="lNq-ij-jkO" firstAttribute="top" secondItem="W6c-wS-SxS" secondAttribute="bottom" id="J8Z-Mj-Oa7"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="JgR-Qz-IV8" secondAttribute="trailing" constant="-8" id="Jvp-Tn-K9N"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="Aei-hf-LUa" secondAttribute="trailing" constant="-8" id="OnH-jC-PIs"/>
                                         <constraint firstItem="JgR-Qz-IV8" firstAttribute="leading" secondItem="T4z-mu-a4I" secondAttribute="leadingMargin" constant="-4" id="OrB-Q0-CjP"/>
@@ -596,19 +586,24 @@
                                         <constraint firstItem="HvO-lk-I5Z" firstAttribute="leading" secondItem="T4z-mu-a4I" secondAttribute="leadingMargin" constant="-8" id="X5Z-Fp-X2a"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="Aei-hf-LUa" secondAttribute="bottom" constant="-4" id="Xjb-4x-xPN"/>
                                         <constraint firstItem="Cmb-op-73b" firstAttribute="leading" secondItem="T4z-mu-a4I" secondAttribute="leadingMargin" constant="10" id="Xuo-Pz-GMt"/>
+                                        <constraint firstItem="W6c-wS-SxS" firstAttribute="width" secondItem="lNq-ij-jkO" secondAttribute="width" id="by7-mP-Ts7"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="hDo-fs-vDe" secondAttribute="bottom" constant="-8" id="dNk-so-RxI"/>
                                         <constraint firstItem="ILl-yX-q9B" firstAttribute="leading" secondItem="T4z-mu-a4I" secondAttribute="leadingMargin" constant="-8" id="hJY-O3-O2T"/>
+                                        <constraint firstItem="W6c-wS-SxS" firstAttribute="height" secondItem="lNq-ij-jkO" secondAttribute="height" constant="1" id="hax-Fy-sQf"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="ILl-yX-q9B" secondAttribute="trailing" constant="-8" id="kRf-7s-w6g"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="HvO-lk-I5Z" secondAttribute="bottom" constant="-4" id="nNM-90-Vbe"/>
                                         <constraint firstItem="Aei-hf-LUa" firstAttribute="leading" secondItem="T4z-mu-a4I" secondAttribute="leadingMargin" constant="-8" id="pi1-0P-wgD"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="JgR-Qz-IV8" secondAttribute="bottom" constant="27" id="qJ5-g5-BHq"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="JgR-Qz-IV8" secondAttribute="bottom" constant="-3" id="qJ5-g5-BHq"/>
                                         <constraint firstItem="HvO-lk-I5Z" firstAttribute="top" secondItem="T4z-mu-a4I" secondAttribute="topMargin" constant="-7" id="sBu-G2-Xnl"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="hDo-fs-vDe" secondAttribute="trailing" constant="-8" id="sZo-TV-ggu"/>
                                         <constraint firstItem="PkW-KS-AjZ" firstAttribute="leading" secondItem="Cmb-op-73b" secondAttribute="trailing" constant="4" id="tho-GE-hC2"/>
-                                        <constraint firstItem="JgR-Qz-IV8" firstAttribute="top" secondItem="T4z-mu-a4I" secondAttribute="topMargin" constant="49" id="yfP-xK-06u"/>
+                                        <constraint firstItem="W6c-wS-SxS" firstAttribute="leading" secondItem="lNq-ij-jkO" secondAttribute="leading" id="uqu-WV-nEe"/>
+                                        <constraint firstItem="JgR-Qz-IV8" firstAttribute="top" secondItem="T4z-mu-a4I" secondAttribute="topMargin" constant="79" id="yfP-xK-06u"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="daysRemainingLabel" destination="W6c-wS-SxS" id="PH9-2o-h2m"/>
+                                    <outlet property="distanceLabel" destination="lNq-ij-jkO" id="CY6-AT-ugP"/>
                                     <outlet property="infoButton" destination="PkW-KS-AjZ" id="71z-gj-8I7"/>
                                     <outlet property="pieGraphView" destination="JgR-Qz-IV8" id="U2q-2d-Ima"/>
                                     <outlet property="tintView" destination="HvO-lk-I5Z" id="Nao-gi-BDe"/>
