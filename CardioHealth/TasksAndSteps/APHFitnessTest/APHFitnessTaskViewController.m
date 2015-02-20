@@ -69,9 +69,9 @@ static NSString* const kLastHeartRateForDashboard  = @"lastHeartRate";
     if (result == ORKTaskViewControllerResultCompleted)
     {
         [[UIView appearance] setTintColor:[UIColor appPrimaryColor]];
-        
-        [super taskViewController:taskViewController didFinishWithResult:result error:error];
     }
+    
+    [super taskViewController:taskViewController didFinishWithResult:result error:error];
 }
 
 
