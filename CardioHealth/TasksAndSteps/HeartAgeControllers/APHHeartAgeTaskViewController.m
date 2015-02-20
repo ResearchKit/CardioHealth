@@ -24,7 +24,8 @@ static NSString *kHeartAgeFormStepBiographicAndDemographic = @"biographicAndDemo
 static NSString *kHeartAgeFormStepEthnicty = @"ethnicity";
 static NSString *kHeartAgeFormStepSmokingHistory = @"smokingHistory";
 static NSString *kHeartAgeFormStepCholesterolHdlSystolic = @"cholesterolHdlSystolic";
-static NSString *kHeartAgeTestDataDiastolicBloodPressure = @"cholesterolHdlDiastolic";
+static NSString *kHeartAgeFormStepBlood = @"blood";
+
 
 static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
 
@@ -158,8 +159,8 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
         NSMutableArray *stepQuestions = [NSMutableArray array];
         ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:kHeartAgeFormStepCholesterolHdlSystolic
                                                                 title:nil
-                                                                 text:NSLocalizedString(@"Cholesterol & Blood Pressure",
-                                                                                        @"Cholesterol & Blood Pressure")];
+                                                                 text:NSLocalizedString(@"Cholesterol",
+                                                                                        @"Cholesterol")];
         step.optional = NO;
         
         {
@@ -186,16 +187,40 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
         }
         
         {
+            ORKNumericAnswerFormat *format = [ORKNumericAnswerFormat integerAnswerFormatWithUnit:@"mg/dl"];
+            format.minimum = @(1);
+            format.maximum = @(1000);
+            
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:kHeartAgeTestDataLDL
+                                                                   text:NSLocalizedString(@"LDL Cholesterol", @"LDL Cholesterol")
+                                                           answerFormat:format];
+            [stepQuestions addObject:item];
+        }
+        
+        [step setFormItems:stepQuestions];
+        
+        [steps addObject:step];
+    }
+    
+    {
+        NSMutableArray *stepQuestions = [NSMutableArray array];
+        ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:kHeartAgeFormStepBlood
+                                                              title:nil
+                                                               text:NSLocalizedString(@"Blood Glucose & Blood Pressure",
+                                                                                      @"Blood Glucose & Blood Pressure")];
+        step.optional = NO;
+        
+        {
             ORKHealthKitQuantityTypeAnswerFormat *format = [ORKHealthKitQuantityTypeAnswerFormat answerFormatWithQuantityType:[HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierBloodPressureSystolic]
-                                                                                                                           unit:[HKUnit unitFromString:@"mmHg"]
-                                                                                                                          style:ORKNumericAnswerStyleInteger];
+                                                                                                                         unit:[HKUnit unitFromString:@"mmHg"]
+                                                                                                                        style:ORKNumericAnswerStyleInteger];
             
             
             
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:kHeartAgeTestDataSystolicBloodPressure
-                                                                 text:NSLocalizedString(@"Systolic Blood Pressure",
-                                                                                        @"Systolic Blood Pressure")
-                                                         answerFormat:format];
+                                                                   text:NSLocalizedString(@"Systolic Blood Pressure",
+                                                                                          @"Systolic Blood Pressure")
+                                                           answerFormat:format];
             [stepQuestions addObject:item];
         }
         
@@ -209,6 +234,20 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:kHeartAgeTestDataDiastolicBloodPressure
                                                                    text:NSLocalizedString(@"Diastolic Blood Pressure",
                                                                                           @"Diastolic Blood Pressure")
+                                                           answerFormat:format];
+            [stepQuestions addObject:item];
+        }
+        
+        {
+            ORKHealthKitQuantityTypeAnswerFormat *format = [ORKHealthKitQuantityTypeAnswerFormat answerFormatWithQuantityType:[HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierBloodGlucose]
+                                                                                                                         unit:[HKUnit unitFromString:@"mmHg"]
+                                                                                                                        style:ORKNumericAnswerStyleInteger];
+            
+            
+            
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:kHeartAgeTestBloodGlucose
+                                                                   text:NSLocalizedString(@"Blood Glucose",
+                                                                                          @"Blood Glucose")
                                                            answerFormat:format];
             [stepQuestions addObject:item];
         }
@@ -257,21 +296,37 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
     self.shouldShowResultsStep = YES;
         
     self.heartAgeTaskQuestionIndex = @{
-                                       kHeartAgeFormStepBiographicAndDemographic: @[
-                                               kHeartAgeTestDataAge,
-                                               kHeartAgeTestDataGender],
-                                       kHeartAgeFormStepEthnicty: @[kHeartAgeTestDataEthnicity],
-                                       kHeartAgeTestDataDiabetes: @[
-                                               kHeartAgeTestDataDiabetes],
-                                       kHeartAgeTestDataHypertension: @[
-                                               kHeartAgeTestDataHypertension],
-                                       kHeartAgeFormStepCholesterolHdlSystolic: @[
-                                               kHeartAgeTestDataTotalCholesterol,
-                                               kHeartAgeTestDataHDL,
-                                               kHeartAgeTestDataSystolicBloodPressure,
-                                               kHeartAgeTestDataDiastolicBloodPressure],
-                                       kHeartAgeFormStepSmokingHistory: @[
-                                               kHeartAgeFormStepSmokingHistory]
+                                        kHeartAgeFormStepBiographicAndDemographic: @[
+                                                                                    kHeartAgeTestDataAge,
+                                                                                    kHeartAgeTestDataGender
+                                                                                    ],
+                                       
+                                                        kHeartAgeFormStepEthnicty: @[
+                                                                                    kHeartAgeTestDataEthnicity
+                                                                                    ],
+                                       
+                                                        kHeartAgeTestDataDiabetes: @[
+                                                                                    kHeartAgeTestDataDiabetes
+                                                                                    ],
+                                       
+                                                    kHeartAgeTestDataHypertension: @[
+                                                                                    kHeartAgeTestDataHypertension
+                                                                                    ],
+                                       
+                                          kHeartAgeFormStepCholesterolHdlSystolic: @[
+                                                                                    kHeartAgeTestDataTotalCholesterol,
+                                                                                    kHeartAgeTestDataHDL,
+                                                                                    kHeartAgeTestDataLDL
+                                                                                    ],
+                                                            kHeartAgeFormStepBlood: @[
+                                                                                    kHeartAgeTestDataSystolicBloodPressure,
+                                                                                    kHeartAgeTestDataDiastolicBloodPressure,
+                                                                                    kHeartAgeTestBloodGlucose
+                                                                                    ],
+                                       
+                                                  kHeartAgeFormStepSmokingHistory: @[
+                                                                                    kHeartAgeFormStepSmokingHistory
+                                                                                    ]
                                        };
 }
 
