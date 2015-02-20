@@ -34,6 +34,7 @@
 		5B827B6A1A8222AF00C685A3 /* APHTableViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B827B691A8222AF00C685A3 /* APHTableViewItem.m */; };
 		5BB2BAA41A10157B00684CCE /* Learn.json in Resources */ = {isa = PBXBuildFile; fileRef = 5BB2BAA31A10157B00684CCE /* Learn.json */; };
 		744174EC1A9248D0004A7CC1 /* APHConsentSection.json in Resources */ = {isa = PBXBuildFile; fileRef = 744174EB1A9248D0004A7CC1 /* APHConsentSection.json */; };
+		747307131A96E2540071D863 /* openssl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 747307121A96E2540071D863 /* openssl.framework */; };
 		74FA829C1A91661C00F93769 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FA829B1A91661C00F93769 /* ResearchKit.framework */; };
 		74FA829F1A91662500F93769 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 74FA829E1A91662500F93769 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7B0E172D1A3FBDD70079E536 /* APHCardiovascularHealthSurveyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0E172C1A3FBDD70079E536 /* APHCardiovascularHealthSurveyController.m */; };
@@ -47,11 +48,27 @@
 		7B5C43941A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C43921A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.m */; };
 		7B5C43951A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B5C43931A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.xib */; };
 		7B5C43A41A3B98EF001A22F5 /* APHWellBeingSurveyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C43A31A3B98EF001A22F5 /* APHWellBeingSurveyController.m */; };
+		7B5F927D1A9671D500C44BFC /* APHParQQuizTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5F927C1A9671D500C44BFC /* APHParQQuizTaskViewController.m */; };
+		7B5F92801A96739500C44BFC /* APHDynamicParQQuizTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5F927F1A96739500C44BFC /* APHDynamicParQQuizTask.m */; };
 		7B6753411A01540E005864E6 /* APHHeartAgeLearnMoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B67533F1A01540E005864E6 /* APHHeartAgeLearnMoreViewController.m */; };
 		7BD73F7B19E8A20600F5DFF3 /* Intro.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 7BD73F7A19E8A20600F5DFF3 /* Intro.mp4 */; };
 		7BEA4BE61A65C10300FEAF60 /* APHHeartAgeLearnMoreViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BEA4BE51A65C10300FEAF60 /* APHHeartAgeLearnMoreViewController.storyboard */; };
 		7BEA4BE91A65D95400FEAF60 /* APHIntroPurposeContainedTableTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BEA4BE81A65D95400FEAF60 /* APHIntroPurposeContainedTableTableViewController.m */; };
 		7BEEFA601A003E04004F6C87 /* APHHeartAgeResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BEEFA5E1A003E04004F6C87 /* APHHeartAgeResultsViewController.m */; };
+		A78115BF1A96A08E00CEC822 /* 00_Blank_to_Activities@2x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = A78115AC1A96A08E00CEC822 /* 00_Blank_to_Activities@2x.m4v */; };
+		A78115C01A96A08E00CEC822 /* 01_Activities_to_SensorData@2x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = A78115AD1A96A08E00CEC822 /* 01_Activities_to_SensorData@2x.m4v */; };
+		A78115C11A96A08E00CEC822 /* 02_SensorData_to_DataGathering@2x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = A78115AE1A96A08E00CEC822 /* 02_SensorData_to_DataGathering@2x.m4v */; };
+		A78115C21A96A08E00CEC822 /* 10_PotentialBenifits@2x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = A78115AF1A96A08E00CEC822 /* 10_PotentialBenifits@2x.m4v */; };
+		A78115C41A96A08E00CEC822 /* 11_IssuesToConsider1@2x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = A78115B11A96A08E00CEC822 /* 11_IssuesToConsider1@2x.m4v */; };
+		A78115C61A96A08E00CEC822 /* 12_IssuesToConside2@2x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = A78115B31A96A08E00CEC822 /* 12_IssuesToConside2@2x.m4v */; };
+		A78115C71A96A08E00CEC822 /* 13_RiskToPrivacy@2x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = A78115B41A96A08E00CEC822 /* 13_RiskToPrivacy@2x.m4v */; };
+		A78115C81A96A08E00CEC822 /* 00_Blank_to_Activities@3x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = A78115B61A96A08E00CEC822 /* 00_Blank_to_Activities@3x.m4v */; };
+		A78115C91A96A08E00CEC822 /* 01_Activities_to_SensorData@3x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = A78115B71A96A08E00CEC822 /* 01_Activities_to_SensorData@3x.m4v */; };
+		A78115CA1A96A08E00CEC822 /* 02_SensorData_to_DataGathering@3x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = A78115B81A96A08E00CEC822 /* 02_SensorData_to_DataGathering@3x.m4v */; };
+		A78115CB1A96A08E00CEC822 /* 10_PotentialBenifits@3x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = A78115B91A96A08E00CEC822 /* 10_PotentialBenifits@3x.m4v */; };
+		A78115CD1A96A08E00CEC822 /* 11_IssuesToConsider1@3x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = A78115BB1A96A08E00CEC822 /* 11_IssuesToConsider1@3x.m4v */; };
+		A78115CF1A96A08E00CEC822 /* 12_IssuesToConside2@3x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = A78115BD1A96A08E00CEC822 /* 12_IssuesToConside2@3x.m4v */; };
+		A78115D01A96A08E00CEC822 /* 13_RiskToPrivacy@3x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = A78115BE1A96A08E00CEC822 /* 13_RiskToPrivacy@3x.m4v */; };
 		F5165E7A19E86581003836CA /* APCParameters.json in Resources */ = {isa = PBXBuildFile; fileRef = F5165E7919E86581003836CA /* APCParameters.json */; };
 		F5481F1419E4820100D84617 /* APHHeartAgeTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5481F0C19E4820100D84617 /* APHHeartAgeTaskViewController.m */; };
 		F55BBE5719D362D0003CA0F9 /* NSString+CustomMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = F55BBDDB19D362D0003CA0F9 /* NSString+CustomMethods.m */; };
@@ -163,6 +180,7 @@
 		5B827B691A8222AF00C685A3 /* APHTableViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHTableViewItem.m; sourceTree = "<group>"; };
 		5BB2BAA31A10157B00684CCE /* Learn.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Learn.json; sourceTree = "<group>"; };
 		744174EB1A9248D0004A7CC1 /* APHConsentSection.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = APHConsentSection.json; sourceTree = "<group>"; };
+		747307121A96E2540071D863 /* openssl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = openssl.framework; path = ../AppCore/APCAppCore/openssl.framework; sourceTree = "<group>"; };
 		74FA829B1A91661C00F93769 /* ResearchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ResearchKit.framework; path = AppCore/APCAppCore/ResearchKit/ResearchKit.framework; sourceTree = SOURCE_ROOT; };
 		74FA829E1A91662500F93769 /* ResearchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ResearchKit.framework; path = AppCore/APCAppCore/ResearchKit/ResearchKit.framework; sourceTree = "<group>"; };
 		7B0E172B1A3FBDD70079E536 /* APHCardiovascularHealthSurveyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHCardiovascularHealthSurveyController.h; sourceTree = "<group>"; };
@@ -180,6 +198,10 @@
 		7B5C43931A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = APHRiskEstimatorWebViewController.xib; sourceTree = "<group>"; };
 		7B5C43A21A3B98EF001A22F5 /* APHWellBeingSurveyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHWellBeingSurveyController.h; sourceTree = "<group>"; };
 		7B5C43A31A3B98EF001A22F5 /* APHWellBeingSurveyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHWellBeingSurveyController.m; sourceTree = "<group>"; };
+		7B5F927B1A9671D500C44BFC /* APHParQQuizTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHParQQuizTaskViewController.h; sourceTree = "<group>"; };
+		7B5F927C1A9671D500C44BFC /* APHParQQuizTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHParQQuizTaskViewController.m; sourceTree = "<group>"; };
+		7B5F927E1A96739500C44BFC /* APHDynamicParQQuizTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHDynamicParQQuizTask.h; sourceTree = "<group>"; };
+		7B5F927F1A96739500C44BFC /* APHDynamicParQQuizTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHDynamicParQQuizTask.m; sourceTree = "<group>"; };
 		7B67533E1A01540E005864E6 /* APHHeartAgeLearnMoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHHeartAgeLearnMoreViewController.h; sourceTree = "<group>"; };
 		7B67533F1A01540E005864E6 /* APHHeartAgeLearnMoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHHeartAgeLearnMoreViewController.m; sourceTree = "<group>"; };
 		7BD73F7A19E8A20600F5DFF3 /* Intro.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Intro.mp4; sourceTree = "<group>"; };
@@ -188,6 +210,20 @@
 		7BEA4BE81A65D95400FEAF60 /* APHIntroPurposeContainedTableTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHIntroPurposeContainedTableTableViewController.m; sourceTree = "<group>"; };
 		7BEEFA5D1A003E04004F6C87 /* APHHeartAgeResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHHeartAgeResultsViewController.h; sourceTree = "<group>"; };
 		7BEEFA5E1A003E04004F6C87 /* APHHeartAgeResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHHeartAgeResultsViewController.m; sourceTree = "<group>"; };
+		A78115AC1A96A08E00CEC822 /* 00_Blank_to_Activities@2x.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = "00_Blank_to_Activities@2x.m4v"; sourceTree = "<group>"; };
+		A78115AD1A96A08E00CEC822 /* 01_Activities_to_SensorData@2x.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = "01_Activities_to_SensorData@2x.m4v"; sourceTree = "<group>"; };
+		A78115AE1A96A08E00CEC822 /* 02_SensorData_to_DataGathering@2x.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = "02_SensorData_to_DataGathering@2x.m4v"; sourceTree = "<group>"; };
+		A78115AF1A96A08E00CEC822 /* 10_PotentialBenifits@2x.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = "10_PotentialBenifits@2x.m4v"; sourceTree = "<group>"; };
+		A78115B11A96A08E00CEC822 /* 11_IssuesToConsider1@2x.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = "11_IssuesToConsider1@2x.m4v"; sourceTree = "<group>"; };
+		A78115B31A96A08E00CEC822 /* 12_IssuesToConside2@2x.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = "12_IssuesToConside2@2x.m4v"; sourceTree = "<group>"; };
+		A78115B41A96A08E00CEC822 /* 13_RiskToPrivacy@2x.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = "13_RiskToPrivacy@2x.m4v"; sourceTree = "<group>"; };
+		A78115B61A96A08E00CEC822 /* 00_Blank_to_Activities@3x.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = "00_Blank_to_Activities@3x.m4v"; sourceTree = "<group>"; };
+		A78115B71A96A08E00CEC822 /* 01_Activities_to_SensorData@3x.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = "01_Activities_to_SensorData@3x.m4v"; sourceTree = "<group>"; };
+		A78115B81A96A08E00CEC822 /* 02_SensorData_to_DataGathering@3x.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = "02_SensorData_to_DataGathering@3x.m4v"; sourceTree = "<group>"; };
+		A78115B91A96A08E00CEC822 /* 10_PotentialBenifits@3x.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = "10_PotentialBenifits@3x.m4v"; sourceTree = "<group>"; };
+		A78115BB1A96A08E00CEC822 /* 11_IssuesToConsider1@3x.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = "11_IssuesToConsider1@3x.m4v"; sourceTree = "<group>"; };
+		A78115BD1A96A08E00CEC822 /* 12_IssuesToConside2@3x.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = "12_IssuesToConside2@3x.m4v"; sourceTree = "<group>"; };
+		A78115BE1A96A08E00CEC822 /* 13_RiskToPrivacy@3x.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = "13_RiskToPrivacy@3x.m4v"; sourceTree = "<group>"; };
 		F5165E7919E86581003836CA /* APCParameters.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = APCParameters.json; sourceTree = "<group>"; };
 		F5481F0B19E4820100D84617 /* APHHeartAgeTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHHeartAgeTaskViewController.h; sourceTree = "<group>"; };
 		F5481F0C19E4820100D84617 /* APHHeartAgeTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHHeartAgeTaskViewController.m; sourceTree = "<group>"; };
@@ -227,6 +263,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F573809119E45CA4008A8354 /* HealthKit.framework in Frameworks */,
+				747307131A96E2540071D863 /* openssl.framework in Frameworks */,
 				F571C90C1A2F93850011C270 /* APCAppCore.framework in Frameworks */,
 				F571C9111A2F93920011C270 /* BridgeSDK.framework in Frameworks */,
 				F5F6452B19D35C57004CFBB2 /* Security.framework in Frameworks */,
@@ -373,6 +410,17 @@
 			name = "Well-Being and Risk Perception Survey";
 			sourceTree = "<group>";
 		};
+		7B5F92791A9671AF00C44BFC /* Par-Q Quiz */ = {
+			isa = PBXGroup;
+			children = (
+				7B5F927B1A9671D500C44BFC /* APHParQQuizTaskViewController.h */,
+				7B5F927C1A9671D500C44BFC /* APHParQQuizTaskViewController.m */,
+				7B5F927E1A96739500C44BFC /* APHDynamicParQQuizTask.h */,
+				7B5F927F1A96739500C44BFC /* APHDynamicParQQuizTask.m */,
+			);
+			name = "Par-Q Quiz";
+			sourceTree = "<group>";
+		};
 		7B67533C1A0153DB005864E6 /* Intro */ = {
 			isa = PBXGroup;
 			children = (
@@ -399,6 +447,43 @@
 				08FA98001A108686002317C8 /* Heart Age Summary Cells */,
 			);
 			name = Summary;
+			sourceTree = "<group>";
+		};
+		A78115AA1A96A08E00CEC822 /* Consent */ = {
+			isa = PBXGroup;
+			children = (
+				A78115AB1A96A08E00CEC822 /* 2x */,
+				A78115B51A96A08E00CEC822 /* 3x */,
+			);
+			path = Consent;
+			sourceTree = "<group>";
+		};
+		A78115AB1A96A08E00CEC822 /* 2x */ = {
+			isa = PBXGroup;
+			children = (
+				A78115AC1A96A08E00CEC822 /* 00_Blank_to_Activities@2x.m4v */,
+				A78115AD1A96A08E00CEC822 /* 01_Activities_to_SensorData@2x.m4v */,
+				A78115AE1A96A08E00CEC822 /* 02_SensorData_to_DataGathering@2x.m4v */,
+				A78115AF1A96A08E00CEC822 /* 10_PotentialBenifits@2x.m4v */,
+				A78115B11A96A08E00CEC822 /* 11_IssuesToConsider1@2x.m4v */,
+				A78115B31A96A08E00CEC822 /* 12_IssuesToConside2@2x.m4v */,
+				A78115B41A96A08E00CEC822 /* 13_RiskToPrivacy@2x.m4v */,
+			);
+			path = 2x;
+			sourceTree = "<group>";
+		};
+		A78115B51A96A08E00CEC822 /* 3x */ = {
+			isa = PBXGroup;
+			children = (
+				A78115B61A96A08E00CEC822 /* 00_Blank_to_Activities@3x.m4v */,
+				A78115B71A96A08E00CEC822 /* 01_Activities_to_SensorData@3x.m4v */,
+				A78115B81A96A08E00CEC822 /* 02_SensorData_to_DataGathering@3x.m4v */,
+				A78115B91A96A08E00CEC822 /* 10_PotentialBenifits@3x.m4v */,
+				A78115BB1A96A08E00CEC822 /* 11_IssuesToConsider1@3x.m4v */,
+				A78115BD1A96A08E00CEC822 /* 12_IssuesToConside2@3x.m4v */,
+				A78115BE1A96A08E00CEC822 /* 13_RiskToPrivacy@3x.m4v */,
+			);
+			path = 3x;
 			sourceTree = "<group>";
 		};
 		F5481F0619E4820100D84617 /* HeartAgeControllers */ = {
@@ -498,6 +583,7 @@
 		F55BBE2219D362D0003CA0F9 /* TasksAndSteps */ = {
 			isa = PBXGroup;
 			children = (
+				7B5F92791A9671AF00C44BFC /* Par-Q Quiz */,
 				7B0E17291A3FBDAB0079E536 /* Cardiovascular Health Survey */,
 				7B5C43A01A3B989C001A22F5 /* Well-Being and Risk Perception Survey */,
 				7B41045519E5D94F00592B96 /* APHFitnessTest */,
@@ -530,6 +616,7 @@
 		F584909319E8913E0091A640 /* Video */ = {
 			isa = PBXGroup;
 			children = (
+				A78115AA1A96A08E00CEC822 /* Consent */,
 				7BD73F7A19E8A20600F5DFF3 /* Intro.mp4 */,
 			);
 			path = Video;
@@ -581,6 +668,7 @@
 		F5F6452219D35BE3004CFBB2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				747307121A96E2540071D863 /* openssl.framework */,
 				74FA829B1A91661C00F93769 /* ResearchKit.framework */,
 				F571C9101A2F93920011C270 /* BridgeSDK.framework */,
 				F571C9031A2F93670011C270 /* APCAppCore.xcodeproj */,
@@ -697,6 +785,9 @@
 				7B5BEC9B1A34F0B7007CEA94 /* cardio_CVhealth_survey.json in Resources */,
 				08B972511A1FB4AF00316D49 /* APHHealthyHeartSummaryStepViewController.xib in Resources */,
 				21B8E3A11A8AAACB00CCDD48 /* APHTasksAndSchedules_NoM7.json in Resources */,
+				A78115C21A96A08E00CEC822 /* 10_PotentialBenifits@2x.m4v in Resources */,
+				A78115C91A96A08E00CEC822 /* 01_Activities_to_SensorData@3x.m4v in Resources */,
+				A78115CA1A96A08E00CEC822 /* 02_SensorData_to_DataGathering@3x.m4v in Resources */,
 				5B5A31341A10A78600552F7D /* WithdrawStudy.json in Resources */,
 				F55BBE6719D362D0003CA0F9 /* Main.storyboard in Resources */,
 				08C56E391A15E7D100D3BF61 /* APHActivityTracking.storyboard in Resources */,
@@ -705,20 +796,31 @@
 				7B5BEC9D1A34F0B7007CEA94 /* cardio_wellbeing_survey.json in Resources */,
 				5B04326A1A305D3E000DC9ED /* TermsAndConditions.json in Resources */,
 				F55BBE6A19D362D0003CA0F9 /* APHDashboard.storyboard in Resources */,
+				A78115CF1A96A08E00CEC822 /* 12_IssuesToConside2@3x.m4v in Resources */,
 				F55BBE6119D362D0003CA0F9 /* APHTasksAndSchedules.json in Resources */,
+				A78115CB1A96A08E00CEC822 /* 10_PotentialBenifits@3x.m4v in Resources */,
+				A78115C61A96A08E00CEC822 /* 12_IssuesToConside2@2x.m4v in Resources */,
+				A78115CD1A96A08E00CEC822 /* 11_IssuesToConsider1@3x.m4v in Resources */,
 				08FA97FB1A10630F002317C8 /* APHHeartAgeSummary.storyboard in Resources */,
 				5B0432611A305742000DC9ED /* HTMLContent in Resources */,
 				F5778E7519F0613D0079F1B2 /* APHOnboarding.storyboard in Resources */,
+				A78115C41A96A08E00CEC822 /* 11_IssuesToConsider1@2x.m4v in Resources */,
+				A78115C11A96A08E00CEC822 /* 02_SensorData_to_DataGathering@2x.m4v in Resources */,
 				7B30CFA11A376B3D00625350 /* cardiovascular.pem in Resources */,
 				744174EC1A9248D0004A7CC1 /* APHConsentSection.json in Resources */,
 				F573809319E45D62008A8354 /* StudyOverview.json in Resources */,
+				A78115C71A96A08E00CEC822 /* 13_RiskToPrivacy@2x.m4v in Resources */,
 				7B5C43951A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.xib in Resources */,
+				A78115C81A96A08E00CEC822 /* 00_Blank_to_Activities@3x.m4v in Resources */,
 				5BB2BAA41A10157B00684CCE /* Learn.json in Resources */,
 				7B5BEC9C1A34F0B7007CEA94 /* cardio_diet_survey.json in Resources */,
 				7B5BEC9A1A34F0B7007CEA94 /* cardio_activitysleep_survey.json in Resources */,
 				F55BBE6619D362D0003CA0F9 /* LaunchScreen.xib in Resources */,
 				7BEA4BE61A65C10300FEAF60 /* APHHeartAgeLearnMoreViewController.storyboard in Resources */,
 				F5F6450A19D35BA2004CFBB2 /* Images.xcassets in Resources */,
+				A78115BF1A96A08E00CEC822 /* 00_Blank_to_Activities@2x.m4v in Resources */,
+				A78115D01A96A08E00CEC822 /* 13_RiskToPrivacy@3x.m4v in Resources */,
+				A78115C01A96A08E00CEC822 /* 01_Activities_to_SensorData@2x.m4v in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -746,6 +848,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08FA98031A108839002317C8 /* APHHeartAgeSummaryCell.m in Sources */,
+				7B5F92801A96739500C44BFC /* APHDynamicParQQuizTask.m in Sources */,
 				F5481F1419E4820100D84617 /* APHHeartAgeTaskViewController.m in Sources */,
 				08FA98061A108A46002317C8 /* APHHeartAgeRiskEstimateCell.m in Sources */,
 				08D3A10219E4A08C00A3D20D /* APHHeartAgeAndRiskFactors.m in Sources */,
@@ -756,6 +859,7 @@
 				5B4633851A15917000E68B82 /* APHDashboardEditViewController.m in Sources */,
 				F55BBE6519D362D0003CA0F9 /* APHAppDelegate.m in Sources */,
 				7BEEFA601A003E04004F6C87 /* APHHeartAgeResultsViewController.m in Sources */,
+				7B5F927D1A9671D500C44BFC /* APHParQQuizTaskViewController.m in Sources */,
 				7B5C43941A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.m in Sources */,
 				5B73CAD01A89BE5200FFE79C /* APHWalkTestViewController.m in Sources */,
 				5B827B6A1A8222AF00C685A3 /* APHTableViewItem.m in Sources */,
@@ -845,6 +949,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/AppCore/APCAppCore/**",
 					"$(PROJECT_DIR)/AppCore/APCAppCore/ResearchKit",
+					"$(PROJECT_DIR)/CardioHealth",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				INFOPLIST_FILE = CardioHealth/Info.plist;
@@ -908,6 +1013,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/AppCore/APCAppCore/**",
 					"$(PROJECT_DIR)/AppCore/APCAppCore/ResearchKit",
+					"$(PROJECT_DIR)/CardioHealth",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
@@ -1009,6 +1115,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/AppCore/APCAppCore/**",
 					"$(PROJECT_DIR)/AppCore/APCAppCore/ResearchKit",
+					"$(PROJECT_DIR)/CardioHealth",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				INFOPLIST_FILE = CardioHealth/Info.plist;
@@ -1031,6 +1138,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/AppCore/APCAppCore/**",
 					"$(PROJECT_DIR)/AppCore/APCAppCore/ResearchKit",
+					"$(PROJECT_DIR)/CardioHealth",
 				);
 				INFOPLIST_FILE = CardioHealth/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

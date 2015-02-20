@@ -30,7 +30,7 @@ p,  h2 {
 }
 
 h1 {
-	font-family: 'HelveticaNeue-Medium', 'HelveticaNeue', 'Helvetica Neue';
+	font-family: 'HelveticaNeue-Light', 'HelveticaNeue light', 'Helvetica Neue';
 	font-size:26px; 
 	color:#000000; 
 	line-height:normal; 
@@ -56,7 +56,7 @@ h1 {
 
 
 .content {
-	padding: 10px 0;
+	padding: 10px 10px 10px 10px;
 }
 
 

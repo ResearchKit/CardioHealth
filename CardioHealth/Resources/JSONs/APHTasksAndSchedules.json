@@ -47,9 +47,22 @@
               "taskID": "WellBeingAndRiskPerceptionSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66",
               "taskFileName" : "cardio_wellbeing_survey",
               "taskClassName" : "APHWellBeingSurveyController"
+              },
+              
+              {
+              "taskTitle" : "PAR-Q Quiz",
+              "taskID": "parqquiz-1E174061-5B02-11E4-8ED6-0800200C9A77",
+              "taskClassName" : "APHParQQuizTaskViewController"
               }
+              
               ],
     "schedules": [
+                  {
+                  "scheduleType": "recurring",
+                  "scheduleString": "0 5 * * *",
+                  "taskID": "parqquiz-1E174061-5B02-11E4-8ED6-0800200C9A77"
+                  },
+                  
                   {
                   "scheduleType": "recurring",
                   "scheduleString": "0 5 * * *",
