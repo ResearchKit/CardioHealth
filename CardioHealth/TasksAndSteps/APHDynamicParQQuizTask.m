@@ -74,7 +74,6 @@ typedef NS_ENUM(NSUInteger, APHDynamicParQQuizType) {
 @property (nonatomic, strong) NSDictionary *backwardKeys;
 
 @property (nonatomic) NSInteger currentState;
-@property (nonatomic) NSInteger currentCount;
 @property (nonatomic, strong) NSDictionary *currentOrderedSteps;
 
 
@@ -218,7 +217,6 @@ typedef NS_ENUM(NSUInteger, APHDynamicParQQuizType) {
     if (step == nil)
     {
         step = self.steps[0];
-        self.currentCount = 1;
     }
     
     else if ([[self.steps[self.steps.count - 1] identifier] isEqualToString:step.identifier] || [[self.steps[self.steps.count - 2] identifier] isEqualToString:step.identifier])
@@ -230,9 +228,6 @@ typedef NS_ENUM(NSUInteger, APHDynamicParQQuizType) {
         NSNumber *index = (NSNumber *) self.keys[step.identifier];
         
         step = self.steps[[index intValue]];
-        
-        self.currentCount = [index integerValue];
-        
     }
     
     return step;
