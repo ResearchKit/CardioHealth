@@ -47,6 +47,8 @@
 		7B5C43941A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C43921A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.m */; };
 		7B5C43951A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B5C43931A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.xib */; };
 		7B5C43A41A3B98EF001A22F5 /* APHWellBeingSurveyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C43A31A3B98EF001A22F5 /* APHWellBeingSurveyController.m */; };
+		7B5F927D1A9671D500C44BFC /* APHParQQuizTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5F927C1A9671D500C44BFC /* APHParQQuizTaskViewController.m */; };
+		7B5F92801A96739500C44BFC /* APHDynamicParQQuizTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5F927F1A96739500C44BFC /* APHDynamicParQQuizTask.m */; };
 		7B6753411A01540E005864E6 /* APHHeartAgeLearnMoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B67533F1A01540E005864E6 /* APHHeartAgeLearnMoreViewController.m */; };
 		7BD73F7B19E8A20600F5DFF3 /* Intro.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 7BD73F7A19E8A20600F5DFF3 /* Intro.mp4 */; };
 		7BEA4BE61A65C10300FEAF60 /* APHHeartAgeLearnMoreViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BEA4BE51A65C10300FEAF60 /* APHHeartAgeLearnMoreViewController.storyboard */; };
@@ -180,6 +182,10 @@
 		7B5C43931A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = APHRiskEstimatorWebViewController.xib; sourceTree = "<group>"; };
 		7B5C43A21A3B98EF001A22F5 /* APHWellBeingSurveyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHWellBeingSurveyController.h; sourceTree = "<group>"; };
 		7B5C43A31A3B98EF001A22F5 /* APHWellBeingSurveyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHWellBeingSurveyController.m; sourceTree = "<group>"; };
+		7B5F927B1A9671D500C44BFC /* APHParQQuizTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHParQQuizTaskViewController.h; sourceTree = "<group>"; };
+		7B5F927C1A9671D500C44BFC /* APHParQQuizTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHParQQuizTaskViewController.m; sourceTree = "<group>"; };
+		7B5F927E1A96739500C44BFC /* APHDynamicParQQuizTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHDynamicParQQuizTask.h; sourceTree = "<group>"; };
+		7B5F927F1A96739500C44BFC /* APHDynamicParQQuizTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHDynamicParQQuizTask.m; sourceTree = "<group>"; };
 		7B67533E1A01540E005864E6 /* APHHeartAgeLearnMoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHHeartAgeLearnMoreViewController.h; sourceTree = "<group>"; };
 		7B67533F1A01540E005864E6 /* APHHeartAgeLearnMoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHHeartAgeLearnMoreViewController.m; sourceTree = "<group>"; };
 		7BD73F7A19E8A20600F5DFF3 /* Intro.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Intro.mp4; sourceTree = "<group>"; };
@@ -373,6 +379,17 @@
 			name = "Well-Being and Risk Perception Survey";
 			sourceTree = "<group>";
 		};
+		7B5F92791A9671AF00C44BFC /* Par-Q Quiz */ = {
+			isa = PBXGroup;
+			children = (
+				7B5F927B1A9671D500C44BFC /* APHParQQuizTaskViewController.h */,
+				7B5F927C1A9671D500C44BFC /* APHParQQuizTaskViewController.m */,
+				7B5F927E1A96739500C44BFC /* APHDynamicParQQuizTask.h */,
+				7B5F927F1A96739500C44BFC /* APHDynamicParQQuizTask.m */,
+			);
+			name = "Par-Q Quiz";
+			sourceTree = "<group>";
+		};
 		7B67533C1A0153DB005864E6 /* Intro */ = {
 			isa = PBXGroup;
 			children = (
@@ -498,6 +515,7 @@
 		F55BBE2219D362D0003CA0F9 /* TasksAndSteps */ = {
 			isa = PBXGroup;
 			children = (
+				7B5F92791A9671AF00C44BFC /* Par-Q Quiz */,
 				7B0E17291A3FBDAB0079E536 /* Cardiovascular Health Survey */,
 				7B5C43A01A3B989C001A22F5 /* Well-Being and Risk Perception Survey */,
 				7B41045519E5D94F00592B96 /* APHFitnessTest */,
@@ -746,6 +764,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08FA98031A108839002317C8 /* APHHeartAgeSummaryCell.m in Sources */,
+				7B5F92801A96739500C44BFC /* APHDynamicParQQuizTask.m in Sources */,
 				F5481F1419E4820100D84617 /* APHHeartAgeTaskViewController.m in Sources */,
 				08FA98061A108A46002317C8 /* APHHeartAgeRiskEstimateCell.m in Sources */,
 				08D3A10219E4A08C00A3D20D /* APHHeartAgeAndRiskFactors.m in Sources */,
@@ -756,6 +775,7 @@
 				5B4633851A15917000E68B82 /* APHDashboardEditViewController.m in Sources */,
 				F55BBE6519D362D0003CA0F9 /* APHAppDelegate.m in Sources */,
 				7BEEFA601A003E04004F6C87 /* APHHeartAgeResultsViewController.m in Sources */,
+				7B5F927D1A9671D500C44BFC /* APHParQQuizTaskViewController.m in Sources */,
 				7B5C43941A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.m in Sources */,
 				5B73CAD01A89BE5200FFE79C /* APHWalkTestViewController.m in Sources */,
 				5B827B6A1A8222AF00C685A3 /* APHTableViewItem.m in Sources */,
