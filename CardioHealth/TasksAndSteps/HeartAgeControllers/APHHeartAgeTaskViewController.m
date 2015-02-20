@@ -183,29 +183,17 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
     }
     
     {
-        NSMutableArray *stepQuestions = [NSMutableArray array];
-        ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:kHeartAgeFormStepMedicalHistory
-                                                                title:nil
-                                                                 text:NSLocalizedString(@"Your Medical History",
-                                                                                        @"Your medical history")];
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:kHeartAgeTestDataDiabetes title:NSLocalizedString(@"Do you have Diabetes?", @"Do you have Diabetes?") answer:[ORKBooleanAnswerFormat new]];
+        
         step.optional = NO;
-        {
-            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:kHeartAgeTestDataDiabetes
-                                                                 text:NSLocalizedString(@"Do you have Diabetes?",
-                                                                                        @"Do you have Diabetes?")
-                                                         answerFormat:[ORKBooleanAnswerFormat new]];
-            [stepQuestions addObject:item];
-        }
         
-        {
-            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:kHeartAgeTestDataHypertension
-                                                                 text:NSLocalizedString(@"Are you being treated for Hypertension (High Blood Pressure)?",
-                                                                                        @"Are you being treated for Hypertension (High Blood Pressure)?")
-                                                         answerFormat:[ORKBooleanAnswerFormat new]];
-            [stepQuestions addObject:item];
-        }
+        [steps addObject:step];
+    }
+    
+    {
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:kHeartAgeTestDataHypertension title:NSLocalizedString(@"Are you being treated for Hypertension (High Blood Pressure)?", @"Are you being treated for Hypertension (High Blood Pressure)?") answer:[ORKBooleanAnswerFormat new]];
         
-        [step setFormItems:stepQuestions];
+        step.optional = NO;
         
         [steps addObject:step];
     }
@@ -287,6 +275,15 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
 #pragma  mark  - TaskViewController delegates
 /*********************************************************************************/
 
+- (void)taskViewController:(ORKTaskViewController *)taskViewController didFinishWithResult:(ORKTaskViewControllerResult)result error:(NSError *)error
+{
+    if (result == ORKTaskViewControllerResultCompleted)
+    {
+        [self taskViewControllerDidComplete:taskViewController];
+        [super taskViewController:taskViewController didFinishWithResult:result error:error];
+    }
+}
+
 - (void)taskViewControllerDidComplete: (ORKTaskViewController *)taskViewController{
     
     // We need to create three question results that will hold the value of Heart Age,
@@ -322,8 +319,6 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
     [questionResultsForSurvey addObject:qrLifetimeRisk];
     
     self.result.results = questionResultsForSurvey;
-    
-    [super taskViewControllerDidComplete:taskViewController];
 }
 
 - (ORKStepViewController *)taskViewController:(ORKTaskViewController *)taskViewController viewControllerForStep:(ORKStep *)step

@@ -21,7 +21,7 @@
                           {
                           "title":"Who is Eligible to Participate",
                           "details":"EligibleToParticipate",
-                          "icon_image":"eligibility",
+                          "icon_image":"clipboard_icon",
                           "tint_color" : "green"
                           },
                           
@@ -34,7 +34,7 @@
                 {
                     "title": "Symptoms",
                     "details": "symptoms",
-                    "icon_image": "symptoms",
+                    "icon_image": "diagnostics_icon",
                     "tint_color": "green"
                 },
                 {

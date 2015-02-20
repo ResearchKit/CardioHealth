@@ -119,6 +119,10 @@ static CGFloat    const kMetersToYardConversion                 = 1.093f;
                                                     name:APHSevenDayAllocationDataIsReadyNotification
                                                   object:nil];
     
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:APHSevenDayAllocationHealthKitDataIsReadyNotification
+                                                  object:nil];
+    
     [super viewWillDisappear:animated];
 }
 
