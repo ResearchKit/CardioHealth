@@ -280,8 +280,13 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
     if (result == ORKTaskViewControllerResultCompleted)
     {
         [self taskViewControllerDidComplete:taskViewController];
-        [super taskViewController:taskViewController didFinishWithResult:result error:error];
     }
+    else if (result == ORKTaskViewControllerResultDiscarded)
+    {
+        [self taskViewControllerDidComplete:taskViewController];
+    }
+
+    [super taskViewController:taskViewController didFinishWithResult:result error:error];
 }
 
 - (void)taskViewControllerDidComplete: (ORKTaskViewController *)taskViewController{
@@ -462,6 +467,5 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
     
     }
 }
-
 
 @end
