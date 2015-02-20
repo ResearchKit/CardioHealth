@@ -251,11 +251,17 @@ NSString *const kSummaryLifetimeRisk = @"lifetimeRisk";
                                      kHeartAgeTestDataAge: actualAge,
                                      kHeartAgeTestDataGender: gender,
                                      kHeartAgeTestDataEthnicity: ethnicity,
+                                     
                                      kHeartAgeTestDataTotalCholesterol: self.heartAgeParametersLookup[kLookupOptimalRiskFactors][kLookupOptimalRiskFactorTotalCholesterol],
+                                     
                                      kHeartAgeTestDataHDL: self.heartAgeParametersLookup[kLookupOptimalRiskFactors][kLookupOptimalRiskFactorHDL],
+                                     
                                      kHeartAgeTestDataSystolicBloodPressure: self.heartAgeParametersLookup[kLookupOptimalRiskFactors][kLookupOptimalRiskFactorSystolicBP],
+                                     
                                      kHeartAgeTestDataHypertension: [NSNumber numberWithBool:NO],
+                                     
                                      kHeartAgeTestDataSmoke: [NSNumber numberWithBool:NO],
+                                     
                                      kHeartAgeTestDataDiabetes: [NSNumber numberWithBool:NO]
                                      };
     
