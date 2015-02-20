@@ -15,6 +15,7 @@ static NSString *kKludgeIdentifierForHeartAgeTaskB = @"APHHeartAgeB-7259AC18-D71
 
 // Introduction Step and Summary Key
 static NSString *kHeartAgeIntroduction = @"HeartAgeIntroduction";
+static NSString *kHeartAgeHasHeartDiseaseIntroduction = @"hasHeartDiseaseIntroduction";
 static NSString *kHeartAgeSummary = @"HeartAgeSummary";
 static NSString *kHeartAgeResult = @"HeartAgeResult";
 
@@ -25,6 +26,9 @@ static NSString *kHeartAgeFormStepCholesterolHdlSystolic = @"cholesterolHdlSysto
 static NSString *kHeartAgeTestDataDiastolicBloodPressure = @"cholesterolHdlDiastolic";
 
 static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
+
+static NSString *kHeartDiseaseInstructionsTitle = @"Heart Age Test";
+static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you have heart disease. This test is designed for people that do not have heart disease, thus the results will not be applicable to you - but you are welcome to proceed and use the tool.";
 
 @interface APHHeartAgeTaskViewController ()
 
@@ -51,6 +55,21 @@ static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
 + (ORKOrderedTask *)createTask:(APCScheduledTask *)scheduledTask
 {
     NSMutableArray *steps = [NSMutableArray array];
+    
+    APCAppDelegate *appDelegate = (APCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    if (appDelegate.dataSubstrate.currentUser.hasHeartDisease) {
+        {
+            ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:kHeartAgeHasHeartDiseaseIntroduction];
+            step.title = NSLocalizedString(kHeartDiseaseInstructionsTitle, kHeartDiseaseInstructionsTitle);
+            
+            step.detailText = NSLocalizedString(kHeartDiseaseInstructionsDetail,
+                                          kHeartDiseaseInstructionsDetail);
+            
+            [steps addObject:step];
+        }
+    }
+    
     
     {
         ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:kHeartAgeIntroduction];
