@@ -1,10 +1,11 @@
 {
+    "htmlDocument" : "cardio_fullconsent",
     "sections":
     [
      {
      "sectionType" : "overview",
-     "sectionSummary" : "This simple walkthrough will explain the research study, the impact it may have on your life and will allow you to provide your consent to participate."
-     
+     "sectionSummary" : "This simple walkthrough will explain the research study, the impact it may have on your life and will allow you to provide your consent to participate.",
+     "sectionHtmlContent" : "1welcome"
      },
      
      
@@ -13,15 +14,17 @@
      "sectionTitle": "Activities",
      "sectionSummary": "This study will ask you to perform tasks and respond to surveys.",
      "sectionHtmlContent" : "3activities",
-     "sectionImage": "00_Blank_to_Activities"
-     
+     "sectionImage": "00_Blank_to_Activities",
+     "sectionAnimationUrl": "00_Blank_to_Activities"
      },
      
      {
      "sectionType" : "custom",
-     "sectionTitle": "Sensor and Health Data",
+     "sectionTitle": "Sensor Data",
      "sectionSummary": "This study will also gather sensor data from your iPhone and personal devices with your permission.",
-     "sectionImage": "01_Activities_to_SensorData"
+     "sectionHtmlContent" : "4sensordata",
+     "sectionImage": "01_Activities_to_SensorData",
+     "sectionAnimationUrl":"01_Activities_to_SensorData"
      
      },
      
@@ -29,7 +32,9 @@
      {
      "sectionType" : "dataGathering",
      "sectionTitle": "Data Processing",
-     "sectionSummary" : "Collected data may allow researchers, as well as you, to understand patterns and details about heart health."
+     "sectionSummary" : "Collected data may allow researchers, as well as you, to understand patterns and details about Cardiovascular health.",
+     "sectionHtmlContent" : "5dataprocessing",
+     "sectionAnimationUrl":"02_SensorData_to_DataGathering"
      },
      
      {
@@ -48,23 +53,23 @@
      {
      "sectionType" : "timeCommitment",
      "sectionTitle" : "Issues to Consider",
-     "sectionSummary": "Your initial participation in this study will take 10-15 minutes per day for a week. We hope that you can contribute to the study for one week every three months.",
+     "sectionSummary": "Your participation in this study will take no more than 20 minutes per week.  We hope that you can participate at least for one week every three months.",
      "sectionHtmlContent" : "8time"
      
      },
      
      {
      "sectionType" : "studySurvey",
-     "sectionTitle" : "Surveys",
-     "sectionSummary": "Some of the tasks in this study will require you to answer to survey questions about various health and lifestyle factors."
-     
+     "sectionTitle" : "Study Survey",
+     "sectionSummary": "Some of the tasks in this study will require you to answer to survey questions about various health and lifestyle factors.",
+     "sectionHtmlContent" : "9study_survey"
      
      },
      
      {
      "sectionType" : "studyTasks",
      "sectionTitle" : "Study Tasks",
-     "sectionSummary": "We will ask you to complete active tasks that may require physical activity.",
+     "sectionSummary": "Other tasks will ask you to complete active tasks that may require some light physical activity.",
      "sectionHtmlContent" : "10study_task"
      },
      {
@@ -78,16 +83,19 @@
      {
      "sectionType" : "custom",
      "sectionTitle": "Potential Benefits",
-     "sectionSummary": "The information collected by this study may help you better understand and monitor your heart health.",
+     "sectionSummary": "The information collected by this study may help you better track and monitor your Cardiovascular health.",
      "sectionHtmlContent" : "12potentialbenefits1",
-     "sectionImage": "10_PotentialBenifits"
+     "sectionImage": "10_PotentialBenifits",
+     "sectionAnimationUrl":"10_PotentialBenifits"
      
      },
      {
      "sectionType" : "custom",
      "sectionTitle": "Issues to Consider",
      "sectionSummary": "Some questions may make you uncomfortable.  Simply do not respond.",
-     "sectionImage": "11_IssuesToConsider1"
+     "sectionHtmlContent" : "13issues_survey",
+     "sectionImage": "11_IssuesToConsider1",
+     "sectionAnimationUrl":"11_IssuesToConsider1"
      
      },
      
@@ -96,7 +104,8 @@
      "sectionTitle": "Issues to Consider",
      "sectionSummary": "Participating in this study may change how you feel.  You may feel more tired, sad, energized, or happy.",
      "sectionHtmlContent" : "14issues_mood",
-     "sectionImage": "12_IssuesToConsider2"
+     "sectionImage": "12_IssuesToConsider2",
+     "sectionAnimationUrl":"12_IssuesToConside2"
      
      },
      
@@ -105,7 +114,8 @@
      "sectionTitle": "Risk to Privacy",
      "sectionSummary": "Some of the data that you provide may be sensitive.  We will de-identify your data and use secure computers, but we cannot ensure complete privacy.",
      "sectionHtmlContent" : "15privacy_risk",
-     "sectionImage": "13_RiskToPrivacy"
+     "sectionImage": "13_RiskToPrivacy",
+     "sectionAnimationUrl":"13_RiskToPrivacy"
      
      }
      
