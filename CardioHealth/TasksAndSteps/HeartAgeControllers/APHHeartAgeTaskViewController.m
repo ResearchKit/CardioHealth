@@ -21,9 +21,11 @@ static NSString *kHeartAgeResult = @"HeartAgeResult";
 
 // RKForm keys
 static NSString *kHeartAgeFormStepBiographicAndDemographic = @"biographicAndDemographic";
+static NSString *kHeartAgeFormStepEthnicty = @"ethnicity";
 static NSString *kHeartAgeFormStepSmokingHistory = @"smokingHistory";
 static NSString *kHeartAgeFormStepCholesterolHdlSystolic = @"cholesterolHdlSystolic";
-static NSString *kHeartAgeTestDataDiastolicBloodPressure = @"cholesterolHdlDiastolic";
+static NSString *kHeartAgeFormStepBlood = @"blood";
+
 
 static NSString *kHeartAgeFormStepMedicalHistory = @"medicalHistory";
 
@@ -111,6 +113,22 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
                                                          answerFormat:format];
             [stepQuestions addObject:item];
         }
+                
+        [step setFormItems:stepQuestions];
+        
+        [steps addObject:step];
+    }
+    
+    // Biographic and Demographic
+    {
+        NSMutableArray *stepQuestions = [NSMutableArray array];
+        
+        
+        ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:kHeartAgeFormStepEthnicty title:nil text:NSLocalizedString(nil,
+                                                                                                                                               nil)];
+        
+        step.optional = NO;
+        
         
         {
             
@@ -119,8 +137,8 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
             ORKAnswerFormat *format = [ORKTextChoiceAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:choices];
             
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:kHeartAgeTestDataEthnicity
-                                                                 text:NSLocalizedString(@"Ethnicity", @"Ethnicity")
-                                                         answerFormat:format];
+                                                                   text:NSLocalizedString(@"Ethnicity", @"Ethnicity")
+                                                           answerFormat:format];
             [stepQuestions addObject:item];
         }
         
@@ -141,8 +159,8 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
         NSMutableArray *stepQuestions = [NSMutableArray array];
         ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:kHeartAgeFormStepCholesterolHdlSystolic
                                                                 title:nil
-                                                                 text:NSLocalizedString(@"Cholesterol & Blood Pressure",
-                                                                                        @"Cholesterol & Blood Pressure")];
+                                                                 text:NSLocalizedString(@"Cholesterol",
+                                                                                        @"Cholesterol")];
         step.optional = NO;
         
         {
@@ -169,16 +187,40 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
         }
         
         {
+            ORKNumericAnswerFormat *format = [ORKNumericAnswerFormat integerAnswerFormatWithUnit:@"mg/dl"];
+            format.minimum = @(1);
+            format.maximum = @(1000);
+            
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:kHeartAgeTestDataLDL
+                                                                   text:NSLocalizedString(@"LDL Cholesterol", @"LDL Cholesterol")
+                                                           answerFormat:format];
+            [stepQuestions addObject:item];
+        }
+        
+        [step setFormItems:stepQuestions];
+        
+        [steps addObject:step];
+    }
+    
+    {
+        NSMutableArray *stepQuestions = [NSMutableArray array];
+        ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:kHeartAgeFormStepBlood
+                                                              title:nil
+                                                               text:NSLocalizedString(@"Blood Glucose & Blood Pressure",
+                                                                                      @"Blood Glucose & Blood Pressure")];
+        step.optional = NO;
+        
+        {
             ORKHealthKitQuantityTypeAnswerFormat *format = [ORKHealthKitQuantityTypeAnswerFormat answerFormatWithQuantityType:[HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierBloodPressureSystolic]
-                                                                                                                           unit:[HKUnit unitFromString:@"mmHg"]
-                                                                                                                          style:ORKNumericAnswerStyleInteger];
+                                                                                                                         unit:[HKUnit unitFromString:@"mmHg"]
+                                                                                                                        style:ORKNumericAnswerStyleInteger];
             
             
             
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:kHeartAgeTestDataSystolicBloodPressure
-                                                                 text:NSLocalizedString(@"Systolic Blood Pressure",
-                                                                                        @"Systolic Blood Pressure")
-                                                         answerFormat:format];
+                                                                   text:NSLocalizedString(@"Systolic Blood Pressure",
+                                                                                          @"Systolic Blood Pressure")
+                                                           answerFormat:format];
             [stepQuestions addObject:item];
         }
         
@@ -192,6 +234,20 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:kHeartAgeTestDataDiastolicBloodPressure
                                                                    text:NSLocalizedString(@"Diastolic Blood Pressure",
                                                                                           @"Diastolic Blood Pressure")
+                                                           answerFormat:format];
+            [stepQuestions addObject:item];
+        }
+        
+        {
+            ORKHealthKitQuantityTypeAnswerFormat *format = [ORKHealthKitQuantityTypeAnswerFormat answerFormatWithQuantityType:[HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierBloodGlucose]
+                                                                                                                         unit:[HKUnit unitFromString:@"mmHg"]
+                                                                                                                        style:ORKNumericAnswerStyleInteger];
+            
+            
+            
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:kHeartAgeTestBloodGlucose
+                                                                   text:NSLocalizedString(@"Blood Glucose",
+                                                                                          @"Blood Glucose")
                                                            answerFormat:format];
             [stepQuestions addObject:item];
         }
@@ -240,21 +296,37 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
     self.shouldShowResultsStep = YES;
         
     self.heartAgeTaskQuestionIndex = @{
-                                       kHeartAgeFormStepBiographicAndDemographic: @[
-                                               kHeartAgeTestDataAge,
-                                               kHeartAgeTestDataGender,
-                                               kHeartAgeTestDataEthnicity],
-                                       kHeartAgeFormStepMedicalHistory: @[
-                                               kHeartAgeTestDataDiabetes,
-                                               kHeartAgeTestDataHypertension],
-                                       kHeartAgeFormStepCholesterolHdlSystolic: @[
-                                               kHeartAgeTestDataTotalCholesterol,
-                                               kHeartAgeTestDataHDL,
-                                               kHeartAgeTestDataSystolicBloodPressure,
-                                               kHeartAgeTestDataDiastolicBloodPressure],
-                                       kHeartAgeFormStepSmokingHistory: @[
-                                               kHeartAgeTestDataSmoke,
-                                               kHeartAgeTestDataCurrentlySmoke]
+                                        kHeartAgeFormStepBiographicAndDemographic: @[
+                                                                                    kHeartAgeTestDataAge,
+                                                                                    kHeartAgeTestDataGender
+                                                                                    ],
+                                       
+                                                        kHeartAgeFormStepEthnicty: @[
+                                                                                    kHeartAgeTestDataEthnicity
+                                                                                    ],
+                                       
+                                                        kHeartAgeTestDataDiabetes: @[
+                                                                                    kHeartAgeTestDataDiabetes
+                                                                                    ],
+                                       
+                                                    kHeartAgeTestDataHypertension: @[
+                                                                                    kHeartAgeTestDataHypertension
+                                                                                    ],
+                                       
+                                          kHeartAgeFormStepCholesterolHdlSystolic: @[
+                                                                                    kHeartAgeTestDataTotalCholesterol,
+                                                                                    kHeartAgeTestDataHDL,
+                                                                                    kHeartAgeTestDataLDL
+                                                                                    ],
+                                                            kHeartAgeFormStepBlood: @[
+                                                                                    kHeartAgeTestDataSystolicBloodPressure,
+                                                                                    kHeartAgeTestDataDiastolicBloodPressure,
+                                                                                    kHeartAgeTestBloodGlucose
+                                                                                    ],
+                                       
+                                                  kHeartAgeFormStepSmokingHistory: @[
+                                                                                    kHeartAgeFormStepSmokingHistory
+                                                                                    ]
                                        };
 }
 
@@ -405,7 +477,7 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
                         
                         NSUInteger usersAge = [ageComponents year];
                         [surveyResultsDictionary setObject:[NSNumber numberWithInteger:usersAge] forKey:questionIdentifier];
-                    } else if ([ORKQuestionResult isKindOfClass:[ORKBooleanQuestionResult class]]) {
+                    } else if ([questionResult isKindOfClass:[ORKBooleanQuestionResult class]]) {
                         ORKBooleanQuestionResult *numericResult = (ORKBooleanQuestionResult *) questionResult;
                         
                         NSNumber *answer = @(0);
@@ -415,7 +487,7 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
                         }
                         
                         [surveyResultsDictionary setObject:answer forKey:questionIdentifier];
-                    } else if ([ORKQuestionResult isKindOfClass:[ORKNumericQuestionResult class]]) {
+                    } else if ([questionResult isKindOfClass:[ORKNumericQuestionResult class]]) {
                         ORKNumericQuestionResult *numericResult = (ORKNumericQuestionResult *) questionResult;
                         
                         NSNumber *answer = @(0);
