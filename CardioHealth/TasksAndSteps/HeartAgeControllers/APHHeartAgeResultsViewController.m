@@ -39,6 +39,15 @@ static NSString *kRiskEstimateCellIdenfier       = @"RiskEstimateCell";
 static NSString *kRecommendationsCellIdentifier  = @"RecommendationCell";
 static NSString *kKludgeIdentifierForHeartAgeTaskB = @"APHHeartAgeB-7259AC18-D711-47A6-ADBD-6CFCECDED1DF";
 
+// Cells
+static NSString *kHeartAgeResults               = @"heartAgeResults";
+static NSString *kTenYearRisk                   = @"tenYearRisk";
+static NSString *kLifeTimeRisk                  = @"lifeTimeRisk";
+static NSString *kHeartAgeSummaryTitle          = @"heartAgeSummaryTitle";
+static NSString *kEighteenToTwentyInstructions  = @"eighteenToTwentyInstructions";
+
+
+
 @interface APHHeartAgeResultsViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -48,6 +57,8 @@ static NSString *kKludgeIdentifierForHeartAgeTaskB = @"APHHeartAgeB-7259AC18-D71
 
 @property (strong, nonatomic) NSAttributedString *tenYearRiskDescriptionAttributedText;
 @property (strong, nonatomic) NSAttributedString *lifeTimeRiskDescriptionAttributedText;
+
+@property (nonatomic) NSInteger numberOfSections;
 
 - (IBAction)ASCVDRiskEstimatorActionButton:(id)sender;
 @end
@@ -76,48 +87,50 @@ static NSString *kKludgeIdentifierForHeartAgeTaskB = @"APHHeartAgeB-7259AC18-D71
     self.heartAndRiskData = [NSMutableArray new];
     self.summaryData = [NSMutableArray new];
     
+    self.numberOfSections = 2;
+    
     if ((self.actualAge > 40) && (self.actualAge < 59))
     {
-        [self.heartAndRiskData addObject:@"heartAgeResults"];
-        [self.heartAndRiskData addObject:@"tenYearRisk"];
-        [self.heartAndRiskData addObject:@"lifeTimeRisk"];
+        [self.heartAndRiskData addObject:kHeartAgeResults];
+        [self.heartAndRiskData addObject:kTenYearRisk];
+        [self.heartAndRiskData addObject:kLifeTimeRisk];
         
-        [self.summaryData addObject:@"heartAgeSummaryTitle"];
-        [self.summaryData addObject:@"tenYearRisk"];
-        [self.summaryData addObject:@"lifeTimeRisk"];
+        [self.summaryData addObject:kHeartAgeSummaryTitle];
+        [self.summaryData addObject:kTenYearRisk];
+        [self.summaryData addObject:kLifeTimeRisk];
     }
     
     else if ((self.actualAge >= 20) && (self.actualAge <= 59))
         
     {
-        [self.heartAndRiskData addObject:@"heartAgeResults"];
-        [self.heartAndRiskData addObject:@"lifeTimeRisk"];
+        [self.heartAndRiskData addObject:kHeartAgeResults];
+        [self.heartAndRiskData addObject:kLifeTimeRisk];
         
-        [self.summaryData addObject:@"heartAgeSummaryTitle"];
-        [self.summaryData addObject:@"lifeTimeRisk"];
+        [self.summaryData addObject:kHeartAgeSummaryTitle];
+        [self.summaryData addObject:kLifeTimeRisk];
     }
     
     else if ((self.actualAge >= 40) && (self.actualAge <= 79))
         
     {
-        [self.heartAndRiskData addObject:@"heartAgeResults"];
-        [self.heartAndRiskData addObject:@"tenYearRisk"];
+        [self.heartAndRiskData addObject:kHeartAgeResults];
+        [self.heartAndRiskData addObject:kTenYearRisk];
         
-        [self.summaryData addObject:@"heartAgeSummaryTitle"];
-        [self.summaryData addObject:@"tenYearRisk"];
+        [self.summaryData addObject:kHeartAgeSummaryTitle];
+        [self.summaryData addObject:kTenYearRisk];
     }
     
     else if ((self.actualAge >= 18) && (self.actualAge <= 20))
         
     {
-        [self.heartAndRiskData addObject:@"heartAgeResults"];
+        [self.heartAndRiskData addObject:kHeartAgeResults];
         
-        [self.summaryData addObject:@"eighteenToTwentyInstructions"];
+        [self.summaryData addObject:kEighteenToTwentyInstructions];
     }
     
     else {
-        
-        [self.heartAndRiskData addObject:@"heartAgeResults"];
+        self.numberOfSections = 1;
+        [self.heartAndRiskData addObject:kHeartAgeResults];
     }
     
     [self.tableView reloadData];
@@ -156,22 +169,22 @@ static NSString *kKludgeIdentifierForHeartAgeTaskB = @"APHHeartAgeB-7259AC18-D71
         
         objectId = [self.summaryData objectAtIndex:indexPath.row];
         
-        if ([objectId isEqualToString:@"lifeTimeRisk"])
+        if ([objectId isEqualToString:kLifeTimeRisk])
         {
             height = tableView.rowHeight;
         }
 
-        else if ([objectId isEqualToString:@"tenYearRisk"]) {
+        else if ([objectId isEqualToString:kTenYearRisk]) {
             
             height = tableView.rowHeight;
         }
         
-        else if ([objectId isEqualToString:@"eighteenToTwentyInstructions"]) {
+        else if ([objectId isEqualToString:kEighteenToTwentyInstructions]) {
             
             height = tableView.rowHeight;
         }
         
-        else if ([objectId isEqualToString:@"heartAgeSummaryTitle"]) {
+        else if ([objectId isEqualToString:kHeartAgeSummaryTitle]) {
             
             height = 50;
         }
@@ -184,22 +197,22 @@ static NSString *kKludgeIdentifierForHeartAgeTaskB = @"APHHeartAgeB-7259AC18-D71
         
         objectId = [self.heartAndRiskData objectAtIndex:indexPath.row];
         
-        if ([objectId isEqualToString:@"heartAgeResults"])
+        if ([objectId isEqualToString:kHeartAgeResults])
         {
             height = 190;
         }
         
-        else if ([objectId isEqualToString:@"lifeTimeRisk"] || [objectId isEqualToString:@"tenYearRisk"])
+        else if ([objectId isEqualToString:kLifeTimeRisk] || [objectId isEqualToString:kTenYearRisk])
         {
             height = 220;
         }
         
-        else if ([objectId isEqualToString:@"eighteenToTwentyInstructions"]) {
+        else if ([objectId isEqualToString:kEighteenToTwentyInstructions]) {
             
             height = tableView.rowHeight;
         }
         
-        else if ([objectId isEqualToString:@"heartAgeSummaryTitle"]) {
+        else if ([objectId isEqualToString:kHeartAgeSummaryTitle]) {
             
             height = 50;
         }
@@ -231,7 +244,7 @@ static NSString *kKludgeIdentifierForHeartAgeTaskB = @"APHHeartAgeB-7259AC18-D71
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2.0;
+    return self.numberOfSections;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -258,11 +271,11 @@ static NSString *kKludgeIdentifierForHeartAgeTaskB = @"APHHeartAgeB-7259AC18-D71
         
         NSString *objectId = [self.summaryData objectAtIndex:indexPath.row];
         
-        if ([objectId isEqualToString:@"heartAgeResults"])
+        if ([objectId isEqualToString:kHeartAgeResults])
         {
             cell = [self configureHeartAgeEstimateCellAtIndexPath:indexPath];
         }
-        else if ([objectId isEqualToString:@"lifeTimeRisk"])
+        else if ([objectId isEqualToString:kLifeTimeRisk])
         {
             APHHeartAgeRecommendationCell *titleSummaryCell = [tableView dequeueReusableCellWithIdentifier:@"LifeTimeRiskScoreSummaryCell"];
             
@@ -271,7 +284,7 @@ static NSString *kKludgeIdentifierForHeartAgeTaskB = @"APHHeartAgeB-7259AC18-D71
             cell = titleSummaryCell;
 
         }
-        else if ([objectId isEqualToString:@"tenYearRisk"])
+        else if ([objectId isEqualToString:kTenYearRisk])
         {
             APHHeartAgeTenYearRecommendationCell *titleSummaryCell = [tableView dequeueReusableCellWithIdentifier:@"TenYearRiskScoreSummaryCell"];
             
@@ -279,13 +292,13 @@ static NSString *kKludgeIdentifierForHeartAgeTaskB = @"APHHeartAgeB-7259AC18-D71
             
             cell = titleSummaryCell;
         }
-        else if ([objectId isEqualToString:@"heartAgeSummaryTitle"])
+        else if ([objectId isEqualToString:kHeartAgeSummaryTitle])
         {
             APHHeartAgeSummaryTitleCell *titleSummaryCell = [tableView dequeueReusableCellWithIdentifier:@"HeartAgeSummaryTitleCell"];
             
             cell = titleSummaryCell;
         }
-        else if ([objectId isEqualToString:@"eighteenToTwentyInstructions"]) {
+        else if ([objectId isEqualToString:kEighteenToTwentyInstructions]) {
             APHInstructionsForBelowTwentyTableViewCell *titleSummaryCell = [tableView dequeueReusableCellWithIdentifier:@"eighteenToTwentyInstructions"];
             
             titleSummaryCell.descriptionLabel.text = @"Due to your current age we have no way to perform any calculations to give you any further information about your risk for ASVCD."; 
@@ -298,15 +311,15 @@ static NSString *kKludgeIdentifierForHeartAgeTaskB = @"APHHeartAgeB-7259AC18-D71
     {
         NSString *objectId = [self.heartAndRiskData objectAtIndex:indexPath.row];
         
-        if ([objectId isEqualToString:@"heartAgeResults"])
+        if ([objectId isEqualToString:kHeartAgeResults])
         {
             cell = [self configureHeartAgeEstimateCellAtIndexPath:indexPath];
         }
-        else if ([objectId isEqualToString:@"lifeTimeRisk"])
+        else if ([objectId isEqualToString:kLifeTimeRisk])
         {
             cell = [self configureRiskEstimateCellAtIndexPath:objectId];
         }
-        else if ([objectId isEqualToString:@"tenYearRisk"])
+        else if ([objectId isEqualToString:kTenYearRisk])
         {
             cell = [self configureRiskEstimateCellAtIndexPath:objectId];
         }
@@ -351,7 +364,7 @@ static NSString *kKludgeIdentifierForHeartAgeTaskB = @"APHHeartAgeB-7259AC18-D71
     NSString *optimalRisk = nil;
     static double kOnePercent = 0.01;
     
-    if ([objectId  isEqual: @"tenYearRisk"]) {
+    if ([objectId  isEqual: kTenYearRisk]) {
 
         cell.riskCellTitle.text = NSLocalizedString(@"10-Year Risk Estimate", @"10-year risk estimate");
         
