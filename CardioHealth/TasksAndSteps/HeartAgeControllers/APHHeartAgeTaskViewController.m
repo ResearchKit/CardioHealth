@@ -165,7 +165,7 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
         step.optional = NO;
         
         {
-            ORKNumericAnswerFormat *format = [ORKNumericAnswerFormat integerAnswerFormatWithUnit:@"mg/dl"];
+            ORKNumericAnswerFormat *format = [ORKNumericAnswerFormat integerAnswerFormatWithUnit:@"mg/dL"];
             format.minimum = @(1);
             format.maximum = @(1000);
             
@@ -177,7 +177,7 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
         }
         
         {
-            ORKNumericAnswerFormat *format = [ORKNumericAnswerFormat integerAnswerFormatWithUnit:@"mg/dl"];
+            ORKNumericAnswerFormat *format = [ORKNumericAnswerFormat integerAnswerFormatWithUnit:@"mg/dL"];
             format.minimum = @(1);
             format.maximum = @(250);
             
@@ -188,7 +188,7 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
         }
         
         {
-            ORKNumericAnswerFormat *format = [ORKNumericAnswerFormat integerAnswerFormatWithUnit:@"mg/dl"];
+            ORKNumericAnswerFormat *format = [ORKNumericAnswerFormat integerAnswerFormatWithUnit:@"mg/dL"];
             format.minimum = @(1);
             format.maximum = @(1000);
             
@@ -200,7 +200,7 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
         
         {
             ORKHealthKitQuantityTypeAnswerFormat *format = [ORKHealthKitQuantityTypeAnswerFormat answerFormatWithQuantityType:[HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierBloodGlucose]
-                                                                                                                         unit:[HKUnit unitFromString:@"mg/dl"]
+                                                                                                                         unit:[HKUnit unitFromString:@"mg/dL"]
                                                                                                                         style:ORKNumericAnswerStyleInteger];
             
             
