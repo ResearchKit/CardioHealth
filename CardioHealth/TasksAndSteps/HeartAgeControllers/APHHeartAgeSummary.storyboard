@@ -28,7 +28,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Agb-SY-Bbe">
-                                                    <rect key="frame" x="0.0" y="186" width="320" height="1"/>
+                                                    <rect key="frame" x="0.0" y="189" width="320" height="1"/>
                                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="JqC-Kx-jeY"/>
@@ -104,7 +104,7 @@
                                                 <constraint firstItem="B2Q-e6-nNJ" firstAttribute="centerX" secondItem="ekM-93-iUw" secondAttribute="centerX" id="H3x-Ko-n53"/>
                                                 <constraint firstItem="fUU-75-9Gb" firstAttribute="leading" secondItem="n0S-8H-TRF" secondAttribute="leadingMargin" constant="5" id="KKn-vk-PDW"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="Agb-SY-Bbe" secondAttribute="trailing" constant="-8" id="RdK-oC-PV0"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="Agb-SY-Bbe" secondAttribute="bottom" constant="-5" id="SKT-aW-Mxk"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="Agb-SY-Bbe" secondAttribute="bottom" constant="-8" id="SKT-aW-Mxk"/>
                                                 <constraint firstItem="jT7-gp-eA6" firstAttribute="leading" secondItem="n0S-8H-TRF" secondAttribute="leadingMargin" constant="-8" id="Y9L-7Q-hyD"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="u6K-Vg-uR2" secondAttribute="trailing" constant="-9" id="YPz-q4-EVf"/>
                                                 <constraint firstItem="rbU-zA-jS7" firstAttribute="top" secondItem="jT7-gp-eA6" secondAttribute="bottom" id="eAe-rH-hqv"/>
@@ -298,7 +298,7 @@
                                                         <constraint firstAttribute="width" constant="3" id="9ba-v8-v1g"/>
                                                     </constraints>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is for young guns." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Oo-AY-htt">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is for young guns." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Oo-AY-htt">
                                                     <rect key="frame" x="22" y="11" width="276" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>

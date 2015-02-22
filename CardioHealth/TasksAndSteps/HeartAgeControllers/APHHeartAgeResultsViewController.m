@@ -87,7 +87,7 @@ static NSString *kKludgeIdentifierForHeartAgeTaskB = @"APHHeartAgeB-7259AC18-D71
         [self.summaryData addObject:@"lifeTimeRisk"];
     }
     
-    else if ((self.actualAge > 20) && (self.actualAge < 59))
+    else if ((self.actualAge >= 20) && (self.actualAge <= 59))
         
     {
         [self.heartAndRiskData addObject:@"heartAgeResults"];
@@ -97,7 +97,7 @@ static NSString *kKludgeIdentifierForHeartAgeTaskB = @"APHHeartAgeB-7259AC18-D71
         [self.summaryData addObject:@"lifeTimeRisk"];
     }
     
-    else if ((self.actualAge > 40) && (self.actualAge < 79))
+    else if ((self.actualAge >= 40) && (self.actualAge <= 79))
         
     {
         [self.heartAndRiskData addObject:@"heartAgeResults"];
@@ -107,7 +107,7 @@ static NSString *kKludgeIdentifierForHeartAgeTaskB = @"APHHeartAgeB-7259AC18-D71
         [self.summaryData addObject:@"tenYearRisk"];
     }
     
-    else if ((self.actualAge > 18) && (self.actualAge < 20))
+    else if ((self.actualAge >= 18) && (self.actualAge <= 20))
         
     {
         [self.heartAndRiskData addObject:@"heartAgeResults"];
