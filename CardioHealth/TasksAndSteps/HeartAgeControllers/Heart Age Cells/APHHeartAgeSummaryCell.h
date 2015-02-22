@@ -15,4 +15,7 @@
 @property (nonatomic, strong) NSString *actualAgeValue;
 @property (nonatomic, strong) NSString *heartAgeValue;
 
+@property (weak, nonatomic) IBOutlet UILabel *actualAge;
+@property (weak, nonatomic) IBOutlet UILabel *heartAge;
+
 @end

@@ -13,8 +13,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *heartAgeCellTitle;
 @property (weak, nonatomic) IBOutlet UILabel *actualAgeCellLabel;
 @property (weak, nonatomic) IBOutlet UILabel *heartAgeCellLabel;
-@property (weak, nonatomic) IBOutlet UILabel *actualAge;
-@property (weak, nonatomic) IBOutlet UILabel *heartAge;
+
 
 @end
 

@@ -12,6 +12,7 @@
 #import "APHHeartAgeRecommendationCell.h"
 #import "APHRiskEstimatorWebViewController.h"
 #import "APHHeartAgeSummaryTitleCell.h"
+#import "APHInstructionsForBelowTwentyTableViewCell.h"
 
 #import "APHHeartAgeTenYearRecommendationCell.h"
 
@@ -167,7 +168,7 @@ static NSString *kKludgeIdentifierForHeartAgeTaskB = @"APHHeartAgeB-7259AC18-D71
         
         else if ([objectId isEqualToString:@"eighteenToTwentyInstructions"]) {
             
-            height = 220;
+            height = tableView.rowHeight;
         }
         
         else if ([objectId isEqualToString:@"heartAgeSummaryTitle"]) {
@@ -195,7 +196,7 @@ static NSString *kKludgeIdentifierForHeartAgeTaskB = @"APHHeartAgeB-7259AC18-D71
         
         else if ([objectId isEqualToString:@"eighteenToTwentyInstructions"]) {
             
-            height = 220;
+            height = tableView.rowHeight;
         }
         
         else if ([objectId isEqualToString:@"heartAgeSummaryTitle"]) {
@@ -284,6 +285,12 @@ static NSString *kKludgeIdentifierForHeartAgeTaskB = @"APHHeartAgeB-7259AC18-D71
             
             cell = titleSummaryCell;
         }
+        else if ([objectId isEqualToString:@"eighteenToTwentyInstructions"]) {
+            APHInstructionsForBelowTwentyTableViewCell *titleSummaryCell = [tableView dequeueReusableCellWithIdentifier:@"eighteenToTwentyInstructions"];
+            
+            titleSummaryCell.descriptionLabel.text = @"Due to your current age we have no way to perform any calculations to give you any further information about your risk for ASVCD."; 
+            cell = titleSummaryCell;
+        }
     }
     
     else
@@ -303,9 +310,6 @@ static NSString *kKludgeIdentifierForHeartAgeTaskB = @"APHHeartAgeB-7259AC18-D71
         {
             cell = [self configureRiskEstimateCellAtIndexPath:objectId];
         }
-        else if ([objectId isEqualToString:@"eighteenToTwentyInstructions"]) {
-            cell = [self configureRiskEstimateCellAtIndexPath:objectId];
-        }
     }
     return cell;
 }
@@ -322,6 +326,15 @@ static NSString *kKludgeIdentifierForHeartAgeTaskB = @"APHHeartAgeB-7259AC18-D71
     
     cell.actualAgeValue = [NSString stringWithFormat:@"%lu", (unsigned long)self.actualAge];
     cell.heartAgeValue = [NSString stringWithFormat:@"%lu", (unsigned long)self.heartAge];
+    
+    if (self.heartAge <= self.actualAge)
+    {
+        cell.heartAge.textColor = [UIColor appTertiaryColor1];
+    }
+    else
+    {
+        cell.heartAge.textColor = [UIColor blackColor];
+    }
     
     return cell;
 }
