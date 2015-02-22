@@ -96,10 +96,6 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
                                                  name:APHSevenDayAllocationDataIsReadyNotification
                                                object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(TotalDistanceFromHealthKit:) name:APHSevenDayAllocationHealthKitDataIsReadyNotification
-                                               object:nil];
-    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     self.rowItemsOrder = [NSMutableArray arrayWithArray:[defaults objectForKey:kAPCDashboardRowItemsOrder]];
 
@@ -116,10 +112,6 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:APHSevenDayAllocationDataIsReadyNotification
-                                                  object:nil];
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:APHSevenDayAllocationHealthKitDataIsReadyNotification
                                                   object:nil];
     
     [super viewWillDisappear:animated];
@@ -511,33 +503,6 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
     }
     
     return fitnessStartDate;
-}
-
-- (void)TotalDistanceFromHealthKit:(NSNotification *)notif {
-    
-    NSDictionary *healthKitDict = notif.userInfo;
-    self.totalDistanceForSevenDay = (NSNumber *)[healthKitDict objectForKey:@"datasetValueKey"];
-    
-    NSIndexPath *indexPath = nil;
-    
-    if (self.currentPieGraphIndexPath) {
-        indexPath = self.currentPieGraphIndexPath;
-    } else {
-        for (NSNumber *number in self.rowItemsOrder) {
-            if ([number intValue] == kAPHDashboardItemTypeSevenDayFitness) {
-                NSInteger row = [self.rowItemsOrder indexOfObject:number];
-                
-                indexPath = [NSIndexPath indexPathForRow:row inSection:1];
-                
-                break;
-            }
-        }
-    }
-    
-    if (self.totalDistanceForSevenDay == nil) {
-        [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }
-
 }
 
 @end
