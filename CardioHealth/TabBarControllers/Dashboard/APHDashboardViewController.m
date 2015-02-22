@@ -175,25 +175,16 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
             item.identifier = kAPCDashboardProgressTableViewCellIdentifier;
             item.editable = NO;
             item.progress = (CGFloat)completedScheduledTasks/allScheduledTasks;
+            item.caption = NSLocalizedString(@"Activity Completion", @"Activity Completion");
+            
+#warning Replace Placeholder Values - APPLE-1576
+            item.info = NSLocalizedString(@"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", @"");
             
             APCTableViewRow *row = [APCTableViewRow new];
             row.item = item;
             row.itemType = kAPCTableViewDashboardItemTypeProgress;
             [rowItems addObject:row];
         }
-        
-        APCTableViewSection *section = [APCTableViewSection new];
-        NSDate *dateToday = [NSDate date];
-        
-        self.dateFormatter.dateFormat = @"MMMM d";
-        
-        section.sectionTitle = [NSString stringWithFormat:@"%@, %@", NSLocalizedString(@"Today", @""), [self.dateFormatter stringFromDate:dateToday]];
-        section.rows = [NSArray arrayWithArray:rowItems];
-        [self.items addObject:section];
-    }
-    
-    {
-        NSMutableArray *rowItems = [NSMutableArray new];
         
         for (NSNumber *typeNumber in self.rowItemsOrder) {
             
