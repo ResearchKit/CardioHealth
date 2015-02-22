@@ -26,7 +26,6 @@ static NSString*  const kFitTestTotalDistDataSourceKey          = @"totalDistanc
 static NSString*  const kFitTestpeakHeartRateDataSourceKey      = @"peakHeartRate";
 static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRate";
 
-static CGFloat    const kMetersToYardConversion                 = 1.093f;
 
 @interface APHDashboardViewController ()<APCPieGraphViewDatasource>
 
@@ -35,7 +34,6 @@ static CGFloat    const kMetersToYardConversion                 = 1.093f;
 @property (nonatomic, strong)   APCScoring*             stepScoring;
 @property (nonatomic, strong)   APCScoring*             heartRateScoring;
 @property (nonatomic, strong)   NSMutableArray*         rowItemsOrder;
-@property (nonatomic, strong)   NSDateFormatter*        dateFormatter;
 @property (nonatomic, strong)   APHWalkingTestResults*  walkingResults;
 @property (nonatomic)           NSNumber*               totalDistanceForSevenDay;
 @property (nonatomic)           NSIndexPath*            currentPieGraphIndexPath;
@@ -71,7 +69,6 @@ static CGFloat    const kMetersToYardConversion                 = 1.093f;
         
         self.title = NSLocalizedString(@"Dashboard", @"Dashboard");
         
-        _dateFormatter = [NSDateFormatter new];
     }
     
     return self;
@@ -155,11 +152,11 @@ static CGFloat    const kMetersToYardConversion                 = 1.093f;
     
 
     HKQuantityType *stepQuantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierStepCount];
-    self.stepScoring= [[APCScoring alloc] initWithHealthKitQuantityType:stepQuantityType unit:[HKUnit countUnit] numberOfDays:-5];
+    self.stepScoring= [[APCScoring alloc] initWithHealthKitQuantityType:stepQuantityType unit:[HKUnit countUnit] numberOfDays:-kNumberOfDaysToDisplay];
 
     HKQuantityType *heartRateQuantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierHeartRate];
     
-    self.heartRateScoring = [[APCScoring alloc] initWithHealthKitQuantityType:heartRateQuantityType unit:[[HKUnit countUnit] unitDividedByUnit:[HKUnit minuteUnit]] numberOfDays:-5];
+    self.heartRateScoring = [[APCScoring alloc] initWithHealthKitQuantityType:heartRateQuantityType unit:[[HKUnit countUnit] unitDividedByUnit:[HKUnit minuteUnit]] numberOfDays:-kNumberOfDaysToDisplay];
 
 }
 
@@ -178,25 +175,16 @@ static CGFloat    const kMetersToYardConversion                 = 1.093f;
             item.identifier = kAPCDashboardProgressTableViewCellIdentifier;
             item.editable = NO;
             item.progress = (CGFloat)completedScheduledTasks/allScheduledTasks;
+            item.caption = NSLocalizedString(@"Activity Completion", @"Activity Completion");
+            
+#warning Replace Placeholder Values - APPLE-1576
+            item.info = NSLocalizedString(@"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", @"");
             
             APCTableViewRow *row = [APCTableViewRow new];
             row.item = item;
             row.itemType = kAPCTableViewDashboardItemTypeProgress;
             [rowItems addObject:row];
         }
-        
-        APCTableViewSection *section = [APCTableViewSection new];
-        NSDate *dateToday = [NSDate date];
-        
-        self.dateFormatter.dateFormat = @"MMMM d";
-        
-        section.sectionTitle = [NSString stringWithFormat:@"%@, %@", NSLocalizedString(@"Today", @""), [self.dateFormatter stringFromDate:dateToday]];
-        section.rows = [NSArray arrayWithArray:rowItems];
-        [self.items addObject:section];
-    }
-    
-    {
-        NSMutableArray *rowItems = [NSMutableArray new];
         
         for (NSNumber *typeNumber in self.rowItemsOrder) {
             
@@ -265,7 +253,7 @@ static CGFloat    const kMetersToYardConversion                 = 1.093f;
 
                     //If healthkit updated quickly enough then fill in the data.
                     if (self.totalDistanceForSevenDay != nil) {
-                        sevenDayDistanceStr = [NSString stringWithFormat:@"%.2f Miles", [self.totalDistanceForSevenDay floatValue]/metersPerMile];
+                        sevenDayDistanceStr = [NSString stringWithFormat:@"%.2f miles", [self.totalDistanceForSevenDay floatValue]/metersPerMile];
                     }
                     
                     item.distanceTraveledString = sevenDayDistanceStr;
@@ -345,19 +333,24 @@ static CGFloat    const kMetersToYardConversion                 = 1.093f;
         
         pieGraphCell.pieGraphView.datasource = self;
         pieGraphCell.textLabel.text = @"";
-        pieGraphCell.daysRemainingLabel.text = fitnessItem.numberOfDaysString;
+        pieGraphCell.subTitleLabel.text = fitnessItem.numberOfDaysString;
         
         if (fitnessItem.distanceTraveledString == nil) {
             fitnessItem.distanceTraveledString = [NSString stringWithFormat:@"%0.1f miles", [self.totalDistanceForSevenDay floatValue]/metersPerMile];
             
-            pieGraphCell.distanceLabel.alpha = 0;
+            pieGraphCell.subTitleLabel2.alpha = 0;
+            
             [UIView animateWithDuration:0.2 animations:^{
-                pieGraphCell.distanceLabel.text = fitnessItem.distanceTraveledString;
-                pieGraphCell.distanceLabel.alpha = 1;
+                pieGraphCell.subTitleLabel2.text = fitnessItem.distanceTraveledString;
+                pieGraphCell.subTitleLabel2.alpha = 1;
             }];
         }
         
-        pieGraphCell.distanceLabel.text = fitnessItem.distanceTraveledString;
+        NSMutableAttributedString *attirbutedDistanceString = [[NSMutableAttributedString alloc] initWithString:fitnessItem.distanceTraveledString];
+        [attirbutedDistanceString addAttribute:NSFontAttributeName value:[UIFont appMediumFontWithSize:17.0f] range:NSMakeRange(0, (fitnessItem.distanceTraveledString.length - @" miles".length))];
+        [attirbutedDistanceString addAttribute:NSFontAttributeName value:[UIFont appRegularFontWithSize:16.0f] range: [fitnessItem.distanceTraveledString rangeOfString:@" miles"]];
+        
+        pieGraphCell.subTitleLabel2.attributedText = attirbutedDistanceString;
         
         pieGraphCell.title = fitnessItem.caption;
         pieGraphCell.tintColor = fitnessItem.tintColor;
@@ -404,9 +397,9 @@ static CGFloat    const kMetersToYardConversion                 = 1.093f;
     if ([dashboardItem isKindOfClass:[APHTableViewDashboardFitnessControlItem class]]){
         height = 255.0f;
     } else if ([dashboardItem isKindOfClass:[APHTableViewDashboardWalkingTestItem class]]) {
-        height = 138.0;
+        height = 141.0;
     } else if ([dashboardItem isKindOfClass:[APHTableViewDashboardSevenDayFitnessItem class]]) {
-        height = 285.0;
+        height = 288.0;
     }
     
     return height;
