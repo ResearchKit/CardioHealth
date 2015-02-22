@@ -164,6 +164,7 @@ static  NSString*       const   kVideoShownKey                          = @"Vide
 
 - (id<ORKTask>)makeConsent
 {
+    NSString*               agreement = @"By agreeing you confirm that you have read the terms and conditions, that you understand them and that you wish to take part in this research study.";
     NSString*               docHtml   = nil;
     NSArray*                sections  = [super consentSectionsAndHtmlContent:&docHtml];
     ORKConsentDocument*     document  = [[ORKConsentDocument alloc] init];
@@ -174,7 +175,7 @@ static  NSString*       const   kVideoShownKey                          = @"Vide
     signature.requiresSignatureImage = NO;
     document.title                   = NSLocalizedString(@"Consent", nil);
     document.signaturePageTitle      = NSLocalizedString(@"Consent", nil);
-    document.signaturePageContent    = NSLocalizedString(@"I agree to participate in this research Study.", nil);
+    document.signaturePageContent    = NSLocalizedString(agreement, nil);
     document.sections                = sections;
     document.htmlReviewContent       = docHtml;
     
@@ -185,14 +186,10 @@ static  NSString*       const   kVideoShownKey                          = @"Vide
     ORKConsentReviewStep*   reviewStep   = nil;
     NSMutableArray*         consentSteps = [NSMutableArray arrayWithObject:step];
     
-#warning Reconsider if the the `signedIn` feature for consent is needed.
-    if (!self.dataSubstrate.currentUser.isSignedIn)
-    {
-        reviewStep                  = [[ORKConsentReviewStep alloc] initWithIdentifier:@"reviewStep" signature:signature inDocument:document];
-        reviewStep.reasonForConsent = NSLocalizedString(@"By agreeing you confirm that you have read the terms and conditions, that you understand them and that you wish to take part in this research study.", nil);
-        
-        [consentSteps addObject:reviewStep];
-    }
+    reviewStep                  = [[ORKConsentReviewStep alloc] initWithIdentifier:@"reviewStep" signature:signature inDocument:document];
+    reviewStep.reasonForConsent = NSLocalizedString(@"By agreeing you confirm that you have read the terms and conditions, that you understand them and that you wish to take part in this research study.", nil);
+    
+    [consentSteps addObject:reviewStep];
     
     ORKOrderedTask* task = [[ORKOrderedTask alloc] initWithIdentifier:@"consent" steps:consentSteps];
     

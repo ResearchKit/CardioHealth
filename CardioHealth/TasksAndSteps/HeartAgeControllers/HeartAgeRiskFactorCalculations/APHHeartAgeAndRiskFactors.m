@@ -36,7 +36,10 @@ static NSString *kLifetimeRiskFactorMajorGreaterThanEqualToTwo = @"risk-factor-m
 NSString *const kHeartAgeTestDataAge = @"heartAgeDataAge";
 NSString *const kHeartAgeTestDataTotalCholesterol = @"heartAgeDataTotalCholesterol";
 NSString *const kHeartAgeTestDataHDL = @"heartAgeDataHdl";
+NSString *const kHeartAgeTestDataLDL = @"heartAgeDataLdl";
 NSString *const kHeartAgeTestDataSystolicBloodPressure = @"heartAgeDataSystolicBloodPressure";
+NSString *const kHeartAgeTestDataDiastolicBloodPressure = @"heartAgeDataDiastolicBloodPressure";
+NSString *const kHeartAgeTestBloodGlucose = @"heartAgeDataBloodGlucose";
 NSString *const kHeartAgeTestDataSmoke = @"heartAgeDataSmoke";
 NSString *const kHeartAgeTestDataDiabetes = @"heartAgeDataDiabetes";
 NSString *const kHeartAgeTestDataFamilyDiabetes = @"heartAgeDataFamilyDiabetes";
@@ -251,11 +254,17 @@ NSString *const kSummaryLifetimeRisk = @"lifetimeRisk";
                                      kHeartAgeTestDataAge: actualAge,
                                      kHeartAgeTestDataGender: gender,
                                      kHeartAgeTestDataEthnicity: ethnicity,
+                                     
                                      kHeartAgeTestDataTotalCholesterol: self.heartAgeParametersLookup[kLookupOptimalRiskFactors][kLookupOptimalRiskFactorTotalCholesterol],
+                                     
                                      kHeartAgeTestDataHDL: self.heartAgeParametersLookup[kLookupOptimalRiskFactors][kLookupOptimalRiskFactorHDL],
+                                     
                                      kHeartAgeTestDataSystolicBloodPressure: self.heartAgeParametersLookup[kLookupOptimalRiskFactors][kLookupOptimalRiskFactorSystolicBP],
+                                     
                                      kHeartAgeTestDataHypertension: [NSNumber numberWithBool:NO],
+                                     
                                      kHeartAgeTestDataSmoke: [NSNumber numberWithBool:NO],
+                                     
                                      kHeartAgeTestDataDiabetes: [NSNumber numberWithBool:NO]
                                      };
     
