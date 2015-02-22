@@ -51,6 +51,9 @@
 		7B5F927D1A9671D500C44BFC /* APHParQQuizTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5F927C1A9671D500C44BFC /* APHParQQuizTaskViewController.m */; };
 		7B5F92801A96739500C44BFC /* APHDynamicParQQuizTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5F927F1A96739500C44BFC /* APHDynamicParQQuizTask.m */; };
 		7B6753411A01540E005864E6 /* APHHeartAgeLearnMoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B67533F1A01540E005864E6 /* APHHeartAgeLearnMoreViewController.m */; };
+		7B6F91831A996EDB00335E50 /* APHHeartAgeSummaryTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6F91821A996EDB00335E50 /* APHHeartAgeSummaryTitleCell.m */; };
+		7B6F91871A99731000335E50 /* APHHeartAgeTenYearRecommendationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6F91861A99731000335E50 /* APHHeartAgeTenYearRecommendationCell.m */; };
+		7B6F918A1A9A64AD00335E50 /* APHInstructionsForBelowTwentyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6F91891A9A64AD00335E50 /* APHInstructionsForBelowTwentyTableViewCell.m */; };
 		7BD73F7B19E8A20600F5DFF3 /* Intro.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 7BD73F7A19E8A20600F5DFF3 /* Intro.mp4 */; };
 		7BEA4BE61A65C10300FEAF60 /* APHHeartAgeLearnMoreViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BEA4BE51A65C10300FEAF60 /* APHHeartAgeLearnMoreViewController.storyboard */; };
 		7BEA4BE91A65D95400FEAF60 /* APHIntroPurposeContainedTableTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BEA4BE81A65D95400FEAF60 /* APHIntroPurposeContainedTableTableViewController.m */; };
@@ -204,6 +207,12 @@
 		7B5F927F1A96739500C44BFC /* APHDynamicParQQuizTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHDynamicParQQuizTask.m; sourceTree = "<group>"; };
 		7B67533E1A01540E005864E6 /* APHHeartAgeLearnMoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHHeartAgeLearnMoreViewController.h; sourceTree = "<group>"; };
 		7B67533F1A01540E005864E6 /* APHHeartAgeLearnMoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHHeartAgeLearnMoreViewController.m; sourceTree = "<group>"; };
+		7B6F91811A996EDB00335E50 /* APHHeartAgeSummaryTitleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHHeartAgeSummaryTitleCell.h; sourceTree = "<group>"; };
+		7B6F91821A996EDB00335E50 /* APHHeartAgeSummaryTitleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHHeartAgeSummaryTitleCell.m; sourceTree = "<group>"; };
+		7B6F91851A99731000335E50 /* APHHeartAgeTenYearRecommendationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHHeartAgeTenYearRecommendationCell.h; sourceTree = "<group>"; };
+		7B6F91861A99731000335E50 /* APHHeartAgeTenYearRecommendationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHHeartAgeTenYearRecommendationCell.m; sourceTree = "<group>"; };
+		7B6F91881A9A64AD00335E50 /* APHInstructionsForBelowTwentyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHInstructionsForBelowTwentyTableViewCell.h; sourceTree = "<group>"; };
+		7B6F91891A9A64AD00335E50 /* APHInstructionsForBelowTwentyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHInstructionsForBelowTwentyTableViewCell.m; sourceTree = "<group>"; };
 		7BD73F7A19E8A20600F5DFF3 /* Intro.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Intro.mp4; sourceTree = "<group>"; };
 		7BEA4BE51A65C10300FEAF60 /* APHHeartAgeLearnMoreViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = APHHeartAgeLearnMoreViewController.storyboard; sourceTree = "<group>"; };
 		7BEA4BE71A65D95400FEAF60 /* APHIntroPurposeContainedTableTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHIntroPurposeContainedTableTableViewController.h; sourceTree = "<group>"; };
@@ -330,6 +339,12 @@
 				08FA98051A108A46002317C8 /* APHHeartAgeRiskEstimateCell.m */,
 				08FA98071A108C33002317C8 /* APHHeartAgeRecommendationCell.h */,
 				08FA98081A108C33002317C8 /* APHHeartAgeRecommendationCell.m */,
+				7B6F91811A996EDB00335E50 /* APHHeartAgeSummaryTitleCell.h */,
+				7B6F91821A996EDB00335E50 /* APHHeartAgeSummaryTitleCell.m */,
+				7B6F91851A99731000335E50 /* APHHeartAgeTenYearRecommendationCell.h */,
+				7B6F91861A99731000335E50 /* APHHeartAgeTenYearRecommendationCell.m */,
+				7B6F91881A9A64AD00335E50 /* APHInstructionsForBelowTwentyTableViewCell.h */,
+				7B6F91891A9A64AD00335E50 /* APHInstructionsForBelowTwentyTableViewCell.m */,
 			);
 			name = "Heart Age Summary Cells";
 			sourceTree = "<group>";
@@ -849,6 +864,7 @@
 			files = (
 				08FA98031A108839002317C8 /* APHHeartAgeSummaryCell.m in Sources */,
 				7B5F92801A96739500C44BFC /* APHDynamicParQQuizTask.m in Sources */,
+				7B6F91831A996EDB00335E50 /* APHHeartAgeSummaryTitleCell.m in Sources */,
 				F5481F1419E4820100D84617 /* APHHeartAgeTaskViewController.m in Sources */,
 				08FA98061A108A46002317C8 /* APHHeartAgeRiskEstimateCell.m in Sources */,
 				08D3A10219E4A08C00A3D20D /* APHHeartAgeAndRiskFactors.m in Sources */,
@@ -868,6 +884,8 @@
 				08FA98091A108C33002317C8 /* APHHeartAgeRecommendationCell.m in Sources */,
 				F5F644FF19D35BA2004CFBB2 /* main.m in Sources */,
 				7B6753411A01540E005864E6 /* APHHeartAgeLearnMoreViewController.m in Sources */,
+				7B6F91871A99731000335E50 /* APHHeartAgeTenYearRecommendationCell.m in Sources */,
+				7B6F918A1A9A64AD00335E50 /* APHInstructionsForBelowTwentyTableViewCell.m in Sources */,
 				7B41047E19E5D94F00592B96 /* APHFitnessTaskViewController.m in Sources */,
 				0865F8B41A65E8C7005770ED /* APHIntroCellTableViewCell.m in Sources */,
 				7B5C43A41A3B98EF001A22F5 /* APHWellBeingSurveyController.m in Sources */,
