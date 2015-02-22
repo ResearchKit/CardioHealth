@@ -301,7 +301,7 @@ static NSString *kEighteenToTwentyInstructions  = @"eighteenToTwentyInstructions
         else if ([objectId isEqualToString:kEighteenToTwentyInstructions]) {
             APHInstructionsForBelowTwentyTableViewCell *titleSummaryCell = [tableView dequeueReusableCellWithIdentifier:@"eighteenToTwentyInstructions"];
             
-            titleSummaryCell.descriptionLabel.text = @"Due to your current age we have no way to perform any calculations to give you any further information about your risk for ASVCD."; 
+            titleSummaryCell.descriptionLabel.text = NSLocalizedString(@"Due to your current age we have no way to perform any calculations to give you any further information about your risk for ASVCD.", @"Due to your current age we have no way to perform any calculations to give you any further information about your risk for ASVCD.");
             cell = titleSummaryCell;
         }
     }
@@ -368,7 +368,7 @@ static NSString *kEighteenToTwentyInstructions  = @"eighteenToTwentyInstructions
 
         cell.riskCellTitle.text = NSLocalizedString(@"10-Year Risk Estimate", @"10-year risk estimate");
         
-        cell.riskEstimateDescription.text = @"According to your answers, your calculated risk of developing ASCVD within 10 years is:";
+        cell.riskEstimateDescription.text = NSLocalizedString(@"According to your answers, your calculated risk of developing ASCVD within 10 years is:", @"According to your answers, your calculated risk of developing ASCVD within 10 years is:");
         
         if ([self.tenYearRisk doubleValue] < kOnePercent) {
             calculatedRisk = @"< 1%";
@@ -399,7 +399,7 @@ static NSString *kEighteenToTwentyInstructions  = @"eighteenToTwentyInstructions
         
         optimalRisk = [NSString stringWithFormat:@"%lu%%", (long)[self.optimalLifetimeRisk integerValue]];
         
-        cell.riskEstimateDescription.text = @"According to your answers, your calculated risk of developing ASCVD within your lifetime is:";
+        cell.riskEstimateDescription.text = NSLocalizedString(@"According to your answers, your calculated risk of developing ASCVD within your lifetime is:", @"According to your answers, your calculated risk of developing ASCVD within your lifetime is:" );
         
         if ([self.lifetimeRisk floatValue] > 7.5)
         {
@@ -433,14 +433,14 @@ static NSString *kEighteenToTwentyInstructions  = @"eighteenToTwentyInstructions
     {
         NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init] ;
         [paragraphStyle setAlignment:NSTextAlignmentLeft];
-        
-        NSMutableAttributedString *attribString = [[NSMutableAttributedString alloc]initWithString:@"10-Year Risk Score: "];
+
+        NSMutableAttributedString *attribString = [[NSMutableAttributedString alloc]initWithString:NSLocalizedString(@"10-Year Risk Score: ", @"10-Year Risk Score: ")];
         [attribString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [@"10-Year Risk Score: " length])];
         
         [attribString addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0,[attribString length])];
         [attribString addAttribute:NSFontAttributeName value:[UIFont fontWithName: @"Helvetica-Bold" size:17.0] range:NSMakeRange(0,[attribString length])];
         
-        NSMutableAttributedString * finalString = [[NSMutableAttributedString alloc] initWithString:@"In general a 10-year risk > 7.5% is considered high and warrants discussion with your doctor. There may be other medical or family history that can increase your risk and these should be discussed with your doctor."];
+        NSMutableAttributedString * finalString = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"In general a 10-year risk > 7.5% is considered high and warrants discussion with your doctor. There may be other medical or family history that can increase your risk and these should be discussed with your doctor.", @"In general a 10-year risk > 7.5% is considered high and warrants discussion with your doctor. There may be other medical or family history that can increase your risk and these should be discussed with your doctor.")];
         
         NSMutableParagraphStyle *paragraphStyle2 = [[NSMutableParagraphStyle alloc] init];
         paragraphStyle2.lineBreakMode = NSLineBreakByWordWrapping;
@@ -458,12 +458,12 @@ static NSString *kEighteenToTwentyInstructions  = @"eighteenToTwentyInstructions
 
         NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init] ;
         
-        NSMutableAttributedString *attribString = [[NSMutableAttributedString alloc]initWithString:@"Lifetime Risk Score: "];
+        NSMutableAttributedString *attribString = [[NSMutableAttributedString alloc]initWithString:NSLocalizedString(@"Lifetime Risk Score: ", @"Lifetime Risk Score: ")];
         [attribString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [@"Lifetime Risk Score: " length])];
         [attribString addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0,[attribString length])];
         [attribString addAttribute:NSFontAttributeName value:[UIFont fontWithName: @"Helvetica-Bold" size:17.0] range:NSMakeRange(0,[attribString length])];
         
-        NSMutableAttributedString * finalString = [[NSMutableAttributedString alloc] initWithString:@"For official recommendations, please refer to the guide from the American College of Cardiology-"];
+        NSMutableAttributedString * finalString = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"For official recommendations, please refer to the guide from the American College of Cardiology-", @"For official recommendations, please refer to the guide from the American College of Cardiology-")];
         
         NSMutableParagraphStyle *paragraphStyle2 = [[NSMutableParagraphStyle alloc] init];
         paragraphStyle2.lineBreakMode = NSLineBreakByWordWrapping;
