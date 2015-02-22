@@ -326,14 +326,13 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
                                           kHeartAgeFormStepCholesterolHdlSystolic: @[
                                                                                     kHeartAgeTestDataTotalCholesterol,
                                                                                     kHeartAgeTestDataHDL,
-                                                                                    kHeartAgeTestDataLDL
+                                                                                    kHeartAgeTestDataLDL,
+                                                                                    kHeartAgeTestBloodGlucose
                                                                                     ],
                                                             kHeartAgeFormStepBlood: @[
                                                                                     kHeartAgeTestDataSystolicBloodPressure,
-                                                                                    kHeartAgeTestDataDiastolicBloodPressure,
-                                                                                    kHeartAgeTestBloodGlucose
+                                                                                    kHeartAgeTestDataDiastolicBloodPressure
                                                                                     ],
-                                       
                                                   kHeartAgeFormStepSmokingHistory: @[
                                                                                     kHeartAgeFormStepSmokingHistory
                                                                                     ]

@@ -13,4 +13,5 @@
 @property (nonatomic, strong) NSString *recommendationTitle;
 @property (nonatomic, strong) NSString *recommendationContent;
 @property (weak, nonatomic) IBOutlet UIButton *ASCVDLinkButton;
+@property (weak, nonatomic) IBOutlet UILabel *recommendationText;
 @end

@@ -11,6 +11,10 @@
 #import "APHHeartAgeRiskEstimateCell.h"
 #import "APHHeartAgeRecommendationCell.h"
 #import "APHRiskEstimatorWebViewController.h"
+#import "APHHeartAgeSummaryTitleCell.h"
+
+#import "APHHeartAgeTenYearRecommendationCell.h"
+
 
 typedef NS_ENUM(NSUInteger, APHHeartAgeSummarySections)
 {
@@ -38,6 +42,12 @@ static NSString *kKludgeIdentifierForHeartAgeTaskB = @"APHHeartAgeB-7259AC18-D71
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
+@property (strong, nonatomic) NSMutableArray *heartAndRiskData;
+@property (strong, nonatomic)NSMutableArray *summaryData;
+
+@property (strong, nonatomic) NSAttributedString *tenYearRiskDescriptionAttributedText;
+@property (strong, nonatomic) NSAttributedString *lifeTimeRiskDescriptionAttributedText;
+
 - (IBAction)ASCVDRiskEstimatorActionButton:(id)sender;
 @end
 
@@ -45,6 +55,7 @@ static NSString *kKludgeIdentifierForHeartAgeTaskB = @"APHHeartAgeB-7259AC18-D71
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     
     NSLog(@"Task Identifier : %@", self.taskViewController.task.identifier);
     
@@ -58,21 +69,67 @@ static NSString *kKludgeIdentifierForHeartAgeTaskB = @"APHHeartAgeB-7259AC18-D71
                                                                                            action:@selector(doneButtonTapped:)];
     
     // This will trigger self-sizing rows in the tableview
-    self.tableView.estimatedRowHeight = 44.0;
+    self.tableView.estimatedRowHeight = 90.0;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
+    
+    self.heartAndRiskData = [NSMutableArray new];
+    self.summaryData = [NSMutableArray new];
+    
+    if ((self.actualAge > 40) && (self.actualAge < 59))
+    {
+        [self.heartAndRiskData addObject:@"heartAgeResults"];
+        [self.heartAndRiskData addObject:@"tenYearRisk"];
+        [self.heartAndRiskData addObject:@"lifeTimeRisk"];
+        
+        [self.summaryData addObject:@"heartAgeSummaryTitle"];
+        [self.summaryData addObject:@"tenYearRisk"];
+        [self.summaryData addObject:@"lifeTimeRisk"];
+    }
+    
+    else if ((self.actualAge > 20) && (self.actualAge < 59))
+        
+    {
+        [self.heartAndRiskData addObject:@"heartAgeResults"];
+        [self.heartAndRiskData addObject:@"lifeTimeRisk"];
+        
+        [self.summaryData addObject:@"heartAgeSummaryTitle"];
+        [self.summaryData addObject:@"lifeTimeRisk"];
+    }
+    
+    else if ((self.actualAge > 40) && (self.actualAge < 79))
+        
+    {
+        [self.heartAndRiskData addObject:@"heartAgeResults"];
+        [self.heartAndRiskData addObject:@"tenYearRisk"];
+        
+        [self.summaryData addObject:@"heartAgeSummaryTitle"];
+        [self.summaryData addObject:@"tenYearRisk"];
+    }
+    
+    else if ((self.actualAge > 18) && (self.actualAge < 20))
+        
+    {
+        [self.heartAndRiskData addObject:@"heartAgeResults"];
+        
+        [self.summaryData addObject:@"eighteenToTwentyInstructions"];
+    }
+    
+    else {
+        
+        [self.heartAndRiskData addObject:@"heartAgeResults"];
+    }
+    
+    [self.tableView reloadData];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    self.navigationItem.title = NSLocalizedString(@"Activity Complete", @"Activity Complete");
     self.navigationItem.leftBarButtonItem = nil;
     self.navigationItem.hidesBackButton = YES;
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
+    
+    [self createAttributedStrings];
 }
 
 #pragma mark - Actions
@@ -86,44 +143,109 @@ static NSString *kKludgeIdentifierForHeartAgeTaskB = @"APHHeartAgeB-7259AC18-D71
     }
 }
 
-#pragma mark - TableView
-#pragma mark Datasource
+#pragma mark - TableView Datasource
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    CGFloat height = tableView.rowHeight;
+    
+    NSString *objectId = [self.heartAndRiskData objectAtIndex:indexPath.row];
+    
+    if (indexPath.section) {
+        
+        objectId = [self.summaryData objectAtIndex:indexPath.row];
+        
+        if ([objectId isEqualToString:@"lifeTimeRisk"])
+        {
+            height = tableView.rowHeight;
+        }
+
+        else if ([objectId isEqualToString:@"tenYearRisk"]) {
+            
+            height = tableView.rowHeight;
+        }
+        
+        else if ([objectId isEqualToString:@"eighteenToTwentyInstructions"]) {
+            
+            height = 220;
+        }
+        
+        else if ([objectId isEqualToString:@"heartAgeSummaryTitle"]) {
+            
+            height = 50;
+        }
+        
+        else
+        {
+            height = tableView.rowHeight;
+        }
+    } else {
+        
+        objectId = [self.heartAndRiskData objectAtIndex:indexPath.row];
+        
+        if ([objectId isEqualToString:@"heartAgeResults"])
+        {
+            height = 190;
+        }
+        
+        else if ([objectId isEqualToString:@"lifeTimeRisk"] || [objectId isEqualToString:@"tenYearRisk"])
+        {
+            height = 220;
+        }
+        
+        else if ([objectId isEqualToString:@"eighteenToTwentyInstructions"]) {
+            
+            height = 220;
+        }
+        
+        else if ([objectId isEqualToString:@"heartAgeSummaryTitle"]) {
+            
+            height = 50;
+        }
+        
+        else
+        {
+            height = tableView.rowHeight;
+        }
+    }
+
+    
+    return height;
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    CGFloat height = 0;
+    if (section)
+    {
+        height = 20.0;
+    }
+    else
+    {
+        height = 0;
+    }
+    
+    return height;
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return APHHeartAgeSummaryNumberOfSections;
+    return 2.0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSUInteger rows = 1;
+    NSUInteger rows = 0;
     
-    switch (section) {
-        case APHHeartAgeSummarySectionHeartAge:
-        {
-            if ([self.taskViewController.task.identifier isEqualToString:kKludgeIdentifierForHeartAgeTaskB]) {
-                rows = 0;
-            }
-            break;
-        }
-        case APHHeartAgeSummarySectionTenYearRiskEstimate:
-        {
-            if ((self.actualAge < 40) || (self.actualAge > 79)) {
-                rows = 0;
-            } else {
-                rows = APHHeartAgeSummaryNumberOfRows;
-            }
-        }
-            break;
-        default:
-            if ((self.actualAge < 20) || (self.actualAge > 59)) {
-                rows = 0;
-            } else {
-                rows = APHHeartAgeSummaryNumberOfRows;
-            }
-            break;
+    if (section)
+    {
+        rows = self.summaryData.count;
     }
-    
+    else
+    {
+        rows = self.heartAndRiskData.count;
+    }
+
     return rows;
 }
 
@@ -131,57 +253,64 @@ static NSString *kKludgeIdentifierForHeartAgeTaskB = @"APHHeartAgeB-7259AC18-D71
 {
     UITableViewCell *cell = nil;
     
-    switch (indexPath.section) {
+    if (indexPath.section) {
         
-        case APHHeartAgeSummarySectionHeartAge:
+        NSString *objectId = [self.summaryData objectAtIndex:indexPath.row];
+        
+        if ([objectId isEqualToString:@"heartAgeResults"])
         {
-            if (indexPath.row == APHHeartAgeSummaryRowBanner) {
-                cell = [self configureHeartAgeEstimateCellAtIndexPath:indexPath];
-            } else {
-                cell = [self configureRecommendationCellAtIndexPath:indexPath];
-            }
+            cell = [self configureHeartAgeEstimateCellAtIndexPath:indexPath];
         }
-        break;
-        
-        case APHHeartAgeSummarySectionTenYearRiskEstimate:
-        case APHHeartAgeSummarySectionLifetimeRiskEstimate:
+        else if ([objectId isEqualToString:@"lifeTimeRisk"])
         {
-            if (indexPath.row == APHHeartAgeSummaryRowBanner) {
-                cell = [self configureRiskEstimateCellAtIndexPath:indexPath];
-            } else {
-                cell = [self configureRecommendationCellAtIndexPath:indexPath];
-            }
+            APHHeartAgeRecommendationCell *titleSummaryCell = [tableView dequeueReusableCellWithIdentifier:@"LifeTimeRiskScoreSummaryCell"];
             
+            titleSummaryCell.recommendationText.attributedText = self.lifeTimeRiskDescriptionAttributedText;
+            
+            cell = titleSummaryCell;
+
         }
-        break;
-        
-        default:
-            NSAssert(YES, @"Extra section encountered.");
-        break;
+        else if ([objectId isEqualToString:@"tenYearRisk"])
+        {
+            APHHeartAgeTenYearRecommendationCell *titleSummaryCell = [tableView dequeueReusableCellWithIdentifier:@"TenYearRiskScoreSummaryCell"];
+            
+            titleSummaryCell.recommendationText.attributedText = self.tenYearRiskDescriptionAttributedText;
+            
+            cell = titleSummaryCell;
+        }
+        else if ([objectId isEqualToString:@"heartAgeSummaryTitle"])
+        {
+            APHHeartAgeSummaryTitleCell *titleSummaryCell = [tableView dequeueReusableCellWithIdentifier:@"HeartAgeSummaryTitleCell"];
+            
+            cell = titleSummaryCell;
+        }
     }
     
+    else
+        
+    {
+        NSString *objectId = [self.heartAndRiskData objectAtIndex:indexPath.row];
+        
+        if ([objectId isEqualToString:@"heartAgeResults"])
+        {
+            cell = [self configureHeartAgeEstimateCellAtIndexPath:indexPath];
+        }
+        else if ([objectId isEqualToString:@"lifeTimeRisk"])
+        {
+            cell = [self configureRiskEstimateCellAtIndexPath:objectId];
+        }
+        else if ([objectId isEqualToString:@"tenYearRisk"])
+        {
+            cell = [self configureRiskEstimateCellAtIndexPath:objectId];
+        }
+        else if ([objectId isEqualToString:@"eighteenToTwentyInstructions"]) {
+            cell = [self configureRiskEstimateCellAtIndexPath:objectId];
+        }
+    }
     return cell;
 }
 
 #pragma mark Cell Configurations
-
-- (APHHeartAgeTodaysActivitiesCell *)configureTodaysActivitiesCellAtIndexPath:(NSIndexPath *)indexPath
-{
-    APHHeartAgeTodaysActivitiesCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kTodaysActivitiesCellIdentifier];
-    
-    cell.caption = NSLocalizedString(@"Today's Activities", @"Today's Activities");
-    
-    NSUInteger allScheduledTasks = ((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.countOfAllScheduledTasksForToday;
-    NSUInteger completedScheduledTasks = ((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.countOfCompletedScheduledTasksForToday;
-    
-    completedScheduledTasks = MIN(allScheduledTasks, completedScheduledTasks+1);
-    CGFloat percent = (CGFloat) completedScheduledTasks / (CGFloat) allScheduledTasks;
-    
-    cell.activitiesCount = [NSString stringWithFormat:@"%lu/%lu", (unsigned long)completedScheduledTasks, (unsigned long)allScheduledTasks];
-    cell.activitiesProgress = [NSNumber numberWithFloat:percent];
-    
-    return cell;
-}
 
 - (APHHeartAgeSummaryCell *)configureHeartAgeEstimateCellAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -197,13 +326,10 @@ static NSString *kKludgeIdentifierForHeartAgeTaskB = @"APHHeartAgeB-7259AC18-D71
     return cell;
 }
 
-- (APHHeartAgeRiskEstimateCell *)configureRiskEstimateCellAtIndexPath:(NSIndexPath *)indexPath
+- (APHHeartAgeRiskEstimateCell *)configureRiskEstimateCellAtIndexPath:(NSString *)objectId
 {
     APHHeartAgeRiskEstimateCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kRiskEstimateCellIdenfier];
-    
-    cell.calculatedRiskLabel = NSLocalizedString(@"Calculated Risk", @"Calculated risk");
-    cell.optimalFactorRiskLabel = NSLocalizedString(@"with Optimal Risk Factors", @"with Optimak Risk Factors");
-    
+
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setNumberStyle:NSNumberFormatterPercentStyle];
     [numberFormatter setMaximumFractionDigits:0];
@@ -212,9 +338,11 @@ static NSString *kKludgeIdentifierForHeartAgeTaskB = @"APHHeartAgeB-7259AC18-D71
     NSString *optimalRisk = nil;
     static double kOnePercent = 0.01;
     
-    if (indexPath.section == APHHeartAgeSummarySectionTenYearRiskEstimate) {
-        cell.riskEstimateTitle = NSLocalizedString(@"10-Year Risk Estimate", @"10-year risk estimate");
+    if ([objectId  isEqual: @"tenYearRisk"]) {
+
+        cell.riskCellTitle.text = NSLocalizedString(@"10-Year Risk Estimate", @"10-year risk estimate");
         
+        cell.riskEstimateDescription.text = @"According to your answers, your calculated risk of developing ASCVD within 10 years is:";
         
         if ([self.tenYearRisk doubleValue] < kOnePercent) {
             calculatedRisk = @"< 1%";
@@ -227,38 +355,42 @@ static NSString *kKludgeIdentifierForHeartAgeTaskB = @"APHHeartAgeB-7259AC18-D71
         } else {
             optimalRisk = [numberFormatter stringFromNumber:self.optimalTenYearRisk];
         }
+        
+        if ([self.tenYearRisk doubleValue] > 7.5)
+        {
+            cell.calculatedRisk.textColor = [UIColor blackColor];
+        }
+        else
+        {
+            cell.calculatedRisk.textColor = [UIColor appTertiaryColor1];
+        }
+
+        
     } else {
-        cell.riskEstimateTitle = NSLocalizedString(@"Lifetime Risk Estimate", @"Lifetime risk estimate");
+        cell.riskCellTitle.text = NSLocalizedString(@"Lifetime Risk Estimate", @"Lifetime risk estimate");
+        
         calculatedRisk = [NSString stringWithFormat:@"%lu%%", (long)[self.lifetimeRisk integerValue]];
+        
         optimalRisk = [NSString stringWithFormat:@"%lu%%", (long)[self.optimalLifetimeRisk integerValue]];
+        
+        cell.riskEstimateDescription.text = @"According to your answers, your calculated risk of developing ASCVD within your lifetime is:";
+        
+        if ([self.lifetimeRisk floatValue] > 7.5)
+        {
+            cell.calculatedRisk.textColor = [UIColor blackColor];
+        }
+        else
+        {
+            cell.calculatedRisk.textColor = [UIColor appTertiaryColor1];
+        }        
     }
-    
-    cell.calculatedRiskValue = calculatedRisk;
-    cell.optimalFactorRiskValue = optimalRisk;
+
+    cell.calculatedRisk.text = calculatedRisk;
+    cell.optimalFactorRisk.text = optimalRisk;
     
     return cell;
 }
 
-- (APHHeartAgeRecommendationCell *)configureRecommendationCellAtIndexPath:(NSIndexPath *)indexPath
-{
-    APHHeartAgeRecommendationCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kRecommendationsCellIdentifier];
-    
-   cell.recommendationTitle = NSLocalizedString(@"What does my risk score mean?", @"What does my risk score mean?");
-    
-    if (indexPath.section == APHHeartAgeSummarySectionTenYearRiskEstimate) {
-        cell.recommendationContent = NSLocalizedString(@"In general, a 10-year risk > 7.5% is considered high and warrants discussion with your doctor. There may be other medical or family history that can increase your risk and these should be discussed with your doctor.", @"Placeholder copy");
-        
-        cell.ASCVDLinkButton.alpha = 0;
-        
-    } else {
- 
-        cell.recommendationContent = NSLocalizedString(@"For official recommendations, please refer to the guide from the American College of Cardiology -", @"Placeholder copy");
-        
-        
-    }
-    
-    return cell;
-}
 
 - (IBAction)ASCVDRiskEstimatorActionButton:(id)sender {
     
@@ -268,4 +400,56 @@ static NSString *kKludgeIdentifierForHeartAgeTaskB = @"APHHeartAgeB-7259AC18-D71
     [self presentViewController:viewController animated:YES completion:nil];
     
 }
+
+#pragma mark - Helper methods 
+
+- (void)createAttributedStrings {
+    {
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init] ;
+        [paragraphStyle setAlignment:NSTextAlignmentLeft];
+        
+        NSMutableAttributedString *attribString = [[NSMutableAttributedString alloc]initWithString:@"10-Year Risk Score: "];
+        [attribString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [@"10-Year Risk Score: " length])];
+        
+        [attribString addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0,[attribString length])];
+        [attribString addAttribute:NSFontAttributeName value:[UIFont fontWithName: @"Helvetica-Bold" size:17.0] range:NSMakeRange(0,[attribString length])];
+        
+        NSMutableAttributedString * finalString = [[NSMutableAttributedString alloc] initWithString:@"In general a 10-year risk > 7.5% is considered high and warrants discussion with your doctor. There may be other medical or family history that can increase your risk and these should be discussed with your doctor."];
+        
+        NSMutableParagraphStyle *paragraphStyle2 = [[NSMutableParagraphStyle alloc] init];
+        paragraphStyle2.lineBreakMode = NSLineBreakByWordWrapping;
+        [finalString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle2 range:NSMakeRange(0, [finalString length])];
+        
+        [finalString addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0,[finalString length])];
+        
+        [attribString appendAttributedString:finalString];
+        
+        
+        self.tenYearRiskDescriptionAttributedText = attribString;
+    }
+    
+    {
+
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init] ;
+        
+        NSMutableAttributedString *attribString = [[NSMutableAttributedString alloc]initWithString:@"Lifetime Risk Score: "];
+        [attribString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [@"Lifetime Risk Score: " length])];
+        [attribString addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0,[attribString length])];
+        [attribString addAttribute:NSFontAttributeName value:[UIFont fontWithName: @"Helvetica-Bold" size:17.0] range:NSMakeRange(0,[attribString length])];
+        
+        NSMutableAttributedString * finalString = [[NSMutableAttributedString alloc] initWithString:@"For official recommendations, please refer to the guide from the American College of Cardiology-"];
+        
+        NSMutableParagraphStyle *paragraphStyle2 = [[NSMutableParagraphStyle alloc] init];
+        paragraphStyle2.lineBreakMode = NSLineBreakByWordWrapping;
+        [finalString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle2 range:NSMakeRange(0, [finalString length])];
+        
+        [finalString addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0,[finalString length])];
+        
+        [attribString appendAttributedString:finalString];
+        
+        self.lifeTimeRiskDescriptionAttributedText = attribString;
+    }
+    
+}
+
 @end
