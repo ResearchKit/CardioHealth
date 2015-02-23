@@ -73,14 +73,15 @@ static NSString *kSevenDayFitnessCompleteStep = @"sevenDayFitnessCompleteStep";
     if (step.identifier == kSevenDayFitnessInstructionStep) {
         APCInstructionStepViewController *controller = [[UIStoryboard storyboardWithName:@"APCInstructionStep"
                                                                                   bundle:[NSBundle appleCoreBundle]] instantiateInitialViewController];
+        
         controller.imagesArray = @[@"tutorial-2", @"tutorial-1"];
         controller.headingsArray = @[
-                                     @"Keep Your Phone On You",
-                                     @"7-Day Activity and Sleep Assessment"
+                                     NSLocalizedString(@"Keep Your Phone On You", @""),
+                                     NSLocalizedString(@"7-Day Activity and Sleep Assessment", @"")
                                     ];
         controller.messagesArray = @[
-                                     @"To ensure the accuracy of this task, keep your phone on you at all times.",
-                                     @"During the next week, your fitness allocation will be monitored, analyzed, and available to you in real time."
+                                     NSLocalizedString(@"To ensure the accuracy of this task, keep your phone on you at all times.", @""),
+                                     NSLocalizedString(@"During the next week, your fitness allocation will be monitored, analyzed, and available to you in real time.", @"")
                                     ];
         
         controller.delegate = self;

@@ -57,11 +57,9 @@ static NSString* const kFitnessWalkText = @"Walk as far as you can for six minut
     
     [[UIView appearance] setTintColor:[UIColor appPrimaryColor]];
     
-    [task.steps[kFirstStep] setText: kInstructionIntendedDescription];
-    [task.steps[kSecondStep] setText: kInstruction2IntendedDescription];
-    [task.steps[kThirdStep] setTitle: kFitnessWalkText];
-    
-
+    [task.steps[kFirstStep] setText:NSLocalizedString(kInstructionIntendedDescription, kInstructionIntendedDescription)];
+    [task.steps[kSecondStep] setText:NSLocalizedString(kInstruction2IntendedDescription, kInstruction2IntendedDescription)];
+    [task.steps[kThirdStep] setTitle:NSLocalizedString(kFitnessWalkText, kFitnessWalkText)];
     
     return  task;
 }
