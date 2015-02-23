@@ -1,6 +1,6 @@
 //
 //  APHIntroCellTableViewCell.m
-//  MyHeartCounts
+//  MyHeart Counts
 //
 //  Copyright (c) 2015 Apple, Inc. All rights reserved.
 //
