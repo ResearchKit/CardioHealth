@@ -12,6 +12,9 @@ static NSInteger const  kRestDuration              = 3.0 * 60.0;
 static NSInteger const  kWalkDuration              = 6.0 * 60.0;
 static NSString* const  kFitnessTestIdentifier     = @"6-Minute Walk Test";
 
+static NSInteger const  kFirstStep                 = 0;
+static NSInteger const  kSecondStep                = 1;
+static NSInteger const  kThirdStep                 = 3;
 static NSString* const  kIntroStep                 = @"instruction";
 static NSString* const  kIntroOneStep              = @"instruction1";
 static NSString* const  kCountdownStep             = @"countdown";
@@ -34,7 +37,9 @@ static NSString* const kLastHeartRateForDashboard  = @"lastHeartRate";
 
 static NSString* const kInstructionIntendedDescription = @"This test monitors how far you can walk in six minutes. It will also monitor your heart rate if you are wearing such a device.";
 
-static NSString* const kInstruction2IntendedDescription = @"";
+static NSString* const kInstruction2IntendedDescription = @"Walk outdoors at your fastest pace for six minutes. When you're done, sit and rest comfortably for three minutes. To begin, tap Get Started.";
+
+static NSString* const kFitnessWalkText = @"Walk as far as you can for six minutes.";
 
 @interface APHFitnessTaskViewController ()
 
@@ -52,9 +57,11 @@ static NSString* const kInstruction2IntendedDescription = @"";
     
     [[UIView appearance] setTintColor:[UIColor appPrimaryColor]];
     
-    [task.steps[0] setText: kInstructionIntendedDescription];
+    [task.steps[kFirstStep] setText: kInstructionIntendedDescription];
+    [task.steps[kSecondStep] setText: kInstruction2IntendedDescription];
+    [task.steps[kThirdStep] setText: kFitnessWalkText];
     
-    [task.steps[1] setText: @"This test evaluates your tapping speed and coordination."];
+
     
     return  task;
 }
