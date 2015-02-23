@@ -10,10 +10,8 @@
 
 @interface APHHeartAgeRiskEstimateCell : UITableViewCell
 
-@property (nonatomic, strong) NSString *riskEstimateTitle;
-@property (nonatomic, strong) NSString *calculatedRiskLabel;
-@property (nonatomic, strong) NSString *optimalFactorRiskLabel;
-@property (nonatomic, strong) NSString *calculatedRiskValue;
-@property (nonatomic, strong) NSString *optimalFactorRiskValue;
-
+@property (weak, nonatomic) IBOutlet UILabel *riskEstimateDescription;
+@property (weak, nonatomic) IBOutlet UILabel *riskCellTitle;
+@property (weak, nonatomic) IBOutlet UILabel *calculatedRisk;
+@property (weak, nonatomic) IBOutlet UILabel *optimalFactorRisk;
 @end

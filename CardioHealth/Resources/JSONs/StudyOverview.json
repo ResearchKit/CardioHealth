@@ -6,6 +6,11 @@
     "questions":
     [
      {
+     "title":"Welcome to My Heart Counts",
+     "details":"A Cardiovascular Disease Research Study",
+     },
+     
+     {
      "title":"About this Study",
      "details":"AboutStudy_intro",
      "icon_image":"paperplus_icon",
