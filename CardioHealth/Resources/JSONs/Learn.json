@@ -12,21 +12,21 @@
                           },
                           
                           {
-                          "title":"How this Study works",
+                          "title":"How this Study Works",
                           "details":"howstudyworks",
                           "icon_image":"rulerpencil_icon",
                           "tint_color" : "purple"
                           },
                           
                           {
-                          "title":"Who is Eligible to Participate",
+                          "title":"Who Can Participate?",
                           "details":"EligibleToParticipate",
                           "icon_image":"eligibility",
                           "tint_color" : "green"
                           },
                           
                 {
-                    "title": "Life with ASCVD",
+                    "title": "What is Heart Disease?",
                     "details": "disease_information",
                     "icon_image": "disease_icon",
                     "tint_color": "appColor"
