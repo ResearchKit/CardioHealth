@@ -1,6 +1,6 @@
 //
 //  APHActivityTrackingStepViewController.m
-//  MyHeartCounts
+//  MyHeart Counts
 //
 //  Copyright (c) 2014 Apple, Inc. All rights reserved.
 //
