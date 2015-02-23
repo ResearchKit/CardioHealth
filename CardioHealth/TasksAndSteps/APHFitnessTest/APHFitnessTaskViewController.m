@@ -32,7 +32,9 @@ static NSString* const kPeakHeartRateForDashboard  = @"peakHeartRate";
 static NSString* const kAvgHeartRateForDashboard   = @"avgHeartRate";
 static NSString* const kLastHeartRateForDashboard  = @"lastHeartRate";
 
+static NSString* const kInstructionIntendedDescription = @"This test monitors how far you can walk in six minutes. It will also monitor your heart rate if you are wearing such a device.";
 
+static NSString* const kInstruction2IntendedDescription = @"";
 
 @interface APHFitnessTaskViewController ()
 
@@ -49,6 +51,10 @@ static NSString* const kLastHeartRateForDashboard  = @"lastHeartRate";
     ORKOrderedTask  *task = [ORKOrderedTask fitnessCheckTaskWithIdentifier:kFitnessTestIdentifier intendedUseDescription:nil walkDuration:kWalkDuration restDuration:kRestDuration options:ORKPredefinedTaskOptionNone];
     
     [[UIView appearance] setTintColor:[UIColor appPrimaryColor]];
+    
+    [task.steps[0] setText: kInstructionIntendedDescription];
+    
+    [task.steps[1] setText: @"This test evaluates your tapping speed and coordination."];
     
     return  task;
 }
