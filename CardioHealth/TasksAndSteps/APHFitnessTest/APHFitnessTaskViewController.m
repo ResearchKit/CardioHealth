@@ -37,7 +37,7 @@ static NSString* const kLastHeartRateForDashboard  = @"lastHeartRate";
 
 static NSString* const kInstructionIntendedDescription = @"This test monitors how far you can walk in six minutes. It will also monitor your heart rate if you are wearing such a device.";
 
-static NSString* const kInstruction2IntendedDescription = @"Walk outdoors at your fastest pace for six minutes. When you're done, sit and rest comfortably for three minutes. To begin, tap Get Started.";
+static NSString* const kInstruction2IntendedDescription = @"Walk outdoors as far as you can for six minutes. When you're done, sit and rest comfortably for three minutes. To begin, tap Get Started.";
 
 static NSString* const kFitnessWalkText = @"Walk as far as you can for six minutes.";
 
@@ -59,7 +59,7 @@ static NSString* const kFitnessWalkText = @"Walk as far as you can for six minut
     
     [task.steps[kFirstStep] setText: kInstructionIntendedDescription];
     [task.steps[kSecondStep] setText: kInstruction2IntendedDescription];
-    [task.steps[kThirdStep] setText: kFitnessWalkText];
+    [task.steps[kThirdStep] setTitle: kFitnessWalkText];
     
 
     
