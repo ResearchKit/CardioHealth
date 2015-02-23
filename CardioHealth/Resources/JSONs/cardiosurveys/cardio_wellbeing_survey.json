@@ -6,7 +6,8 @@
         {
             "guid": "854afd00-3d2b-41c2-9b36-17c72287819b",
             "identifier": "satisfiedwith_life",
-            "prompt": "The following question asks how satisfied you feel, on a scale from 0 to 10. Zero means you feel “not at all satisfied” and 10 means you feel “completely satisfied”. Overall, how satisfied are you with life as a whole these days?",
+            "prompt": "Overall, how satisfied are you with life as a whole these days?",
+            "detail" : "The following question asks how satisfied you feel, on a scale from 0 to 10. Zero means you feel “not at all satisfied” and 10 means you feel “completely satisfied“",
             "constraints":
             {
                 "dataType":"integer",
@@ -21,7 +22,8 @@
         {
             "guid": "854bfd00-3d2b-41c2-9b36-17c7228781a1",
             "identifier": "feel_worthwhile1",
-            "prompt": "The following question asks how worthwhile you feel the things you do in your life are, on a scale from 0 to 10. Zero means you feel the things you do in your life are “not at all worthwhile”, and 10 means “completely worthwhile”.Overall, to what extent do you feel the things you do in your life are worthwhile?",
+            "prompt": "Overall, to what extent do you feel the things you do in your life are worthwhile?",
+            "detail" : "This question asks how worthwhile you feel the things you do in your life are, on a scale from 0 to 10. Zero means you feel the things you do in your life are “not at all worthwhile”, and 10 means “completely worthwhile”.",
             "constraints":
             {
                 "dataType":"integer",
@@ -36,7 +38,8 @@
         {
             "guid": "854bfd00-3d2b-41e2-9b36-17c7228781a2",
             "identifier": "feel_worthwhile2",
-            "prompt": "The following questions ask about how you felt yesterday on a scale from 0 to 10. Zero               means you did not experience the feeling “at all” yesterday while 10 means you experienced the feeling “all of the time” yesterday.How about happy?",
+            "prompt": "How about happy?",
+            "detail" : "This and the following questions ask about how you felt yesterday on a scale from 0 to 10. Zero means you did not experience the feeling “at all” yesterday while 10 means you experienced the feeling “all of the time” yesterday."
             "constraints":
             {
                 "dataType":"integer",
