@@ -193,7 +193,7 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
             format.maximum = @(1000);
             
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:kHeartAgeTestDataLDL
-                                                                   text:NSLocalizedString(@"LDL Cholesterol", @"LDL Cholesterol")
+                                                                   text:NSLocalizedString(@"LDL Cholesterol (optional)", @"LDL Cholesterol (optional)")
                                                            answerFormat:format];
             [stepQuestions addObject:item];
         }
@@ -206,8 +206,8 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
             
             
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:kHeartAgeTestBloodGlucose
-                                                                   text:NSLocalizedString(@"Blood Glucose",
-                                                                                          @"Blood Glucose")
+                                                                   text:NSLocalizedString(@"Blood Glucose (optional)",
+                                                                                          @"Blood Glucose (optional)")
                                                            answerFormat:format];
             [stepQuestions addObject:item];
         }
