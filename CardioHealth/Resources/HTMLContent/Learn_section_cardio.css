@@ -13,7 +13,7 @@ a:active {
 }
 
 body {
-	font-family: "Helvetica Neue Light", 'HelveticaNeue-Light', 'HelveticaNeue Light', 'HelveticaNeue', 'Helvetica Neue';
+	font-family: "Helvetica Neue", 'HelveticaNeue', 'HelveticaNeue';
 	font-size:22px; 
 	color:#000000; 
 	line-height:normal; 
@@ -30,20 +30,25 @@ p,  h2 {
 }
 
 h1 {
+	font-family: 'HelveticaNeue-Light', 'HelveticaNeue light', 'Helvetica Neue';
+	font-size:26px; 
+	color:#000000; 
+	line-height:normal; 
+	font-weight:normal;
+	padding-top:0px;
+	padding-bottom:0px;
 	text-align:center;	
 	
 }
 
 
-.content {
-	width:95%;
-}
+
 
 
 .footer {
 	background-color: #FFFFFF;
-	width: 100%;
-	margin: auto ;
+	width: 20%;
+	margin: 0 auto;
 	
 	
 	
@@ -51,12 +56,12 @@ h1 {
 
 
 .content {
-	padding: 10px 0;
+	padding: 10px 10px 10px 10px;
 }
 
 
 .content ul, .content ol { 
-	padding: 0 15px 15px 25px; 
+	padding: 0 15px 15px 40px; 
 }
 
 
@@ -85,7 +90,8 @@ ul, ol {
 	color:#000000; 
 	list-style-type: square;
 	list-style-position: outside;
-	line-height:120%;
+	padding-left:23px;
+	line-height:115%;
 	
 }
 

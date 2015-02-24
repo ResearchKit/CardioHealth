@@ -22,11 +22,11 @@ static  NSString  *kPhysicallyCapable       = @"physicallyCapable";
 static  NSString  *kStopHere                = @"stopHere";
 static  NSString  *kGoodToGo                = @"goodToGo";
 
-static NSString *const kInstructionTitle = @"Physical Activity Readiness Questionnaire: PAR-Q";
+static NSString *const kInstructionTitle = @"Physical Activity Readiness Questionnaire: \nPAR-Q";
 
 static NSString *const kInstructionDetail = @"Regular physical activity is fun and healthy, and increasingly more people are starting to become more active every day. Being more active is very safe for most people. However, some people should check with their doctor before they start becoming much more physically active.\n\nSource:  Canadian Society for Exercise Physiology, © 2012. Used with permission.";
 
-static NSString *const kInstruction2Title = @"Physical Activity Readiness Questionnaire: PAR-Q";
+static NSString *const kInstruction2Title = @"Physical Activity Readiness Questionnaire: \nPAR-Q";
 
 static NSString *const kInstruction2Detail = @"If you are planning to become much more physically active than you are now, start by answering the seven questions on the following screens. If you are between the ages of 15 and 69, the PAR-Q will tell you if you should check with your doctor before you start. If you are over 69 years of age, and you are not used to being very active, check with your doctor. Common sense is your best guide when you answer these questions. Please read the questions carefully and answer each one honestly: check YES or NO.";
 

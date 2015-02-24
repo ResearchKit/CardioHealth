@@ -38,7 +38,7 @@
      
      {
      "sectionType" : "privacy",
-     "sectionTitle": "Protecting your data",
+     "sectionTitle": "Protecting your Data",
      "sectionSummary": "Your data will be encrypted and sent to a secure database, with your name replaced by a random code.",
      "sectionHtmlContent" : "6protectingdata"
      },
@@ -100,7 +100,7 @@
      {
      "sectionType" : "custom",
      "sectionTitle": "Issues to Consider",
-     "sectionSummary": "Participating in this study may change how you feel.  You may feel more tired, sad, energized, or happy.",
+     "sectionSummary": "Participating in this study may change how you feel. You may feel more tired, sad, energized, or happy.",
      "sectionHtmlContent" : "14issues_mood",
      "sectionImage": "12_IssuesToConsider2",
      "sectionAnimationUrl":"12_IssuesToConside2"
