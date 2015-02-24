@@ -206,8 +206,8 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
             
             
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:kHeartAgeTestBloodGlucose
-                                                                   text:NSLocalizedString(@"Blood Glucose (optional)",
-                                                                                          @"Blood Glucose (optional)")
+                                                                   text:NSLocalizedString(@"Fasting Blood Glucose (optional)",
+                                                                                          @"Fasting Blood Glucose (optional)")
                                                            answerFormat:format];
             [stepQuestions addObject:item];
         }
