@@ -197,7 +197,7 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
         
         {
             ORKNumericAnswerFormat *format = [ORKNumericAnswerFormat integerAnswerFormatWithUnit:@"mg/dL"];
-            format.minimum = @(1);
+            format.minimum = @(0);
             format.maximum = @(1000);
             
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:kHeartAgeTestDataLDL
