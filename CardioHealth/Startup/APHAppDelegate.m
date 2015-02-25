@@ -130,6 +130,10 @@ static  NSString*       const   kVideoShownKey                          = @"Vide
         
         [self.sevenDayFitnessAllocationData startDataCollection];
     }
+
+    APCCoreMotionTracker * motionTracker = [[APCCoreMotionTracker alloc] initWithIdentifier:@"motionTracker"];
+    
+    [self.passiveDataCollector addTracker:motionTracker];
     
     return;
     
