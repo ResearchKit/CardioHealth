@@ -284,6 +284,13 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hyJ-c5-Ztd" id="3sm-kw-OJI">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7kh-EV-jKl">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
+                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="Jde-rs-Elh"/>
+                                                    </constraints>
+                                                </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cde-1b-8XW">
                                                     <rect key="frame" x="0.0" y="43" width="320" height="1"/>
                                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -308,8 +315,11 @@
                                             <constraints>
                                                 <constraint firstAttribute="bottomMargin" secondItem="KGR-eX-cjF" secondAttribute="bottom" constant="-8" id="0WN-Xe-aWs"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="8Oo-AY-htt" secondAttribute="bottom" constant="4" id="9aa-gg-bn2"/>
+                                                <constraint firstItem="7kh-EV-jKl" firstAttribute="leading" secondItem="3sm-kw-OJI" secondAttribute="leadingMargin" constant="-8" id="BEp-iz-iGM"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="7kh-EV-jKl" secondAttribute="trailing" constant="-8" id="C2I-wB-0mm"/>
                                                 <constraint firstItem="cde-1b-8XW" firstAttribute="leading" secondItem="3sm-kw-OJI" secondAttribute="leadingMargin" constant="-8" id="Gr4-OM-wZU"/>
                                                 <constraint firstItem="KGR-eX-cjF" firstAttribute="top" secondItem="3sm-kw-OJI" secondAttribute="topMargin" constant="-8" id="Hxk-gv-6Yy"/>
+                                                <constraint firstItem="7kh-EV-jKl" firstAttribute="top" secondItem="3sm-kw-OJI" secondAttribute="topMargin" constant="-8" id="WGh-Tm-LAD"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="cde-1b-8XW" secondAttribute="bottom" constant="-8" id="abA-BI-FXf"/>
                                                 <constraint firstItem="8Oo-AY-htt" firstAttribute="top" secondItem="3sm-kw-OJI" secondAttribute="topMargin" constant="3" id="c24-BF-hFW"/>
                                                 <constraint firstItem="KGR-eX-cjF" firstAttribute="leading" secondItem="3sm-kw-OJI" secondAttribute="leadingMargin" constant="-8" id="czA-R5-Q8H"/>

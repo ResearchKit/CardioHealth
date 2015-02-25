@@ -188,8 +188,16 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
         }
         
         {
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:kBloodPressureInstruction
+                                                                   text:NSLocalizedString(@"The items below are optional. If you do not know the values you may enter 0.",
+                                                                                          @"The items below are optional. If you do not know the values you may enter 0.")
+                                                           answerFormat:nil];
+            [stepQuestions addObject:item];
+        }
+        
+        {
             ORKNumericAnswerFormat *format = [ORKNumericAnswerFormat integerAnswerFormatWithUnit:@"mg/dL"];
-            format.minimum = @(1);
+            format.minimum = @(0);
             format.maximum = @(1000);
             
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:kHeartAgeTestDataLDL
