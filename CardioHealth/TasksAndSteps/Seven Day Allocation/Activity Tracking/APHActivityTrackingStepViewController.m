@@ -97,7 +97,7 @@ static NSInteger const kWeekSegmentIndex         = 2;
     
     APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    self.chartView.valueLabel.text = [NSString stringWithFormat:@"%0.2f", appDelegate.sevenDayFitnessAllocationData.activeSeconds/60];
+    self.chartView.valueLabel.text = [NSString stringWithFormat:@"%d", (int) roundf(appDelegate.sevenDayFitnessAllocationData.activeSeconds/60)];
     self.chartView.valueLabel.alpha = 1;
 
     

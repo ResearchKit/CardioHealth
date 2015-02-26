@@ -234,7 +234,7 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
                     APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
                     NSString *sevenDayDistanceStr = nil;
 
-                    sevenDayDistanceStr = [NSString stringWithFormat:@"%.2f Active Minutes", appDelegate.sevenDayFitnessAllocationData.activeSeconds/60];
+                    sevenDayDistanceStr = [NSString stringWithFormat:@"%d Active Minutes", (int) roundf(appDelegate.sevenDayFitnessAllocationData.activeSeconds/60)];
                     
                     item.distanceTraveledString = sevenDayDistanceStr;
                     item.identifier = kAPCDashboardPieGraphTableViewCellIdentifier;
