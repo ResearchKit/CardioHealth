@@ -96,9 +96,6 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
             }
             
             
-            //Set the users start and end of day
-            [self setMostRecentSleepRangeStartDateAndEndDate];
-            
             _datasetForToday = [NSMutableArray array];
             _datasetForTheWeek = [NSMutableArray array];
             _datasetForYesterday = [NSMutableArray array];
@@ -126,12 +123,17 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
                                                  name:APHSevenDayAllocationSleepDataIsReadyNotification
                                                object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reporterDone:)
+                                                 name:APCMotionHistoryReporterDoneNotification
+                                               object:nil];
+
+    
     return self;
 }
 
 - (void) startDataCollection {
     
-    [self setMostRecentSleepRangeStartDateAndEndDate];
     
     NSDate *startDate = [[NSCalendar currentCalendar] dateBySettingHour:0
                                                          minute:0
@@ -152,13 +154,94 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
     // numberOfDaysFromStartDate provides the difference of days from now to start
     // of task and therefore if there is no difference we are only getting data for one day.
     numberOfDaysFromStartDate.day += 1;
+    NSLog(@"numberOfDaysFromStartDate.day %ld",(long)numberOfDaysFromStartDate.day);
+    
+    APCMotionHistoryReporter *reporter = [APCMotionHistoryReporter sharedInstance];
+    [reporter startMotionCoProcessorDataFrom:[NSDate dateWithTimeIntervalSinceNow:-24 * 60 * 60] andEndDate:[NSDate new] andNumberOfDays:numberOfDaysFromStartDate.day];
 
+
+    //This call is replaced by   [reporter startMotionCoProcessorDataFrom:startDate andEndDate:[NSDate new] andNumberOfDays:numberOfDaysFromStartDate.day];
+    /*
     [self getRangeOfDataPointsFrom:self.userDayStart
                         andEndDate:self.userDayEnd
                    andNumberOfDays:numberOfDaysFromStartDate.day
                      withQueryType:SevenDayFitnessQueryTypeWake];
+     */
 }
 
+- (void)reporterDone:(NSNotification *)notification {
+    
+    APCMotionHistoryReporter *reporter = [APCMotionHistoryReporter sharedInstance];
+    
+
+    NSArray * theMotionData = reporter.retrieveMotionReport;
+    //The count will be the number of days in the array, each element represents a day
+    if(theMotionData.count > 0)
+    {
+        for (NSArray *dayArray in theMotionData)
+        {
+            // Now that you have a “day" you can get the APCMotionHistoryData out of them
+            NSLog(@"**********************************");
+            for(APCMotionHistoryData * theData in dayArray) {
+                NSLog(@"activityType: %ld , timeInterval: %f",theData.activityType,theData.timeInterval);
+                /*
+                [self.wakeDataset addObject:@{
+                                              self.segmentInactive: @(inactiveCounter),
+                                              self.segmentSedentary: @(sedentaryCounter),
+                                              self.segmentModerate: @(moderateCounter),
+                                              self.segmentVigorous: @(vigorousCounter)
+                                              }];
+                 */
+                
+                /*
+                [self.sleepDataset addObject:@{
+                                               self.segmentSleep: @(sleepForStationaryCounter)
+                                               }];
+                 */
+                
+            }
+        }
+    }
+    
+   
+    
+    
+    //Not sure if this is needed
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:APHSevenDayAllocationSleepDataIsReadyNotification object:nil];
+    });
+    
+    /*
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:APHSevenDayAllocationDataIsReadyNotification
+                                                            object:nil];
+    });
+     */
+    
+    /*
+    - (void)motionDataGatheringComplete
+    {
+        for (NSDictionary *day in self.sleepDataset) {
+            NSUInteger dayIndex = [self.sleepDataset indexOfObject:day];
+            
+            NSMutableDictionary *wakeData = [[self.wakeDataset objectAtIndex:dayIndex] mutableCopy];
+            
+            [wakeData setObject:day[self.segmentSleep] forKey:self.segmentSleep];
+            
+            [self.wakeDataset replaceObjectAtIndex:dayIndex withObject:wakeData];
+        }
+        
+        self.datasetNormalized = self.wakeDataset;
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:APHSevenDayAllocationDataIsReadyNotification
+                                                                object:nil];
+        });
+        
+        
+    }
+     */
+}
 - (HKHealthStore *) healthStore {
     APCAppDelegate *delegate = (APCAppDelegate*)[UIApplication sharedApplication].delegate;
     
@@ -268,201 +351,9 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
     return allocationData;
 }
 
-#pragma mark - Allocation Algorithm
-/**
- * @brief Since there is no corrolation between the data that is provided by Core Motion
- *        and the data that is pulled from HealthKit, we have to hypothesize that the
- *        time that is associated with data points from both sources are the same points.
- *        Given that, we will use the data from Core Motion as the container using the Activity type
- *        and Confidence that are provided by Core Motion to relate data from HealthKit.
- *
- *        Therefore if the data point from Core Motion has medium to high confidence and the
- *        timestamp is within the same hour as the HealthKit data, the data from HealthKit
- *        will be organized according to the Activity type that is provided by Core Motion.
- */
-//- (void)groupDataFromMotion:(NSArray *)motionDataset andHealthKit:(NSArray *)healthkitDataset
-//{
-//    // At this point all datasets (from HealthKit and Core Motion) should be
-//    // available, since the queries to build these datasets gets fired at -initWithAllocationStartDate.
-//    
-//    NSMutableArray *normalDataset = [NSMutableArray array];
-//    NSArray *segments = @[self.segmentSleep , self.segmentInactive, self.segmentSedentary, self.segmentModerate, self.segmentVigorous];
-//    
-//    for (NSString *segmentId in segments) {
-//        NSMutableDictionary *entry = [NSMutableDictionary new];
-//        [entry setObject:segmentId forKey:kDatasetSegmentKey];
-//        
-//        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K = %@", kDatasetSegmentKey, segmentId];
-//        NSArray *groupSegments = [motionDataset filteredArrayUsingPredicate:predicate];
-//        double segmentSum = 0;
-//        
-//        for (int i = 0; i < groupSegments.count; i++) {
-//            if (![segmentId isEqualToString:self.segmentSleep]) {
-//                segmentSum += 1;
-//            } else {
-//                segmentSum += [[[groupSegments objectAtIndex:i] objectForKey:kSegmentSumKey] integerValue];
-//            }
-//        }
-//        
-//        entry[kSegmentSumKey] = @(segmentSum);
-//        
-//        UIColor *segmentColor = nil;
-//        
-//        if ([segmentId isEqualToString:self.segmentSleep]) {
-//            segmentColor =[APHTheme colorForActivitySleep];
-//        } else if ([segmentId isEqualToString:self.segmentInactive]) {
-//            segmentColor = [APHTheme colorForActivityInactive];
-//        } else if ([segmentId isEqualToString:self.segmentSedentary]) {
-//            segmentColor = [APHTheme colorForActivitySedentary];
-//        } else if ([segmentId isEqualToString:self.segmentModerate]) {
-//            segmentColor = [APHTheme colorForActivityModerate];
-//        } else {
-//            segmentColor = [APHTheme colorForActivityVigorous];
-//        }
-//        
-//        entry[kDatasetSegmentColorKey] = segmentColor;
-//        
-//        [normalDataset addObject:entry];
-//    }
-//    
-//    self.datasetNormalized = normalDataset;
-//}
-
-//- (void)normalizeMotionData:(NSArray *)dataset
-//{
-//    // The way we are corrolating the Core Motion data is as that each of the
-//    // activity type is mapped to our categories. That association is:
-//    //
-//    //   Core Motion       Confidence        Our Map
-//    //   ============================================
-//    //   Stationary        Any               Inactive
-//    //   Walking           Low               Sedentary
-//    //   Walking           Medium/High       Moderate
-//    //   Running           Low               Moderate
-//    //   Running           Medium/High       Vigorous
-//    //   Cycling           Medium/High       Vigorous
-//    //
-//
-//    
-//    for (CMMotionActivity *activity in dataset) {
-//        BOOL isValidActivityType = YES;
-//        NSString *dateHour = [dateFormatter stringFromDate:activity.startDate];
-//        NSString *activityType = nil;
-//        
-//        if (activity.stationary) {
-//            activityType = self.segmentInactive;
-//        } else if (activity.walking) {
-//            if (activity.confidence == CMMotionActivityConfidenceLow) {
-//                activityType = self.segmentSedentary;
-//            } else {
-//                activityType = self.segmentModerate;
-//            }
-//        } else if (activity.running) {
-//            if (activity.confidence == CMMotionActivityConfidenceLow) {
-//                activityType = self.segmentModerate;
-//            } else {
-//                activityType = self.segmentVigorous;
-//            }
-//        } else if (activity.cycling) {
-//            if (activity.confidence == CMMotionActivityConfidenceLow) {
-//                activityType = self.segmentModerate;
-//            } else {
-//                activityType = self.segmentVigorous;
-//            }
-//        } else {
-//            isValidActivityType = NO;
-//        }
-//        
-//        if (isValidActivityType) {
-//        NSArray *filteredSegments = nil;
-//            NSDictionary *segment = @{kDatasetSegmentKey: activityType, kDatasetDateHourKey: dateHour};
-//            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(%K = %@) AND (%K = %@)",
-//                                      kDatasetSegmentKey,
-//                                      activityType,
-//                                      kDatasetDateHourKey,
-//                                      dateHour];
-//            
-//            
-//            filteredSegments = [self.motionDatasetForTheWeek filteredArrayUsingPredicate:predicate];
-//            [self.motionDatasetForTheWeek addObject:segment];
-//        }
-//        
-//    }
-//}
-
-//- (NSNumber *)retrieveDataFromDataset:(NSArray *)dataset forDateHour:(NSString *)dateHour
-//{
-//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", kDatasetDateHourKey, dateHour];
-//    NSArray *filteredDataset = nil;
-//    NSNumber *dataValue = @(0);
-//    
-//    filteredDataset = [dataset filteredArrayUsingPredicate:predicate];
-//    
-//    if ([filteredDataset count] > 0) {
-//        dataValue = [[filteredDataset firstObject] valueForKey:kDatasetValueKey];
-//    }
-//    
-//    return dataValue;
-//}
 
 #pragma mark - Queries
 
-- (void)setMostRecentSleepRangeStartDateAndEndDate {
-    
-    APCAppDelegate*         delegate        =   (APCAppDelegate *)[UIApplication sharedApplication].delegate;
-            NSDate*         userSleepTime   =                   delegate.dataSubstrate.currentUser.sleepTime;
-            NSDate*         userWakeTime    =                  delegate.dataSubstrate.currentUser.wakeUpTime;
-    
-
-    #warning To avoid the bug with sleep/wake time, we will default to the 7 AM wake time and 9:30 PM sleep time.
-    if (!userSleepTime)
-    {
-        userSleepTime                       = [[NSCalendar currentCalendar] dateBySettingHour:21
-                                                                                       minute:30
-                                                                                       second:0
-                                                                                       ofDate:[NSDate date]
-                                                                                      options:0];
-    }
-    
-    if (!userWakeTime)
-    {
-        userWakeTime                        = [[NSCalendar currentCalendar] dateBySettingHour:7
-                                                                                       minute:0
-                                                                                       second:0
-                                                                                       ofDate:[NSDate date]
-                                                                                      options:0];
-    }
-    
-            NSCalendar*         cal         =   [[NSCalendar alloc] initWithCalendarIdentifier:[NSCalendar currentCalendar].calendarIdentifier];
-        NSCalendarUnit          units       =   (NSCalendarUnitHour | NSCalendarUnitMinute);
-      NSDateComponents*         sleepTime   =   [cal components:units fromDate: userSleepTime];
-      NSDateComponents*         wakeTime    =   [cal components:units  fromDate: userWakeTime];
-                NSDate*         newEndDate  =   [cal dateBySettingHour:  sleepTime.hour
-                                                                minute:  sleepTime.minute
-                                                                second:  0
-                                                                ofDate:  [NSDate date]
-                                                               options:  0];
-    
-                NSDate*         newStartDate =  [cal dateBySettingHour: wakeTime.hour
-                                                                minute: wakeTime.minute
-                                                                second: 0
-                                                                ofDate: [NSDate date]
-                                                               options: 0];
-    
-    
-    if (sleepTime.hour < wakeTime.hour) {
-        
-        NSDateComponents*    dateComponent  = [[NSDateComponents alloc] init];
-                                                    [dateComponent setDay:1];
-        
-        newEndDate                          = [[NSCalendar currentCalendar] dateByAddingComponents:  dateComponent
-                                                                                           toDate:  newEndDate
-                                                                                          options:  0];
-    }
-
-    self.userDayStart                       = newStartDate;
-    self.userDayEnd                         =   newEndDate;
-}
 
 
 - (void) getRangeOfDataPointsFrom:(NSDate *)startDate andEndDate:(NSDate *)endDate andNumberOfDays:(NSInteger)numberOfDays withQueryType:(SevenDayFitnessQueryType)queryType{
@@ -605,6 +496,7 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:APHSevenDayAllocationSleepDataIsReadyNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:APCMotionHistoryReporterDoneNotification object:nil];
 }
 
 - (void)motionDataGatheringComplete
