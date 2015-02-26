@@ -230,23 +230,10 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
                     item.caption = NSLocalizedString(@"7-Day Assessment", @"");
                     item.numberOfDaysString = NSLocalizedString([self fitnessDaysRemaining], @"");
                     
-                    NSDate *startDate = [[NSCalendar currentCalendar] dateBySettingHour:0
-                                                                                 minute:0
-                                                                                 second:0
-                                                                                 ofDate:[NSDate date]
-                                                                                options:0];
-                    
-
                     APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
-                    [appDelegate.sevenDayFitnessAllocationData runStatsCollectionQueryfromStartDate:startDate toEndDate:[NSDate date]];
-                    
-                    
                     NSString *sevenDayDistanceStr = nil;
 
-                    //If healthkit updated quickly enough then fill in the data.
-                    if (self.totalDistanceForSevenDay != nil) {
-                        sevenDayDistanceStr = [NSString stringWithFormat:@"%.2f miles", [self.totalDistanceForSevenDay floatValue]/metersPerMile];
-                    }
+                    sevenDayDistanceStr = [NSString stringWithFormat:@"%.2f Active Minutes", appDelegate.sevenDayFitnessAllocationData.activeSeconds/60];
                     
                     item.distanceTraveledString = sevenDayDistanceStr;
                     item.identifier = kAPCDashboardPieGraphTableViewCellIdentifier;
@@ -327,16 +314,12 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
         pieGraphCell.textLabel.text = @"";
         pieGraphCell.subTitleLabel.text = fitnessItem.numberOfDaysString;
         
-        if (fitnessItem.distanceTraveledString == nil) {
-            fitnessItem.distanceTraveledString = [NSString stringWithFormat:@"%0.1f miles", [self.totalDistanceForSevenDay floatValue]/metersPerMile];
-            
-            pieGraphCell.subTitleLabel2.alpha = 0;
-            
-            [UIView animateWithDuration:0.2 animations:^{
-                pieGraphCell.subTitleLabel2.text = fitnessItem.distanceTraveledString;
-                pieGraphCell.subTitleLabel2.alpha = 1;
-            }];
-        }
+        pieGraphCell.subTitleLabel2.alpha = 0;
+        
+        [UIView animateWithDuration:0.2 animations:^{
+            pieGraphCell.subTitleLabel2.text = fitnessItem.distanceTraveledString;
+            pieGraphCell.subTitleLabel2.alpha = 1;
+        }];
         
         NSMutableAttributedString *attirbutedDistanceString = [[NSMutableAttributedString alloc] initWithString:fitnessItem.distanceTraveledString];
         [attirbutedDistanceString addAttribute:NSFontAttributeName value:[UIFont appMediumFontWithSize:17.0f] range:NSMakeRange(0, (fitnessItem.distanceTraveledString.length - @" miles".length))];
@@ -486,21 +469,6 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     NSDate *fitnessStartDate = [defaults objectForKey:kSevenDayFitnessStartDateKey];
-    
-    if (!fitnessStartDate) {
-        
-        NSDate *startDate = [[NSCalendar currentCalendar] dateBySettingHour:0
-                                                                     minute:0
-                                                                     second:0
-                                                                     ofDate:[NSDate date]
-                                                                    options:0];
-        
-        fitnessStartDate = startDate;
-        
-        APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
-        appDelegate.sevenDayFitnessAllocationData = [[APHFitnessAllocation alloc] initWithAllocationStartDate:fitnessStartDate];
-        [appDelegate.sevenDayFitnessAllocationData startDataCollection];
-    }
     
     return fitnessStartDate;
 }
