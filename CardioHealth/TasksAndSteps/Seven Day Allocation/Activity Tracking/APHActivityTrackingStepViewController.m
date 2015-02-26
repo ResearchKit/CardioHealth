@@ -81,9 +81,6 @@ static NSInteger const kWeekSegmentIndex         = 2;
                                              selector:@selector(datasetDidUpdate:)
                                                  name:APHSevenDayAllocationDataIsReadyNotification
                                                object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(TotalDistanceFromHealthKit:) name:APHSevenDayAllocationHealthKitDataIsReadyNotification
-                                               object:nil];
     
     self.showTodaysDataAtViewLoad = YES;
     
@@ -123,9 +120,6 @@ static NSInteger const kWeekSegmentIndex         = 2;
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:APHSevenDayAllocationDataIsReadyNotification
-                                                  object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:APHSevenDayAllocationHealthKitDataIsReadyNotification
                                                   object:nil];
     
     [super viewWillDisappear:animated];
@@ -182,18 +176,6 @@ static NSInteger const kWeekSegmentIndex         = 2;
     }
     
     [self refreshAllocation:sender.selectedSegmentIndex];
-}
-
-- (void)TotalDistanceFromHealthKit:(NSNotification *)notif {
-    
-//    APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
-//    
-//    self.chartView.valueLabel.alpha = 0;
-//    [UIView animateWithDuration:0.3 animations:^{
-//        self.chartView.valueLabel.text = [NSString stringWithFormat:@"%f Active Minutes", appDelegate.sevenDayFitnessAllocationData.activeSeconds/60];
-//        self.chartView.valueLabel.alpha = 1;
-//    }];
-    
 }
 
 - (void)handleClose:(UIBarButtonItem *)sender

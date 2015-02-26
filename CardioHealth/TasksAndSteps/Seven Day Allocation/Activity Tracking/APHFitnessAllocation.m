@@ -153,19 +153,10 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
     // numberOfDaysFromStartDate provides the difference of days from now to start
     // of task and therefore if there is no difference we are only getting data for one day.
     numberOfDaysFromStartDate.day += 1;
-    NSLog(@"numberOfDaysFromStartDate.day %ld",(long)numberOfDaysFromStartDate.day);
     
     APCMotionHistoryReporter *reporter = [APCMotionHistoryReporter sharedInstance];
     [reporter startMotionCoProcessorDataFrom:[NSDate dateWithTimeIntervalSinceNow:-24 * 60 * 60] andEndDate:[NSDate new] andNumberOfDays:numberOfDaysFromStartDate.day];
 
-
-    //This call is replaced by   [reporter startMotionCoProcessorDataFrom:startDate andEndDate:[NSDate new] andNumberOfDays:numberOfDaysFromStartDate.day];
-    /*
-    [self getRangeOfDataPointsFrom:self.userDayStart
-                        andEndDate:self.userDayEnd
-                   andNumberOfDays:numberOfDaysFromStartDate.day
-                     withQueryType:SevenDayFitnessQueryTypeWake];
-     */
 }
 
 - (void)reporterDone:(NSNotification *)notification {
@@ -186,11 +177,8 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
             NSUInteger moderateCounter    = 0;
             NSUInteger vigorousCounter    = 0;
 
-            
-            // Now that you have a “day" you can get the APCMotionHistoryData out of them
-            NSLog(@"**********************************");
+
             for(APCMotionHistoryData * theData in dayArray) {
-                NSLog(@"activityType: %ld , timeInterval: %f",theData.activityType,theData.timeInterval);
                 
                 if(theData.activityType == ActivityTypeSleeping)
                 {
