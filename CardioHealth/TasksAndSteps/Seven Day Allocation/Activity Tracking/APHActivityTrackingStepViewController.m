@@ -321,17 +321,13 @@ static NSInteger const kWeekSegmentIndex         = 2;
 }
 
 - (IBAction)resetTaskStartDate:(id)sender {
+    //Updating the start date of the task.
     [self saveSevenDayFitnessStartDate: [NSDate date]];
-
-    APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    //appDelegate.sevenDayFitnessAllocationData = [[APHFitnessAllocation alloc] initWithAllocationStartDate:[NSDate date]];
+    //Calling the motion history reporter to retrieve and update the data for core activity. This triggers a series of notifications that lead to the pie graph being drawn again here.
     APCMotionHistoryReporter *reporter = [APCMotionHistoryReporter sharedInstance];
-    
     [reporter startMotionCoProcessorDataFrom:[NSDate dateWithTimeIntervalSinceNow:-24 * 60 * 60] andEndDate:[NSDate new] andNumberOfDays:1];
-
-    //[appDelegate.sevenDayFitnessAllocationData startDataCollection];
     
-    
+  
 }
 @end
