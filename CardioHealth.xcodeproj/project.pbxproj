@@ -683,10 +683,10 @@
 		F5F6452219D35BE3004CFBB2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F571C9031A2F93670011C270 /* APCAppCore.xcodeproj */,
 				747307121A96E2540071D863 /* openssl.framework */,
 				74FA829B1A91661C00F93769 /* ResearchKit.framework */,
 				F571C9101A2F93920011C270 /* BridgeSDK.framework */,
-				F571C9031A2F93670011C270 /* APCAppCore.xcodeproj */,
 				08C56E751A16E50B00D3BF61 /* CoreMotion.framework */,
 				F5F6453019D35C7D004CFBB2 /* libz.dylib */,
 				F5F6452E19D35C65004CFBB2 /* libarchive.dylib */,

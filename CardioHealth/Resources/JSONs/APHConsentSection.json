@@ -1,5 +1,28 @@
 {
+    "documentProperties" :
+    {
     "htmlDocument" : "cardio_fullconsent",
+    },
+    "quiz":
+    {
+        "questions":
+        [
+            {
+                "identifier": "instruction",
+                "prompt": "Comprehension",
+                "text": "Let's do a quick and simple test on your understanding of this study.",
+                "type": "instruction"
+            },
+            {
+                "identifier": "no-answer",
+                "prompt": "Continue?",
+                "type": "boolean",
+                "expectedAnswer": "true"
+            }
+        ],
+        "failure": "You failed",
+        "success": "Yay!"
+    },
     "sections":
     [
      {
