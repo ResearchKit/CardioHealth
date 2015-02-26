@@ -328,6 +328,9 @@ static NSInteger const kWeekSegmentIndex         = 2;
     APCMotionHistoryReporter *reporter = [APCMotionHistoryReporter sharedInstance];
     [reporter startMotionCoProcessorDataFrom:[NSDate dateWithTimeIntervalSinceNow:-24 * 60 * 60] andEndDate:[NSDate new] andNumberOfDays:1];
     
+    [self.segmentDays setEnabled:YES forSegmentAtIndex:0];
+    [self.segmentDays setEnabled:YES forSegmentAtIndex:2];
+    
   
 }
 @end
