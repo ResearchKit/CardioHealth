@@ -238,7 +238,7 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
                     
 
                     APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
-                    [appDelegate.sevenDayFitnessAllocationData runStatsCollectionQueryfromStartDate:startDate toEndDate:[NSDate date]];
+//                    [appDelegate.sevenDayFitnessAllocationData runStatsCollectionQueryfromStartDate:startDate toEndDate:[NSDate date]];
                     
                     
                     NSString *sevenDayDistanceStr = nil;

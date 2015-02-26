@@ -94,8 +94,13 @@ static NSInteger const kWeekSegmentIndex         = 2;
     self.chartView.legendPaddingHeight = 60.0;
     self.chartView.shouldAnimate = YES;
     self.chartView.shouldAnimateLegend = NO;
-    self.chartView.titleLabel.text = NSLocalizedString(@"Distance", @"Distance");
+    self.chartView.titleLabel.text = NSLocalizedString(@"Active Minutes", @"Active Minutes");
     
+    
+    APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    self.chartView.valueLabel.text = [NSString stringWithFormat:@"%0.2f", appDelegate.sevenDayFitnessAllocationData.activeSeconds/60];
+    self.chartView.valueLabel.alpha = 1;
 
     
 
@@ -153,8 +158,6 @@ static NSInteger const kWeekSegmentIndex         = 2;
                                                                ofDate:startDate
                                                               options:0];
             
-            [appDelegate.sevenDayFitnessAllocationData runStatsCollectionQueryfromStartDate:startDate
-                                                                                  toEndDate:endDate];
             break;
         case 1:
             self.allocationDataset = [appDelegate.sevenDayFitnessAllocationData todaysAllocation];
@@ -163,8 +166,6 @@ static NSInteger const kWeekSegmentIndex         = 2;
                                                                  second:0
                                                                  ofDate:[NSDate date]
                                                                 options:0];
-            [appDelegate.sevenDayFitnessAllocationData runStatsCollectionQueryfromStartDate:startDate
-                                                                                  toEndDate:[NSDate date]];
 
             break;
         default:
@@ -176,8 +177,6 @@ static NSInteger const kWeekSegmentIndex         = 2;
                                                                  ofDate:self.allocationStartDate
                                                                 options:0];
             
-            [appDelegate.sevenDayFitnessAllocationData runStatsCollectionQueryfromStartDate:startDate
-                                                                                  toEndDate:[NSDate date]];
 
             break;
     }
@@ -187,14 +186,13 @@ static NSInteger const kWeekSegmentIndex         = 2;
 
 - (void)TotalDistanceFromHealthKit:(NSNotification *)notif {
     
-    NSDictionary *healthKitDict = notif.userInfo;
-    double totalDistance = [[healthKitDict objectForKey:@"datasetValueKey"] doubleValue];
-    
-    self.chartView.valueLabel.alpha = 0;
-    [UIView animateWithDuration:0.3 animations:^{
-        self.chartView.valueLabel.text = [NSString stringWithFormat:@"%0.1f mi", totalDistance/metersPerMile];
-        self.chartView.valueLabel.alpha = 1;
-    }];
+//    APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
+//    
+//    self.chartView.valueLabel.alpha = 0;
+//    [UIView animateWithDuration:0.3 animations:^{
+//        self.chartView.valueLabel.text = [NSString stringWithFormat:@"%f Active Minutes", appDelegate.sevenDayFitnessAllocationData.activeSeconds/60];
+//        self.chartView.valueLabel.alpha = 1;
+//    }];
     
 }
 
