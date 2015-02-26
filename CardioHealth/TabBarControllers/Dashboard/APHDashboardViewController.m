@@ -208,6 +208,7 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
                     APCTableViewDashboardGraphItem *item = [APCTableViewDashboardGraphItem new];
                     item.caption = NSLocalizedString(@"Heart Rate", @"");
                     item.graphData = self.heartRateScoring;
+                    item.graphType = kAPCDashboardGraphTypeDiscrete;
                     
                     item.detailText = [NSString stringWithFormat:NSLocalizedString(@"Average : %0.0f bpm", @"Average: {value} bpm"), [[self.heartRateScoring averageDataPoint] doubleValue]];
                     item.identifier = kAPCDashboardGraphTableViewCellIdentifier;
