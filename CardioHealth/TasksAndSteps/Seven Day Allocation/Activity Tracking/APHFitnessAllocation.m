@@ -236,7 +236,7 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
 - (NSArray *)todaysAllocation
 {
     NSArray *allocationForToday = nil;
-    NSDictionary *todaysData = [self.datasetNormalized lastObject];
+    NSDictionary *todaysData = [self.datasetNormalized firstObject];
     
     allocationForToday = [self buildSegmentArrayForData:todaysData];
     
@@ -247,7 +247,7 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
 {
     NSArray *allcationForYesterday = nil;
     if ([self.datasetNormalized count] > 1) {
-        NSUInteger yesterdayIndex = [self.datasetNormalized indexOfObject:[self.datasetNormalized lastObject]] - 1;
+        NSUInteger yesterdayIndex = [self.datasetNormalized indexOfObject:[self.datasetNormalized firstObject]] + 1;
         NSDictionary *yesterdaysData = [self.datasetNormalized objectAtIndex:yesterdayIndex];
         
         allcationForYesterday = [self buildSegmentArrayForData:yesterdaysData];

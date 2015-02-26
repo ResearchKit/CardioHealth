@@ -128,17 +128,9 @@ static  NSString*       const   kVideoShownKey                          = @"Vide
         
         [self.sevenDayFitnessAllocationData startDataCollection];
     }
-    
 }
 -(void)setUpCollectors
 {
-    //For the Seven Day Fitness Allocation
-    NSDate *fitnessStartDate = [self checkSevenDayFitnessStartDate];
-    if (fitnessStartDate) {
-        self.sevenDayFitnessAllocationData = [[APHFitnessAllocation alloc] initWithAllocationStartDate:fitnessStartDate];
-        
-        [self.sevenDayFitnessAllocationData startDataCollection];
-    }
 
     APCCoreMotionTracker * motionTracker = [[APCCoreMotionTracker alloc] initWithIdentifier:@"motionTracker"];
     [self.passiveDataCollector addTracker:motionTracker];

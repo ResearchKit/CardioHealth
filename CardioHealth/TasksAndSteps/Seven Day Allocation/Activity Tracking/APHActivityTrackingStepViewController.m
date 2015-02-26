@@ -15,6 +15,7 @@ static NSInteger const kTodaySegmentIndex        = 1;
 static NSInteger const kWeekSegmentIndex         = 2;
 
 @interface APHActivityTrackingStepViewController () <APCPieGraphViewDatasource>
+- (IBAction)resetTaskStartDate:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UILabel *daysRemaining;
 @property (weak, nonatomic) IBOutlet APCPieGraphView *chartView;
@@ -319,4 +320,15 @@ static NSInteger const kWeekSegmentIndex         = 2;
     return [[[self.allocationDataset valueForKey:kSegmentSumKey] objectAtIndex:index] floatValue];
 }
 
+- (IBAction)resetTaskStartDate:(id)sender {
+    [self saveSevenDayFitnessStartDate: [NSDate date]];
+
+    APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    appDelegate.sevenDayFitnessAllocationData = [[APHFitnessAllocation alloc] initWithAllocationStartDate:[NSDate date]];
+    
+    [appDelegate.sevenDayFitnessAllocationData startDataCollection];
+    
+    
+}
 @end
