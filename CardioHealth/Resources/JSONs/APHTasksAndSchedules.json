@@ -53,10 +53,23 @@
               "taskTitle" : "PAR-Q Quiz",
               "taskID": "parqquiz-1E174061-5B02-11E4-8ED6-0800200C9A77",
               "taskClassName" : "APHParQQuizTaskViewController"
+              },
+              
+              {
+              "taskTitle" : "Daily Check",
+              "taskID": "be42dc21-4706-478a-a398-10cabb9c7d78",
+              "taskFileName" : "cardio_daily_check",
+              "taskClassName" : "APCGenericSurveyTaskViewController"
               }
               
               ],
     "schedules": [
+                  {
+                  "scheduleType": "recurring",
+                  "scheduleString": "0 5 * * *",
+                  "taskID": "be42dc21-4706-478a-a398-10cabb9c7d78"
+                  },
+                  
                   {
                   "scheduleType": "recurring",
                   "scheduleString": "0 5 * * *",
