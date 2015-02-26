@@ -180,26 +180,49 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
     {
         for (NSArray *dayArray in theMotionData)
         {
+            
+            NSUInteger inactiveCounter    = 0;
+            NSUInteger sedentaryCounter   = 0;
+            NSUInteger moderateCounter    = 0;
+            NSUInteger vigorousCounter    = 0;
+
+            
             // Now that you have a “day" you can get the APCMotionHistoryData out of them
             NSLog(@"**********************************");
             for(APCMotionHistoryData * theData in dayArray) {
                 NSLog(@"activityType: %ld , timeInterval: %f",theData.activityType,theData.timeInterval);
-                /*
-                [self.wakeDataset addObject:@{
-                                              self.segmentInactive: @(inactiveCounter),
-                                              self.segmentSedentary: @(sedentaryCounter),
-                                              self.segmentModerate: @(moderateCounter),
-                                              self.segmentVigorous: @(vigorousCounter)
-                                              }];
-                 */
                 
-                /*
-                [self.sleepDataset addObject:@{
-                                               self.segmentSleep: @(sleepForStationaryCounter)
-                                               }];
-                 */
+                if(theData.activityType == ActivityTypeSleeping)
+                {
+                    [self.sleepDataset addObject:@{
+                                                   self.segmentSleep: @(theData.timeInterval)
+                                                   }];
+                }
+                else if(theData.activityType == ActivityTypeStationary)
+                {
+                    inactiveCounter += theData.timeInterval;
+                }
+                else if(theData.activityType == ActivityTypeWalking)
+                {
+                    moderateCounter += theData.timeInterval;
+                }
+                else if(theData.activityType == ActivityTypeRunning)
+                {
+                    vigorousCounter += theData.timeInterval;
+                }
+            
                 
             }
+            
+            sedentaryCounter = inactiveCounter/3;
+            [self.wakeDataset addObject:@{
+                                          self.segmentInactive: @(inactiveCounter),
+                                          self.segmentSedentary: @(sedentaryCounter),
+                                          self.segmentModerate: @(moderateCounter),
+                                          self.segmentVigorous: @(vigorousCounter)
+                                          }];
+          
+
         }
     }
     
@@ -217,6 +240,7 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
                                                             object:nil];
     });
      */
+    
     
     /*
     - (void)motionDataGatheringComplete
