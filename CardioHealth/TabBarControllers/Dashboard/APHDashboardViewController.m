@@ -470,21 +470,6 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
     
     NSDate *fitnessStartDate = [defaults objectForKey:kSevenDayFitnessStartDateKey];
     
-    if (!fitnessStartDate) {
-        
-        NSDate *startDate = [[NSCalendar currentCalendar] dateBySettingHour:0
-                                                                     minute:0
-                                                                     second:0
-                                                                     ofDate:[NSDate date]
-                                                                    options:0];
-        
-        fitnessStartDate = startDate;
-        
-        APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
-        appDelegate.sevenDayFitnessAllocationData = [[APHFitnessAllocation alloc] initWithAllocationStartDate:fitnessStartDate];
-        [appDelegate.sevenDayFitnessAllocationData startDataCollection];
-    }
-    
     return fitnessStartDate;
 }
 
