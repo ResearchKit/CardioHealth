@@ -325,9 +325,12 @@ static NSInteger const kWeekSegmentIndex         = 2;
 
     APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    appDelegate.sevenDayFitnessAllocationData = [[APHFitnessAllocation alloc] initWithAllocationStartDate:[NSDate date]];
+    //appDelegate.sevenDayFitnessAllocationData = [[APHFitnessAllocation alloc] initWithAllocationStartDate:[NSDate date]];
+    APCMotionHistoryReporter *reporter = [APCMotionHistoryReporter sharedInstance];
     
-    [appDelegate.sevenDayFitnessAllocationData startDataCollection];
+    [reporter startMotionCoProcessorDataFrom:[NSDate dateWithTimeIntervalSinceNow:-24 * 60 * 60] andEndDate:[NSDate new] andNumberOfDays:1];
+
+    //[appDelegate.sevenDayFitnessAllocationData startDataCollection];
     
     
 }
