@@ -97,7 +97,7 @@ static NSInteger const kWeekSegmentIndex         = 2;
     
     APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    self.chartView.valueLabel.text = [NSString stringWithFormat:@"%0.2f", appDelegate.sevenDayFitnessAllocationData.activeSeconds/60];
+    self.chartView.valueLabel.text = [NSString stringWithFormat:@"%d", (int) roundf(appDelegate.sevenDayFitnessAllocationData.activeSeconds/60)];
     self.chartView.valueLabel.alpha = 1;
 
     
@@ -327,6 +327,9 @@ static NSInteger const kWeekSegmentIndex         = 2;
     //Calling the motion history reporter to retrieve and update the data for core activity. This triggers a series of notifications that lead to the pie graph being drawn again here.
     APCMotionHistoryReporter *reporter = [APCMotionHistoryReporter sharedInstance];
     [reporter startMotionCoProcessorDataFrom:[NSDate dateWithTimeIntervalSinceNow:-24 * 60 * 60] andEndDate:[NSDate new] andNumberOfDays:1];
+    
+    [self.segmentDays setEnabled:YES forSegmentAtIndex:0];
+    [self.segmentDays setEnabled:YES forSegmentAtIndex:2];
     
   
 }
