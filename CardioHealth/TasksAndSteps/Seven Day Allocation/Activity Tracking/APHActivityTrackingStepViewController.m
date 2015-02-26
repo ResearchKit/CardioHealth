@@ -15,6 +15,7 @@ static NSInteger const kTodaySegmentIndex        = 1;
 static NSInteger const kWeekSegmentIndex         = 2;
 
 @interface APHActivityTrackingStepViewController () <APCPieGraphViewDatasource>
+- (IBAction)resetTaskStartDate:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UILabel *daysRemaining;
 @property (weak, nonatomic) IBOutlet APCPieGraphView *chartView;
@@ -81,9 +82,6 @@ static NSInteger const kWeekSegmentIndex         = 2;
                                              selector:@selector(datasetDidUpdate:)
                                                  name:APHSevenDayAllocationDataIsReadyNotification
                                                object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(TotalDistanceFromHealthKit:) name:APHSevenDayAllocationHealthKitDataIsReadyNotification
-                                               object:nil];
     
     self.showTodaysDataAtViewLoad = YES;
     
@@ -94,8 +92,13 @@ static NSInteger const kWeekSegmentIndex         = 2;
     self.chartView.legendPaddingHeight = 60.0;
     self.chartView.shouldAnimate = YES;
     self.chartView.shouldAnimateLegend = NO;
-    self.chartView.titleLabel.text = NSLocalizedString(@"Distance", @"Distance");
+    self.chartView.titleLabel.text = NSLocalizedString(@"Active Minutes", @"Active Minutes");
     
+    
+    APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    self.chartView.valueLabel.text = [NSString stringWithFormat:@"%0.2f", appDelegate.sevenDayFitnessAllocationData.activeSeconds/60];
+    self.chartView.valueLabel.alpha = 1;
 
     
 
@@ -118,9 +121,6 @@ static NSInteger const kWeekSegmentIndex         = 2;
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:APHSevenDayAllocationDataIsReadyNotification
-                                                  object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:APHSevenDayAllocationHealthKitDataIsReadyNotification
                                                   object:nil];
     
     [super viewWillDisappear:animated];
@@ -153,8 +153,6 @@ static NSInteger const kWeekSegmentIndex         = 2;
                                                                ofDate:startDate
                                                               options:0];
             
-            [appDelegate.sevenDayFitnessAllocationData runStatsCollectionQueryfromStartDate:startDate
-                                                                                  toEndDate:endDate];
             break;
         case 1:
             self.allocationDataset = [appDelegate.sevenDayFitnessAllocationData todaysAllocation];
@@ -163,8 +161,6 @@ static NSInteger const kWeekSegmentIndex         = 2;
                                                                  second:0
                                                                  ofDate:[NSDate date]
                                                                 options:0];
-            [appDelegate.sevenDayFitnessAllocationData runStatsCollectionQueryfromStartDate:startDate
-                                                                                  toEndDate:[NSDate date]];
 
             break;
         default:
@@ -176,26 +172,11 @@ static NSInteger const kWeekSegmentIndex         = 2;
                                                                  ofDate:self.allocationStartDate
                                                                 options:0];
             
-            [appDelegate.sevenDayFitnessAllocationData runStatsCollectionQueryfromStartDate:startDate
-                                                                                  toEndDate:[NSDate date]];
 
             break;
     }
     
     [self refreshAllocation:sender.selectedSegmentIndex];
-}
-
-- (void)TotalDistanceFromHealthKit:(NSNotification *)notif {
-    
-    NSDictionary *healthKitDict = notif.userInfo;
-    double totalDistance = [[healthKitDict objectForKey:@"datasetValueKey"] doubleValue];
-    
-    self.chartView.valueLabel.alpha = 0;
-    [UIView animateWithDuration:0.3 animations:^{
-        self.chartView.valueLabel.text = [NSString stringWithFormat:@"%0.1f mi", totalDistance/metersPerMile];
-        self.chartView.valueLabel.alpha = 1;
-    }];
-    
 }
 
 - (void)handleClose:(UIBarButtonItem *)sender
@@ -339,4 +320,14 @@ static NSInteger const kWeekSegmentIndex         = 2;
     return [[[self.allocationDataset valueForKey:kSegmentSumKey] objectAtIndex:index] floatValue];
 }
 
+- (IBAction)resetTaskStartDate:(id)sender {
+    //Updating the start date of the task.
+    [self saveSevenDayFitnessStartDate: [NSDate date]];
+    
+    //Calling the motion history reporter to retrieve and update the data for core activity. This triggers a series of notifications that lead to the pie graph being drawn again here.
+    APCMotionHistoryReporter *reporter = [APCMotionHistoryReporter sharedInstance];
+    [reporter startMotionCoProcessorDataFrom:[NSDate dateWithTimeIntervalSinceNow:-24 * 60 * 60] andEndDate:[NSDate new] andNumberOfDays:1];
+    
+  
+}
 @end
