@@ -21,11 +21,12 @@ extern NSString *const APHSevenDayAllocationHealthKitDataIsReadyNotification;
 
 @interface APHFitnessAllocation : NSObject
 
+@property (nonatomic) NSTimeInterval activeSeconds;
+
 - (instancetype)initWithAllocationStartDate:(NSDate *)startDate;
 - (NSArray *)todaysAllocation;
 - (NSArray *)yesterdaysAllocation;
 - (NSArray *)weeksAllocation;
-- (NSNumber *)totalDistanceForDays:(NSInteger)days;
 - (void) startDataCollection;
-- (void)runStatsCollectionQueryfromStartDate:(NSDate *)startDate toEndDate:(NSDate *)endDate;
+
 @end

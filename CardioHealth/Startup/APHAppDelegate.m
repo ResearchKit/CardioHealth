@@ -24,6 +24,14 @@ static  NSString*       const   kVideoShownKey                          = @"Vide
 
 - (void) setUpInitializationOptions
 {
+    NSDictionary *permissionsDescriptions = @{
+                                              @(kSignUpPermissionsTypeLocation) : NSLocalizedString(@"Using your GPS enables the app to accurately determine distances travelled. Your actual location will never be shared.", @""),
+                                              @(kSignUpPermissionsTypeCoremotion) : NSLocalizedString(@"Using the motion co-processor allows the app to determine your activity, helping the study better understand how activity level may influence disease.", @""),
+                                              @(kSignUpPermissionsTypeMicrophone) : NSLocalizedString(@"Access to microphone is required for your Voice Recording Activity.", @""),
+                                              @(kSignUpPermissionsTypeLocalNotifications) : NSLocalizedString(@"Allowing notifications enables the app to show you reminders.", @""),
+                                              @(kSignUpPermissionsTypeHealthKit) : NSLocalizedString(@"On the next screen, you will be prompted to grant MyHeart Counts access to read and write some of your general and health information, such as height, weight and steps taken so you don't have to enter it again.", @""),
+                                              };
+    
     NSMutableDictionary * dictionary = [super defaultInitializationOptions];
     dictionary = [self updateOptionsFor5OrOlder:dictionary];
     [dictionary addEntriesFromDictionary:@{
@@ -52,6 +60,7 @@ static  NSString*       const   kVideoShownKey                          = @"Vide
                                                    @(kSignUpPermissionsTypeCoremotion),
                                                    @(kSignUpPermissionsTypeLocalNotifications)
                                                    ],
+                                           kAppServicesDescriptionsKey : permissionsDescriptions,
                                            kAppProfileElementsListKey            : @[
                                                    @(kAPCUserInfoItemTypeEmail),
                                                    @(kAPCUserInfoItemTypeDateOfBirth),
@@ -119,17 +128,12 @@ static  NSString*       const   kVideoShownKey                          = @"Vide
         
         [self.sevenDayFitnessAllocationData startDataCollection];
     }
-    
 }
 -(void)setUpCollectors
 {
-    //For the Seven Day Fitness Allocation
-    NSDate *fitnessStartDate = [self checkSevenDayFitnessStartDate];
-    if (fitnessStartDate) {
-        self.sevenDayFitnessAllocationData = [[APHFitnessAllocation alloc] initWithAllocationStartDate:fitnessStartDate];
-        
-        [self.sevenDayFitnessAllocationData startDataCollection];
-    }
+
+    APCCoreMotionTracker * motionTracker = [[APCCoreMotionTracker alloc] initWithIdentifier:@"motionTracker"];
+    [self.passiveDataCollector addTracker:motionTracker];
     
     return;
     
