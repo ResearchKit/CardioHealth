@@ -321,16 +321,38 @@ static NSInteger const kWeekSegmentIndex         = 2;
 }
 
 - (IBAction)resetTaskStartDate:(id)sender {
+    
+    [[UIView appearanceWhenContainedIn:[UIAlertController class], nil] setTintColor:[UIColor appPrimaryColor]];
+    
+    UIAlertController *alertContorller = [UIAlertController alertControllerWithTitle:nil message:NSLocalizedString(@"Resetting your 7 Day Assessment will clear all recorded data from the week.", @"") preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction *withdrawAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Continue", @"") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * __unused action) {
+        [self reset];
+    }];
+    [alertContorller addAction:withdrawAction];
+    
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"") style:UIAlertActionStyleCancel handler:^(UIAlertAction * __unused action) {
+        
+    }];
+    
+    [alertContorller addAction:cancelAction];
+    
+    [self.navigationController presentViewController:alertContorller animated:YES completion:nil];
+
+}
+
+- (void)reset
+{
     //Updating the start date of the task.
     [self saveSevenDayFitnessStartDate: [NSDate date]];
-    
+
     //Calling the motion history reporter to retrieve and update the data for core activity. This triggers a series of notifications that lead to the pie graph being drawn again here.
     APCMotionHistoryReporter *reporter = [APCMotionHistoryReporter sharedInstance];
     [reporter startMotionCoProcessorDataFrom:[NSDate dateWithTimeIntervalSinceNow:-24 * 60 * 60] andEndDate:[NSDate new] andNumberOfDays:1];
-    
+
     [self.segmentDays setEnabled:YES forSegmentAtIndex:0];
     [self.segmentDays setEnabled:YES forSegmentAtIndex:2];
-    
-  
 }
+
 @end
