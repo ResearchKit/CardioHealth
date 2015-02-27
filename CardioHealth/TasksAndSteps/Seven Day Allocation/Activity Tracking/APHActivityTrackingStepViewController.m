@@ -58,24 +58,24 @@ static NSInteger const kFontSize = 17;
     self.segmentDays.tintColor = [UIColor clearColor];
 
     [self.segmentDays setTitleTextAttributes:@{
-                                               NSFontAttributeName:[UIFont appRegularFontWithSize:19.0f],
-                                               NSForegroundColorAttributeName : [UIColor lightGrayColor]
+                                               NSFontAttributeName:[UIFont fontWithName:@"Helvetica-Light" size:17.0],
+                                               NSForegroundColorAttributeName : [UIColor appPrimaryColor]
                                                
                                                }
                                     forState:UIControlStateNormal];
     [self.segmentDays setTitleTextAttributes:@{
-                                               NSFontAttributeName:[UIFont appMediumFontWithSize:19.0f],
-                                               NSForegroundColorAttributeName : [UIColor blackColor]
+                                               NSFontAttributeName:[UIFont fontWithName:@"Helvetica-Light" size:17.0],
+                                               NSForegroundColorAttributeName : [UIColor whiteColor],
                                                
                                                }
                                     forState:UIControlStateSelected];
     [self.segmentDays setTitleTextAttributes:@{
-                                               NSFontAttributeName:[UIFont appMediumFontWithSize:19.0f],
-                                               NSForegroundColorAttributeName : [UIColor whiteColor]
+                                               NSFontAttributeName:[UIFont fontWithName:@"Helvetica-Light" size:17.0],
+                                               NSForegroundColorAttributeName : [UIColor lightGrayColor]
                                                }
                                     forState:UIControlStateDisabled];
     
-    [[UIView appearance] setTintColor:[UIColor whiteColor]];
+    //[[UIView appearance] setTintColor:[UIColor whiteColor]];
     
     self.previouslySelectedSegment = kTodaySegmentIndex;
     
