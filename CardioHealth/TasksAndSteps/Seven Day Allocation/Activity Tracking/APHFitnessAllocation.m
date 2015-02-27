@@ -201,24 +201,31 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
             }
             
             sedentaryCounter = inactiveCounter/3;
-            [self.wakeDataset addObject:@{
-                                          self.segmentInactive: @(inactiveCounter),
-                                          self.segmentSedentary: @(sedentaryCounter),
-                                          self.segmentModerate: @(moderateCounter),
-                                          self.segmentVigorous: @(vigorousCounter),
-                                          self.segmentSleep: self.sleepDataset[0]
-                                          }];
+            
+            NSDictionary *activityData = @{
+                                           self.segmentInactive: @(inactiveCounter),
+                                           self.segmentSedentary: @(sedentaryCounter),
+                                           self.segmentModerate: @(moderateCounter),
+                                           self.segmentVigorous: @(vigorousCounter),
+                                           self.segmentSleep: self.sleepDataset[0]
+                                           };
+            
+            [self.wakeDataset addObject:activityData];
           
-
+            NSNumber *moderate = [activityData objectForKey:self.segmentModerate];
+            NSNumber *vigorous = [activityData objectForKey:self.segmentVigorous];
+            
+            //    Active minutes = minutes of moderate activity + 2x(minutes of vigorous activity). This should be the TOTAL ACTIVE MINUTES FOR THE WEEK,
+            self.activeSeconds = (double)[moderate doubleValue] + ([vigorous doubleValue] * 2) ;
         }
     }
     
-    NSDictionary *dataSet = self.wakeDataset[0];
-    NSNumber *moderate = [dataSet objectForKey:self.segmentModerate];
-    NSNumber *vigorous = [dataSet objectForKey:self.segmentVigorous];
-    
-    //    Active minutes = minutes of moderate activity + 2x(minutes of vigorous activity). This should be the TOTAL ACTIVE MINUTES FOR THE WEEK,
-    self.activeSeconds = (double)(2 * [moderate doubleValue]) + [vigorous doubleValue];
+//    NSDictionary *dataSet = self.wakeDataset[0];
+//    NSNumber *moderate = [dataSet objectForKey:self.segmentModerate];
+//    NSNumber *vigorous = [dataSet objectForKey:self.segmentVigorous];
+//    
+//    //    Active minutes = minutes of moderate activity + 2x(minutes of vigorous activity). This should be the TOTAL ACTIVE MINUTES FOR THE WEEK,
+//    self.activeSeconds = (double)(2 * [moderate doubleValue]) + [vigorous doubleValue];
     
     //Not sure if this is needed
     dispatch_async(dispatch_get_main_queue(), ^{
