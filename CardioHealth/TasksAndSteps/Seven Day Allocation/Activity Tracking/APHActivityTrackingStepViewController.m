@@ -14,7 +14,11 @@ static NSInteger const kYesterdaySegmentIndex    = 0;
 static NSInteger const kTodaySegmentIndex        = 1;
 static NSInteger const kWeekSegmentIndex         = 2;
 
-@interface APHActivityTrackingStepViewController () <APCPieGraphViewDatasource>
+static NSString   *kLearnMoreString = @"Lorem Ipsum.";
+
+static NSInteger const kFontSize = 17;
+
+@interface APHActivityTrackingStepViewController () <APCPieGraphViewDatasource, UIGestureRecognizerDelegate >
 - (IBAction)resetTaskStartDate:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UILabel *daysRemaining;
@@ -29,6 +33,9 @@ static NSInteger const kWeekSegmentIndex         = 2;
 
 @property (nonatomic) BOOL showTodaysDataAtViewLoad;
 @property (nonatomic) NSInteger numberOfDaysOfFitnessWeek;
+@property (weak, nonatomic) IBOutlet UIButton *infoIconButton;
+
+@property (strong, nonatomic) UIImageView *customSurveylearnMoreView;
 
 @end
 
@@ -100,7 +107,10 @@ static NSInteger const kWeekSegmentIndex         = 2;
     self.chartView.valueLabel.text = [NSString stringWithFormat:@"%d", (int) roundf(appDelegate.sevenDayFitnessAllocationData.activeSeconds/60)];
     self.chartView.valueLabel.alpha = 1;
 
-    
+    [self.infoIconButton setImage:[[UIImage imageNamed:@"info_icon"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+    [self.infoIconButton setImage:[[UIImage imageNamed:@"info_icon_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateHighlighted];
+    self.infoIconButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    self.infoIconButton.imageView.tintColor = [UIColor appSecondaryColor1];
 
 }
 
@@ -353,6 +363,137 @@ static NSInteger const kWeekSegmentIndex         = 2;
 
     [self.segmentDays setEnabled:YES forSegmentAtIndex:0];
     [self.segmentDays setEnabled:YES forSegmentAtIndex:2];
+}
+
+- (IBAction)infoIconHandler:(id)sender {
+    UIImage *blurredImage = [self.view blurredSnapshotDark];
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.customSurveylearnMoreView = imageView;
+    imageView.alpha = 0;
+    [imageView setBounds:[UIScreen mainScreen].bounds];
+    
+    [self.view addSubview:imageView];
+    imageView.image = blurredImage;
+    
+    [UIView animateWithDuration:0.2 animations:^{
+        imageView.alpha = 1;
+    }];
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeLearnMore:)];
+    [imageView setUserInteractionEnabled:YES];
+    
+    tapGesture.delegate = self;
+    tapGesture.numberOfTapsRequired = 1;
+    tapGesture.numberOfTouchesRequired = 1;
+    tapGesture.cancelsTouchesInView = NO;
+    
+    [imageView addGestureRecognizer:tapGesture];
+    
+    UIView *learnMoreBubble = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+    [learnMoreBubble setBackgroundColor:[UIColor whiteColor]];
+    learnMoreBubble.layer.cornerRadius = 5;
+    learnMoreBubble.layer.masksToBounds = YES;
+    
+    [imageView addSubview:learnMoreBubble];
+    
+    [learnMoreBubble setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    // SET THE WIDTH
+    [imageView addConstraint:[NSLayoutConstraint
+                              constraintWithItem:learnMoreBubble
+                              attribute:NSLayoutAttributeWidth
+                              relatedBy:NSLayoutRelationEqual
+                              toItem:imageView
+                              attribute:NSLayoutAttributeWidth
+                              multiplier:0.9
+                              constant:0.0]];
+    
+    [imageView addConstraint:[NSLayoutConstraint
+                              constraintWithItem:learnMoreBubble
+                              attribute:NSLayoutAttributeHeight
+                              relatedBy:NSLayoutRelationEqual
+                              toItem:imageView
+                              attribute:NSLayoutAttributeHeight
+                              multiplier:0.5
+                              constant:0.0]];
+    
+    [imageView addConstraint:[NSLayoutConstraint
+                              constraintWithItem:learnMoreBubble
+                              attribute:NSLayoutAttributeCenterY
+                              relatedBy:NSLayoutRelationEqual
+                              toItem:imageView
+                              attribute:NSLayoutAttributeCenterY
+                              multiplier:0.6
+                              constant:0.0]];
+    
+    [imageView addConstraint:[NSLayoutConstraint
+                              constraintWithItem:learnMoreBubble
+                              attribute:NSLayoutAttributeCenterX
+                              relatedBy:NSLayoutRelationEqual
+                              toItem:imageView
+                              attribute:NSLayoutAttributeCenterX
+                              multiplier:1
+                              constant:0.0]];
+    
+    UILabel *textView = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, learnMoreBubble.bounds.size.width, 100.0)];
+    [learnMoreBubble addSubview:textView];
+    
+    [textView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    [learnMoreBubble addConstraint:[NSLayoutConstraint
+                                    constraintWithItem:textView
+                                    attribute:NSLayoutAttributeWidth
+                                    relatedBy:NSLayoutRelationEqual
+                                    toItem:learnMoreBubble
+                                    attribute:NSLayoutAttributeWidth
+                                    multiplier:0.85
+                                    constant:0.0]];
+    
+    [learnMoreBubble addConstraint:[NSLayoutConstraint
+                                    constraintWithItem:textView
+                                    attribute:NSLayoutAttributeHeight
+                                    relatedBy:NSLayoutRelationEqual
+                                    toItem:learnMoreBubble
+                                    attribute:NSLayoutAttributeHeight
+                                    multiplier:0.9
+                                    constant:0.0]];
+    
+    [learnMoreBubble addConstraint:[NSLayoutConstraint
+                                    constraintWithItem:textView
+                                    attribute:NSLayoutAttributeCenterY
+                                    relatedBy:NSLayoutRelationEqual
+                                    toItem:learnMoreBubble
+                                    attribute:NSLayoutAttributeCenterY
+                                    multiplier:1
+                                    constant:0.0]];
+    
+    [learnMoreBubble addConstraint:[NSLayoutConstraint
+                                    constraintWithItem:textView
+                                    attribute:NSLayoutAttributeCenterX
+                                    relatedBy:NSLayoutRelationEqual
+                                    toItem:learnMoreBubble
+                                    attribute:NSLayoutAttributeCenterX
+                                    multiplier:1
+                                    constant:0.0]];
+    
+    textView.text =NSLocalizedString( kLearnMoreString, kLearnMoreString);
+    
+    textView.textColor = [UIColor blackColor];
+    [textView setFont:[UIFont fontWithName:@"HelveticaNeue" size:kFontSize]];
+    textView.numberOfLines = 0;
+    textView.adjustsFontSizeToFitWidth  = YES;
+    
+}
+
+
+
+- (void)removeLearnMore:(id)sender {
+    [UIView animateWithDuration:0.2 animations:^{
+        self.customSurveylearnMoreView.alpha = 0;
+    } completion:^(BOOL finished) {
+        [self.customSurveylearnMoreView removeFromSuperview];
+    }];
 }
 
 @end

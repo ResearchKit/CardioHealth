@@ -60,6 +60,19 @@
                                     <action selector="resetTaskStartDate:" destination="VrU-qS-l30" eventType="touchUpInside" id="644-RJ-dyB"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HdE-70-8Ae">
+                                <rect key="frame" x="281" y="80" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="3Vw-Qe-6xB"/>
+                                    <constraint firstAttribute="width" constant="30" id="l7Y-ck-nl8"/>
+                                </constraints>
+                                <state key="normal" image="info_icon">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="infoIconHandler:" destination="VrU-qS-l30" eventType="touchUpInside" id="4Vb-c0-qSw"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.97254902124404907" green="0.97254902124404907" blue="0.97254902124404907" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -70,7 +83,9 @@
                             <constraint firstAttribute="centerX" secondItem="1ZF-P2-foS" secondAttribute="centerX" id="JIw-oE-k4w"/>
                             <constraint firstItem="5zS-Qy-ghC" firstAttribute="bottom" secondItem="upX-AZ-JBq" secondAttribute="top" id="NOx-Ls-tHs"/>
                             <constraint firstItem="U6v-h5-YfZ" firstAttribute="leading" secondItem="IaW-xM-au3" secondAttribute="leading" id="OLD-8J-Y8Y"/>
+                            <constraint firstItem="HdE-70-8Ae" firstAttribute="trailing" secondItem="XEY-UO-FTF" secondAttribute="trailing" constant="-1" id="PAS-4Z-CBp"/>
                             <constraint firstAttribute="trailing" secondItem="U6v-h5-YfZ" secondAttribute="trailing" id="U1v-9f-PwD"/>
+                            <constraint firstItem="HdE-70-8Ae" firstAttribute="top" secondItem="XEY-UO-FTF" secondAttribute="bottom" constant="7" id="bQi-aY-VGc"/>
                             <constraint firstItem="5zS-Qy-ghC" firstAttribute="top" secondItem="U6v-h5-YfZ" secondAttribute="bottom" id="hre-Vw-Cgm"/>
                             <constraint firstItem="upX-AZ-JBq" firstAttribute="top" secondItem="1ZF-P2-foS" secondAttribute="bottom" constant="74" id="lyF-JM-rkD"/>
                             <constraint firstItem="5zS-Qy-ghC" firstAttribute="leading" secondItem="IaW-xM-au3" secondAttribute="leading" id="nkk-ex-o4f"/>
@@ -89,6 +104,7 @@
                     <connections>
                         <outlet property="chartView" destination="5zS-Qy-ghC" id="H3w-TY-Isq"/>
                         <outlet property="daysRemaining" destination="uN4-Ax-0TN" id="fHh-gs-f2j"/>
+                        <outlet property="infoIconButton" destination="HdE-70-8Ae" id="DIg-PF-4Gh"/>
                         <outlet property="segmentDays" destination="XEY-UO-FTF" id="e27-iu-z4E"/>
                     </connections>
                 </viewController>
@@ -97,4 +113,7 @@
             <point key="canvasLocation" x="787" y="385"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="info_icon" width="44" height="44"/>
+    </resources>
 </document>
