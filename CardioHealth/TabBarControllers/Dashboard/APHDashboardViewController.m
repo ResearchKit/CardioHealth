@@ -14,8 +14,6 @@
 #import "APHWalkTestViewController.h"
 #import "APHWalkingTestResults.h"
 
-
-static   CGFloat const metersPerMile             = 1609.344;
 static NSString*  const kAPCBasicTableViewCellIdentifier        = @"APCBasicTableViewCell";
 static NSString*  const kAPCRightDetailTableViewCellIdentifier  = @"APCRightDetailTableViewCell";
 static NSInteger  const kDataCountLimit                         = 1;
