@@ -9,7 +9,6 @@
 #import "APHAppDelegate.h"
 #import "APHFitnessAllocation.h"
 
-static   CGFloat const metersPerMile             = 1609.344;
 static NSInteger const kYesterdaySegmentIndex    = 0;
 static NSInteger const kTodaySegmentIndex        = 1;
 static NSInteger const kWeekSegmentIndex         = 2;
@@ -45,6 +44,8 @@ static NSInteger const kRegularFontSize = 17;
 #pragma mark - Lifecycle
 
 - (void)viewDidLoad {
+    
+//    self.view.layer.frame.origin.x
     [super viewDidLoad];
     self.daysRemaining.text = [self fitnessDaysRemaining];
     
@@ -52,7 +53,7 @@ static NSInteger const kRegularFontSize = 17;
                                                                               style:UIBarButtonItemStylePlain
                                                                              target:self
                                                                              action:@selector(handleClose:)];
-    
+
 
     self.view.layer.backgroundColor = [UIColor colorWithWhite:0.973 alpha:1.000].CGColor;
     

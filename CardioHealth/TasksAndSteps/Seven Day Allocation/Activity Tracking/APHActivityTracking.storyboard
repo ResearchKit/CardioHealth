@@ -17,22 +17,16 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I1L-R2-NG9" userLabel="topLine">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I1L-R2-NG9" userLabel="topLine" customClass="APCHorizontalThinLineView">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="0bX-A6-0LV"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 Days Remaining" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uN4-Ax-0TN">
-                                <rect key="frame" x="10" y="8" width="320" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.55686277151107788" green="0.55686277151107788" blue="0.57647061347961426" alpha="1" colorSpace="deviceRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mFa-Eb-zHV" userLabel="bottomLine">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mFa-Eb-zHV" userLabel="bottomLine" customClass="APCHorizontalThinLineView">
                                 <rect key="frame" x="0.0" y="36" width="320" height="1"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="XL5-Td-b4H"/>
                                 </constraints>
@@ -90,15 +84,12 @@
                         </subviews>
                         <color key="backgroundColor" red="0.97254902124404907" green="0.97254902124404907" blue="0.97254902124404907" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="uN4-Ax-0TN" firstAttribute="top" secondItem="S6x-uK-2Oa" secondAttribute="bottom" constant="8" id="4n5-JV-2H9"/>
-                            <constraint firstItem="uN4-Ax-0TN" firstAttribute="leading" secondItem="IaW-xM-au3" secondAttribute="leading" constant="10" id="7C0-tc-KqE"/>
                             <constraint firstAttribute="trailing" secondItem="5zS-Qy-ghC" secondAttribute="trailing" id="8eU-wU-KoX"/>
                             <constraint firstAttribute="centerX" secondItem="1ZF-P2-foS" secondAttribute="centerX" id="JIw-oE-k4w"/>
                             <constraint firstItem="5zS-Qy-ghC" firstAttribute="bottom" secondItem="upX-AZ-JBq" secondAttribute="top" id="NOx-Ls-tHs"/>
                             <constraint firstItem="U6v-h5-YfZ" firstAttribute="leading" secondItem="IaW-xM-au3" secondAttribute="leading" id="OLD-8J-Y8Y"/>
                             <constraint firstItem="HdE-70-8Ae" firstAttribute="trailing" secondItem="XEY-UO-FTF" secondAttribute="trailing" constant="-1" id="PAS-4Z-CBp"/>
                             <constraint firstItem="U6v-h5-YfZ" firstAttribute="top" secondItem="mFa-Eb-zHV" secondAttribute="bottom" id="QZE-uP-IPV"/>
-                            <constraint firstItem="uN4-Ax-0TN" firstAttribute="trailing" secondItem="IaW-xM-au3" secondAttribute="trailing" constant="10" id="R1V-YE-6Rw"/>
                             <constraint firstAttribute="trailing" secondItem="U6v-h5-YfZ" secondAttribute="trailing" id="U1v-9f-PwD"/>
                             <constraint firstItem="HdE-70-8Ae" firstAttribute="top" secondItem="XEY-UO-FTF" secondAttribute="bottom" constant="7" id="bQi-aY-VGc"/>
                             <constraint firstItem="mFa-Eb-zHV" firstAttribute="leading" secondItem="IaW-xM-au3" secondAttribute="leading" id="fiw-L1-5LG"/>
@@ -110,7 +101,6 @@
                             <constraint firstItem="I1L-R2-NG9" firstAttribute="leading" secondItem="IaW-xM-au3" secondAttribute="leading" id="qEM-x8-3pV"/>
                             <constraint firstItem="5zS-Qy-ghC" firstAttribute="top" secondItem="IaW-xM-au3" secondAttribute="top" constant="81" id="rSd-s2-yhk"/>
                             <constraint firstItem="1ZF-P2-foS" firstAttribute="leading" secondItem="IaW-xM-au3" secondAttribute="leading" constant="122" id="rhc-CF-Oha"/>
-                            <constraint firstItem="U6v-h5-YfZ" firstAttribute="top" secondItem="uN4-Ax-0TN" secondAttribute="bottom" constant="8" id="typ-GZ-LEJ"/>
                             <constraint firstItem="I1L-R2-NG9" firstAttribute="top" secondItem="S6x-uK-2Oa" secondAttribute="bottom" id="ukY-zF-3y8"/>
                         </constraints>
                         <variation key="default">
@@ -123,7 +113,6 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="chartView" destination="5zS-Qy-ghC" id="H3w-TY-Isq"/>
-                        <outlet property="daysRemaining" destination="uN4-Ax-0TN" id="fHh-gs-f2j"/>
                         <outlet property="infoIconButton" destination="HdE-70-8Ae" id="DIg-PF-4Gh"/>
                         <outlet property="segmentDays" destination="XEY-UO-FTF" id="e27-iu-z4E"/>
                     </connections>

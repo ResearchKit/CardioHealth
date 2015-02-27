@@ -9,7 +9,6 @@
 #import <CoreMotion/CoreMotion.h>
 #import "APHTheme.h"
 
-static NSInteger kIntervalByHour = 1;
 static NSDateFormatter *dateFormatter = nil;
 
 NSString *const kDatasetDateKey         = @"datasetDateKey";
