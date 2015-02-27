@@ -60,7 +60,6 @@
 		7BEA4BE61A65C10300FEAF60 /* APHHeartAgeLearnMoreViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BEA4BE51A65C10300FEAF60 /* APHHeartAgeLearnMoreViewController.storyboard */; };
 		7BEA4BE91A65D95400FEAF60 /* APHIntroPurposeContainedTableTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BEA4BE81A65D95400FEAF60 /* APHIntroPurposeContainedTableTableViewController.m */; };
 		7BEEFA601A003E04004F6C87 /* APHHeartAgeResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BEEFA5E1A003E04004F6C87 /* APHHeartAgeResultsViewController.m */; };
-		7BF54F801AA11B290081C935 /* CALayer+ XibConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF54F7F1AA11B290081C935 /* CALayer+ XibConfiguration.m */; };
 		A78115BF1A96A08E00CEC822 /* 00_Blank_to_Activities@2x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = A78115AC1A96A08E00CEC822 /* 00_Blank_to_Activities@2x.m4v */; };
 		A78115C01A96A08E00CEC822 /* 01_Activities_to_SensorData@2x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = A78115AD1A96A08E00CEC822 /* 01_Activities_to_SensorData@2x.m4v */; };
 		A78115C11A96A08E00CEC822 /* 02_SensorData_to_DataGathering@2x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = A78115AE1A96A08E00CEC822 /* 02_SensorData_to_DataGathering@2x.m4v */; };
@@ -887,7 +886,6 @@
 				7B5F92801A96739500C44BFC /* APHDynamicParQQuizTask.m in Sources */,
 				7B6F91831A996EDB00335E50 /* APHHeartAgeSummaryTitleCell.m in Sources */,
 				F5481F1419E4820100D84617 /* APHHeartAgeTaskViewController.m in Sources */,
-				7BF54F801AA11B290081C935 /* CALayer+ XibConfiguration.m in Sources */,
 				08FA98061A108A46002317C8 /* APHHeartAgeRiskEstimateCell.m in Sources */,
 				08D3A10219E4A08C00A3D20D /* APHHeartAgeAndRiskFactors.m in Sources */,
 				7BEA4BE91A65D95400FEAF60 /* APHIntroPurposeContainedTableTableViewController.m in Sources */,
