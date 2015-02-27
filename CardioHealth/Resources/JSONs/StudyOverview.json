@@ -13,22 +13,21 @@
      {
      "title":"About this Study",
      "details":"AboutStudy_intro",
-     "icon_image":"paperplus_icon",
-     "tint_color" : "blue"
+     },
+     {
+     "title":"About the App",
+     "details":"Please tap on the image below to watch a short video introduction to MyHeart Counts.",
+     "video_name" : "Intro",
      },
      
      {
      "title":"How this Study works",
      "details":"howstudyworks_intro",
-     "icon_image":"rulerpencil_icon",
-     "tint_color" : "purple"
      },
      
      {
      "title":"Who is Eligible to Participate",
      "details":"EligibleToParticipate_intro",
-     "icon_image":"clipboard_icon",
-     "tint_color" : "green"
      } 
      ]
 }
