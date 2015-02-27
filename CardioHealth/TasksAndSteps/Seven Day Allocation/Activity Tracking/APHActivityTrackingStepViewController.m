@@ -16,7 +16,8 @@ static NSInteger const kWeekSegmentIndex         = 2;
 
 static NSString   *kLearnMoreString = @"Lorem Ipsum.";
 
-static NSInteger const kFontSize = 17;
+static NSInteger const kSmallerFontSize = 16;
+static NSInteger const kRegularFontSize = 17;
 
 @interface APHActivityTrackingStepViewController () <APCPieGraphViewDatasource, UIGestureRecognizerDelegate >
 - (IBAction)resetTaskStartDate:(id)sender;
@@ -58,19 +59,19 @@ static NSInteger const kFontSize = 17;
     self.segmentDays.tintColor = [UIColor clearColor];
 
     [self.segmentDays setTitleTextAttributes:@{
-                                               NSFontAttributeName:[UIFont fontWithName:@"Helvetica-Light" size:17.0],
+                                               NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue" size:kSmallerFontSize],
                                                NSForegroundColorAttributeName : [UIColor appPrimaryColor]
                                                
                                                }
                                     forState:UIControlStateNormal];
     [self.segmentDays setTitleTextAttributes:@{
-                                               NSFontAttributeName:[UIFont fontWithName:@"Helvetica-Light" size:17.0],
+                                               NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue" size:kSmallerFontSize],
                                                NSForegroundColorAttributeName : [UIColor whiteColor],
                                                
                                                }
                                     forState:UIControlStateSelected];
     [self.segmentDays setTitleTextAttributes:@{
-                                               NSFontAttributeName:[UIFont fontWithName:@"Helvetica-Light" size:17.0],
+                                               NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue" size:kSmallerFontSize],
                                                NSForegroundColorAttributeName : [UIColor lightGrayColor]
                                                }
                                     forState:UIControlStateDisabled];
@@ -480,7 +481,7 @@ static NSInteger const kFontSize = 17;
     textView.text =NSLocalizedString( kLearnMoreString, kLearnMoreString);
     
     textView.textColor = [UIColor blackColor];
-    [textView setFont:[UIFont fontWithName:@"HelveticaNeue" size:kFontSize]];
+    [textView setFont:[UIFont fontWithName:@"HelveticaNeue" size:kRegularFontSize]];
     textView.numberOfLines = 0;
     textView.adjustsFontSizeToFitWidth  = YES;
     
