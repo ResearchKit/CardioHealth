@@ -39,21 +39,11 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wRq-gi-cWb">
-                                            <rect key="frame" x="61" y="14" width="156" height="27"/>
+                                            <rect key="frame" x="61" y="14" width="137" height="27"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="27" id="igx-7M-Ics"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9999 ft" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1A0-1W-4an">
-                                            <rect key="frame" x="225" y="13" width="81" height="28"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="28" id="XlX-BV-srq"/>
-                                                <constraint firstAttribute="width" constant="81" id="oNS-S0-3mi"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -64,6 +54,16 @@
                                                 <constraint firstAttribute="height" constant="1" id="hke-MX-9I3"/>
                                             </constraints>
                                         </view>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99999 yd" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="1A0-1W-4an">
+                                            <rect key="frame" x="206" y="13" width="100" height="28"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="28" id="XlX-BV-srq"/>
+                                                <constraint firstAttribute="width" constant="100" id="oNS-S0-3mi"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="centerY" secondItem="wRq-gi-cWb" secondAttribute="centerY" constant="-0.5" id="1Ug-lv-7M3"/>
