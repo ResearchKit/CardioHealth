@@ -219,13 +219,6 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
         }
     }
     
-//    NSDictionary *dataSet = self.wakeDataset[0];
-//    NSNumber *moderate = [dataSet objectForKey:self.segmentModerate];
-//    NSNumber *vigorous = [dataSet objectForKey:self.segmentVigorous];
-//    
-//    //    Active minutes = minutes of moderate activity + 2x(minutes of vigorous activity). This should be the TOTAL ACTIVE MINUTES FOR THE WEEK,
-//    self.activeSeconds = (double)(2 * [moderate doubleValue]) + [vigorous doubleValue];
-    
     //Not sure if this is needed
     dispatch_async(dispatch_get_main_queue(), ^{
         [[NSNotificationCenter defaultCenter] postNotificationName:APHSevenDayAllocationSleepDataIsReadyNotification object:nil];
