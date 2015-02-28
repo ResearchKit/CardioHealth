@@ -27,9 +27,9 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wUg-i0-ecg" id="n0S-8H-TRF">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Agb-SY-Bbe">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Agb-SY-Bbe" customClass="APCHorizontalThinLineView">
                                                     <rect key="frame" x="0.0" y="189" width="320" height="1"/>
-                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="JqC-Kx-jeY"/>
                                                     </constraints>
@@ -62,9 +62,9 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i0x-Lt-zJk" userLabel="divider_between_actual_and_heart_age">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i0x-Lt-zJk" userLabel="divider_between_actual_and_heart_age" customClass="APCVerticalThinLineView">
                                                     <rect key="frame" x="160" y="83" width="1" height="95"/>
-                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="1" id="syx-m4-STb"/>
                                                     </constraints>
@@ -128,14 +128,14 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3hi-2l-FkS" id="ya0-Bh-6yE">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c4Z-Cu-RHn">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c4Z-Cu-RHn" customClass="APCHorizontalBottomThinLineView">
                                                     <rect key="frame" x="0.0" y="219" width="320" height="1"/>
-                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="3JN-qg-g8U"/>
                                                     </constraints>
                                                 </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="602-Cy-Ybp">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="602-Cy-Ybp" userLabel="ornamentSideBar">
                                                     <rect key="frame" x="0.0" y="0.0" width="3" height="220"/>
                                                     <color key="backgroundColor" red="0.80000001190000003" green="0.050854331879999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
@@ -157,9 +157,9 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yLp-xC-6kW" userLabel="divider_between_risk_scores">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yLp-xC-6kW" userLabel="divider_between_risk_scores" customClass="APCVerticalThinLineView">
                                                     <rect key="frame" x="160" y="96" width="1" height="112"/>
-                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="1" id="Rwt-4r-587"/>
                                                     </constraints>
@@ -227,6 +227,63 @@
                                             <outlet property="riskEstimateDescription" destination="P4x-8g-6BD" id="t25-Uf-5qg"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LifeTimeRiskScoreSummaryCell" rowHeight="90" id="2BX-Sh-xa5" userLabel="LifeTimeRiskScoreSummary" customClass="APHHeartAgeRecommendationCell">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2BX-Sh-xa5" id="lC3-kc-slW">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fox-Yv-Ngq" customClass="APCHorizontalBottomThinLineView">
+                                                    <rect key="frame" x="0.0" y="89" width="320" height="1"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="sfl-8G-4Im"/>
+                                                    </constraints>
+                                                </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lifetime Risk Score:" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A8a-9L-CfN">
+                                                    <rect key="frame" x="22" y="13" width="276" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wex-TJ-5S4">
+                                                    <rect key="frame" x="0.0" y="0.0" width="3" height="90"/>
+                                                    <color key="backgroundColor" red="0.80000001190000003" green="0.050854331879999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="3" id="3Aa-j8-xPk"/>
+                                                    </constraints>
+                                                </view>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N9e-Vm-ea6">
+                                                    <rect key="frame" x="0.0" y="52" width="320" height="30"/>
+                                                    <state key="normal" title="ASCVD Risk Estimator">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="ASCVDRiskEstimatorActionButton:" destination="VDE-ac-cZA" eventType="touchUpInside" id="YRz-Fl-dqT"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="N9e-Vm-ea6" secondAttribute="trailing" constant="-8" id="8cT-Id-OPL"/>
+                                                <constraint firstItem="A8a-9L-CfN" firstAttribute="top" secondItem="lC3-kc-slW" secondAttribute="topMargin" constant="5" id="BAB-PF-bAz"/>
+                                                <constraint firstAttribute="trailing" secondItem="fox-Yv-Ngq" secondAttribute="trailing" id="HdF-3Y-S78"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="A8a-9L-CfN" secondAttribute="trailing" constant="14" id="IHL-gc-nzD"/>
+                                                <constraint firstItem="N9e-Vm-ea6" firstAttribute="leading" secondItem="lC3-kc-slW" secondAttribute="leadingMargin" constant="-8" id="O1P-sz-OnT"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="A8a-9L-CfN" secondAttribute="bottom" constant="48.5" id="VfD-eN-k8u"/>
+                                                <constraint firstItem="wex-TJ-5S4" firstAttribute="top" secondItem="lC3-kc-slW" secondAttribute="topMargin" constant="-8" id="dCL-pP-yTU"/>
+                                                <constraint firstItem="wex-TJ-5S4" firstAttribute="leading" secondItem="lC3-kc-slW" secondAttribute="leadingMargin" constant="-8" id="esI-Al-htP"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="wex-TJ-5S4" secondAttribute="bottom" constant="-8" id="jOA-Hl-8ej"/>
+                                                <constraint firstItem="fox-Yv-Ngq" firstAttribute="leading" secondItem="lC3-kc-slW" secondAttribute="leading" id="nmt-rk-53M"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="fox-Yv-Ngq" secondAttribute="bottom" constant="-8" id="nup-FO-xDR"/>
+                                                <constraint firstItem="A8a-9L-CfN" firstAttribute="leading" secondItem="lC3-kc-slW" secondAttribute="leadingMargin" constant="14" id="p9L-CZ-oQg"/>
+                                                <constraint firstItem="N9e-Vm-ea6" firstAttribute="bottom" secondItem="lC3-kc-slW" secondAttribute="bottomMargin" id="rre-vc-OAk"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="ASCVDLinkButton" destination="N9e-Vm-ea6" id="h0i-Yv-Vti"/>
+                                            <outlet property="recommendationText" destination="A8a-9L-CfN" id="6NM-ut-AsA"/>
+                                        </connections>
+                                    </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="HeartAgeSummaryTitleCell" rowHeight="50" id="9Tl-iR-dW8" customClass="APHHeartAgeSummaryTitleCell">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
@@ -239,21 +296,21 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="trJ-ad-HtO">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="trJ-ad-HtO" customClass="APCVerticalThinLineView">
                                                     <rect key="frame" x="0.0" y="49" width="320" height="1"/>
-                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="qyT-2h-PnR"/>
                                                     </constraints>
                                                 </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hkk-c5-Idc">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hkk-c5-Idc" customClass="APCHorizontalThinLineView">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
-                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="V5S-4d-gVh"/>
                                                     </constraints>
                                                 </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NYz-cv-Fno">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NYz-cv-Fno" userLabel="ornamentalSideBar">
                                                     <rect key="frame" x="0.0" y="0.0" width="3" height="50"/>
                                                     <color key="backgroundColor" red="0.80000001190000003" green="0.050854331879999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
@@ -284,16 +341,16 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hyJ-c5-Ztd" id="3sm-kw-OJI">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7kh-EV-jKl">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7kh-EV-jKl" customClass="APCHorizontalThinLineView">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
-                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="Jde-rs-Elh"/>
                                                     </constraints>
                                                 </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cde-1b-8XW">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cde-1b-8XW" customClass="APCHorizontalBottomThinLineView">
                                                     <rect key="frame" x="0.0" y="43" width="320" height="1"/>
-                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="oaV-vs-AsJ"/>
                                                     </constraints>
@@ -343,9 +400,9 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wf2-v4-6tC">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wf2-v4-6tC" customClass="APCHorizontalBottomThinLineView">
                                                     <rect key="frame" x="1" y="49" width="319" height="1"/>
-                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="hbj-4E-fFX"/>
                                                     </constraints>
@@ -373,53 +430,6 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="recommendationText" destination="9jU-1c-w3F" id="BjD-8S-B9F"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LifeTimeRiskScoreSummaryCell" rowHeight="90" id="2BX-Sh-xa5" userLabel="LifeTimeRiskScoreSummary" customClass="APHHeartAgeRecommendationCell">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2BX-Sh-xa5" id="lC3-kc-slW">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lifetime Risk Score:" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A8a-9L-CfN">
-                                                    <rect key="frame" x="22" y="13" width="276" height="20.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wex-TJ-5S4">
-                                                    <rect key="frame" x="0.0" y="0.0" width="3" height="90"/>
-                                                    <color key="backgroundColor" red="0.80000001190000003" green="0.050854331879999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="3" id="3Aa-j8-xPk"/>
-                                                    </constraints>
-                                                </view>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N9e-Vm-ea6">
-                                                    <rect key="frame" x="0.0" y="52" width="320" height="30"/>
-                                                    <state key="normal" title="ASCVD Risk Estimator">
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="ASCVDRiskEstimatorActionButton:" destination="VDE-ac-cZA" eventType="touchUpInside" id="YRz-Fl-dqT"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="N9e-Vm-ea6" secondAttribute="trailing" constant="-8" id="8cT-Id-OPL"/>
-                                                <constraint firstItem="A8a-9L-CfN" firstAttribute="top" secondItem="lC3-kc-slW" secondAttribute="topMargin" constant="5" id="BAB-PF-bAz"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="A8a-9L-CfN" secondAttribute="trailing" constant="14" id="IHL-gc-nzD"/>
-                                                <constraint firstItem="N9e-Vm-ea6" firstAttribute="leading" secondItem="lC3-kc-slW" secondAttribute="leadingMargin" constant="-8" id="O1P-sz-OnT"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="A8a-9L-CfN" secondAttribute="bottom" constant="48.5" id="VfD-eN-k8u"/>
-                                                <constraint firstItem="wex-TJ-5S4" firstAttribute="top" secondItem="lC3-kc-slW" secondAttribute="topMargin" constant="-8" id="dCL-pP-yTU"/>
-                                                <constraint firstItem="wex-TJ-5S4" firstAttribute="leading" secondItem="lC3-kc-slW" secondAttribute="leadingMargin" constant="-8" id="esI-Al-htP"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="wex-TJ-5S4" secondAttribute="bottom" constant="-8" id="jOA-Hl-8ej"/>
-                                                <constraint firstItem="A8a-9L-CfN" firstAttribute="leading" secondItem="lC3-kc-slW" secondAttribute="leadingMargin" constant="14" id="p9L-CZ-oQg"/>
-                                                <constraint firstItem="N9e-Vm-ea6" firstAttribute="bottom" secondItem="lC3-kc-slW" secondAttribute="bottomMargin" id="rre-vc-OAk"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="ASCVDLinkButton" destination="N9e-Vm-ea6" id="h0i-Yv-Vti"/>
-                                            <outlet property="recommendationText" destination="A8a-9L-CfN" id="6NM-ut-AsA"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
