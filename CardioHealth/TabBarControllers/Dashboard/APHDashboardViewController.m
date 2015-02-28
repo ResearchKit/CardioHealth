@@ -52,7 +52,6 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
         if (!_rowItemsOrder.count) {
             _rowItemsOrder = [[NSMutableArray alloc] initWithArray:@[
                                                                      @(kAPHDashboardItemTypeDistance),
-                                                                     @(kAPHDashboardItemTypeHeartRate),
                                                                      ]];
             if ([APCDeviceHardware isiPhone5SOrNewer]) {
                 [_rowItemsOrder addObjectsFromArray:@[@(kAPHDashboardItemTypeSevenDayFitness), @(kAPHDashboardItemTypeWalkingTest)]];
@@ -116,11 +115,6 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
                                                   object:nil];
     
     [super viewWillDisappear:animated];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
 }
 
 #pragma mark - APCDashboardGraphTableViewCellDelegate methods
@@ -230,6 +224,7 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
                 {
                     APHTableViewDashboardSevenDayFitnessItem *item = [APHTableViewDashboardSevenDayFitnessItem new];
                     item.caption = NSLocalizedString(@"7-Day Assessment", @"");
+                    item.taskId = @"APHSevenDayAllocation-00000000-1111-1111-1111-F810BE28D995";
                     item.numberOfDaysString = NSLocalizedString([self fitnessDaysRemaining], @"");
                     
                     APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -239,7 +234,7 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
                     
                     item.distanceTraveledString = sevenDayDistanceStr;
                     item.identifier = kAPCDashboardPieGraphTableViewCellIdentifier;
-                    item.tintColor = [UIColor appTertiaryGreenColor];
+                    item.tintColor = [UIColor colorForTaskId:item.taskId];
                     item.editable = YES;
                     
                     #warning Replace Placeholder Values - APPLE-1576
@@ -269,8 +264,9 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
                     }
                     
                     item.caption = NSLocalizedString(@"6-minute Walking Test", @"");
+                    item.taskId = @"APHFitnessTest-00000000-1111-1111-1111-F810BE28D995";
                     item.identifier = kAPHDashboardWalkTestTableViewCellIdentifier;
-                    item.tintColor = [UIColor appTertiaryRedColor];
+                    item.tintColor = [UIColor colorForTaskId:item.taskId];
                     item.editable = YES;
                     
 #warning Replace Placeholder Values - APPLE-1576
@@ -324,8 +320,8 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
         }];
         
         NSMutableAttributedString *attirbutedDistanceString = [[NSMutableAttributedString alloc] initWithString:fitnessItem.distanceTraveledString];
-        [attirbutedDistanceString addAttribute:NSFontAttributeName value:[UIFont appMediumFontWithSize:17.0f] range:NSMakeRange(0, (fitnessItem.distanceTraveledString.length - @" miles".length))];
-        [attirbutedDistanceString addAttribute:NSFontAttributeName value:[UIFont appRegularFontWithSize:16.0f] range: [fitnessItem.distanceTraveledString rangeOfString:@" miles"]];
+        [attirbutedDistanceString addAttribute:NSFontAttributeName value:[UIFont appMediumFontWithSize:17.0f] range:NSMakeRange(0, (fitnessItem.distanceTraveledString.length - @" Active Minutes".length))];
+        [attirbutedDistanceString addAttribute:NSFontAttributeName value:[UIFont appRegularFontWithSize:16.0f] range: [fitnessItem.distanceTraveledString rangeOfString:@" Active Minutes"]];
         
         pieGraphCell.subTitleLabel2.attributedText = attirbutedDistanceString;
         
