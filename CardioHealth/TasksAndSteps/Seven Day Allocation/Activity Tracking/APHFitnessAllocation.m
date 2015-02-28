@@ -168,6 +168,8 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
     
     if(theMotionData.count > 0)
     {
+        int sleepArrayCounter = 0;
+        
         for (NSArray *dayArray in theMotionData)
         {
             
@@ -176,7 +178,7 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
             NSUInteger moderateCounter    = 0;
             NSUInteger vigorousCounter    = 0;
 
-
+            
             for(APCMotionHistoryData * theData in dayArray) {
                 
                 if(theData.activityType == ActivityTypeSleeping)
@@ -206,8 +208,9 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
                                            self.segmentSedentary: @(sedentaryCounter),
                                            self.segmentModerate: @(moderateCounter),
                                            self.segmentVigorous: @(vigorousCounter),
-                                           self.segmentSleep: self.sleepDataset[0]
+                                           self.segmentSleep: self.sleepDataset[sleepArrayCounter]
                                            };
+            sleepArrayCounter++;
             
             [self.wakeDataset addObject:activityData];
           
@@ -216,6 +219,7 @@ typedef NS_ENUM(NSUInteger, SevenDayFitnessQueryType)
             
             //    Active minutes = minutes of moderate activity + 2x(minutes of vigorous activity). This should be the TOTAL ACTIVE MINUTES FOR THE WEEK,
             self.activeSeconds = (double)[moderate doubleValue] + ([vigorous doubleValue] * 2) ;
+            
         }
     }
     
