@@ -9,12 +9,16 @@
 #import "APHAppDelegate.h"
 #import "APHFitnessAllocation.h"
 
-static   CGFloat const metersPerMile             = 1609.344;
 static NSInteger const kYesterdaySegmentIndex    = 0;
 static NSInteger const kTodaySegmentIndex        = 1;
 static NSInteger const kWeekSegmentIndex         = 2;
 
-@interface APHActivityTrackingStepViewController () <APCPieGraphViewDatasource>
+static NSString   *kLearnMoreString = @"Lorem Ipsum.";
+
+static NSInteger const kSmallerFontSize = 16;
+static NSInteger const kRegularFontSize = 17;
+
+@interface APHActivityTrackingStepViewController () <APCPieGraphViewDatasource, UIGestureRecognizerDelegate >
 - (IBAction)resetTaskStartDate:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UILabel *daysRemaining;
@@ -29,6 +33,9 @@ static NSInteger const kWeekSegmentIndex         = 2;
 
 @property (nonatomic) BOOL showTodaysDataAtViewLoad;
 @property (nonatomic) NSInteger numberOfDaysOfFitnessWeek;
+@property (weak, nonatomic) IBOutlet UIButton *infoIconButton;
+
+@property (strong, nonatomic) UIImageView *customSurveylearnMoreView;
 
 @end
 
@@ -37,6 +44,8 @@ static NSInteger const kWeekSegmentIndex         = 2;
 #pragma mark - Lifecycle
 
 - (void)viewDidLoad {
+    
+//    self.view.layer.frame.origin.x
     [super viewDidLoad];
     self.daysRemaining.text = [self fitnessDaysRemaining];
     
@@ -44,31 +53,31 @@ static NSInteger const kWeekSegmentIndex         = 2;
                                                                               style:UIBarButtonItemStylePlain
                                                                              target:self
                                                                              action:@selector(handleClose:)];
-    
+
 
     self.view.layer.backgroundColor = [UIColor colorWithWhite:0.973 alpha:1.000].CGColor;
     
     self.segmentDays.tintColor = [UIColor clearColor];
 
     [self.segmentDays setTitleTextAttributes:@{
-                                               NSFontAttributeName:[UIFont appRegularFontWithSize:19.0f],
-                                               NSForegroundColorAttributeName : [UIColor lightGrayColor]
+                                               NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue" size:kSmallerFontSize],
+                                               NSForegroundColorAttributeName : [UIColor appPrimaryColor]
                                                
                                                }
                                     forState:UIControlStateNormal];
     [self.segmentDays setTitleTextAttributes:@{
-                                               NSFontAttributeName:[UIFont appMediumFontWithSize:19.0f],
-                                               NSForegroundColorAttributeName : [UIColor blackColor]
+                                               NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue" size:kSmallerFontSize],
+                                               NSForegroundColorAttributeName : [UIColor whiteColor],
                                                
                                                }
                                     forState:UIControlStateSelected];
     [self.segmentDays setTitleTextAttributes:@{
-                                               NSFontAttributeName:[UIFont appMediumFontWithSize:19.0f],
-                                               NSForegroundColorAttributeName : [UIColor whiteColor]
+                                               NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue" size:kSmallerFontSize],
+                                               NSForegroundColorAttributeName : [UIColor lightGrayColor]
                                                }
                                     forState:UIControlStateDisabled];
     
-    [[UIView appearance] setTintColor:[UIColor whiteColor]];
+    //[[UIView appearance] setTintColor:[UIColor whiteColor]];
     
     self.previouslySelectedSegment = kTodaySegmentIndex;
     
@@ -100,7 +109,10 @@ static NSInteger const kWeekSegmentIndex         = 2;
     self.chartView.valueLabel.text = [NSString stringWithFormat:@"%d", (int) roundf(appDelegate.sevenDayFitnessAllocationData.activeSeconds/60)];
     self.chartView.valueLabel.alpha = 1;
 
-    
+    [self.infoIconButton setImage:[[UIImage imageNamed:@"info_icon"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+    [self.infoIconButton setImage:[[UIImage imageNamed:@"info_icon_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateHighlighted];
+    self.infoIconButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    self.infoIconButton.imageView.tintColor = [UIColor appSecondaryColor1];
 
 }
 
@@ -321,16 +333,169 @@ static NSInteger const kWeekSegmentIndex         = 2;
 }
 
 - (IBAction)resetTaskStartDate:(id)sender {
+    
+    [[UIView appearanceWhenContainedIn:[UIAlertController class], nil] setTintColor:[UIColor appPrimaryColor]];
+    
+    UIAlertController *alertContorller = [UIAlertController alertControllerWithTitle:nil message:NSLocalizedString(@"Resetting your 7 Day Assessment will clear all recorded data from the week.", @"") preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction *withdrawAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Continue", @"") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * __unused action) {
+        [self reset];
+    }];
+    [alertContorller addAction:withdrawAction];
+    
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"") style:UIAlertActionStyleCancel handler:^(UIAlertAction * __unused action) {
+        
+    }];
+    
+    [alertContorller addAction:cancelAction];
+    
+    [self.navigationController presentViewController:alertContorller animated:YES completion:nil];
+
+}
+
+- (void)reset
+{
     //Updating the start date of the task.
     [self saveSevenDayFitnessStartDate: [NSDate date]];
-    
+
     //Calling the motion history reporter to retrieve and update the data for core activity. This triggers a series of notifications that lead to the pie graph being drawn again here.
     APCMotionHistoryReporter *reporter = [APCMotionHistoryReporter sharedInstance];
     [reporter startMotionCoProcessorDataFrom:[NSDate dateWithTimeIntervalSinceNow:-24 * 60 * 60] andEndDate:[NSDate new] andNumberOfDays:1];
-    
-    [self.segmentDays setEnabled:YES forSegmentAtIndex:0];
-    [self.segmentDays setEnabled:YES forSegmentAtIndex:2];
-    
-  
+
+    [self.segmentDays setEnabled:NO forSegmentAtIndex:0];
+    [self.segmentDays setEnabled:NO forSegmentAtIndex:2];
 }
+
+- (IBAction)infoIconHandler:(id)sender {
+    UIImage *blurredImage = [self.view blurredSnapshotDark];
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.customSurveylearnMoreView = imageView;
+    imageView.alpha = 0;
+    [imageView setBounds:[UIScreen mainScreen].bounds];
+    
+    [self.view addSubview:imageView];
+    imageView.image = blurredImage;
+    
+    [UIView animateWithDuration:0.2 animations:^{
+        imageView.alpha = 1;
+    }];
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeLearnMore:)];
+    [imageView setUserInteractionEnabled:YES];
+    
+    tapGesture.delegate = self;
+    tapGesture.numberOfTapsRequired = 1;
+    tapGesture.numberOfTouchesRequired = 1;
+    tapGesture.cancelsTouchesInView = NO;
+    
+    [imageView addGestureRecognizer:tapGesture];
+    
+    UIView *learnMoreBubble = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+    [learnMoreBubble setBackgroundColor:[UIColor whiteColor]];
+    learnMoreBubble.layer.cornerRadius = 5;
+    learnMoreBubble.layer.masksToBounds = YES;
+    
+    [imageView addSubview:learnMoreBubble];
+    
+    [learnMoreBubble setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    // SET THE WIDTH
+    [imageView addConstraint:[NSLayoutConstraint
+                              constraintWithItem:learnMoreBubble
+                              attribute:NSLayoutAttributeWidth
+                              relatedBy:NSLayoutRelationEqual
+                              toItem:imageView
+                              attribute:NSLayoutAttributeWidth
+                              multiplier:0.9
+                              constant:0.0]];
+    
+    [imageView addConstraint:[NSLayoutConstraint
+                              constraintWithItem:learnMoreBubble
+                              attribute:NSLayoutAttributeHeight
+                              relatedBy:NSLayoutRelationEqual
+                              toItem:imageView
+                              attribute:NSLayoutAttributeHeight
+                              multiplier:0.5
+                              constant:0.0]];
+    
+    [imageView addConstraint:[NSLayoutConstraint
+                              constraintWithItem:learnMoreBubble
+                              attribute:NSLayoutAttributeCenterY
+                              relatedBy:NSLayoutRelationEqual
+                              toItem:imageView
+                              attribute:NSLayoutAttributeCenterY
+                              multiplier:0.6
+                              constant:0.0]];
+    
+    [imageView addConstraint:[NSLayoutConstraint
+                              constraintWithItem:learnMoreBubble
+                              attribute:NSLayoutAttributeCenterX
+                              relatedBy:NSLayoutRelationEqual
+                              toItem:imageView
+                              attribute:NSLayoutAttributeCenterX
+                              multiplier:1
+                              constant:0.0]];
+    
+    UILabel *textView = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, learnMoreBubble.bounds.size.width, 100.0)];
+    [learnMoreBubble addSubview:textView];
+    
+    [textView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    [learnMoreBubble addConstraint:[NSLayoutConstraint
+                                    constraintWithItem:textView
+                                    attribute:NSLayoutAttributeWidth
+                                    relatedBy:NSLayoutRelationEqual
+                                    toItem:learnMoreBubble
+                                    attribute:NSLayoutAttributeWidth
+                                    multiplier:0.85
+                                    constant:0.0]];
+    
+    [learnMoreBubble addConstraint:[NSLayoutConstraint
+                                    constraintWithItem:textView
+                                    attribute:NSLayoutAttributeHeight
+                                    relatedBy:NSLayoutRelationEqual
+                                    toItem:learnMoreBubble
+                                    attribute:NSLayoutAttributeHeight
+                                    multiplier:0.9
+                                    constant:0.0]];
+    
+    [learnMoreBubble addConstraint:[NSLayoutConstraint
+                                    constraintWithItem:textView
+                                    attribute:NSLayoutAttributeCenterY
+                                    relatedBy:NSLayoutRelationEqual
+                                    toItem:learnMoreBubble
+                                    attribute:NSLayoutAttributeCenterY
+                                    multiplier:1
+                                    constant:0.0]];
+    
+    [learnMoreBubble addConstraint:[NSLayoutConstraint
+                                    constraintWithItem:textView
+                                    attribute:NSLayoutAttributeCenterX
+                                    relatedBy:NSLayoutRelationEqual
+                                    toItem:learnMoreBubble
+                                    attribute:NSLayoutAttributeCenterX
+                                    multiplier:1
+                                    constant:0.0]];
+    
+    textView.text =NSLocalizedString( kLearnMoreString, kLearnMoreString);
+    
+    textView.textColor = [UIColor blackColor];
+    [textView setFont:[UIFont fontWithName:@"HelveticaNeue" size:kRegularFontSize]];
+    textView.numberOfLines = 0;
+    textView.adjustsFontSizeToFitWidth  = YES;
+    
+}
+
+
+
+- (void)removeLearnMore:(id)sender {
+    [UIView animateWithDuration:0.2 animations:^{
+        self.customSurveylearnMoreView.alpha = 0;
+    } completion:^(BOOL finished) {
+        [self.customSurveylearnMoreView removeFromSuperview];
+    }];
+}
+
 @end
