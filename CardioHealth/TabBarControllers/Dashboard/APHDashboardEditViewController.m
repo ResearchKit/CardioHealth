@@ -67,7 +67,8 @@
                     
                     APCTableViewDashboardItem *item = [APCTableViewDashboardItem new];
                     item.caption = NSLocalizedString(@"7-Day Assessment", @"");
-                    item.tintColor = [UIColor appTertiaryGreenColor];
+                    item.taskId = @"APHSevenDayAllocation-00000000-1111-1111-1111-F810BE28D995";
+                    item.tintColor = [UIColor colorForTaskId:item.taskId];
                     [self.items addObject:item];
                 }
                     break;
@@ -76,7 +77,8 @@
                 {
                     APCTableViewDashboardItem *item = [APCTableViewDashboardItem new];
                     item.caption = NSLocalizedString(@"6-minute Walking Test", @"");
-                    item.tintColor = [UIColor appTertiaryRedColor];
+                    item.taskId = @"APHFitnessTest-00000000-1111-1111-1111-F810BE28D995";
+                    item.tintColor = [UIColor colorForTaskId:item.taskId];
                     [self.items addObject:item];
                 }
                     
