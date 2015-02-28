@@ -80,9 +80,6 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 
-//    [self updatePieChart:nil];
-//    [self prepareScoringObjects];
-//    [self prepareData];
 }
 
 - (void)viewWillAppear:(BOOL)animated
