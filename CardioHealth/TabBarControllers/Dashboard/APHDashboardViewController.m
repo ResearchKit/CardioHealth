@@ -79,10 +79,10 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
     [super viewDidLoad];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
-    [self updatePieChart:nil];
-    [self prepareScoringObjects];
-    [self prepareData];
+
+//    [self updatePieChart:nil];
+//    [self prepareScoringObjects];
+//    [self prepareData];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -100,6 +100,12 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
     [self updatePieChart:nil];
     
     [self prepareScoringObjects];
+    
+    if (self.heartRateScoring.allObjects == nil || self.heartRateScoring.averageDataPoint == nil) {
+        
+        [self.rowItemsOrder removeObject:@(kAPHDashboardItemTypeHeartRate)];
+    }
+    
     [self prepareData];
     
     //Every time the cells are reloaded this variable is checked and used to prevent unnecessary drawing of the pie graph.
