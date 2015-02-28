@@ -157,9 +157,6 @@ static NSString *kEighteenToTwentyInstructions  = @"eighteenToTwentyInstructions
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     CGFloat height = tableView.rowHeight;
-    
-    NSLog(@"----> %ld", (long)indexPath.row);
-    
     NSString *objectId = @"";
     
     if (indexPath.section) {
