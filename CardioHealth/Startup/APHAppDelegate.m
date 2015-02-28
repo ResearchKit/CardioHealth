@@ -12,9 +12,11 @@
 /*********************************************************************************/
 #pragma mark - Initializations Options
 /*********************************************************************************/
-static  NSString*       const   kStudyIdentifier                        = @"Cardiovascular";
-static  NSString*       const   kAppPrefix                              = @"cardiovascular";
-static  NSString*       const   kVideoShownKey                          = @"VideoShown";
+static NSString* const  kStudyIdentifier           = @"Cardiovascular";
+static NSString* const  kAppPrefix                 = @"cardiovascular";
+static NSString* const  kVideoShownKey             = @"VideoShown";
+static NSString* const  kConsentPropertiesFileName = @"APHConsentSection";
+static NSString* const  kFlurryApiKey              = @"9NPWCDZZY6KCXD4SCHWG";
 
 @interface APHAppDelegate ()
 
@@ -70,8 +72,8 @@ static  NSString*       const   kVideoShownKey                          = @"Vide
                                                    @(kAPCUserInfoItemTypeWakeUpTime),
                                                    @(kAPCUserInfoItemTypeSleepTime),
                                                    ],
-                                           kAnalyticsOnOffKey  : @(YES),
-                                           kAnalyticsFlurryAPIKeyKey : @"9NPWCDZZY6KCXD4SCHWG"
+                                           kAnalyticsOnOffKey  : @YES,
+                                           kAnalyticsFlurryAPIKeyKey : kFlurryApiKey
                                            }];
     self.initializationOptions = dictionary;
 }
@@ -169,7 +171,7 @@ static  NSString*       const   kVideoShownKey                          = @"Vide
 #pragma mark - Consent
 /*********************************************************************************/
 
-- (id<ORKTask>)makeConsent
+- (NSArray*)makeConsentSections
 {
     NSString*               agreement = @"By agreeing you confirm that you have read the Consent, that you understand it and that you wish to take part in this research study.";
     NSString*               docHtml   = nil;
@@ -198,17 +200,19 @@ static  NSString*       const   kVideoShownKey                          = @"Vide
     
     [consentSteps addObject:reviewStep];
     
-    ORKOrderedTask* task = [[ORKOrderedTask alloc] initWithIdentifier:@"consent" steps:consentSteps];
-    
-    return task;
+    return consentSteps;
+//    
+//    ORKOrderedTask* task = [[ORKOrderedTask alloc] initWithIdentifier:@"consent" steps:consentSteps];
+//    
+//    return task;
 }
 
 - (ORKTaskViewController *)consentViewController
 {
-    id<ORKTask> task = [self makeConsent];
-    
-    ORKTaskViewController *consentVC = [[ORKTaskViewController alloc] initWithTask:task
-                                                                         taskRunUUID:[NSUUID UUID]];
+    APCConsentTask*         task = [[APCConsentTask alloc] initWithIdentifier:@"Consent"
+                                                           propertiesFileName:kConsentPropertiesFileName];
+    ORKTaskViewController*  consentVC = [[ORKTaskViewController alloc] initWithTask:task
+                                                                        taskRunUUID:[NSUUID UUID]];
     
     return consentVC;
 }
