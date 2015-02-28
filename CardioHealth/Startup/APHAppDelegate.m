@@ -205,12 +205,10 @@ static NSString* const  kFlurryApiKey              = @"9NPWCDZZY6KCXD4SCHWG";
 
 - (ORKTaskViewController *)consentViewController
 {
-    APCConsentTask* task = [[APCConsentTask alloc] initWithIdentifier:@"Consent"
-                                                   propertiesFileName:kConsentPropertiesFileName];
-
-    
-    ORKTaskViewController *consentVC = [[ORKTaskViewController alloc] initWithTask:task
-                                                                         taskRunUUID:[NSUUID UUID]];
+    APCConsentTask*         task = [[APCConsentTask alloc] initWithIdentifier:@"Consent"
+                                                           propertiesFileName:kConsentPropertiesFileName];
+    ORKTaskViewController*  consentVC = [[ORKTaskViewController alloc] initWithTask:task
+                                                                        taskRunUUID:[NSUUID UUID]];
     
     return consentVC;
 }

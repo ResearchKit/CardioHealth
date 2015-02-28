@@ -185,7 +185,7 @@
 		744174EB1A9248D0004A7CC1 /* APHConsentSection.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = APHConsentSection.json; sourceTree = "<group>"; };
 		747307121A96E2540071D863 /* openssl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = openssl.framework; path = ../AppCore/APCAppCore/openssl.framework; sourceTree = "<group>"; };
 		74FA829B1A91661C00F93769 /* ResearchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ResearchKit.framework; path = AppCore/APCAppCore/ResearchKit/ResearchKit.framework; sourceTree = SOURCE_ROOT; };
-		74FA829E1A91662500F93769 /* ResearchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ResearchKit.framework; path = AppCore/APCAppCore/ResearchKit/ResearchKit.framework; sourceTree = "<group>"; };
+		74FA829E1A91662500F93769 /* ResearchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ResearchKit.framework; path = ../AppCore/APCAppCore/ResearchKit/ResearchKit.framework; sourceTree = "<group>"; };
 		7B0E172B1A3FBDD70079E536 /* APHCardiovascularHealthSurveyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHCardiovascularHealthSurveyController.h; sourceTree = "<group>"; };
 		7B0E172C1A3FBDD70079E536 /* APHCardiovascularHealthSurveyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHCardiovascularHealthSurveyController.m; sourceTree = "<group>"; };
 		7B30CF9E1A376B3D00625350 /* cardiovascular-staging.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "cardiovascular-staging.pem"; sourceTree = "<group>"; };
@@ -640,7 +640,6 @@
 		F5F644F019D35BA2004CFBB2 = {
 			isa = PBXGroup;
 			children = (
-				74FA829E1A91662500F93769 /* ResearchKit.framework */,
 				F5F644FB19D35BA2004CFBB2 /* CardioHealth */,
 				F5F6452219D35BE3004CFBB2 /* Frameworks */,
 				F5F644FA19D35BA2004CFBB2 /* Products */,
@@ -683,6 +682,7 @@
 		F5F6452219D35BE3004CFBB2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				74FA829E1A91662500F93769 /* ResearchKit.framework */,
 				F571C9031A2F93670011C270 /* APCAppCore.xcodeproj */,
 				747307121A96E2540071D863 /* openssl.framework */,
 				74FA829B1A91661C00F93769 /* ResearchKit.framework */,
