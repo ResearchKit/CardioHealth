@@ -79,7 +79,9 @@ static  NSString*       const   kVideoShownKey                          = @"Vide
 - (void) setUpAppAppearance
 {
     [APCAppearanceInfo setAppearanceDictionary:@{
-                                                 kPrimaryAppColorKey : [UIColor colorWithRed:0.698 green:0.027 blue:0.220 alpha:1.000]
+                                                 kPrimaryAppColorKey : [UIColor colorWithRed:0.698 green:0.027 blue:0.220 alpha:1.000],
+                                                 @"APHFitnessTest-00000000-1111-1111-1111-F810BE28D995" :[UIColor appTertiaryBlueColor],
+                                                 @"APHSevenDayAllocation-00000000-1111-1111-1111-F810BE28D995":[UIColor appTertiaryRedColor],
                                                  }];
     [[UINavigationBar appearance] setTintColor:[UIColor appPrimaryColor]];
     [[UINavigationBar appearance] setTitleTextAttributes: @{
@@ -88,6 +90,7 @@ static  NSString*       const   kVideoShownKey                          = @"Vide
                                                             }];
     
     [[UIView appearance] setTintColor:[UIColor appPrimaryColor]];
+    
 }
 
 - (void) showOnBoarding
