@@ -16,22 +16,6 @@
 
 #import "APHHeartAgeTenYearRecommendationCell.h"
 
-
-typedef NS_ENUM(NSUInteger, APHHeartAgeSummarySections)
-{
-    APHHeartAgeSummarySectionHeartAge = 0,
-    APHHeartAgeSummarySectionTenYearRiskEstimate,
-    APHHeartAgeSummarySectionLifetimeRiskEstimate,
-    APHHeartAgeSummaryNumberOfSections
-};
-
-typedef NS_ENUM(NSUInteger, APHHeartAgeSummaryRows)
-{
-    APHHeartAgeSummaryRowBanner = 0,
-    APHHeartAgeSummaryRowRecommendation,
-    APHHeartAgeSummaryNumberOfRows
-};
-
 // Cell Identifiers
 static NSString *kTodaysActivitiesCellIdentifier = @"TodaysActivitiesCell";
 static NSString *kHeartAgeCellIdentifier         = @"HeartAgeCell";
@@ -45,8 +29,6 @@ static NSString *kTenYearRisk                   = @"tenYearRisk";
 static NSString *kLifeTimeRisk                  = @"lifeTimeRisk";
 static NSString *kHeartAgeSummaryTitle          = @"heartAgeSummaryTitle";
 static NSString *kEighteenToTwentyInstructions  = @"eighteenToTwentyInstructions";
-
-
 
 @interface APHHeartAgeResultsViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -91,7 +73,10 @@ static NSString *kEighteenToTwentyInstructions  = @"eighteenToTwentyInstructions
     
     if ((self.actualAge > 40) && (self.actualAge < 59))
     {
-        [self.heartAndRiskData addObject:kHeartAgeResults];
+        if (![self.taskViewController.task.identifier isEqualToString:kKludgeIdentifierForHeartAgeTaskB]) {
+            [self.heartAndRiskData addObject:kHeartAgeResults];
+        }
+        
         [self.heartAndRiskData addObject:kTenYearRisk];
         [self.heartAndRiskData addObject:kLifeTimeRisk];
         
@@ -103,7 +88,10 @@ static NSString *kEighteenToTwentyInstructions  = @"eighteenToTwentyInstructions
     else if ((self.actualAge >= 20) && (self.actualAge <= 59))
         
     {
-        [self.heartAndRiskData addObject:kHeartAgeResults];
+        if (![self.taskViewController.task.identifier isEqualToString:kKludgeIdentifierForHeartAgeTaskB]) {
+            [self.heartAndRiskData addObject:kHeartAgeResults];
+        }
+        
         [self.heartAndRiskData addObject:kLifeTimeRisk];
         
         [self.summaryData addObject:kHeartAgeSummaryTitle];
@@ -113,7 +101,10 @@ static NSString *kEighteenToTwentyInstructions  = @"eighteenToTwentyInstructions
     else if ((self.actualAge >= 40) && (self.actualAge <= 79))
         
     {
-        [self.heartAndRiskData addObject:kHeartAgeResults];
+        if (![self.taskViewController.task.identifier isEqualToString:kKludgeIdentifierForHeartAgeTaskB]) {
+            [self.heartAndRiskData addObject:kHeartAgeResults];
+        }
+        
         [self.heartAndRiskData addObject:kTenYearRisk];
         
         [self.summaryData addObject:kHeartAgeSummaryTitle];
@@ -123,7 +114,9 @@ static NSString *kEighteenToTwentyInstructions  = @"eighteenToTwentyInstructions
     else if ((self.actualAge >= 18) && (self.actualAge <= 20))
         
     {
-        [self.heartAndRiskData addObject:kHeartAgeResults];
+        if (![self.taskViewController.task.identifier isEqualToString:kKludgeIdentifierForHeartAgeTaskB]) {
+            [self.heartAndRiskData addObject:kHeartAgeResults];
+        }
         
         [self.summaryData addObject:kEighteenToTwentyInstructions];
     }
@@ -132,6 +125,8 @@ static NSString *kEighteenToTwentyInstructions  = @"eighteenToTwentyInstructions
         self.numberOfSections = 1;
         [self.heartAndRiskData addObject:kHeartAgeResults];
     }
+    
+
     
     [self.tableView reloadData];
 
@@ -162,8 +157,7 @@ static NSString *kEighteenToTwentyInstructions  = @"eighteenToTwentyInstructions
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     CGFloat height = tableView.rowHeight;
-    
-    NSString *objectId = [self.heartAndRiskData objectAtIndex:indexPath.row];
+    NSString *objectId = @"";
     
     if (indexPath.section) {
         
