@@ -14,6 +14,8 @@
 #import "APHWalkTestViewController.h"
 #import "APHWalkingTestResults.h"
 
+static NSString *const kDatasetValueNoDataKey = @"datasetValueNoDataKey";
+
 static NSString*  const kAPCBasicTableViewCellIdentifier        = @"APCBasicTableViewCell";
 static NSString*  const kAPCRightDetailTableViewCellIdentifier  = @"APCRightDetailTableViewCell";
 static NSInteger  const kDataCountLimit                         = 1;
@@ -35,6 +37,7 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
 @property (nonatomic, strong)   APHWalkingTestResults*  walkingResults;
 @property (nonatomic)           NSNumber*               totalDistanceForSevenDay;
 @property (nonatomic)           NSIndexPath*            currentPieGraphIndexPath;
+@property (nonatomic)           float __block         totalStepsValue;
 
 @end
 
@@ -78,6 +81,11 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
     [super viewDidLoad];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateSevenDayItem:)
+                                                 name:@"APCUpdateStepsCountIn7Day"
+                                               object:nil];
 
 }
 
@@ -225,6 +233,7 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
                     APHTableViewDashboardSevenDayFitnessItem *item = [APHTableViewDashboardSevenDayFitnessItem new];
                     item.caption = NSLocalizedString(@"7-Day Assessment", @"");
                     item.taskId = @"APHSevenDayAllocation-00000000-1111-1111-1111-F810BE28D995";
+                
                     item.numberOfDaysString = NSLocalizedString([self fitnessDaysRemaining], @"");
                     
                     APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -232,7 +241,7 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
 
                     sevenDayDistanceStr = [NSString stringWithFormat:@"%d Active Minutes", (int) roundf(appDelegate.sevenDayFitnessAllocationData.activeSeconds/60)];
                     
-                    item.distanceTraveledString = sevenDayDistanceStr;
+                    item.activeMinutesString = sevenDayDistanceStr;
                     item.identifier = kAPCDashboardPieGraphTableViewCellIdentifier;
                     item.tintColor = [UIColor colorForTaskId:item.taskId];
                     item.editable = YES;
@@ -304,6 +313,8 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
 
         
     } else if ([dashboardItem isKindOfClass:[APHTableViewDashboardSevenDayFitnessItem class]]){
+        
+        
         APHTableViewDashboardSevenDayFitnessItem *fitnessItem = (APHTableViewDashboardSevenDayFitnessItem *)dashboardItem;
         self.currentPieGraphIndexPath = indexPath;
         APCDashboardPieGraphTableViewCell *pieGraphCell = (APCDashboardPieGraphTableViewCell *)cell;
@@ -315,13 +326,38 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
         pieGraphCell.subTitleLabel2.alpha = 0;
         
         [UIView animateWithDuration:0.2 animations:^{
-            pieGraphCell.subTitleLabel2.text = fitnessItem.distanceTraveledString;
+            pieGraphCell.subTitleLabel2.text = fitnessItem.activeMinutesString;
             pieGraphCell.subTitleLabel2.alpha = 1;
         }];
         
-        NSMutableAttributedString *attirbutedDistanceString = [[NSMutableAttributedString alloc] initWithString:fitnessItem.distanceTraveledString];
-        [attirbutedDistanceString addAttribute:NSFontAttributeName value:[UIFont appMediumFontWithSize:17.0f] range:NSMakeRange(0, (fitnessItem.distanceTraveledString.length - @" Active Minutes".length))];
-        [attirbutedDistanceString addAttribute:NSFontAttributeName value:[UIFont appRegularFontWithSize:16.0f] range: [fitnessItem.distanceTraveledString rangeOfString:@" Active Minutes"]];
+        NSMutableAttributedString *attirbutedDistanceString = [[NSMutableAttributedString alloc] initWithString:fitnessItem.activeMinutesString];
+        [attirbutedDistanceString addAttribute:NSFontAttributeName value:[UIFont appMediumFontWithSize:17.0f] range:NSMakeRange(0, (fitnessItem.activeMinutesString.length - @" Active Minutes".length))];
+        [attirbutedDistanceString addAttribute:NSFontAttributeName value:[UIFont appRegularFontWithSize:16.0f] range: [fitnessItem.activeMinutesString rangeOfString:@" Active Minutes"]];
+        
+        
+        
+        
+        
+        
+        NSString *numberOfStepsString = [NSString stringWithFormat:@"%d", (int)self.totalStepsValue];
+        
+        NSString *nonAttributedString = [NSString stringWithFormat:@"%@ Steps Today", numberOfStepsString];
+        
+        NSMutableAttributedString *attirbutedTotalStepsString = [[NSMutableAttributedString alloc] initWithString:nonAttributedString];
+        
+        if (self.totalStepsValue > 0) {
+        
+            [attirbutedTotalStepsString addAttribute:NSFontAttributeName value:[UIFont appMediumFontWithSize:17.0f] range:NSMakeRange(0, numberOfStepsString.length)];
+            [attirbutedTotalStepsString addAttribute:NSFontAttributeName value:[UIFont appRegularFontWithSize:16.0f] range: [numberOfStepsString rangeOfString:@" Steps Today"]];
+        
+        }
+
+        
+        
+        
+        
+        
+        pieGraphCell.subTitleLabel3.attributedText = attirbutedTotalStepsString;
         
         pieGraphCell.subTitleLabel2.attributedText = attirbutedDistanceString;
         
@@ -332,6 +368,7 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
         //Every time the cells are reloaded this variable is checked and used to prevent unnecessary drawing of the pie graph.
         if (self.dataCount < kDataCountLimit) {
             [pieGraphCell.pieGraphView setNeedsLayout];
+            [self statsCollectionQueryForStep];
         }
         
         pieGraphCell.delegate = self;
@@ -469,6 +506,104 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
     NSDate *fitnessStartDate = [defaults objectForKey:kSevenDayFitnessStartDateKey];
     
     return fitnessStartDate;
+}
+
+#pragma mark - Helper methods
+
+- (void)statsCollectionQueryForStep
+{
+    NSInteger days = -1;
+    
+    HKQuantityType *quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierStepCount];;
+    
+    NSDateComponents *interval = [[NSDateComponents alloc] init];
+    interval.day = 1;
+    
+    NSDate *startDate = [[NSCalendar currentCalendar] dateBySettingHour:0
+                                                                 minute:0
+                                                                 second:0
+                                                                 ofDate:[self dateForSpan:days]
+                                                                options:0];
+    
+    NSPredicate *predicate = [HKQuery predicateForSamplesWithStartDate:startDate endDate:[NSDate date] options:HKQueryOptionStrictEndDate];
+    
+    BOOL isDecreteQuantity = ([quantityType aggregationStyle] == HKQuantityAggregationStyleDiscrete);
+    
+    HKStatisticsOptions queryOptions;
+    
+    if (isDecreteQuantity) {
+        queryOptions = HKStatisticsOptionDiscreteAverage | HKStatisticsOptionDiscreteMax | HKStatisticsOptionDiscreteMin;
+    } else {
+        queryOptions = HKStatisticsOptionCumulativeSum;
+    }
+    
+    HKStatisticsCollectionQuery *query = [[HKStatisticsCollectionQuery alloc] initWithQuantityType:quantityType
+                                                                           quantitySamplePredicate:predicate
+                                                                                           options:queryOptions
+                                                                                        anchorDate:startDate
+                                                                                intervalComponents:interval];
+    
+    // set the results handler
+    query.initialResultsHandler = ^(HKStatisticsCollectionQuery * __unused query,
+                                    HKStatisticsCollection *results,
+                                    NSError *error) {
+        if (!error) {
+            NSDate *endDate = [[NSCalendar currentCalendar] dateBySettingHour:23
+                                                                       minute:59
+                                                                       second:59
+                                                                       ofDate:[NSDate date]
+                                                                      options:0];
+            NSDate *beginDate = startDate;
+            
+            [results enumerateStatisticsFromDate:beginDate
+                                          toDate:endDate
+                                       withBlock:^(HKStatistics *result, BOOL * __unused stop) {
+                                           HKQuantity *quantity;
+                                           NSMutableDictionary *dataPoint = [NSMutableDictionary new];
+                                           
+                                           quantity = result.sumQuantity;
+                                           
+                                           NSDate *date = result.startDate;
+                                           double value = [quantity doubleValueForUnit:[HKUnit countUnit]];
+                                           self.totalStepsValue = value;
+                                           
+                                           dataPoint[kDatasetDateKey] = date;
+                                           dataPoint[kDatasetValueKey] = (!quantity) ? @(NSNotFound) : @(value);
+                                           dataPoint[kDatasetValueNoDataKey] = (isDecreteQuantity) ? @(YES) : @(NO);
+                                           
+                                           
+
+
+                                       }];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"APCUpdateStepsCountIn7Day"
+                                                                    object:nil];
+            });
+        }
+    };
+    
+    [[HKHealthStore new] executeQuery:query];
+}
+
+- (NSDate *)dateForSpan:(NSInteger)daySpan
+{
+    NSDateComponents *components = [[NSDateComponents alloc] init];
+    [components setDay:daySpan];
+    
+    NSDate *spanDate = [[NSCalendar currentCalendar] dateByAddingComponents:components
+                                                                     toDate:[NSDate date]
+                                                                    options:0];
+    return spanDate;
+}
+
+
+
+- (void)updateSevenDayItem:(NSNotification *)notif {
+    
+    [self.tableView beginUpdates];
+    [self.tableView reloadRowsAtIndexPaths:@[self.currentPieGraphIndexPath] withRowAnimation:UITableViewRowAnimationNone];
+    [self.tableView endUpdates];
 }
 
 @end
