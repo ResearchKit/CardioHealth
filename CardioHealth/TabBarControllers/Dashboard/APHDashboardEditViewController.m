@@ -26,16 +26,7 @@
             APHDashboardItemType rowType = typeNumber.integerValue;
             
             switch (rowType) {
-                case kAPHDashboardItemTypeDistance:
-                {
-                    APCTableViewDashboardItem *item = [APCTableViewDashboardItem new];
-                    item.caption = NSLocalizedString(@"Steps", @"");
-                    item.tintColor = [UIColor appTertiaryPurpleColor];
-                    
-                    [self.items addObject:item];
-                    
-                }
-                    break;
+
                 case kAPHDashboardItemTypeHeartRate:{
                     
                     APCTableViewDashboardItem *item = [APCTableViewDashboardItem new];

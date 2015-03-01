@@ -53,9 +53,7 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
         _rowItemsOrder = [NSMutableArray arrayWithArray:[defaults objectForKey:kAPCDashboardRowItemsOrder]];
         
         if (!_rowItemsOrder.count) {
-            _rowItemsOrder = [[NSMutableArray alloc] initWithArray:@[
-                                                                     @(kAPHDashboardItemTypeDistance),
-                                                                     ]];
+            _rowItemsOrder = [[NSMutableArray alloc] initWithArray:@[]];
             if ([APCDeviceHardware isiPhone5SOrNewer]) {
                 [_rowItemsOrder addObjectsFromArray:@[@(kAPHDashboardItemTypeSevenDayFitness), @(kAPHDashboardItemTypeWalkingTest)]];
             } else {
@@ -144,10 +142,6 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
 }
 
 - (void)prepareScoringObjects {
-    
-
-    HKQuantityType *stepQuantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierStepCount];
-    self.stepScoring= [[APCScoring alloc] initWithHealthKitQuantityType:stepQuantityType unit:[HKUnit countUnit] numberOfDays:-kNumberOfDaysToDisplay];
 
     HKQuantityType *heartRateQuantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierHeartRate];
     
@@ -186,26 +180,26 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
             APHDashboardItemType rowType = typeNumber.integerValue;
             
             switch (rowType) {
-                case kAPHDashboardItemTypeDistance:
-                {
-                    APCTableViewDashboardGraphItem *item = [APCTableViewDashboardGraphItem new];
-                    item.caption = NSLocalizedString(@"Steps", @"");
-                    item.graphData = self.stepScoring;
-                    item.detailText = [NSString stringWithFormat:NSLocalizedString(@"Average : %0.0f", @"Average: {value}"), [[self.stepScoring averageDataPoint] doubleValue]];
-                    item.identifier = kAPCDashboardGraphTableViewCellIdentifier;
-                    item.editable = YES;
-                    item.tintColor = [UIColor appTertiaryPurpleColor];
-                    
-                    #warning Replace Placeholder Values - APPLE-1576
-                    item.info = NSLocalizedString(@"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", @"");
-                    
-                    APCTableViewRow *row = [APCTableViewRow new];
-                    row.item = item;
-                    row.itemType = rowType;
-                    [rowItems addObject:row];
-
-                }
-                    break;
+//                case kAPHDashboardItemTypeDistance:
+//                {
+//                    APCTableViewDashboardGraphItem *item = [APCTableViewDashboardGraphItem new];
+//                    item.caption = NSLocalizedString(@"Steps", @"");
+//                    item.graphData = self.stepScoring;
+//                    item.detailText = [NSString stringWithFormat:NSLocalizedString(@"Average : %0.0f", @"Average: {value}"), [[self.stepScoring averageDataPoint] doubleValue]];
+//                    item.identifier = kAPCDashboardGraphTableViewCellIdentifier;
+//                    item.editable = YES;
+//                    item.tintColor = [UIColor appTertiaryPurpleColor];
+//                    
+//                    #warning Replace Placeholder Values - APPLE-1576
+//                    item.info = NSLocalizedString(@"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", @"");
+//                    
+//                    APCTableViewRow *row = [APCTableViewRow new];
+//                    row.item = item;
+//                    row.itemType = rowType;
+//                    [rowItems addObject:row];
+//
+//                }
+//                    break;
                 case kAPHDashboardItemTypeHeartRate:{
                     
                     APCTableViewDashboardGraphItem *item = [APCTableViewDashboardGraphItem new];
