@@ -149,7 +149,7 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
     }
     
     {
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:kHeartAgeFormStepSmokingHistory title:NSLocalizedString(@"Smoking History", @"Smoking History") answer:[ORKBooleanAnswerFormat new]];
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:kHeartAgeFormStepSmokingHistory title:NSLocalizedString(@"Are you currently smoking cigarettes?", @"Are you currently smoking cigarettes?") answer:[ORKBooleanAnswerFormat new]];
 
         step.optional = NO;
         
