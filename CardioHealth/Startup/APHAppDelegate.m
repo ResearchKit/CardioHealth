@@ -26,6 +26,8 @@ static NSString* const  kFlurryApiKey              = @"9NPWCDZZY6KCXD4SCHWG";
 
 - (void) setUpInitializationOptions
 {
+    [APCUtilities setRealApplicationName: @"MyHeart Counts"];
+    
     NSDictionary *permissionsDescriptions = @{
                                               @(kSignUpPermissionsTypeLocation) : NSLocalizedString(@"Using your GPS enables the app to accurately determine distances travelled. Your actual location will never be shared.", @""),
                                               @(kSignUpPermissionsTypeCoremotion) : NSLocalizedString(@"Using the motion co-processor allows the app to determine your activity, helping the study better understand how activity level may influence disease.", @""),
@@ -125,8 +127,6 @@ static NSString* const  kFlurryApiKey              = @"9NPWCDZZY6KCXD4SCHWG";
 /*********************************************************************************/
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     [super applicationDidBecomeActive:application];
-    
-    [APCUtilities setRealApplicationName: @"My Heart Counts"];
     
     //For the Seven Day Fitness Allocation
     NSDate *fitnessStartDate = [self checkSevenDayFitnessStartDate];
