@@ -1,5 +1,10 @@
 {
-    "htmlDocument" : "cardio_fullconsent",
+    "documentProperties" :
+    {
+        "htmlDocument" : "cardio_fullconsent",
+        "investigatorShortDescription": "Investigator",
+        "investigatorLongDescription": "Investigator",
+    },
     "sections":
     [
      {
