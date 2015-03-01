@@ -1,7 +1,7 @@
 {
     "tasks": [
               {
-              "taskTitle": "Heart and Stroke Risk Score, Plus Heart Age",
+              "taskTitle": "Heart/Stroke Risk Score + Heart Age",
               "taskID": "APHHeartAge-7259AC18-D711-47A6-ADBD-6CFCECDED1DF",
               "taskClassName": "APHHeartAgeTaskViewController"
               },
