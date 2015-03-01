@@ -35,7 +35,7 @@ static NSString* const kPeakHeartRateForDashboard  = @"peakHeartRate";
 static NSString* const kAvgHeartRateForDashboard   = @"avgHeartRate";
 static NSString* const kLastHeartRateForDashboard  = @"lastHeartRate";
 
-static NSString* const kInstructionIntendedDescription = @"This test monitors how far you can walk in six minutes. It will also monitor your heart rate if you are wearing such a device.";
+static NSString* const kInstructionIntendedDescription = @"This test monitors how far you can walk in six minutes. It will also record your heart rate if you are wearing such a device.";
 
 static NSString* const kInstruction2IntendedDescription = @"Walk outdoors as far as you can for six minutes. When you're done, sit and rest comfortably for three minutes. To begin, tap Get Started.";
 
