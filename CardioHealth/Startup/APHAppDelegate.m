@@ -126,6 +126,8 @@ static NSString* const  kFlurryApiKey              = @"9NPWCDZZY6KCXD4SCHWG";
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     [super applicationDidBecomeActive:application];
     
+    [APCUtilities setRealApplicationName: @"My Heart Counts"];
+    
     //For the Seven Day Fitness Allocation
     NSDate *fitnessStartDate = [self checkSevenDayFitnessStartDate];
     if (fitnessStartDate) {
