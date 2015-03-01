@@ -7,7 +7,6 @@
  
 @import APCAppCore;
 #import "APHAppDelegate.h"
-#import "APHFitnessAllocation.h"
 
 /*********************************************************************************/
 #pragma mark - Initializations Options
@@ -131,7 +130,7 @@ static NSString* const  kFlurryApiKey              = @"9NPWCDZZY6KCXD4SCHWG";
     //For the Seven Day Fitness Allocation
     NSDate *fitnessStartDate = [self checkSevenDayFitnessStartDate];
     if (fitnessStartDate) {
-        self.sevenDayFitnessAllocationData = [[APHFitnessAllocation alloc] initWithAllocationStartDate:fitnessStartDate];
+        self.sevenDayFitnessAllocationData = [[APCFitnessAllocation alloc] initWithAllocationStartDate:fitnessStartDate];
         
         [self.sevenDayFitnessAllocationData startDataCollection];
     }

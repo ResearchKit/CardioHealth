@@ -6,7 +6,7 @@
 //
 
 #import "APHSevenDayFitnessAllocationTaskViewController.h"
-#import "APHActivityTrackingStepViewController.h"
+
 
 static NSString *kMainStudyIdentifier = @"com.cardioVascular.sevenDayFitnessAllocation";
 static NSString *kSevenDayFitnessInstructionStep = @"sevenDayFitnessInstructionStep";
@@ -89,8 +89,8 @@ static NSString *kSevenDayFitnessCompleteStep = @"sevenDayFitnessCompleteStep";
         
         stepVC = controller;
     } else if (step.identifier == kSevenDayFitnessActivityStep) {
-        UIStoryboard *sbActivityTracking = [UIStoryboard storyboardWithName:@"APHActivityTracking" bundle:nil];
-        APHActivityTrackingStepViewController *activityVC = [sbActivityTracking instantiateInitialViewController];
+        UIStoryboard *sbActivityTracking = [UIStoryboard storyboardWithName:@"APCActivityTracking" bundle:[NSBundle appleCoreBundle]];
+        APCActivityTrackingStepViewController *activityVC = [sbActivityTracking instantiateInitialViewController];
         
         activityVC.delegate = self;
         activityVC.step = step;

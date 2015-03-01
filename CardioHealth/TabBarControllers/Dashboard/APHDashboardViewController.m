@@ -8,7 +8,6 @@
 /* Controllers */
 #import "APHDashboardViewController.h"
 #import "APHDashboardEditViewController.h"
-#import "APHFitnessAllocation.h"
 #import "APHAppDelegate.h"
 #import "APHDashboardWalkTestTableViewCell.h"
 #import "APHWalkTestViewController.h"

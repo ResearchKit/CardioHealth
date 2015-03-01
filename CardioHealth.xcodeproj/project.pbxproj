@@ -7,15 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		08547C121A11899C00DC6E7C /* APHTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 08547C111A11899C00DC6E7C /* APHTheme.m */; };
 		0865F8B41A65E8C7005770ED /* APHIntroCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0865F8B31A65E8C7005770ED /* APHIntroCellTableViewCell.m */; };
-		087EC8571A2E2594009A6768 /* APHFitnessAllocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 087EC8561A2E2594009A6768 /* APHFitnessAllocation.m */; };
 		08B9724B1A1FB00700316D49 /* APHHealthyHeartTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08B9724A1A1FB00700316D49 /* APHHealthyHeartTaskViewController.m */; };
 		08B9724F1A1FB47B00316D49 /* APHHealthyHeartSummaryStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08B9724E1A1FB47B00316D49 /* APHHealthyHeartSummaryStepViewController.m */; };
 		08B972511A1FB4AF00316D49 /* APHHealthyHeartSummaryStepViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08B972501A1FB4AF00316D49 /* APHHealthyHeartSummaryStepViewController.xib */; };
 		08C2328A1A15796E00DB4EF9 /* APHSevenDayFitnessAllocationTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08C232821A15796E00DB4EF9 /* APHSevenDayFitnessAllocationTaskViewController.m */; };
-		08C56E361A15E75400D3BF61 /* APHActivityTrackingStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08C56E351A15E75400D3BF61 /* APHActivityTrackingStepViewController.m */; };
-		08C56E391A15E7D100D3BF61 /* APHActivityTracking.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08C56E381A15E7D100D3BF61 /* APHActivityTracking.storyboard */; };
 		08D3A10219E4A08C00A3D20D /* APHHeartAgeAndRiskFactors.m in Sources */ = {isa = PBXBuildFile; fileRef = 08D3A0FA19E4A08C00A3D20D /* APHHeartAgeAndRiskFactors.m */; };
 		08FA97FB1A10630F002317C8 /* APHHeartAgeSummary.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08FA97FA1A10630F002317C8 /* APHHeartAgeSummary.storyboard */; };
 		08FA97FF1A108680002317C8 /* APHHeartAgeTodaysActivitiesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FA97FE1A108680002317C8 /* APHHeartAgeTodaysActivitiesCell.m */; };
@@ -139,12 +135,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		08547C101A11899C00DC6E7C /* APHTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHTheme.h; sourceTree = "<group>"; };
-		08547C111A11899C00DC6E7C /* APHTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHTheme.m; sourceTree = "<group>"; };
 		0865F8B21A65E8C7005770ED /* APHIntroCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHIntroCellTableViewCell.h; sourceTree = "<group>"; };
 		0865F8B31A65E8C7005770ED /* APHIntroCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHIntroCellTableViewCell.m; sourceTree = "<group>"; };
-		087EC8551A2E2594009A6768 /* APHFitnessAllocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APHFitnessAllocation.h; path = "Activity Tracking/APHFitnessAllocation.h"; sourceTree = "<group>"; };
-		087EC8561A2E2594009A6768 /* APHFitnessAllocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APHFitnessAllocation.m; path = "Activity Tracking/APHFitnessAllocation.m"; sourceTree = "<group>"; };
 		08B972491A1FB00700316D49 /* APHHealthyHeartTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHHealthyHeartTaskViewController.h; sourceTree = "<group>"; };
 		08B9724A1A1FB00700316D49 /* APHHealthyHeartTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHHealthyHeartTaskViewController.m; sourceTree = "<group>"; };
 		08B9724D1A1FB47B00316D49 /* APHHealthyHeartSummaryStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHHealthyHeartSummaryStepViewController.h; sourceTree = "<group>"; };
@@ -152,9 +144,6 @@
 		08B972501A1FB4AF00316D49 /* APHHealthyHeartSummaryStepViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = APHHealthyHeartSummaryStepViewController.xib; sourceTree = "<group>"; };
 		08C232811A15796E00DB4EF9 /* APHSevenDayFitnessAllocationTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHSevenDayFitnessAllocationTaskViewController.h; sourceTree = "<group>"; };
 		08C232821A15796E00DB4EF9 /* APHSevenDayFitnessAllocationTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHSevenDayFitnessAllocationTaskViewController.m; sourceTree = "<group>"; };
-		08C56E341A15E75400D3BF61 /* APHActivityTrackingStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APHActivityTrackingStepViewController.h; path = "Activity Tracking/APHActivityTrackingStepViewController.h"; sourceTree = "<group>"; };
-		08C56E351A15E75400D3BF61 /* APHActivityTrackingStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APHActivityTrackingStepViewController.m; path = "Activity Tracking/APHActivityTrackingStepViewController.m"; sourceTree = "<group>"; };
-		08C56E381A15E7D100D3BF61 /* APHActivityTracking.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = APHActivityTracking.storyboard; path = "Activity Tracking/APHActivityTracking.storyboard"; sourceTree = "<group>"; };
 		08C56E751A16E50B00D3BF61 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		08D3A0F919E4A08C00A3D20D /* APHHeartAgeAndRiskFactors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHHeartAgeAndRiskFactors.h; sourceTree = "<group>"; };
 		08D3A0FA19E4A08C00A3D20D /* APHHeartAgeAndRiskFactors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHHeartAgeAndRiskFactors.m; sourceTree = "<group>"; };
@@ -306,21 +295,8 @@
 			children = (
 				08C232811A15796E00DB4EF9 /* APHSevenDayFitnessAllocationTaskViewController.h */,
 				08C232821A15796E00DB4EF9 /* APHSevenDayFitnessAllocationTaskViewController.m */,
-				08C56E371A15E75800D3BF61 /* Activity Tracking */,
 			);
 			path = "Seven Day Allocation";
-			sourceTree = "<group>";
-		};
-		08C56E371A15E75800D3BF61 /* Activity Tracking */ = {
-			isa = PBXGroup;
-			children = (
-				08C56E341A15E75400D3BF61 /* APHActivityTrackingStepViewController.h */,
-				08C56E351A15E75400D3BF61 /* APHActivityTrackingStepViewController.m */,
-				08C56E381A15E7D100D3BF61 /* APHActivityTracking.storyboard */,
-				087EC8551A2E2594009A6768 /* APHFitnessAllocation.h */,
-				087EC8561A2E2594009A6768 /* APHFitnessAllocation.m */,
-			);
-			name = "Activity Tracking";
 			sourceTree = "<group>";
 		};
 		08D3A0F819E4A08C00A3D20D /* HeartAgeRiskFactorCalculations */ = {
@@ -550,8 +526,6 @@
 				5B1095C91A9FA4CD006631F5 /* PDF */,
 				7B30CF9D1A376B3D00625350 /* Certificates */,
 				5B0432601A305742000DC9ED /* HTMLContent */,
-				08547C101A11899C00DC6E7C /* APHTheme.h */,
-				08547C111A11899C00DC6E7C /* APHTheme.m */,
 				F55BBDF019D362D0003CA0F9 /* JSONs */,
 				F584909319E8913E0091A640 /* Video */,
 			);
@@ -820,7 +794,6 @@
 				A78115CA1A96A08E00CEC822 /* 02_SensorData_to_DataGathering@3x.m4v in Resources */,
 				5B5A31341A10A78600552F7D /* WithdrawStudy.json in Resources */,
 				F55BBE6719D362D0003CA0F9 /* Main.storyboard in Resources */,
-				08C56E391A15E7D100D3BF61 /* APHActivityTracking.storyboard in Resources */,
 				7BD73F7B19E8A20600F5DFF3 /* Intro.mp4 in Resources */,
 				7B30CFA01A376B3D00625350 /* cardiovascular-staging.pem in Resources */,
 				74D75D671A9F863B00078A73 /* cardio_daily_check.json in Resources */,
@@ -887,7 +860,6 @@
 				7BEA4BE91A65D95400FEAF60 /* APHIntroPurposeContainedTableTableViewController.m in Sources */,
 				08FA97FF1A108680002317C8 /* APHHeartAgeTodaysActivitiesCell.m in Sources */,
 				08B9724F1A1FB47B00316D49 /* APHHealthyHeartSummaryStepViewController.m in Sources */,
-				08C56E361A15E75400D3BF61 /* APHActivityTrackingStepViewController.m in Sources */,
 				5B4633851A15917000E68B82 /* APHDashboardEditViewController.m in Sources */,
 				F55BBE6519D362D0003CA0F9 /* APHAppDelegate.m in Sources */,
 				7BEEFA601A003E04004F6C87 /* APHHeartAgeResultsViewController.m in Sources */,
@@ -905,10 +877,8 @@
 				7B41047E19E5D94F00592B96 /* APHFitnessTaskViewController.m in Sources */,
 				0865F8B41A65E8C7005770ED /* APHIntroCellTableViewCell.m in Sources */,
 				7B5C43A41A3B98EF001A22F5 /* APHWellBeingSurveyController.m in Sources */,
-				087EC8571A2E2594009A6768 /* APHFitnessAllocation.m in Sources */,
 				08B9724B1A1FB00700316D49 /* APHHealthyHeartTaskViewController.m in Sources */,
 				F55BBE5719D362D0003CA0F9 /* NSString+CustomMethods.m in Sources */,
-				08547C121A11899C00DC6E7C /* APHTheme.m in Sources */,
 				5B73CADC1A8A002B00FFE79C /* APHWalkingTestResults.m in Sources */,
 				F5778E7219F0613D0079F1B2 /* APHInclusionCriteriaViewController.m in Sources */,
 				5B73CAD41A89C12400FFE79C /* APHWalkTestDetailsTableViewCell.m in Sources */,

@@ -6,7 +6,6 @@
 //
 
 #import "APHHeartAgeRiskEstimateCell.h"
-#import "APHTheme.h"
 
 @interface APHHeartAgeRiskEstimateCell()
 
