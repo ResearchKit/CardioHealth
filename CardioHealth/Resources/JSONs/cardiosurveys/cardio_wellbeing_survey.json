@@ -39,7 +39,7 @@
             "guid": "854bfd00-3d2b-41e2-9b36-17c7228781a2",
             "identifier": "feel_worthwhile2",
             "prompt": "How about happy?",
-            "detail" : "This and the following questions ask about how you felt yesterday on a scale from 0 to 10. Zero means you did not experience the feeling “at all” yesterday while 10 means you experienced the feeling “all of the time” yesterday.",
+            "detail" : "This question asks about how you felt yesterday on a scale from 0 to 10. Zero means you did not experience the feeling “at all” yesterday while 10 means you experienced the feeling “all of the time” yesterday.",
             "constraints":
             {
                 "dataType":"integer",
@@ -55,6 +55,7 @@
             "guid": "854bfd00-3d2b-41e2-9a36-17c7228781a3",
             "identifier": "feel_worthwhile3",
             "prompt": "How about worried?",
+            "detail" : "This question asks about how you felt yesterday on a scale from 0 to 10. Zero means you did not experience the feeling “at all” yesterday while 10 means you experienced the feeling “all of the time” yesterday.",
             "constraints":
             {
                 "dataType":"integer",
@@ -70,6 +71,7 @@
             "guid": "854bfd00-3d2b-41e2-9b36-17c72287aaa4",
             "identifier": "feel_worthwhile4",
             "prompt": "How about depressed?",
+            "detail" : "This question asks about how you felt yesterday on a scale from 0 to 10. Zero means you did not experience the feeling “at all” yesterday while 10 means you experienced the feeling “all of the time” yesterday.",
             "constraints":
             {
                 "dataType":"integer",
@@ -81,6 +83,27 @@
             "uiHint":"slider",
             "type":"SurveyQuestion"
         },
+         {
+         "guid":"21987ad2-4846-48a4-aa80-27c3371186a2",
+         "identifier":"zip",
+        "prompt":"Please enter the first 3 digits of your zip code.",
+         "detail":"This information will help us understand how heart health varies by region.",
+
+         "constraints":
+         {
+         "dataType":"integer",
+         "minValue":0,
+         "maxValue":999,
+         "step":null,
+         "type":"IntegerConstraints"
+         },
+         "uiHint":"numberfield",
+         "type":"SurveyQuestion"
+         },
+
+     
+     
+     
         {
             "guid": "854aed00-3d2c-41c2-9b36-17a7228781a5",
             "identifier": "riskfactors1",

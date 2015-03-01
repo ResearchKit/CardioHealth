@@ -157,7 +157,7 @@
     {
       "guid" : "c374b293-a063-47c9-bd99-2738837967g9",
       "identifier" : "sleep_time",
-      "prompt" : "How much sleep do you usually get at night on weekdays or workdays? (in hours)",
+      "prompt" : "How much sleep do think you need every night to be rested? \n(in hours)",
       "constraints" : 
       {
         "rules" : [],
@@ -170,61 +170,80 @@
       "type" : "SurveyQuestion"
     },
     {
-      "guid" : "1992b80e-912c-4c05-b29b-5c35f02688h0",
-      "identifier" : "sleep_trouble",
-      "prompt" : "Have you ever told a doctor or other health professional that you have trouble sleeping?",
-      "constraints" : 
-      {
-        "rules" : [],
-        "dataType" : "integer",
-        "enumeration" : 
-        [
-          {
-            "label" : "Yes",
-            "value" : 1,
-            "type" : "SurveyQuestionOption"
-          },
-          {
-            "label" : "No",
-            "value" : 2,
-            "type" : "SurveyQuestionOption"
-          }
+   "identifier": "sleep_diagnosis1",
+   "prompt": "Have you ever been told by a doctor or other health professional that you have a sleep disorder?",
+   "uiHint": "checkbox",
+   "guid": "854cff04-3b2f-41c2-9b88-17b72287819a",
+   "type": "SurveyQuestion",
+   "constraints": {
+   "rules": [
+             {
+             "operator": "eq",
+             "skipTo": "sleep_diagnosis2",
+             "type": "SurveyRule",
+             "value": 1
+             }
+             ],
+   "dataType": "boolean",
+   "type": "BooleanConstraints"
+   }
+   },
+   {
+       "guid" : "1992b80e-912c-4b05-b29b-5c35f02688d6",
+       "identifier" : "sleep_diagnosis2",
+       "prompt" : "Which of the following sleep disorders apply to you? (select all that apply)",
+       "constraints" :
+       {
+       "rules" : [],
+       "dataType" : "integer",
+       "enumeration" :
+       [
+        {
+        "label" : "Sleep Apnea (breathing stops at night)",
+        "value" : 1,
+        "type" : "SurveyQuestionOption"
+        },
+        {
+        "label" : "Insomnia",
+        "value" : 2,
+        "type" : "SurveyQuestionOption"
+        },
+        {
+        "label" : "Circadian Rhythm Disturbance (Advanced/Delayed Sleep Phase, Shift work)",
+        "value" : 3,
+        "type" : "SurveyQuestionOption"
+        },
+        {
+        "label" : "Restless Legs Syndrome and/or Periodic Limb Movements",
+        "value" : 4,
+        "type" : "SurveyQuestionOption"
+        },
+        {
+        "label" : "Narcolepsy or Cataplexy",
+        "value" : 5,
+        "type" : "SurveyQuestionOption"
+        },
+        {
+        "label" : "REM Behavior Disorder (act out dreams in your sleep)",
+        "value" : 6,
+        "type" : "SurveyQuestionOption"
+        },
+        {
+        "label" : "Sleepwalking",
+        "value" : 7,
+        "type" : "SurveyQuestionOption"
+        }
         ],
-        "allowOther" : false,
-        "allowMultiple" : false,
-        "type" : "MultiValueConstraints"
-      },
-      "uiHint" : "list",
-      "type" : "SurveyQuestion"
+       "allowOther" : false,
+       "allowMultiple" : true,
+       "type" : "MultiValueConstraints"
+       },
+       "uiHint" : "list",
+       "type" : "SurveyQuestion"
     },
-    {
-      "guid" : "1992b80e-912c-4c05-b29b-5c35f02688i1",
-      "identifier" : "sleep_diagnosis",
-      "prompt" : "Have you ever been told BY A DOCTOR or other HEALTH PROFESSIONAL that you have a sleep disorder? ",
-      "constraints" : 
-      {
-        "rules" : [],
-        "dataType" : "integer",
-        "enumeration" : 
-        [
-          {
-            "label" : "Yes",
-            "value" : 1,
-            "type" : "SurveyQuestionOption"
-          },
-          {
-            "label" : "No",
-            "value" : 2,
-            "type" : "SurveyQuestionOption"
-          }
-        ],
-        "allowOther" : false,
-        "allowMultiple" : false,
-        "type" : "MultiValueConstraints"
-      },
-      "uiHint" : "list",
-      "type" : "SurveyQuestion"
-    }
+
+   
+   
   ],
   "type" : "Survey"
 }
