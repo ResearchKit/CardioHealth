@@ -33,6 +33,7 @@ typedef NS_ENUM(NSUInteger, APHWalkingTestRowType) {
 @interface APHTableViewDashboardSevenDayFitnessItem : APCTableViewDashboardItem
 
 @property (nonatomic) NSString *numberOfDaysString;
-@property (nonatomic) NSString *distanceTraveledString;
+@property (nonatomic) NSString *activeMinutesString;
+@property (nonatomic) NSString *totalStepsString;
 
 @end

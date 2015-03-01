@@ -44,8 +44,9 @@
 {
     self = [super init];
     if (self) {
-        _distanceTraveledString = @"";
+        _activeMinutesString = @"";
         _numberOfDaysString = @"";
+        _totalStepsString = @"";
     }
     return self;
 }
@@ -54,6 +55,11 @@
 {
     return [NSString stringWithFormat:@"\
             numberOfDaysString : %@\n\
-            distanceTraveledString : %@", self.numberOfDaysString, self.distanceTraveledString];
+            activeMinutesString : %@\n\
+            totalStepsString: %@", self.numberOfDaysString, self.activeMinutesString, self.totalStepsString];
+    
+    
+    
+    
 }
 @end
