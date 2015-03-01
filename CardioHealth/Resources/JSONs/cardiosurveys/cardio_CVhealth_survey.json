@@ -3,31 +3,11 @@
     "identifier": "risk_factors",
     "questions": 
     [
-      {
-        "guid":"e872f85a-e157-457b-890f-9e28eeed6ef0",
-        "identifier":"family_history_q",
-        "prompt":"Do you have a family history of heart disease?",
-        "constraints" : 
-        {
-          "rules" :
-          [
-            {
-                "operator" : "ot",
-                "value" : 1,
-                "skipTo" : "medications_to_treat",
-                "type" : "SurveyRule"
-            }
-          ],
-          "dataType" : "boolean",
-          "type" : "BooleanConstraints"
-        },
-        "uiHint" : "checkbox",
-        "type" : "SurveyQuestion"
-      },
+     
       {
         "guid":"e872f85a-e157-457b-890f-9e28eeed6efa",
         "identifier":"family_history",
-        "prompt":"Indicate all family members with a history of heart disease?",
+        "prompt":"Do you have a family history of early heart disease?",
         "constraints":
         {
           "dataType": "integer",
@@ -44,7 +24,12 @@
               "detail": "Heart attack or coronary artery disease before age 65",
               "value": 2,
               "type": "SurveyQuestionOption"
-            }
+            },
+           {
+           "label": "None of the above",
+           "value": 3,
+           "type": "SurveyQuestionOption"
+           }
           ],
           "allowMultiple": true,
           "type": "MultiValueConstraints"
@@ -75,7 +60,14 @@
               "label": "To treat diabetes/pre-diabetes and lower blood sugar",
               "value": 3,
               "type": "SurveyQuestionOption"
-            }
+            },
+           {
+               "label": "None of the above",
+               "value": 4,
+               "type": "SurveyQuestionOption"
+           },
+
+           
           ],
           "allowMultiple": true,
           "type": "MultiValueConstraints"
@@ -83,31 +75,10 @@
         "uiHint": "MultiValueConstraints",
         "type": "SurveyQuestion"
       },
-      {
-        "guid":"854aed00-3c2c-41c2-9b36-17b722878190",
-        "identifier":"heart_disease_q",
-        "prompt":"Have you been diagnosed with heart disease?",
-        "constraints" : 
-        {
-          "rules" :
-          [
-            {
-                "operator" : "ot",
-                "value" : 1,
-                "skipTo" : "vascular_q",
-                "type" : "SurveyRule"
-            }
-          ],
-          "dataType" : "boolean",
-          "type" : "BooleanConstraints"
-        },
-        "uiHint" : "checkbox",
-        "type" : "SurveyQuestion"
-      },
-      {
+    {
         "guid": "854aed00-3c2c-41c2-9b36-17b72287819b",
         "identifier": "heart_disease",
-        "prompt": "Which heart disease diagnosis have you received?",
+        "prompt": "Have you been diagnosed with any of the below diseases?",
         "constraints":
         {
           "dataType": "integer",
@@ -152,34 +123,24 @@
               "label": "Atrial fibrillation (Afib)",
               "value": 8,
               "type": "SurveyQuestionOption"
-            }
+            },
+           {
+               "label": "Congenital Heart Defect",
+               "value": 9,
+               "type": "SurveyQuestionOption"
+           },
+           {
+               "label": "None of the above",
+               "value": 10,
+               "type": "SurveyQuestionOption"
+           }
+           
           ],
         "allowMultiple": true,
         "type": "MultiValueConstraints"
         },
         "uiHint": "MultiValueConstraints",
         "type": "SurveyQuestion"
-      },
-      {
-        "guid":"854aed00-3c2c-41c2-9b36-17b722878190",
-        "identifier":"vascular_q",
-        "prompt":"Have you been diagnosed with vascular disease?",
-        "constraints" : 
-        {
-          "rules" :
-          [
-            {
-                "operator" : "ot",
-                "value" : 1,
-                "skipTo" : "END_OF_SURVEY",
-                "type" : "SurveyRule"
-            }
-          ],
-          "dataType" : "boolean",
-          "type" : "BooleanConstraints"
-        },
-        "uiHint" : "checkbox",
-        "type" : "SurveyQuestion"
       },
       {
         "guid": "854aed00-3c2c-41c2-9b36-17b72287819b",
@@ -219,7 +180,13 @@
               "label": "Abdominal Aortic Aneurysm",
               "value": 6,
               "type": "SurveyQuestionOption"
-            }
+            },
+           {
+               "label": "None of the above",
+               "value": 7,
+               "type": "SurveyQuestionOption"
+           }
+           
           ],
           "allowMultiple": true,
           "type": "MultiValueConstraints"
