@@ -171,47 +171,16 @@ static NSString* const  kFlurryApiKey              = @"9NPWCDZZY6KCXD4SCHWG";
 #pragma mark - Consent
 /*********************************************************************************/
 
-- (NSArray*)makeConsentSections
+- (APCConsentTask*)consentTask
 {
-    NSString*               agreement = @"By agreeing you confirm that you have read the Consent, that you understand it and that you wish to take part in this research study.";
-    NSString*               docHtml   = nil;
-    NSArray*                sections  = [super consentSectionsAndHtmlContent:&docHtml];
-    ORKConsentDocument*     document  = [[ORKConsentDocument alloc] init];
-    ORKConsentSignature*    signature = [ORKConsentSignature signatureForPersonWithTitle:NSLocalizedString(@"Participant", nil)
-                                                                        dateFormatString:nil
-                                                                              identifier:@"participant"];
-    
-    signature.requiresSignatureImage = NO;
-    document.title                   = NSLocalizedString(@"Consent", nil);
-    document.signaturePageTitle      = NSLocalizedString(@"Consent", nil);
-    document.signaturePageContent    = NSLocalizedString(agreement, nil);
-    document.sections                = sections;
-    document.htmlReviewContent       = docHtml;
-    
-    [document addSignature:signature];
-    
-    
-    ORKVisualConsentStep*   step         = [[ORKVisualConsentStep alloc] initWithIdentifier:@"visual" document:document];
-    ORKConsentReviewStep*   reviewStep   = nil;
-    NSMutableArray*         consentSteps = [NSMutableArray arrayWithObject:step];
-    
-    reviewStep                  = [[ORKConsentReviewStep alloc] initWithIdentifier:@"reviewStep" signature:signature inDocument:document];
-    reviewStep.reasonForConsent = NSLocalizedString(@"By agreeing you confirm that you have read the Consent, that you understand it and that you wish to take part in this research study.", nil);
-    
-    [consentSteps addObject:reviewStep];
-    
-    return consentSteps;
-//    
-//    ORKOrderedTask* task = [[ORKOrderedTask alloc] initWithIdentifier:@"consent" steps:consentSteps];
-//    
-//    return task;
+    APCConsentTask* task = [[APCConsentTask alloc] initWithIdentifier:@"Consent"
+                                                   propertiesFileName:kConsentPropertiesFileName];
+    return task;
 }
 
-- (ORKTaskViewController *)consentViewController
+- (ORKTaskViewController*)consentViewController
 {
-    APCConsentTask*         task = [[APCConsentTask alloc] initWithIdentifier:@"Consent"
-                                                           propertiesFileName:kConsentPropertiesFileName];
-    ORKTaskViewController*  consentVC = [[ORKTaskViewController alloc] initWithTask:task
+    ORKTaskViewController*  consentVC = [[ORKTaskViewController alloc] initWithTask:[self consentTask]
                                                                         taskRunUUID:[NSUUID UUID]];
     
     return consentVC;
