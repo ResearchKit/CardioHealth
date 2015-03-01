@@ -148,7 +148,7 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="According to your answers, your calculated risk of developing ASCVD within [your lifetime or 10 years] is:" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P4x-8g-6BD">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="According to your answers, your calculated risk of developing Heart Disease or Stroke within [your lifetime or 10 years] is:" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P4x-8g-6BD">
                                                     <rect key="frame" x="11" y="34" width="301" height="54"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="P4x-8g-6BD" secondAttribute="height" multiplier="301:54" id="qQ6-Lp-j40"/>
@@ -255,7 +255,7 @@
                                                 </view>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N9e-Vm-ea6">
                                                     <rect key="frame" x="0.0" y="52" width="320" height="30"/>
-                                                    <state key="normal" title="ASCVD Risk Estimator">
+                                                    <state key="normal" title="Risk Score Information">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>

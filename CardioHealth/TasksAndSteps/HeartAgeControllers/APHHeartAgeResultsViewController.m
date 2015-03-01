@@ -362,7 +362,7 @@ static NSString *kEighteenToTwentyInstructions  = @"eighteenToTwentyInstructions
 
         cell.riskCellTitle.text = NSLocalizedString(@"10-Year Risk Estimate", @"10-year risk estimate");
         
-        cell.riskEstimateDescription.text = NSLocalizedString(@"According to your answers, your calculated risk of developing ASCVD within 10 years is:", @"According to your answers, your calculated risk of developing ASCVD within 10 years is:");
+        cell.riskEstimateDescription.text = NSLocalizedString(@"According to your answers, your calculated risk of developing Heart Disease or Stroke within 10 years is:", @"According to your answers, your calculated risk of developing Heart Disease or Stroke within 10 years is:");
         
         if ([self.tenYearRisk doubleValue] < kOnePercent) {
             calculatedRisk = @"< 1%";
@@ -393,7 +393,7 @@ static NSString *kEighteenToTwentyInstructions  = @"eighteenToTwentyInstructions
         
         optimalRisk = [NSString stringWithFormat:@"%lu%%", (long)[self.optimalLifetimeRisk integerValue]];
         
-        cell.riskEstimateDescription.text = NSLocalizedString(@"According to your answers, your calculated risk of developing ASCVD within your lifetime is:", @"According to your answers, your calculated risk of developing ASCVD within your lifetime is:" );
+        cell.riskEstimateDescription.text = NSLocalizedString(@"According to your answers, your calculated risk of developing Heart Disease or Stroke within your lifetime is:", @"According to your answers, your calculated risk of developing Heart Disease or Stroke within your lifetime is:" );
         
         if ([self.lifetimeRisk floatValue] > 7.5)
         {

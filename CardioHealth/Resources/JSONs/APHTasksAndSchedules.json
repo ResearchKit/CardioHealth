@@ -1,7 +1,7 @@
 {
     "tasks": [
               {
-              "taskTitle": "Heart and Stroke Risk Score, Plus Heart Age",
+              "taskTitle": "Heart/Stroke Risk Score + Heart Age",
               "taskID": "APHHeartAge-7259AC18-D711-47A6-ADBD-6CFCECDED1DF",
               "taskClassName": "APHHeartAgeTaskViewController"
               },
@@ -50,7 +50,7 @@
               },
               
               {
-              "taskTitle" : "PAR-Q Quiz",
+              "taskTitle" : "Physical Activity Readiness",
               "taskID": "parqquiz-1E174061-5B02-11E4-8ED6-0800200C9A77",
               "taskClassName" : "APHParQQuizTaskViewController"
               },
