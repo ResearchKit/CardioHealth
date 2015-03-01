@@ -14,7 +14,7 @@ a:active {
 
 body {
 	font-family: "Helvetica Neue", 'HelveticaNeue', 'HelveticaNeue';
-	font-size:22px; 
+	font-size:16pt;
 	color:#000000; 
 	line-height:normal; 
 	font-weight:normal;
@@ -31,7 +31,7 @@ p,  h2 {
 
 h1 {
 	font-family: 'HelveticaNeue-Light', 'HelveticaNeue light', 'Helvetica Neue';
-	font-size:26px; 
+	font-size:19pt;
 	color:#000000; 
 	line-height:normal; 
 	font-weight:normal;
@@ -61,7 +61,7 @@ h1 {
 
 
 .content ul, .content ol { 
-	padding: 0 15px 15px 40px; 
+	padding: 0 10px 15px 15px;
 }
 
 
@@ -75,7 +75,7 @@ IMG.displayed {
 boldie
 	{
 		font-family:'HelveticaNeue-Medium', 'Helvetica Neue Medium', Helvetica;
-		font-size:22px; 
+		font-size:16pt;
 		color:#000000; 
 		line-height:normal; 
 		font-weight:normal;
@@ -85,8 +85,8 @@ boldie
 	}
 
 ul, ol {
-	font-family: 'HelveticaNeue-Light', 'HelveticaNeue', 'Helvetica Neue';
-	font-size:22px; 
+	font-family: "Helvetica Neue", 'HelveticaNeue', 'HelveticaNeue';
+	font-size:16pt;
 	color:#000000; 
 	list-style-type: square;
 	list-style-position: outside;
