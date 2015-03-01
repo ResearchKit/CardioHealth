@@ -11,14 +11,14 @@
             {
                 "dataType":"integer",
                 "minValue":0,
-                "maxValue":10,
+                "maxValue":50,
                 "step":null,
                 "type":"IntegerConstraints"
             },
             "uiHint":"numberfield",
             "type":"SurveyQuestion"
-            },
-            {
+        },
+        {
                 "guid":"21987af2-4846-48a4-aa80-27c3371186a3",
                 "identifier":"vegetable",
                 "prompt":"How many cups of vegetables do you eat in an average day?",
@@ -26,7 +26,7 @@
             {
                 "dataType":"integer",
                 "minValue":0,
-                "maxValue":10,
+                "maxValue":50,
                 "step":null,
                 "type":"IntegerConstraints"
             },
@@ -36,99 +36,88 @@
         {
             "guid":"a872f85a-c157-457b-890e-9e28eeed6ea4",
             "identifier":"fish",
-            "prompt":"Do you eat 2 servings of fish or more weekly?",
-            "constraints":
-            {
-                "dataType":"integer",
-                "enumeration": 
-                [
-                    {
-                        "label": "Yes, I eat 2 servings of fish or more weekly",
-                        "value": 1,
-                        "type": "SurveyQuestionOption"
-                     },
-                     {
-                         "label": "No, I eat less than 2 servings of fish weekly ",
-                         "value": 2,
-                         "type": "SurveyQuestionOption"
-                     }
-                ],
-                "type": "MultiValueConstraints"
-            },
-            "uiHint":"list",
-            "type":"SurveyQuestion"
-        },
+             "prompt":"How many servings of fish do you eat on an average week?",
+             "constraints":
+             {
+             "dataType":"integer",
+             "minValue":0,
+             "maxValue":50,
+             "step":null,
+             "type":"IntegerConstraints"
+             },
+             "uiHint":"numberfield",
+             "type":"SurveyQuestion"
+         },
         {
             "guid":"e872f85a-c157-457f-890f-9e28eeed6ea5",
             "identifier":"grains",
-            "prompt":"Do you eat 3 servings of whole grains or more daily?",
-            "constraints":
-            {
-                "dataType":"integer",
-                "enumeration": 
-                [
-                    {
-                        "label": "Yes, I eat 3 servings of whole grains daily",
-                        "value": 1,
-                        "type": "SurveyQuestionOption"
-                    },
-                    {
-                        "label": "No, I eat less than 3 servings of whole grains daily",
-                        "value": 2,
-                        "type": "SurveyQuestionOption"
-                    }
-                ],
-                "type": "MultiValueConstraints"
-            },
-            "uiHint":"list",
-            "type":"SurveyQuestion"
+             "prompt":"How many servings of whole grains do you eat on an average day?",
+             "constraints":
+                 {
+                 "dataType":"integer",
+                 "minValue":0,
+                 "maxValue":50,
+                 "step":null,
+                 "type":"IntegerConstraints"
+                 },
+             "uiHint":"numberfield",
+             "type":"SurveyQuestion"
         },
-        {
+     
+     
+     
+     {
             "guid":"e872f85c-c157-457b-890f-9e28eeed6ea6",
-            "identifier":"sugar",
-            "prompt":"Do you drink less than 36 ounces (450 calories) of beverages with added sugar weekly?",
-            "constraints":
-            {
-                "dataType":"integer",
-                "enumeration": 
-                [
-                    {
-                        "label": "Yes, I drink less than 36 ounces of beverages weekly",
-                        "value": 1,
-                        "type": "SurveyQuestionOption"
-                    },
-                    {
-                        "label": "No, I drink more than 36 ounces of beverages weekly",
-                        "value": 2,
-                        "type": "SurveyQuestionOption"
-                    }
-                ],
-                "type": "MultiValueConstraints"
-            },
-            "uiHint":"list",
-            "type":"SurveyQuestion"
-        },
-        {
+            "identifier":"sugar_drinks",
+             "prompt":"How many beverages with added sugar do you drink every week?",
+             "constraints":
+             {
+             "dataType":"integer",
+             "minValue":0,
+             "maxValue":50,
+             "step":null,
+             "type":"IntegerConstraints"
+             },
+             "uiHint":"numberfield",
+             "type":"SurveyQuestion"
+     },
+
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     {
             "guid":"e872f85c-c157-457b-890f-9e28eeed6ea1",
             "identifier":"sodium",
-            "prompt":"Do you eat less than 1500 mg of sodium daily?",
+            "prompt":"Select the statements that apply to you:",
             "constraints":
             {
                 "dataType":"integer",
                 "enumeration":
                 [
                     {
-                        "label": "Yes, I eat less than 1500 mg of sodium daily",
+                        "label": "I avoid eating prepackaged and processed foods.",
                         "value": 1,
                         "type": "SurveyQuestionOption"
                     },
                     {
-                        "label": "No, eat more than 1500 mg of sodium daily",
+                        "label": "I avoid eating out, but when I do, I seek out low-sodium options.",
                         "value": 2,
                         "type": "SurveyQuestionOption"
-                    }
+                    },
+                     {
+                         "label": "I avoid salt when I'm cooking at home.",
+                         "value": 3,
+                         "type": "SurveyQuestionOption"
+                     }
                 ],
-                "type":"MultiValueConstraints"
+                 "allowMultiple": true,
+                 "type": "MultiValueConstraints"
             },
             "uiHint":"list",
             "type":"SurveyQuestion"
