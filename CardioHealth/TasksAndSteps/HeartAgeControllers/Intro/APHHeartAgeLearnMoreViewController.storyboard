@@ -72,32 +72,18 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PI5-JQ-gVY" id="QA6-ee-Occ">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Purpose" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EXg-Rl-XU6">
-                                            <rect key="frame" x="18" y="16" width="410" height="23"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oi4-VC-ZFD">
-                                            <rect key="frame" x="40" y="53.5" width="366" height="34"/>
+                                            <rect key="frame" x="40" y="31" width="366" height="34"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="oi4-VC-ZFD" secondAttribute="trailing" constant="40" id="4kB-Nx-bJy"/>
-                                        <constraint firstItem="EXg-Rl-XU6" firstAttribute="leading" secondItem="QA6-ee-Occ" secondAttribute="leadingMargin" constant="10" id="ALq-xE-fvR"/>
-                                        <constraint firstAttribute="bottom" secondItem="oi4-VC-ZFD" secondAttribute="bottom" constant="8" id="Cnh-fU-vwV"/>
+                                        <constraint firstAttribute="bottom" secondItem="oi4-VC-ZFD" secondAttribute="bottom" constant="31" id="Cnh-fU-vwV"/>
                                         <constraint firstItem="oi4-VC-ZFD" firstAttribute="leading" secondItem="QA6-ee-Occ" secondAttribute="leading" constant="40" id="MxA-6l-0tK"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="EXg-Rl-XU6" secondAttribute="trailing" constant="10" id="Q0z-K6-84w"/>
-                                        <constraint firstAttribute="centerY" secondItem="EXg-Rl-XU6" secondAttribute="centerY" constant="271.75" id="Qrt-U8-fb5"/>
-                                        <constraint firstItem="EXg-Rl-XU6" firstAttribute="top" secondItem="QA6-ee-Occ" secondAttribute="topMargin" constant="8" id="hey-cu-8T7"/>
-                                        <constraint firstItem="oi4-VC-ZFD" firstAttribute="top" secondItem="EXg-Rl-XU6" secondAttribute="bottom" constant="15" id="v6n-kN-fb9"/>
+                                        <constraint firstItem="oi4-VC-ZFD" firstAttribute="top" secondItem="QA6-ee-Occ" secondAttribute="topMargin" constant="23" id="WSp-tE-FaN"/>
                                     </constraints>
-                                    <variation key="default">
-                                        <mask key="constraints">
-                                            <exclude reference="Qrt-U8-fb5"/>
-                                        </mask>
-                                    </variation>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="purposeBodyLabel" destination="oi4-VC-ZFD" id="ccm-Pq-q3S"/>
