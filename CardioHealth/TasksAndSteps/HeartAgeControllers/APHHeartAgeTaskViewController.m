@@ -76,9 +76,9 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
     
     {
         ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:kHeartAgeIntroduction];
-        step.title = NSLocalizedString(@"Heart Age Test", @"Heart Age Test");
-        step.text = NSLocalizedString(@"The following few details about you will be used to calculate your heart age.",
-                                      @"Requesting user to provide information to calculate their heart age.");
+        step.title = NSLocalizedString(@"Risk Score and Heart Age", @"Risk Score and Heart Age");
+        step.text = NSLocalizedString(@"You will be asked to enter your blood pressure and laboratory data to calculate your risk score and estimate your 'heart age.'",
+                                      @"You will be asked to enter your blood pressure and laboratory data to calculate your risk score and estimate your 'heart age.'");
         
 
         step.detailText = nil;
@@ -92,8 +92,8 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
         NSMutableArray *stepQuestions = [NSMutableArray array];
         
         
-        ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:kHeartAgeFormStepBiographicAndDemographic title:nil text:NSLocalizedString(@"To calculate your heart age, please enter a few details about yourself.",
-                                                                                                                            @"To calculate your heart age, please enter a few details about yourself.")];
+        ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:kHeartAgeFormStepBiographicAndDemographic title:nil text:NSLocalizedString(@"To calculate risk score and heart age, please enter a few details about yourself.",
+                                                                                                                            @"To calculate risk score and heart age, please enter a few details about yourself.")];
         
         step.optional = NO;
         

@@ -255,7 +255,7 @@
                                                 </view>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N9e-Vm-ea6">
                                                     <rect key="frame" x="0.0" y="52" width="320" height="30"/>
-                                                    <state key="normal" title="Heart Disease or Stroke Risk Estimator">
+                                                    <state key="normal" title="Risk Score Information">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
