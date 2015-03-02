@@ -119,6 +119,10 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
                                                     name:APHSevenDayAllocationDataIsReadyNotification
                                                   object:nil];
     
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:@"APCUpdateStepsCountIn7Day"
+                                                  object:nil];
+    
     [super viewWillDisappear:animated];
 }
 
@@ -136,7 +140,7 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
 - (void)updatePieChart:(NSNotification *)notification
 {
     APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
-    self.allocationDataset = [appDelegate.sevenDayFitnessAllocationData todaysAllocation];
+    self.allocationDataset = [appDelegate.sevenDayFitnessAllocationData weeksAllocation];
     [self.tableView reloadData];
 }
 
@@ -208,25 +212,32 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
                     item.caption = NSLocalizedString(@"7-Day Assessment", @"");
                     item.taskId = @"APHSevenDayAllocation-00000000-1111-1111-1111-F810BE28D995";
                 
-                    item.numberOfDaysString = NSLocalizedString([self fitnessDaysRemaining], @"");
-                    
-                    APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
-                    NSString *sevenDayDistanceStr = nil;
+                    if ([self numberOfRemainingDaysInSevenDayFitnessTask] > 0) {
+                        
+                        item.numberOfDaysString = NSLocalizedString([self fitnessDaysRemaining], @"");
+                        
+                        APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
+                        NSString *sevenDayDistanceStr = nil;
 
-                    sevenDayDistanceStr = [NSString stringWithFormat:@"%d Active Minutes", (int) roundf(appDelegate.sevenDayFitnessAllocationData.activeSeconds/60)];
-                    
-                    item.activeMinutesString = sevenDayDistanceStr;
-                    item.identifier = kAPCDashboardPieGraphTableViewCellIdentifier;
-                    item.tintColor = [UIColor colorForTaskId:item.taskId];
-                    item.editable = YES;
+                        sevenDayDistanceStr = [NSString stringWithFormat:@"%d Active Minutes", (int) roundf(appDelegate.sevenDayFitnessAllocationData.activeSeconds/60)];
+                        
+                        item.activeMinutesString = sevenDayDistanceStr;
+                        item.identifier = kAPCDashboardPieGraphTableViewCellIdentifier;
+                        item.tintColor = [UIColor colorForTaskId:item.taskId];
+                        item.editable = YES;
+                    }
                     
                     #warning Replace Placeholder Values - APPLE-1576
                     item.info = NSLocalizedString(@"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", @"");
                     
-                    APCTableViewRow *row = [APCTableViewRow new];
-                    row.item = item;
-                    row.itemType = rowType;
-                    [rowItems addObject:row];
+                    //If there is no date returned then no task has ever been started and thus we don't show this graph.
+                    if ([self checkSevenDayFitnessStartDate] != nil) {
+                    
+                        APCTableViewRow *row = [APCTableViewRow new];
+                        row.item = item;
+                        row.itemType = rowType;
+                        [rowItems addObject:row];
+                    }
                 }
                     break;
                     
@@ -439,6 +450,34 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
 
 #pragma mark - Helper Methods
 
+- (NSInteger)numberOfRemainingDaysInSevenDayFitnessTask {
+    NSDate *startDate = [[NSCalendar currentCalendar] dateBySettingHour:0
+                                                                 minute:0
+                                                                 second:0
+                                                                 ofDate:[self checkSevenDayFitnessStartDate]
+                                                                options:0];
+    NSDate *today = [[NSCalendar currentCalendar] dateBySettingHour:0
+                                                             minute:0
+                                                             second:0
+                                                             ofDate:[NSDate date]
+                                                            options:0];
+    
+    
+    // Compute the remaing days of the 7 day fitness allocation.
+    NSDateComponents *numberOfDaysFromStartDate = [[NSCalendar currentCalendar] components:NSCalendarUnitDay
+                                                                                  fromDate:startDate
+                                                                                    toDate:today
+                                                                                   options:NSCalendarWrapComponents];
+    
+    NSUInteger daysRemain = 0;
+    
+    if (numberOfDaysFromStartDate.day < 7) {
+        daysRemain = 7 - numberOfDaysFromStartDate.day;
+    }
+
+    return daysRemain;
+}
+
 - (NSString *)fitnessDaysRemaining
 {
     NSDate *startDate = [[NSCalendar currentCalendar] dateBySettingHour:0
@@ -481,8 +520,6 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
     
     return fitnessStartDate;
 }
-
-#pragma mark - Helper methods
 
 - (void)statsCollectionQueryForStep
 {
