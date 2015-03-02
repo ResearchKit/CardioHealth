@@ -192,7 +192,7 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
                     }
                     
                     #warning Replace Placeholder Values - APPLE-1576
-                    item.info = NSLocalizedString(@"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", @"");
+                    item.info = NSLocalizedString(@"The circle depicts the percentage of time you spent in various levels of activity over the past 7 days. The recommendation in type 2 diabetes is for at least 150 min of moderate activity per week. The daily activity graphic and assessment are courtesy of the Stanford MyHeart Counts study team.", @"");
                     
                     //If there is no date returned then no task has ever been started and thus we don't show this graph.
                     if ([self checkSevenDayFitnessStartDate] != nil) {
@@ -221,14 +221,14 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
                         item = [APHTableViewDashboardWalkingTestItem new];
                     }
                     
-                    item.caption = NSLocalizedString(@"6-minute Walking Test", @"");
+                    item.caption = NSLocalizedString(@"6-minute Walk Test", @"");
                     item.taskId = @"APHFitnessTest-00000000-1111-1111-1111-F810BE28D995";
                     item.identifier = kAPHDashboardWalkTestTableViewCellIdentifier;
                     item.tintColor = [UIColor colorForTaskId:item.taskId];
                     item.editable = YES;
                     
 #warning Replace Placeholder Values - APPLE-1576
-                    item.info = NSLocalizedString(@"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", @"");
+                    item.info = NSLocalizedString(@"This shows the distance you have walked in 6 minutes, which is a simple measure of fitness. We are also implementing a feature to give you the typical distance expected for your age, gender, height, and weight. You can also view a log of your prior data. Heart rate data are made available if you were using a wearable device capable of recording heart rate while walking.", @"");
                     
                     APCTableViewRow *row = [APCTableViewRow new];
                     row.item = item;
