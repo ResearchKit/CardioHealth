@@ -162,6 +162,36 @@ static NSString* const  kFlurryApiKey              = @"9NPWCDZZY6KCXD4SCHWG";
     return fitnessStartDate;
 }
 
+- (NSArray *)offsetForTaskSchedules
+{
+    return @[
+             @{
+                 kScheduleOffsetTaskIdKey: @"WellBeingAndRiskPerceptionSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66",
+                 kScheduleOffsetOffsetKey: @(2)
+                 },
+             @{
+                 kScheduleOffsetTaskIdKey: @"CardioVascularHealthSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66",
+                 kScheduleOffsetOffsetKey: @(2)
+                 },
+             @{
+                 kScheduleOffsetTaskIdKey: @"DietSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66",
+                 kScheduleOffsetOffsetKey: @(2)
+                 },
+             @{
+                 kScheduleOffsetTaskIdKey: @"APHHeartAgeB-7259AC18-D711-47A6-ADBD-6CFCECDED1DF",
+                 kScheduleOffsetOffsetKey: @(8)
+                 },
+             @{
+                 kScheduleOffsetTaskIdKey: @"APHFitnessTest-00000000-1111-1111-1111-F810BE28D995",
+                 kScheduleOffsetOffsetKey: @(8)
+                 },
+             @{
+                 kScheduleOffsetTaskIdKey: @"WellBeingAndRiskPerceptionSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66",
+                 kScheduleOffsetOffsetKey: @(8)
+                 },
+             ];
+}
+
 /*********************************************************************************/
 #pragma mark - APCOnboardingDelegate Methods
 /*********************************************************************************/
