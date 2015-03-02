@@ -27,15 +27,6 @@
             
             switch (rowType) {
 
-                case kAPHDashboardItemTypeHeartRate:{
-                    
-                    APCTableViewDashboardItem *item = [APCTableViewDashboardItem new];
-                    item.caption = NSLocalizedString(@"Heart Rate", @"");
-                    item.tintColor = [UIColor appTertiaryYellowColor];
-                    
-                    [self.items addObject:item];
-                }
-                    break;
                 case kAPHDashboardItemTypeAlerts:{
                     
                     APCTableViewDashboardItem *item = [APCTableViewDashboardItem new];
