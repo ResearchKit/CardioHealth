@@ -52,7 +52,7 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
         _rowItemsOrder = [NSMutableArray arrayWithArray:[defaults objectForKey:kAPCDashboardRowItemsOrder]];
         
         if (!_rowItemsOrder.count) {
-            _rowItemsOrder = [[NSMutableArray alloc] initWithArray:@[]];
+            _rowItemsOrder = [[NSMutableArray alloc] initWithArray:@[@(kAPHDashboardItemTypeHeartRate)]];
             if ([APCDeviceHardware isiPhone5SOrNewer]) {
                 [_rowItemsOrder addObjectsFromArray:@[@(kAPHDashboardItemTypeSevenDayFitness), @(kAPHDashboardItemTypeWalkingTest)]];
             } else {
@@ -101,11 +101,10 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
     [self updatePieChart:nil];
     
     [self prepareScoringObjects];
+
+
     
-    if (self.heartRateScoring.allObjects == nil || self.heartRateScoring.averageDataPoint == nil) {
-        
-        [self.rowItemsOrder removeObject:@(kAPHDashboardItemTypeHeartRate)];
-    }
+
     
     [self prepareData];
     
@@ -199,10 +198,22 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
                     #warning Replace Placeholder Values - APPLE-1576
                     item.info = NSLocalizedString(@"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", @"");
                     
-                    APCTableViewRow *row = [APCTableViewRow new];
-                    row.item = item;
-                    row.itemType = rowType;
-                    [rowItems addObject:row];
+                    BOOL hasData = NO;
+                    for (NSDictionary *dict in self.heartRateScoring.allObjects) {
+                        if( [dict[@"datasetValueKey"] integerValue] != NSNotFound) {
+                            hasData = YES;
+                            break;
+                        }
+                        
+                    }
+                    
+                    if (hasData) {
+                        
+                        APCTableViewRow *row = [APCTableViewRow new];
+                        row.item = item;
+                        row.itemType = rowType;
+                        [rowItems addObject:row];
+                    }
                 }
                     break;
                 
