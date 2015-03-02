@@ -12,6 +12,8 @@ static NSInteger const  kRestDuration              = 3.0 * 60.0;
 static NSInteger const  kWalkDuration              = 6.0 * 60.0;
 static NSString* const  kFitnessTestIdentifier     = @"6-Minute Walk Test";
 
+static NSString* const  kFitnessTestInstructionTitle = @"6-Minute Walk Test";
+
 static NSInteger const  kFirstStep                 = 0;
 static NSInteger const  kSecondStep                = 1;
 static NSInteger const  kThirdStep                 = 3;
@@ -56,8 +58,13 @@ static NSString* const kFitnessWalkText = @"Walk as far as you can for six minut
     ORKOrderedTask  *task = [ORKOrderedTask fitnessCheckTaskWithIdentifier:kFitnessTestIdentifier intendedUseDescription:nil walkDuration:kWalkDuration restDuration:kRestDuration options:ORKPredefinedTaskOptionNone];
     
     [[UIView appearance] setTintColor:[UIColor appPrimaryColor]];
+
+    [task.steps[kFirstStep] setTitle:NSLocalizedString(kFitnessTestInstructionTitle, nil)];
     
     [task.steps[kFirstStep] setText:NSLocalizedString(kInstructionIntendedDescription, kInstructionIntendedDescription)];
+    
+    [task.steps[kSecondStep] setTitle:NSLocalizedString(kFitnessTestInstructionTitle, nil)];
+    
     [task.steps[kSecondStep] setText:NSLocalizedString(kInstruction2IntendedDescription, kInstruction2IntendedDescription)];
     [task.steps[kThirdStep] setTitle:NSLocalizedString(kFitnessWalkText, kFitnessWalkText)];
     
@@ -67,9 +74,7 @@ static NSString* const kFitnessWalkText = @"Walk as far as you can for six minut
 - (void)taskViewController:(ORKTaskViewController *) __unused taskViewController stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     
     if ([stepViewController.step.identifier isEqualToString:kIntroStep] || [stepViewController.step.identifier isEqualToString:kIntroOneStep]) {
-        ORKInstructionStep *introStep = ((ORKInstructionStep *)stepViewController.step);
-        introStep.title = NSLocalizedString(@"6-Minute Walk Test", @"6-Minute Walk Test");
-        stepViewController.step = introStep;
+
     } else if ([stepViewController.step.identifier isEqualToString:kConclusionStep]) {
         [[UIView appearance] setTintColor:[UIColor appTertiaryColor1]];
     }
