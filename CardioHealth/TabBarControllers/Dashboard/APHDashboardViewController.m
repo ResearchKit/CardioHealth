@@ -52,7 +52,7 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
         _rowItemsOrder = [NSMutableArray arrayWithArray:[defaults objectForKey:kAPCDashboardRowItemsOrder]];
         
         if (!_rowItemsOrder.count) {
-            _rowItemsOrder = [[NSMutableArray alloc] initWithArray:@[@(kAPHDashboardItemTypeHeartRate)]];
+            _rowItemsOrder = [[NSMutableArray alloc] initWithArray:@[]];
             if ([APCDeviceHardware isiPhone5SOrNewer]) {
                 [_rowItemsOrder addObjectsFromArray:@[@(kAPHDashboardItemTypeSevenDayFitness), @(kAPHDashboardItemTypeWalkingTest)]];
             } else {
@@ -128,27 +128,15 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
 #pragma mark - APCDashboardGraphTableViewCellDelegate methods
 - (void)updateVisibleRowsInTableView:(NSNotification *) __unused notification
 {
-    //Every time the cells are reloaded this variable is added to and used as a flag to prevent unnecessary drawing of the pie graph.
-    self.dataCount++;
-    
-    [self prepareData];
 }
 
 #pragma mark - Data
 
 - (void)updatePieChart:(NSNotification *) __unused notification
 {
-    APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
-    self.allocationDataset = [appDelegate.sevenDayFitnessAllocationData weeksAllocation];
-    [self.tableView reloadData];
 }
 
 - (void)prepareScoringObjects {
-
-    HKQuantityType *heartRateQuantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierHeartRate];
-    
-    self.heartRateScoring = [[APCScoring alloc] initWithHealthKitQuantityType:heartRateQuantityType unit:[[HKUnit countUnit] unitDividedByUnit:[HKUnit minuteUnit]] numberOfDays:-kNumberOfDaysToDisplay];
-
 }
 
 - (void)prepareData
@@ -181,40 +169,6 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
             APHDashboardItemType rowType = typeNumber.integerValue;
             
             switch (rowType) {
-
-                case kAPHDashboardItemTypeHeartRate:{
-                    
-                    APCTableViewDashboardGraphItem *item = [APCTableViewDashboardGraphItem new];
-                    item.caption = NSLocalizedString(@"Heart Rate", @"");
-                    item.graphData = self.heartRateScoring;
-                    item.graphType = kAPCDashboardGraphTypeDiscrete;
-                    
-                    item.detailText = [NSString stringWithFormat:NSLocalizedString(@"Average : %0.0f bpm", @"Average: {value} bpm"), [[self.heartRateScoring averageDataPoint] doubleValue]];
-                    item.identifier = kAPCDashboardGraphTableViewCellIdentifier;
-                    item.editable = YES;
-                    item.tintColor = [UIColor appTertiaryYellowColor];
-                    
-                    #warning Replace Placeholder Values - APPLE-1576
-                    item.info = NSLocalizedString(@"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", @"");
-                    
-                    BOOL hasData = NO;
-                    for (NSDictionary *dict in self.heartRateScoring.allObjects) {
-                        if( [dict[@"datasetValueKey"] integerValue] != NSNotFound) {
-                            hasData = YES;
-                            break;
-                        }
-                        
-                    }
-                    
-                    if (hasData) {
-                        
-                        APCTableViewRow *row = [APCTableViewRow new];
-                        row.item = item;
-                        row.itemType = rowType;
-                        [rowItems addObject:row];
-                    }
-                }
-                    break;
                 
                 case kAPHDashboardItemTypeSevenDayFitness:
                 {
@@ -364,6 +318,8 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
         if (self.dataCount < kDataCountLimit) {
             [pieGraphCell.pieGraphView setNeedsLayout];
             [self statsCollectionQueryForStep];
+            
+            self.dataCount++;
         }
         
         pieGraphCell.delegate = self;
@@ -621,6 +577,8 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
 
 
 - (void)updateSevenDayItem:(NSNotification *) __unused notif {
+    APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
+    self.allocationDataset = [appDelegate.sevenDayFitnessAllocationData weeksAllocation];
     
     [self.tableView beginUpdates];
     [self.tableView reloadRowsAtIndexPaths:@[self.currentPieGraphIndexPath] withRowAnimation:UITableViewRowAnimationNone];
