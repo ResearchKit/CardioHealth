@@ -126,7 +126,7 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
 }
 
 #pragma mark - APCDashboardGraphTableViewCellDelegate methods
-- (void)updateVisibleRowsInTableView:(NSNotification *)notification
+- (void)updateVisibleRowsInTableView:(NSNotification *) __unused notification
 {
     //Every time the cells are reloaded this variable is added to and used as a flag to prevent unnecessary drawing of the pie graph.
     self.dataCount++;
@@ -136,7 +136,7 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
 
 #pragma mark - Data
 
-- (void)updatePieChart:(NSNotification *)notification
+- (void)updatePieChart:(NSNotification *) __unused notification
 {
     APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
     self.allocationDataset = [appDelegate.sevenDayFitnessAllocationData weeksAllocation];
@@ -410,7 +410,7 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
     return height;
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *) __unused tableView willDisplayCell:(UITableViewCell *) __unused cell forRowAtIndexPath:(NSIndexPath *) __unused indexPath {
     //cell.contentView.subviews
     
 }
@@ -422,17 +422,17 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
     return [self.allocationDataset count];
 }
 
-- (UIColor *)pieGraphView:(APCPieGraphView *)pieGraphView colorForSegmentAtIndex:(NSInteger)index
+- (UIColor *)pieGraphView:(APCPieGraphView *) __unused pieGraphView colorForSegmentAtIndex:(NSInteger)index
 {
     return [[self.allocationDataset valueForKey:kDatasetSegmentColorKey] objectAtIndex:index];
 }
 
-- (NSString *)pieGraphView:(APCPieGraphView *)pieGraphView titleForSegmentAtIndex:(NSInteger)index
+- (NSString *)pieGraphView:(APCPieGraphView *) __unused pieGraphView titleForSegmentAtIndex:(NSInteger)index
 {
     return [[self.allocationDataset valueForKey:kDatasetSegmentKey] objectAtIndex:index];
 }
 
-- (CGFloat)pieGraphView:(APCPieGraphView *)pieGraphView valueForSegmentAtIndex:(NSInteger)index
+- (CGFloat)pieGraphView:(APCPieGraphView *) __unused pieGraphView valueForSegmentAtIndex:(NSInteger)index
 {
     return [[[self.allocationDataset valueForKey:kSegmentSumKey] objectAtIndex:index] floatValue];
 }
@@ -620,7 +620,7 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
 
 
 
-- (void)updateSevenDayItem:(NSNotification *)notif {
+- (void)updateSevenDayItem:(NSNotification *) __unused notif {
     
     [self.tableView beginUpdates];
     [self.tableView reloadRowsAtIndexPaths:@[self.currentPieGraphIndexPath] withRowAnimation:UITableViewRowAnimationNone];

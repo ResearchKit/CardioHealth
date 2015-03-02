@@ -234,7 +234,7 @@ typedef NS_ENUM(NSUInteger, APHDynamicParQQuizType) {
     
 }
 
-- (ORKStep *)stepBeforeStep:(ORKStep *)step withResult:(ORKTaskResult *)result
+- (ORKStep *)stepBeforeStep:(ORKStep *)step withResult:(ORKTaskResult *) __unused result
 {
     
     if ([[self.steps[0] identifier] isEqualToString:step.identifier]) {
@@ -254,7 +254,7 @@ typedef NS_ENUM(NSUInteger, APHDynamicParQQuizType) {
     
 }
 
-- (ORKTaskProgress)progressOfCurrentStep:(ORKStep *)step withResult:(ORKTaskResult *)result
+- (ORKTaskProgress)progressOfCurrentStep:(ORKStep *)step withResult:(ORKTaskResult *) __unused result
 {
     return ORKTaskProgressMake([[self.currentOrderedSteps objectForKey:step.identifier] intValue], self.currentOrderedSteps.count);
 }

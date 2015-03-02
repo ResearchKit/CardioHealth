@@ -143,7 +143,7 @@ static NSString *kEighteenToTwentyInstructions  = @"eighteenToTwentyInstructions
 
 #pragma mark - Actions
 
-- (void)doneButtonTapped:(UIBarButtonItem *)sender
+- (void)doneButtonTapped:(UIBarButtonItem *) __unused sender
 {
     if (self.delegate != nil) {
         if ([self.delegate respondsToSelector:@selector(stepViewController:didFinishWithNavigationDirection:)] == YES) {
@@ -221,7 +221,7 @@ static NSString *kEighteenToTwentyInstructions  = @"eighteenToTwentyInstructions
     return height;
 }
 
-- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+- (CGFloat) tableView:(UITableView *) __unused tableView heightForHeaderInSection:(NSInteger)section
 {
     CGFloat height = 0;
     if (section)
@@ -236,12 +236,12 @@ static NSString *kEighteenToTwentyInstructions  = @"eighteenToTwentyInstructions
     return height;
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+- (NSInteger)numberOfSectionsInTableView:(UITableView *) __unused tableView
 {
     return self.numberOfSections;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger)tableView:(UITableView *) __unused tableView numberOfRowsInSection:(NSInteger)section
 {
     NSUInteger rows = 0;
     
@@ -323,7 +323,7 @@ static NSString *kEighteenToTwentyInstructions  = @"eighteenToTwentyInstructions
 
 #pragma mark Cell Configurations
 
-- (APHHeartAgeSummaryCell *)configureHeartAgeEstimateCellAtIndexPath:(NSIndexPath *)indexPath
+- (APHHeartAgeSummaryCell *)configureHeartAgeEstimateCellAtIndexPath:(NSIndexPath *) __unused indexPath
 {
     APHHeartAgeSummaryCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kHeartAgeCellIdentifier];
     
@@ -412,7 +412,7 @@ static NSString *kEighteenToTwentyInstructions  = @"eighteenToTwentyInstructions
 }
 
 
-- (IBAction)ASCVDRiskEstimatorActionButton:(id)sender {
+- (IBAction)ASCVDRiskEstimatorActionButton:(id) __unused sender {
     
     APHRiskEstimatorWebViewController *viewController = [[APHRiskEstimatorWebViewController alloc] init];
     

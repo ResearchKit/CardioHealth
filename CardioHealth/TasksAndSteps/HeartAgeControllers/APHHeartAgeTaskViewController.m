@@ -366,7 +366,7 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
                          actionWithTitle:NSLocalizedString(@"OK",
                                                            @"OK")
                          style:UIAlertActionStyleDefault
-                         handler:^(UIAlertAction * action) {
+                         handler:^(UIAlertAction * __unused action) {
                              [alerVC dismissViewControllerAnimated:YES completion:nil];
                              
                          }];
@@ -397,7 +397,7 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
     [super taskViewController:taskViewController didFinishWithResult:result error:error];
 }
 
-- (void)taskViewControllerDidComplete: (ORKTaskViewController *)taskViewController{
+- (void)taskViewControllerDidComplete: (ORKTaskViewController *) __unused taskViewController{
     
     // We need to create three question results that will hold the value of Heart Age,
     // Ten Year Risk, and Lifetime Risk factors. Ideally we would like to simply
@@ -448,7 +448,7 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
             if (![survey.identifier isEqualToString:kHeartAgeIntroduction]) {
                 NSArray *qrIdentifiers = self.heartAgeTaskQuestionIndex[survey.identifier];
                 
-                [survey.results enumerateObjectsUsingBlock:^(ORKQuestionResult *questionResult, NSUInteger idx, BOOL *stop) {
+                [survey.results enumerateObjectsUsingBlock:^(ORKQuestionResult *questionResult, NSUInteger idx, BOOL * __unused stop) {
                     NSString *questionIdentifier = [qrIdentifiers objectAtIndex:idx];
                     
                     if ([questionIdentifier isEqualToString:kHeartAgeTestDataEthnicity]) {
@@ -545,7 +545,7 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
 }
 
 
-- (BOOL)taskViewController:(ORKTaskViewController *)taskViewController hasLearnMoreForStep:(ORKStep *)step {
+- (BOOL)taskViewController:(ORKTaskViewController *) __unused taskViewController hasLearnMoreForStep:(ORKStep *)step {
     
     BOOL hasLearnMore = NO;
     
@@ -558,7 +558,7 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
     return hasLearnMore;
 }
 
-- (void)taskViewController:(ORKTaskViewController *)taskViewController learnMoreForStep:(ORKStepViewController *)stepViewController {
+- (void)taskViewController:(ORKTaskViewController *) __unused taskViewController learnMoreForStep:(ORKStepViewController *)stepViewController {
     
     
     if ([stepViewController.step.identifier isEqualToString:kHeartAgeIntroduction]) {

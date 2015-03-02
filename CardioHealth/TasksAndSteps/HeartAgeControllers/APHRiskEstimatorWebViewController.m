@@ -32,7 +32,7 @@ static NSString *kASCVDRiskEstimatorLink = @"http://tools.cardiosource.org/ASCVD
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)doneActionButton:(id)sender {
+- (IBAction)doneActionButton:(id) __unused sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 @end

@@ -40,7 +40,7 @@ static NSString* const  kFlurryApiKey              = @"9NPWCDZZY6KCXD4SCHWG";
     [dictionary addEntriesFromDictionary:@{
                                            kStudyIdentifierKey                  : kStudyIdentifier,
                                            kAppPrefixKey                        : kAppPrefix,
-                                           kBridgeEnvironmentKey                : @(SBBEnvironmentStaging),
+                                           kBridgeEnvironmentKey                : @(SBBEnvironmentProd),
                                            kHKReadPermissionsKey                : @[
                                                    HKQuantityTypeIdentifierBodyMass,
                                                    HKQuantityTypeIdentifierHeight,
@@ -85,6 +85,14 @@ static NSString* const  kFlurryApiKey              = @"9NPWCDZZY6KCXD4SCHWG";
                                                  kPrimaryAppColorKey : [UIColor colorWithRed:0.698 green:0.027 blue:0.220 alpha:1.000],
                                                  @"APHFitnessTest-00000000-1111-1111-1111-F810BE28D995" :[UIColor appTertiaryBlueColor],
                                                  @"APHSevenDayAllocation-00000000-1111-1111-1111-F810BE28D995":[UIColor appTertiaryRedColor],
+                                                 @"APHHeartAge-7259AC18-D711-47A6-ADBD-6CFCECDED1DF" : [UIColor lightGrayColor],
+                                                 @"APHHeartAgeB-7259AC18-D711-47A6-ADBD-6CFCECDED1DF" : [UIColor lightGrayColor],
+                                                 @"CardioActivityAndSleepSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66" : [UIColor lightGrayColor],
+                                                 @"CardioVascularHealthSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66" : [UIColor lightGrayColor],
+                                                 @"DietSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66" : [UIColor lightGrayColor],
+                                                 @"WellBeingAndRiskPerceptionSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66" : [UIColor lightGrayColor],
+                                                 @"parqquiz-1E174061-5B02-11E4-8ED6-0800200C9A77" : [UIColor lightGrayColor],
+                                                 @"be42dc21-4706-478a-a398-10cabb9c7d78" : [UIColor lightGrayColor],
                                                  }];
     [[UINavigationBar appearance] setTintColor:[UIColor appPrimaryColor]];
     [[UINavigationBar appearance] setTitleTextAttributes: @{
@@ -158,7 +166,7 @@ static NSString* const  kFlurryApiKey              = @"9NPWCDZZY6KCXD4SCHWG";
 #pragma mark - APCOnboardingDelegate Methods
 /*********************************************************************************/
 
-- (APCScene *)inclusionCriteriaSceneForOnboarding:(APCOnboarding *)onboarding
+- (APCScene *)inclusionCriteriaSceneForOnboarding:(APCOnboarding *) __unused onboarding
 {
     APCScene *scene = [APCScene new];
     scene.name = @"APHInclusionCriteriaViewController";
