@@ -200,6 +200,9 @@
                                         </button>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JgR-Qz-IV8" customClass="APCPieGraphView">
                                             <rect key="frame" x="4" y="87" width="371" height="193"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="193" id="6cE-0M-QSI"/>
+                                            </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hDo-fs-vDe">
                                             <rect key="frame" x="0.0" y="281" width="375" height="7"/>
@@ -360,6 +363,7 @@
                                         <constraint firstItem="ECo-CN-pkA" firstAttribute="leading" secondItem="hnf-8k-xB0" secondAttribute="leadingMargin" constant="9" id="P6O-Dh-o9S"/>
                                         <constraint firstAttribute="trailing" secondItem="PCh-Yt-exC" secondAttribute="trailing" id="PuG-5D-mEf"/>
                                         <constraint firstItem="eTs-lQ-axD" firstAttribute="top" secondItem="hnf-8k-xB0" secondAttribute="topMargin" id="RYT-ln-yvn"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="1wR-Mp-kV6" secondAttribute="bottom" constant="19" id="VSG-gp-jj7"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="HSX-hC-8a2" secondAttribute="trailing" constant="-8" id="Z3h-XA-GCM"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="OdP-Pd-U0B" secondAttribute="trailing" constant="-8" id="bsg-X2-bFS"/>
                                         <constraint firstItem="OdP-Pd-U0B" firstAttribute="leading" secondItem="hnf-8k-xB0" secondAttribute="leadingMargin" constant="-8" id="ifO-ak-Rte"/>
@@ -401,6 +405,9 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eZr-Ae-s7c" customClass="APCDiscreteGraphView">
                                             <rect key="frame" x="4" y="63" width="371" height="154"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="154" id="uAf-El-Jje"/>
+                                            </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Ug-zi-pHl" userLabel="Tint View">
                                             <rect key="frame" x="0.0" y="1" width="4" height="217"/>
