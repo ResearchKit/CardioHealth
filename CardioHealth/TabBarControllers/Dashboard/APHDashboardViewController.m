@@ -101,10 +101,6 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
     [self updatePieChart:nil];
     
     [self prepareScoringObjects];
-
-
-    
-
     
     [self prepareData];
     
@@ -191,8 +187,12 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
                         item.editable = YES;
                     }
                     
+<<<<<<< HEAD
                     #warning Replace Placeholder Values - APPLE-1576
                     item.info = NSLocalizedString(@"This shows the distance you have walked in 6 minutes, which is a simple measure of fitness. We are also implementing a feature to give you the typical distance expected for your age, gender, height, and weight. You can also view a log of your prior data. Heart rate data are made available if you were using a wearable device capable of recording heart rate while walking.", @"");
+=======
+                    item.info = NSLocalizedString(@"The circle depicts the percentage of time you spent in various levels of activity over the past 7 days. The recommendation in type 2 diabetes is for at least 150 min of moderate activity per week. The daily activity graphic and assessment are courtesy of the Stanford MyHeart Counts study team.", @"");
+>>>>>>> cfbd0bcf84c1049cc700f3059c21cc7d29c49865
                     
                     //If there is no date returned then no task has ever been started and thus we don't show this graph.
                     if ([self checkSevenDayFitnessStartDate] != nil) {
@@ -227,7 +227,10 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
                     item.tintColor = [UIColor colorForTaskId:item.taskId];
                     item.editable = YES;
                     
+<<<<<<< HEAD
 #warning Replace Placeholder Values - APPLE-1576
+=======
+>>>>>>> cfbd0bcf84c1049cc700f3059c21cc7d29c49865
                     item.info = NSLocalizedString(@"This shows the distance you have walked in 6 minutes, which is a simple measure of fitness. We are also implementing a feature to give you the typical distance expected for your age, gender, height, and weight. You can also view a log of your prior data. Heart rate data are made available if you were using a wearable device capable of recording heart rate while walking.", @"");
                     
                     APCTableViewRow *row = [APCTableViewRow new];
