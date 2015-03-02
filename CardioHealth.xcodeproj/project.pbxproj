@@ -19,9 +19,9 @@
 		08FA98061A108A46002317C8 /* APHHeartAgeRiskEstimateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FA98051A108A46002317C8 /* APHHeartAgeRiskEstimateCell.m */; };
 		08FA98091A108C33002317C8 /* APHHeartAgeRecommendationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FA98081A108C33002317C8 /* APHHeartAgeRecommendationCell.m */; };
 		21B8E3A11A8AAACB00CCDD48 /* APHTasksAndSchedules_NoM7.json in Resources */ = {isa = PBXBuildFile; fileRef = 21B8E3A01A8AAACB00CCDD48 /* APHTasksAndSchedules_NoM7.json */; };
+		5A0F996D1AA4AB6600A2A7EB /* consent.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 5A0F996C1AA4AB6600A2A7EB /* consent.pdf */; };
 		5B0432611A305742000DC9ED /* HTMLContent in Resources */ = {isa = PBXBuildFile; fileRef = 5B0432601A305742000DC9ED /* HTMLContent */; };
 		5B04326A1A305D3E000DC9ED /* TermsAndConditions.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B0432691A305D3E000DC9ED /* TermsAndConditions.json */; };
-		5B1095CB1A9FA4CD006631F5 /* consent.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 5B1095CA1A9FA4CD006631F5 /* consent.pdf */; };
 		5B4633851A15917000E68B82 /* APHDashboardEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B4633841A15917000E68B82 /* APHDashboardEditViewController.m */; };
 		5B5A31341A10A78600552F7D /* WithdrawStudy.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B5A31331A10A78600552F7D /* WithdrawStudy.json */; };
 		5B73CAD01A89BE5200FFE79C /* APHWalkTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B73CACF1A89BE5200FFE79C /* APHWalkTestViewController.m */; };
@@ -157,9 +157,9 @@
 		08FA98071A108C33002317C8 /* APHHeartAgeRecommendationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APHHeartAgeRecommendationCell.h; path = "Heart Age Cells/APHHeartAgeRecommendationCell.h"; sourceTree = "<group>"; };
 		08FA98081A108C33002317C8 /* APHHeartAgeRecommendationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APHHeartAgeRecommendationCell.m; path = "Heart Age Cells/APHHeartAgeRecommendationCell.m"; sourceTree = "<group>"; };
 		21B8E3A01A8AAACB00CCDD48 /* APHTasksAndSchedules_NoM7.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = APHTasksAndSchedules_NoM7.json; sourceTree = "<group>"; };
+		5A0F996C1AA4AB6600A2A7EB /* consent.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = consent.pdf; path = CardioHealth/Resources/consent.pdf; sourceTree = SOURCE_ROOT; };
 		5B0432601A305742000DC9ED /* HTMLContent */ = {isa = PBXFileReference; lastKnownFileType = folder; path = HTMLContent; sourceTree = "<group>"; };
 		5B0432691A305D3E000DC9ED /* TermsAndConditions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TermsAndConditions.json; sourceTree = "<group>"; };
-		5B1095CA1A9FA4CD006631F5 /* consent.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = consent.pdf; sourceTree = "<group>"; };
 		5B4633831A15917000E68B82 /* APHDashboardEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHDashboardEditViewController.h; sourceTree = "<group>"; };
 		5B4633841A15917000E68B82 /* APHDashboardEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHDashboardEditViewController.m; sourceTree = "<group>"; };
 		5B5A31331A10A78600552F7D /* WithdrawStudy.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = WithdrawStudy.json; sourceTree = "<group>"; };
@@ -332,7 +332,7 @@
 		5B1095C91A9FA4CD006631F5 /* PDF */ = {
 			isa = PBXGroup;
 			children = (
-				5B1095CA1A9FA4CD006631F5 /* consent.pdf */,
+				5A0F996C1AA4AB6600A2A7EB /* consent.pdf */,
 			);
 			path = PDF;
 			sourceTree = "<group>";
@@ -787,7 +787,7 @@
 				F5165E7A19E86581003836CA /* APCParameters.json in Resources */,
 				7B5BEC9B1A34F0B7007CEA94 /* cardio_CVhealth_survey.json in Resources */,
 				08B972511A1FB4AF00316D49 /* APHHealthyHeartSummaryStepViewController.xib in Resources */,
-				5B1095CB1A9FA4CD006631F5 /* consent.pdf in Resources */,
+				5A0F996D1AA4AB6600A2A7EB /* consent.pdf in Resources */,
 				21B8E3A11A8AAACB00CCDD48 /* APHTasksAndSchedules_NoM7.json in Resources */,
 				A78115C21A96A08E00CEC822 /* 10_PotentialBenifits@2x.m4v in Resources */,
 				A78115C91A96A08E00CEC822 /* 01_Activities_to_SensorData@3x.m4v in Resources */,
