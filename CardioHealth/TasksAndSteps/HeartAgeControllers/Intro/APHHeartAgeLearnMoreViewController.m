@@ -16,7 +16,7 @@ static NSString *kKludgeIdentifierForHeartAgeTaskB = @"APHHeartAgeB-7259AC18-D71
 
 @implementation APHHeartAgeLearnMoreViewController
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id) __unused sender {
         
     if ([self.taskIdentifier isEqualToString:kKludgeIdentifierForHeartAgeTaskB]) {
         self.purposeText = @"The American Heart Association and the American College of Cardiology developed a risk score for future heart disease and stroke as the first step for prevention. It is based on following healthy individuals for many years to understand which risk factors predicted cardiovascular disease. By entering your own data, requiring blood pressure and cholesterol values, the app will provide a personalized estimate of your risk of heart attack or stroke over the next 10 years, as well as over your lifetime. It will also provide optimal risk scores for someone your age, gender, and race. We also calculate a Heart Age by comparing your 10-year risk against the optimal risk, with an older age indicating higher risk.\n\n[Note the 10-year risk score and Heart Age only applies to ages 40-79, while the lifetime risk score is calculated for ages 20-59.]";
@@ -31,7 +31,7 @@ static NSString *kKludgeIdentifierForHeartAgeTaskB = @"APHHeartAgeB-7259AC18-D71
 }
 
 
-- (IBAction)getStartedWasTapped:(id)sender
+- (IBAction)getStartedWasTapped:(id) __unused sender
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }

@@ -22,7 +22,7 @@ static NSString *kHealthyHeartSummary = @"healthyHeartSummary";
 
 #pragma mark - Task
 
-+ (ORKOrderedTask *)createTask:(APCScheduledTask *)scheduledTask
++ (ORKOrderedTask *)createTask:(APCScheduledTask *) __unused scheduledTask
 {
     NSMutableArray *steps = [NSMutableArray array];
     
@@ -95,7 +95,7 @@ static NSString *kHealthyHeartSummary = @"healthyHeartSummary";
     [super didReceiveMemoryWarning];
 }
 
-- (ORKStepViewController *)taskViewController:(ORKTaskViewController *)taskViewController viewControllerForStep:(ORKStep *)step
+- (ORKStepViewController *)taskViewController:(ORKTaskViewController *) __unused taskViewController viewControllerForStep:(ORKStep *)step
 {
     ORKStepViewController *stepVC = nil;
     

@@ -51,7 +51,7 @@ static NSString* const kFitnessWalkText = @"Walk as far as you can for six minut
 #pragma  mark  -  Initialisation
 /*********************************************************************************/
 
-+ (ORKOrderedTask *)createTask:(APCScheduledTask *)scheduledTask
++ (ORKOrderedTask *)createTask:(APCScheduledTask *) __unused scheduledTask
 {
     ORKOrderedTask  *task = [ORKOrderedTask fitnessCheckTaskWithIdentifier:kFitnessTestIdentifier intendedUseDescription:nil walkDuration:kWalkDuration restDuration:kRestDuration options:ORKPredefinedTaskOptionNone];
     
@@ -64,7 +64,7 @@ static NSString* const kFitnessWalkText = @"Walk as far as you can for six minut
     return  task;
 }
 
-- (void)taskViewController:(ORKTaskViewController *)taskViewController stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
+- (void)taskViewController:(ORKTaskViewController *) __unused taskViewController stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     
     if ([stepViewController.step.identifier isEqualToString:kIntroStep] || [stepViewController.step.identifier isEqualToString:kIntroOneStep]) {
         ORKInstructionStep *introStep = ((ORKInstructionStep *)stepViewController.step);

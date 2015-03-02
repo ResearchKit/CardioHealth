@@ -14,7 +14,7 @@
 
 @implementation APHParQQuizTaskViewController
 
-+ (id<ORKTask>)createTask:(APCScheduledTask *)scheduledTask
++ (id<ORKTask>)createTask:(APCScheduledTask *) __unused scheduledTask
 {
     APHDynamicParQQuizTask *task = [[APHDynamicParQQuizTask alloc] init];
     
