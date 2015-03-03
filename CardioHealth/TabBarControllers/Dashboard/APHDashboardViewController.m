@@ -17,7 +17,6 @@ static NSString *const kDatasetValueNoDataKey = @"datasetValueNoDataKey";
 
 static NSString*  const kAPCBasicTableViewCellIdentifier        = @"APCBasicTableViewCell";
 static NSString*  const kAPCRightDetailTableViewCellIdentifier  = @"APCRightDetailTableViewCell";
-static NSInteger  const kDataCountLimit                         = 1;
 
 static NSString*  const kFitnessTestTaskId                      = @"APHFitnessTest-00000000-1111-1111-1111-F810BE28D995";
 static NSString*  const kAPCTaskAttributeUpdatedAt              = @"updatedAt";
@@ -37,6 +36,8 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
 @property (nonatomic)           NSNumber*               totalDistanceForSevenDay;
 @property (nonatomic)           NSIndexPath*            currentPieGraphIndexPath;
 @property (nonatomic)           float __block         totalStepsValue;
+
+@property (nonatomic) BOOL pieGraphDataExists;
 
 @end
 
@@ -83,6 +84,8 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
                                              selector:@selector(updateSevenDayItem:)
                                                  name:@"APCUpdateStepsCountIn7Day"
                                                object:nil];
+    
+
 
 }
 
@@ -106,6 +109,8 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
     
     //Every time the cells are reloaded this variable is checked and used to prevent unnecessary drawing of the pie graph.
     self.dataCount = 0;
+    
+    self.pieGraphDataExists = NO;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -119,6 +124,8 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
                                                   object:nil];
     
     [super viewWillDisappear:animated];
+    
+    self.pieGraphDataExists = NO;
 }
 
 #pragma mark - APCDashboardGraphTableViewCellDelegate methods
@@ -308,14 +315,9 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
         pieGraphCell.tintColor = fitnessItem.tintColor;
         pieGraphCell.pieGraphView.shouldAnimateLegend = NO;
         
-        //Every time the cells are reloaded this variable is checked and used to prevent unnecessary drawing of the pie graph.
-        if (self.dataCount < kDataCountLimit) {
-            [pieGraphCell.pieGraphView setNeedsLayout];
-            [self statsCollectionQueryForStep];
-            
-            self.dataCount++;
-        }
-        
+        [pieGraphCell.pieGraphView setNeedsLayout];
+        [self statsCollectionQueryForStep];
+
         pieGraphCell.delegate = self;
     
         
@@ -361,8 +363,6 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
 }
 
 - (void)tableView:(UITableView *) __unused tableView willDisplayCell:(UITableViewCell *) __unused cell forRowAtIndexPath:(NSIndexPath *) __unused indexPath {
-    //cell.contentView.subviews
-    
 }
 
 #pragma mark - Pie Graph View delegates
@@ -571,12 +571,18 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
 
 
 - (void)updateSevenDayItem:(NSNotification *) __unused notif {
-    APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
-    self.allocationDataset = [appDelegate.sevenDayFitnessAllocationData weeksAllocation];
     
-    [self.tableView beginUpdates];
-    [self.tableView reloadRowsAtIndexPaths:@[self.currentPieGraphIndexPath] withRowAnimation:UITableViewRowAnimationNone];
-    [self.tableView endUpdates];
+    if (!self.pieGraphDataExists) {
+    
+        APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
+        self.allocationDataset = [appDelegate.sevenDayFitnessAllocationData weeksAllocation];
+        
+        [self.tableView beginUpdates];
+        [self.tableView reloadRowsAtIndexPaths:@[self.currentPieGraphIndexPath] withRowAnimation:UITableViewRowAnimationNone];
+        [self.tableView endUpdates];
+        
+        self.pieGraphDataExists = YES;
+    }
 }
 
 @end
