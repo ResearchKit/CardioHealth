@@ -25,6 +25,7 @@ static NSString* const  kFlurryApiKey              = @"9NPWCDZZY6KCXD4SCHWG";
 
 - (void) setUpInitializationOptions
 {
+    self.disableSignatureInConsent = YES;
     [APCUtilities setRealApplicationName: @"MyHeart Counts"];
     
     NSDictionary *permissionsDescriptions = @{
