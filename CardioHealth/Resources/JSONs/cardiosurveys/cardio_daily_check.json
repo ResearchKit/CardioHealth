@@ -168,7 +168,7 @@
                   {
                   "identifier": "activity2_option",
                   "prompt": "Did you perform any additional physical activities yesterday that you think were not recorded by your phone \n or wearable device?",
-                  "detail" : "0",
+                  "detail" : "",
                   "uiHint": "checkbox",
                   "guid": "854cff00-3b2f-41c2-9b88-17b72287819a",
                   "type": "SurveyQuestion",
@@ -299,7 +299,7 @@
                   "guid":"db8d54db-c00e-4203-af71-2701253aa9e9",
                   "identifier":"sleep_time",
                   "prompt":"How many hours of sleep did you get last night?",
-                  "detail":"Use the below scroll to indicate how long, in hours and minutes, you think you slept last night",
+                  "detail":"Use the below scroll to indicate how long, in hours and minutes, you think you slept last night.",
                   "constraints":{
                   "rules":[
                   

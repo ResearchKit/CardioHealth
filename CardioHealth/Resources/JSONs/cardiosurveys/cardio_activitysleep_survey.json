@@ -4,28 +4,7 @@
   "questions" : 
   [
    
-   {
-   "identifier": "normalsleep",
-   "prompt": "How much sleep do you usually get at night on weekdays or workdays?",
-   "uiHint": "checkbox",
-   "guid": "854cff00-3b2f-41c2-9b88-17b72287819a",
-   "type": "SurveyQuestion",
-   "constraints": {
-   "rules": [
-             {
-             "operator": "eq",
-             "skipTo": "sleep_time",
-             "type": "SurveyRule",
-             "value": 0
-             }
-             ],
-   "dataType": "boolean",
-   "type": "BooleanConstraints"
-   }
-   },
-
-   
-   
+    
    
    
     {
@@ -52,7 +31,7 @@
     {
       "guid" : "1992b80e-912c-4b05-b29b-5c35f02688c5",
       "identifier" : "atwork",
-      "prompt" : "Work Time Activity?",
+      "prompt" : "Work Time Activity.",
       "detail" : "During the past month, which statement best describes the kinds of physical activity you usually did as part of your job or work? Do not include activities during breaks or outside of work. Please read all four statements before selecting one.",
       "constraints" : 
       {
@@ -95,7 +74,7 @@
     {
       "guid" : "1992b80e-912c-4b05-b29b-5c35f02688d6",
       "identifier" : "phys_activity",
-      "prompt" : "Leisure Time Activity?",
+      "prompt" : "Leisure Time Activity.",
       "detail" : "During the past month, which statement best describes the kinds of physical activity you usually did? Do not include the time you spent as part of your work or job. Please read all six statements before selecting one.",
       "constraints" : 
       {
@@ -179,6 +158,24 @@
       "uiHint" : "slide",
       "type" : "SurveyQuestion"
     },
+       {
+       "guid" : "c374b293-a063-47c9-bd99-2739997967g9",
+       "identifier" : "sleep_time1",
+        "prompt" : "“How much sleep do you usually get at night on weekdays or workdays?",
+        "detail"="(in hours)"
+       "constraints" :
+       {
+       "rules" : [],
+       "dataType" : "integer",
+       "type" : "IntegerConstraints"
+       },
+       "minValue" : "0",
+       "maxValue" : "24",
+       "uiHint" : "slide",
+       "type" : "SurveyQuestion"
+       },
+
+   
     {
       "guid" : "c374b293-a063-47c9-bd99-2738837967g9",
       "identifier" : "sleep_time",
@@ -190,7 +187,7 @@
         "type" : "IntegerConstraints"
       },
       "minValue" : "0",
-      "maxValue" : "40",
+      "maxValue" : "24",
       "uiHint" : "slide",
       "type" : "SurveyQuestion"
     },
@@ -216,7 +213,7 @@
    {
        "guid" : "1992b80e-912c-4b05-b29b-5c35f02688d6",
        "identifier" : "sleep_diagnosis2",
-       "prompt" : "Which of the following sleep disorders apply to you? (select all that apply)",
+       "prompt" : "Which of the following sleep disorders apply to you? (select all that apply).",
        "constraints" :
        {
        "rules" : [],
