@@ -1,7 +1,7 @@
 {
     "identifier": "day_one",
     "type": "Survey",
-    "name": "Day One",
+    "name": "DayOne",
     "questions": [
                   
                   
@@ -63,7 +63,7 @@
                   "identifier": "labwork",
                   "prompt": "After 7 days, you will be asked to calculate your heart risk score, which requires entering your cholesterol blood values and blood pressure. Will you have those data in the next 7 days? ",
                   "detail" : "",
-                  "guid": "854fff30-3d2e-41c2-9a36-76b72887819a",
+                  "guid": "854fff35-3d2e-41c2-9a36-76b22887819a",
                   "type": "SurveyQuestion",
                   "constraints": {
                   "dataType": "integer",
