@@ -53,7 +53,7 @@
               "taskID": "WellBeingAndRiskPerceptionSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66",
               "taskFileName" : "cardio_wellbeing_survey",
               "taskClassName" : "APHWellBeingSurveyController",
-              "taskCompletionTimeString" : "10 Questions Part 1"
+              "taskCompletionTimeString" : "(One Time) 10 Questions Part 1"
               },
 
               {
@@ -61,7 +61,7 @@
               "taskID": "WellBeingAndRiskPerceptionSurvey-1E174061-5B02-11E4-8ED6-0800200C0000",
               "taskFileName" : "cardio_wellbeing_survey",
               "taskClassName" : "APHWellBeingSurveyController",
-              "taskCompletionTimeString" : "10 Questions Part 2"
+              "taskCompletionTimeString" : "(One Time) 10 Questions Part 2"
               },
               
               {
@@ -73,7 +73,7 @@
               
               {
               "taskTitle" : "Daily Check-in",
-              "taskID": "be42dc21-4706-478a-a398-10cabb9c7d78",
+              "taskID": "DailyCheckin-be42dc21-4706-478a-a398-10cabb9c7d78",
               "taskFileName" : "cardio_daily_check",
               "taskClassName" : "APCGenericSurveyTaskViewController",
               "taskCompletionTimeString" : "10 Questions"
@@ -83,7 +83,7 @@
               "taskID": "DayOne-be42dc21-4706-478a-a398-10cabb9c7d78",
               "taskFileName" : "cardio_day_one",
               "taskClassName" : "APCGenericSurveyTaskViewController",
-              "taskCompletionTimeString" : "3 Questions"
+              "taskCompletionTimeString" : "(One Time) 3 Questions"
               }
               
               ],
@@ -91,7 +91,7 @@
                   {
                   "scheduleType": "recurring",
                   "scheduleString": "0 5 * * *",
-                  "taskID": "be42dc21-4706-478a-a398-10cabb9c7d78"
+                  "taskID": "DailyCheckin-be42dc21-4706-478a-a398-10cabb9c7d78"
                   
                   },
                   
