@@ -68,6 +68,9 @@ static NSString* const kFitnessWalkText = @"Walk as far as you can for six minut
     [task.steps[kSecondStep] setText:NSLocalizedString(kInstruction2IntendedDescription, kInstruction2IntendedDescription)];
     [task.steps[kThirdStep] setTitle:NSLocalizedString(kFitnessWalkText, kFitnessWalkText)];
     
+    [task.steps[5] setTitle:NSLocalizedString(@"Thank You!", nil)];
+    [task.steps[5] setText:NSLocalizedString(@"The results of this activity can be viewed on the dashboard.", nil)];
+
     return  task;
 }
 

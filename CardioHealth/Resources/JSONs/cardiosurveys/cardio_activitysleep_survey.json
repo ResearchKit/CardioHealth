@@ -3,13 +3,38 @@
   "identifier" : "ActivitySleep",
   "questions" : 
   [
+   
+   {
+   "identifier": "normalsleep",
+   "prompt": "How much sleep do you usually get at night on weekdays or workdays?",
+   "uiHint": "checkbox",
+   "guid": "854cff00-3b2f-41c2-9b88-17b72287819a",
+   "type": "SurveyQuestion",
+   "constraints": {
+   "rules": [
+             {
+             "operator": "eq",
+             "skipTo": "sleep_time",
+             "type": "SurveyRule",
+             "value": 0
+             }
+             ],
+   "dataType": "boolean",
+   "type": "BooleanConstraints"
+   }
+   },
+
+   
+   
+   
+   
     {
       "guid" : "1992b80e-912c-4b05-b29b-5c35f02688b4",
       "identifier" : "work",
       "prompt" : "Do you do regular work?",
-      "constraints" : 
+      "constraints" :
       {
-        "rules" : 
+        "rules" :
         [
           {
             "operator" : "ot",
@@ -232,7 +257,13 @@
         "label" : "Sleepwalking",
         "value" : 7,
         "type" : "SurveyQuestionOption"
+        },
+        {
+        "label" : "None of the above",
+        "value" : 8,
+        "type" : "SurveyQuestionOption"
         }
+
         ],
        "allowOther" : false,
        "allowMultiple" : true,

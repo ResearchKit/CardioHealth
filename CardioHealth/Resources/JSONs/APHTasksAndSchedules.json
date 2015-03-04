@@ -60,7 +60,21 @@
               "taskID": "be42dc21-4706-478a-a398-10cabb9c7d78",
               "taskFileName" : "cardio_daily_check",
               "taskClassName" : "APCGenericSurveyTaskViewController"
+              },
+              {
+              "taskTitle" : "Day One",
+              "taskID": "DayOne-be99dc21-4706-478a-a358-10cabb9c7d78",
+              "taskFileName" : "cardio_day_one",
+              "taskClassName" : "APHDayOne"
               }
+
+              
+              
+              
+              
+             
+              
+              
               
               ],
     "schedules": [
@@ -110,6 +124,12 @@
                   "scheduleType": "recurring",
                   "scheduleString": "0 5 * * *",
                   "taskID": "WellBeingAndRiskPerceptionSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66"
+                  },
+                  {
+                  "scheduleType": "once",
+                  "scheduleString": "0 5 * * *",
+                  "taskID": "DayOne-be99dc21-4706-478a-a358-10cabb9c7d78"
                   }
+
                   ]
 }
