@@ -3,55 +3,95 @@
               {
               "taskTitle": "Heart and Stroke Risk Score, Plus Heart Age",
               "taskID": "APHHeartAge-7259AC18-D711-47A6-ADBD-6CFCECDED1DF",
-              "taskClassName": "APHHeartAgeTaskViewController"
+              "taskClassName": "APHHeartAgeTaskViewController",
+              "taskCompletionTimeString" : "9 Questions",
+              
               },
               {
               "taskTitle": "Heart and Stroke Risk Score",
               "taskID": "APHHeartAgeB-7259AC18-D711-47A6-ADBD-6CFCECDED1DF",
-              "taskClassName": "APHHeartAgeTaskViewController"
+              "taskClassName": "APHHeartAgeTaskViewController",
+              "taskCompletionTimeString" : "9 Questions"
               },
               {
               "taskTitle": "6-Minute Walk Test",
               "taskID": "APHFitnessTest-00000000-1111-1111-1111-F810BE28D995",
-              "taskClassName": "APHFitnessTaskViewController"
+              "taskClassName": "APHFitnessTaskViewController",
+              "taskCompletionTimeString" : "6-9 Minutes"
               },
               
               {
               "taskTitle" : "Activity and Sleep Survey",
               "taskID": "CardioActivityAndSleepSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66",
               "taskFileName" : "cardio_activitysleep_survey",
-              "taskClassName" : "APCGenericSurveyTaskViewController"
+              "taskClassName" : "APCGenericSurveyTaskViewController",
+              "taskCompletionTimeString" : "8 Questions"
               },
               
               {
               "taskTitle" : "Cardiovascular Health Survey",
               "taskID": "CardioVascularHealthSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66",
               "taskFileName" : "cardio_CVhealth_survey",
-              "taskClassName" : "APHCardiovascularHealthSurveyController"
+              "taskClassName" : "APHCardiovascularHealthSurveyController",
+              "taskCompletionTimeString" : "4 Questions"
               },
               
               {
               "taskTitle" : "Diet Survey",
               "taskID": "DietSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66",
               "taskFileName" : "cardio_diet_survey",
-              "taskClassName" : "APCGenericSurveyTaskViewController"
+              "taskClassName" : "APCGenericSurveyTaskViewController",
+              "taskCompletionTimeString" : "6 Questions"
               },
               
               {
               "taskTitle" : "Well-Being and Risk Perception Survey",
               "taskID": "WellBeingAndRiskPerceptionSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66",
               "taskFileName" : "cardio_wellbeing_survey",
-              "taskClassName" : "APHWellBeingSurveyController"
+              "taskClassName" : "APHWellBeingSurveyController",
+              "taskCompletionTimeString" : "10 Questions Part 1"
+              },
+              
+              {
+              "taskTitle" : "Well-Being and Risk Perception Survey",
+              "taskID": "WellBeingAndRiskPerceptionSurvey-1E174061-5B02-11E4-8ED6-0800200C0000",
+              "taskFileName" : "cardio_wellbeing_survey",
+              "taskClassName" : "APHWellBeingSurveyController",
+              "taskCompletionTimeString" : "10 Questions Part 2"
               },
               
               {
               "taskTitle" : "Physical Activity Readiness",
               "taskID": "parqquiz-1E174061-5B02-11E4-8ED6-0800200C9A77",
-              "taskClassName" : "APHParQQuizTaskViewController"
-              }
+              "taskClassName" : "APHParQQuizTaskViewController",
+              "taskCompletionTimeString" : "10 Questions"
+              },
+              {
+              "taskTitle" : "Daily Check-in",
+              "taskID": "be42dc21-4706-478a-a398-10cabb9c7d78",
+              "taskFileName" : "cardio_daily_check",
+              "taskClassName" : "APCGenericSurveyTaskViewController",
+              "taskCompletionTimeString" : "10 Questions"
+              },
+              
+              {
+              "taskTitle" : "Day One Check-in",
+              "taskID": "DayOne-be42dc21-4706-478a-a398-10cabb9c7d78",
+              "taskFileName" : "cardio_day_one",
+              "taskClassName" : "APCGenericSurveyTaskViewController",
+              "taskCompletionTimeString" : "3 Questions"
+              },
+              
               
               ],
     "schedules": [
+                  {
+                  "scheduleType": "recurring",
+                  "scheduleString": "0 5 * * *",
+                  "taskID": "be42dc21-4706-478a-a398-10cabb9c7d78"
+                  
+                  },
+                  
                   {
                   "scheduleType": "recurring",
                   "scheduleString": "0 5 * * *",
@@ -86,6 +126,23 @@
                   "scheduleType": "recurring",
                   "scheduleString": "0 5 * * *",
                   "taskID": "WellBeingAndRiskPerceptionSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66"
-                  }
+                  },
+                  {
+                  "scheduleType": "once",
+                  "scheduleString": "0 5 * * *",
+                  "taskID": "WellBeingAndRiskPerceptionSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66"
+                  },
+                  
+                  {
+                  "scheduleType": "once",
+                  "scheduleString": "0 5 * * *",
+                  "taskID": "WellBeingAndRiskPerceptionSurvey-1E174061-5B02-11E4-8ED6-0800200C0000"
+                  },
+                  
+                  {
+                  "scheduleType": "once",
+                  "scheduleString": "0 5 * * *",
+                  "taskID": "DayOne-be42dc21-4706-478a-a398-10cabb9c7d78"
+                  },
                   ]
 }
