@@ -115,7 +115,7 @@
                   },
                   {
                   "scheduleType": "once",
-                  "expires" : "PT5D",
+                  "expires" : "PT6D",
                   "scheduleString": "0 5 * * *",
                   "taskID": "WellBeingAndRiskPerceptionSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66"
                   },
