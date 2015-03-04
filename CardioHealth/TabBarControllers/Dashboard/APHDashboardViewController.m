@@ -508,7 +508,7 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
 - (void)updateSevenDayItem {
     
     if (!self.pieGraphDataExists) {
-            
+
         [self.tableView beginUpdates];
         [self.tableView reloadRowsAtIndexPaths:@[self.currentPieGraphIndexPath] withRowAnimation:UITableViewRowAnimationNone];
         [self.tableView endUpdates];
