@@ -17,7 +17,6 @@ static NSString *const kDatasetValueNoDataKey = @"datasetValueNoDataKey";
 
 static NSString*  const kAPCBasicTableViewCellIdentifier        = @"APCBasicTableViewCell";
 static NSString*  const kAPCRightDetailTableViewCellIdentifier  = @"APCRightDetailTableViewCell";
-static NSInteger  const kDataCountLimit                         = 1;
 
 static NSString*  const kFitnessTestTaskId                      = @"APHFitnessTest-00000000-1111-1111-1111-F810BE28D995";
 static NSString*  const kAPCTaskAttributeUpdatedAt              = @"updatedAt";
@@ -37,6 +36,8 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
 @property (nonatomic)           NSNumber*               totalDistanceForSevenDay;
 @property (nonatomic)           NSIndexPath*            currentPieGraphIndexPath;
 @property (nonatomic)           float __block         totalStepsValue;
+
+@property (nonatomic) BOOL pieGraphDataExists;
 
 @end
 
@@ -83,6 +84,8 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
                                              selector:@selector(updateSevenDayItem:)
                                                  name:@"APCUpdateStepsCountIn7Day"
                                                object:nil];
+    
+
 
 }
 
@@ -106,6 +109,8 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
     
     //Every time the cells are reloaded this variable is checked and used to prevent unnecessary drawing of the pie graph.
     self.dataCount = 0;
+    
+    self.pieGraphDataExists = NO;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -119,6 +124,8 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
                                                   object:nil];
     
     [super viewWillDisappear:animated];
+    
+    self.pieGraphDataExists = NO;
 }
 
 #pragma mark - APCDashboardGraphTableViewCellDelegate methods
@@ -187,12 +194,7 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
                         item.editable = YES;
                     }
                     
-<<<<<<< HEAD
-                    #warning Replace Placeholder Values - APPLE-1576
-                    item.info = NSLocalizedString(@"This shows the distance you have walked in 6 minutes, which is a simple measure of fitness. We are also implementing a feature to give you the typical distance expected for your age, gender, height, and weight. You can also view a log of your prior data. Heart rate data are made available if you were using a wearable device capable of recording heart rate while walking.", @"");
-=======
-                    item.info = NSLocalizedString(@"The circle depicts the percentage of time you spent in various levels of activity over the past 7 days. The recommendation in type 2 diabetes is for at least 150 min of moderate activity per week. The daily activity graphic and assessment are courtesy of the Stanford MyHeart Counts study team.", @"");
->>>>>>> cfbd0bcf84c1049cc700f3059c21cc7d29c49865
+                    item.info = NSLocalizedString(@"The circle shows estimates of the proportion of time you have been spending in different levels of activity, based on sensor data from your phone or wearable device. It also estimates your accumulated “active minutes,” which combines moderate and vigorous activities, and daily steps. This is intended to be informational, as accurate assessment of every type of activity from sensors is an ongoing area of research and development. Your data can help us refine these estimates and better understand the relationship between activity and your health.", @"");
                     
                     //If there is no date returned then no task has ever been started and thus we don't show this graph.
                     if ([self checkSevenDayFitnessStartDate] != nil) {
@@ -227,10 +229,6 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
                     item.tintColor = [UIColor colorForTaskId:item.taskId];
                     item.editable = YES;
                     
-<<<<<<< HEAD
-#warning Replace Placeholder Values - APPLE-1576
-=======
->>>>>>> cfbd0bcf84c1049cc700f3059c21cc7d29c49865
                     item.info = NSLocalizedString(@"This shows the distance you have walked in 6 minutes, which is a simple measure of fitness. We are also implementing a feature to give you the typical distance expected for your age, gender, height, and weight. You can also view a log of your prior data. Heart rate data are made available if you were using a wearable device capable of recording heart rate while walking.", @"");
                     
                     APCTableViewRow *row = [APCTableViewRow new];
@@ -317,14 +315,9 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
         pieGraphCell.tintColor = fitnessItem.tintColor;
         pieGraphCell.pieGraphView.shouldAnimateLegend = NO;
         
-        //Every time the cells are reloaded this variable is checked and used to prevent unnecessary drawing of the pie graph.
-        if (self.dataCount < kDataCountLimit) {
-            [pieGraphCell.pieGraphView setNeedsLayout];
-            [self statsCollectionQueryForStep];
-            
-            self.dataCount++;
-        }
-        
+        [pieGraphCell.pieGraphView setNeedsLayout];
+        [self statsCollectionQueryForStep];
+
         pieGraphCell.delegate = self;
     
         
@@ -370,8 +363,6 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
 }
 
 - (void)tableView:(UITableView *) __unused tableView willDisplayCell:(UITableViewCell *) __unused cell forRowAtIndexPath:(NSIndexPath *) __unused indexPath {
-    //cell.contentView.subviews
-    
 }
 
 #pragma mark - Pie Graph View delegates
@@ -492,9 +483,7 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
 
 - (void)statsCollectionQueryForStep
 {
-    NSInteger days = -1;
-    
-    HKQuantityType *quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierStepCount];;
+    HKQuantityType *quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierStepCount];
     
     NSDateComponents *interval = [[NSDateComponents alloc] init];
     interval.day = 1;
@@ -502,24 +491,14 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
     NSDate *startDate = [[NSCalendar currentCalendar] dateBySettingHour:0
                                                                  minute:0
                                                                  second:0
-                                                                 ofDate:[self dateForSpan:days]
+                                                                 ofDate:[NSDate date]
                                                                 options:0];
     
     NSPredicate *predicate = [HKQuery predicateForSamplesWithStartDate:startDate endDate:[NSDate date] options:HKQueryOptionStrictEndDate];
     
-    BOOL isDecreteQuantity = ([quantityType aggregationStyle] == HKQuantityAggregationStyleDiscrete);
-    
-    HKStatisticsOptions queryOptions;
-    
-    if (isDecreteQuantity) {
-        queryOptions = HKStatisticsOptionDiscreteAverage | HKStatisticsOptionDiscreteMax | HKStatisticsOptionDiscreteMin;
-    } else {
-        queryOptions = HKStatisticsOptionCumulativeSum;
-    }
-    
     HKStatisticsCollectionQuery *query = [[HKStatisticsCollectionQuery alloc] initWithQuantityType:quantityType
                                                                            quantitySamplePredicate:predicate
-                                                                                           options:queryOptions
+                                                                                           options:HKStatisticsOptionCumulativeSum
                                                                                         anchorDate:startDate
                                                                                 intervalComponents:interval];
     
@@ -528,32 +507,18 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
                                     HKStatisticsCollection *results,
                                     NSError *error) {
         if (!error) {
-            NSDate *endDate = [[NSCalendar currentCalendar] dateBySettingHour:23
-                                                                       minute:59
-                                                                       second:59
-                                                                       ofDate:[NSDate date]
-                                                                      options:0];
+            NSDate *endDate = [NSDate date];
             NSDate *beginDate = startDate;
             
             [results enumerateStatisticsFromDate:beginDate
                                           toDate:endDate
                                        withBlock:^(HKStatistics *result, BOOL * __unused stop) {
                                            HKQuantity *quantity;
-                                           NSMutableDictionary *dataPoint = [NSMutableDictionary new];
-                                           
+
                                            quantity = result.sumQuantity;
                                            
-                                           NSDate *date = result.startDate;
                                            double value = [quantity doubleValueForUnit:[HKUnit countUnit]];
                                            self.totalStepsValue = value;
-                                           
-                                           dataPoint[kDatasetDateKey] = date;
-                                           dataPoint[kDatasetValueKey] = (!quantity) ? @(NSNotFound) : @(value);
-                                           dataPoint[kDatasetValueNoDataKey] = (isDecreteQuantity) ? @(YES) : @(NO);
-                                           
-                                           
-
-
                                        }];
             
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -580,12 +545,18 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
 
 
 - (void)updateSevenDayItem:(NSNotification *) __unused notif {
-    APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
-    self.allocationDataset = [appDelegate.sevenDayFitnessAllocationData weeksAllocation];
     
-    [self.tableView beginUpdates];
-    [self.tableView reloadRowsAtIndexPaths:@[self.currentPieGraphIndexPath] withRowAnimation:UITableViewRowAnimationNone];
-    [self.tableView endUpdates];
+    if (!self.pieGraphDataExists) {
+    
+        APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
+        self.allocationDataset = [appDelegate.sevenDayFitnessAllocationData weeksAllocation];
+        
+        [self.tableView beginUpdates];
+        [self.tableView reloadRowsAtIndexPaths:@[self.currentPieGraphIndexPath] withRowAnimation:UITableViewRowAnimationNone];
+        [self.tableView endUpdates];
+        
+        self.pieGraphDataExists = YES;
+    }
 }
 
 @end
