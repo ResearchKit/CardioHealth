@@ -48,6 +48,13 @@
               "taskFileName" : "cardio_wellbeing_survey",
               "taskClassName" : "APHWellBeingSurveyController"
               },
+
+              {
+              "taskTitle" : "Well-Being and Risk Perception Survey",
+              "taskID": "WellBeingAndRiskPerceptionSurvey-1E174061-5B02-11E4-8ED6-0800200C0000",
+              "taskFileName" : "cardio_wellbeing_survey",
+              "taskClassName" : "APHWellBeingSurveyController"
+              },
               
               {
               "taskTitle" : "Physical Activity Readiness",
@@ -56,7 +63,7 @@
               },
               
               {
-              "taskTitle" : "Daily Check",
+              "taskTitle" : "Daily Check-in",
               "taskID": "be42dc21-4706-478a-a398-10cabb9c7d78",
               "taskFileName" : "cardio_daily_check",
               "taskClassName" : "APCGenericSurveyTaskViewController"
@@ -107,9 +114,16 @@
                   "taskID": "DietSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66"
                   },
                   {
-                  "scheduleType": "recurring",
+                  "scheduleType": "once",
                   "scheduleString": "0 5 * * *",
                   "taskID": "WellBeingAndRiskPerceptionSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66"
+                  },
+                  
+                  {
+                  "scheduleType": "once",
+                  "scheduleString": "0 5 * * *",
+                  "taskID": "WellBeingAndRiskPerceptionSurvey-1E174061-5B02-11E4-8ED6-0800200C0000"
                   }
+                  
                   ]
 }

@@ -167,29 +167,33 @@ static NSString* const  kFlurryApiKey              = @"9NPWCDZZY6KCXD4SCHWG";
 {
     return @[
              @{
-                 kScheduleOffsetTaskIdKey: @"WellBeingAndRiskPerceptionSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66",
-                 kScheduleOffsetOffsetKey: @(2)
+                 kScheduleOffsetTaskIdKey: @"be42dc21-4706-478a-a398-10cabb9c7d78",
+                 kScheduleOffsetOffsetKey: @(1)
                  },
              @{
                  kScheduleOffsetTaskIdKey: @"CardioVascularHealthSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66",
-                 kScheduleOffsetOffsetKey: @(2)
+                 kScheduleOffsetOffsetKey: @(1)
                  },
              @{
                  kScheduleOffsetTaskIdKey: @"DietSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66",
-                 kScheduleOffsetOffsetKey: @(2)
+                 kScheduleOffsetOffsetKey: @(1)
                  },
              @{
                  kScheduleOffsetTaskIdKey: @"APHHeartAgeB-7259AC18-D711-47A6-ADBD-6CFCECDED1DF",
-                 kScheduleOffsetOffsetKey: @(8)
+                 kScheduleOffsetOffsetKey: @(7)
                  },
              @{
                  kScheduleOffsetTaskIdKey: @"APHFitnessTest-00000000-1111-1111-1111-F810BE28D995",
-                 kScheduleOffsetOffsetKey: @(8)
+                 kScheduleOffsetOffsetKey: @(7)
                  },
              @{
                  kScheduleOffsetTaskIdKey: @"WellBeingAndRiskPerceptionSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66",
-                 kScheduleOffsetOffsetKey: @(8)
+                 kScheduleOffsetOffsetKey: @(1)
                  },
+             @{
+                 kScheduleOffsetTaskIdKey: @"WellBeingAndRiskPerceptionSurvey-1E174061-5B02-11E4-8ED6-0800200C0000",
+                 kScheduleOffsetOffsetKey: @(7)
+                 }
              ];
 }
 
