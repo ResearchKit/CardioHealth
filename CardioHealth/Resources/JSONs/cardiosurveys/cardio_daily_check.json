@@ -72,7 +72,7 @@
                   {
                   "identifier": "activity1_type",
                   "prompt": "Which activity did you do that may have been improperly recorded?",
-                  "detail" : "Select all that apply.",
+                  "detail" : "",
                   "guid": "854fff30-3d2e-41c2-9a36-17b72887819a",
                   "type": "SurveyQuestion",
                   "constraints": {
@@ -167,8 +167,8 @@
                   
                   {
                   "identifier": "activity2_option",
-                  "prompt": "Did you perform any physical activities yesterday that you think were not recorded by your phone \n or wearable device?",
-                  "detail" : "Some activities, such as weight lifting, may not be fully recorded by activity sensors.",
+                  "prompt": "Did you perform any additional physical activities yesterday that you think were not recorded by your phone \n or wearable device?",
+                  "detail" : "0",
                   "uiHint": "checkbox",
                   "guid": "854cff00-3b2f-41c2-9b88-17b72287819a",
                   "type": "SurveyQuestion",
@@ -191,7 +191,7 @@
                   {
                   "identifier": "activity2_type",
                   "prompt": "Which activity did you do that may have been improperly recorded?",
-                  "detail" : "Select all that apply.",
+                  "detail" : "",
                   "guid": "854fff30-3d2e-41c2-9a36-17b72887819a",
                   "type": "SurveyQuestion",
                   "constraints": {
