@@ -27,7 +27,6 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
 
 @interface APHDashboardViewController ()<APCPieGraphViewDatasource>
 
-@property (nonatomic)           NSInteger               dataCount;
 @property (nonatomic, strong)   NSArray*                allocationDataset;
 @property (nonatomic, strong)   APCScoring*             stepScoring;
 @property (nonatomic, strong)   APCScoring*             heartRateScoring;
@@ -80,67 +79,32 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(updateSevenDayItem:)
-                                                 name:@"APCUpdateStepsCountIn7Day"
-                                               object:nil];
-    
-
-
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(updatePieChart:)
-                                                 name:APHSevenDayAllocationDataIsReadyNotification
-                                               object:nil];
+    APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
+    self.allocationDataset = [appDelegate.sevenDayFitnessAllocationData weeksAllocation];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     self.rowItemsOrder = [NSMutableArray arrayWithArray:[defaults objectForKey:kAPCDashboardRowItemsOrder]];
-
-    [self updatePieChart:nil];
-    
-    [self prepareScoringObjects];
     
     [self prepareData];
-    
-    //Every time the cells are reloaded this variable is checked and used to prevent unnecessary drawing of the pie graph.
-    self.dataCount = 0;
     
     self.pieGraphDataExists = NO;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:APHSevenDayAllocationDataIsReadyNotification
-                                                  object:nil];
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:@"APCUpdateStepsCountIn7Day"
-                                                  object:nil];
-    
     [super viewWillDisappear:animated];
     
     self.pieGraphDataExists = NO;
 }
 
-#pragma mark - APCDashboardGraphTableViewCellDelegate methods
-- (void)updateVisibleRowsInTableView:(NSNotification *) __unused notification
-{
-}
-
 #pragma mark - Data
 
-- (void)updatePieChart:(NSNotification *) __unused notification
-{
-}
-
-- (void)prepareScoringObjects {
-}
 
 - (void)prepareData
 {
@@ -284,11 +248,6 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
         [attirbutedDistanceString addAttribute:NSFontAttributeName value:[UIFont appMediumFontWithSize:17.0f] range:NSMakeRange(0, (fitnessItem.activeMinutesString.length - @" Active Minutes".length))];
         [attirbutedDistanceString addAttribute:NSFontAttributeName value:[UIFont appRegularFontWithSize:16.0f] range: [fitnessItem.activeMinutesString rangeOfString:@" Active Minutes"]];
         
-        
-        
-        
-        
-        
         NSString *numberOfStepsString = [NSString stringWithFormat:@"%d", (int)self.totalStepsValue];
         
         NSString *nonAttributedString = [NSString stringWithFormat:@"%@ Steps Today", numberOfStepsString];
@@ -302,11 +261,6 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
         
         }
 
-        
-        
-        
-        
-        
         pieGraphCell.subTitleLabel3.attributedText = attirbutedTotalStepsString;
         
         pieGraphCell.subTitleLabel2.attributedText = attirbutedDistanceString;
@@ -315,8 +269,13 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
         pieGraphCell.tintColor = fitnessItem.tintColor;
         pieGraphCell.pieGraphView.shouldAnimateLegend = NO;
         
-        [pieGraphCell.pieGraphView setNeedsLayout];
-        [self statsCollectionQueryForStep];
+        if (!self.pieGraphDataExists) {
+            
+            [pieGraphCell.pieGraphView setNeedsLayout];
+            
+            [self statsCollectionQueryForStep];
+            self.pieGraphDataExists = YES;
+        }
 
         pieGraphCell.delegate = self;
     
@@ -522,9 +481,11 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
                                        }];
             
             dispatch_async(dispatch_get_main_queue(), ^{
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"APCUpdateStepsCountIn7Day"
-                                                                    object:nil];
+            [self updateSevenDayItem];
             });
+            
+        } else {
+            APCLogError2(error);
         }
     };
     
@@ -544,12 +505,12 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
 
 
 
-- (void)updateSevenDayItem:(NSNotification *) __unused notif {
+- (void)updateSevenDayItem {
     
     if (!self.pieGraphDataExists) {
     
-        APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
-        self.allocationDataset = [appDelegate.sevenDayFitnessAllocationData weeksAllocation];
+//        APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
+//        self.allocationDataset = [appDelegate.sevenDayFitnessAllocationData weeksAllocation];
         
         [self.tableView beginUpdates];
         [self.tableView reloadRowsAtIndexPaths:@[self.currentPieGraphIndexPath] withRowAnimation:UITableViewRowAnimationNone];
