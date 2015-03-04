@@ -508,10 +508,7 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
 - (void)updateSevenDayItem {
     
     if (!self.pieGraphDataExists) {
-    
-//        APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
-//        self.allocationDataset = [appDelegate.sevenDayFitnessAllocationData weeksAllocation];
-        
+            
         [self.tableView beginUpdates];
         [self.tableView reloadRowsAtIndexPaths:@[self.currentPieGraphIndexPath] withRowAnimation:UITableViewRowAnimationNone];
         [self.tableView endUpdates];
