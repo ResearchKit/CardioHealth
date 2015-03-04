@@ -483,9 +483,7 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
 
 - (void)statsCollectionQueryForStep
 {
-    NSInteger days = -1;
-    
-    HKQuantityType *quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierStepCount];;
+    HKQuantityType *quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierStepCount];
     
     NSDateComponents *interval = [[NSDateComponents alloc] init];
     interval.day = 1;
@@ -493,24 +491,14 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
     NSDate *startDate = [[NSCalendar currentCalendar] dateBySettingHour:0
                                                                  minute:0
                                                                  second:0
-                                                                 ofDate:[self dateForSpan:days]
+                                                                 ofDate:[NSDate date]
                                                                 options:0];
     
     NSPredicate *predicate = [HKQuery predicateForSamplesWithStartDate:startDate endDate:[NSDate date] options:HKQueryOptionStrictEndDate];
     
-    BOOL isDecreteQuantity = ([quantityType aggregationStyle] == HKQuantityAggregationStyleDiscrete);
-    
-    HKStatisticsOptions queryOptions;
-    
-    if (isDecreteQuantity) {
-        queryOptions = HKStatisticsOptionDiscreteAverage | HKStatisticsOptionDiscreteMax | HKStatisticsOptionDiscreteMin;
-    } else {
-        queryOptions = HKStatisticsOptionCumulativeSum;
-    }
-    
     HKStatisticsCollectionQuery *query = [[HKStatisticsCollectionQuery alloc] initWithQuantityType:quantityType
                                                                            quantitySamplePredicate:predicate
-                                                                                           options:queryOptions
+                                                                                           options:HKStatisticsOptionCumulativeSum
                                                                                         anchorDate:startDate
                                                                                 intervalComponents:interval];
     
@@ -519,32 +507,18 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
                                     HKStatisticsCollection *results,
                                     NSError *error) {
         if (!error) {
-            NSDate *endDate = [[NSCalendar currentCalendar] dateBySettingHour:23
-                                                                       minute:59
-                                                                       second:59
-                                                                       ofDate:[NSDate date]
-                                                                      options:0];
+            NSDate *endDate = [NSDate date];
             NSDate *beginDate = startDate;
             
             [results enumerateStatisticsFromDate:beginDate
                                           toDate:endDate
                                        withBlock:^(HKStatistics *result, BOOL * __unused stop) {
                                            HKQuantity *quantity;
-                                           NSMutableDictionary *dataPoint = [NSMutableDictionary new];
-                                           
+
                                            quantity = result.sumQuantity;
                                            
-                                           NSDate *date = result.startDate;
                                            double value = [quantity doubleValueForUnit:[HKUnit countUnit]];
                                            self.totalStepsValue = value;
-                                           
-                                           dataPoint[kDatasetDateKey] = date;
-                                           dataPoint[kDatasetValueKey] = (!quantity) ? @(NSNotFound) : @(value);
-                                           dataPoint[kDatasetValueNoDataKey] = (isDecreteQuantity) ? @(YES) : @(NO);
-                                           
-                                           
-
-
                                        }];
             
             dispatch_async(dispatch_get_main_queue(), ^{
