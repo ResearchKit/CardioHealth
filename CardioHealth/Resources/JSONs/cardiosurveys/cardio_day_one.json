@@ -1,0 +1,101 @@
+{
+    "identifier": "day_one",
+    "type": "Survey",
+    "name": "Day One",
+    "questions": [
+                  
+                  
+                  {
+                      "identifier": "welcome",
+                      "prompt": "Welcome and congratulations on being an integral part of the MyHeart Counts study of cardiovascular health. Your heart counts!",
+                      "detail" : "Are you ready to start following your physical activity and sleep for the next 7 days? You should do your usual amount of activity during this time.",
+                      "guid": "832fff30-3d2e-41c2-9a36-17b72887819a",
+                      "type": "SurveyQuestion",
+                      "constraints": {
+                          "rules": [
+                            {
+                            "operator": "eq",
+                            "skipTo": "XXXX",
+                            "type": "SurveyRule",
+                            "value": 0
+                            }
+                            ],
+                  "dataType": "boolean",
+                  "type": "BooleanConstraints"
+                  						}
+                  },
+                  
+                  
+                   {
+                  "identifier": "device",
+                  "prompt": "Which of the following devices do you plan to have on you during the next 7 days to help monitor your regular physical activity and sleep through your iPhone’s Health app?",
+                  "detail" : "Select all that apply.",
+                  "guid": "854fff30-3d2e-41c2-9a36-76b72887819a",
+                  "type": "SurveyQuestion",
+                  "constraints": {
+                  "dataType": "integer",
+                  "allowMultiple": true,
+                  "allowOther" : true,
+                  "type": "MultiValueConstraints",
+                  "enumeration": [
+                                  {
+                                  "type": "SurveyQuestionOption",
+                                  "value": 1,
+                                  "label": "iPhone"
+                                  },
+                                  {
+                                  "type": "SurveyQuestionOption",
+                                  "value": 2,
+                                  "label": "Activity band or pedometer"
+                                  },
+                                  {
+                                  "type": "SurveyQuestionOption",
+                                  "value": 3,
+                                  "label": "Smartwatch / Apple Watch"
+                                  }
+                                 ]
+                                  }
+                  },
+                  
+                  
+                  
+                   {
+                  "identifier": "labwork",
+                  "prompt": "After 7 days, you will be asked to calculate your heart risk score, which requires entering your cholesterol blood values and blood pressure. Will you have those data in the next 7 days? ",
+                  "detail" : "",
+                  "guid": "854fff30-3d2e-41c2-9a36-76b72887819a",
+                  "type": "SurveyQuestion",
+                  "constraints": {
+                  "dataType": "integer",
+                  "allowMultiple": false,
+                  "allowOther" : false,
+                  "type": "MultiValueConstraints",
+                  "enumeration": [
+                                  {
+                                  "type": "SurveyQuestionOption",
+                                  "value": 1,
+                                  "label": "I currently have this information"
+                                  },
+                                  {
+                                  "type": "SurveyQuestionOption",
+                                  "value": 2,
+                                  "label": "I will try to get this information during the next week"
+                                  }
+                                 ]
+                                  }
+                  }
+                  
+                  
+                  
+                  
+                 
+
+                  
+                  ]
+
+}
+
+
+
+
+
