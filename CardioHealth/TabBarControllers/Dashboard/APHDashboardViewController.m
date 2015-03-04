@@ -187,7 +187,7 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
                         item = [APHTableViewDashboardWalkingTestItem new];
                     }
                     
-                    item.caption = NSLocalizedString(@"6-minute Walk Test", @"");
+                    item.caption = NSLocalizedString(@"6-Minute Walk Test", @"");
                     item.taskId = @"APHFitnessTest-00000000-1111-1111-1111-F810BE28D995";
                     item.identifier = kAPHDashboardWalkTestTableViewCellIdentifier;
                     item.tintColor = [UIColor colorForTaskId:item.taskId];
