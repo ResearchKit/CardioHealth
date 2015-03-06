@@ -34,7 +34,7 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
 @property (nonatomic, strong)   APHWalkingTestResults*  walkingResults;
 @property (nonatomic)           NSNumber*               totalDistanceForSevenDay;
 @property (nonatomic)           NSIndexPath*            currentPieGraphIndexPath;
-@property (nonatomic)           float __block         totalStepsValue;
+@property (nonatomic)           NSNumber*               totalStepsValue;
 
 @property (nonatomic) BOOL pieGraphDataExists;
 
@@ -65,7 +65,20 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
         }
         
         self.title = NSLocalizedString(@"Dashboard", @"Dashboard");
-        
+
+        /*
+         Keep this "nil" until we get some real data from HealthKit
+         (in -statsCollectionQuery, below).  If nil, we won't display it.
+         */
+        self.totalStepsValue = nil;
+
+        /*
+         We use this property to update some UI elements when that data
+         arrives from HealthKit.  We set this property for the first time
+         when we first load the table.  So let's keep it nil until then,
+         so we don't try to redraw things before we have a place to draw them.
+         */
+        self.currentPieGraphIndexPath = nil;
     }
     
     return self;
@@ -248,20 +261,30 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
         [attirbutedDistanceString addAttribute:NSFontAttributeName value:[UIFont appMediumFontWithSize:17.0f] range:NSMakeRange(0, (fitnessItem.activeMinutesString.length - @" Active Minutes".length))];
         [attirbutedDistanceString addAttribute:NSFontAttributeName value:[UIFont appRegularFontWithSize:16.0f] range: [fitnessItem.activeMinutesString rangeOfString:@" Active Minutes"]];
         
-        NSString *numberOfStepsString = [NSString stringWithFormat:@"%d", (int)self.totalStepsValue];
-        
-        NSString *nonAttributedString = [NSString stringWithFormat:@"%@ Steps Today", numberOfStepsString];
-        
-        NSMutableAttributedString *attirbutedTotalStepsString = [[NSMutableAttributedString alloc] initWithString:nonAttributedString];
-        
-        if (self.totalStepsValue > 0) {
-        
-            [attirbutedTotalStepsString addAttribute:NSFontAttributeName value:[UIFont appMediumFontWithSize:17.0f] range:NSMakeRange(0, numberOfStepsString.length)];
-            [attirbutedTotalStepsString addAttribute:NSFontAttributeName value:[UIFont appRegularFontWithSize:16.0f] range: [numberOfStepsString rangeOfString:@" Steps Today"]];
-        
+
+        /*
+         Total number of steps.  This "nil" check keeps it blank until
+         we hear back from HealthKit (in -statsCollectionQuery, below).
+         */
+        NSMutableAttributedString *attributedTotalStepsString = nil;
+
+        if (self.totalStepsValue != nil)
+        {
+            NSString *explanation         = @" Steps Today";
+            NSString *nonAttributedString = [NSString stringWithFormat: @"%@%@", self.totalStepsValue, explanation];
+            attributedTotalStepsString    = [[NSMutableAttributedString alloc] initWithString: nonAttributedString];
+
+            [attributedTotalStepsString addAttribute: NSFontAttributeName
+                                               value: [UIFont appMediumFontWithSize: 17.0f]
+                                               range: NSMakeRange (0, nonAttributedString.length)];
+
+            [attributedTotalStepsString addAttribute: NSFontAttributeName
+                                               value: [UIFont appRegularFontWithSize: 16.0f]
+                                               range: [nonAttributedString rangeOfString: explanation]];
         }
 
-        pieGraphCell.subTitleLabel3.attributedText = attirbutedTotalStepsString;
+
+        pieGraphCell.subTitleLabel3.attributedText = attributedTotalStepsString;
         
         pieGraphCell.subTitleLabel2.attributedText = attirbutedDistanceString;
         
@@ -472,12 +495,10 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
             [results enumerateStatisticsFromDate:beginDate
                                           toDate:endDate
                                        withBlock:^(HKStatistics *result, BOOL * __unused stop) {
-                                           HKQuantity *quantity;
 
-                                           quantity = result.sumQuantity;
-                                           
-                                           double value = [quantity doubleValueForUnit:[HKUnit countUnit]];
-                                           self.totalStepsValue = value;
+                                           HKQuantity *quantity = result.sumQuantity;
+                                           double numberOfSteps = [quantity doubleValueForUnit:[HKUnit countUnit]];
+                                           [self updateTotalStepsItemWithValue: numberOfSteps];
                                        }];
             
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -514,6 +535,35 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
         [self.tableView endUpdates];
         
         self.pieGraphDataExists = YES;
+    }
+}
+
+- (void) updateTotalStepsItemWithValue: (double) rawNumberOfSteps
+{
+    NSInteger numberOfStepsAsInt = (NSInteger) rawNumberOfSteps;
+
+    if (numberOfStepsAsInt > 0)
+    {
+        NSNumber *numberOfSteps = @(numberOfStepsAsInt);
+
+        /*
+         The __weak means:  if the view gets destroyed before the main-queue
+         block executes (below), the __weak variable weakSelf will become nil.
+         This means that when the main-thread code eventually DOES run -- which
+         it always will - it'll execute safely.
+         */
+        __weak APHDashboardViewController *weakSelf = self;
+
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+
+            weakSelf.totalStepsValue = numberOfSteps;
+
+            if (weakSelf.currentPieGraphIndexPath != nil)
+            {
+                [weakSelf.tableView reloadRowsAtIndexPaths: @[weakSelf.currentPieGraphIndexPath]
+                                          withRowAnimation: UITableViewRowAnimationNone];
+            }
+        }];
     }
 }
 
