@@ -7,7 +7,7 @@
 
 #import "APHWalkingTestResults.h"
 
-static NSString*  const kFitnessTestTaskId                      = @"APHFitnessTest-00000000-1111-1111-1111-F810BE28D995";
+static NSString*  const kFitnessTestTaskId                      = @"3-APHFitnessTest-00000000-1111-1111-1111-F810BE28D995";
 static NSString*  const kAPCTaskAttributeUpdatedAt              = @"updatedAt";
 static NSString*  const kFitTestTotalDistDataSourceKey          = @"totalDistance";
 static NSString*  const kFitTestpeakHeartRateDataSourceKey      = @"peakHeartRate";

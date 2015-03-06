@@ -18,7 +18,7 @@ static NSString *const kDatasetValueNoDataKey = @"datasetValueNoDataKey";
 static NSString*  const kAPCBasicTableViewCellIdentifier        = @"APCBasicTableViewCell";
 static NSString*  const kAPCRightDetailTableViewCellIdentifier  = @"APCRightDetailTableViewCell";
 
-static NSString*  const kFitnessTestTaskId                      = @"APHFitnessTest-00000000-1111-1111-1111-F810BE28D995";
+static NSString*  const kFitnessTestTaskId                      = @"3-APHFitnessTest-00000000-1111-1111-1111-F810BE28D995";
 static NSString*  const kAPCTaskAttributeUpdatedAt              = @"updatedAt";
 static NSString*  const kFitTestTotalDistDataSourceKey          = @"totalDistance";
 static NSString*  const kFitTestpeakHeartRateDataSourceKey      = @"peakHeartRate";
@@ -154,7 +154,7 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
                 {
                     APHTableViewDashboardSevenDayFitnessItem *item = [APHTableViewDashboardSevenDayFitnessItem new];
                     item.caption = NSLocalizedString(@"7-Day Assessment", @"");
-                    item.taskId = @"APHSevenDayAllocation-00000000-1111-1111-1111-F810BE28D995";
+                    item.taskId = @"3-APHSevenDayAllocation-00000000-1111-1111-1111-F810BE28D995";
                 
                     if ([self numberOfRemainingDaysInSevenDayFitnessTask] > 0) {
                         
@@ -201,7 +201,7 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
                     }
                     
                     item.caption = NSLocalizedString(@"6-Minute Walk Test", @"");
-                    item.taskId = @"APHFitnessTest-00000000-1111-1111-1111-F810BE28D995";
+                    item.taskId = @"3-APHFitnessTest-00000000-1111-1111-1111-F810BE28D995";
                     item.identifier = kAPHDashboardWalkTestTableViewCellIdentifier;
                     item.tintColor = [UIColor colorForTaskId:item.taskId];
                     item.editable = YES;

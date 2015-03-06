@@ -49,7 +49,7 @@
                     
                     APCTableViewDashboardItem *item = [APCTableViewDashboardItem new];
                     item.caption = NSLocalizedString(@"7-Day Assessment", @"");
-                    item.taskId = @"APHSevenDayAllocation-00000000-1111-1111-1111-F810BE28D995";
+                    item.taskId = @"3-APHSevenDayAllocation-00000000-1111-1111-1111-F810BE28D995";
                     item.tintColor = [UIColor colorForTaskId:item.taskId];
                     [self.items addObject:item];
                 }
@@ -59,7 +59,7 @@
                 {
                     APCTableViewDashboardItem *item = [APCTableViewDashboardItem new];
                     item.caption = NSLocalizedString(@"6-minute Walking Test", @"");
-                    item.taskId = @"APHFitnessTest-00000000-1111-1111-1111-F810BE28D995";
+                    item.taskId = @"3-APHFitnessTest-00000000-1111-1111-1111-F810BE28D995";
                     item.tintColor = [UIColor colorForTaskId:item.taskId];
                     [self.items addObject:item];
                 }

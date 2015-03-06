@@ -2,7 +2,7 @@
     "tasks": [
               {
               "taskTitle": "Heart/Stroke Risk Score + Heart Age",
-              "taskID": "APHHeartAge-7259AC18-D711-47A6-ADBD-6CFCECDED1DF",
+              "taskID": "2-APHHeartAge-7259AC18-D711-47A6-ADBD-6CFCECDED1DF",
               "taskClassName": "APHHeartAgeTaskViewController",
               "taskCompletionTimeString" : "9 Questions"
               },
@@ -11,12 +11,6 @@
               "taskID": "2-APHHeartAgeB-7259AC18-D711-47A6-ADBD-6CFCECDED1DF",
               "taskClassName": "APHHeartAgeTaskViewController",
               "taskCompletionTimeString" : "9 Questions"
-              },
-              {
-              "taskTitle": "6-Minute Walk Test",
-              "taskID": "3-APHFitnessTest-00000000-1111-1111-1111-F810BE28D995",
-              "taskClassName": "APHFitnessTaskViewController",
-              "taskCompletionTimeString" : "6-9 Minutes"
               },
               {
               "taskTitle": "7-Day Activity and Sleep Assessment",
@@ -93,24 +87,19 @@
                   "scheduleString": "0 5 * * *",
                   "taskID": "1-DailyCheckin-be42dc21-4706-478a-a398-10cabb9c7d78"
                   },
-                  {
-                  "scheduleType": "recurring",
-                  "scheduleString": "0 5 * * *",
-                  "taskID": "1-parqquiz-1E174061-5B02-11E4-8ED6-0800200C9A77"
-                  },
                   
                   {
                   "scheduleType": "recurring",
                   "scheduleString": "0 5 * * *",
-                  "taskID": "2-APHHeartAgeB-7259AC18-D711-47A6-ADBD-6CFCECDED1DF"
+                  "taskID": "2-APHHeartAge-7259AC18-D711-47A6-ADBD-6CFCECDED1DF"
                   },
                   {
                   "scheduleType": "recurring",
                   "scheduleString": "0 5 * * *",
-                  "taskID": "3-APHFitnessTest-00000000-1111-1111-1111-F810BE28D995"
+                  "taskID": "3-APHSevenDayAllocation-00000000-1111-1111-1111-F810BE28D995"
                   },
                   {
-                  "scheduleType": "recurring",
+                  "scheduleType": "once",
                   "scheduleString": "0 5 * * *",
                   "taskID": "2-CardioActivityAndSleepSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66"
                   },
@@ -126,20 +115,20 @@
                   },
                   {
                   "scheduleType": "once",
-                  "scheduleString": "0 5 * * *",
                   "taskID": "2-WellBeingAndRiskPerceptionSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66"
                   },
                   
                   {
                   "scheduleType": "once",
-                  "scheduleString": "0 5 * * *",
                   "taskID": "5-WellBeingAndRiskPerceptionSurvey-1E174061-5B02-11E4-8ED6-0800200C0000"
                   },
                   {
                   "scheduleType": "once",
-                  "scheduleString": "0 5 * * *",
                   "taskID": "4-DayOne-be42dc21-4706-478a-a398-10cabb9c7d78"
+                  },
+                  {
+                  "scheduleType": "once",
+                  "taskID": "1-parqquiz-1E174061-5B02-11E4-8ED6-0800200C9A77"
                   }
-                  
                   ]
 }
