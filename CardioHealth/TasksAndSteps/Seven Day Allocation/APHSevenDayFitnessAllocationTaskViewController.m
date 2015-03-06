@@ -81,7 +81,7 @@ static NSString *kSevenDayFitnessCompleteStep = @"sevenDayFitnessCompleteStep";
                                     ];
         controller.messagesArray = @[
                                      NSLocalizedString(@"To ensure the accuracy of this task, keep your phone or wearable on you at all times.", @""),
-                                     NSLocalizedString(@"During the next week, your fitness allocation will be recorded, analyzed, and available to you in real time.", @"")
+                                     NSLocalizedString(@"During the next week, your activity allocation will be recorded, analyzed, and available to you in real time.", @"")
                                     ];
         
         controller.delegate = self;
