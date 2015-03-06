@@ -149,7 +149,7 @@
                   {
                   "guid": "c374b293-a063-47c9-bd99-2739997967g9",
                   "identifier": "sleep_time1",
-                  "prompt": "“How much sleep do you usually get at night on weekdays or workdays?",
+                  "prompt": "How much sleep do you usually get at night on weekdays or workdays?",
                   "detail": "(in hours)",
                   "constraints": {
                   "rules": [],
@@ -185,9 +185,9 @@
                   "rules": [
                             {
                             "operator": "eq",
-                            "skipTo": "sleep_diagnosis2",
+                            "skipTo": "END_OF_SURVEY",
                             "type": "SurveyRule",
-                            "value": 1
+                            "value": 0
                             }
                             ],
                   "dataType": "boolean",

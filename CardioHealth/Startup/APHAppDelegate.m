@@ -239,8 +239,10 @@ static NSString* const  kFlurryApiKey              = @"9NPWCDZZY6KCXD4SCHWG";
 
 - (APCConsentTask*)consentTask
 {
+    NSString*   reason   = NSLocalizedString(@"By agreeing you confirm that you read the consent form and that you "
+                                             @"wish to take part in this research study.", nil);
     APCConsentTask* task = [[APCConsentTask alloc] initWithIdentifier:@"Consent"
-                                                   propertiesFileName:kConsentPropertiesFileName];
+                                                   propertiesFileName:kConsentPropertiesFileName reasonForConsent:reason];
     return task;
 }
 
