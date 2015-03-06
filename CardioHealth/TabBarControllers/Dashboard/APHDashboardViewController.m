@@ -66,15 +66,18 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
         
         self.title = NSLocalizedString(@"Dashboard", @"Dashboard");
 
-        // Keep this "nil" until we get some real data from HealthKit
-        // (in -statsCollectionQuery, below).  If nil, we won't display it.
+        /*
+         Keep this "nil" until we get some real data from HealthKit
+         (in -statsCollectionQuery, below).  If nil, we won't display it.
+         */
         self.totalStepsValue = nil;
 
-        // We use this property to update some features of the table
-        // when they come in from HealthKit.  the table asynchronously.
-        // We set it for the first time when we first load the load
-        // So let's keep it nil until we've actually loaded the table,
-        // so we don't try to redraw things before it's necessary.
+        /*
+         We use this property to update some UI elements when that data
+         arrives from HealthKit.  We set this property for the first time
+         when we first load the table.  So let's keep it nil until then,
+         so we don't try to redraw things before we have a place to draw them.
+         */
         self.currentPieGraphIndexPath = nil;
     }
     
@@ -553,10 +556,10 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
 
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
 
+            weakSelf.totalStepsValue = numberOfSteps;
+
             if (weakSelf.currentPieGraphIndexPath != nil)
             {
-                weakSelf.totalStepsValue = numberOfSteps;
-
                 [weakSelf.tableView reloadRowsAtIndexPaths: @[weakSelf.currentPieGraphIndexPath]
                                           withRowAnimation: UITableViewRowAnimationNone];
             }
