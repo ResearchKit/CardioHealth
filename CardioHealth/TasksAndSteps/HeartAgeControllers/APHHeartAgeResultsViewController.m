@@ -331,17 +331,12 @@ static NSString *kEighteenToTwentyInstructions  = @"eighteenToTwentyInstructions
     cell.actualAgeLabel = NSLocalizedString(@"Actual Age", @"Actual Age");
     cell.heartAgeLabel = NSLocalizedString(@"Heart Age", @"Heart Age");
     
-    cell.actualAgeValue = [NSString stringWithFormat:@"%lu", (unsigned long)self.actualAge];
-    cell.heartAgeValue = [NSString stringWithFormat:@"%lu", (unsigned long)self.heartAge];
+    //These have been switched around.
+    cell.actualAgeValue = [NSString stringWithFormat:@"%lu", (unsigned long)self.heartAge];
+    cell.heartAgeValue =[NSString stringWithFormat:@"%lu", (unsigned long)self.actualAge];
     
-    if (self.heartAge <= self.actualAge)
-    {
-        cell.heartAge.textColor = [UIColor appTertiaryColor1];
-    }
-    else
-    {
-        cell.heartAge.textColor = [UIColor blackColor];
-    }
+    cell.heartAge.textColor = [UIColor blackColor];
+    
     
     return cell;
 }
@@ -376,15 +371,7 @@ static NSString *kEighteenToTwentyInstructions  = @"eighteenToTwentyInstructions
             optimalRisk = [numberFormatter stringFromNumber:self.optimalTenYearRisk];
         }
         
-        if ([self.tenYearRisk doubleValue] > 7.5)
-        {
-            cell.calculatedRisk.textColor = [UIColor blackColor];
-        }
-        else
-        {
-            cell.calculatedRisk.textColor = [UIColor appTertiaryColor1];
-        }
-
+        cell.calculatedRisk.textColor = [UIColor blackColor];
         
     } else {
         cell.riskCellTitle.text = NSLocalizedString(@"Lifetime Risk Estimate", @"Lifetime risk estimate");
@@ -395,14 +382,7 @@ static NSString *kEighteenToTwentyInstructions  = @"eighteenToTwentyInstructions
         
         cell.riskEstimateDescription.text = NSLocalizedString(@"According to your answers, your calculated risk of developing Heart Disease or Stroke within your lifetime is:", @"According to your answers, your calculated risk of developing Heart Disease or Stroke within your lifetime is:" );
         
-        if ([self.lifetimeRisk floatValue] > 7.5)
-        {
-            cell.calculatedRisk.textColor = [UIColor blackColor];
-        }
-        else
-        {
-            cell.calculatedRisk.textColor = [UIColor appTertiaryColor1];
-        }        
+        cell.calculatedRisk.textColor = [UIColor blackColor];
     }
 
     cell.calculatedRisk.text = calculatedRisk;
@@ -457,7 +437,7 @@ static NSString *kEighteenToTwentyInstructions  = @"eighteenToTwentyInstructions
         [attribString addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0,[attribString length])];
         [attribString addAttribute:NSFontAttributeName value:[UIFont fontWithName: @"Helvetica-Bold" size:17.0] range:NSMakeRange(0,[attribString length])];
         
-        NSMutableAttributedString * finalString = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"For official recommendations, please refer to the guide from the American College of Cardiology-", @"For official recommendations, please refer to the guide from the American College of Cardiology-")];
+        NSMutableAttributedString * finalString = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"This is based on data comparing risk factors and the likelihood of developing heart disease or stroke over a lifetime. In the US, approximately 1 in 2 men and 1 in 3 women will develop cardiovascular disease in their life. Having more optimal risk factors is associated with a lower lifetime risk.\n\nFor official recommendations, please refer to the guide from the American College of Cardiology -", nil)];
         
         NSMutableParagraphStyle *paragraphStyle2 = [[NSMutableParagraphStyle alloc] init];
         paragraphStyle2.lineBreakMode = NSLineBreakByWordWrapping;
