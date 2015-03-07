@@ -34,7 +34,7 @@ static NSString *kLengthBody = @"Entering the data for the risk score should tak
 - (NSInteger)tableView:(UITableView *) __unused tableView numberOfRowsInSection:(NSInteger) __unused section {
 
     // Return the number of rows in the section. One for purpose and one for length.
-    return 2;
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -46,12 +46,6 @@ static NSString *kLengthBody = @"Entering the data for the risk score should tak
         purposeCell.purposeBody = self.purposeText;
         
         cell = purposeCell;
-    } else {
-        APHIntroCellTableViewCell *lengthCell = [tableView dequeueReusableCellWithIdentifier:@"LengthCellIdentifier"
-                                                                          forIndexPath:indexPath];
-        lengthCell.lengthBody = kLengthBody;
-        
-        cell = lengthCell;
     }
     
     return cell;

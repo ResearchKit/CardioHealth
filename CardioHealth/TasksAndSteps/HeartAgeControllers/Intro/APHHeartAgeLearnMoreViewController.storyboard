@@ -89,52 +89,6 @@
                                     <outlet property="purposeBodyLabel" destination="oi4-VC-ZFD" id="ccm-Pq-q3S"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LengthCellIdentifier" rowHeight="96" id="0vv-ae-EE9" customClass="APHIntroCellTableViewCell">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0vv-ae-EE9" id="Fvy-UN-bQb">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Length" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mws-27-veR">
-                                            <rect key="frame" x="18" y="16" width="410" height="23"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6On-oB-UvS">
-                                            <rect key="frame" x="40" y="53.5" width="366" height="34"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B62-wc-TU6">
-                                            <rect key="frame" x="0.0" y="0.0" width="446" height="2"/>
-                                            <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="2" id="VoV-6j-Yzh"/>
-                                            </constraints>
-                                        </view>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="6On-oB-UvS" secondAttribute="bottom" constant="8" id="0h9-ov-vrF"/>
-                                        <constraint firstItem="Mws-27-veR" firstAttribute="leading" secondItem="Fvy-UN-bQb" secondAttribute="leadingMargin" constant="10" id="1mq-JF-knk"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="B62-wc-TU6" secondAttribute="trailing" constant="-8" id="5lk-8z-LwP"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="Mws-27-veR" secondAttribute="trailing" constant="10" id="D2N-hh-dXW"/>
-                                        <constraint firstItem="Mws-27-veR" firstAttribute="top" secondItem="Fvy-UN-bQb" secondAttribute="topMargin" constant="8" id="EAo-gA-ncd"/>
-                                        <constraint firstItem="B62-wc-TU6" firstAttribute="top" secondItem="Fvy-UN-bQb" secondAttribute="topMargin" constant="-8" id="GNP-tC-jsU"/>
-                                        <constraint firstItem="6On-oB-UvS" firstAttribute="leading" secondItem="Fvy-UN-bQb" secondAttribute="leading" constant="40" id="Lni-vN-Sd0"/>
-                                        <constraint firstAttribute="centerY" secondItem="Mws-27-veR" secondAttribute="centerY" constant="271.75" id="SfZ-ly-K0w"/>
-                                        <constraint firstItem="B62-wc-TU6" firstAttribute="leading" secondItem="Fvy-UN-bQb" secondAttribute="leadingMargin" constant="-8" id="WSQ-nf-uQ5"/>
-                                        <constraint firstItem="6On-oB-UvS" firstAttribute="top" secondItem="Mws-27-veR" secondAttribute="bottom" constant="15" id="aIR-2D-STn"/>
-                                        <constraint firstAttribute="trailing" secondItem="6On-oB-UvS" secondAttribute="trailing" constant="40" id="r2C-ts-EUg"/>
-                                    </constraints>
-                                    <variation key="default">
-                                        <mask key="constraints">
-                                            <exclude reference="SfZ-ly-K0w"/>
-                                        </mask>
-                                    </variation>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="lengthBodyLabel" destination="6On-oB-UvS" id="PzT-v4-sYm"/>
-                                </connections>
-                            </tableViewCell>
                         </prototypes>
                         <sections/>
                         <connections>
@@ -145,7 +99,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fny-f5-hEj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1464" y="190"/>
+            <point key="canvasLocation" x="1464" y="190.5"/>
         </scene>
     </scenes>
 </document>

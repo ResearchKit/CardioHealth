@@ -166,8 +166,8 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
         
         {
             ORKNumericAnswerFormat *format = [ORKNumericAnswerFormat integerAnswerFormatWithUnit:@"mg/dL"];
-            format.minimum = @(1);
-            format.maximum = @(1000);
+            format.minimum = @(130);
+            format.maximum = @(400);
             
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:kHeartAgeTestDataTotalCholesterol
                                                                  text:NSLocalizedString(@"Total Cholesterol",
@@ -178,8 +178,8 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
         
         {
             ORKNumericAnswerFormat *format = [ORKNumericAnswerFormat integerAnswerFormatWithUnit:@"mg/dL"];
-            format.minimum = @(1);
-            format.maximum = @(250);
+            format.minimum = @(20);
+            format.maximum = @(100);
             
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:kHeartAgeTestDataHDL
                                                                  text:NSLocalizedString(@"HDL Cholesterol", @"HDL Cholesterol")
@@ -188,7 +188,7 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
         }
         
         {
-            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:kBloodPressureInstruction
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"emptyIdentifier"
                                                                    text:NSLocalizedString(@"The items below are optional. If you do not know the values you may enter 0.",
                                                                                           @"The items below are optional. If you do not know the values you may enter 0.")
                                                            answerFormat:nil];
@@ -225,36 +225,26 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
         [steps addObject:step];
     }
     
+    
     {
         NSMutableArray *stepQuestions = [NSMutableArray array];
         ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:kHeartAgeFormStepBlood
                                                               title:nil
-                                                               text:NSLocalizedString(@"Blood Glucose & Blood Pressure",
-                                                                                      @"Blood Glucose & Blood Pressure")];
+                                                               text:NSLocalizedString(@"Blood pressure (typically shown as systolic over diastolic)",
+                                                                                      @"Blood pressure (typically shown as systolic over diastolic)")];
         step.optional = NO;
         
         {
+            ORKNumericAnswerFormat *format = [ORKNumericAnswerFormat integerAnswerFormatWithUnit:@"mg/dL"];
+            format.minimum = @(90);
+            format.maximum = @(200);
+            
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:kBloodPressureInstruction
-                                                                   text:NSLocalizedString(@"Blood pressure (typically shown as systolic over diastolic)",
-                                                                                          @"Blood pressure (typically shown as systolic over diastolic)")
-                                                           answerFormat:nil];
-            [stepQuestions addObject:item];
-        }
-        
-        {
-            ORKHealthKitQuantityTypeAnswerFormat *format = [ORKHealthKitQuantityTypeAnswerFormat answerFormatWithQuantityType:[HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierBloodPressureSystolic]
-                                                                                                                         unit:[HKUnit unitFromString:@"mmHg"]
-                                                                                                                        style:ORKNumericAnswerStyleInteger];
-            
-            
-            
-            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:kHeartAgeTestDataSystolicBloodPressure
                                                                    text:NSLocalizedString(@"Systolic Blood Pressure",
                                                                                           @"Systolic Blood Pressure")
                                                            answerFormat:format];
             [stepQuestions addObject:item];
         }
-        
         
         {
             ORKHealthKitQuantityTypeAnswerFormat *format = [ORKHealthKitQuantityTypeAnswerFormat answerFormatWithQuantityType:[HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierBloodPressureDiastolic]
@@ -263,7 +253,7 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
             
             
             
-            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:kHeartAgeTestDataDiastolicBloodPressure
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:kHeartAgeTestDataSystolicBloodPressure
                                                                    text:NSLocalizedString(@"Diastolic Blood Pressure",
                                                                                           @"Diastolic Blood Pressure")
                                                            answerFormat:format];
