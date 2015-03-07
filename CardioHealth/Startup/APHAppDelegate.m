@@ -219,6 +219,18 @@ static NSString* const  kFlurryApiKey              = @"9NPWCDZZY6KCXD4SCHWG";
              ];
 }
 
+- (NSArray *)allSetTextBlocks
+{
+    return @[
+             @{
+                 kAllSetActivitiesTextOriginal: NSLocalizedString(@"You’ll find your list of daily surveys and tasks on the “Activities” tab. New surveys and tasks will appear over the next few days.", @"")
+               }
+             @{
+                 kAllSetDashboardTextOriginal: NSLocalizedString(@"To see your task results, check your “Dashboard” tab.",
+                                                                 @"")}
+             ];
+}
+
 /*********************************************************************************/
 #pragma mark - APCOnboardingDelegate Methods
 /*********************************************************************************/
