@@ -133,7 +133,29 @@ static NSString* const kFitnessWalkText = @"Walk as far as you can for six minut
     [dashboardDataSource addEntriesFromDictionary:heartRateResults];
     
     NSString *jsonString = [self generateJSONFromDictionary:dashboardDataSource];
-    
+
+
+    //Intercept the location result if it exists and tear it out.
+
+    NSMutableArray *newResultForFitnessTest = [NSMutableArray new];
+
+    if (stepResult)
+    {
+        for (ORKFileResult* fileResult in stepResult.results) {
+
+
+            if (![fileResult.fileURL.lastPathComponent hasPrefix: kLocationFileNameComp])
+            {
+                [newResultForFitnessTest addObject:fileResult];
+            }
+        }
+    }
+
+    ORKStepResult* newStepResult = (ORKStepResult *)[self.result resultForIdentifier:kWalkStep];
+
+    newStepResult.results = (NSArray *) newResultForFitnessTest;
+
+
     return jsonString;
 }
 
