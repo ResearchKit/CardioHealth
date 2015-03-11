@@ -227,6 +227,49 @@
                                             <outlet property="riskEstimateDescription" destination="P4x-8g-6BD" id="t25-Uf-5qg"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TenYearRiskScoreSummaryCell" rowHeight="50" id="op0-73-85b" userLabel="TenYearRiskScoreSummary" customClass="APHHeartAgeTenYearRecommendationCell">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="op0-73-85b" id="J0r-JC-61X">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10-Year Risk Score:" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9jU-1c-w3F">
+                                                    <rect key="frame" x="22" y="13" width="276" height="24"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wf2-v4-6tC" customClass="APCHorizontalBottomThinLineView">
+                                                    <rect key="frame" x="1" y="49" width="319" height="1"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="hbj-4E-fFX"/>
+                                                    </constraints>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G8s-UN-ECS">
+                                                    <rect key="frame" x="0.0" y="0.0" width="3" height="50"/>
+                                                    <color key="backgroundColor" red="0.80000001190000003" green="0.050854331879999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="3" id="NU4-gJ-Jl7"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="G8s-UN-ECS" firstAttribute="leading" secondItem="J0r-JC-61X" secondAttribute="leadingMargin" constant="-8" id="1NL-8D-9ub"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="wf2-v4-6tC" secondAttribute="bottom" constant="-8" id="DyV-Tl-fOq"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="wf2-v4-6tC" secondAttribute="trailing" constant="-8" id="KDq-DP-TPS"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="9jU-1c-w3F" secondAttribute="trailing" constant="14" id="UrA-s5-kGE"/>
+                                                <constraint firstItem="9jU-1c-w3F" firstAttribute="leading" secondItem="J0r-JC-61X" secondAttribute="leadingMargin" constant="14" id="Uxt-a8-hCr"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="9jU-1c-w3F" secondAttribute="bottom" constant="5" id="ZBH-iX-sJX"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="G8s-UN-ECS" secondAttribute="bottom" constant="-8" id="Zwj-PH-3sm"/>
+                                                <constraint firstItem="9jU-1c-w3F" firstAttribute="top" secondItem="J0r-JC-61X" secondAttribute="topMargin" constant="5" id="c9M-2Y-iWn"/>
+                                                <constraint firstItem="wf2-v4-6tC" firstAttribute="leading" secondItem="J0r-JC-61X" secondAttribute="leadingMargin" constant="-7" id="qL0-aq-j42"/>
+                                                <constraint firstItem="G8s-UN-ECS" firstAttribute="top" secondItem="J0r-JC-61X" secondAttribute="topMargin" constant="-8" id="rty-CX-tv9"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="recommendationText" destination="9jU-1c-w3F" id="BjD-8S-B9F"/>
+                                        </connections>
+                                    </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LifeTimeRiskScoreSummaryCell" rowHeight="90" id="2BX-Sh-xa5" userLabel="LifeTimeRiskScoreSummary" customClass="APHHeartAgeRecommendationCell">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
@@ -387,49 +430,6 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="descriptionLabel" destination="8Oo-AY-htt" id="GEv-Wl-ggJ"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TenYearRiskScoreSummaryCell" rowHeight="50" id="op0-73-85b" userLabel="TenYearRiskScoreSummary" customClass="APHHeartAgeTenYearRecommendationCell">
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="op0-73-85b" id="J0r-JC-61X">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10-Year Risk Score:" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9jU-1c-w3F">
-                                                    <rect key="frame" x="22" y="13" width="276" height="24"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wf2-v4-6tC" customClass="APCHorizontalBottomThinLineView">
-                                                    <rect key="frame" x="1" y="49" width="319" height="1"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="hbj-4E-fFX"/>
-                                                    </constraints>
-                                                </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G8s-UN-ECS">
-                                                    <rect key="frame" x="0.0" y="0.0" width="3" height="50"/>
-                                                    <color key="backgroundColor" red="0.80000001190000003" green="0.050854331879999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="3" id="NU4-gJ-Jl7"/>
-                                                    </constraints>
-                                                </view>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="G8s-UN-ECS" firstAttribute="leading" secondItem="J0r-JC-61X" secondAttribute="leadingMargin" constant="-8" id="1NL-8D-9ub"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="wf2-v4-6tC" secondAttribute="bottom" constant="-8" id="DyV-Tl-fOq"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="wf2-v4-6tC" secondAttribute="trailing" constant="-8" id="KDq-DP-TPS"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="9jU-1c-w3F" secondAttribute="trailing" constant="14" id="UrA-s5-kGE"/>
-                                                <constraint firstItem="9jU-1c-w3F" firstAttribute="leading" secondItem="J0r-JC-61X" secondAttribute="leadingMargin" constant="14" id="Uxt-a8-hCr"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="9jU-1c-w3F" secondAttribute="bottom" constant="5" id="ZBH-iX-sJX"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="G8s-UN-ECS" secondAttribute="bottom" constant="-8" id="Zwj-PH-3sm"/>
-                                                <constraint firstItem="9jU-1c-w3F" firstAttribute="top" secondItem="J0r-JC-61X" secondAttribute="topMargin" constant="5" id="c9M-2Y-iWn"/>
-                                                <constraint firstItem="wf2-v4-6tC" firstAttribute="leading" secondItem="J0r-JC-61X" secondAttribute="leadingMargin" constant="-7" id="qL0-aq-j42"/>
-                                                <constraint firstItem="G8s-UN-ECS" firstAttribute="top" secondItem="J0r-JC-61X" secondAttribute="topMargin" constant="-8" id="rty-CX-tv9"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="recommendationText" destination="9jU-1c-w3F" id="BjD-8S-B9F"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

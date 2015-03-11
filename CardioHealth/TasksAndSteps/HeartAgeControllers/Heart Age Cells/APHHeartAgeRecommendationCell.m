@@ -20,19 +20,11 @@
     [super setSelected:selected animated:animated];
 }
 
-//- (void)setRecommendationTitle:(NSString *)recommendationTitle
-//{
-//    _recommendationTitle = recommendationTitle;
-//    
-//    self.recommendationCellTitle.text = _recommendationTitle;
-//}
-//
-//- (void)setRecommendationContent:(NSString *)recommendationContent
-//{
-//    _recommendationContent = recommendationContent;
-//    
-//    self.recommendationCellContent.text = _recommendationContent;
-//}
-
+- (void)setHideLinkButton:(BOOL)hideLinkButton
+{
+    _hideLinkButton = hideLinkButton;
+    
+    self.ASCVDLinkButton.hidden = hideLinkButton;
+}
 
 @end
