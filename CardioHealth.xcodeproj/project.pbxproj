@@ -242,8 +242,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		085F3EA81AAF6A0D003A910A /* CardioHealth copy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CardioHealth copy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		085F3EA91AAF6A0D003A910A /* CardioHealth copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "CardioHealth copy-Info.plist"; path = "/Users/farhan.ahmed/Projects/iOS/Apple/applecardiology/CardioHealth copy-Info.plist"; sourceTree = "<absolute>"; };
+		085F3EA81AAF6A0D003A910A /* CardioHealth_YML.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CardioHealth_YML.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		085F3EA91AAF6A0D003A910A /* CardioHealth-YML-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "CardioHealth-YML-Info.plist"; path = "/Users/farhan.ahmed/Projects/iOS/Apple/applecardiology/CardioHealth-YML-Info.plist"; sourceTree = "<absolute>"; };
 		0865F8B21A65E8C7005770ED /* APHIntroCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHIntroCellTableViewCell.h; sourceTree = "<group>"; };
 		0865F8B31A65E8C7005770ED /* APHIntroCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHIntroCellTableViewCell.m; sourceTree = "<group>"; };
 		08B972491A1FB00700316D49 /* APHHealthyHeartTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHHealthyHeartTaskViewController.h; sourceTree = "<group>"; };
@@ -763,7 +763,7 @@
 			isa = PBXGroup;
 			children = (
 				F5F644F919D35BA2004CFBB2 /* CardioHealth.app */,
-				085F3EA81AAF6A0D003A910A /* CardioHealth copy.app */,
+				085F3EA81AAF6A0D003A910A /* CardioHealth_YML.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -786,7 +786,7 @@
 		F5F644FC19D35BA2004CFBB2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				085F3EA91AAF6A0D003A910A /* CardioHealth copy-Info.plist */,
+				085F3EA91AAF6A0D003A910A /* CardioHealth-YML-Info.plist */,
 				F5F6454219D35CDF004CFBB2 /* CardioHealth.entitlements */,
 				F5F644FD19D35BA2004CFBB2 /* Info.plist */,
 				F5F644FE19D35BA2004CFBB2 /* main.m */,
@@ -834,7 +834,7 @@
 			);
 			name = "CardioHealth - YML";
 			productName = CardioHealth;
-			productReference = 085F3EA81AAF6A0D003A910A /* CardioHealth copy.app */;
+			productReference = 085F3EA81AAF6A0D003A910A /* CardioHealth_YML.app */;
 			productType = "com.apple.product-type.application";
 		};
 		F5F644F819D35BA2004CFBB2 /* CardioHealth */ = {
@@ -1181,9 +1181,9 @@
 					"$(PROJECT_DIR)/AppCore/APCAppCore/ResearchKit",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
-				INFOPLIST_FILE = "CardioHealth copy-Info.plist";
+				INFOPLIST_FILE = "CardioHealth-YML-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "CardioHealth copy";
+				PRODUCT_NAME = CardioHealth_YML;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
@@ -1205,9 +1205,9 @@
 					"$(PROJECT_DIR)/AppCore/APCAppCore/ResearchKit",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
-				INFOPLIST_FILE = "CardioHealth copy-Info.plist";
+				INFOPLIST_FILE = "CardioHealth-YML-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "CardioHealth copy";
+				PRODUCT_NAME = CardioHealth_YML;
 				PROVISIONING_PROFILE = "";
 			};
 			name = DebugAndSendToDataVerificationServer;
@@ -1232,9 +1232,9 @@
 					"$(inherited)",
 					"DEVELOPMENT=1",
 				);
-				INFOPLIST_FILE = "CardioHealth copy-Info.plist";
+				INFOPLIST_FILE = "CardioHealth-YML-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "CardioHealth copy";
+				PRODUCT_NAME = CardioHealth_YML;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Development;
@@ -1255,9 +1255,9 @@
 					"$(PROJECT_DIR)/AppCore/APCAppCore/BridgeSDK",
 					"$(PROJECT_DIR)/AppCore/APCAppCore/ResearchKit",
 				);
-				INFOPLIST_FILE = "CardioHealth copy-Info.plist";
+				INFOPLIST_FILE = "CardioHealth-YML-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "CardioHealth copy";
+				PRODUCT_NAME = CardioHealth_YML;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
