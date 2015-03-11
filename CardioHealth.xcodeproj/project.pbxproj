@@ -869,6 +869,11 @@
 				TargetAttributes = {
 					085F3E451AAF6A0D003A910A = {
 						DevelopmentTeam = NL3PRC58UN;
+						SystemCapabilities = {
+							com.apple.DataProtection = {
+								enabled = 1;
+							};
+						};
 					};
 					F5F644F819D35BA2004CFBB2 = {
 						CreatedOnToolsVersion = 6.0.1;
