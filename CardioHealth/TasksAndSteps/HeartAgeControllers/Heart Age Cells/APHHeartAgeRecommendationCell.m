@@ -27,19 +27,4 @@
     self.ASCVDLinkButton.hidden = hideLinkButton;
 }
 
-//- (void)setRecommendationTitle:(NSString *)recommendationTitle
-//{
-//    _recommendationTitle = recommendationTitle;
-//    
-//    self.recommendationCellTitle.text = _recommendationTitle;
-//}
-//
-//- (void)setRecommendationContent:(NSString *)recommendationContent
-//{
-//    _recommendationContent = recommendationContent;
-//    
-//    self.recommendationCellContent.text = _recommendationContent;
-//}
-
-
 @end
