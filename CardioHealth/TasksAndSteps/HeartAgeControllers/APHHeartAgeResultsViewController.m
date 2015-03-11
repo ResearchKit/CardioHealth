@@ -49,10 +49,7 @@ static NSString *kEighteenToTwentyInstructions  = @"eighteenToTwentyInstructions
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
-    NSLog(@"Task Identifier : %@", self.taskViewController.task.identifier);
-    
+
     UIColor *viewBackgroundColor = [UIColor appSecondaryColor4];
     
     [self.view setBackgroundColor:viewBackgroundColor];
@@ -71,7 +68,7 @@ static NSString *kEighteenToTwentyInstructions  = @"eighteenToTwentyInstructions
     
     self.numberOfSections = 2;
     
-    if ((self.actualAge > 40) && (self.actualAge < 59))
+    if ((self.actualAge >= 40) && (self.actualAge <= 59))
     {
         if (![self.taskViewController.task.identifier isEqualToString:kKludgeIdentifierForHeartAgeTaskB]) {
             [self.heartAndRiskData addObject:kHeartAgeResults];
@@ -274,16 +271,16 @@ static NSString *kEighteenToTwentyInstructions  = @"eighteenToTwentyInstructions
             APHHeartAgeRecommendationCell *titleSummaryCell = [tableView dequeueReusableCellWithIdentifier:@"LifeTimeRiskScoreSummaryCell"];
             
             titleSummaryCell.recommendationText.attributedText = self.lifeTimeRiskDescriptionAttributedText;
-            
+            titleSummaryCell.hideLinkButton = YES;
             cell = titleSummaryCell;
 
         }
         else if ([objectId isEqualToString:kTenYearRisk])
         {
-            APHHeartAgeTenYearRecommendationCell *titleSummaryCell = [tableView dequeueReusableCellWithIdentifier:@"TenYearRiskScoreSummaryCell"];
+            APHHeartAgeRecommendationCell *titleSummaryCell = [tableView dequeueReusableCellWithIdentifier:@"LifeTimeRiskScoreSummaryCell"];
             
             titleSummaryCell.recommendationText.attributedText = self.tenYearRiskDescriptionAttributedText;
-            
+            titleSummaryCell.hideLinkButton = NO;
             cell = titleSummaryCell;
         }
         else if ([objectId isEqualToString:kHeartAgeSummaryTitle])
@@ -332,7 +329,22 @@ static NSString *kEighteenToTwentyInstructions  = @"eighteenToTwentyInstructions
     cell.heartAgeLabel = NSLocalizedString(@"Heart Age", @"Heart Age");
     
     //These have been switched around.
-    cell.actualAgeValue = [NSString stringWithFormat:@"%lu", (unsigned long)self.heartAge];
+    NSString *heartAgeCaption = nil;
+    
+    if ((self.actualAge >= 40) && (self.actualAge <= 79)) {
+        if (self.heartAge < 40) {
+            heartAgeCaption = @"< 40";
+        } else if (self.heartAge > 79) {
+            heartAgeCaption = @"> 79";
+        } else {
+            heartAgeCaption = [NSString stringWithFormat:@"%lu", (unsigned long)self.heartAge];
+        }
+    } else {
+        heartAgeCaption = @"N/A";
+    }
+    
+    
+    cell.actualAgeValue = heartAgeCaption;
     cell.heartAgeValue =[NSString stringWithFormat:@"%lu", (unsigned long)self.actualAge];
     
     cell.heartAge.textColor = [UIColor blackColor];
@@ -414,7 +426,7 @@ static NSString *kEighteenToTwentyInstructions  = @"eighteenToTwentyInstructions
         [attribString addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0,[attribString length])];
         [attribString addAttribute:NSFontAttributeName value:[UIFont fontWithName: @"Helvetica-Bold" size:17.0] range:NSMakeRange(0,[attribString length])];
         
-        NSMutableAttributedString * finalString = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"In general a 10-year risk > 7.5% is considered high and warrants discussion with your doctor. There may be other medical or family history that can increase your risk and these should be discussed with your doctor.", @"In general a 10-year risk > 7.5% is considered high and warrants discussion with your doctor. There may be other medical or family history that can increase your risk and these should be discussed with your doctor.")];
+        NSMutableAttributedString * finalString = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"In general a 10-year risk > 7.5% is considered high and warrants discussion with your doctor. There may be other medical or family history that can increase your risk and these should be discussed with your doctor.\n\nFor official recommendations, please refer to the guide from the American College of Cardiology -", @"In general a 10-year risk > 7.5% is considered high and warrants discussion with your doctor. There may be other medical or family history that can increase your risk and these should be discussed with your doctor.")];
         
         NSMutableParagraphStyle *paragraphStyle2 = [[NSMutableParagraphStyle alloc] init];
         paragraphStyle2.lineBreakMode = NSLineBreakByWordWrapping;
@@ -437,7 +449,7 @@ static NSString *kEighteenToTwentyInstructions  = @"eighteenToTwentyInstructions
         [attribString addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0,[attribString length])];
         [attribString addAttribute:NSFontAttributeName value:[UIFont fontWithName: @"Helvetica-Bold" size:17.0] range:NSMakeRange(0,[attribString length])];
         
-        NSMutableAttributedString * finalString = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"This is based on data comparing risk factors and the likelihood of developing heart disease or stroke over a lifetime. In the US, approximately 1 in 2 men and 1 in 3 women will develop cardiovascular disease in their life. Having more optimal risk factors is associated with a lower lifetime risk.\n\nFor official recommendations, please refer to the guide from the American College of Cardiology -", nil)];
+        NSMutableAttributedString * finalString = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"This is based on data comparing risk factors and the likelihood of developing heart disease or stroke over a lifetime. In the US, approximately 1 in 2 men and 1 in 3 women will develop cardiovascular disease in their life. Having more optimal risk factors is associated with a lower lifetime risk.", nil)];
         
         NSMutableParagraphStyle *paragraphStyle2 = [[NSMutableParagraphStyle alloc] init];
         paragraphStyle2.lineBreakMode = NSLineBreakByWordWrapping;
