@@ -156,16 +156,29 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
                     item.caption = NSLocalizedString(@"7-Day Assessment", @"");
                     item.taskId = @"3-APHSevenDayAllocation-00000000-1111-1111-1111-F810BE28D995";
                 
-                    if ([self numberOfRemainingDaysInSevenDayFitnessTask] > 0) {
+                    NSNumber *numberOfDaysRemaining = [self numberOfRemainingDaysInSevenDayFitnessTask];
+                    
+                    if (numberOfDaysRemaining != nil) {
                         
-                        item.numberOfDaysString = NSLocalizedString([self fitnessDaysRemaining], @"");
+                        NSString *numOfDaysRemainingLabelInfo = nil;
+                        if ([numberOfDaysRemaining integerValue] > 0) {
+                            numOfDaysRemainingLabelInfo = NSLocalizedString([self fitnessDaysRemaining], @"");
+                        }
+                        
+                        item.numberOfDaysString = numOfDaysRemainingLabelInfo;
                         
                         APHAppDelegate *appDelegate = (APHAppDelegate *)[[UIApplication sharedApplication] delegate];
                         NSString *sevenDayDistanceStr = nil;
 
                         sevenDayDistanceStr = [NSString stringWithFormat:@"%d Active Minutes", (int) roundf(appDelegate.sevenDayFitnessAllocationData.activeSeconds/60)];
                         
-                        item.activeMinutesString = sevenDayDistanceStr;
+                        NSString *activityMinutesLabelInfo = nil;
+                        
+                        if ([numberOfDaysRemaining integerValue] > 0) {
+                            activityMinutesLabelInfo = NSLocalizedString(sevenDayDistanceStr, @"");
+                        }
+                        
+                        item.activeMinutesString = activityMinutesLabelInfo;
                         item.identifier = kAPCDashboardPieGraphTableViewCellIdentifier;
                         item.tintColor = [UIColor colorForTaskId:item.taskId];
                         item.editable = YES;
@@ -257,10 +270,13 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
             pieGraphCell.subTitleLabel2.alpha = 1;
         }];
         
-        NSMutableAttributedString *attirbutedDistanceString = [[NSMutableAttributedString alloc] initWithString:fitnessItem.activeMinutesString];
-        [attirbutedDistanceString addAttribute:NSFontAttributeName value:[UIFont appMediumFontWithSize:17.0f] range:NSMakeRange(0, (fitnessItem.activeMinutesString.length - @" Active Minutes".length))];
-        [attirbutedDistanceString addAttribute:NSFontAttributeName value:[UIFont appRegularFontWithSize:16.0f] range: [fitnessItem.activeMinutesString rangeOfString:@" Active Minutes"]];
+        NSMutableAttributedString *attirbutedDistanceString = nil;
         
+        if (fitnessItem.activeMinutesString != nil && ![fitnessItem.activeMinutesString isEqualToString:@""]) {
+            attirbutedDistanceString = [[NSMutableAttributedString alloc] initWithString:fitnessItem.activeMinutesString];
+            [attirbutedDistanceString addAttribute:NSFontAttributeName value:[UIFont appMediumFontWithSize:17.0f] range:NSMakeRange(0, (fitnessItem.activeMinutesString.length - @" Active Minutes".length))];
+            [attirbutedDistanceString addAttribute:NSFontAttributeName value:[UIFont appRegularFontWithSize:16.0f] range: [fitnessItem.activeMinutesString rangeOfString:@" Active Minutes"]];
+        }
 
         /*
          Total number of steps.  This "nil" check keeps it blank until
@@ -392,12 +408,10 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
 
 #pragma mark - Helper Methods
 
-- (NSInteger)numberOfRemainingDaysInSevenDayFitnessTask {
-    NSDate *startDate = [[NSCalendar currentCalendar] dateBySettingHour:0
-                                                                 minute:0
-                                                                 second:0
-                                                                 ofDate:[self checkSevenDayFitnessStartDate]
-                                                                options:0];
+- (NSNumber *)numberOfRemainingDaysInSevenDayFitnessTask {
+    
+    NSDate *startDate = [self checkSevenDayFitnessStartDate];
+    
     NSDate *today = [[NSCalendar currentCalendar] dateBySettingHour:0
                                                              minute:0
                                                              second:0
@@ -411,22 +425,19 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
                                                                                     toDate:today
                                                                                    options:NSCalendarWrapComponents];
     
-    NSUInteger daysRemain = 0;
+    NSInteger daysRemain = 0;
     
-    if (numberOfDaysFromStartDate.day < 7) {
-        daysRemain = 7 - numberOfDaysFromStartDate.day;
-    }
 
-    return daysRemain;
+    daysRemain = 7 - numberOfDaysFromStartDate.day;
+
+
+    return startDate ? @(daysRemain) : nil;
 }
 
 - (NSString *)fitnessDaysRemaining
 {
-    NSDate *startDate = [[NSCalendar currentCalendar] dateBySettingHour:0
-                                                                 minute:0
-                                                                 second:0
-                                                                 ofDate:[self checkSevenDayFitnessStartDate]
-                                                                options:0];
+    NSDate *startDate = [self checkSevenDayFitnessStartDate];
+    
     NSDate *today = [[NSCalendar currentCalendar] dateBySettingHour:0
                                                              minute:0
                                                              second:0
@@ -449,7 +460,12 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
     NSString *days = (daysRemain == 1) ? NSLocalizedString(@"Day", @"Day") : NSLocalizedString(@"Days", @"Days");
     
     NSString *remaining = [NSString stringWithFormat:NSLocalizedString(@"%lu %@ Remaining",
+    
                                                                        @"{count} {day/s} Remaining"), daysRemain, days];
+    
+    if ( daysRemain == 1) {
+        remaining = NSLocalizedString(@"Last Day", nil);
+    }
     
     return remaining;
 }
