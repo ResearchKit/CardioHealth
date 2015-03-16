@@ -30,6 +30,8 @@ static NSString *kLifeTimeRisk                  = @"lifeTimeRisk";
 static NSString *kHeartAgeSummaryTitle          = @"heartAgeSummaryTitle";
 static NSString *kEighteenToTwentyInstructions  = @"eighteenToTwentyInstructions";
 
+static CGFloat kTitleFontSize = 17.0f;
+
 @interface APHHeartAgeResultsViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -424,7 +426,7 @@ static NSString *kEighteenToTwentyInstructions  = @"eighteenToTwentyInstructions
         [attribString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [@"10-Year Risk Score: " length])];
         
         [attribString addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0,[attribString length])];
-        [attribString addAttribute:NSFontAttributeName value:[UIFont fontWithName: @"Helvetica-Bold" size:17.0] range:NSMakeRange(0,[attribString length])];
+        [attribString addAttribute:NSFontAttributeName value:[UIFont fontWithName: @"Helvetica-Bold" size:kTitleFontSize] range:NSMakeRange(0,[attribString length])];
         
         NSMutableAttributedString * finalString = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"In general a 10-year risk > 7.5% is considered high and warrants discussion with your doctor. There may be other medical or family history that can increase your risk and these should be discussed with your doctor.\n\nFor official recommendations, please refer to the guide from the American College of Cardiology -", @"In general a 10-year risk > 7.5% is considered high and warrants discussion with your doctor. There may be other medical or family history that can increase your risk and these should be discussed with your doctor.")];
         
@@ -447,7 +449,7 @@ static NSString *kEighteenToTwentyInstructions  = @"eighteenToTwentyInstructions
         NSMutableAttributedString *attribString = [[NSMutableAttributedString alloc]initWithString:NSLocalizedString(@"Lifetime Risk Score: ", @"Lifetime Risk Score: ")];
         [attribString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [@"Lifetime Risk Score: " length])];
         [attribString addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0,[attribString length])];
-        [attribString addAttribute:NSFontAttributeName value:[UIFont fontWithName: @"Helvetica-Bold" size:17.0] range:NSMakeRange(0,[attribString length])];
+        [attribString addAttribute:NSFontAttributeName value:[UIFont fontWithName: @"Helvetica-Bold" size:kTitleFontSize] range:NSMakeRange(0,[attribString length])];
         
         NSMutableAttributedString * finalString = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"This is based on data comparing risk factors and the likelihood of developing heart disease or stroke over a lifetime. In the US, approximately 1 in 2 men and 1 in 3 women will develop cardiovascular disease in their life. Having more optimal risk factors is associated with a lower lifetime risk.", nil)];
         

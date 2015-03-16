@@ -104,7 +104,7 @@ static NSString* const  kFlurryApiKey              = @"9NPWCDZZY6KCXD4SCHWG";
     [[UINavigationBar appearance] setTintColor:[UIColor appPrimaryColor]];
     [[UINavigationBar appearance] setTitleTextAttributes: @{
                                                             NSForegroundColorAttributeName : [UIColor appSecondaryColor2],
-                                                            NSFontAttributeName : [UIFont appMediumFontWithSize:17.0f]
+                                                            NSFontAttributeName : [UIFont appNavBarTitleFont]
                                                             }];
     
     [[UIView appearance] setTintColor:[UIColor appPrimaryColor]];

@@ -52,26 +52,26 @@
 {
     {
         self.question1Label.textColor = [UIColor blackColor];
-        self.question1Label.font = [UIFont appRegularFontWithSize:17.0f];
+        self.question1Label.font = [UIFont appQuestionLabelFont];
         
-        [self.question1Option1.titleLabel setFont:[UIFont appRegularFontWithSize:44.0]];
-        [self.question1Option2.titleLabel setFont:[UIFont appRegularFontWithSize:44.0]];
+        [self.question1Option1.titleLabel setFont:[UIFont appQuestionOptionFont]];
+        [self.question1Option2.titleLabel setFont:[UIFont appQuestionOptionFont]];
     }
     
     {
         self.question2Label.textColor = [UIColor blackColor];
-        self.question2Label.font = [UIFont appRegularFontWithSize:17.0f];
+        self.question2Label.font = [UIFont appQuestionLabelFont];
         
-        [self.question2Option1.titleLabel setFont:[UIFont appRegularFontWithSize:44.0]];
-        [self.question2Option2.titleLabel setFont:[UIFont appRegularFontWithSize:44.0]];
+        [self.question2Option1.titleLabel setFont:[UIFont appQuestionOptionFont]];
+        [self.question2Option2.titleLabel setFont:[UIFont appQuestionOptionFont]];
     }
     
     {
         self.question3Label.textColor = [UIColor blackColor];
-        self.question3Label.font = [UIFont appRegularFontWithSize:17.0f];
+        self.question3Label.font = [UIFont appQuestionLabelFont];
         
-        [self.question3Option1.titleLabel setFont:[UIFont appRegularFontWithSize:44.0]];
-        [self.question3Option2.titleLabel setFont:[UIFont appRegularFontWithSize:44.0]];
+        [self.question3Option1.titleLabel setFont:[UIFont appQuestionOptionFont]];
+        [self.question3Option2.titleLabel setFont:[UIFont appQuestionOptionFont]];
     }
     
 }
