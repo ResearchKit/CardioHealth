@@ -114,6 +114,11 @@
                          "label": "I avoid salt when I'm cooking at home.",
                          "value": 3,
                          "type": "SurveyQuestionOption"
+                     },
+                     {
+                         "label": "None of the above",
+                         "value": 4,
+                         "type": "SurveyQuestionOption"
                      }
                 ],
                  "allowMultiple": true,
