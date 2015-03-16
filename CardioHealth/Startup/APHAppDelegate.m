@@ -75,7 +75,8 @@ static NSString* const  kFlurryApiKey              = @"9NPWCDZZY6KCXD4SCHWG";
                                                    @(kAPCUserInfoItemTypeSleepTime),
                                                    ],
                                            kAnalyticsOnOffKey  : @YES,
-                                           kAnalyticsFlurryAPIKeyKey : kFlurryApiKey
+                                           kAnalyticsFlurryAPIKeyKey : kFlurryApiKey,
+                                        kTaskReminderStartupDefaultTimeKey:@"9:00 PM"
                                            }];
     self.initializationOptions = dictionary;
 }
