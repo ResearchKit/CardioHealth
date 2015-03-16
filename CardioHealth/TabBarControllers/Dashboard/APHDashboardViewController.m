@@ -24,6 +24,8 @@ static NSString*  const kFitTestTotalDistDataSourceKey          = @"totalDistanc
 static NSString*  const kFitTestpeakHeartRateDataSourceKey      = @"peakHeartRate";
 static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRate";
 
+static CGFloat kTitleFontSize = 17.0f;
+static CGFloat kDetailFontSize = 16.0f;
 
 @interface APHDashboardViewController ()<APCPieGraphViewDatasource>
 
@@ -274,8 +276,8 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
         
         if (fitnessItem.activeMinutesString != nil && ![fitnessItem.activeMinutesString isEqualToString:@""]) {
             attirbutedDistanceString = [[NSMutableAttributedString alloc] initWithString:fitnessItem.activeMinutesString];
-            [attirbutedDistanceString addAttribute:NSFontAttributeName value:[UIFont appMediumFontWithSize:17.0f] range:NSMakeRange(0, (fitnessItem.activeMinutesString.length - @" Active Minutes".length))];
-            [attirbutedDistanceString addAttribute:NSFontAttributeName value:[UIFont appRegularFontWithSize:16.0f] range: [fitnessItem.activeMinutesString rangeOfString:@" Active Minutes"]];
+            [attirbutedDistanceString addAttribute:NSFontAttributeName value:[UIFont appMediumFontWithSize:kTitleFontSize] range:NSMakeRange(0, (fitnessItem.activeMinutesString.length - @" Active Minutes".length))];
+            [attirbutedDistanceString addAttribute:NSFontAttributeName value:[UIFont appRegularFontWithSize:kDetailFontSize] range: [fitnessItem.activeMinutesString rangeOfString:@" Active Minutes"]];
         }
 
         /*
@@ -291,11 +293,11 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
             attributedTotalStepsString    = [[NSMutableAttributedString alloc] initWithString: nonAttributedString];
 
             [attributedTotalStepsString addAttribute: NSFontAttributeName
-                                               value: [UIFont appMediumFontWithSize: 17.0f]
+                                               value: [UIFont appMediumFontWithSize:kTitleFontSize]
                                                range: NSMakeRange (0, nonAttributedString.length)];
 
             [attributedTotalStepsString addAttribute: NSFontAttributeName
-                                               value: [UIFont appRegularFontWithSize: 16.0f]
+                                               value: [UIFont appRegularFontWithSize:kDetailFontSize]
                                                range: [nonAttributedString rangeOfString: explanation]];
         }
 

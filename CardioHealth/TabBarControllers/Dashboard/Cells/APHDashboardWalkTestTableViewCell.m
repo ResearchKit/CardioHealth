@@ -9,6 +9,9 @@
 
 NSString * const kAPHDashboardWalkTestTableViewCellIdentifier = @"APHDashboardWalkTestTableViewCell";
 
+static CGFloat kWalkDataLabelFontSize = 15.0f;
+static CGFloat kDateLabelFontSize = 13.0f;
+
 @implementation APHDashboardWalkTestTableViewCell
 
 - (void)awakeFromNib {
@@ -19,16 +22,16 @@ NSString * const kAPHDashboardWalkTestTableViewCellIdentifier = @"APHDashboardWa
 
 - (void)setupAppearance
 {
-    self.distanceLabel.font = [UIFont appLightFontWithSize:15.0f];
+    self.distanceLabel.font = [UIFont appLightFontWithSize:kWalkDataLabelFontSize];
     self.distanceLabel.textColor = [UIColor appSecondaryColor2];
     
-    self.peakHeartRateLabel.font = [UIFont appLightFontWithSize:15.0f];
+    self.peakHeartRateLabel.font = [UIFont appLightFontWithSize:kWalkDataLabelFontSize];
     self.peakHeartRateLabel.textColor = [UIColor appSecondaryColor2];
     
-    self.finalHeartRateLabel.font = [UIFont appLightFontWithSize:15.0f];
+    self.finalHeartRateLabel.font = [UIFont appLightFontWithSize:kWalkDataLabelFontSize];
     self.finalHeartRateLabel.textColor = [UIColor appSecondaryColor2];
     
-    self.lastPerformedDateLabel.font = [UIFont appLightFontWithSize:13.0f];
+    self.lastPerformedDateLabel.font = [UIFont appLightFontWithSize:kDateLabelFontSize];
     self.lastPerformedDateLabel.textColor = [UIColor appSecondaryColor3];
 }
 
