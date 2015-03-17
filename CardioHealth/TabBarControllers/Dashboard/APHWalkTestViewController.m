@@ -10,6 +10,8 @@
 
 static NSInteger const numberOfRows = 3;
 
+static CGFloat kHeaderFontSize = 16.0f;
+
 @interface APHWalkTestViewController ()
 
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
@@ -101,7 +103,7 @@ static NSInteger const numberOfRows = 3;
     headerView.contentView.backgroundColor = [UIColor appSecondaryColor4];
     
     UILabel *headerLabel = [[UILabel alloc] initWithFrame:headerView.bounds];
-    headerLabel.font = [UIFont appLightFontWithSize:16.0f];
+    headerLabel.font = [UIFont appLightFontWithSize:kHeaderFontSize];
     headerLabel.textColor = [UIColor appSecondaryColor3];
     headerLabel.textAlignment = NSTextAlignmentCenter;
     headerLabel.text = [self.dateFormatter stringFromDate:item.activityDate];

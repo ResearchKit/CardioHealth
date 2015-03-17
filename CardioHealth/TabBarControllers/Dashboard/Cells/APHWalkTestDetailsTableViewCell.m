@@ -9,6 +9,9 @@
 
 NSString * const kAPHWalkTestDetailsTableViewCellIdentifier = @"APHWalkTestDetailsTableViewCell";
 
+static CGFloat kTextFontSize = 16.0f;
+static CGFloat kDetailFontSize = 24.0f;
+
 @implementation APHWalkTestDetailsTableViewCell
 
 @synthesize imageView = _imageView;
@@ -19,10 +22,10 @@ NSString * const kAPHWalkTestDetailsTableViewCellIdentifier = @"APHWalkTestDetai
     // Initialization code
     
     self.textLabel.textColor = [UIColor appSecondaryColor1];
-    self.textLabel.font = [UIFont appRegularFontWithSize:16.0f];
+    self.textLabel.font = [UIFont appRegularFontWithSize:kTextFontSize];
     
     self.detailTextLabel.textColor = self.tintColor;
-    self.detailTextLabel.font = [UIFont appRegularFontWithSize:24.0f];
+    self.detailTextLabel.font = [UIFont appRegularFontWithSize:kDetailFontSize];
     
 }
 
