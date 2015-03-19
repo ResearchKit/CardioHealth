@@ -7,11 +7,11 @@
       buildImplicitDependencies = "YES">
       <BuildActionEntries>
          <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
+            buildForTesting = "NO"
+            buildForRunning = "NO"
             buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F5F644F819D35BA2004CFBB2"
@@ -32,9 +32,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F5F644F819D35BA2004CFBB2"
-            BuildableName = "CardioHealth.app"
-            BlueprintName = "CardioHealth"
+            BlueprintIdentifier = "085F3E451AAF6A0D003A910A"
+            BuildableName = "CardioHealth_YML.app"
+            BlueprintName = "CardioHealth - YML"
             ReferencedContainer = "container:CardioHealth.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -48,12 +48,13 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F5F644F819D35BA2004CFBB2"
-            BuildableName = "CardioHealth.app"
-            BlueprintName = "CardioHealth"
+            BlueprintIdentifier = "085F3E451AAF6A0D003A910A"
+            BuildableName = "CardioHealth_YML.app"
+            BlueprintName = "CardioHealth - YML"
             ReferencedContainer = "container:CardioHealth.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -66,12 +67,13 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F5F644F819D35BA2004CFBB2"
-            BuildableName = "CardioHealth.app"
-            BlueprintName = "CardioHealth"
+            BlueprintIdentifier = "085F3E451AAF6A0D003A910A"
+            BuildableName = "CardioHealth_YML.app"
+            BlueprintName = "CardioHealth - YML"
             ReferencedContainer = "container:CardioHealth.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
