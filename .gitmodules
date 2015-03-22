@@ -4,3 +4,6 @@
 [submodule "researchkit"]
 	path = researchkit
 	url = https://bitbucket.org/ymedialabs/researchkit.git
+[submodule "BridgeSDK"]
+	path = BridgeSDK
+	url = https://bitbucket.org/ymedialabs/applebranch.git
