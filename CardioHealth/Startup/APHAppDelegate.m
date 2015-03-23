@@ -7,6 +7,7 @@
  
 @import APCAppCore;
 #import "APHAppDelegate.h"
+#import "APHAppDelegate+APHMigration.h"
 
 /*********************************************************************************/
 #pragma mark - Initializations Options
@@ -22,6 +23,51 @@ static NSString* const  kFlurryApiKey              = @"9NPWCDZZY6KCXD4SCHWG";
 @end
 
 @implementation APHAppDelegate
+
+/*********************************************************************************/
+#pragma mark - App Specific Code
+/*********************************************************************************/
+
+- (void)performMigrationAfterDataSubstrateFrom:(NSInteger) __unused previousVersion currentVersion:(NSInteger) __unused currentVersion
+{
+    NSDictionary*   infoDictionary      = [[NSBundle mainBundle] infoDictionary];
+    NSString*       majorVersion        = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+    NSString*       minorVersion        = [infoDictionary objectForKey:@"CFBundleVersion"];
+    
+    NSUserDefaults* defaults            = [NSUserDefaults standardUserDefaults];
+    
+    NSError *migrationError = nil;
+    
+#warning Danger! Delete this code below
+    [self performMigrationFromOneToTwoWithError:&migrationError];
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:
+          [[self applicationDocumentsDirectory] stringByAppendingPathComponent:self.initializationOptions[kDatabaseNameKey]]])
+    {
+        APCLogEvent(@"This application is being launched for the first time. We know this because there is no persistent store.");
+    }
+    else if ( [defaults objectForKey:@"previousVersion"] == nil)
+    {
+        APCLogEvent(@"The entire data model version %d", kTheEntireDataModelOfTheApp);
+        if ([self performMigrationFromOneToTwoWithError:&migrationError]) {
+            
+            APCLogEvent(@"Migration from version 1 to 2 has failed.");
+        }
+    }
+    
+    [defaults setObject:majorVersion
+                 forKey:@"shortVersionString"];
+    
+    [defaults setObject:minorVersion
+                 forKey:@"version"];
+    
+    
+    if (!migrationError)
+    {
+        [defaults setObject:@(currentVersion) forKey:@"previousVersion"];
+    }
+    
+}
 
 - (void) setUpInitializationOptions
 {
