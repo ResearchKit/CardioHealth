@@ -60,10 +60,10 @@
     {
         
         //Retrieve the reference for today and tomorrow's scheduled tasks if they exist
-        NSFetchRequest * request = [APCScheduledTask request];
-        request.predicate = [NSPredicate predicateWithFormat:@"task.taskID == %@", identifier];
-        NSError * error;
-        NSArray * scheduledTasks = [self.dataSubstrate.persistentContext executeFetchRequest:request error:&error];
+        NSFetchRequest*     request             = [APCScheduledTask request];
+        request.predicate                       = [NSPredicate predicateWithFormat:@"task.taskID == %@", identifier];
+        NSError*            error;
+        NSArray*            scheduledTasks      = [self.dataSubstrate.persistentContext executeFetchRequest:request error:&error];
         
         if (error)
         {
@@ -72,21 +72,30 @@
             goto errorOccurred;
         }
         
-        APCScheduledTask *tempScheduledTask = nil;
+        APCScheduledTask*   tempScheduledTask   = nil;
         
         if (scheduledTasks.count > 0)
         {
             tempScheduledTask = [scheduledTasks firstObject];
         }
         
+        BOOL                shouldCreate        = YES;
+
         //Delete all scheduled tasks that are recurring types
         for (APCScheduledTask *scheduledTask in scheduledTasks) {
-            [self.dataSubstrate.persistentContext deleteObject:scheduledTask];
+            
+            if (!scheduledTask.completed)
+            {
+                [self.dataSubstrate.persistentContext deleteObject:scheduledTask];
+            } else {
+                //If there are completed tasks keep them and set flag to not create additional scheduled tasks
+                shouldCreate = NO;
+            }
             
         }
         
         
-        NSError* MOCError = nil;
+        NSError*            MOCError            = nil;
         
         if (! [self.dataSubstrate.persistentContext save:&MOCError])
         {
@@ -120,18 +129,20 @@
         [APCSchedule updateSchedulesFromJSON:schedules[@"schedules"]
                                    inContext:self.dataSubstrate.persistentContext];
         
-        if ( [self returnAllAPCResultsWithTaskId:identifier] == nil || [self returnAllAPCResultsWithTaskId:identifier].count <= 0)
-        //If there are no results update scheduled tasks as necessary
+        if ( shouldCreate )
         {
             APCScheduler*       scheduler               = [[APCScheduler alloc] initWithDataSubstrate:self.dataSubstrate];
             
-            scheduler.referenceRange.startDate = [[NSDate date] startOfDay];
+            scheduler.referenceRange.startDate          = [[NSDate date] startOfDay];
 
             APCSchedule*        taskSchedule            = [APCSchedule cannedScheduleForTaskID:identifier
                                                                                      inContext:self.dataSubstrate.persistentContext];
-
-            [scheduler updateScheduledTasksForSchedule:taskSchedule];
-
+            
+            NSDate*             startDate               = [[NSDate date] startOfDay];
+            
+            [scheduler findOrCreateOneTimeScheduledTask:taskSchedule
+                                                   task:tempScheduledTask.task
+                                  andStartDateReference:startDate];
         }
     }
     
@@ -139,28 +150,4 @@ errorOccurred:
     
     return success;
 }
-
-- (NSArray *)returnAllAPCResultsWithTaskId:(NSString *)taskId {
-    
-    APCAppDelegate*     appDelegate         = (APCAppDelegate *)[[UIApplication sharedApplication] delegate];
-    NSFetchRequest*     request             = [APCResult request];
-
-    
-    NSPredicate*        predicate           = [NSPredicate predicateWithFormat:@"taskID == %@", taskId];
-    
-                        request.predicate   = predicate;
-    
-    NSError*            error               = nil;
-    
-    NSArray *           results             = [appDelegate.dataSubstrate.mainContext executeFetchRequest:request
-                                                                                                   error:&error];
-    
-    if (error)
-    {
-        APCLogError2(error);
-    }
-    
-    return results;
-}
-
 @end
