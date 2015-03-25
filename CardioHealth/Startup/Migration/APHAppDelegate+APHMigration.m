@@ -20,33 +20,9 @@
 
 - (BOOL)updateTaskScheduleToOnceWithTaskId
 {
-    //Change the schedule type to Once
-//    NSDictionary * schedules    = @{
-//                                      @"schedules":
-//                                          @[
-//
-//                                              @{
-//                                                  @"expire"         : @"P89D",
-//                                                  @"scheduleType"   : @"once",
-//                                                  @"taskID"         : @"2-APHHeartAge-7259AC18-D711-47A6-ADBD-6CFCECDED1DF"
-//                                              },
-//
-//                                              @{
-//                                                  @"expire"         : @"P89D",
-//                                                  @"scheduleType"   : @"once",
-//                                                  @"taskID"         : @"3-APHFitnessTest-00000000-1111-1111-1111-F810BE28D995"
-//                                              },
-//                                          ]
-//                                      };
-//
-//    [APCSchedule updateSchedulesFromJSON:schedules[@"schedules"]
-//                               inContext:self.dataSubstrate.persistentContext];
-    
-    
 
     [self findScheduledTaskAndClean: @[@"2-APHHeartAge-7259AC18-D711-47A6-ADBD-6CFCECDED1DF",
                                        @"3-APHFitnessTest-00000000-1111-1111-1111-F810BE28D995"]];
-
     
     return YES;
 }
@@ -106,39 +82,24 @@
 
         
         //Update the schedule type to 'Once' from 'Recurring'
-        
-#warning TODO figure out how many days until expiration
-        NSDictionary * schedules    = @{
-                                        @"schedules":
-                                            @[
-                                                
-                                                @{
-                                                    @"expire"         : @"P89D",
-                                                    @"scheduleType"   : @"once",
-                                                    @"taskID"         : @"2-APHHeartAge-7259AC18-D711-47A6-ADBD-6CFCECDED1DF"
-                                                    },
-                                                
-                                                @{
-                                                    @"expire"         : @"P89D",
-                                                    @"scheduleType"   : @"once",
-                                                    @"taskID"         : @"3-APHFitnessTest-00000000-1111-1111-1111-F810BE28D995"
-                                                    },
-                                                ]
-                                        };
-        
-        [APCSchedule updateSchedulesFromJSON:schedules[@"schedules"]
-                                   inContext:self.dataSubstrate.persistentContext];
+        [self updateSchedulesToOnce];
+
         
         if ( shouldCreate )
         {
             APCScheduler*       scheduler               = [[APCScheduler alloc] initWithDataSubstrate:self.dataSubstrate];
             
-            scheduler.referenceRange.startDate          = [[NSDate date] startOfDay];
-
             APCSchedule*        taskSchedule            = [APCSchedule cannedScheduleForTaskID:identifier
                                                                                      inContext:self.dataSubstrate.persistentContext];
             
-            NSDate*             startDate               = [[NSDate date] startOfDay];
+            NSDate*             taskReferenceDate       = [tempScheduledTask.task.createdAt startOfDay];
+            
+            NSDateComponents*   components              = [[NSDateComponents alloc] init];
+            [components setDay:8];
+            
+            NSDate*             startDate               = [[NSCalendar currentCalendar] dateByAddingComponents:components
+                                                                                                        toDate:taskReferenceDate
+                                                                                                       options:0];
             
             [scheduler findOrCreateOneTimeScheduledTask:taskSchedule
                                                    task:tempScheduledTask.task
@@ -149,5 +110,29 @@
 errorOccurred:
     
     return success;
+}
+
+- (void) updateSchedulesToOnce {
+    //Update the schedule type to 'Once' from 'Recurring'
+    NSDictionary * schedules    = @{
+                                    @"schedules":
+                                        @[
+                                            
+                                            @{
+                                                @"expire"         : @"P89D",
+                                                @"scheduleType"   : @"once",
+                                                @"taskID"         : @"2-APHHeartAge-7259AC18-D711-47A6-ADBD-6CFCECDED1DF"
+                                                },
+                                            
+                                            @{
+                                                @"expire"         : @"P89D",
+                                                @"scheduleType"   : @"once",
+                                                @"taskID"         : @"3-APHFitnessTest-00000000-1111-1111-1111-F810BE28D995"
+                                                },
+                                            ]
+                                    };
+    
+    [APCSchedule updateSchedulesFromJSON:schedules[@"schedules"]
+                               inContext:self.dataSubstrate.persistentContext];
 }
 @end
