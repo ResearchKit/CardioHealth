@@ -36,13 +36,11 @@ static NSString* const  kFlurryApiKey              = @"9NPWCDZZY6KCXD4SCHWG";
     
     NSUserDefaults* defaults            = [NSUserDefaults standardUserDefaults];
     
-    NSError *migrationError = nil;
+    NSError*        migrationError      = nil;
     
 #warning Danger! Delete this code below
-    [self performMigrationFromOneToTwoWithError:&migrationError];
-    
-    if (![[NSFileManager defaultManager] fileExistsAtPath:
-          [[self applicationDocumentsDirectory] stringByAppendingPathComponent:self.initializationOptions[kDatabaseNameKey]]])
+//    [self performMigrationFromOneToTwoWithError:&migrationError];    
+    if (![APCDBStatus isSeedLoadedWithContext:self.dataSubstrate.persistentContext])
     {
         APCLogEvent(@"This application is being launched for the first time. We know this because there is no persistent store.");
     }

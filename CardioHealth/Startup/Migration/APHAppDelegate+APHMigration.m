@@ -21,24 +21,26 @@
 - (BOOL)updateTaskScheduleToOnceWithTaskId
 {
     //Change the schedule type to Once
-    NSDictionary * schedules    = @{
-                                      @"schedules":
-                                          @[
-
-                                              @{
-                                                  @"scheduleType"   : @"once",
-                                                  @"taskID"         : @"2-APHHeartAge-7259AC18-D711-47A6-ADBD-6CFCECDED1DF"
-                                              },
-
-                                              @{
-                                                  @"scheduleType"   : @"once",
-                                                  @"taskID"         : @"3-APHFitnessTest-00000000-1111-1111-1111-F810BE28D995"
-                                              },
-                                          ]
-                                      };
-    
-    [APCSchedule updateSchedulesFromJSON:schedules[@"schedules"]
-                               inContext:self.dataSubstrate.persistentContext];
+//    NSDictionary * schedules    = @{
+//                                      @"schedules":
+//                                          @[
+//
+//                                              @{
+//                                                  @"expire"         : @"P89D",
+//                                                  @"scheduleType"   : @"once",
+//                                                  @"taskID"         : @"2-APHHeartAge-7259AC18-D711-47A6-ADBD-6CFCECDED1DF"
+//                                              },
+//
+//                                              @{
+//                                                  @"expire"         : @"P89D",
+//                                                  @"scheduleType"   : @"once",
+//                                                  @"taskID"         : @"3-APHFitnessTest-00000000-1111-1111-1111-F810BE28D995"
+//                                              },
+//                                          ]
+//                                      };
+//
+//    [APCSchedule updateSchedulesFromJSON:schedules[@"schedules"]
+//                               inContext:self.dataSubstrate.persistentContext];
     
     
 
@@ -58,32 +60,31 @@
     {
         
         //Retrieve the reference for today and tomorrow's scheduled tasks if they exist
+        NSFetchRequest * request = [APCScheduledTask request];
+        request.predicate = [NSPredicate predicateWithFormat:@"task.taskID == %@", identifier];
+        NSError * error;
+        NSArray * scheduledTasks = [self.dataSubstrate.persistentContext executeFetchRequest:request error:&error];
         
-        APCSchedule*        taskSchedule            = [APCSchedule cannedScheduleForTaskID:identifier
-                                                                                 inContext:self.dataSubstrate.persistentContext];
-        
-        APCScheduledTask*   scheduleTaskForToday    = [APCScheduledTask scheduledTaskForStartOnDate:[[NSDate date] startOfDay]
-                                                                                           schedule:taskSchedule
-                                                                                          inContext:self.dataSubstrate.persistentContext];
-        
-        NSDate*             dateForTomorrow         = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitDay
-                                                                                               value:1
-                                                                                              toDate:[[NSDate date] startOfDay]
-                                                                                             options:0];
-        
-        APCScheduledTask*   scheduleTaskForTomorrow = [APCScheduledTask scheduledTaskForStartOnDate:dateForTomorrow
-                                                                                           schedule:taskSchedule
-                                                                                          inContext:self.dataSubstrate.persistentContext];
-        
-        if (! [scheduleTaskForToday.completed boolValue])
+        if (error)
         {
-            [self.dataSubstrate.persistentContext deleteObject:scheduleTaskForToday];
+            APCLogError2(error);
+            success = NO;
+            goto errorOccurred;
         }
         
-        if (scheduleTaskForTomorrow != nil)
+        APCScheduledTask *tempScheduledTask = nil;
+        
+        if (scheduledTasks.count > 0)
         {
-            [self.dataSubstrate.persistentContext deleteObject:scheduleTaskForTomorrow];
+            tempScheduledTask = [scheduledTasks firstObject];
         }
+        
+        //Delete all scheduled tasks that are recurring types
+        for (APCScheduledTask *scheduledTask in scheduledTasks) {
+            [self.dataSubstrate.persistentContext deleteObject:scheduledTask];
+            
+        }
+        
         
         NSError* MOCError = nil;
         
@@ -91,15 +92,50 @@
         {
             APCLogError2(MOCError);
             success = NO;
+            goto errorOccurred;
         }
+
+        
+        //Update the schedule type to 'Once' from 'Recurring'
+        
+#warning TODO figure out how many days until expiration
+        NSDictionary * schedules    = @{
+                                        @"schedules":
+                                            @[
+                                                
+                                                @{
+                                                    @"expire"         : @"P89D",
+                                                    @"scheduleType"   : @"once",
+                                                    @"taskID"         : @"2-APHHeartAge-7259AC18-D711-47A6-ADBD-6CFCECDED1DF"
+                                                    },
+                                                
+                                                @{
+                                                    @"expire"         : @"P89D",
+                                                    @"scheduleType"   : @"once",
+                                                    @"taskID"         : @"3-APHFitnessTest-00000000-1111-1111-1111-F810BE28D995"
+                                                    },
+                                                ]
+                                        };
+        
+        [APCSchedule updateSchedulesFromJSON:schedules[@"schedules"]
+                                   inContext:self.dataSubstrate.persistentContext];
         
         if ( [self returnAllAPCResultsWithTaskId:identifier] == nil || [self returnAllAPCResultsWithTaskId:identifier].count <= 0)
         //If there are no results update scheduled tasks as necessary
         {
-            APCScheduler* scheduler = [[APCScheduler alloc] initWithDataSubstrate:self.dataSubstrate];
-            [scheduler updateScheduledTasksIfNotUpdating:YES];
+            APCScheduler*       scheduler               = [[APCScheduler alloc] initWithDataSubstrate:self.dataSubstrate];
+            
+            scheduler.referenceRange.startDate = [[NSDate date] startOfDay];
+
+            APCSchedule*        taskSchedule            = [APCSchedule cannedScheduleForTaskID:identifier
+                                                                                     inContext:self.dataSubstrate.persistentContext];
+
+            [scheduler updateScheduledTasksForSchedule:taskSchedule];
+
         }
     }
+    
+errorOccurred:
     
     return success;
 }
@@ -107,10 +143,10 @@
 - (NSArray *)returnAllAPCResultsWithTaskId:(NSString *)taskId {
     
     APCAppDelegate*     appDelegate         = (APCAppDelegate *)[[UIApplication sharedApplication] delegate];
-    NSFetchRequest*     request             = [APCScheduledTask request];
+    NSFetchRequest*     request             = [APCResult request];
 
     
-    NSPredicate*        predicate           = [NSPredicate predicateWithFormat:@"task.taskID == %@", taskId];
+    NSPredicate*        predicate           = [NSPredicate predicateWithFormat:@"taskID == %@", taskId];
     
                         request.predicate   = predicate;
     
