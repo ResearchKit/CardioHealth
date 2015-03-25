@@ -48,12 +48,14 @@
             goto errorOccurred;
         }
         
-        APCScheduledTask*   tempScheduledTask   = nil;
+        APCScheduledTask*   tempScheduledTask           = nil;
+        NSDate*             taskCreatedReferenceDate    = nil;
         
         if (scheduledTasks.count > 0)
         {
-            tempScheduledTask = [scheduledTasks firstObject];
+            tempScheduledTask           = [scheduledTasks firstObject];
         }
+        
         
         BOOL                shouldCreate        = YES;
 
@@ -68,6 +70,7 @@
                 shouldCreate = NO;
             }
             
+            taskCreatedReferenceDate = scheduledTask.task.createdAt;
         }
         
         
@@ -92,7 +95,7 @@
             APCSchedule*        taskSchedule            = [APCSchedule cannedScheduleForTaskID:identifier
                                                                                      inContext:self.dataSubstrate.persistentContext];
             
-            NSDate*             taskReferenceDate       = [tempScheduledTask.task.createdAt startOfDay];
+            NSDate*             taskReferenceDate       = [taskCreatedReferenceDate startOfDay];
             
             NSDateComponents*   components              = [[NSDateComponents alloc] init];
             [components setDay:8];
