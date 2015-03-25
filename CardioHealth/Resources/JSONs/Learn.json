@@ -1,0 +1,55 @@
+{
+    "items": [
+        {
+            "section_title": "",
+            "row_items": [
+                          
+                          {
+                          "title":"About this Study",
+                          "details":"AboutStudy",
+                          "icon_image":"paperplus_icon",
+                          "tint_color" : "blue"
+                          },
+                          
+                          {
+                          "title":"How this Study Works",
+                          "details":"howstudyworks",
+                          "icon_image":"rulerpencil_icon",
+                          "tint_color" : "purple"
+                          },
+                          
+                          {
+                          "title":"Who Can Participate?",
+                          "details":"EligibleToParticipate",
+                          "icon_image":"eligibility",
+                          "tint_color" : "green"
+                          },
+                          
+                {
+                    "title": "What is Heart Disease?",
+                    "details": "disease_information",
+                    "icon_image": "disease_icon",
+                    "tint_color": "appColor"
+                },
+                {
+                    "title": "Symptoms",
+                    "details": "symptoms",
+                    "icon_image": "symptoms",
+                    "tint_color": "green"
+                },
+                {
+                    "title": "Treatment",
+                    "details": "treatment",
+                    "icon_image": "treatment_icon",
+                    "tint_color": "yellow"
+                },
+                {
+                    "title": "Online Resources",
+                    "details": "online_resources",
+                    "icon_image": "globe_icon",
+                    "tint_color": "gray"
+                }
+            ]
+        }
+    ]
+}

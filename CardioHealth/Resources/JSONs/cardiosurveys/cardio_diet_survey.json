@@ -1,0 +1,133 @@
+{
+    "name":"Diet_Survey",
+    "identifier":"Diet_survey_cardio",
+    "questions":
+    [
+        {
+            "guid":"21987ad2-4846-48a4-aa80-27c3371186a2",
+            "identifier":"fruit",
+            "prompt":"How many cups of fruit do you eat in an average day?",
+            "constraints":
+            {
+                "dataType":"integer",
+                "minValue":0,
+                "maxValue":50,
+                "step":null,
+                "type":"IntegerConstraints"
+            },
+            "uiHint":"numberfield",
+            "type":"SurveyQuestion"
+        },
+        {
+                "guid":"21987af2-4846-48a4-aa80-27c3371186a3",
+                "identifier":"vegetable",
+                "prompt":"How many cups of vegetables do you eat in an average day?",
+                "constraints":
+            {
+                "dataType":"integer",
+                "minValue":0,
+                "maxValue":50,
+                "step":null,
+                "type":"IntegerConstraints"
+            },
+            "uiHint":"numberfield",
+            "type":"SurveyQuestion"
+        },         
+        {
+            "guid":"a872f85a-c157-457b-890e-9e28eeed6ea4",
+            "identifier":"fish",
+             "prompt":"How many servings of fish do you eat on an average week?",
+             "constraints":
+             {
+             "dataType":"integer",
+             "minValue":0,
+             "maxValue":50,
+             "step":null,
+             "type":"IntegerConstraints"
+             },
+             "uiHint":"numberfield",
+             "type":"SurveyQuestion"
+         },
+        {
+            "guid":"e872f85a-c157-457f-890f-9e28eeed6ea5",
+            "identifier":"grains",
+             "prompt":"How many servings of whole grains do you eat on an average day?",
+             "constraints":
+                 {
+                 "dataType":"integer",
+                 "minValue":0,
+                 "maxValue":50,
+                 "step":null,
+                 "type":"IntegerConstraints"
+                 },
+             "uiHint":"numberfield",
+             "type":"SurveyQuestion"
+        },
+     
+     
+     
+     {
+            "guid":"e872f85c-c157-457b-890f-9e28eeed6ea6",
+            "identifier":"sugar_drinks",
+             "prompt":"How many beverages with added sugar do you drink every week?",
+             "constraints":
+             {
+             "dataType":"integer",
+             "minValue":0,
+             "maxValue":50,
+             "step":null,
+             "type":"IntegerConstraints"
+             },
+             "uiHint":"numberfield",
+             "type":"SurveyQuestion"
+     },
+
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     {
+            "guid":"e872f85c-c157-457b-890f-9e28eeed6ea1",
+            "identifier":"sodium",
+            "prompt":"Select the statements that apply to you:",
+            "constraints":
+            {
+                "dataType":"integer",
+                "enumeration":
+                [
+                    {
+                        "label": "I avoid eating prepackaged and processed foods.",
+                        "value": 1,
+                        "type": "SurveyQuestionOption"
+                    },
+                    {
+                        "label": "I avoid eating out, but when I do, I seek out low-sodium options.",
+                        "value": 2,
+                        "type": "SurveyQuestionOption"
+                    },
+                     {
+                         "label": "I avoid salt when I'm cooking at home.",
+                         "value": 3,
+                         "type": "SurveyQuestionOption"
+                     },
+                     {
+                         "label": "None of the above",
+                         "value": 4,
+                         "type": "SurveyQuestionOption"
+                     }
+                ],
+                 "allowMultiple": true,
+                 "type": "MultiValueConstraints"
+            },
+            "uiHint":"list",
+            "type":"SurveyQuestion"
+        }
+    ],
+    "type":"Survey"
+}
+
