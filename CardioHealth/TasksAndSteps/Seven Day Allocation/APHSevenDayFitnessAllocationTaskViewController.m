@@ -127,11 +127,11 @@ static NSString *kSevenDayFitnessCompleteStep = @"sevenDayFitnessCompleteStep";
     return stepVC;
 }
 
-- (void)taskViewController:(ORKTaskViewController *)taskViewController didFinishWithResult:(ORKTaskViewControllerResult)result error:(NSError *)error
+- (void)taskViewController:(ORKTaskViewController *)taskViewController didFinishWithReason:(ORKTaskViewControllerFinishReason)result error:(NSError *)error
 {
     [[UIView appearance] setTintColor:[UIColor appPrimaryColor]];
     
-    [super taskViewController:taskViewController didFinishWithResult:result error:error];
+    [super taskViewController:taskViewController didFinishWithReason:result error:error];
 }
 
 

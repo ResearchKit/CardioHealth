@@ -109,14 +109,14 @@ static NSString* const kFitnessWalkText = @"Walk as far as you can for six minut
     }
 }
 
-- (void)taskViewController:(ORKTaskViewController *)taskViewController didFinishWithResult:(ORKTaskViewControllerResult)result error:(NSError *)error
+- (void)taskViewController:(ORKTaskViewController *)taskViewController didFinishWithReason:(ORKTaskViewControllerFinishReason)result error:(NSError *)error
 {
-    if (result == ORKTaskViewControllerResultCompleted)
+    if (result == ORKTaskViewControllerFinishReasonCompleted)
     {
         [[UIView appearance] setTintColor:[UIColor appPrimaryColor]];
     }
     
-    [super taskViewController:taskViewController didFinishWithResult:result error:error];
+    [super taskViewController:taskViewController didFinishWithReason:result error:error];
 }
 
 
