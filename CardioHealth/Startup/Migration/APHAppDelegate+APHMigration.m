@@ -34,7 +34,6 @@
     
     for (NSString* identifier in tasksIdentifiers)
     {
-        
         //Retrieve the reference for today and tomorrow's scheduled tasks if they exist
         NSFetchRequest*     request             = [APCScheduledTask request];
         request.predicate                       = [NSPredicate predicateWithFormat:@"task.taskID == %@", identifier];
@@ -45,72 +44,73 @@
         {
             APCLogError2(error);
             success = NO;
-            goto errorOccurred;
-        }
-        
-        APCScheduledTask*   tempScheduledTask           = nil;
-        NSDate*             taskCreatedReferenceDate    = nil;
-        
-        if (scheduledTasks.count > 0)
-        {
-            tempScheduledTask           = [scheduledTasks firstObject];
-        }
-        
-        
-        BOOL                shouldCreate        = YES;
 
-        //Delete all scheduled tasks that are recurring types
-        for (APCScheduledTask *scheduledTask in scheduledTasks) {
             
-            if (!scheduledTask.completed)
+        } else {
+            
+            APCScheduledTask*   tempScheduledTask           = nil;
+            NSDate*             taskCreatedReferenceDate    = nil;
+            
+            if (scheduledTasks.count > 0)
             {
-                [self.dataSubstrate.persistentContext deleteObject:scheduledTask];
-            } else {
-                //If there are completed tasks keep them and set flag to not create additional scheduled tasks
-                shouldCreate = NO;
+                tempScheduledTask = [scheduledTasks firstObject];
             }
             
-            taskCreatedReferenceDate = scheduledTask.task.createdAt;
-        }
-        
-        
-        NSError*            MOCError            = nil;
-        
-        if (! [self.dataSubstrate.persistentContext save:&MOCError])
-        {
-            APCLogError2(MOCError);
-            success = NO;
-            goto errorOccurred;
-        }
-
-        
-        //Update the schedule type to 'Once' from 'Recurring'
-        [self updateSchedulesToOnce];
-
-        
-        if ( shouldCreate )
-        {
-            APCScheduler*       scheduler               = [[APCScheduler alloc] initWithDataSubstrate:self.dataSubstrate];
+            BOOL shouldCreate = YES;
             
-            APCSchedule*        taskSchedule            = [APCSchedule cannedScheduleForTaskID:identifier
-                                                                                     inContext:self.dataSubstrate.persistentContext];
+            //Delete all scheduled tasks that are recurring types
+            for (APCScheduledTask *scheduledTask in scheduledTasks) {
+                
+                if (!scheduledTask.completed)
+                {
+                    [self.dataSubstrate.persistentContext deleteObject:scheduledTask];
+                } else {
+                    //If there are completed tasks keep them and set flag to not create additional scheduled tasks
+                    shouldCreate = NO;
+                }
+                
+                taskCreatedReferenceDate = scheduledTask.task.createdAt;
+            }
             
-            NSDate*             taskReferenceDate       = [taskCreatedReferenceDate startOfDay];
             
-            NSDateComponents*   components              = [[NSDateComponents alloc] init];
-            [components setDay:8];
+            NSError* MOCError = nil;
             
-            NSDate*             startDate               = [[NSCalendar currentCalendar] dateByAddingComponents:components
-                                                                                                        toDate:taskReferenceDate
-                                                                                                       options:0];
-            
-            [scheduler findOrCreateOneTimeScheduledTask:taskSchedule
-                                                   task:tempScheduledTask.task
-                                  andStartDateReference:startDate];
+            if (! [self.dataSubstrate.persistentContext save:&MOCError])
+            {
+                APCLogError2(MOCError);
+                success = NO;
+            } else {
+                
+                //Update the schedule type to 'Once' from 'Recurring'
+                [self updateSchedulesToOnce];
+                
+                
+                if ( shouldCreate )
+                {
+                    APCScheduler*       scheduler               = [[APCScheduler alloc] initWithDataSubstrate:self.dataSubstrate];
+                    
+                    APCSchedule*        taskSchedule            = [APCSchedule cannedScheduleForTaskID:identifier
+                                                                                             inContext:self.dataSubstrate.persistentContext];
+                    
+                    NSDate*             taskReferenceDate       = [taskCreatedReferenceDate startOfDay];
+                    
+                    NSDateComponents*   components              = [[NSDateComponents alloc] init];
+                    [components setDay:8];
+                    
+                    NSDate*             startDate               = [[NSCalendar currentCalendar] dateByAddingComponents:components
+                                                                                                                toDate:taskReferenceDate
+                                                                                                               options:0];
+                    
+                    if (startDate != nil)
+                    {
+                        [scheduler findOrCreateOneTimeScheduledTask:taskSchedule
+                                                               task:tempScheduledTask.task
+                                              andStartDateReference:startDate];
+                    }
+                }
+            }
         }
     }
-    
-errorOccurred:
     
     return success;
 }

@@ -28,7 +28,7 @@ static NSString* const  kFlurryApiKey              = @"9NPWCDZZY6KCXD4SCHWG";
 #pragma mark - App Specific Code
 /*********************************************************************************/
 
-- (void)performMigrationAfterDataSubstrateFrom:(NSInteger) __unused previousVersion currentVersion:(NSInteger) __unused currentVersion
+- (void)performMigrationAfterDataSubstrateFrom:(NSInteger) __unused previousVersion currentVersion:(NSInteger) currentVersion
 {
     NSDictionary*   infoDictionary      = [[NSBundle mainBundle] infoDictionary];
     NSString*       majorVersion        = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
@@ -38,13 +38,12 @@ static NSString* const  kFlurryApiKey              = @"9NPWCDZZY6KCXD4SCHWG";
     
     NSError*        migrationError      = nil;
     
-#warning Danger! Delete this code below
-//    [self performMigrationFromOneToTwoWithError:&migrationError];    
-    if (![APCDBStatus isSeedLoadedWithContext:self.dataSubstrate.persistentContext])
+    
+    if ([self doesPersisteStoreExist] == NO)
     {
         APCLogEvent(@"This application is being launched for the first time. We know this because there is no persistent store.");
     }
-    else if ( [defaults objectForKey:@"previousVersion"] == nil)
+    else if ( [defaults integerForKey:@"previousVersion"] == 0)
     {
         APCLogEvent(@"The entire data model version %d", kTheEntireDataModelOfTheApp);
         if ([self performMigrationFromOneToTwoWithError:&migrationError]) {
@@ -62,7 +61,8 @@ static NSString* const  kFlurryApiKey              = @"9NPWCDZZY6KCXD4SCHWG";
     
     if (!migrationError)
     {
-        [defaults setObject:@(currentVersion) forKey:@"previousVersion"];
+        [defaults setInteger:currentVersion forKey:@"previousVersion"];
+        [defaults synchronize];
     }
     
 }
