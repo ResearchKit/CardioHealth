@@ -1,6 +1,3 @@
-[submodule "ResearchKit"]
-	path = ResearchKit
-	url = git@github.com:ResearchKit/ResearchKit-Stage.git
 [submodule "BridgeSDK"]
 	path = BridgeSDK
 	url = git@github.com:Sage-Bionetworks/Bridge-iOS-SDK.git
