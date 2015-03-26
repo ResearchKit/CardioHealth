@@ -4,3 +4,6 @@
 [submodule "AppCore"]
 	path = AppCore
 	url = git@github.com:ResearchKit/AppCore.git
+[submodule "ResearchKit"]
+	path = ResearchKit
+	url = git@github.com:ResearchKit/ResearchKit.git
