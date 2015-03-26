@@ -88,15 +88,12 @@
                 if ( shouldCreate )
                 {
                     APCScheduler*       scheduler               = [[APCScheduler alloc] initWithDataSubstrate:self.dataSubstrate];
-                    
                     APCSchedule*        taskSchedule            = [APCSchedule cannedScheduleForTaskID:identifier
                                                                                              inContext:self.dataSubstrate.persistentContext];
                     
                     NSDate*             taskReferenceDate       = [taskCreatedReferenceDate startOfDay];
-                    
                     NSDateComponents*   components              = [[NSDateComponents alloc] init];
                     [components setDay:8];
-                    
                     NSDate*             startDate               = [[NSCalendar currentCalendar] dateByAddingComponents:components
                                                                                                                 toDate:taskReferenceDate
                                                                                                                options:0];
