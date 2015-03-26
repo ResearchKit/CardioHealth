@@ -18,6 +18,13 @@ static NSString* const  kVideoShownKey             = @"VideoShown";
 static NSString* const  kConsentPropertiesFileName = @"APHConsentSection";
 static NSString* const  kFlurryApiKey              = @"9NPWCDZZY6KCXD4SCHWG";
 
+static NSString* const kPreviousVersion            = @"previousVersion";
+static NSString* const kCFBundleVersion            = @"CFBundleVersion";
+static NSString* const kCFBundleShortVersionString = @"CFBundleShortVersionString";
+
+static NSString* const kShortVersionStringKey      = @"shortVersionString";
+static NSString* const kMinorVersion               = @"version";
+
 @interface APHAppDelegate ()
 
 @end
@@ -31,8 +38,8 @@ static NSString* const  kFlurryApiKey              = @"9NPWCDZZY6KCXD4SCHWG";
 - (void)performMigrationAfterDataSubstrateFrom:(NSInteger) __unused previousVersion currentVersion:(NSInteger) currentVersion
 {
     NSDictionary*   infoDictionary      = [[NSBundle mainBundle] infoDictionary];
-    NSString*       majorVersion        = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
-    NSString*       minorVersion        = [infoDictionary objectForKey:@"CFBundleVersion"];
+    NSString*       majorVersion        = [infoDictionary objectForKey:kCFBundleShortVersionString];
+    NSString*       minorVersion        = [infoDictionary objectForKey:kCFBundleVersion];
     
     NSUserDefaults* defaults            = [NSUserDefaults standardUserDefaults];
     
@@ -43,7 +50,7 @@ static NSString* const  kFlurryApiKey              = @"9NPWCDZZY6KCXD4SCHWG";
     {
         APCLogEvent(@"This application is being launched for the first time. We know this because there is no persistent store.");
     }
-    else if ( [defaults integerForKey:@"previousVersion"] == 0)
+    else if ( [defaults integerForKey:kPreviousVersion] == 0)
     {
         APCLogEvent(@"The entire data model version %d", kTheEntireDataModelOfTheApp);
         if ([self performMigrationFromOneToTwoWithError:&migrationError]) {
@@ -53,15 +60,15 @@ static NSString* const  kFlurryApiKey              = @"9NPWCDZZY6KCXD4SCHWG";
     }
     
     [defaults setObject:majorVersion
-                 forKey:@"shortVersionString"];
+                 forKey:kShortVersionStringKey];
     
     [defaults setObject:minorVersion
-                 forKey:@"version"];
+                 forKey:kMinorVersion];
     
     
     if (!migrationError)
     {
-        [defaults setInteger:currentVersion forKey:@"previousVersion"];
+        [defaults setInteger:currentVersion forKey:kPreviousVersion];
         [defaults synchronize];
     }
     
