@@ -166,10 +166,7 @@ static NSString* const kMinorVersion               = @"version";
                                                    @(kAPCUserInfoItemTypeWeight),
                                                    @(kAPCUserInfoItemTypeWakeUpTime),
                                                    @(kAPCUserInfoItemTypeSleepTime),
-                                                   ],
-                                           kAnalyticsOnOffKey  : @YES,
-                                           kAnalyticsFlurryAPIKeyKey : kFlurryApiKey,
-                                        kTaskReminderStartupDefaultTimeKey:@"9:00 AM"
+                                                   ]
                                            }];
     self.initializationOptions = dictionary;
 }
