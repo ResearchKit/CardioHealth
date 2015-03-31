@@ -2,12 +2,54 @@
 //  APHAppDelegate.m 
 //  MyHeart Counts 
 // 
-//  Copyright (c) 2014 Apple, Inc. All rights reserved. 
+// Copyright (c) 2015, Stanford Medical. All rights reserved. 
+// 
+// Redistribution and use in source and binary forms, with or without modification,
+// are permitted provided that the following conditions are met:
+// 
+// 1.  Redistributions of source code must retain the above copyright notice, this
+// list of conditions and the following disclaimer.
+// 
+// 2.  Redistributions in binary form must reproduce the above copyright notice, 
+// this list of conditions and the following disclaimer in the documentation and/or 
+// other materials provided with the distribution. 
+// 
+// 3.  Neither the name of the copyright holder(s) nor the names of any contributors 
+// may be used to endorse or promote products derived from this software without 
+// specific prior written permission. No license is granted to the trademarks of 
+// the copyright holders even if such marks are included in this software. 
+// 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
+// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE 
+// ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE 
+// FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL 
+// DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR 
+// SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER 
+// CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, 
+// OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
+// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
 // 
  
 @import APCAppCore;
 #import "APHAppDelegate.h"
 #import "APHAppDelegate+APHMigration.h"
+
+/*********************************************************************************/
+#pragma mark - Survey Identifiers
+/*********************************************************************************/
+static NSString* const  kFitnessTestSurveyIdentifier                    = @"3-APHFitnessTest-00000000-1111-1111-1111-F810BE28D995";
+static NSString* const  kSevenDaySurveyIdentifier                       = @"3-APHSevenDayAllocation-00000000-1111-1111-1111-F810BE28D995";
+static NSString* const  kHeartStrokeRiskSurveyIdentifier                = @"2-APHHeartAge-7259AC18-D711-47A6-ADBD-6CFCECDED1DF";
+static NSString* const  kHeartAgeBSurveyIdentifier                      = @"APHHeartAgeB-7259AC18-D711-47A6-ADBD-6CFCECDED1DF";
+static NSString* const  kCardioActivityAndSleepSurveyIdentifier         = @"2-CardioActivityAndSleepSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66";
+static NSString* const  kCardioVascularHealthSurveyIdentifer            = @"3-CardioVascularHealthSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66";
+static NSString* const  kDietSurveyIdentifier                           = @"4-DietSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66";
+static NSString* const  kWellBeingAndRiskPerceptionP1SurveyIdentifier   = @"2-WellBeingAndRiskPerceptionSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66";
+static NSString* const  kWellBeingAndRiskPerceptionP2SurveyIdentifier   = @"5-WellBeingAndRiskPerceptionSurvey-1E174061-5B02-11E4-8ED6-0800200C0000";
+static NSString* const  kPhysicalActivityReadinessSurveyIdentifier      = @"1-parqquiz-1E174061-5B02-11E4-8ED6-0800200C9A77";
+static NSString* const  kDailyCheckinSurveyIdentifier                   = @"1-DailyCheckin-be42dc21-4706-478a-a398-10cabb9c7d78";
+static NSString* const  kDayOneCheckinSurveyIdentifier                  = @"4-DayOne-be42dc21-4706-478a-a398-10cabb9c7d78";
 
 /*********************************************************************************/
 #pragma mark - Initializations Options
@@ -125,11 +167,19 @@ static NSString* const kMinorVersion               = @"version";
                                                    @(kAPCUserInfoItemTypeWakeUpTime),
                                                    @(kAPCUserInfoItemTypeSleepTime),
                                                    ],
-                                           kAnalyticsOnOffKey  : @YES,
-                                           kAnalyticsFlurryAPIKeyKey : kFlurryApiKey,
-                                        kTaskReminderStartupDefaultTimeKey:@"9:00 AM"
+                                           kTaskReminderStartupDefaultTimeKey:@"9:00 AM"
                                            }];
     self.initializationOptions = dictionary;
+}
+
+-(void)setUpTasksReminder{
+    
+    APCTaskReminder *sevenDaySurveyReminder = [[APCTaskReminder alloc]initWithTaskID:kSevenDaySurveyIdentifier reminderBody:NSLocalizedString(@"Activity and Sleep Assessment", nil)];
+    APCTaskReminder *dailyCheckinReminder = [[APCTaskReminder alloc]initWithTaskID:kDailyCheckinSurveyIdentifier reminderBody:NSLocalizedString(@"Daily Check-in", nil)];
+    
+    [self.tasksReminder manageTaskReminder:sevenDaySurveyReminder];
+    [self.tasksReminder manageTaskReminder:dailyCheckinReminder];
+    
 }
 
 - (void) setUpAppAppearance

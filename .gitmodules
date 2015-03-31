@@ -1,3 +1,9 @@
 [submodule "AppCore"]
 	path = AppCore
 	url = https://bitbucket.org/ymedialabs/applecore.git
+[submodule "researchkit"]
+	path = researchkit
+	url = https://bitbucket.org/ymedialabs/researchkit.git
+[submodule "BridgeSDK"]
+	path = BridgeSDK
+	url = https://bitbucket.org/ymedialabs/applebranch.git
