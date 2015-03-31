@@ -131,6 +131,8 @@
 		7B30CFA01A376B3D00625350 /* cardiovascular-staging.pem in Resources */ = {isa = PBXBuildFile; fileRef = 7B30CF9E1A376B3D00625350 /* cardiovascular-staging.pem */; };
 		7B30CFA11A376B3D00625350 /* cardiovascular.pem in Resources */ = {isa = PBXBuildFile; fileRef = 7B30CF9F1A376B3D00625350 /* cardiovascular.pem */; };
 		7B41047E19E5D94F00592B96 /* APHFitnessTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B41045A19E5D94F00592B96 /* APHFitnessTaskViewController.m */; };
+		7B4E38411AC0B296009C5C93 /* APHAppDelegate+APHMigration.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B4E38401AC0B296009C5C93 /* APHAppDelegate+APHMigration.m */; };
+		7B4E38421AC0B296009C5C93 /* APHAppDelegate+APHMigration.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B4E38401AC0B296009C5C93 /* APHAppDelegate+APHMigration.m */; };
 		7B5BEC9A1A34F0B7007CEA94 /* cardio_activitysleep_survey.json in Resources */ = {isa = PBXBuildFile; fileRef = 7B5BEC961A34F0B7007CEA94 /* cardio_activitysleep_survey.json */; };
 		7B5BEC9B1A34F0B7007CEA94 /* cardio_CVhealth_survey.json in Resources */ = {isa = PBXBuildFile; fileRef = 7B5BEC971A34F0B7007CEA94 /* cardio_CVhealth_survey.json */; };
 		7B5BEC9C1A34F0B7007CEA94 /* cardio_diet_survey.json in Resources */ = {isa = PBXBuildFile; fileRef = 7B5BEC981A34F0B7007CEA94 /* cardio_diet_survey.json */; };
@@ -366,6 +368,8 @@
 		7B30CF9F1A376B3D00625350 /* cardiovascular.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cardiovascular.pem; sourceTree = "<group>"; };
 		7B41045919E5D94F00592B96 /* APHFitnessTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHFitnessTaskViewController.h; sourceTree = "<group>"; };
 		7B41045A19E5D94F00592B96 /* APHFitnessTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHFitnessTaskViewController.m; sourceTree = "<group>"; };
+		7B4E383F1AC0B296009C5C93 /* APHAppDelegate+APHMigration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "APHAppDelegate+APHMigration.h"; sourceTree = "<group>"; };
+		7B4E38401AC0B296009C5C93 /* APHAppDelegate+APHMigration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "APHAppDelegate+APHMigration.m"; sourceTree = "<group>"; };
 		7B5BEC961A34F0B7007CEA94 /* cardio_activitysleep_survey.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cardio_activitysleep_survey.json; sourceTree = "<group>"; };
 		7B5BEC971A34F0B7007CEA94 /* cardio_CVhealth_survey.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cardio_CVhealth_survey.json; sourceTree = "<group>"; };
 		7B5BEC981A34F0B7007CEA94 /* cardio_diet_survey.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cardio_diet_survey.json; sourceTree = "<group>"; };
@@ -616,6 +620,15 @@
 			path = APHFitnessTest;
 			sourceTree = "<group>";
 		};
+		7B4E383E1AC0B296009C5C93 /* Migration */ = {
+			isa = PBXGroup;
+			children = (
+				7B4E383F1AC0B296009C5C93 /* APHAppDelegate+APHMigration.h */,
+				7B4E38401AC0B296009C5C93 /* APHAppDelegate+APHMigration.m */,
+			);
+			path = Migration;
+			sourceTree = "<group>";
+		};
 		7B5BEC951A34F0B7007CEA94 /* cardiosurveys */ = {
 			isa = PBXGroup;
 			children = (
@@ -779,6 +792,7 @@
 				F55BBDF819D362D0003CA0F9 /* APHAppDelegate.m */,
 				F55BBDF919D362D0003CA0F9 /* LaunchScreen.xib */,
 				F55BBDFA19D362D0003CA0F9 /* Main.storyboard */,
+				7B4E383E1AC0B296009C5C93 /* Migration */,
 			);
 			path = Startup;
 			sourceTree = "<group>";
@@ -1242,6 +1256,7 @@
 				085F3E671AAF6A0D003A910A /* APHWalkTestDetailsTableViewCell.m in Sources */,
 				085F3E681AAF6A0D003A910A /* APHSevenDayFitnessAllocationTaskViewController.m in Sources */,
 				085F3E691AAF6A0D003A910A /* APHDashboardViewController.m in Sources */,
+				7B4E38421AC0B296009C5C93 /* APHAppDelegate+APHMigration.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1282,6 +1297,7 @@
 				5B73CAD41A89C12400FFE79C /* APHWalkTestDetailsTableViewCell.m in Sources */,
 				08C2328A1A15796E00DB4EF9 /* APHSevenDayFitnessAllocationTaskViewController.m in Sources */,
 				F55BBE6B19D362D0003CA0F9 /* APHDashboardViewController.m in Sources */,
+				7B4E38411AC0B296009C5C93 /* APHAppDelegate+APHMigration.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

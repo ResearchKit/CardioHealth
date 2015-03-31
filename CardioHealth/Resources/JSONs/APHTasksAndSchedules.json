@@ -89,13 +89,13 @@
                   },
                   
                   {
-                  "scheduleType": "recurring",
-                  "scheduleString": "0 5 * * *",
+                  "expire" : "P89D",
+                  "scheduleType": "once",
                   "taskID": "2-APHHeartAge-7259AC18-D711-47A6-ADBD-6CFCECDED1DF"
                   },
                   {
-                  "scheduleType": "recurring",
-                  "scheduleString": "0 5 * * *",
+                  "expire" : "P89D",
+                  "scheduleType": "once",
                   "taskID": "3-APHFitnessTest-00000000-1111-1111-1111-F810BE28D995"
                   },
                   {

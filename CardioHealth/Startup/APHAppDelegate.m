@@ -33,6 +33,7 @@
  
 @import APCAppCore;
 #import "APHAppDelegate.h"
+#import "APHAppDelegate+APHMigration.h"
 
 /*********************************************************************************/
 #pragma mark - Initializations Options
@@ -43,11 +44,61 @@ static NSString* const  kVideoShownKey             = @"VideoShown";
 static NSString* const  kConsentPropertiesFileName = @"APHConsentSection";
 static NSString* const  kFlurryApiKey              = @"9NPWCDZZY6KCXD4SCHWG";
 
+static NSString* const kPreviousVersion            = @"previousVersion";
+static NSString* const kCFBundleVersion            = @"CFBundleVersion";
+static NSString* const kCFBundleShortVersionString = @"CFBundleShortVersionString";
+
+static NSString* const kShortVersionStringKey      = @"shortVersionString";
+static NSString* const kMinorVersion               = @"version";
+
 @interface APHAppDelegate ()
 
 @end
 
 @implementation APHAppDelegate
+
+/*********************************************************************************/
+#pragma mark - App Specific Code
+/*********************************************************************************/
+
+- (void)performMigrationAfterDataSubstrateFrom:(NSInteger) __unused previousVersion currentVersion:(NSInteger) currentVersion
+{
+    NSDictionary*   infoDictionary      = [[NSBundle mainBundle] infoDictionary];
+    NSString*       majorVersion        = [infoDictionary objectForKey:kCFBundleShortVersionString];
+    NSString*       minorVersion        = [infoDictionary objectForKey:kCFBundleVersion];
+    
+    NSUserDefaults* defaults            = [NSUserDefaults standardUserDefaults];
+    
+    NSError*        migrationError      = nil;
+    
+    
+    if ([self doesPersisteStoreExist] == NO)
+    {
+        APCLogEvent(@"This application is being launched for the first time. We know this because there is no persistent store.");
+    }
+    else if ( [defaults integerForKey:kPreviousVersion] == 0)
+    {
+        APCLogEvent(@"The entire data model version %d", kTheEntireDataModelOfTheApp);
+        if ([self performMigrationFromOneToTwoWithError:&migrationError]) {
+            
+            APCLogEvent(@"Migration from version 1 to 2 has failed.");
+        }
+    }
+    
+    [defaults setObject:majorVersion
+                 forKey:kShortVersionStringKey];
+    
+    [defaults setObject:minorVersion
+                 forKey:kMinorVersion];
+    
+    
+    if (!migrationError)
+    {
+        [defaults setInteger:currentVersion forKey:kPreviousVersion];
+        [defaults synchronize];
+    }
+    
+}
 
 - (void) setUpInitializationOptions
 {
