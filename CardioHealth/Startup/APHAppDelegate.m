@@ -166,7 +166,8 @@ static NSString* const kMinorVersion               = @"version";
                                                    @(kAPCUserInfoItemTypeWeight),
                                                    @(kAPCUserInfoItemTypeWakeUpTime),
                                                    @(kAPCUserInfoItemTypeSleepTime),
-                                                   ]
+                                                   ],
+                                           kTaskReminderStartupDefaultTimeKey:@"9:00 AM"
                                            }];
     self.initializationOptions = dictionary;
 }
