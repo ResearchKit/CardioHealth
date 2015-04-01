@@ -41,7 +41,6 @@ static NSString* const  kStudyIdentifier           = @"Cardiovascular";
 static NSString* const  kAppPrefix                 = @"cardiovascular";
 static NSString* const  kVideoShownKey             = @"VideoShown";
 static NSString* const  kConsentPropertiesFileName = @"APHConsentSection";
-static NSString* const  kFlurryApiKey              = @"9NPWCDZZY6KCXD4SCHWG";
 
 @interface APHAppDelegate ()
 
@@ -100,8 +99,6 @@ static NSString* const  kFlurryApiKey              = @"9NPWCDZZY6KCXD4SCHWG";
                                                    @(kAPCUserInfoItemTypeWakeUpTime),
                                                    @(kAPCUserInfoItemTypeSleepTime),
                                                    ],
-                                           kAnalyticsOnOffKey  : @YES,
-                                           kAnalyticsFlurryAPIKeyKey : kFlurryApiKey,
                                         kTaskReminderStartupDefaultTimeKey:@"9:00 AM"
                                            }];
     self.initializationOptions = dictionary;
