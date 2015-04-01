@@ -58,7 +58,6 @@ static NSString* const  kStudyIdentifier           = @"Cardiovascular";
 static NSString* const  kAppPrefix                 = @"cardiovascular";
 static NSString* const  kVideoShownKey             = @"VideoShown";
 static NSString* const  kConsentPropertiesFileName = @"APHConsentSection";
-static NSString* const  kFlurryApiKey              = @"9NPWCDZZY6KCXD4SCHWG";
 
 static NSString* const kPreviousVersion            = @"previousVersion";
 static NSString* const kCFBundleVersion            = @"CFBundleVersion";
