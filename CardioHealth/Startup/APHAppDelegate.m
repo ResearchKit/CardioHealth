@@ -36,6 +36,22 @@
 #import "APHAppDelegate+APHMigration.h"
 
 /*********************************************************************************/
+#pragma mark - Survey Identifiers
+/*********************************************************************************/
+static NSString* const  kFitnessTestSurveyIdentifier                    = @"3-APHFitnessTest-00000000-1111-1111-1111-F810BE28D995";
+static NSString* const  kSevenDaySurveyIdentifier                       = @"3-APHSevenDayAllocation-00000000-1111-1111-1111-F810BE28D995";
+static NSString* const  kHeartStrokeRiskSurveyIdentifier                = @"2-APHHeartAge-7259AC18-D711-47A6-ADBD-6CFCECDED1DF";
+static NSString* const  kHeartAgeBSurveyIdentifier                      = @"APHHeartAgeB-7259AC18-D711-47A6-ADBD-6CFCECDED1DF";
+static NSString* const  kCardioActivityAndSleepSurveyIdentifier         = @"2-CardioActivityAndSleepSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66";
+static NSString* const  kCardioVascularHealthSurveyIdentifer            = @"3-CardioVascularHealthSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66";
+static NSString* const  kDietSurveyIdentifier                           = @"4-DietSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66";
+static NSString* const  kWellBeingAndRiskPerceptionP1SurveyIdentifier   = @"2-WellBeingAndRiskPerceptionSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66";
+static NSString* const  kWellBeingAndRiskPerceptionP2SurveyIdentifier   = @"5-WellBeingAndRiskPerceptionSurvey-1E174061-5B02-11E4-8ED6-0800200C0000";
+static NSString* const  kPhysicalActivityReadinessSurveyIdentifier      = @"1-parqquiz-1E174061-5B02-11E4-8ED6-0800200C9A77";
+static NSString* const  kDailyCheckinSurveyIdentifier                   = @"1-DailyCheckin-be42dc21-4706-478a-a398-10cabb9c7d78";
+static NSString* const  kDayOneCheckinSurveyIdentifier                  = @"4-DayOne-be42dc21-4706-478a-a398-10cabb9c7d78";
+
+/*********************************************************************************/
 #pragma mark - Initializations Options
 /*********************************************************************************/
 static NSString* const  kStudyIdentifier           = @"Cardiovascular";
@@ -150,9 +166,19 @@ static NSString* const kMinorVersion               = @"version";
                                                    @(kAPCUserInfoItemTypeWakeUpTime),
                                                    @(kAPCUserInfoItemTypeSleepTime),
                                                    ],
-                                        kTaskReminderStartupDefaultTimeKey:@"9:00 AM"
+                                           kTaskReminderStartupDefaultTimeKey:@"9:00 AM"
                                            }];
     self.initializationOptions = dictionary;
+}
+
+-(void)setUpTasksReminder{
+    
+    APCTaskReminder *sevenDaySurveyReminder = [[APCTaskReminder alloc]initWithTaskID:kSevenDaySurveyIdentifier reminderBody:NSLocalizedString(@"Activity and Sleep Assessment", nil)];
+    APCTaskReminder *dailyCheckinReminder = [[APCTaskReminder alloc]initWithTaskID:kDailyCheckinSurveyIdentifier reminderBody:NSLocalizedString(@"Daily Check-in", nil)];
+    
+    [self.tasksReminder manageTaskReminder:sevenDaySurveyReminder];
+    [self.tasksReminder manageTaskReminder:dailyCheckinReminder];
+    
 }
 
 - (void) setUpAppAppearance
