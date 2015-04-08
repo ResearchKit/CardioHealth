@@ -3,8 +3,8 @@ Building the App
 
 ###Requirements
 
-* Xcode 6.2
-* iOS 8.2 SDK
+* Xcode 6.3
+* iOS 8.3 SDK
 
 ###Getting the source
 
