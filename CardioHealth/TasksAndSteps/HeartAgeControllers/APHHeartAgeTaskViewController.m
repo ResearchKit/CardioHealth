@@ -399,18 +399,18 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
 #pragma  mark  - TaskViewController delegates
 /*********************************************************************************/
 
-- (void)taskViewController:(ORKTaskViewController *)taskViewController didFinishWithResult:(ORKTaskViewControllerResult)result error:(NSError *)error
+- (void)taskViewController:(ORKTaskViewController *)taskViewController didFinishWithReason:(ORKTaskViewControllerFinishReason)reason error:(nullable NSError *)error
 {
-    if (result == ORKTaskViewControllerResultCompleted)
+    if (reason == ORKTaskViewControllerFinishReasonCompleted)
     {
         [self taskViewControllerDidComplete:taskViewController];
     }
-    else if (result == ORKTaskViewControllerResultDiscarded)
+    else if (reason == ORKTaskViewControllerFinishReasonDiscarded)
     {
         [self taskViewControllerDidComplete:taskViewController];
     }
 
-    [super taskViewController:taskViewController didFinishWithResult:result error:error];
+    [super taskViewController:taskViewController didFinishWithReason:reason error:error];
 }
 
 - (void)taskViewControllerDidComplete: (ORKTaskViewController *) __unused taskViewController{
