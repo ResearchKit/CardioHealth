@@ -145,6 +145,8 @@ static NSString* const kMinorVersion               = @"version";
                                                    HKQuantityTypeIdentifierBloodPressureSystolic,
                                                    HKQuantityTypeIdentifierBloodGlucose,
                                                    HKQuantityTypeIdentifierBloodPressureDiastolic,
+                                                   HKQuantityTypeIdentifierOxygenSaturation,
+                                                   @{kHKWorkoutTypeKey  : HKWorkoutTypeIdentifier},
                                                    @{kHKCategoryTypeKey : HKCategoryTypeIdentifierSleepAnalysis}
                                                    ],
                                            kHKWritePermissionsKey                : @[
