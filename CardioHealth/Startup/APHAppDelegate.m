@@ -277,7 +277,7 @@ static NSString* const kMinorVersion               = @"version";
                                                                                                                    andColumnNames:@[@"startTime,endTime,type,value,unit,source"]];
     
     APCPassiveHealthKitWorkoutSink*         workoutReceiver     = [[APCPassiveHealthKitWorkoutSink alloc] initWithIdentifier:@"HealthKitWorkoutCollector"
-                                                                                                              andColumnNames:@[@"startTime,endTime,type,workoutType,total distance,unit, energy consumed,unit,source"]];
+                                                                                                              andColumnNames:@[@"startTime,endTime,type,workoutType,total distance,unit, energy consumed,unit,source,metadata"]];
     
     APCPassiveHealthKitSleepSink*           sleepReceiver       = [[APCPassiveHealthKitSleepSink alloc] initWithIdentifier:@"HealthKitSleepCollector"
                                                                                                             andColumnNames:@[@"startTime,type,category value,value,unit,source"]];
