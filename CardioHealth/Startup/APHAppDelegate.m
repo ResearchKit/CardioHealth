@@ -258,9 +258,81 @@ static NSString* const kMinorVersion               = @"version";
     APCCoreMotionTracker * motionTracker = [[APCCoreMotionTracker alloc] initWithIdentifier:@"motionTracker"];
     [self.passiveDataCollector addTracker:motionTracker];
     
+    [self configureObserverQueries];
+    
     return;
     
 }
+
+- (void)configureObserverQueries
+{
+    NSArray* dataTypesWithReadPermission = self.initializationOptions[kHKReadPermissionsKey];
+    
+    if (!self.passiveHealthKitCollector)
+    {
+        self.passiveHealthKitCollector = [[APCNewPassiveDataCollector alloc] init];
+    }
+    
+    APCPassiveHealthKitQuantityDataSink*    quantityreceiver    = [[APCPassiveHealthKitQuantityDataSink alloc] initWithIdentifier:@"HealthKitDataCollector"
+                                                                                                                   andColumnNames:@[@"startTime,endTime,type,value,unit,source"]];
+    
+    APCPassiveHealthKitWorkoutSink*         workoutReceiver     = [[APCPassiveHealthKitWorkoutSink alloc] initWithIdentifier:@"HealthKitWorkoutCollector"
+                                                                                                              andColumnNames:@[@"startTime,endTime,type,workoutType,total distance,unit, energy consumed,unit,source"]];
+    
+    APCPassiveHealthKitSleepSink*           sleepReceiver       = [[APCPassiveHealthKitSleepSink alloc] initWithIdentifier:@"HealthKitSleepCollector"
+                                                                                                            andColumnNames:@[@"startTime,type,category value,value,unit,source"]];
+    
+    if (dataTypesWithReadPermission) {
+        
+        for (id dataType in dataTypesWithReadPermission) {
+            
+            HKSampleType*   sampleType  = nil;
+            
+            if ([dataType isKindOfClass:[NSDictionary class]])
+            {
+                NSDictionary* categoryType = (NSDictionary *) dataType;
+                
+                //Distinguish
+                if (categoryType[kHKWorkoutTypeKey])
+                {
+                    sampleType = [HKObjectType workoutType];
+                }
+                else if (categoryType[kHKCategoryTypeKey])
+                {
+                    sampleType = [HKObjectType categoryTypeForIdentifier:categoryType[kHKCategoryTypeKey]];
+                }
+            }
+            else
+            {
+                sampleType = [HKObjectType quantityTypeForIdentifier:dataType];
+            }
+            
+            APCHealthKitBackgroundDataCollector *collector = [[APCHealthKitBackgroundDataCollector alloc] initWithIdentifier:sampleType.identifier sampleType:sampleType andLimit:1];
+            
+            //If the HKObjectType is a HKWorkoutType then set a different receiver/data sink.
+            if ([sampleType isKindOfClass:[HKWorkoutType class]])
+            {
+                [collector setReceiver:workoutReceiver];
+                [collector setDelegate:workoutReceiver];
+            }
+            else if ([sampleType isKindOfClass:[HKCategoryType class]])
+            {
+                [collector setReceiver:sleepReceiver];
+                [collector setDelegate:sleepReceiver];
+            }
+            else
+            {
+                [collector setReceiver:quantityreceiver];
+                [collector setDelegate:quantityreceiver];
+            }
+            
+            [collector start];
+            
+            [self.passiveHealthKitCollector addDataSync:collector];
+        }
+    }
+}
+
 
 - (NSDate *)checkSevenDayFitnessStartDate
 {
