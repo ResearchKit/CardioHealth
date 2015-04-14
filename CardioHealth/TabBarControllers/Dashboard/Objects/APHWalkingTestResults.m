@@ -55,7 +55,7 @@ static CGFloat    const kMetersToYardConversion                 = 1.093f;
 - (void)fetchResults
 {
     NSMutableArray *finalResults = [NSMutableArray new];
-    APHTableViewDashboardWalkingTestItem *item = [APHTableViewDashboardWalkingTestItem new];
+    
     
     NSString *taskId = kFitnessTestTaskId;
     APCAppDelegate *appDelegate = (APCAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -85,7 +85,7 @@ static CGFloat    const kMetersToYardConversion                 = 1.093f;
     NSString *resultSummary = nil;
     
     for (APCResult* taskResult in taskResults) {
-        
+        APHTableViewDashboardWalkingTestItem *item = [APHTableViewDashboardWalkingTestItem new];
         resultSummary = [taskResult resultSummary];
         
         if (resultSummary) {
