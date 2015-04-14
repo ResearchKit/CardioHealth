@@ -33,6 +33,7 @@
  
 #import "APHFitnessTaskViewController.h"
 #import <CoreLocation/CoreLocation.h>
+#import <AVFoundation/AVFoundation.h>
 
 static NSInteger const  kRestDuration              = 3.0 * 60.0;
 static NSInteger const  kWalkDuration              = 6.0 * 60.0;
@@ -92,6 +93,10 @@ static NSString* const kFitnessWalkText = @"Walk as far as you can for six minut
     [task.steps[kSecondStep] setTitle:NSLocalizedString(kFitnessTestInstructionTitle, nil)];
     
     [task.steps[kSecondStep] setText:NSLocalizedString(kInstruction2IntendedDescription, kInstruction2IntendedDescription)];
+
+    NSString  *spokenInstructionString = kFitnessWalkText;
+    [task.steps[kThirdStep] setSpokenInstruction:NSLocalizedString(spokenInstructionString, nil)];
+
     [task.steps[kThirdStep] setTitle:NSLocalizedString(kFitnessWalkText, kFitnessWalkText)];
     
     [task.steps[5] setTitle:NSLocalizedString(@"Thank You!", nil)];
@@ -103,9 +108,18 @@ static NSString* const kFitnessWalkText = @"Walk as far as you can for six minut
 - (void)taskViewController:(ORKTaskViewController *) __unused taskViewController stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     
     if ([stepViewController.step.identifier isEqualToString:kIntroStep] || [stepViewController.step.identifier isEqualToString:kIntroOneStep]) {
-
+        
     } else if ([stepViewController.step.identifier isEqualToString:kConclusionStep]) {
         [[UIView appearance] setTintColor:[UIColor appTertiaryColor1]];
+    }
+    
+    if ([stepViewController.step isKindOfClass:[ORKCompletionStep class]])
+    {
+        AVSpeechUtterance *utterance = [AVSpeechUtterance
+                                        speechUtteranceWithString:@"You have completed the activity"];
+        utterance.rate = (AVSpeechUtteranceMinimumSpeechRate + AVSpeechUtteranceDefaultSpeechRate)*0.3;
+        AVSpeechSynthesizer *synth = [[AVSpeechSynthesizer alloc] init];
+        [synth speakUtterance:utterance];
     }
 }
 
