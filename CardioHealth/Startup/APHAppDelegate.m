@@ -255,8 +255,8 @@ static NSString* const kMinorVersion               = @"version";
 -(void)setUpCollectors
 {
 
-    APCCoreMotionTracker * motionTracker = [[APCCoreMotionTracker alloc] initWithIdentifier:@"motionTracker"];
-    [self.passiveDataCollector addTracker:motionTracker];
+//    APCCoreMotionTracker * motionTracker = [[APCCoreMotionTracker alloc] initWithIdentifier:@"motionTracker"];
+//    [self.passiveDataCollector addTracker:motionTracker];
     
     [self configureObserverQueries];
     
@@ -331,6 +331,18 @@ static NSString* const kMinorVersion               = @"version";
             [self.passiveHealthKitCollector addDataSync:collector];
         }
     }
+    
+    APCCoreMotionBackgroundDataCollector *motionCollector = [[APCCoreMotionBackgroundDataCollector alloc] initWithIdentifier:@"motionActivityCollector"];
+    
+    APCPassiveCoreActivityManagerSink *receiver = [[APCPassiveCoreActivityManagerSink alloc] initWithIdentifier:@"motionActivityCollector" andColumnNames:@[@"startTime",@"activityType",@"confidence"]];
+    
+    [motionCollector setReceiver:receiver];
+    [motionCollector setDelegate:receiver];
+    
+    [motionCollector start];
+    
+    [self.passiveHealthKitCollector addDataSync:motionCollector];
+    
 }
 
 
@@ -358,10 +370,10 @@ static NSString* const kMinorVersion               = @"version";
                  kScheduleOffsetTaskIdKey: @"4-DietSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66",
                  kScheduleOffsetOffsetKey: @(1)
                  },
-             @{
-                 kScheduleOffsetTaskIdKey: @"2-APHHeartAge-7259AC18-D711-47A6-ADBD-6CFCECDED1DF",
-                 kScheduleOffsetOffsetKey: @(7)
-                 },
+//             @{
+//                 kScheduleOffsetTaskIdKey: @"2-APHHeartAge-7259AC18-D711-47A6-ADBD-6CFCECDED1DF",
+//                 kScheduleOffsetOffsetKey: @(7)
+//                 },
              @{
                  kScheduleOffsetTaskIdKey: @"3-APHFitnessTest-00000000-1111-1111-1111-F810BE28D995",
                  kScheduleOffsetOffsetKey: @(7)
