@@ -3,7 +3,7 @@
 	url = https://bitbucket.org/ymedialabs/applecore.git
 [submodule "researchkit"]
 	path = researchkit
-	url = https://github.com/ResearchKit/ResearchKit.git
+	url = https://github.com/peculiar/ResearchKit.git
 [submodule "BridgeSDK"]
 	path = BridgeSDK
 	url = https://github.com/Sage-Bionetworks/Bridge-iOS-SDK.git
