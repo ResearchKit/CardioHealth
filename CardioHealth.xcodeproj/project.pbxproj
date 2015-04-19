@@ -114,7 +114,6 @@
 		749280341ABDFB8900CB37E5 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FED81C1ABDFB34009D970B /* ResearchKit.framework */; };
 		749280371ABDFB9100CB37E5 /* APCAppCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FED8261ABDFB34009D970B /* APCAppCore.framework */; };
 		749280391ABDFB9900CB37E5 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 74FED81C1ABDFB34009D970B /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		7492803C1ABDFBA000CB37E5 /* APCAppCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FED8261ABDFB34009D970B /* APCAppCore.framework */; };
 		7492803D1ABDFBA000CB37E5 /* APCAppCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 74FED8261ABDFB34009D970B /* APCAppCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		74D75D671A9F863B00078A73 /* cardio_daily_check.json in Resources */ = {isa = PBXBuildFile; fileRef = 74D75D661A9F863B00078A73 /* cardio_daily_check.json */; };
 		74EF8E301ABF010E001B47E1 /* BridgeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74EF8E2D1ABF0102001B47E1 /* BridgeSDK.framework */; };
@@ -123,9 +122,7 @@
 		74EF8E371ABF0139001B47E1 /* BridgeSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 74EF8E2D1ABF0102001B47E1 /* BridgeSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		74FB5AB31ABE1AA50059C9A3 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FED81C1ABDFB34009D970B /* ResearchKit.framework */; };
 		74FB5AB51ABE1AAB0059C9A3 /* APCAppCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FED8261ABDFB34009D970B /* APCAppCore.framework */; };
-		74FB5AB61ABE1AB30059C9A3 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FED81C1ABDFB34009D970B /* ResearchKit.framework */; };
 		74FB5AB71ABE1AB30059C9A3 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 74FED81C1ABDFB34009D970B /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		74FB5ABA1ABE1AB90059C9A3 /* APCAppCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FED8261ABDFB34009D970B /* APCAppCore.framework */; };
 		74FB5ABB1ABE1AB90059C9A3 /* APCAppCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 74FED8261ABDFB34009D970B /* APCAppCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7B0E172D1A3FBDD70079E536 /* APHCardiovascularHealthSurveyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0E172C1A3FBDD70079E536 /* APHCardiovascularHealthSurveyController.m */; };
 		7B30CFA01A376B3D00625350 /* cardiovascular-staging.pem in Resources */ = {isa = PBXBuildFile; fileRef = 7B30CF9E1A376B3D00625350 /* cardiovascular-staging.pem */; };
@@ -199,6 +196,13 @@
 			remoteGlobalIDString = B183A4731A8535D100C76870;
 			remoteInfo = OpenResearchKit;
 		};
+		7496F77E1ADB3ED600D428FC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 74FED8081ABDFB0B009D970B /* ResearchKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 86CC8E9A1AC09332001CCD89;
+			remoteInfo = ResearchKitTests;
+		};
 		74EF8E2C1ABF0102001B47E1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 74EF8E221ABF0101001B47E1 /* BridgeSDK.xcodeproj */;
@@ -254,20 +258,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = B183A5951A8535D100C76870;
 			remoteInfo = OpenResearchKit;
-		};
-		74FED81D1ABDFB34009D970B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 74FED8081ABDFB0B009D970B /* ResearchKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = B16E339E1A858AFF00A1019B;
-			remoteInfo = ORKDemo;
-		};
-		74FED81F1ABDFB34009D970B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 74FED8081ABDFB0B009D970B /* ResearchKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = B16E33B61A858AFF00A1019B;
-			remoteInfo = ORKDemoTests;
 		};
 		74FED8251ABDFB34009D970B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -449,12 +439,10 @@
 			files = (
 				74FB5AB51ABE1AAB0059C9A3 /* APCAppCore.framework in Frameworks */,
 				74FB5AB31ABE1AA50059C9A3 /* ResearchKit.framework in Frameworks */,
-				74FB5ABA1ABE1AB90059C9A3 /* APCAppCore.framework in Frameworks */,
 				085F3E6B1AAF6A0D003A910A /* HealthKit.framework in Frameworks */,
 				085F3E6F1AAF6A0D003A910A /* Security.framework in Frameworks */,
 				74EF8E301ABF010E001B47E1 /* BridgeSDK.framework in Frameworks */,
 				085F3E711AAF6A0D003A910A /* AVFoundation.framework in Frameworks */,
-				74FB5AB61ABE1AB30059C9A3 /* ResearchKit.framework in Frameworks */,
 				085F3E721AAF6A0D003A910A /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -467,7 +455,6 @@
 				749280371ABDFB9100CB37E5 /* APCAppCore.framework in Frameworks */,
 				F573809119E45CA4008A8354 /* HealthKit.framework in Frameworks */,
 				F5F6452B19D35C57004CFBB2 /* Security.framework in Frameworks */,
-				7492803C1ABDFBA000CB37E5 /* APCAppCore.framework in Frameworks */,
 				F5F6452919D35C4F004CFBB2 /* AVFoundation.framework in Frameworks */,
 				74EF8E361ABF0139001B47E1 /* BridgeSDK.framework in Frameworks */,
 				F5F6452719D35C49004CFBB2 /* CoreData.framework in Frameworks */,
@@ -578,8 +565,7 @@
 			isa = PBXGroup;
 			children = (
 				74FED81C1ABDFB34009D970B /* ResearchKit.framework */,
-				74FED81E1ABDFB34009D970B /* ORKDemo.app */,
-				74FED8201ABDFB34009D970B /* ORKDemoTests.xctest */,
+				7496F77F1ADB3ED600D428FC /* ResearchKitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -972,7 +958,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = APH;
-				LastUpgradeCheck = 0600;
+				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = "Apple, Inc.";
 				TargetAttributes = {
 					085F3E451AAF6A0D003A910A = {
@@ -1037,6 +1023,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		7496F77F1ADB3ED600D428FC /* ResearchKitTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ResearchKitTests.xctest;
+			remoteRef = 7496F77E1ADB3ED600D428FC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		74EF8E2D1ABF0102001B47E1 /* BridgeSDK.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -1056,20 +1049,6 @@
 			fileType = wrapper.framework;
 			path = ResearchKit.framework;
 			remoteRef = 74FED81B1ABDFB34009D970B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		74FED81E1ABDFB34009D970B /* ORKDemo.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = ORKDemo.app;
-			remoteRef = 74FED81D1ABDFB34009D970B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		74FED8201ABDFB34009D970B /* ORKDemoTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = ORKDemoTests.xctest;
-			remoteRef = 74FED81F1ABDFB34009D970B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		74FED8261ABDFB34009D970B /* APCAppCore.framework */ = {

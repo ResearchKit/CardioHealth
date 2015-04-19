@@ -7,11 +7,11 @@
               "taskCompletionTimeString" : "9 Questions"
               },
               {
-              "taskTitle": "7-Day Activity and Sleep Assessment",
-              "taskID": "3-APHSevenDayAllocation-00000000-1111-1111-1111-F810BE28D995",
-              "taskClassName": "APHSevenDayFitnessAllocationTaskViewController"
+              "taskTitle": "6-Minute Walk Test",
+              "taskID": "3-APHFitnessTest-00000000-1111-1111-1111-F810BE28D995",
+              "taskClassName": "APHFitnessTaskViewController",
+              "taskCompletionTimeString" : "6-9 Minutes"
               },
-              
               {
               "taskTitle" : "Activity and Sleep Survey",
               "taskID": "2-CardioActivityAndSleepSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66",
@@ -88,9 +88,9 @@
                   "taskID": "2-APHHeartAge-7259AC18-D711-47A6-ADBD-6CFCECDED1DF"
                   },
                   {
-                  "scheduleType": "recurring",
-                  "scheduleString": "0 5 * * *",
-                  "taskID": "3-APHSevenDayAllocation-00000000-1111-1111-1111-F810BE28D995"
+                  "expire" : "P89D",
+                  "scheduleType": "once",
+                  "taskID": "3-APHFitnessTest-00000000-1111-1111-1111-F810BE28D995"
                   },
                   {
                   "scheduleType": "once",
