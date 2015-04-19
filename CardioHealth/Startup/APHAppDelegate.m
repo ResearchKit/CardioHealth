@@ -68,6 +68,8 @@ static NSString* const kMinorVersion               = @"version";
 
 @interface APHAppDelegate ()
 
+@property  (nonatomic, assign)  NSInteger environment;
+
 @end
 
 @implementation APHAppDelegate
@@ -129,11 +131,17 @@ static NSString* const kMinorVersion               = @"version";
                                               };
     
     NSMutableDictionary * dictionary = [super defaultInitializationOptions];
+#ifdef DEBUG
+    self.environment = SBBEnvironmentStaging;
+#else
+    self.environment = SBBEnvironmentProd;
+#endif
+    
     dictionary = [self updateOptionsFor5OrOlder:dictionary];
     [dictionary addEntriesFromDictionary:@{
                                            kStudyIdentifierKey                  : kStudyIdentifier,
                                            kAppPrefixKey                        : kAppPrefix,
-                                           kBridgeEnvironmentKey                : @(SBBEnvironmentProd),
+                                           kBridgeEnvironmentKey                : @(self.environment),
                                            kHKReadPermissionsKey                : @[
                                                    HKQuantityTypeIdentifierBodyMass,
                                                    HKQuantityTypeIdentifierHeight,
