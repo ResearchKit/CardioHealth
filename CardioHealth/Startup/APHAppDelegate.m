@@ -67,7 +67,9 @@ static NSString* const kShortVersionStringKey      = @"shortVersionString";
 static NSString* const kMinorVersion               = @"version";
 
 @interface APHAppDelegate ()
+
 @property  (nonatomic, assign)  NSInteger environment;
+
 @end
 
 @implementation APHAppDelegate
