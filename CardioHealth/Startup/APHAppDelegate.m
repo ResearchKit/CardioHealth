@@ -273,14 +273,121 @@ static NSString* const kMinorVersion               = @"version";
         self.passiveHealthKitCollector = [[APCNewPassiveDataCollector alloc] init];
     }
     
-    APCPassiveHealthKitQuantityDataSink*    quantityreceiver    = [[APCPassiveHealthKitQuantityDataSink alloc] initWithIdentifier:@"HealthKitDataCollector"
-                                                                                                                   andColumnNames:@[@"startTime,endTime,type,value,unit,source"]];
+    APCPassiveDataSink*    quantityreceiver    = [[APCPassiveDataSink alloc] initWithIdentifier:@"HealthKitDataCollector"
+                                                  columnNames:@[@"startTime,endTime,type,value,unit,source"]
+                                        operationQueueName:@"APCHealthKitQuantity Activity Collector" andDataProcessor:^NSString *(id dataSample)
+    {
+                                            
+        HKQuantitySample*   qtySample           = (HKQuantitySample *)dataSample;
+        NSString*           startDateTimeStamp  = [qtySample.startDate toStringInISO8601Format];
+        NSString*           endDateTimeStamp    = [qtySample.endDate toStringInISO8601Format];
+        NSString*           healthKitType       = qtySample.quantityType.identifier;
+
+
+        NSString*           quantityValueRep    = [NSString stringWithFormat:@"%@", qtySample.quantity];
+        NSArray*            valueSplit          = [quantityValueRep componentsSeparatedByString:@" "];
+        NSString*           quantityValue       = [valueSplit objectAtIndex:0];
+
+        NSString*           quantityUnit        = @"";
+        for (int i = 1; i < (int)[valueSplit count]; i++)
+        {
+        quantityUnit = [quantityUnit stringByAppendingString:valueSplit[i]];
+        }
+
+        NSString*           quantitySource      = qtySample.source.name;
+
+        if (quantitySource == nil)
+        {
+        quantitySource = @"";
+        }
+        else if ([[[UIDevice currentDevice] name] isEqualToString:quantitySource])
+        {
+        quantitySource = @"iPhone";
+        }
+
+
+        NSString *stringToWrite = [NSString stringWithFormat:@"%@,%@,%@,%@,%@,%@\n",
+                                                               startDateTimeStamp,
+                                                               endDateTimeStamp,
+                                                               healthKitType,
+                                                               quantityValue,
+                                                               quantityUnit,
+                                                               quantitySource];
+
+        return stringToWrite;
+        }];
     
-    APCPassiveHealthKitWorkoutSink*         workoutReceiver     = [[APCPassiveHealthKitWorkoutSink alloc] initWithIdentifier:@"HealthKitWorkoutCollector"
-                                                                                                              andColumnNames:@[@"startTime,endTime,type,workoutType,total distance,unit, energy consumed,unit,source,metadata"]];
+    APCPassiveDataSink*         workoutReceiver     = [[APCPassiveDataSink alloc] initWithIdentifier:@"HealthKitWorkoutCollector"
+                                                                                         columnNames:@[@"startTime,endTime,type,workoutType,total distance,unit, energy consumed,unit,source,metadata"]
+                                                                                  operationQueueName:@"APCHealthKitWorkout Activity Collector"
+                                                                                    andDataProcessor:^(id dataSample)
+    {
+                                                                                                                                
+        HKWorkout*  sample                      = (HKWorkout*)dataSample;
+        NSString*   startDateTimeStamp          = [sample.startDate toStringInISO8601Format];
+        NSString*   endDateTimeStamp            = [sample.endDate toStringInISO8601Format];
+        NSString*   healthKitType               = sample.sampleType.identifier;
+        NSString*   activityType                = [HKWorkout workoutActivityTypeStringRepresentation:(int)sample];
+        double      energyConsumedValue         = [sample.totalEnergyBurned doubleValueForUnit:[HKUnit kilocalorieUnit]];
+        NSString*   energyConsumed              = [NSString stringWithFormat:@"%f", energyConsumedValue];
+        NSString*   energyUnit                  = [HKUnit kilocalorieUnit].description;
+        double      totalDistanceConsumedValue  = [sample.totalDistance doubleValueForUnit:[HKUnit meterUnit]];
+        NSString*   totalDistance               = [NSString stringWithFormat:@"%f", totalDistanceConsumedValue];
+        NSString*   distanceUnit                = [HKUnit meterUnit].description;
+        NSString*   quantitySource              = sample.source.name;
+                                                                                                                                
+        NSError*    error                       = nil;
+
+        NSString *  metaData                    = [NSDictionary convertDictionary:sample.metadata ToStringWithReturningError:&error];
+        NSString *  metaDataStringified         = [NSString stringWithFormat:@"\"%@\"", metaData];
+        NSString *  stringToWrite               = [NSString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@,%@,%@,%@\n",
+                                                   startDateTimeStamp,
+                                                   endDateTimeStamp,
+                                                   healthKitType,
+                                                   activityType,
+                                                   totalDistance,
+                                                   distanceUnit,
+                                                   energyConsumed,
+                                                   energyUnit,
+                                                   quantitySource,
+                                                   metaDataStringified];
+
+        return stringToWrite;
+    }];
     
-    APCPassiveHealthKitSleepSink*           sleepReceiver       = [[APCPassiveHealthKitSleepSink alloc] initWithIdentifier:@"HealthKitSleepCollector"
-                                                                                                            andColumnNames:@[@"startTime,type,category value,value,unit,source"]];
+    APCPassiveDataSink*           sleepReceiver       = [[APCPassiveDataSink alloc] initWithIdentifier:@"HealthKitSleepCollector"
+                                                                                           columnNames:@[@"startTime,type,category value,value,unit,source"]
+                                                                                    operationQueueName:@"APCHealthKitSleep Activity Collector"
+                                                                                      andDataProcessor:^NSString *(id dataSample)
+    {
+                                                                                                         
+        HKCategorySample*   catSample       = (HKCategorySample *)dataSample;
+        NSString*           startDateTime   = [catSample.startDate toStringInISO8601Format];
+        NSString*           healthKitType   = catSample.sampleType.identifier;
+        NSString*           categoryValue   = nil;
+
+        if (catSample.value == HKCategoryValueSleepAnalysisAsleep)
+        {
+         categoryValue = @"HKCategoryValueSleepAnalysisAsleep";
+        }
+        else
+        {
+         categoryValue = @"HKCategoryValueSleepAnalysisInBed";
+        }
+
+        NSString*           quantityUnit    = [HKUnit secondUnit].description;
+        NSString*           quantitySource  = catSample.source.name;
+        // Get the difference in seconds between the start and end date for the sample
+        NSDateComponents* secondsSpentInBedOrAsleep = [[NSCalendar currentCalendar] components:NSCalendarUnitSecond
+                                                                                   fromDate:catSample.startDate
+                                                                                     toDate:catSample.endDate
+                                                                                    options:NSCalendarWrapComponents];
+        NSString*           quantityValue   = [NSString stringWithFormat:@"%ld", (long)secondsSpentInBedOrAsleep.second];
+        NSString*           stringToWrite   = [NSString stringWithFormat:@"%@,%@,%@,%@,%@,%@\n", startDateTime, healthKitType, categoryValue,  quantityValue, quantityUnit, quantitySource];
+
+        return stringToWrite;
+        
+    }];
     
     if (dataTypesWithReadPermission) {
         
@@ -328,20 +435,32 @@ static NSString* const kMinorVersion               = @"version";
             
             [collector start];
             
-            [self.passiveHealthKitCollector addDataSync:collector];
+            [self.passiveHealthKitCollector addDataSink:collector];
         }
     }
     
     APCCoreMotionBackgroundDataCollector *motionCollector = [[APCCoreMotionBackgroundDataCollector alloc] initWithIdentifier:@"motionActivityCollector"];
     
-    APCPassiveCoreActivityManagerSink *receiver = [[APCPassiveCoreActivityManagerSink alloc] initWithIdentifier:@"motionActivityCollector" andColumnNames:@[@"startTime",@"activityType",@"confidence"]];
+    APCPassiveDataSink* receiver = [[APCPassiveDataSink alloc] initWithIdentifier:@"motionActivityCollector"
+                                                                      columnNames:@[@"startTime",@"activityType",@"confidence"]
+                                                               operationQueueName:@"APCCoreMotion Activity Collector"
+                                                                 andDataProcessor:^NSString *(id dataSample)
+    {
+        
+        CMMotionActivity* motionActivitySample  = (CMMotionActivity*)dataSample;
+        NSString* motionActivity                = [CMMotionActivity activityTypeName:motionActivitySample];
+        NSNumber* motionConfidence              = @(motionActivitySample.confidence);
+        NSString* stringToWrite                 = [NSString stringWithFormat:@"%@,%@,%@\n", motionActivitySample.startDate.toStringInISO8601Format, motionActivity ,motionConfidence];
+
+        return stringToWrite;
+    }];
     
     [motionCollector setReceiver:receiver];
     [motionCollector setDelegate:receiver];
     
     [motionCollector start];
     
-    [self.passiveHealthKitCollector addDataSync:motionCollector];
+    [self.passiveHealthKitCollector addDataSink:motionCollector];
     
 }
 
@@ -370,10 +489,10 @@ static NSString* const kMinorVersion               = @"version";
                  kScheduleOffsetTaskIdKey: @"4-DietSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66",
                  kScheduleOffsetOffsetKey: @(1)
                  },
-//             @{
-//                 kScheduleOffsetTaskIdKey: @"2-APHHeartAge-7259AC18-D711-47A6-ADBD-6CFCECDED1DF",
-//                 kScheduleOffsetOffsetKey: @(7)
-//                 },
+             @{
+                 kScheduleOffsetTaskIdKey: @"2-APHHeartAge-7259AC18-D711-47A6-ADBD-6CFCECDED1DF",
+                 kScheduleOffsetOffsetKey: @(7)
+                 },
              @{
                  kScheduleOffsetTaskIdKey: @"3-APHFitnessTest-00000000-1111-1111-1111-F810BE28D995",
                  kScheduleOffsetOffsetKey: @(7)
