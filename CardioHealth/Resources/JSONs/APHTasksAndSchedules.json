@@ -57,14 +57,6 @@
               "taskClassName" : "APHWellBeingSurveyController",
               "taskCompletionTimeString" : "(One Time) 10 Questions Part 2"
               },
-              
-              {
-              "taskTitle" : "Physical Activity Readiness",
-              "taskID": "1-parqquiz-1E174061-5B02-11E4-8ED6-0800200C9A77",
-              "taskClassName" : "APHParQQuizTaskViewController",
-              "taskCompletionTimeString" : "10 Questions"
-              },
-              
               {
               "taskTitle" : "Daily Check-in",
               "taskID": "1-DailyCheckin-be42dc21-4706-478a-a398-10cabb9c7d78",
@@ -127,10 +119,6 @@
                   {
                   "scheduleType": "once",
                   "taskID": "4-DayOne-be42dc21-4706-478a-a398-10cabb9c7d78"
-                  },
-                  {
-                  "scheduleType": "once",
-                  "taskID": "1-parqquiz-1E174061-5B02-11E4-8ED6-0800200C9A77"
                   }
                   ]
 }
