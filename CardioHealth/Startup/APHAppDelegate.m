@@ -289,20 +289,21 @@ static NSString* const kMinorVersion               = @"version";
         NSString*           quantityValue       = [valueSplit objectAtIndex:0];
 
         NSString*           quantityUnit        = @"";
+        
         for (int i = 1; i < (int)[valueSplit count]; i++)
         {
-        quantityUnit = [quantityUnit stringByAppendingString:valueSplit[i]];
+            quantityUnit = [quantityUnit stringByAppendingString:valueSplit[i]];
         }
 
         NSString*           quantitySource      = qtySample.source.name;
 
         if (quantitySource == nil)
         {
-        quantitySource = @"";
+            quantitySource = @"";
         }
         else if ([[[UIDevice currentDevice] name] isEqualToString:quantitySource])
         {
-        quantitySource = @"iPhone";
+            quantitySource = @"iPhone";
         }
 
 
@@ -315,10 +316,11 @@ static NSString* const kMinorVersion               = @"version";
                                                                quantitySource];
 
         return stringToWrite;
-        }];
+    }];
     
+    NSArray*                    workoutColumnNames  = @[@"startTime,endTime,type,workoutType,total distance,unit,energy consumed,unit,source,metadata"];
     APCPassiveDataSink*         workoutReceiver     = [[APCPassiveDataSink alloc] initWithIdentifier:@"HealthKitWorkoutCollector"
-                                                                                         columnNames:@[@"startTime,endTime,type,workoutType,total distance,unit, energy consumed,unit,source,metadata"]
+                                                                                         columnNames:workoutColumnNames
                                                                                   operationQueueName:@"APCHealthKitWorkout Activity Collector"
                                                                                     andDataProcessor:^(id dataSample)
     {
