@@ -217,6 +217,7 @@ static NSString* const kMinorVersion               = @"version";
     
     [[UIView appearance] setTintColor:[UIColor appPrimaryColor]];
     
+    self.dataSubstrate.parameters.hideExampleConsent = YES;    
 }
 
 - (void) showOnBoarding
