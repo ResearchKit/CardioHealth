@@ -347,7 +347,46 @@ typedef NS_ENUM(NSUInteger, APHDailyInsightIdentifiers)
     NSAttributedString *dietInsight = kResultsNotFound;
     
     if (self.dietSurveyResults) {
+        double consumedFruits = [self.dietSurveyResults[kDietSurveyFruitKey] doubleValue]; // >= 4.5 /day
+        double consumedVegetables = [self.dietSurveyResults[kDietSurveyVegetableKey] doubleValue]; // >= 4.5 /day
+        double consumedFish = [self.dietSurveyResults[kDietSurveyFishKey] doubleValue]; // >= 2 /week
+        //double consumedSoduim = [self.dietSurveyResults[kDietSurveySodiumKey] doubleValue]; // < 1500 mg /day
+        double consumedGrains = [self.dietSurveyResults[kDietSurveyGrainsKey] doubleValue]; // 3 oz /day (3 servings / day)
+        double consumedSugarDrinks = [self.dietSurveyResults[kDietSurveySugarDrinksKey] doubleValue]; // 450 cal /week (1 drink / day)
         
+        NSUInteger dietComponents = 0;
+        
+        if (consumedFruits >= 4.5) {
+            dietComponents++;
+        }
+        
+        if (consumedVegetables >= 4.5) {
+            dietComponents++;
+        }
+        
+        if (consumedFish >= 2) {
+            dietComponents++;
+        }
+        
+        if (consumedGrains >= 3) {
+            dietComponents++;
+        }
+        
+        if (consumedSugarDrinks == 1) {
+            dietComponents++;
+        }
+        
+        if (dietComponents > 0) {
+            NSString *dietCaption = [NSString stringWithFormat:@"%lu of 5 healthy diet components", dietComponents];
+            
+            if (dietComponents == 1) {
+                dietInsight = [self attributedStringFromString:dietCaption withColor:self.dailyInsightBadColor];
+            } else if ((dietComponents > 1) && (dietComponents < 4)) {
+                dietInsight = [self attributedStringFromString:dietCaption withColor:self.dailyInsightNeedsImprovementColor];
+            } else {
+                dietInsight = [self attributedStringFromString:dietCaption withColor:self.dailyInsightGoodColor];
+            }
+        }
     }
     
     APCLogDebug(@"Diet insight.");
