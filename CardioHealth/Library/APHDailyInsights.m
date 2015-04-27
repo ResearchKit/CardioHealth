@@ -170,14 +170,22 @@ typedef NS_ENUM(NSUInteger, APHDailyInsightIdentifiers)
             case APHDailyInsightIdentifierDiet: // Based on the Diet survey
             {
                 if (!self.dietSurveyResults) {
-                    self.dietSurveyResults = [self retrieveDataForTask:kDietSurveyTaskId];
+                    NSDictionary *dietResults = [self retrieveDataForTask:kDietSurveyTaskId];
+                    
+                    if (dietResults) {
+                        self.dietSurveyResults = dietResults;
+                    }
                 }
             }
                 break;
             default: // All other insights are pulled from the Heart Age survey.
             {
                 if (!self.heartAgeResults) {
-                    self.heartAgeResults = [self retrieveDataForTask:kHeartAgeTaskId];
+                    NSDictionary *heartResults = [self retrieveDataForTask:kHeartAgeTaskId];
+                    
+                    if (heartResults) {
+                        self.heartAgeResults = heartResults;
+                    }
                 }
             }
                 break;
