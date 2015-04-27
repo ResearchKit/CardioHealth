@@ -288,14 +288,14 @@ static NSString* const kMinorVersion               = @"version";
                  kScheduleOffsetTaskIdKey: @"3-CardioVascularHealthSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66",
                  kScheduleOffsetOffsetKey: @(1)
                  },
-             @{
-                 kScheduleOffsetTaskIdKey: @"4-DietSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66",
-                 kScheduleOffsetOffsetKey: @(1)
-                 },
-             @{
-                 kScheduleOffsetTaskIdKey: @"2-APHHeartAge-7259AC18-D711-47A6-ADBD-6CFCECDED1DF",
-                 kScheduleOffsetOffsetKey: @(7)
-                 },
+//             @{
+//                 kScheduleOffsetTaskIdKey: @"4-DietSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66",
+//                 kScheduleOffsetOffsetKey: @(1)
+//                 },
+//             @{
+//                 kScheduleOffsetTaskIdKey: @"2-APHHeartAge-7259AC18-D711-47A6-ADBD-6CFCECDED1DF",
+//                 kScheduleOffsetOffsetKey: @(7)
+//                 },
              @{
                  kScheduleOffsetTaskIdKey: @"3-APHFitnessTest-00000000-1111-1111-1111-F810BE28D995",
                  kScheduleOffsetOffsetKey: @(7)
