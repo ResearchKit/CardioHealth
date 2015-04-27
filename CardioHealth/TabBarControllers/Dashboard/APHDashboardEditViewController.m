@@ -90,6 +90,14 @@
                     [self.items addObject:item];
                 }
                     
+                case kAPHDashboardItemTypeDailyInsights:
+                {
+                    APCTableViewDashboardItem *item = [APCTableViewDashboardItem new];
+                    item.caption = NSLocalizedString(@"Daily Insights", nil);
+                    item.tintColor = [UIColor blueColor];
+                    [self.items addObject:item];
+                }
+                
                 default:
                     break;
             }
