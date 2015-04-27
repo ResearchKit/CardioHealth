@@ -95,7 +95,7 @@
                 {
                     APCTableViewDashboardItem *item = [APCTableViewDashboardItem new];
                     item.caption = NSLocalizedString(@"Daily Insights", nil);
-                    item.tintColor = [UIColor blueColor];
+                    item.tintColor = [UIColor appTertiaryGreenColor];
                     [self.items addObject:item];
                 }
                     break;
