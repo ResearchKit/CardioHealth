@@ -334,7 +334,7 @@ typedef NS_ENUM(NSUInteger, APHDailyInsightIdentifiers)
     
     double activeMinutes = appDelegate.sevenDayFitnessAllocationData.activeSeconds/60;
     
-    if (activeMinutes > 0) {
+    if (activeMinutes >= 1) {
         NSString *activeMinutesCaption = [NSString stringWithFormat:@"%@ Active Minutes", [formatter stringFromNumber:@(activeMinutes)]];
         
         if (activeMinutes >= 150) {
