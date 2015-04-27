@@ -280,11 +280,11 @@ typedef NS_ENUM(NSUInteger, APHDailyInsightIdentifiers)
     
     if (self.heartAgeResults) {
         if (self.heartAgeResults[kHeartAgeSmokingHistoryKey]) {
-            smokingInsight = [self attributedStringFromString:NSLocalizedString(@"Does not smoke currently", nil)
-                                                    withColor:self.dailyInsightGoodColor];
-        } else {
             smokingInsight = [self attributedStringFromString:NSLocalizedString(@"Currently smokes", nil)
                                                     withColor:self.dailyInsightBadColor];
+        } else {
+            smokingInsight = [self attributedStringFromString:NSLocalizedString(@"Does not smoke currently", nil)
+                                                    withColor:self.dailyInsightGoodColor];
         }
     }
     
@@ -310,10 +310,10 @@ typedef NS_ENUM(NSUInteger, APHDailyInsightIdentifiers)
         if ((bmi >= 18.5) && (bmi <= 25.0)) {
             weightInsight = [self attributedStringFromString:NSLocalizedString(weightCaption, nil)
                                                    withColor:self.dailyInsightGoodColor];
-        } else if (bmi > 25.0) {
+        } else if ((bmi > 25.0) && (bmi <= 30)) {
             weightInsight = [self attributedStringFromString:NSLocalizedString(weightCaption, nil)
                                                    withColor:self.dailyInsightNeedsImprovementColor];
-        } else {
+        } else if ((bmi < 18.5) || (bmi > 30)) {
             weightInsight = [self attributedStringFromString:NSLocalizedString(weightCaption, nil)
                                                    withColor:self.dailyInsightBadColor];
         }
