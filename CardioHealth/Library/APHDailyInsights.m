@@ -310,10 +310,10 @@ typedef NS_ENUM(NSUInteger, APHDailyInsightIdentifiers)
         if ((bmi >= 18.5) && (bmi <= 25.0)) {
             weightInsight = [self attributedStringFromString:NSLocalizedString(weightCaption, nil)
                                                    withColor:self.dailyInsightGoodColor];
-        } else if (bmi > 25.0) {
+        } else if ((bmi > 25.0) && (bmi <= 30)) {
             weightInsight = [self attributedStringFromString:NSLocalizedString(weightCaption, nil)
                                                    withColor:self.dailyInsightNeedsImprovementColor];
-        } else {
+        } else if ((bmi < 18.5) || (bmi > 30)) {
             weightInsight = [self attributedStringFromString:NSLocalizedString(weightCaption, nil)
                                                    withColor:self.dailyInsightBadColor];
         }
