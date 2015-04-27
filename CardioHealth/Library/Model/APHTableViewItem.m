@@ -89,3 +89,28 @@
     
 }
 @end
+
+@implementation APHTableViewDashboardDailyInsightItem
+
+- (instancetype)init
+{
+    self = [super init];
+    
+    if (self) {
+        _insightTitle = nil;
+        _insightAttributedTitle = nil;
+        _insightSubtitle = nil;
+        _insightImage = nil;
+    }
+    
+    return self;
+}
+
+@end
+
+
+
+
+
+
+
