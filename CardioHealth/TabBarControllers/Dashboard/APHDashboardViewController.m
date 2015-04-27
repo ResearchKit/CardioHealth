@@ -1,4 +1,4 @@
-// 
+//
 //  APHDashboardViewController.m 
 //  MyHeart Counts 
 // 
@@ -38,6 +38,8 @@
 #import "APHDashboardWalkTestTableViewCell.h"
 #import "APHWalkTestViewController.h"
 #import "APHWalkingTestResults.h"
+#import "APHCardioInsightCell.h"
+#import "APHDailyInsights.h"
 
 static NSString *const kDatasetValueNoDataKey = @"datasetValueNoDataKey";
 
@@ -52,6 +54,7 @@ static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRat
 
 static CGFloat kTitleFontSize = 17.0f;
 static CGFloat kDetailFontSize = 16.0f;
+static NSUInteger maxNumberOfInsights = 7;
 
 @interface APHDashboardViewController ()<APCPieGraphViewDatasource>
 
@@ -63,6 +66,8 @@ static CGFloat kDetailFontSize = 16.0f;
 @property (nonatomic)           NSNumber*               totalDistanceForSevenDay;
 @property (nonatomic)           NSIndexPath*            currentPieGraphIndexPath;
 @property (nonatomic)           NSNumber*               totalStepsValue;
+
+@property (nonatomic, strong)   APHDailyInsights*       dailyInsights;
 
 @property (nonatomic) BOOL pieGraphDataExists;
 
@@ -82,9 +87,18 @@ static CGFloat kDetailFontSize = 16.0f;
         if (!_rowItemsOrder.count) {
             _rowItemsOrder = [[NSMutableArray alloc] initWithArray:@[]];
             if ([APCDeviceHardware isiPhone5SOrNewer]) {
-                [_rowItemsOrder addObjectsFromArray:@[@(kAPHDashboardItemTypeSevenDayFitness), @(kAPHDashboardItemTypeWalkingTest)]];
+                [_rowItemsOrder addObjectsFromArray:@[
+                                                      @(kAPHDashboardItemTypeSevenDayFitness),
+                                                      @(kAPHDashboardItemTypeWalkingTest),
+                                                      @(kAPHDashboardItemTypeDailyInsights)
+                                                     ]
+                ];
             } else {
-                [_rowItemsOrder addObjectsFromArray:@[@(kAPHDashboardItemTypeWalkingTest)]];
+                [_rowItemsOrder addObjectsFromArray:@[
+                                                      @(kAPHDashboardItemTypeWalkingTest),
+                                                      @(kAPHDashboardItemTypeDailyInsights)
+                                                     ]
+                ];
             }
             
             [defaults setObject:[NSArray arrayWithArray:_rowItemsOrder] forKey:kAPCDashboardRowItemsOrder];
@@ -120,6 +134,7 @@ static CGFloat kDetailFontSize = 16.0f;
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
+    self.dailyInsights = [[APHDailyInsights alloc] initInsight];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -132,7 +147,14 @@ static CGFloat kDetailFontSize = 16.0f;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     self.rowItemsOrder = [NSMutableArray arrayWithArray:[defaults objectForKey:kAPCDashboardRowItemsOrder]];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(dailyInsightNotification:)
+                                                 name:kAPHDailyInsightDataCollectionIsCompleteNotification
+                                               object:nil];
+    
     [self prepareData];
+    
+    [self.dailyInsights gatherInsights];
     
     self.pieGraphDataExists = NO;
 }
@@ -142,10 +164,16 @@ static CGFloat kDetailFontSize = 16.0f;
     [super viewWillDisappear:animated];
     
     self.pieGraphDataExists = NO;
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Data
 
+- (void)dailyInsightNotification:(NSNotification *) __unused notification
+{
+    [self prepareData];
+}
 
 - (void)prepareData
 {
@@ -253,6 +281,44 @@ static CGFloat kDetailFontSize = 16.0f;
                     row.item = item;
                     row.itemType = rowType;
                     [rowItems addObject:row];
+                }
+                    break;
+                    
+                case kAPHDashboardItemTypeDailyInsights:
+                {
+                    // Header
+                    {
+                        APHTableViewDashboardDailyInsightItem *headerItem = [APHTableViewDashboardDailyInsightItem new];
+                        
+                        headerItem.identifier = kAPHDashboardDailyInsightHeaderCellIdentifier;
+                        headerItem.tintColor = [UIColor appTertiaryGreenColor];
+                        headerItem.editable = NO;
+                        
+                        APCTableViewRow *row = [APCTableViewRow new];
+                        row.item = headerItem;
+                        row.itemType = rowType;
+                        [rowItems addObject:row];
+                    }
+                    
+                    // Insight Items
+                    {
+                        for (NSAttributedString *dailyInsight in self.dailyInsights.collectedDailyInsights) {
+                            APHTableViewDashboardDailyInsightItem *item = [APHTableViewDashboardDailyInsightItem new];
+                            
+                            item.identifier = kAPHDashboardDailyInsightCellIdentifier;
+                            item.tintColor = [UIColor appTertiaryGreenColor];
+                            item.editable = NO;
+                            item.insightAttributedTitle = dailyInsight;
+                            item.insightSubtitle = NSLocalizedString(@"where you are now", nil);
+                            item.insightImage = [UIImage imageNamed:@"insights_smoking"];
+                            item.info = NSLocalizedString(@"Put something for Daily Insights", nil);
+                            
+                            APCTableViewRow *row = [APCTableViewRow new];
+                            row.item = item;
+                            row.itemType = rowType;
+                            [rowItems addObject:row];
+                        }
+                    }
                 }
                     break;
 
@@ -366,6 +432,18 @@ static CGFloat kDetailFontSize = 16.0f;
         walkingTestCell.delegate = self;
         
         walkingTestCell.resizeButton.hidden = (self.walkingResults.results.count == 0);
+    } else if ([dashboardItem isKindOfClass:[APHTableViewDashboardDailyInsightItem class]]) {
+        APHTableViewDashboardDailyInsightItem *dailyInsight = (APHTableViewDashboardDailyInsightItem *)dashboardItem;
+        APHCardioInsightCell *dailyInsightCell = (APHCardioInsightCell *)cell;
+        
+        dailyInsightCell.tintColor = dailyInsight.tintColor;
+        dailyInsightCell.delegate = self;
+        
+        if ([dashboardItem.identifier isEqualToString:kAPHDashboardDailyInsightCellIdentifier]) {
+            dailyInsightCell.cellAttributedTitle = dailyInsight.insightAttributedTitle;
+            dailyInsightCell.cellSubtitle = dailyInsight.insightSubtitle;
+            dailyInsightCell.cellImage = dailyInsight.insightImage;
+        }
     }
     
     return cell;
