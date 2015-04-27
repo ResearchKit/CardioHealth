@@ -63,3 +63,12 @@ typedef NS_ENUM(NSUInteger, APHWalkingTestRowType) {
 @property (nonatomic) NSString *totalStepsString;
 
 @end
+
+@interface APHTableViewDashboardDailyInsightItem : APCTableViewDashboardItem
+
+@property (nonatomic, strong) NSString *insightTitle;
+@property (nonatomic, strong) NSAttributedString *insightAttributedTitle;
+@property (nonatomic, strong) NSString *insightSubtitle;
+@property (nonatomic, strong) UIImage *insightImage;
+
+@end
