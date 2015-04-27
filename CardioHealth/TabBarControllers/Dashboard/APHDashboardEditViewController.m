@@ -89,6 +89,7 @@
                     item.tintColor = [UIColor colorForTaskId:item.taskId];
                     [self.items addObject:item];
                 }
+                    break;
                     
                 case kAPHDashboardItemTypeDailyInsights:
                 {
@@ -97,6 +98,7 @@
                     item.tintColor = [UIColor blueColor];
                     [self.items addObject:item];
                 }
+                    break;
                 
                 default:
                     break;
