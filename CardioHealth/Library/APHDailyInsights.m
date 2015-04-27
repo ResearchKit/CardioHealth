@@ -279,11 +279,11 @@ typedef NS_ENUM(NSUInteger, APHDailyInsightIdentifiers)
     NSAttributedString *smokingInsight = kResultsNotFound;
     
     if (self.heartAgeResults) {
-        if (self.heartAgeResults[kHeartAgeSmokingHistoryKey]) {
-            smokingInsight = [self attributedStringFromString:NSLocalizedString(@"Currently smokes", nil)
+        if ([self.heartAgeResults[kHeartAgeSmokingHistoryKey] boolValue]) {
+            smokingInsight = [self attributedStringFromString:NSLocalizedString(@"Currently smoke", nil)
                                                     withColor:self.dailyInsightBadColor];
         } else {
-            smokingInsight = [self attributedStringFromString:NSLocalizedString(@"Does not smoke currently", nil)
+            smokingInsight = [self attributedStringFromString:NSLocalizedString(@"Does not smoke", nil)
                                                     withColor:self.dailyInsightGoodColor];
         }
     }
