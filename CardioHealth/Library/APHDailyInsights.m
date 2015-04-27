@@ -279,11 +279,11 @@ typedef NS_ENUM(NSUInteger, APHDailyInsightIdentifiers)
     NSAttributedString *smokingInsight = kResultsNotFound;
     
     if (self.heartAgeResults) {
-        if (self.heartAgeResults[kHeartAgeSmokingHistoryKey]) {
-            smokingInsight = [self attributedStringFromString:NSLocalizedString(@"Currently smokes", nil)
+        if ([self.heartAgeResults[kHeartAgeSmokingHistoryKey] boolValue]) {
+            smokingInsight = [self attributedStringFromString:NSLocalizedString(@"Currently smoke", nil)
                                                     withColor:self.dailyInsightBadColor];
         } else {
-            smokingInsight = [self attributedStringFromString:NSLocalizedString(@"Does not smoke currently", nil)
+            smokingInsight = [self attributedStringFromString:NSLocalizedString(@"Does not smoke", nil)
                                                     withColor:self.dailyInsightGoodColor];
         }
     }
@@ -334,7 +334,7 @@ typedef NS_ENUM(NSUInteger, APHDailyInsightIdentifiers)
     
     double activeMinutes = appDelegate.sevenDayFitnessAllocationData.activeSeconds/60;
     
-    if (activeMinutes > 0) {
+    if (activeMinutes >= 1) {
         NSString *activeMinutesCaption = [NSString stringWithFormat:@"%@ Active Minutes", [formatter stringFromNumber:@(activeMinutes)]];
         
         if (activeMinutes >= 150) {
@@ -413,7 +413,7 @@ typedef NS_ENUM(NSUInteger, APHDailyInsightIdentifiers)
                                           systolicValue.integerValue, diastolicValue.integerValue];
         NSString *bloodPressureCaption = NSLocalizedString(bloodPressureReading, nil);
         
-        NSRange systolicRangeNeedsImprovement = NSMakeRange(120, 9);
+        NSRange systolicRangeNeedsImprovement = NSMakeRange(120, 19);
         NSRange diastolicRangeNeedsImprovement = NSMakeRange(80, 9);
         
         if ((systolicValue.integerValue < 120) && (diastolicValue.integerValue < 80)) {
