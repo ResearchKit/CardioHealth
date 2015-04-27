@@ -413,7 +413,7 @@ typedef NS_ENUM(NSUInteger, APHDailyInsightIdentifiers)
                                           systolicValue.integerValue, diastolicValue.integerValue];
         NSString *bloodPressureCaption = NSLocalizedString(bloodPressureReading, nil);
         
-        NSRange systolicRangeNeedsImprovement = NSMakeRange(120, 9);
+        NSRange systolicRangeNeedsImprovement = NSMakeRange(120, 19);
         NSRange diastolicRangeNeedsImprovement = NSMakeRange(80, 9);
         
         if ((systolicValue.integerValue < 120) && (diastolicValue.integerValue < 80)) {
