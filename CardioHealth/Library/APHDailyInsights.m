@@ -280,11 +280,11 @@ typedef NS_ENUM(NSUInteger, APHDailyInsightIdentifiers)
     
     if (self.heartAgeResults) {
         if (self.heartAgeResults[kHeartAgeSmokingHistoryKey]) {
-            smokingInsight = [self attributedStringFromString:NSLocalizedString(@"Does not smoke currently", nil)
-                                                    withColor:self.dailyInsightGoodColor];
-        } else {
             smokingInsight = [self attributedStringFromString:NSLocalizedString(@"Currently smokes", nil)
                                                     withColor:self.dailyInsightBadColor];
+        } else {
+            smokingInsight = [self attributedStringFromString:NSLocalizedString(@"Does not smoke currently", nil)
+                                                    withColor:self.dailyInsightGoodColor];
         }
     }
     
