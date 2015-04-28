@@ -85,6 +85,8 @@ NSString *const kDietSurveyStepIdentifierSodium      = @"sodium";
                      
                      if (choiceResult.choiceAnswers.count > 0) {
                          answer = [NSArray arrayWithArray:choiceResult.choiceAnswers];
+                     } else {
+                         answer = @[];
                      }
                      
                      [dietSurveyResults setObject:answer forKey:questionResult.identifier];
