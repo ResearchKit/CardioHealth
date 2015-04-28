@@ -124,8 +124,6 @@ static NSString* const kMinorVersion               = @"version";
         }
     }
     
-    
-    
     return YES;
 }
 
@@ -437,7 +435,6 @@ static NSString* const kMinorVersion               = @"version";
         
     }];
     
-
     NSDate* (^LaunchDate)() = ^
     {
         APCUser*    user        = ((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.currentUser;
@@ -475,8 +472,8 @@ static NSString* const kMinorVersion               = @"version";
 
     if (dataTypesWithReadPermission) {
         
-        for (id dataType in dataTypesWithReadPermission) {
-            
+        for (id dataType in dataTypesWithReadPermission)
+        {
             HKSampleType*   sampleType  = nil;
             
             if ([dataType isKindOfClass:[NSDictionary class]])
