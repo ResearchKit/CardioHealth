@@ -245,7 +245,13 @@ static NSString* const kFitnessWalkText = @"Walk as far as you can for six minut
     NSString*       contents    = [NSString stringWithContentsOfURL:fileURL encoding:NSUTF8StringEncoding error:&error];
     NSDictionary*   results     = nil;
 
-    APCLogError2(error);
+    if (!contents)
+    {
+        if (error)
+        {
+            APCLogError2(error);
+        }
+    }
     
     if (!error) {
         NSError*    error = nil;
