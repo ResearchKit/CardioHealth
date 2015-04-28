@@ -563,6 +563,7 @@ static NSString* const kMinorVersion               = @"version";
                  kScheduleOffsetTaskIdKey: @"3-CardioVascularHealthSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66",
                  kScheduleOffsetOffsetKey: @(1)
                  },
+#warning To be uncommented once all testing is complete. - Farhan
 //             @{
 //                 kScheduleOffsetTaskIdKey: @"4-DietSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66",
 //                 kScheduleOffsetOffsetKey: @(1)
