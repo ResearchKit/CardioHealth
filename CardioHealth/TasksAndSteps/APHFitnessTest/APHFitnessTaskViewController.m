@@ -53,6 +53,7 @@ static NSString* const  kConclusionStep            = @"conclusion";
 
 static NSString* const  kHeartRateFileNameComp     = @"HKQuantityTypeIdentifierHeartRate";
 static NSString* const  kLocationFileNameComp      = @"location";
+static NSString* const  kPedometerFileName         = @"pedometer";
 static NSString* const  kFileResultsKey            = @"items";
 static NSString* const  kHeartRateValueKey         = @"value";
 static NSString* const  kCoordinate                 = @"coordinate";
@@ -140,67 +141,75 @@ static NSString* const kFitnessWalkText = @"Walk as far as you can for six minut
 
 - (NSString *) createResultSummary {
     
-    NSMutableDictionary* dashboardDataSource = [NSMutableDictionary new];
-    NSDictionary* distanceResults = nil;
-    NSDictionary* heartRateResults = nil;
+    NSMutableDictionary*    dashboardDataSource = [NSMutableDictionary new];
+    NSDictionary*           distanceResults     = nil;
+    NSDictionary*           heartRateResults    = nil;
+    NSDictionary*           pedometerResults    = nil;
     
     ORKStepResult* stepResult = (ORKStepResult *)[self.result resultForIdentifier:kWalkStep];
     
-    for (ORKFileResult* fileResult in stepResult.results) {
-        NSString* fileString = [fileResult.fileURL lastPathComponent];
-        NSArray* nameComponents = [fileString componentsSeparatedByString:@"_"];
+    for (ORKFileResult* fileResult in stepResult.results)
+    {
+        NSString*   fileString      = [fileResult.fileURL lastPathComponent];
+        NSArray*    nameComponents  = [fileString componentsSeparatedByString:@"_"];
         
         if ([[nameComponents objectAtIndex:0] isEqualToString:kLocationFileNameComp])
         {
             distanceResults = [self computeTotalDistanceForDashboardItem:fileResult.fileURL];
-            
-        } else if ([[nameComponents objectAtIndex:0] isEqualToString:kHeartRateFileNameComp])
+        }
+        else if ([[nameComponents objectAtIndex:0] isEqualToString:kHeartRateFileNameComp])
         {
             heartRateResults = [self computeHeartRateForDashboardItem:fileResult.fileURL];
         }
+        else if ([[nameComponents objectAtIndex:0] isEqualToString:kPedometerFileName])
+        {
+            pedometerResults =
+        }
     }
     
-    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[NSDate date]];
-    NSInteger day = [components day];
-    NSInteger month = [components month];
-    NSDateFormatter *df = [[NSDateFormatter alloc] init];
-    NSString *monthName = [[df monthSymbols] objectAtIndex:(month-1)];
-    NSString *completedDate = [NSString stringWithFormat:@"%@ %ld", monthName, (long)day];
+    NSDateComponents*   components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear
+                                                                     fromDate:[NSDate date]];
+    NSInteger               day             = [components day];
+    NSInteger               month           = [components month];
+    NSDateFormatter*        df              = [[NSDateFormatter alloc] init];
+    NSString*               monthName       = [[df monthSymbols] objectAtIndex:(month-1)];
+    NSString*               completedDate   = [NSString stringWithFormat:@"%@ %ld", monthName, (long)day];
     
-
-    [dashboardDataSource setValue:completedDate forKey:kCompletedKeyForDashboard];
+    [dashboardDataSource setValue:completedDate
+                           forKey:kCompletedKeyForDashboard];
     [dashboardDataSource addEntriesFromDictionary:distanceResults];
     [dashboardDataSource addEntriesFromDictionary:heartRateResults];
     
-    NSString *jsonString = [self generateJSONFromDictionary:dashboardDataSource];
+    NSString*               jsonString      = [self generateJSONFromDictionary:dashboardDataSource];
 
-
-    //Intercept the location result if it exists and tear it out.
-
-    NSMutableArray *newResultForFitnessTest = [NSMutableArray new];
+    //   Iterate through the file results and if is NOT the location data do not include it in the new set of results.
+    NSMutableArray* newResultForFitnessTest = [NSMutableArray new];
 
     if (stepResult)
     {
-        for (ORKFileResult* fileResult in stepResult.results) {
-
-
-            if (![fileResult.fileURL.lastPathComponent hasPrefix: kLocationFileNameComp])
+        for (ORKFileResult* fileResult in stepResult.results)
+        {
+            if (![fileResult.fileURL.lastPathComponent hasPrefix:kLocationFileNameComp])
             {
                 [newResultForFitnessTest addObject:fileResult];
             }
         }
     }
 
-    ORKStepResult* newStepResult = (ORKStepResult *)[self.result resultForIdentifier:kWalkStep];
+    ORKStepResult* newStepResult = (ORKStepResult*)[self.result resultForIdentifier:kWalkStep];
 
     newStepResult.results = (NSArray *) newResultForFitnessTest;
-
 
     return jsonString;
 }
 
-- (NSDictionary *) computeTotalDistanceForDashboardItem:(NSURL *)fileURL{
+- (NSDictionary*)pedometerData:(NSURL*)fileURL
+{
+    NSDictionary* pedometerResults = [self readFileResultsFor:fileURL];
+}
 
+- (NSDictionary*)computeTotalDistanceForDashboardItem:(NSURL*)fileURL
+{
     NSDictionary*   distanceResults     = [self readFileResultsFor:fileURL];
     NSArray*        locations           = [distanceResults objectForKey:kFileResultsKey];
     
@@ -208,7 +217,8 @@ static NSString* const kFitnessWalkText = @"Walk as far as you can for six minut
     CLLocation*     previousCoor        = nil;
     CLLocationDistance totalDistance    = 0;
     
-    for (NSDictionary *location in locations) {
+    for (NSDictionary *location in locations)
+    {
         float               lon = [[[location objectForKey:kCoordinate] objectForKey:kLongitude] floatValue];
         float               lat = [[[location objectForKey:kCoordinate] objectForKey:kLatitude] floatValue];
         
@@ -239,8 +249,8 @@ static NSString* const kFitnessWalkText = @"Walk as far as you can for six minut
 }
 
 
-- (NSDictionary *) readFileResultsFor:(NSURL *)fileURL {
-
+- (NSDictionary *) readFileResultsFor:(NSURL *)fileURL
+{
     NSError*        error       = nil;
     NSString*       contents    = [NSString stringWithContentsOfURL:fileURL encoding:NSUTF8StringEncoding error:&error];
     NSDictionary*   results     = nil;
@@ -252,30 +262,41 @@ static NSString* const kFitnessWalkText = @"Walk as far as you can for six minut
             APCLogError2(error);
         }
     }
-    
-    if (!error) {
+    else
+    {
         NSError*    error = nil;
         NSData*     data  = [contents dataUsingEncoding:NSUTF8StringEncoding];
         
         results = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
         
-        APCLogError2(error);
+        if (!results)
+        {
+            if (error)
+            {
+                APCLogError2(error);
+            }
+        }
     }
     
     return results;
 }
 
-- (NSString *)generateJSONFromDictionary:(NSMutableDictionary *)dictionary {
-    
+- (NSString *)generateJSONFromDictionary:(NSMutableDictionary *)dictionary
+{
     NSError*    error       = nil;
     NSData*     jsonData    = [NSJSONSerialization dataWithJSONObject:dictionary
                                                                options:0
                                                                  error:&error];
     NSString* jsonString    = nil;
-    
-    APCLogError2(error);
 
-    if (!error)
+    if (!jsonData)
+    {
+        if (error)
+        {
+            APCLogError2(error);
+        }
+    }
+    else
     {
         jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     }
