@@ -261,9 +261,9 @@ typedef NS_ENUM(NSUInteger, APHDailyInsightIdentifiers)
     NSSortDescriptor *sortByDateDesending = [[NSSortDescriptor alloc] initWithKey:kDatasetDateKey ascending:NO];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K in SELF", @"raw"];
     
-    [dataset sortedArrayUsingDescriptors:@[sortByDateDesending]];
-    
     NSArray *rawData = [dataset filteredArrayUsingPredicate:predicate];
+    
+    rawData = [rawData sortedArrayUsingDescriptors:@[sortByDateDesending]];
     
     if (rawData.count > 0) {
         latestResults = [rawData firstObject][@"raw"];
