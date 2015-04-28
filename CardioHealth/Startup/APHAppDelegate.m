@@ -362,7 +362,7 @@ static NSString* const kMinorVersion               = @"version";
     
     if (!self.passiveHealthKitCollector)
     {
-        self.passiveHealthKitCollector = [[APCNewPassiveDataCollector alloc] init];
+        self.passiveHealthKitCollector = [[APCPassiveDataCollector alloc] init];
     }
     
     // Just a note here that we are using n collectors to 1 data sink for quantity sample type data.
@@ -417,7 +417,7 @@ static NSString* const kMinorVersion               = @"version";
         NSString*   startDateTimeStamp          = [sample.startDate toStringInISO8601Format];
         NSString*   endDateTimeStamp            = [sample.endDate toStringInISO8601Format];
         NSString*   healthKitType               = sample.sampleType.identifier;
-        NSString*   activityType                = [HKWorkout workoutActivityTypeStringRepresentation:(int)sample];
+        NSString*   activityType                = [HKWorkout workoutActivityTypeStringRepresentation:(int)sample.workoutActivityType];
         double      energyConsumedValue         = [sample.totalEnergyBurned doubleValueForUnit:[HKUnit kilocalorieUnit]];
         NSString*   energyConsumed              = [NSString stringWithFormat:@"%f", energyConsumedValue];
         NSString*   energyUnit                  = [HKUnit kilocalorieUnit].description;
@@ -564,7 +564,7 @@ static NSString* const kMinorVersion               = @"version";
         }
     }
     
-    APCCoreMotionBackgroundDataCollector *motionCollector = [[APCCoreMotionBackgroundDataCollector alloc] initWithIdentifier:@"motionActivityCollector" dateAnchorName:nil launchDateAnchor:LaunchDate];
+    APCCoreMotionBackgroundDataCollector *motionCollector = [[APCCoreMotionBackgroundDataCollector alloc] initWithIdentifier:@"motionActivityCollector" dateAnchorName:@"APCCoreMotionCollectorAnchorName" launchDateAnchor:LaunchDate];
     
     APCPassiveDataSink* receiver = [[APCPassiveDataSink alloc] initWithIdentifier:@"motionActivityCollector"
                                                                       columnNames:@[@"startTime",@"activityType",@"confidence"]
