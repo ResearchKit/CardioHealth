@@ -89,7 +89,17 @@
                     item.tintColor = [UIColor colorForTaskId:item.taskId];
                     [self.items addObject:item];
                 }
+                    break;
                     
+                case kAPHDashboardItemTypeDailyInsights:
+                {
+                    APCTableViewDashboardItem *item = [APCTableViewDashboardItem new];
+                    item.caption = NSLocalizedString(@"Daily Insights", nil);
+                    item.tintColor = [UIColor appTertiaryGreenColor];
+                    [self.items addObject:item];
+                }
+                    break;
+                
                 default:
                     break;
             }

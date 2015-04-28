@@ -63,6 +63,7 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
 
 @property (nonatomic, strong) NSDictionary *heartAgeInfo;
 @property (nonatomic, strong) NSDictionary *heartAgeTaskQuestionIndex;
+@property (nonatomic, strong) NSDictionary *heartAgeSummaryResults;
 @property (assign) BOOL shouldShowResultsStep;
 @end
 
@@ -394,6 +395,24 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
     
 }
 
+- (NSString *)createResultSummary
+{
+    NSError *error = nil;
+    NSString *heartAgeData = nil;
+    
+    if (self.heartAgeSummaryResults) {
+        NSData *heartAgeSummary = [NSJSONSerialization dataWithJSONObject:self.heartAgeSummaryResults options:0 error:&error];
+        
+        if (heartAgeSummary) {
+            heartAgeData = [[NSString alloc] initWithData:heartAgeSummary encoding:NSUTF8StringEncoding];
+        } else {
+            APCLogError2(error);
+        }
+    }
+    
+    return heartAgeData;
+}
+
 
 /*********************************************************************************/
 #pragma  mark  - TaskViewController delegates
@@ -455,7 +474,7 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
     
     ORKStepViewController *stepVC = nil;
     
- if ([step.identifier isEqualToString:kHeartAgeResult]) {
+    if ([step.identifier isEqualToString:kHeartAgeResult]) {
         
         NSMutableDictionary *surveyResultsDictionary = [NSMutableDictionary dictionary];
         
@@ -534,7 +553,9 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
                 }];
             }
         }
-        
+     
+        self.heartAgeSummaryResults = [NSDictionary dictionaryWithDictionary:surveyResultsDictionary];
+     
         // Kickoff heart age calculations
         
         APHHeartAgeAndRiskFactors *heartAgeAndRiskFactors = [[APHHeartAgeAndRiskFactors alloc] init];
