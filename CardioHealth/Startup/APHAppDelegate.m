@@ -74,6 +74,105 @@ static NSString* const kMinorVersion               = @"version";
 
 @implementation APHAppDelegate
 
+- (BOOL)application:(UIApplication*) __unused application willFinishLaunchingWithOptions:(NSDictionary*) __unused launchOptions
+{
+    [super application:application willFinishLaunchingWithOptions:launchOptions];
+    
+
+/**************************************************************************************************************/
+    //  DEMO CODE - BELOW
+/**************************************************************************************************************/
+    //create/get your HKHealthStore instance (called healthStore here)
+    //get permission to read the data types you need.
+    //define type, frequency, and predicate (called type, frequency, and predicate here, appropriately)
+    
+//    UIBackgroundTaskIdentifier __block taskID = [application beginBackgroundTaskWithExpirationHandler:^{
+//        if (taskID != UIBackgroundTaskInvalid) {
+//            [application endBackgroundTask:taskID];
+//            taskID = UIBackgroundTaskInvalid;
+//        }
+//    }];
+//    [self.dataSubstrate.healthStore enableBackgroundDeliveryForType:[HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierStepCount] frequency:HKUpdateFrequencyImmediate withCompletion:^(BOOL success, NSError *error) {}];
+//
+//    HKQuery *query = [[HKObserverQuery alloc] initWithSampleType:[HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierStepCount] predicate:nil updateHandler:
+//                      ^void(HKObserverQuery *query, HKObserverQueryCompletionHandler completionHandler, NSError *error)
+//                      {
+//                          //If we don't call the completion handler right away, Apple gets mad. They'll try sending us the same notification here 3 times on a back-off algorithm.  The preferred method is we just call the completion handler.  Makes me wonder why they even HAVE a completionHandler if we're expected to just call it right away...
+//                          if (completionHandler) {
+//                              completionHandler();
+//                          }
+//                          //HANDLE DATA HERE
+//                          if (taskID != UIBackgroundTaskInvalid) {
+//                              [application endBackgroundTask:taskID];
+//                              taskID = UIBackgroundTaskInvalid;
+//                          }
+//                      }];
+//    [self.dataSubstrate.healthStore executeQuery:query];
+/**************************************************************************************************************/
+//  DEMO CODE - ABOVE
+/**************************************************************************************************************/
+    
+    NSArray* dataTypesWithReadPermission = self.initializationOptions[kHKReadPermissionsKey];
+    
+    if (dataTypesWithReadPermission)
+    {
+        for (id dataType in dataTypesWithReadPermission)
+        {
+            HKObjectType*   sampleType  = nil;
+            
+            if ([dataType isKindOfClass:[NSDictionary class]])
+            {
+                NSDictionary* categoryType = (NSDictionary*) dataType;
+                
+                //Distinguish
+                if (categoryType[kHKWorkoutTypeKey])
+                {
+                    sampleType = [HKObjectType workoutType];
+                }
+                else if (categoryType[kHKCategoryTypeKey])
+                {
+                    sampleType = [HKObjectType categoryTypeForIdentifier:categoryType[kHKCategoryTypeKey]];
+                }
+            }
+            else
+            {
+                sampleType = [HKObjectType quantityTypeForIdentifier:dataType];
+            }
+        
+            [self.dataSubstrate.healthStore enableBackgroundDeliveryForType:sampleType
+                                                                  frequency:HKUpdateFrequencyImmediate
+                                                             withCompletion:^(BOOL success, NSError *error)
+             {
+                 if (!success)
+                 {
+                     if (error)
+                     {
+                         APCLogError2(error);
+                     }
+                 }
+                 else
+                 {
+                     APCLogDebug(@"Enabling background delivery for healthkit");
+                 }
+             }];
+        }
+    }
+    
+    
+    
+    return YES;
+}
+
+- (void)setUpCollectors
+{
+    [self configureObserverQueries];
+}
+
+- (void)application:(UIApplication*) __unused application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
+{
+    completionHandler(UIBackgroundFetchResultNoData);
+}
+
 /*********************************************************************************/
 #pragma mark - App Specific Code
 /*********************************************************************************/
@@ -83,11 +182,8 @@ static NSString* const kMinorVersion               = @"version";
     NSDictionary*   infoDictionary      = [[NSBundle mainBundle] infoDictionary];
     NSString*       majorVersion        = [infoDictionary objectForKey:kCFBundleShortVersionString];
     NSString*       minorVersion        = [infoDictionary objectForKey:kCFBundleVersion];
-    
     NSUserDefaults* defaults            = [NSUserDefaults standardUserDefaults];
-    
     NSError*        migrationError      = nil;
-    
     
     if ([self doesPersisteStoreExist] == NO)
     {
@@ -108,13 +204,11 @@ static NSString* const kMinorVersion               = @"version";
     [defaults setObject:minorVersion
                  forKey:kMinorVersion];
     
-    
     if (!migrationError)
     {
         [defaults setInteger:currentVersion forKey:kPreviousVersion];
         [defaults synchronize];
     }
-    
 }
 
 - (void) setUpInitializationOptions
@@ -260,17 +354,6 @@ static NSString* const kMinorVersion               = @"version";
         [self.sevenDayFitnessAllocationData startDataCollection];
     }
 }
--(void)setUpCollectors
-{
-
-//    APCCoreMotionTracker * motionTracker = [[APCCoreMotionTracker alloc] initWithIdentifier:@"motionTracker"];
-//    [self.passiveDataCollector addTracker:motionTracker];
-    
-    [self configureObserverQueries];
-    
-    return;
-    
-}
 
 - (void)configureObserverQueries
 {
@@ -281,21 +364,18 @@ static NSString* const kMinorVersion               = @"version";
         self.passiveHealthKitCollector = [[APCNewPassiveDataCollector alloc] init];
     }
     
+    // Just a note here that we are using n collectors to 1 data sink for quantity sample type data.
     APCPassiveDataSink*    quantityreceiver    = [[APCPassiveDataSink alloc] initWithIdentifier:@"HealthKitDataCollector"
                                                   columnNames:@[@"startTime,endTime,type,value,unit,source"]
                                         operationQueueName:@"APCHealthKitQuantity Activity Collector" andDataProcessor:^NSString *(id dataSample)
     {
-                                            
         HKQuantitySample*   qtySample           = (HKQuantitySample *)dataSample;
         NSString*           startDateTimeStamp  = [qtySample.startDate toStringInISO8601Format];
         NSString*           endDateTimeStamp    = [qtySample.endDate toStringInISO8601Format];
         NSString*           healthKitType       = qtySample.quantityType.identifier;
-
-
         NSString*           quantityValueRep    = [NSString stringWithFormat:@"%@", qtySample.quantity];
         NSArray*            valueSplit          = [quantityValueRep componentsSeparatedByString:@" "];
         NSString*           quantityValue       = [valueSplit objectAtIndex:0];
-
         NSString*           quantityUnit        = @"";
         
         for (int i = 1; i < (int)[valueSplit count]; i++)
@@ -332,7 +412,6 @@ static NSString* const kMinorVersion               = @"version";
                                                                                   operationQueueName:@"APCHealthKitWorkout Activity Collector"
                                                                                     andDataProcessor:^(id dataSample)
     {
-                                                                                                                                
         HKWorkout*  sample                      = (HKWorkout*)dataSample;
         NSString*   startDateTimeStamp          = [sample.startDate toStringInISO8601Format];
         NSString*   endDateTimeStamp            = [sample.endDate toStringInISO8601Format];
@@ -345,12 +424,10 @@ static NSString* const kMinorVersion               = @"version";
         NSString*   totalDistance               = [NSString stringWithFormat:@"%f", totalDistanceConsumedValue];
         NSString*   distanceUnit                = [HKUnit meterUnit].description;
         NSString*   quantitySource              = sample.source.name;
-                                                                                                                                
         NSError*    error                       = nil;
-
-        NSString *  metaData                    = [NSDictionary convertDictionary:sample.metadata ToStringWithReturningError:&error];
-        NSString *  metaDataStringified         = [NSString stringWithFormat:@"\"%@\"", metaData];
-        NSString *  stringToWrite               = [NSString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@,%@,%@,%@\n",
+        NSString*   metaData                    = [NSDictionary convertDictionary:sample.metadata ToStringWithReturningError:&error];
+        NSString*   metaDataStringified         = [NSString stringWithFormat:@"\"%@\"", metaData];
+        NSString*   stringToWrite               = [NSString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@,%@,%@,%@\n",
                                                    startDateTimeStamp,
                                                    endDateTimeStamp,
                                                    healthKitType,
@@ -368,9 +445,8 @@ static NSString* const kMinorVersion               = @"version";
     APCPassiveDataSink*           sleepReceiver       = [[APCPassiveDataSink alloc] initWithIdentifier:@"HealthKitSleepCollector"
                                                                                            columnNames:@[@"startTime,type,category value,value,unit,source"]
                                                                                     operationQueueName:@"APCHealthKitSleep Activity Collector"
-                                                                                      andDataProcessor:^NSString *(id dataSample)
+                                                                                      andDataProcessor:^NSString*(id dataSample)
     {
-                                                                                                         
         HKCategorySample*   catSample       = (HKCategorySample *)dataSample;
         NSString*           startDateTime   = [catSample.startDate toStringInISO8601Format];
         NSString*           healthKitType   = catSample.sampleType.identifier;
@@ -399,6 +475,42 @@ static NSString* const kMinorVersion               = @"version";
         
     }];
     
+
+    NSDate* (^LaunchDate)() = ^
+    {
+        APCUser*    user        = ((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.currentUser;
+        NSDate*     consentDate = nil;
+        
+        if (user.consentSignatureDate)
+        {
+            consentDate = user.consentSignatureDate;
+        }
+        else
+        {
+            NSFileManager*  fileManager = [NSFileManager defaultManager];
+            NSString*       filePath    = [[self applicationDocumentsDirectory] stringByAppendingPathComponent:@"db.sqlite"];
+            
+            if ([fileManager fileExistsAtPath:filePath])
+            {
+                NSError*        error       = nil;
+                NSDictionary*   attributes  = [fileManager attributesOfItemAtPath:filePath error:&error];
+                
+                if (error)
+                {
+                    APCLogError2(error);
+                    
+                    consentDate = [[NSDate date] startOfDay];
+                }
+                else
+                {
+                    consentDate = [attributes fileCreationDate];
+                }
+            }
+        }
+        
+        return consentDate;
+    };
+
     if (dataTypesWithReadPermission) {
         
         for (id dataType in dataTypesWithReadPermission) {
@@ -424,7 +536,9 @@ static NSString* const kMinorVersion               = @"version";
                 sampleType = [HKObjectType quantityTypeForIdentifier:dataType];
             }
             
-            APCHealthKitBackgroundDataCollector *collector = [[APCHealthKitBackgroundDataCollector alloc] initWithIdentifier:sampleType.identifier sampleType:sampleType andLimit:1];
+            // This is really important to remember that we are creating as many user defaults as there are healthkit permissions here.
+            NSString* uniqueAnchorDateName = [NSString stringWithFormat:@"APCHealthKit%@AnchorDate", dataType];
+            APCHealthKitBackgroundDataCollector* collector = [[APCHealthKitBackgroundDataCollector alloc] initWithIdentifier:sampleType.identifier sampleType:sampleType anchorName:uniqueAnchorDateName launchDateAnchor:LaunchDate];
             
             //If the HKObjectType is a HKWorkoutType then set a different receiver/data sink.
             if ([sampleType isKindOfClass:[HKWorkoutType class]])
@@ -449,14 +563,13 @@ static NSString* const kMinorVersion               = @"version";
         }
     }
     
-    APCCoreMotionBackgroundDataCollector *motionCollector = [[APCCoreMotionBackgroundDataCollector alloc] initWithIdentifier:@"motionActivityCollector"];
+    APCCoreMotionBackgroundDataCollector *motionCollector = [[APCCoreMotionBackgroundDataCollector alloc] initWithIdentifier:@"motionActivityCollector" dateAnchorName:nil launchDateAnchor:LaunchDate];
     
     APCPassiveDataSink* receiver = [[APCPassiveDataSink alloc] initWithIdentifier:@"motionActivityCollector"
                                                                       columnNames:@[@"startTime",@"activityType",@"confidence"]
                                                                operationQueueName:@"APCCoreMotion Activity Collector"
                                                                  andDataProcessor:^NSString *(id dataSample)
     {
-        
         CMMotionActivity* motionActivitySample  = (CMMotionActivity*)dataSample;
         NSString* motionActivity                = [CMMotionActivity activityTypeName:motionActivitySample];
         NSNumber* motionConfidence              = @(motionActivitySample.confidence);
@@ -467,19 +580,15 @@ static NSString* const kMinorVersion               = @"version";
     
     [motionCollector setReceiver:receiver];
     [motionCollector setDelegate:receiver];
-    
     [motionCollector start];
     
     [self.passiveHealthKitCollector addDataSink:motionCollector];
-    
 }
 
-
-- (NSDate *)checkSevenDayFitnessStartDate
+- (NSDate*)checkSevenDayFitnessStartDate
 {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    NSDate *fitnessStartDate = [defaults objectForKey:kSevenDayFitnessStartDateKey];
+    NSUserDefaults*     defaults            = [NSUserDefaults standardUserDefaults];
+    NSDate*             fitnessStartDate    = [defaults objectForKey:kSevenDayFitnessStartDateKey];
     
     return fitnessStartDate;
 }
