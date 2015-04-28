@@ -78,40 +78,6 @@ static NSString* const kMinorVersion               = @"version";
 {
     [super application:application willFinishLaunchingWithOptions:launchOptions];
     
-
-/**************************************************************************************************************/
-    //  DEMO CODE - BELOW
-/**************************************************************************************************************/
-    //create/get your HKHealthStore instance (called healthStore here)
-    //get permission to read the data types you need.
-    //define type, frequency, and predicate (called type, frequency, and predicate here, appropriately)
-    
-//    UIBackgroundTaskIdentifier __block taskID = [application beginBackgroundTaskWithExpirationHandler:^{
-//        if (taskID != UIBackgroundTaskInvalid) {
-//            [application endBackgroundTask:taskID];
-//            taskID = UIBackgroundTaskInvalid;
-//        }
-//    }];
-//    [self.dataSubstrate.healthStore enableBackgroundDeliveryForType:[HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierStepCount] frequency:HKUpdateFrequencyImmediate withCompletion:^(BOOL success, NSError *error) {}];
-//
-//    HKQuery *query = [[HKObserverQuery alloc] initWithSampleType:[HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierStepCount] predicate:nil updateHandler:
-//                      ^void(HKObserverQuery *query, HKObserverQueryCompletionHandler completionHandler, NSError *error)
-//                      {
-//                          //If we don't call the completion handler right away, Apple gets mad. They'll try sending us the same notification here 3 times on a back-off algorithm.  The preferred method is we just call the completion handler.  Makes me wonder why they even HAVE a completionHandler if we're expected to just call it right away...
-//                          if (completionHandler) {
-//                              completionHandler();
-//                          }
-//                          //HANDLE DATA HERE
-//                          if (taskID != UIBackgroundTaskInvalid) {
-//                              [application endBackgroundTask:taskID];
-//                              taskID = UIBackgroundTaskInvalid;
-//                          }
-//                      }];
-//    [self.dataSubstrate.healthStore executeQuery:query];
-/**************************************************************************************************************/
-//  DEMO CODE - ABOVE
-/**************************************************************************************************************/
-    
     NSArray* dataTypesWithReadPermission = self.initializationOptions[kHKReadPermissionsKey];
     
     if (dataTypesWithReadPermission)
@@ -166,11 +132,6 @@ static NSString* const kMinorVersion               = @"version";
 - (void)setUpCollectors
 {
     [self configureObserverQueries];
-}
-
-- (void)application:(UIApplication*) __unused application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
-{
-    completionHandler(UIBackgroundFetchResultNoData);
 }
 
 /*********************************************************************************/
