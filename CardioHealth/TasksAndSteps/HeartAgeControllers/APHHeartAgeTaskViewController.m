@@ -63,7 +63,8 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
 
 @property (nonatomic, strong) NSDictionary *heartAgeInfo;
 @property (nonatomic, strong) NSDictionary *heartAgeTaskQuestionIndex;
-@property (nonatomic, strong) NSDictionary *heartAgeSummaryResults;
+@property (nonatomic, strong) NSMutableDictionary *heartAgeSummaryResults;
+
 @property (assign) BOOL shouldShowResultsStep;
 @end
 
@@ -575,7 +576,7 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
             }
         }
      
-        self.heartAgeSummaryResults = [NSDictionary dictionaryWithDictionary:surveyResultsDictionary];
+        self.heartAgeSummaryResults = [NSMutableDictionary dictionaryWithDictionary:surveyResultsDictionary];
      
         // Kickoff heart age calculations
         
@@ -595,6 +596,9 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
         heartAgeResultsVC.lifetimeRisk = self.heartAgeInfo[kSummaryLifetimeRisk];
         heartAgeResultsVC.optimalTenYearRisk = optimalRiskFactors[kSummaryTenYearRisk];
         heartAgeResultsVC.optimalLifetimeRisk = optimalRiskFactors[kSummaryLifetimeRisk];
+        
+        // Add the heart age summary to summart results
+        [self.heartAgeSummaryResults addEntriesFromDictionary:self.heartAgeInfo];
         
         stepVC = heartAgeResultsVC;
     }
