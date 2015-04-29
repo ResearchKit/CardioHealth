@@ -113,7 +113,7 @@ static NSString* const kFitnessWalkText = @"Walk as far as you can for six minut
     } else if ([stepViewController.step.identifier isEqualToString:kConclusionStep]) {
         [[UIView appearance] setTintColor:[UIColor appTertiaryColor1]];
     }
-    
+
     if ([stepViewController.step isKindOfClass:[ORKCompletionStep class]])
     {
         AVSpeechUtterance *utterance = [AVSpeechUtterance
@@ -163,7 +163,7 @@ static NSString* const kFitnessWalkText = @"Walk as far as you can for six minut
         }
         else if ([[nameComponents objectAtIndex:0] isEqualToString:kPedometerFileName])
         {
-            pedometerResults =
+            pedometerResults = [self pedometerData:fileResult.fileURL];
         }
     }
     
@@ -179,6 +179,7 @@ static NSString* const kFitnessWalkText = @"Walk as far as you can for six minut
                            forKey:kCompletedKeyForDashboard];
     [dashboardDataSource addEntriesFromDictionary:distanceResults];
     [dashboardDataSource addEntriesFromDictionary:heartRateResults];
+    [dashboardDataSource addEntriesFromDictionary:pedometerResults];
     
     NSString*               jsonString      = [self generateJSONFromDictionary:dashboardDataSource];
 
@@ -205,7 +206,12 @@ static NSString* const kFitnessWalkText = @"Walk as far as you can for six minut
 
 - (NSDictionary*)pedometerData:(NSURL*)fileURL
 {
-    NSDictionary* pedometerResults = [self readFileResultsFor:fileURL];
+    NSDictionary*   pedometerItems      = [self readFileResultsFor:fileURL];
+    NSArray*        pedometerResults    = [pedometerItems objectForKey:kFileResultsKey];
+    NSDictionary*   lastResult          = [pedometerResults lastObject];
+    NSNumber*       totalDistance       = [lastResult objectForKey:@"distance"];
+
+    return @{@"pedometerDistance" : totalDistance};
 }
 
 - (NSDictionary*)computeTotalDistanceForDashboardItem:(NSURL*)fileURL
