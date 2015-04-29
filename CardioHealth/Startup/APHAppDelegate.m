@@ -297,11 +297,10 @@ static NSString* const kMinorVersion               = @"version";
                  kScheduleOffsetTaskIdKey: @"2-APHHeartAge-7259AC18-D711-47A6-ADBD-6CFCECDED1DF",
                  kScheduleOffsetOffsetKey: @(7)
                  },
-#warning Uncomment the code below.
-//             @{
-//                 kScheduleOffsetTaskIdKey: @"3-APHFitnessTest-00000000-1111-1111-1111-F810BE28D995",
-//                 kScheduleOffsetOffsetKey: @(7)
-//                 },
+             @{
+                 kScheduleOffsetTaskIdKey: @"3-APHFitnessTest-00000000-1111-1111-1111-F810BE28D995",
+                 kScheduleOffsetOffsetKey: @(7)
+                 },
              @{
                  kScheduleOffsetTaskIdKey: @"2-WellBeingAndRiskPerceptionSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66",
                  kScheduleOffsetOffsetKey: @(1)
