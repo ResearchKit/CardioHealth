@@ -94,7 +94,7 @@
                 case kAPHDashboardItemTypeDailyInsights:
                 {
                     APCTableViewDashboardItem *item = [APCTableViewDashboardItem new];
-                    item.caption = NSLocalizedString(@"Daily Insights", nil);
+                    item.caption = NSLocalizedString(@"Insights", nil);
                     item.tintColor = [UIColor appTertiaryGreenColor];
                     [self.items addObject:item];
                 }
