@@ -56,6 +56,9 @@ NSString *const kDietSurveyVegetableKey   = @"vegetable";
 NSString *const kDietSurveyFruitKey       = @"fruit";
 NSString *const kDietSurveyFishKey        = @"fish";
 
+NSString *const kDailyInsightIconKey    = @"insightIconKey";
+NSString *const kDailyInsightCaptionKey = @"insightCaptionKey";
+
 NSString *const kAPHDailyInsightDataCollectionIsCompleteNotification = @"APHDailyInsightDataCollectionIsCompleteNotification";
 
 static NSAttributedString *kResultsNotFound = nil;
@@ -290,7 +293,12 @@ typedef NS_ENUM(NSUInteger, APHDailyInsightIdentifiers)
     
     APCLogDebug(@"Smoking insight.");
     
-    [self.collectedInsights addObject:smokingInsight];
+    NSDictionary *insight = @{
+                              kDailyInsightCaptionKey: smokingInsight,
+                              kDailyInsightIconKey: [UIImage imageNamed:@"insight_smoking"]
+                             };
+    
+    [self.collectedInsights addObject:insight];
 }
 
 - (void)insightForWeight
@@ -320,7 +328,13 @@ typedef NS_ENUM(NSUInteger, APHDailyInsightIdentifiers)
     }
     
     APCLogDebug(@"Weight insight.");
-    [self.collectedInsights addObject:weightInsight];
+    
+    NSDictionary *insight = @{
+                              kDailyInsightCaptionKey: weightInsight,
+                              kDailyInsightIconKey: [UIImage imageNamed:@"insight_bmi"]
+                              };
+    
+    [self.collectedInsights addObject:insight];
 }
 
 - (void)insightForActivity
@@ -347,7 +361,13 @@ typedef NS_ENUM(NSUInteger, APHDailyInsightIdentifiers)
     }
     
     APCLogDebug(@"Activity insight.");
-    [self.collectedInsights addObject:activityInsight];
+    
+    NSDictionary *insight = @{
+                              kDailyInsightCaptionKey: activityInsight,
+                              kDailyInsightIconKey: [UIImage imageNamed:@"insight_activity"]
+                              };
+    
+    [self.collectedInsights addObject:insight];
 }
 
 - (void)insightForDiet
@@ -398,7 +418,13 @@ typedef NS_ENUM(NSUInteger, APHDailyInsightIdentifiers)
     }
     
     APCLogDebug(@"Diet insight.");
-    [self.collectedInsights addObject:dietInsight];
+    
+    NSDictionary *insight = @{
+                              kDailyInsightCaptionKey: dietInsight,
+                              kDailyInsightIconKey: [UIImage imageNamed:@"insight_diet"]
+                              };
+    
+    [self.collectedInsights addObject:insight];
 }
 
 - (void)insightForBloodPressure
@@ -430,7 +456,13 @@ typedef NS_ENUM(NSUInteger, APHDailyInsightIdentifiers)
     }
     
     APCLogDebug(@"Blood Pressure insight.");
-    [self.collectedInsights addObject:bloodPressureInsight];
+    
+    NSDictionary *insight = @{
+                              kDailyInsightCaptionKey: bloodPressureInsight,
+                              kDailyInsightIconKey: [UIImage imageNamed:@"insight_blood_pressure"]
+                              };
+    
+    [self.collectedInsights addObject:insight];
 }
 
 - (void)insightForCholesterol
@@ -455,7 +487,13 @@ typedef NS_ENUM(NSUInteger, APHDailyInsightIdentifiers)
     }
     
     APCLogDebug(@"Cholesterol insight.");
-    [self.collectedInsights addObject:cholesterolInsight];
+    
+    NSDictionary *insight = @{
+                              kDailyInsightCaptionKey: cholesterolInsight,
+                              kDailyInsightIconKey: [UIImage imageNamed:@"insight_cholesterol"]
+                              };
+    
+    [self.collectedInsights addObject:insight];
 }
 
 - (void)insightForBloodSugar
@@ -483,7 +521,13 @@ typedef NS_ENUM(NSUInteger, APHDailyInsightIdentifiers)
     }
     
     APCLogDebug(@"Blood Sugar insight.");
-    [self.collectedInsights addObject:bloodSugarInsight];
+    
+    NSDictionary *insight = @{
+                              kDailyInsightCaptionKey: bloodSugarInsight,
+                              kDailyInsightIconKey: [UIImage imageNamed:@"insight_sugars"]
+                              };
+    
+    [self.collectedInsights addObject:insight];
 }
 
 #pragma mark - Helpers
