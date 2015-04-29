@@ -375,36 +375,43 @@ typedef NS_ENUM(NSUInteger, APHDailyInsightIdentifiers)
     NSAttributedString *dietInsight = kResultsNotFound;
     
     if (self.dietSurveyResults) {
-        double consumedFruits = [self.dietSurveyResults[kDietSurveyFruitKey] doubleValue]; // >= 4.5 /day
-        double consumedVegetables = [self.dietSurveyResults[kDietSurveyVegetableKey] doubleValue]; // >= 4.5 /day
-        double consumedFish = [self.dietSurveyResults[kDietSurveyFishKey] doubleValue]; // >= 2 /week
-        //double consumedSoduim = [self.dietSurveyResults[kDietSurveySodiumKey] doubleValue]; // < 1500 mg /day
-        double consumedGrains = [self.dietSurveyResults[kDietSurveyGrainsKey] doubleValue]; // 3 oz /day (3 servings / day)
-        double consumedSugarDrinks = [self.dietSurveyResults[kDietSurveySugarDrinksKey] doubleValue]; // 450 cal /week (1 drink / day)
         
-        NSUInteger dietComponents = 0;
+        BOOL skippedAllQuestions = (self.dietSurveyResults[kDietSurveyFruitKey] == [NSNull null]) &&
+                                   (self.dietSurveyResults[kDietSurveyVegetableKey] == [NSNull null]) &&
+                                   (self.dietSurveyResults[kDietSurveyFishKey] == [NSNull null]) &&
+                                   (self.dietSurveyResults[kDietSurveyGrainsKey] == [NSNull null]) &&
+                                   (self.dietSurveyResults[kDietSurveySugarDrinksKey] == [NSNull null]);
         
-        if (consumedFruits >= 4.5) {
-            dietComponents++;
-        }
-        
-        if (consumedVegetables >= 4.5) {
-            dietComponents++;
-        }
-        
-        if (consumedFish >= 2) {
-            dietComponents++;
-        }
-        
-        if (consumedGrains >= 3) {
-            dietComponents++;
-        }
-        
-        if (consumedSugarDrinks == 1) {
-            dietComponents++;
-        }
-        
-        if (dietComponents > 0) {
+        if (!skippedAllQuestions) {
+            double consumedFruits = [self.dietSurveyResults[kDietSurveyFruitKey] doubleValue]; // >= 4.5 /day
+            double consumedVegetables = [self.dietSurveyResults[kDietSurveyVegetableKey] doubleValue]; // >= 4.5 /day
+            double consumedFish = [self.dietSurveyResults[kDietSurveyFishKey] doubleValue]; // >= 2 /week
+            //double consumedSoduim = [self.dietSurveyResults[kDietSurveySodiumKey] doubleValue]; // < 1500 mg /day
+            double consumedGrains = [self.dietSurveyResults[kDietSurveyGrainsKey] doubleValue]; // 3 oz /day (3 servings / day)
+            double consumedSugarDrinks = [self.dietSurveyResults[kDietSurveySugarDrinksKey] doubleValue]; // 450 cal /week (1 drink / day)
+            
+            NSUInteger dietComponents = 0;
+            
+            if (consumedFruits >= 4.5) {
+                dietComponents++;
+            }
+            
+            if (consumedVegetables >= 4.5) {
+                dietComponents++;
+            }
+            
+            if (consumedFish >= 2) {
+                dietComponents++;
+            }
+            
+            if (consumedGrains >= 3) {
+                dietComponents++;
+            }
+            
+            if (consumedSugarDrinks <= 3) {
+                dietComponents++;
+            }
+            
             NSString *dietCaption = [NSString stringWithFormat:@"%lu of 5 healthy diet components", dietComponents];
             
             if (dietComponents == 1) {
