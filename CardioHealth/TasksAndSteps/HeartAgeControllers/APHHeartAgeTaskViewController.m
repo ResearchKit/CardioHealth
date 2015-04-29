@@ -63,7 +63,8 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
 
 @property (nonatomic, strong) NSDictionary *heartAgeInfo;
 @property (nonatomic, strong) NSDictionary *heartAgeTaskQuestionIndex;
-@property (nonatomic, strong) NSDictionary *heartAgeSummaryResults;
+@property (nonatomic, strong) NSMutableDictionary *heartAgeSummaryResults;
+
 @property (assign) BOOL shouldShowResultsStep;
 @end
 
@@ -439,34 +440,55 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
     // amend the self.headerAgeInfo dictionary to the results, but an appropriate
     // RKSurveyQuestionType is not available for adding dictionary to the result;
     // thus we create separate question results for each of these data points.
-    
-    NSMutableArray *questionResultsForSurvey = [NSMutableArray array];
+    NSMutableArray *stepsForSurvey = [NSMutableArray new];
+    NSMutableArray *summaryResultForSurvey = [NSMutableArray new];
     
     for (ORKStepResult *stepResult in self.result.results) {
+        
+        NSMutableArray *stepQuestionResults = [NSMutableArray new];
+        
         for (ORKQuestionResult *surveyQuestionResult in stepResult.results) {
-            [questionResultsForSurvey addObject:surveyQuestionResult];
+            if (![surveyQuestionResult.identifier isEqualToString:kHeartAgeTestDataAge]) {
+                [stepQuestionResults addObject:surveyQuestionResult];
+            } else {
+                ORKNumericQuestionResult *qrAge = [[ORKNumericQuestionResult alloc] initWithIdentifier:kHeartAgeTestDataAge];
+                qrAge.questionType = ORKQuestionTypeInteger;
+                qrAge.numericAnswer = self.heartAgeSummaryResults[kHeartAgeTestDataAge];
+                
+                [stepQuestionResults addObject:qrAge];
+            }
         }
+        
+        stepResult.results = stepQuestionResults;
+        
+        [stepsForSurvey addObject:stepResult];
     }
     
     ORKNumericQuestionResult *qrHeartAge = [[ORKNumericQuestionResult alloc] initWithIdentifier:kSummaryHeartAge];
     qrHeartAge.questionType = ORKQuestionTypeInteger;
     qrHeartAge.numericAnswer = self.heartAgeInfo[kSummaryHeartAge];
-    [questionResultsForSurvey addObject:qrHeartAge];
+    
+    [summaryResultForSurvey addObject:qrHeartAge];
     
     
     ORKNumericQuestionResult *qrTenYearRisk = [[ORKNumericQuestionResult alloc] initWithIdentifier:kSummaryTenYearRisk];
     qrTenYearRisk.questionType = ORKQuestionTypeDecimal;
     qrTenYearRisk.numericAnswer = self.heartAgeInfo[kSummaryTenYearRisk];
     
-    [questionResultsForSurvey addObject:qrTenYearRisk];
+    [summaryResultForSurvey addObject:qrTenYearRisk];
     
     ORKNumericQuestionResult *qrLifetimeRisk = [[ORKNumericQuestionResult alloc] initWithIdentifier:kSummaryLifetimeRisk];
     qrLifetimeRisk.questionType = ORKQuestionTypeDecimal;
     qrLifetimeRisk.numericAnswer = self.heartAgeInfo[kSummaryLifetimeRisk];
     
-    [questionResultsForSurvey addObject:qrLifetimeRisk];
+    [summaryResultForSurvey addObject:qrLifetimeRisk];
     
-    self.result.results = questionResultsForSurvey;
+    ORKStepResult *summaryStepResult = [[ORKStepResult alloc] initWithStepIdentifier:kHeartAgeSummary
+                                                                             results:summaryResultForSurvey];
+    
+    [stepsForSurvey addObject:summaryStepResult];
+    
+    self.result.results = [stepsForSurvey copy];
 }
 
 - (ORKStepViewController *)taskViewController:(ORKTaskViewController *)taskViewController viewControllerForStep:(ORKStep *)step
@@ -554,7 +576,7 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
             }
         }
      
-        self.heartAgeSummaryResults = [NSDictionary dictionaryWithDictionary:surveyResultsDictionary];
+        self.heartAgeSummaryResults = [NSMutableDictionary dictionaryWithDictionary:surveyResultsDictionary];
      
         // Kickoff heart age calculations
         
@@ -574,6 +596,9 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
         heartAgeResultsVC.lifetimeRisk = self.heartAgeInfo[kSummaryLifetimeRisk];
         heartAgeResultsVC.optimalTenYearRisk = optimalRiskFactors[kSummaryTenYearRisk];
         heartAgeResultsVC.optimalLifetimeRisk = optimalRiskFactors[kSummaryLifetimeRisk];
+        
+        // Add the heart age summary to summart results
+        [self.heartAgeSummaryResults addEntriesFromDictionary:self.heartAgeInfo];
         
         stepVC = heartAgeResultsVC;
     }

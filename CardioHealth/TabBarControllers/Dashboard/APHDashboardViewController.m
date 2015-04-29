@@ -302,15 +302,17 @@ static NSUInteger maxNumberOfInsights = 7;
                     
                     // Insight Items
                     {
-                        for (NSAttributedString *dailyInsight in self.dailyInsights.collectedDailyInsights) {
+                        for (NSDictionary *dailyInsight in self.dailyInsights.collectedDailyInsights) {
                             APHTableViewDashboardDailyInsightItem *item = [APHTableViewDashboardDailyInsightItem new];
                             
                             item.identifier = kAPHDashboardDailyInsightCellIdentifier;
                             item.tintColor = [UIColor appTertiaryGreenColor];
                             item.editable = NO;
-                            item.insightAttributedTitle = dailyInsight;
+                            
+                            item.insightAttributedTitle = dailyInsight[kDailyInsightCaptionKey];
                             item.insightSubtitle = NSLocalizedString(@"where you are now", nil);
-                            item.insightImage = [UIImage imageNamed:@"insights_smoking"];
+                            item.insightImage = dailyInsight[kDailyInsightIconKey];
+                            
                             item.info = NSLocalizedString(@"Put something for Daily Insights", nil);
                             
                             APCTableViewRow *row = [APCTableViewRow new];

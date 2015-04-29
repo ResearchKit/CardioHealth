@@ -56,6 +56,9 @@ NSString *const kDietSurveyVegetableKey   = @"vegetable";
 NSString *const kDietSurveyFruitKey       = @"fruit";
 NSString *const kDietSurveyFishKey        = @"fish";
 
+NSString *const kDailyInsightIconKey    = @"insightIconKey";
+NSString *const kDailyInsightCaptionKey = @"insightCaptionKey";
+
 NSString *const kAPHDailyInsightDataCollectionIsCompleteNotification = @"APHDailyInsightDataCollectionIsCompleteNotification";
 
 static NSAttributedString *kResultsNotFound = nil;
@@ -290,7 +293,12 @@ typedef NS_ENUM(NSUInteger, APHDailyInsightIdentifiers)
     
     APCLogDebug(@"Smoking insight.");
     
-    [self.collectedInsights addObject:smokingInsight];
+    NSDictionary *insight = @{
+                              kDailyInsightCaptionKey: smokingInsight,
+                              kDailyInsightIconKey: [UIImage imageNamed:@"insight_smoking"]
+                             };
+    
+    [self.collectedInsights addObject:insight];
 }
 
 - (void)insightForWeight
@@ -320,7 +328,13 @@ typedef NS_ENUM(NSUInteger, APHDailyInsightIdentifiers)
     }
     
     APCLogDebug(@"Weight insight.");
-    [self.collectedInsights addObject:weightInsight];
+    
+    NSDictionary *insight = @{
+                              kDailyInsightCaptionKey: weightInsight,
+                              kDailyInsightIconKey: [UIImage imageNamed:@"insight_bmi"]
+                              };
+    
+    [self.collectedInsights addObject:insight];
 }
 
 - (void)insightForActivity
@@ -347,7 +361,13 @@ typedef NS_ENUM(NSUInteger, APHDailyInsightIdentifiers)
     }
     
     APCLogDebug(@"Activity insight.");
-    [self.collectedInsights addObject:activityInsight];
+    
+    NSDictionary *insight = @{
+                              kDailyInsightCaptionKey: activityInsight,
+                              kDailyInsightIconKey: [UIImage imageNamed:@"insight_activity"]
+                              };
+    
+    [self.collectedInsights addObject:insight];
 }
 
 - (void)insightForDiet
@@ -355,36 +375,43 @@ typedef NS_ENUM(NSUInteger, APHDailyInsightIdentifiers)
     NSAttributedString *dietInsight = kResultsNotFound;
     
     if (self.dietSurveyResults) {
-        double consumedFruits = [self.dietSurveyResults[kDietSurveyFruitKey] doubleValue]; // >= 4.5 /day
-        double consumedVegetables = [self.dietSurveyResults[kDietSurveyVegetableKey] doubleValue]; // >= 4.5 /day
-        double consumedFish = [self.dietSurveyResults[kDietSurveyFishKey] doubleValue]; // >= 2 /week
-        //double consumedSoduim = [self.dietSurveyResults[kDietSurveySodiumKey] doubleValue]; // < 1500 mg /day
-        double consumedGrains = [self.dietSurveyResults[kDietSurveyGrainsKey] doubleValue]; // 3 oz /day (3 servings / day)
-        double consumedSugarDrinks = [self.dietSurveyResults[kDietSurveySugarDrinksKey] doubleValue]; // 450 cal /week (1 drink / day)
         
-        NSUInteger dietComponents = 0;
+        BOOL skippedAllQuestions = (self.dietSurveyResults[kDietSurveyFruitKey] == [NSNull null]) &&
+                                   (self.dietSurveyResults[kDietSurveyVegetableKey] == [NSNull null]) &&
+                                   (self.dietSurveyResults[kDietSurveyFishKey] == [NSNull null]) &&
+                                   (self.dietSurveyResults[kDietSurveyGrainsKey] == [NSNull null]) &&
+                                   (self.dietSurveyResults[kDietSurveySugarDrinksKey] == [NSNull null]);
         
-        if (consumedFruits >= 4.5) {
-            dietComponents++;
-        }
-        
-        if (consumedVegetables >= 4.5) {
-            dietComponents++;
-        }
-        
-        if (consumedFish >= 2) {
-            dietComponents++;
-        }
-        
-        if (consumedGrains >= 3) {
-            dietComponents++;
-        }
-        
-        if (consumedSugarDrinks == 1) {
-            dietComponents++;
-        }
-        
-        if (dietComponents > 0) {
+        if (!skippedAllQuestions) {
+            double consumedFruits = [self.dietSurveyResults[kDietSurveyFruitKey] doubleValue]; // >= 4.5 /day
+            double consumedVegetables = [self.dietSurveyResults[kDietSurveyVegetableKey] doubleValue]; // >= 4.5 /day
+            double consumedFish = [self.dietSurveyResults[kDietSurveyFishKey] doubleValue]; // >= 2 /week
+            //double consumedSoduim = [self.dietSurveyResults[kDietSurveySodiumKey] doubleValue]; // < 1500 mg /day
+            double consumedGrains = [self.dietSurveyResults[kDietSurveyGrainsKey] doubleValue]; // 3 oz /day (3 servings / day)
+            double consumedSugarDrinks = [self.dietSurveyResults[kDietSurveySugarDrinksKey] doubleValue]; // 450 cal /week (1 drink / day)
+            
+            NSUInteger dietComponents = 0;
+            
+            if (consumedFruits >= 4.5) {
+                dietComponents++;
+            }
+            
+            if (consumedVegetables >= 4.5) {
+                dietComponents++;
+            }
+            
+            if (consumedFish >= 2) {
+                dietComponents++;
+            }
+            
+            if (consumedGrains >= 3) {
+                dietComponents++;
+            }
+            
+            if (consumedSugarDrinks <= 3) {
+                dietComponents++;
+            }
+            
             NSString *dietCaption = [NSString stringWithFormat:@"%lu of 5 healthy diet components", dietComponents];
             
             if (dietComponents == 1) {
@@ -398,7 +425,13 @@ typedef NS_ENUM(NSUInteger, APHDailyInsightIdentifiers)
     }
     
     APCLogDebug(@"Diet insight.");
-    [self.collectedInsights addObject:dietInsight];
+    
+    NSDictionary *insight = @{
+                              kDailyInsightCaptionKey: dietInsight,
+                              kDailyInsightIconKey: [UIImage imageNamed:@"insight_diet"]
+                              };
+    
+    [self.collectedInsights addObject:insight];
 }
 
 - (void)insightForBloodPressure
@@ -430,7 +463,13 @@ typedef NS_ENUM(NSUInteger, APHDailyInsightIdentifiers)
     }
     
     APCLogDebug(@"Blood Pressure insight.");
-    [self.collectedInsights addObject:bloodPressureInsight];
+    
+    NSDictionary *insight = @{
+                              kDailyInsightCaptionKey: bloodPressureInsight,
+                              kDailyInsightIconKey: [UIImage imageNamed:@"insight_blood_pressure"]
+                              };
+    
+    [self.collectedInsights addObject:insight];
 }
 
 - (void)insightForCholesterol
@@ -455,7 +494,13 @@ typedef NS_ENUM(NSUInteger, APHDailyInsightIdentifiers)
     }
     
     APCLogDebug(@"Cholesterol insight.");
-    [self.collectedInsights addObject:cholesterolInsight];
+    
+    NSDictionary *insight = @{
+                              kDailyInsightCaptionKey: cholesterolInsight,
+                              kDailyInsightIconKey: [UIImage imageNamed:@"insight_cholesterol"]
+                              };
+    
+    [self.collectedInsights addObject:insight];
 }
 
 - (void)insightForBloodSugar
@@ -483,7 +528,13 @@ typedef NS_ENUM(NSUInteger, APHDailyInsightIdentifiers)
     }
     
     APCLogDebug(@"Blood Sugar insight.");
-    [self.collectedInsights addObject:bloodSugarInsight];
+    
+    NSDictionary *insight = @{
+                              kDailyInsightCaptionKey: bloodSugarInsight,
+                              kDailyInsightIconKey: [UIImage imageNamed:@"insight_sugars"]
+                              };
+    
+    [self.collectedInsights addObject:insight];
 }
 
 #pragma mark - Helpers
