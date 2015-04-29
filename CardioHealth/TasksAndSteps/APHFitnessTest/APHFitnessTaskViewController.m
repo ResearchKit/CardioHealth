@@ -59,11 +59,14 @@ static NSString* const  kHeartRateValueKey         = @"value";
 static NSString* const  kCoordinate                 = @"coordinate";
 static NSString* const  kLongitude                 = @"longitude";
 static NSString* const  kLatitude                  = @"latitude";
+static NSString* const  kDistance                  = @"distance";
 
 static NSString* const kCompletedKeyForDashboard   = @"completed";
 static NSString* const kPeakHeartRateForDashboard  = @"peakHeartRate";
 static NSString* const kAvgHeartRateForDashboard   = @"avgHeartRate";
 static NSString* const kLastHeartRateForDashboard  = @"lastHeartRate";
+static NSString* const kPedometerDistance          = @"pedometerDistance";
+static NSString* const kLocationDistance           = @"totalDistance";
 
 static NSString* const kInstructionIntendedDescription = @"This test monitors how far you can walk in six minutes. It will also record your heart rate if you are wearing such a device.";
 
@@ -138,9 +141,8 @@ static NSString* const kFitnessWalkText = @"Walk as far as you can for six minut
 /*********************************************************************************/
 #pragma  mark  -  Helper methods
 /*********************************************************************************/
-
-- (NSString *) createResultSummary {
-    
+- (NSString*) createResultSummary
+{
     NSMutableDictionary*    dashboardDataSource = [NSMutableDictionary new];
     NSDictionary*           distanceResults     = nil;
     NSDictionary*           heartRateResults    = nil;
@@ -153,35 +155,50 @@ static NSString* const kFitnessWalkText = @"Walk as far as you can for six minut
         NSString*   fileString      = [fileResult.fileURL lastPathComponent];
         NSArray*    nameComponents  = [fileString componentsSeparatedByString:@"_"];
         
-        if ([[nameComponents objectAtIndex:0] isEqualToString:kLocationFileNameComp])
+        if ([[nameComponents firstObject] isEqualToString:kLocationFileNameComp])
         {
             distanceResults = [self computeTotalDistanceForDashboardItem:fileResult.fileURL];
         }
-        else if ([[nameComponents objectAtIndex:0] isEqualToString:kHeartRateFileNameComp])
+        else if ([[nameComponents firstObject] isEqualToString:kHeartRateFileNameComp])
         {
             heartRateResults = [self computeHeartRateForDashboardItem:fileResult.fileURL];
         }
-        else if ([[nameComponents objectAtIndex:0] isEqualToString:kPedometerFileName])
+        else if ([[nameComponents firstObject] isEqualToString:kPedometerFileName])
         {
             pedometerResults = [self pedometerData:fileResult.fileURL];
         }
     }
     
-    NSDateComponents*   components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear
-                                                                     fromDate:[NSDate date]];
+    NSDateComponents*       components      = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear
+                                                                              fromDate:[NSDate date]];
     NSInteger               day             = [components day];
-    NSInteger               month           = [components month];
+    NSInteger               month           = [components month]; //    Not zero based.
     NSDateFormatter*        df              = [[NSDateFormatter alloc] init];
     NSString*               monthName       = [[df monthSymbols] objectAtIndex:(month-1)];
     NSString*               completedDate   = [NSString stringWithFormat:@"%@ %ld", monthName, (long)day];
     
-    [dashboardDataSource setValue:completedDate
-                           forKey:kCompletedKeyForDashboard];
-    [dashboardDataSource addEntriesFromDictionary:distanceResults];
-    [dashboardDataSource addEntriesFromDictionary:heartRateResults];
-    [dashboardDataSource addEntriesFromDictionary:pedometerResults];
+    if (completedDate)
+    {
+        [dashboardDataSource setValue:completedDate
+                               forKey:kCompletedKeyForDashboard];
+    }
     
-    NSString*               jsonString      = [self generateJSONFromDictionary:dashboardDataSource];
+    if (distanceResults)
+    {
+        [dashboardDataSource addEntriesFromDictionary:distanceResults];
+    }
+    
+    if (heartRateResults)
+    {
+        [dashboardDataSource addEntriesFromDictionary:heartRateResults];
+    }
+    
+    if (pedometerResults)
+    {
+        [dashboardDataSource addEntriesFromDictionary:pedometerResults];
+    }
+    
+    NSString*       jsonString              = [self generateJSONFromDictionary:dashboardDataSource];
 
     //   Iterate through the file results and if is NOT the location data do not include it in the new set of results.
     NSMutableArray* newResultForFitnessTest = [NSMutableArray new];
@@ -209,51 +226,96 @@ static NSString* const kFitnessWalkText = @"Walk as far as you can for six minut
     NSDictionary*   pedometerItems      = [self readFileResultsFor:fileURL];
     NSArray*        pedometerResults    = [pedometerItems objectForKey:kFileResultsKey];
     NSDictionary*   lastResult          = [pedometerResults lastObject];
-    NSNumber*       totalDistance       = [lastResult objectForKey:@"distance"];
-
-    return @{@"pedometerDistance" : totalDistance};
+    NSNumber*       totalDistance       = [lastResult objectForKey:kDistance];
+    NSDictionary*   distance            = nil;
+    
+    if (totalDistance)
+    {
+        distance = @{kPedometerDistance : totalDistance};
+    }
+    
+    return distance;
 }
 
 - (NSDictionary*)computeTotalDistanceForDashboardItem:(NSURL*)fileURL
 {
-    NSDictionary*   distanceResults     = [self readFileResultsFor:fileURL];
-    NSArray*        locations           = [distanceResults objectForKey:kFileResultsKey];
-    
-    
-    CLLocation*     previousCoor        = nil;
-    CLLocationDistance totalDistance    = 0;
-    
-    for (NSDictionary *location in locations)
+    NSDictionary*       distanceResults = [self readFileResultsFor:fileURL];
+    CLLocationDistance  totalDistance   = 0;
+    NSArray*            locations       = [distanceResults objectForKey:kFileResultsKey];
+
+    if (locations)
     {
-        float               lon = [[[location objectForKey:kCoordinate] objectForKey:kLongitude] floatValue];
-        float               lat = [[[location objectForKey:kCoordinate] objectForKey:kLatitude] floatValue];
+        CLLocation* previousCoor = nil;
         
-        CLLocation *currentCoor = [[CLLocation alloc] initWithLatitude:lat longitude:lon];
-        
-        if(previousCoor) {
-            totalDistance       += [currentCoor distanceFromLocation:previousCoor];
-            previousCoor        = currentCoor;
+        for (NSDictionary *location in locations)
+        {
+            float lon = 0;
+            
+            if ([location objectForKey:kCoordinate])
+            {
+                if ([[location objectForKey:kCoordinate] objectForKey:kLongitude])
+                {
+                    lon = [[[location objectForKey:kCoordinate] objectForKey:kLongitude] floatValue];
+                }
+            }
+            
+            float lat = 0;
+            
+            if ([location objectForKey:kCoordinate])
+            {
+                if ([[location objectForKey:kCoordinate] objectForKey:kLatitude])
+                {
+                    lat = [[[location objectForKey:kCoordinate] objectForKey:kLatitude] floatValue];
+                }
+            }
+            
+            CLLocation *currentCoor = [[CLLocation alloc] initWithLatitude:lat longitude:lon];
+            
+            if(previousCoor)
+            {
+                totalDistance       += [currentCoor distanceFromLocation:previousCoor];
+                previousCoor        = currentCoor;
+            }
+            
+            previousCoor = currentCoor;
         }
-        
-        previousCoor        = currentCoor;
     }
 
-    return @{@"totalDistance" : @(totalDistance)};
+    return @{kLocationDistance : @(totalDistance)};
 }
 
-- (NSDictionary *) computeHeartRateForDashboardItem:(NSURL *)fileURL {
-    
+- (NSDictionary*)computeHeartRateForDashboardItem:(NSURL*)fileURL
+{
     NSDictionary*   heartRateResults    = [self readFileResultsFor:fileURL];
     NSArray*        heartRates          = [heartRateResults objectForKey:kFileResultsKey];
-
-    // Using KVC operators to retrieve values for peak and average heart rate.
+    id              maxValue            = [NSNull null];
+    id              avgValue            = [NSNull null];
+    id              lastValue           = [NSNull null];
+    
+    if ([heartRates valueForKeyPath:@"@max.value"])
+    {
+        maxValue = [heartRates valueForKeyPath:@"@max.value"];
+    }
+    
+    if ([heartRates valueForKeyPath:@"@avg.value"])
+    {
+        avgValue = [heartRates valueForKeyPath:@"@avg.value"];
+    }
+    
+    if (heartRates)
+    {
+        if ([[heartRates lastObject] objectForKey:kHeartRateValueKey])
+        {
+            lastValue = [[heartRates lastObject] objectForKey:kHeartRateValueKey];
+        }
+    }
+    
     return @{
-             kPeakHeartRateForDashboard : [heartRates valueForKeyPath:@"@max.value"],
-             kAvgHeartRateForDashboard  : [heartRates valueForKeyPath:@"@avg.value"],
-             kLastHeartRateForDashboard : [[heartRates lastObject] objectForKey:kHeartRateValueKey]
+             kPeakHeartRateForDashboard : maxValue,
+             kAvgHeartRateForDashboard  : avgValue,
+             kLastHeartRateForDashboard : lastValue
             };
 }
-
 
 - (NSDictionary *) readFileResultsFor:(NSURL *)fileURL
 {
