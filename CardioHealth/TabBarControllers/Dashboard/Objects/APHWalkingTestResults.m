@@ -111,6 +111,10 @@ static CGFloat    const kMetersToYardConversion                 = 1.093f;
             {
                 totalDistance = [[result objectForKey:kFitTestTotalDistDataSourceKey] integerValue];
             }
+            else
+            {
+                APCLogDebug(@"This should not happen. Displacement may not have occurred.");
+            }
             
             item.distanceWalked = totalDistance * kMetersToYardConversion;
         }
