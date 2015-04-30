@@ -377,10 +377,9 @@ static NSString* const kFitnessWalkText = @"Walk as far as you can for six minut
 
 - (NSString*)startDisplacementSerializer:(NSURL*)fileURL
 {
-    NSDictionary*       distanceResults     = [self readFileResultsFor:fileURL];
-    NSArray*            locationData        = [distanceResults objectForKey:kFileResultsKey];
-    
-    __weak typeof (self) weakSelf = self;
+    NSDictionary*           distanceResults     = [self readFileResultsFor:fileURL];
+    NSArray*                locationData        = [distanceResults objectForKey:kFileResultsKey];
+    __weak typeof (self)    weakSelf            = self;
     
     void(^LocationDataTransformer)(NSArray*) = ^(NSArray* locations)
     {
