@@ -438,12 +438,6 @@ static NSString* const kFitnessWalkText = @"Walk as far as you can for six minut
                        
                        [displacementData addObject:displacement];
                    }
-                   else
-                   {
-                       NSDictionary* displacement = [strongSelf displacement:[NSNull null] direction:[NSNull null]fromLocationData:location];
-                       
-                       [displacementData addObject:displacement];
-                   }
                    
                    previousCoor = currentCoor;
                }
