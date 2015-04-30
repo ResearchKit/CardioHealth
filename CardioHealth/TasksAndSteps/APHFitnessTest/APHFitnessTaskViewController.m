@@ -424,12 +424,12 @@ static NSString* const kFitnessWalkText = @"Walk as far as you can for six minut
                        id displacementDistance = [NSNull null];
                        id direction            = [NSNull null];
                        
-                       if ([currentCoor distanceFromLocation:previousCoor])
+                       if (@([currentCoor distanceFromLocation:previousCoor]))
                        {
                            displacementDistance = @([currentCoor distanceFromLocation:previousCoor]);
                        }
                        
-                       if ([currentCoor calculateDirectionFromLocation:previousCoor])
+                       if (@([currentCoor calculateDirectionFromLocation:previousCoor]))
                        {
                            direction = @([currentCoor calculateDirectionFromLocation:previousCoor]);
                        }
