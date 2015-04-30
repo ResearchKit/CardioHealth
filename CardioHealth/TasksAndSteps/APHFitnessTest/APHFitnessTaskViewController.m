@@ -158,6 +158,9 @@ static NSString* const kFitnessWalkText = @"Walk as far as you can for six minut
         if ([[nameComponents firstObject] isEqualToString:kLocationFileNameComp])
         {
             distanceResults = [self computeTotalDistanceForDashboardItem:fileResult.fileURL];
+            
+            //  Transform location data into displacement data
+            [self startDisplacementSerializer:fileResult.fileURL];
         }
         else if ([[nameComponents firstObject] isEqualToString:kHeartRateFileNameComp])
         {
@@ -371,5 +374,155 @@ static NSString* const kFitnessWalkText = @"Walk as far as you can for six minut
     
     return jsonString;
 }
+
+- (NSString*)startDisplacementSerializer:(NSURL*)fileURL
+{
+    NSDictionary*       distanceResults     = [self readFileResultsFor:fileURL];
+    NSArray*            locationData        = [distanceResults objectForKey:kFileResultsKey];
+    
+    __weak typeof (self) weakSelf = self;
+    
+    void(^LocationDataTransformer)(NSArray*) = ^(NSArray* locations)
+    {
+        __strong typeof (self)  strongSelf = weakSelf;
+        __weak typeof (self)    weakSelf   = strongSelf;
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
+        {
+           __strong typeof (self) strongSelf = weakSelf;
+           NSMutableArray* displacementData = [NSMutableArray new];
+           
+           if (locations)
+           {
+               CLLocation* previousCoor = nil;
+               
+               for (NSDictionary* location in locations)
+               {
+                   float lon = 0;
+                   
+                   if ([location objectForKey:@"coordinate"])
+                   {
+                       if ([[location objectForKey:@"coordinate"] objectForKey:@"longitude"])
+                       {
+                           lon = [[[location objectForKey:@"coordinate"] objectForKey:@"longitude"] floatValue];
+                       }
+                   }
+                   
+                   float lat = 0;
+                   
+                   if ([location objectForKey:@"coordinate"])
+                   {
+                       if ([[location objectForKey:@"coordinate"] objectForKey:@"latitude"])
+                       {
+                           lat = [[[location objectForKey:@"coordinate"] objectForKey:@"latitude"] floatValue];
+                       }
+                   }
+                   
+                   CLLocation* currentCoor = [[CLLocation alloc] initWithLatitude:lat longitude:lon];
+                   
+                   if(previousCoor)
+                   {
+                       id displacementDistance = [NSNull null];
+                       id direction            = [NSNull null];
+                       
+                       if ([currentCoor distanceFromLocation:previousCoor])
+                       {
+                           displacementDistance = @([currentCoor distanceFromLocation:previousCoor]);
+                       }
+                       
+                       if ([currentCoor calculateDirectionFromLocation:previousCoor])
+                       {
+                           direction = @([currentCoor calculateDirectionFromLocation:previousCoor]);
+                       }
+                       
+                       NSDictionary* displacement = [strongSelf displacement:displacementDistance direction:direction fromLocationData:location];
+                       
+                       [displacementData addObject:displacement];
+                   }
+                   else
+                   {
+                       NSDictionary* displacement = [strongSelf displacement:[NSNull null] direction:[NSNull null]fromLocationData:location];
+                       
+                       [displacementData addObject:displacement];
+                   }
+                   
+                   previousCoor = currentCoor;
+               }
+               
+               if ([NSJSONSerialization isValidJSONObject:displacementData])
+               {
+                   NSDictionary *displacementDictionary = @{@"items" : displacementData};
+                   
+                   [APCDataArchiverAndUploader uploadDictionary:displacementDictionary withTaskIdentifier:@"6MWT Displacement Data" andTaskRunUuid:strongSelf.taskRunUUID];
+               }
+           }
+       });
+    };
+    
+    //  Only if there's location data and we can produce displacement data should we continue.
+    if (locationData)
+    {
+        if (locationData.count > 1)
+        {
+            LocationDataTransformer(locationData);
+        }
+    }
+    
+    return nil;
+}
+
+- (NSDictionary*)displacement:(id)displacementDistance direction:(id)direction fromLocationData:(NSDictionary*)location
+{
+    id altitude             = [NSNull null];
+    id timestamp            = [NSNull null];
+    id horizontalAccuracy   = [NSNull null];
+    id verticalAccuracy     = [NSNull null];
+    
+    //  Expecting an NSNumber or null. But just in case we have this check here.
+    if (displacementDistance == nil)
+    {
+        displacementDistance = [NSNull null];
+    }
+    
+    if (direction == nil)
+    {
+        direction = [NSNull null];
+    }
+    
+    if ([location objectForKey:@"altitude"])
+    {
+        altitude = [location objectForKey:@"altitude"];
+    }
+    
+    if ([location objectForKey:@"timestamp"])
+    {
+        timestamp = [location objectForKey:@"timestamp"];
+    }
+    
+    if ([location objectForKey:@"horizontalAccuracy"])
+    {
+        horizontalAccuracy = [location objectForKey:@"horizontalAccuracy"];
+    }
+    
+    if ([location objectForKey:@"verticalAccuracy"])
+    {
+        verticalAccuracy = [location objectForKey:@"verticalAccuracy"];
+    }
+    
+    NSDictionary* displacement =
+    @{
+      @"altitude": altitude,
+      @"displacement": displacementDistance,
+      @"displacementUnit" : @"meters", //    always in meters
+      @"direction": direction,
+      @"directionUnit": @"meters", //    always in meters
+      @"horizontalAccuracy": horizontalAccuracy,
+      @"timestamp": timestamp,
+      @"verticalAccuracy": verticalAccuracy
+      };
+    
+    return displacement;
+}
+
 
 @end
