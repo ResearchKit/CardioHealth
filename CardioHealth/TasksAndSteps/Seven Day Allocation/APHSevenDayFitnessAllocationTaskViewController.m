@@ -33,7 +33,6 @@
 
 #import "APHSevenDayFitnessAllocationTaskViewController.h"
 
-
 static NSString *kMainStudyIdentifier = @"com.cardioVascular.sevenDayFitnessAllocation";
 static NSString *kSevenDayFitnessInstructionStep = @"sevenDayFitnessInstructionStep";
 static NSString *kSevenDayFitnessActivityStep = @"sevenDayFitnessActivityStep";
@@ -133,6 +132,4 @@ static NSString *kSevenDayFitnessCompleteStep = @"sevenDayFitnessCompleteStep";
     
     [super taskViewController:taskViewController didFinishWithReason:reason error:error];
 }
-
-
 @end

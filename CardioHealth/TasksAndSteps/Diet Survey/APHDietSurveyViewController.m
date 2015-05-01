@@ -68,10 +68,10 @@ NSString *const kDietSurveyStepIdentifierSodium      = @"sodium";
                  {
                      ORKNumericQuestionResult *numericResult = (ORKNumericQuestionResult *) questionResult;
                      
-                     NSNumber *answer = @(0);
+                     id answer = [NSNull null];
                      
                      if (numericResult.numericAnswer != nil) {
-                         answer = numericResult.numericAnswer;
+                         answer = (NSNumber *)numericResult.numericAnswer;
                      }
                      
                      [dietSurveyResults setObject:answer forKey:questionResult.identifier];

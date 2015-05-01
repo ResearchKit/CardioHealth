@@ -35,6 +35,7 @@
 
 static NSString*  const kFitnessTestTaskId                      = @"3-APHFitnessTest-00000000-1111-1111-1111-F810BE28D995";
 static NSString*  const kAPCTaskAttributeUpdatedAt              = @"updatedAt";
+static NSString*  const kFitTestPedometerDistDataSourceKey      = @"pedometerDistance";
 static NSString*  const kFitTestTotalDistDataSourceKey          = @"totalDistance";
 static NSString*  const kFitTestpeakHeartRateDataSourceKey      = @"peakHeartRate";
 static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRate";
@@ -97,9 +98,25 @@ static CGFloat    const kMetersToYardConversion                 = 1.093f;
             }
         }
         
-        
-        if ([result objectForKey:kFitTestTotalDistDataSourceKey]) {
-            item.distanceWalked = [[result objectForKey:kFitTestTotalDistDataSourceKey] integerValue] * kMetersToYardConversion;
+        //  The condition below supports older users who have distance data using CLLocation and users with CMPedometer
+        if ([result objectForKey:kFitTestPedometerDistDataSourceKey] || [result objectForKey:kFitTestTotalDistDataSourceKey])
+        {
+            NSInteger totalDistance = 0;
+            
+            if ([result objectForKey:kFitTestPedometerDistDataSourceKey])
+            {
+                totalDistance = [[result objectForKey:kFitTestPedometerDistDataSourceKey] integerValue];
+            }
+            else if ([result objectForKey:kFitTestTotalDistDataSourceKey])
+            {
+                totalDistance = [[result objectForKey:kFitTestTotalDistDataSourceKey] integerValue];
+            }
+            else
+            {
+                APCLogDebug(@"This should not happen. Displacement may not have occurred.");
+            }
+            
+            item.distanceWalked = totalDistance * kMetersToYardConversion;
         }
         
         if ([result objectForKey:kFitTestpeakHeartRateDataSourceKey]) {

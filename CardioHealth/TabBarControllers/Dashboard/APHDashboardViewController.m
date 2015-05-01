@@ -41,20 +41,15 @@
 #import "APHCardioInsightCell.h"
 #import "APHDailyInsights.h"
 
-static NSString *const kDatasetValueNoDataKey = @"datasetValueNoDataKey";
-
+static NSString*  const kDatasetValueNoDataKey                  = @"datasetValueNoDataKey";
 static NSString*  const kAPCBasicTableViewCellIdentifier        = @"APCBasicTableViewCell";
 static NSString*  const kAPCRightDetailTableViewCellIdentifier  = @"APCRightDetailTableViewCell";
-
 static NSString*  const kFitnessTestTaskId                      = @"3-APHFitnessTest-00000000-1111-1111-1111-F810BE28D995";
 static NSString*  const kAPCTaskAttributeUpdatedAt              = @"updatedAt";
-static NSString*  const kFitTestTotalDistDataSourceKey          = @"totalDistance";
 static NSString*  const kFitTestpeakHeartRateDataSourceKey      = @"peakHeartRate";
 static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRate";
-
-static CGFloat kTitleFontSize = 17.0f;
-static CGFloat kDetailFontSize = 16.0f;
-static NSUInteger maxNumberOfInsights = 7;
+static CGFloat          kTitleFontSize                          = 17.0f;
+static CGFloat          kDetailFontSize                         = 16.0f;
 
 @interface APHDashboardViewController ()<APCPieGraphViewDatasource>
 
@@ -302,15 +297,17 @@ static NSUInteger maxNumberOfInsights = 7;
                     
                     // Insight Items
                     {
-                        for (NSAttributedString *dailyInsight in self.dailyInsights.collectedDailyInsights) {
+                        for (NSDictionary *dailyInsight in self.dailyInsights.collectedDailyInsights) {
                             APHTableViewDashboardDailyInsightItem *item = [APHTableViewDashboardDailyInsightItem new];
                             
                             item.identifier = kAPHDashboardDailyInsightCellIdentifier;
                             item.tintColor = [UIColor appTertiaryGreenColor];
                             item.editable = NO;
-                            item.insightAttributedTitle = dailyInsight;
+                            
+                            item.insightAttributedTitle = dailyInsight[kDailyInsightCaptionKey];
                             item.insightSubtitle = NSLocalizedString(@"where you are now", nil);
-                            item.insightImage = [UIImage imageNamed:@"insights_smoking"];
+                            item.insightImage = dailyInsight[kDailyInsightIconKey];
+                            
                             item.info = NSLocalizedString(@"Put something for Daily Insights", nil);
                             
                             APCTableViewRow *row = [APCTableViewRow new];
