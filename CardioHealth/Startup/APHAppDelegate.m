@@ -202,6 +202,10 @@ static NSString* const kMinorVersion               = @"version";
         for (APCTaskReminder *reminder in self.tasksReminder.reminders) {
             [[NSUserDefaults standardUserDefaults]setObject:reminder.reminderBody forKey:reminder.reminderIdentifier];
         }
+        
+        if ([[UIApplication sharedApplication] currentUserNotificationSettings].types != UIUserNotificationTypeNone){
+            [self.tasksReminder setReminderOn:@YES];
+        }
         [[NSUserDefaults standardUserDefaults]synchronize];
     }
     
