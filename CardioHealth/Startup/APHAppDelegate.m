@@ -168,6 +168,14 @@ static NSString* const kMinorVersion               = @"version";
             APCLogEvent(@"Migration from version 1 to 2 has failed.");
         }
     }
+    else if ([[defaults objectForKey:kPreviousVersion] isEqual: @3])
+    {
+        APCLogEvent(@"The entire data model version %d", kTheEntireDataModelOfTheApp);
+        if (![self performMigrationFromThreeToFourWithError:&migrationError])
+        {
+            APCLogEvent(@"Migration from version %@ to %@ has failed.", [defaults objectForKey:kPreviousVersion], @(kTheEntireDataModelOfTheApp));
+        }
+    }
     
     [defaults setObject:majorVersion
                  forKey:kShortVersionStringKey];
@@ -251,8 +259,22 @@ static NSString* const kMinorVersion               = @"version";
     APCTaskReminder *sevenDaySurveyReminder = [[APCTaskReminder alloc]initWithTaskID:kSevenDaySurveyIdentifier reminderBody:NSLocalizedString(@"Activity and Sleep Assessment", nil)];
     APCTaskReminder *dailyCheckinReminder = [[APCTaskReminder alloc]initWithTaskID:kDailyCheckinSurveyIdentifier reminderBody:NSLocalizedString(@"Daily Check-in", nil)];
     
+    [self.tasksReminder.reminders removeAllObjects];
     [self.tasksReminder manageTaskReminder:sevenDaySurveyReminder];
     [self.tasksReminder manageTaskReminder:dailyCheckinReminder];
+    
+    if ([self doesPersisteStoreExist] == NO)
+    {
+        APCLogEvent(@"This app is being launched for the first time. Turn all reminders on");
+        for (APCTaskReminder *reminder in self.tasksReminder.reminders) {
+            [[NSUserDefaults standardUserDefaults]setObject:reminder.reminderBody forKey:reminder.reminderIdentifier];
+        }
+        
+        if ([[UIApplication sharedApplication] currentUserNotificationSettings].types != UIUserNotificationTypeNone){
+            [self.tasksReminder setReminderOn:@YES];
+        }
+        [[NSUserDefaults standardUserDefaults]synchronize];
+    }
     
 }
 
