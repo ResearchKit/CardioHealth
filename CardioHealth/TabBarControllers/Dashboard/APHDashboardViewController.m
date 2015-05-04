@@ -305,7 +305,7 @@ static CGFloat          kDetailFontSize                         = 16.0f;
                             item.editable = NO;
                             
                             item.insightAttributedTitle = dailyInsight[kDailyInsightCaptionKey];
-                            item.insightSubtitle = NSLocalizedString(@"where you are now", nil);
+                            item.insightSubtitle = dailyInsight[kDailyInsightSubCaptionKey];
                             item.insightImage = dailyInsight[kDailyInsightIconKey];
                             
                             item.info = NSLocalizedString(@"Put something for Daily Insights", nil);

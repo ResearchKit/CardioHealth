@@ -37,6 +37,7 @@ extern NSString *const kAPHDailyInsightDataCollectionIsCompleteNotification;
 
 extern NSString *const kDailyInsightIconKey;
 extern NSString *const kDailyInsightCaptionKey;
+extern NSString *const kDailyInsightSubCaptionKey;
 
 typedef NS_ENUM(NSUInteger, APHInsightIdentifiers)
 {
