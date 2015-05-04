@@ -137,8 +137,11 @@ static NSString* const kMinorVersion               = @"version";
 
 - (void)setUpCollectors
 {
-    [self configureObserverQueries];
-    [self configureMotionActivityObserver];
+    if (self.dataSubstrate.currentUser.userConsented)
+    {
+        [self configureObserverQueries];
+        [self configureMotionActivityObserver];
+    }
 }
 
 /*********************************************************************************/
