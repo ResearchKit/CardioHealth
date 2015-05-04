@@ -429,38 +429,43 @@ static NSString* const kMinorVersion               = @"version";
     NSString*(^CategoryDataSerializer)(id) = ^NSString*(id dataSample)
     {
         HKCategorySample*   catSample       = (HKCategorySample *)dataSample;
-        NSString*           startDateTime   = [catSample.startDate toStringInISO8601Format];
-        NSString*           healthKitType   = catSample.sampleType.identifier;
-        NSString*           categoryValue   = nil;
+        NSString*           stringToWrite   = nil;
         
-        if (catSample.value == HKCategoryValueSleepAnalysisAsleep)
+        if (catSample.categoryType.identifier == HKCategoryTypeIdentifierSleepAnalysis)
         {
-            categoryValue = @"HKCategoryValueSleepAnalysisAsleep";
+            NSString*           startDateTime   = [catSample.startDate toStringInISO8601Format];
+            NSString*           healthKitType   = catSample.sampleType.identifier;
+            NSString*           categoryValue   = nil;
+            
+            if (catSample.value == HKCategoryValueSleepAnalysisAsleep)
+            {
+                categoryValue = @"HKCategoryValueSleepAnalysisAsleep";
+            }
+            else
+            {
+                categoryValue = @"HKCategoryValueSleepAnalysisInBed";
+            }
+            
+            NSString*           quantityUnit    = [[HKUnit secondUnit] unitString];
+            NSString*           quantitySource  = catSample.source.name;
+            
+            // Get the difference in seconds between the start and end date for the sample
+            NSDateComponents* secondsSpentInBedOrAsleep = [[NSCalendar currentCalendar] components:NSCalendarUnitSecond
+                                                                                          fromDate:catSample.startDate
+                                                                                            toDate:catSample.endDate
+                                                                                           options:NSCalendarWrapComponents];
+            NSString*           quantityValue   = [NSString stringWithFormat:@"%ld", (long)secondsSpentInBedOrAsleep.second];
+            
+            stringToWrite   = [NSString stringWithFormat:@"%@,%@,%@,%@,%@,%@\n",
+                               startDateTime,
+                               healthKitType,
+                               categoryValue,
+                               quantityValue,
+                               quantityUnit,
+                               quantitySource];
         }
-        else
-        {
-            categoryValue = @"HKCategoryValueSleepAnalysisInBed";
-        }
-        
-        NSString*           quantityUnit    = [HKUnit secondUnit].description;
-        NSString*           quantitySource  = catSample.source.name;
-        
-        // Get the difference in seconds between the start and end date for the sample
-        NSDateComponents* secondsSpentInBedOrAsleep = [[NSCalendar currentCalendar] components:NSCalendarUnitSecond
-                                                                                      fromDate:catSample.startDate
-                                                                                        toDate:catSample.endDate
-                                                                                       options:NSCalendarWrapComponents];
-        NSString*           quantityValue   = [NSString stringWithFormat:@"%ld", (long)secondsSpentInBedOrAsleep.second];
-        NSString*           stringToWrite   = [NSString stringWithFormat:@"%@,%@,%@,%@,%@,%@\n",
-                                               startDateTime,
-                                               healthKitType,
-                                               categoryValue,
-                                               quantityValue,
-                                               quantityUnit,
-                                               quantitySource];
         
         return stringToWrite;
-        
     };
     
     NSString*(^CoreMotionDataSerializer)(id) = ^NSString *(id dataSample)
