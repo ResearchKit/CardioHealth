@@ -1005,7 +1005,7 @@
 					};
 					F5F644F819D35BA2004CFBB2 = {
 						CreatedOnToolsVersion = 6.0.1;
-						DevelopmentTeam = CQRZ4E7K9U;
+						DevelopmentTeam = NL3PRC58UN;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
