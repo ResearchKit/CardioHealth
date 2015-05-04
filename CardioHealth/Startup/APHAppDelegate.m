@@ -139,6 +139,11 @@ static NSString* const kMinorVersion               = @"version";
 {
     if (self.dataSubstrate.currentUser.userConsented)
     {
+        if (!self.passiveDataCollector)
+        {
+            self.passiveDataCollector = [[APCPassiveDataCollector alloc] init];
+        }
+        
         [self configureObserverQueries];
         [self configureMotionActivityObserver];
     }
@@ -550,11 +555,6 @@ static NSString* const kMinorVersion               = @"version";
     
     NSArray* dataTypesWithReadPermission = self.initializationOptions[kHKReadPermissionsKey];
     
-    if (!self.passiveHealthKitCollector)
-    {
-        self.passiveHealthKitCollector = [[APCPassiveDataCollector alloc] init];
-    }
-    
     // Just a note here that we are using n collectors to 1 data sink for quantity sample type data.
     NSArray*                    quantityColumnNames = @[@"startTime,endTime,type,value,unit,source,sourceIdentifier"];
     APCPassiveDataSink*         quantityreceiver    = [[APCPassiveDataSink alloc] initWithIdentifier:@"HealthKitDataCollector"
@@ -624,7 +624,7 @@ static NSString* const kMinorVersion               = @"version";
                 }
                 
                 [collector start];
-                [self.passiveHealthKitCollector addDataSink:collector];
+                [self.passiveDataCollector addDataSink:collector];
             }
         }
     }
@@ -693,7 +693,7 @@ static NSString* const kMinorVersion               = @"version";
     [motionCollector setReceiver:receiver];
     [motionCollector setDelegate:receiver];
     [motionCollector start];
-    [self.passiveHealthKitCollector addDataSink:motionCollector];
+    [self.passiveDataCollector addDataSink:motionCollector];
 }
 
 
