@@ -263,7 +263,7 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
         step.optional = NO;
         
         {
-            ORKNumericAnswerFormat *format = [ORKNumericAnswerFormat integerAnswerFormatWithUnit:@"mg/dL"];
+            ORKNumericAnswerFormat *format = [ORKNumericAnswerFormat integerAnswerFormatWithUnit:@"mmHg"];
             format.minimum = @(90);
             format.maximum = @(200);
             
