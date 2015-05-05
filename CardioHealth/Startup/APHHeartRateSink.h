@@ -42,8 +42,6 @@ typedef NSDate*(^ForegroundLaunchDate)();
 //  Last recorded heart rate update
 @property (nonatomic, strong) NSDate* lastUpdate;
 
-@property (assign) double intervalSinceLastUpdate;
-
 //  If one or less updates then the return value will be negative.
 - (double)intervalSinceLastHeartRateUpdate;
 - (NSInteger)numberOfUpdatesSinceAppLaunch;

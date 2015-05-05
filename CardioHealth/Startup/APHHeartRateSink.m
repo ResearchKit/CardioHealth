@@ -35,7 +35,8 @@
 
 @interface APHHeartRateSink()
 
-@property (nonatomic, strong) NSDate* activeApplicationDate;
+@property (nonatomic, strong)   NSDate* activeApplicationDate;
+@property (assign)              double intervalSinceLastUpdate;
 
 @end
 
@@ -48,35 +49,18 @@
     //  Expecting to get an array of updates.
     if ([result isKindOfClass:[NSArray class]])
     {
-        NSArray* results = (NSArray*)result;
-    
-        if (results.count > 0)
+        NSArray*    arrayResult     = (NSArray*)result;
+        NSDate*     targetDate      = [self applicationActiveDate];
+        
+        NSUInteger  ndx = [arrayResult indexOfObjectPassingTest:^(HKQuantitySample* qtySample, NSUInteger __unused ndx, BOOL* __unused stop)
         {
-            NSUInteger i = 0;
-            
-            for (i = 0; i < results.count; i++)
-            {
-                HKQuantitySample* qtySample = (HKQuantitySample*)results[i];
-                
-                if ([qtySample.startDate isLaterThanDate:[self applicationActiveDate]])
-                {
-                    //  If any of the heart rate dates are recent just grab the latest startdate and cache.
-                    self.lastUpdate = ((HKQuantitySample*)[results lastObject]).startDate;
-                    self.numberOfUpdates++;
-                    
-                    
-                    NSInteger numLeft = results.count - (i+1);
-                    
-                    //  Include the additional data samples that are valid
-                    if (numLeft > 0)
-                    {
-                        self.numberOfUpdates += numLeft;
-                    }
-                    
-                    //  We only care about the latest heart rate data sample if one exists after the launch of the app.
-                    break;
-                }
-            }
+            return [qtySample.startDate isLaterThanDate:targetDate];
+        }];
+        
+        if (ndx != NSNotFound)
+        {
+            self.lastUpdate         = ((HKQuantitySample*)[arrayResult lastObject]).startDate;
+            self.numberOfUpdates    = arrayResult.count - ndx;
         }
     }
 }
