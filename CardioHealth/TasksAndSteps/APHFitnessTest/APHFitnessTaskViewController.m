@@ -86,7 +86,7 @@ static NSString* const kFitnessWalkText = @"Walk as far as you can for six minut
 
 + (ORKOrderedTask *)createTask:(APCScheduledTask *) __unused scheduledTask
 {
-    ORKOrderedTask  *task = [ORKOrderedTask fitnessCheckTaskWithIdentifier:kFitnessTestIdentifier intendedUseDescription:nil walkDuration:kWalkDuration restDuration:kRestDuration options:ORKPredefinedTaskOptionNone];
+    ORKOrderedTask  *task = [ORKOrderedTask fitnessCheckTaskWithIdentifier:kFitnessTestIdentifier intendedUseDescription:nil walkDuration:kWalkDuration restDuration:kRestDuration options:ORKPredefinedTaskOptionExcludeHeartRate];
     
     [[UIView appearance] setTintColor:[UIColor appPrimaryColor]];
 
