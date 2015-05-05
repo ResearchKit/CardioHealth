@@ -496,7 +496,7 @@ static NSString* const kMinorVersion               = @"version";
         HKCategorySample*   catSample       = (HKCategorySample *)dataSample;
         NSString*           stringToWrite   = nil;
         
-        if (catSample.categoryType.identifier == HKCategoryTypeIdentifierSleepAnalysis)
+        if ([catSample.categoryType.identifier isEqualToString:@"HKCategoryTypeIdentifierSleepAnalysis"])
         {
             NSString*           startDateTime   = [catSample.startDate toStringInISO8601Format];
             NSString*           healthKitType   = catSample.sampleType.identifier;
