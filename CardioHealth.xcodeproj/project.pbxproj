@@ -130,6 +130,7 @@
 		74D75D671A9F863B00078A73 /* cardio_daily_check.json in Resources */ = {isa = PBXBuildFile; fileRef = 74D75D661A9F863B00078A73 /* cardio_daily_check.json */; };
 		74EF8E361ABF0139001B47E1 /* BridgeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74EF8E2D1ABF0102001B47E1 /* BridgeSDK.framework */; };
 		74EF8E371ABF0139001B47E1 /* BridgeSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 74EF8E2D1ABF0102001B47E1 /* BridgeSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7B09EB161AF96ACD00F72A63 /* APHHeartRateSink.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BAEF5341AF964B000E5B1BA /* APHHeartRateSink.m */; };
 		7B0E172D1A3FBDD70079E536 /* APHCardiovascularHealthSurveyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0E172C1A3FBDD70079E536 /* APHCardiovascularHealthSurveyController.m */; };
 		7B30CFA01A376B3D00625350 /* cardiovascular-staging.pem in Resources */ = {isa = PBXBuildFile; fileRef = 7B30CF9E1A376B3D00625350 /* cardiovascular-staging.pem */; };
 		7B30CFA11A376B3D00625350 /* cardiovascular.pem in Resources */ = {isa = PBXBuildFile; fileRef = 7B30CF9F1A376B3D00625350 /* cardiovascular.pem */; };
@@ -149,6 +150,7 @@
 		7B6F91831A996EDB00335E50 /* APHHeartAgeSummaryTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6F91821A996EDB00335E50 /* APHHeartAgeSummaryTitleCell.m */; };
 		7B6F91871A99731000335E50 /* APHHeartAgeTenYearRecommendationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6F91861A99731000335E50 /* APHHeartAgeTenYearRecommendationCell.m */; };
 		7B6F918A1A9A64AD00335E50 /* APHInstructionsForBelowTwentyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6F91891A9A64AD00335E50 /* APHInstructionsForBelowTwentyTableViewCell.m */; };
+		7BAEF5351AF964B000E5B1BA /* APHHeartRateSink.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BAEF5341AF964B000E5B1BA /* APHHeartRateSink.m */; };
 		7BD73F7B19E8A20600F5DFF3 /* Intro.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 7BD73F7A19E8A20600F5DFF3 /* Intro.mp4 */; };
 		7BEA4BE61A65C10300FEAF60 /* APHHeartAgeLearnMoreViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BEA4BE51A65C10300FEAF60 /* APHHeartAgeLearnMoreViewController.storyboard */; };
 		7BEA4BE91A65D95400FEAF60 /* APHIntroPurposeContainedTableTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BEA4BE81A65D95400FEAF60 /* APHIntroPurposeContainedTableTableViewController.m */; };
@@ -393,6 +395,8 @@
 		7B6F91861A99731000335E50 /* APHHeartAgeTenYearRecommendationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHHeartAgeTenYearRecommendationCell.m; sourceTree = "<group>"; };
 		7B6F91881A9A64AD00335E50 /* APHInstructionsForBelowTwentyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHInstructionsForBelowTwentyTableViewCell.h; sourceTree = "<group>"; };
 		7B6F91891A9A64AD00335E50 /* APHInstructionsForBelowTwentyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHInstructionsForBelowTwentyTableViewCell.m; sourceTree = "<group>"; };
+		7BAEF5331AF964B000E5B1BA /* APHHeartRateSink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHHeartRateSink.h; sourceTree = "<group>"; };
+		7BAEF5341AF964B000E5B1BA /* APHHeartRateSink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHHeartRateSink.m; sourceTree = "<group>"; };
 		7BD73F7A19E8A20600F5DFF3 /* Intro.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Intro.mp4; sourceTree = "<group>"; };
 		7BEA4BE51A65C10300FEAF60 /* APHHeartAgeLearnMoreViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = APHHeartAgeLearnMoreViewController.storyboard; sourceTree = "<group>"; };
 		7BEA4BE71A65D95400FEAF60 /* APHIntroPurposeContainedTableTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHIntroPurposeContainedTableTableViewController.h; sourceTree = "<group>"; };
@@ -809,6 +813,8 @@
 			children = (
 				F55BBDF719D362D0003CA0F9 /* APHAppDelegate.h */,
 				F55BBDF819D362D0003CA0F9 /* APHAppDelegate.m */,
+				7BAEF5331AF964B000E5B1BA /* APHHeartRateSink.h */,
+				7BAEF5341AF964B000E5B1BA /* APHHeartRateSink.m */,
 				F55BBDF919D362D0003CA0F9 /* LaunchScreen.xib */,
 				F55BBDFA19D362D0003CA0F9 /* Main.storyboard */,
 				7B4E383E1AC0B296009C5C93 /* Migration */,
@@ -1273,6 +1279,7 @@
 				085F3E681AAF6A0D003A910A /* APHSevenDayFitnessAllocationTaskViewController.m in Sources */,
 				085F3E691AAF6A0D003A910A /* APHDashboardViewController.m in Sources */,
 				7B4E38421AC0B296009C5C93 /* APHAppDelegate+APHMigration.m in Sources */,
+				7B09EB161AF96ACD00F72A63 /* APHHeartRateSink.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1317,6 +1324,7 @@
 				08C2328A1A15796E00DB4EF9 /* APHSevenDayFitnessAllocationTaskViewController.m in Sources */,
 				F55BBE6B19D362D0003CA0F9 /* APHDashboardViewController.m in Sources */,
 				7B4E38411AC0B296009C5C93 /* APHAppDelegate+APHMigration.m in Sources */,
+				7BAEF5351AF964B000E5B1BA /* APHHeartRateSink.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
