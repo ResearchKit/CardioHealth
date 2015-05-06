@@ -105,8 +105,8 @@ typedef NS_ENUM(NSUInteger, APHDailyInsightIdentifiers)
     _dailyInsightNeedsImprovementColor = [UIColor appTertiaryYellowColor];
     _dailyInsightBadColor = [UIColor appTertiaryRedColor];
     
-    _heightInInches = [((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.currentUser.height doubleValueForUnit:[HKUnit inchUnit]];
-    _weightInPounds = [((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.currentUser.weight doubleValueForUnit:[HKUnit poundUnit]];
+    _heightInInches = 0;
+    _weightInPounds = 0;
     
     _dailyInsightQueue = [NSOperationQueue sequentialOperationQueueWithName:@"Daily Insight Queue"];
     
@@ -156,57 +156,65 @@ typedef NS_ENUM(NSUInteger, APHDailyInsightIdentifiers)
 {
     APCLogDebug(@"Fetching insight entry point...");
     
-    BOOL hasItemsQueued = self.queueItems.count > 0;
-    
-    if (hasItemsQueued) {
-        APCLogDebug(@"About to queue insight item...");
+    [self.dailyInsightQueue addOperationWithBlock:^{
         
-        NSNumber *insightItem = [self.queueItems firstObject];
-        [self.queueItems removeObjectAtIndex:0];
+        BOOL hasItemsQueued = self.queueItems.count > 0;
         
-        APCLogDebug(@"We are about to collect data for the insight item (%@)...", insightItem);
-        
-        switch (insightItem.integerValue) {
-            case APHDailyInsightIdentifierWeight:
-                break;
-            case APHDailyInsightIdentifierActivity:
-                break;
-            case APHDailyInsightIdentifierDiet: // Based on the Diet survey
-            {
-                if (!self.dietSurveyResults) {
-                    NSDictionary *dietResults = [self retrieveDataForTask:kDietSurveyTaskId];
+        if (hasItemsQueued) {
+            APCLogDebug(@"About to queue insight item...");
+            
+            NSNumber *insightItem = [self.queueItems firstObject];
+            [self.queueItems removeObjectAtIndex:0];
+            
+            APCLogDebug(@"We are about to collect data for the insight item (%@)...", insightItem);
+            
+            switch (insightItem.integerValue) {
+                case APHDailyInsightIdentifierWeight:
+                {
+                    self.heightInInches = [((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.currentUser.height doubleValueForUnit:[HKUnit inchUnit]];
                     
-                    if (dietResults) {
-                        self.dietSurveyResults = dietResults;
+                    self.weightInPounds = [((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.currentUser.weight doubleValueForUnit:[HKUnit poundUnit]];
+                }
+                    break;
+                case APHDailyInsightIdentifierActivity:
+                    break;
+                case APHDailyInsightIdentifierDiet: // Based on the Diet survey
+                {
+                    if (!self.dietSurveyResults) {
+                        NSDictionary *dietResults = [self retrieveDataForTask:kDietSurveyTaskId];
+                        
+                        if (dietResults) {
+                            self.dietSurveyResults = dietResults;
+                        }
                     }
                 }
-            }
-                break;
-            default: // All other insights are pulled from the Heart Age survey.
-            {
-                if (!self.heartAgeResults) {
-                    NSDictionary *heartResults = [self retrieveDataForTask:kHeartAgeTaskId];
-                    
-                    if (heartResults) {
-                        self.heartAgeResults = heartResults;
+                    break;
+                default: // All other insights are pulled from the Heart Age survey.
+                {
+                    if (!self.heartAgeResults) {
+                        NSDictionary *heartResults = [self retrieveDataForTask:kHeartAgeTaskId];
+                        
+                        if (heartResults) {
+                            self.heartAgeResults = heartResults;
+                        }
                     }
                 }
+                    break;
             }
-                break;
+            
+            [self generateInsightForIdentifier:insightItem.integerValue];
+            
+            [self fetchInsightsForQueuedItems];
+        } else {
+            APCLogDebug(@"We're done!");
+            
+            self.collectedDailyInsights = [self.collectedInsights copy];
+            
+            // Post the notification that all data collection and processing is done.
+            [[NSNotificationCenter defaultCenter] postNotificationName:kAPHDailyInsightDataCollectionIsCompleteNotification
+                                                                object:nil];
         }
-        
-        [self generateInsightForIdentifier:insightItem.integerValue];
-        
-        [self fetchInsightsForQueuedItems];
-    } else {
-        APCLogDebug(@"We're done!");
-        
-        self.collectedDailyInsights = [self.collectedInsights copy];
-        
-        // Post the notification that all data collection and processing is done.
-        [[NSNotificationCenter defaultCenter] postNotificationName:kAPHDailyInsightDataCollectionIsCompleteNotification
-                                                            object:nil];
-    }
+    }];
 }
 
 - (void)refresh:(APHDailyInsightIdentifiers)identifier
@@ -569,22 +577,3 @@ typedef NS_ENUM(NSUInteger, APHDailyInsightIdentifiers)
 }
 
 @end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
