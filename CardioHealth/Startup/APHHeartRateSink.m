@@ -36,7 +36,7 @@
 @interface APHHeartRateSink()
 
 @property (nonatomic, strong)   NSDate* activeApplicationDate;
-@property (assign)              double intervalSinceLastUpdate;
+@property (nonatomic, assign)   double  intervalSinceLastUpdate;
 
 @end
 
