@@ -105,8 +105,8 @@ typedef NS_ENUM(NSUInteger, APHDailyInsightIdentifiers)
     _dailyInsightNeedsImprovementColor = [UIColor appTertiaryYellowColor];
     _dailyInsightBadColor = [UIColor appTertiaryRedColor];
     
-    _heightInInches = [((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.currentUser.height doubleValueForUnit:[HKUnit inchUnit]];
-    _weightInPounds = [((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.currentUser.weight doubleValueForUnit:[HKUnit poundUnit]];
+    _heightInInches = 0;
+    _weightInPounds = 0;
     
     _dailyInsightQueue = [NSOperationQueue sequentialOperationQueueWithName:@"Daily Insight Queue"];
     
@@ -156,57 +156,65 @@ typedef NS_ENUM(NSUInteger, APHDailyInsightIdentifiers)
 {
     APCLogDebug(@"Fetching insight entry point...");
     
-    BOOL hasItemsQueued = self.queueItems.count > 0;
-    
-    if (hasItemsQueued) {
-        APCLogDebug(@"About to queue insight item...");
+    [self.dailyInsightQueue addOperationWithBlock:^{
         
-        NSNumber *insightItem = [self.queueItems firstObject];
-        [self.queueItems removeObjectAtIndex:0];
+        BOOL hasItemsQueued = self.queueItems.count > 0;
         
-        APCLogDebug(@"We are about to collect data for the insight item (%@)...", insightItem);
-        
-        switch (insightItem.integerValue) {
-            case APHDailyInsightIdentifierWeight:
-                break;
-            case APHDailyInsightIdentifierActivity:
-                break;
-            case APHDailyInsightIdentifierDiet: // Based on the Diet survey
-            {
-                if (!self.dietSurveyResults) {
-                    NSDictionary *dietResults = [self retrieveDataForTask:kDietSurveyTaskId];
+        if (hasItemsQueued) {
+            APCLogDebug(@"About to queue insight item...");
+            
+            NSNumber *insightItem = [self.queueItems firstObject];
+            [self.queueItems removeObjectAtIndex:0];
+            
+            APCLogDebug(@"We are about to collect data for the insight item (%@)...", insightItem);
+            
+            switch (insightItem.integerValue) {
+                case APHDailyInsightIdentifierWeight:
+                {
+                    self.heightInInches = [((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.currentUser.height doubleValueForUnit:[HKUnit inchUnit]];
                     
-                    if (dietResults) {
-                        self.dietSurveyResults = dietResults;
+                    self.weightInPounds = [((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.currentUser.weight doubleValueForUnit:[HKUnit poundUnit]];
+                }
+                    break;
+                case APHDailyInsightIdentifierActivity:
+                    break;
+                case APHDailyInsightIdentifierDiet: // Based on the Diet survey
+                {
+                    if (!self.dietSurveyResults) {
+                        NSDictionary *dietResults = [self retrieveDataForTask:kDietSurveyTaskId];
+                        
+                        if (dietResults) {
+                            self.dietSurveyResults = dietResults;
+                        }
                     }
                 }
-            }
-                break;
-            default: // All other insights are pulled from the Heart Age survey.
-            {
-                if (!self.heartAgeResults) {
-                    NSDictionary *heartResults = [self retrieveDataForTask:kHeartAgeTaskId];
-                    
-                    if (heartResults) {
-                        self.heartAgeResults = heartResults;
+                    break;
+                default: // All other insights are pulled from the Heart Age survey.
+                {
+                    if (!self.heartAgeResults) {
+                        NSDictionary *heartResults = [self retrieveDataForTask:kHeartAgeTaskId];
+                        
+                        if (heartResults) {
+                            self.heartAgeResults = heartResults;
+                        }
                     }
                 }
+                    break;
             }
-                break;
+            
+            [self generateInsightForIdentifier:insightItem.integerValue];
+            
+            [self fetchInsightsForQueuedItems];
+        } else {
+            APCLogDebug(@"We're done!");
+            
+            self.collectedDailyInsights = [self.collectedInsights copy];
+            
+            // Post the notification that all data collection and processing is done.
+            [[NSNotificationCenter defaultCenter] postNotificationName:kAPHDailyInsightDataCollectionIsCompleteNotification
+                                                                object:nil];
         }
-        
-        [self generateInsightForIdentifier:insightItem.integerValue];
-        
-        [self fetchInsightsForQueuedItems];
-    } else {
-        APCLogDebug(@"We're done!");
-        
-        self.collectedDailyInsights = [self.collectedInsights copy];
-        
-        // Post the notification that all data collection and processing is done.
-        [[NSNotificationCenter defaultCenter] postNotificationName:kAPHDailyInsightDataCollectionIsCompleteNotification
-                                                            object:nil];
-    }
+    }];
 }
 
 - (void)refresh:(APHDailyInsightIdentifiers)identifier
@@ -376,51 +384,66 @@ typedef NS_ENUM(NSUInteger, APHDailyInsightIdentifiers)
     
     if (self.dietSurveyResults) {
         
-        BOOL skippedAllQuestions = (self.dietSurveyResults[kDietSurveyFruitKey] == [NSNull null]) &&
-                                   (self.dietSurveyResults[kDietSurveyVegetableKey] == [NSNull null]) &&
-                                   (self.dietSurveyResults[kDietSurveyFishKey] == [NSNull null]) &&
-                                   (self.dietSurveyResults[kDietSurveyGrainsKey] == [NSNull null]) &&
-                                   (self.dietSurveyResults[kDietSurveySugarDrinksKey] == [NSNull null]);
+        double consumedFruits = 0;
+        double consumedVegetables = 0;
+        double consumedFish = 0;
+        double consumedGrains = 0;
+        double consumedSugarDrinks = 0;
         
-        if (!skippedAllQuestions) {
-            double consumedFruits = [self.dietSurveyResults[kDietSurveyFruitKey] doubleValue]; // >= 4.5 /day
-            double consumedVegetables = [self.dietSurveyResults[kDietSurveyVegetableKey] doubleValue]; // >= 4.5 /day
-            double consumedFish = [self.dietSurveyResults[kDietSurveyFishKey] doubleValue]; // >= 2 /week
-            //double consumedSoduim = [self.dietSurveyResults[kDietSurveySodiumKey] doubleValue]; // < 1500 mg /day
-            double consumedGrains = [self.dietSurveyResults[kDietSurveyGrainsKey] doubleValue]; // 3 oz /day (3 servings / day)
-            double consumedSugarDrinks = [self.dietSurveyResults[kDietSurveySugarDrinksKey] doubleValue]; // 450 cal /week (1 drink / day)
-            
-            NSUInteger dietComponents = 0;
-            
-            if (consumedFruits >= 4.5) {
-                dietComponents++;
-            }
-            
-            if (consumedVegetables >= 4.5) {
-                dietComponents++;
-            }
-            
-            if (consumedFish >= 2) {
-                dietComponents++;
-            }
-            
-            if (consumedGrains >= 3) {
-                dietComponents++;
-            }
-            
-            if (consumedSugarDrinks <= 3) {
-                dietComponents++;
-            }
-            
-            NSString *dietCaption = [NSString stringWithFormat:@"%lu of 5 healthy diet components", dietComponents];
-            
-            if (dietComponents == 1) {
-                dietInsight = [self attributedStringFromString:dietCaption withColor:self.dailyInsightBadColor];
-            } else if ((dietComponents > 1) && (dietComponents < 4)) {
-                dietInsight = [self attributedStringFromString:dietCaption withColor:self.dailyInsightNeedsImprovementColor];
-            } else {
-                dietInsight = [self attributedStringFromString:dietCaption withColor:self.dailyInsightGoodColor];
-            }
+        if (self.dietSurveyResults[kDietSurveyFruitKey] != [NSNull null]) {
+            consumedFruits = [self.dietSurveyResults[kDietSurveyFruitKey] doubleValue]; // >= 4.5 /day
+        }
+        
+        if (self.dietSurveyResults[kDietSurveyVegetableKey] != [NSNull null]) {
+            consumedVegetables = [self.dietSurveyResults[kDietSurveyVegetableKey] doubleValue]; // >= 4.5 /day
+        }
+        
+        if (self.dietSurveyResults[kDietSurveyFishKey] != [NSNull null]) {
+            consumedFish = [self.dietSurveyResults[kDietSurveyFishKey] doubleValue]; // >= 2 /week
+        }
+        
+        //double consumedSoduim = [self.dietSurveyResults[kDietSurveySodiumKey] doubleValue]; // < 1500 mg /day
+        
+        if (self.dietSurveyResults[kDietSurveyGrainsKey] != [NSNull null]) {
+            consumedGrains = [self.dietSurveyResults[kDietSurveyGrainsKey] doubleValue]; // 3 oz /day (3 servings / day)
+        }
+        
+        if ((self.dietSurveyResults[kDietSurveySugarDrinksKey] != [NSNull null])) {
+            consumedSugarDrinks = [self.dietSurveyResults[kDietSurveySugarDrinksKey] doubleValue]; // 450 cal /week (1 drink / day)
+        } else {
+            consumedSugarDrinks = -1; // This is to avoid false positives.
+        }
+        
+        NSUInteger dietComponents = 0;
+        
+        if (consumedFruits >= 4.5) {
+            dietComponents++;
+        }
+        
+        if (consumedVegetables >= 4.5) {
+            dietComponents++;
+        }
+        
+        if (consumedFish >= 2) {
+            dietComponents++;
+        }
+        
+        if (consumedGrains >= 3) {
+            dietComponents++;
+        }
+        
+        if ((consumedSugarDrinks >= 0) && (consumedSugarDrinks <= 3)) {
+            dietComponents++;
+        }
+        
+        NSString *dietCaption = [NSString stringWithFormat:@"%lu of 5 healthy diet components", dietComponents];
+        
+        if (dietComponents <= 1) {
+            dietInsight = [self attributedStringFromString:dietCaption withColor:self.dailyInsightBadColor];
+        } else if ((dietComponents > 1) && (dietComponents < 4)) {
+            dietInsight = [self attributedStringFromString:dietCaption withColor:self.dailyInsightNeedsImprovementColor];
+        } else {
+            dietInsight = [self attributedStringFromString:dietCaption withColor:self.dailyInsightGoodColor];
         }
     }
     
@@ -554,22 +577,3 @@ typedef NS_ENUM(NSUInteger, APHDailyInsightIdentifiers)
 }
 
 @end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
