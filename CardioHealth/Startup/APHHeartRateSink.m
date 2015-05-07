@@ -44,8 +44,6 @@
 
 - (void)didRecieveUpdatedValuesFromCollector:(id)result
 {
-    [super didRecieveUpdatedValueFromCollector:result];
-
     //  Expecting to get an array of updates.
     if ([result isKindOfClass:[NSArray class]])
     {
@@ -63,6 +61,8 @@
             self.numberOfUpdates    = arrayResult.count - ndx;
         }
     }
+    
+    [super didRecieveUpdatedValuesFromCollector:result];
 }
 
 - (instancetype)initWithIdentifier:(NSString*)identifier
