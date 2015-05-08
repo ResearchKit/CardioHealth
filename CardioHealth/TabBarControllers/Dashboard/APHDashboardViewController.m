@@ -250,32 +250,32 @@ static CGFloat          kDetailFontSize                         = 16.0f;
                     
                 case kAPHDashboardItemTypeWalkingTest:
                 {
-                    if (self.walkingResults) {
+                    if (self.walkingResults)
+                    {
                         self.walkingResults = nil;
                     }
                     
                     self.walkingResults = [APHWalkingTestResults new];
                     
-                    APHTableViewDashboardWalkingTestItem *item;
+                    APHTableViewDashboardWalkingTestItem *item = nil;
                     
-                    if (self.walkingResults.results.count) {
-                        item = [self.walkingResults.results firstObject];
-                    } else {
-                        item = [APHTableViewDashboardWalkingTestItem new];
+                    if (self.walkingResults.results.count)
+                    {
+                        item            = [self.walkingResults.results firstObject];
+                        item.caption    = NSLocalizedString(@"6-Minute Walk Test", nil);
+                        item.taskId     = kFitnessTestTaskId;
+                        item.identifier = kAPHDashboardWalkTestTableViewCellIdentifier;
+                        item.tintColor  = [UIColor colorForTaskId:item.taskId];
+                        item.editable   = YES;
+                        item.info       = NSLocalizedString(@"This shows the distance you have walked in 6 minutes, which is a simple measure of fitness. We are also implementing a feature to give you the typical distance expected for your age, gender, height, and weight. You can also view a log of your prior data. Heart rate data are made available if you were using a wearable device capable of recording heart rate while walking.", nil);
+                        
+                        APCTableViewRow* row = [APCTableViewRow new];
+                        
+                        row.item        = item;
+                        row.itemType    = rowType;
+                        
+                        [rowItems addObject:row];
                     }
-                    
-                    item.caption = NSLocalizedString(@"6-Minute Walk Test", @"");
-                    item.taskId = @"3-APHFitnessTest-00000000-1111-1111-1111-F810BE28D995";
-                    item.identifier = kAPHDashboardWalkTestTableViewCellIdentifier;
-                    item.tintColor = [UIColor colorForTaskId:item.taskId];
-                    item.editable = YES;
-                    
-                    item.info = NSLocalizedString(@"This shows the distance you have walked in 6 minutes, which is a simple measure of fitness. We are also implementing a feature to give you the typical distance expected for your age, gender, height, and weight. You can also view a log of your prior data. Heart rate data are made available if you were using a wearable device capable of recording heart rate while walking.", @"");
-                    
-                    APCTableViewRow *row = [APCTableViewRow new];
-                    row.item = item;
-                    row.itemType = rowType;
-                    [rowItems addObject:row];
                 }
                     break;
                     
