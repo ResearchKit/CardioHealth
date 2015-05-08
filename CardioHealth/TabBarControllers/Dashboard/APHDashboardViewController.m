@@ -262,8 +262,8 @@ static CGFloat          kDetailFontSize                         = 16.0f;
                     if (self.walkingResults.results.count)
                     {
                         item            = [self.walkingResults.results firstObject];
-                        item.caption    = NSLocalizedString(@"6-Minute Walk Test", @"");
-                        item.taskId     = @"3-APHFitnessTest-00000000-1111-1111-1111-F810BE28D995";
+                        item.caption    = NSLocalizedString(@"6-Minute Walk Test", nil);
+                        item.taskId     = kFitnessTestTaskId;
                         item.identifier = kAPHDashboardWalkTestTableViewCellIdentifier;
                         item.tintColor  = [UIColor colorForTaskId:item.taskId];
                         item.editable   = YES;

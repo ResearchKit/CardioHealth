@@ -34,6 +34,8 @@
 #import "APHDashboardEditViewController.h"
 #import "APHWalkingTestResults.h"
 
+static NSString*  const kFitnessTestTaskId = @"3-APHFitnessTest-00000000-1111-1111-1111-F810BE28D995";
+
 @implementation APHDashboardEditViewController
 
 - (void)viewDidLoad
@@ -57,7 +59,7 @@
                 case kAPHDashboardItemTypeAlerts:{
                     
                     APCTableViewDashboardItem *item = [APCTableViewDashboardItem new];
-                    item.caption = NSLocalizedString(@"Alerts", @"");
+                    item.caption = NSLocalizedString(@"Alerts", nil);
                     
                     [self.items addObject:item];
                 }
@@ -65,7 +67,7 @@
                 case kAPHDashboardItemTypeInsights:{
                     
                     APCTableViewDashboardItem *item = [APCTableViewDashboardItem new];
-                    item.caption = NSLocalizedString(@"Insights", @"");
+                    item.caption = NSLocalizedString(@"Insights", nil);
                     
                     [self.items addObject:item];
                 }
@@ -75,7 +77,7 @@
                 {
                     
                     APCTableViewDashboardItem *item = [APCTableViewDashboardItem new];
-                    item.caption = NSLocalizedString(@"7-Day Assessment", @"");
+                    item.caption = NSLocalizedString(@"7-Day Assessment", nil);
                     item.taskId = @"3-APHSevenDayAllocation-00000000-1111-1111-1111-F810BE28D995";
                     item.tintColor = [UIColor colorForTaskId:item.taskId];
                     [self.items addObject:item];
@@ -89,8 +91,8 @@
                     if (walkingTest.results.count)
                     {
                         APCTableViewDashboardItem *item = [APCTableViewDashboardItem new];
-                        item.caption = NSLocalizedString(@"6-minute Walking Test", @"");
-                        item.taskId = @"3-APHFitnessTest-00000000-1111-1111-1111-F810BE28D995";
+                        item.caption = NSLocalizedString(@"6-minute Walking Test", nil);
+                        item.taskId = kFitnessTestTaskId;
                         item.tintColor = [UIColor colorForTaskId:item.taskId];
                         [self.items addObject:item];
                     }
