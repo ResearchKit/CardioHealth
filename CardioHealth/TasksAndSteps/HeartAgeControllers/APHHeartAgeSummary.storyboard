@@ -422,7 +422,7 @@
                                                 <constraint firstItem="7kh-EV-jKl" firstAttribute="top" secondItem="3sm-kw-OJI" secondAttribute="topMargin" constant="-8" id="WGh-Tm-LAD"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="cde-1b-8XW" secondAttribute="bottom" constant="-8" id="abA-BI-FXf"/>
                                                 <constraint firstItem="8Oo-AY-htt" firstAttribute="top" secondItem="3sm-kw-OJI" secondAttribute="topMargin" constant="3" id="c24-BF-hFW"/>
-                                                <constraint firstItem="KGR-eX-cjF" firstAttribute="leading" secondItem="3sm-kw-OJI" secondAttribute="leadingMargin" constant="-8" id="czA-R5-Q8H"/>
+                                                <constraint firstItem="KGR-eX-cjF" firstAttribute="leading" secondItem="3sm-kw-OJI" secondAttribute="leading" id="czA-R5-Q8H"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="8Oo-AY-htt" secondAttribute="trailing" constant="14" id="hGl-Vl-387"/>
                                                 <constraint firstItem="8Oo-AY-htt" firstAttribute="leading" secondItem="3sm-kw-OJI" secondAttribute="leadingMargin" constant="14" id="kRl-AE-22y"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="cde-1b-8XW" secondAttribute="trailing" constant="-8" id="qZ8-c2-JAl"/>
@@ -448,7 +448,8 @@
                         </constraints>
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="568"/>
                     <connections>
                         <outlet property="tableView" destination="siv-HN-wPN" id="rjn-Qd-YFC"/>
                     </connections>
