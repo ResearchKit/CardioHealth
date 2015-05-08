@@ -32,6 +32,7 @@
 // 
  
 #import "APHDashboardEditViewController.h"
+#import "APHWalkingTestResults.h"
 
 @implementation APHDashboardEditViewController
 
@@ -83,11 +84,16 @@
                     
                 case kAPHDashboardItemTypeWalkingTest:
                 {
-                    APCTableViewDashboardItem *item = [APCTableViewDashboardItem new];
-                    item.caption = NSLocalizedString(@"6-minute Walking Test", @"");
-                    item.taskId = @"3-APHFitnessTest-00000000-1111-1111-1111-F810BE28D995";
-                    item.tintColor = [UIColor colorForTaskId:item.taskId];
-                    [self.items addObject:item];
+                    APHWalkingTestResults* walkingTest = [APHWalkingTestResults new];
+                    
+                    if (walkingTest.results.count)
+                    {
+                        APCTableViewDashboardItem *item = [APCTableViewDashboardItem new];
+                        item.caption = NSLocalizedString(@"6-minute Walking Test", @"");
+                        item.taskId = @"3-APHFitnessTest-00000000-1111-1111-1111-F810BE28D995";
+                        item.tintColor = [UIColor colorForTaskId:item.taskId];
+                        [self.items addObject:item];
+                    }
                 }
                     break;
                     
