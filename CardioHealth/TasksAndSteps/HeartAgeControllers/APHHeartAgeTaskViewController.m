@@ -126,11 +126,13 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
         step.optional = NO;
         
         {
-            ORKHealthKitCharacteristicTypeAnswerFormat *format = [ORKHealthKitCharacteristicTypeAnswerFormat answerFormatWithCharacteristicType:[HKCharacteristicType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierDateOfBirth]];
-            
+            ORKNumericAnswerFormat *format = [ORKNumericAnswerFormat integerAnswerFormatWithUnit:@"years"];
+            format.maximum = @(150);
+            format.minimum = @(18);
+    
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:kHeartAgeTestDataAge
-                                                                 text:NSLocalizedString(@"Date of birth", @"Date of birth")
-                                                         answerFormat:format];
+                                                                   text:NSLocalizedString(@"What is your age?", nil)
+                                                           answerFormat:format];
             [stepQuestions addObject:item];
         }
         
@@ -535,22 +537,15 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
                         [surveyResultsDictionary setObject:selectedGender
                                                     forKey:questionIdentifier];
                     } else if ([questionIdentifier isEqualToString:kHeartAgeTestDataAge]) {
-                        ORKDateQuestionResult *dob = (ORKDateQuestionResult *) questionResult;
+                        ORKNumericQuestionResult *ageResult = (ORKNumericQuestionResult *) questionResult;
                         
-                        //Default date
-                        NSDate *dateOfBirth = [NSDate date];
+                        NSNumber* currentAge = nil;
                         
-                        if (dob.dateAnswer != nil) {
-                            dateOfBirth = dob.dateAnswer;                        // Compute the age of the user.
+                        if (ageResult.numericAnswer != nil) {
+                            currentAge = ageResult.numericAnswer;
                         }
                     
-                        NSDateComponents *ageComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitYear
-                                                                                          fromDate:dateOfBirth
-                                                                                            toDate:[NSDate date] // today
-                                                                                           options:NSCalendarWrapComponents];
-                        
-                        NSUInteger usersAge = [ageComponents year];
-                        [surveyResultsDictionary setObject:[NSNumber numberWithInteger:usersAge] forKey:questionIdentifier];
+                        [surveyResultsDictionary setObject:currentAge forKey:questionIdentifier];
                     } else if ([questionResult isKindOfClass:[ORKBooleanQuestionResult class]]) {
                         ORKBooleanQuestionResult *numericResult = (ORKBooleanQuestionResult *) questionResult;
                         
