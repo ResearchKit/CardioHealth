@@ -537,17 +537,19 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
                         
                         [surveyResultsDictionary setObject:selectedGender
                                                     forKey:questionIdentifier];
-                    } else if ([questionIdentifier isEqualToString:kHeartAgeTestDataAge]) {
-                        ORKNumericQuestionResult *ageResult = (ORKNumericQuestionResult *) questionResult;
+                    } else if ([questionIdentifier isEqualToString:kHeartAgeTestDataAge])
+                    {
+                        ORKNumericQuestionResult*   ageResult   = (ORKNumericQuestionResult *) questionResult;
+                        NSNumber*                   currentAge  = @(0);
                         
-                        NSNumber* currentAge = nil;
-                        
-                        if (ageResult.numericAnswer != nil) {
+                        if (ageResult.numericAnswer != nil)
+                        {
                             currentAge = ageResult.numericAnswer;
                         }
                     
                         [surveyResultsDictionary setObject:currentAge forKey:questionIdentifier];
-                    } else if ([questionResult isKindOfClass:[ORKBooleanQuestionResult class]]) {
+                    }
+                    else if ([questionResult isKindOfClass:[ORKBooleanQuestionResult class]]) {
                         ORKBooleanQuestionResult *numericResult = (ORKBooleanQuestionResult *) questionResult;
                         
                         NSNumber *answer = @(0);
