@@ -33,10 +33,11 @@
  
 @import APCAppCore;
 #import <UIKit/UIKit.h>
+#import "APHHeartRateSink.h"
 
 @interface APHAppDelegate : APCAppDelegate
 
-
+@property (nonatomic, strong) APHHeartRateSink* heartRateSink;
 
 @end
 

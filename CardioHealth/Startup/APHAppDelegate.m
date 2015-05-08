@@ -34,6 +34,7 @@
 @import APCAppCore;
 #import "APHAppDelegate.h"
 #import "APHAppDelegate+APHMigration.h"
+#import "APHHeartRateSink.h"
 
 /*********************************************************************************/
 #pragma mark - Survey Identifiers
@@ -573,6 +574,19 @@ static NSString* const kMinorVersion               = @"version";
                                                                                   operationQueueName:@"APCHealthKitSleep Activity Collector"
                                                                                     andDataProcessor:CategoryDataSerializer];
     
+    typeof(self) __weak weakSelf = self;
+    self.heartRateSink = [[APHHeartRateSink alloc] initWithIdentifier:@"HealthKitDataCollector"
+                                                         columnNames:quantityColumnNames
+                                                  operationQueueName:@"APCHealthKitQuantity Activity Collector"
+                                                       dataProcessor:QuantityDataSerializer
+                                                         andAppLaunch:^NSDate*
+    {
+       __typeof(self)   strongSelf = weakSelf;
+       NSDate*          activeDate = [strongSelf applicationBecameActiveDate];
+       
+       return activeDate;
+    }];
+    
     if (dataTypesWithReadPermission)
     {
         for (id dataType in dataTypesWithReadPermission)
@@ -617,10 +631,18 @@ static NSString* const kMinorVersion               = @"version";
                     [collector setReceiver:sleepReceiver];
                     [collector setDelegate:sleepReceiver];
                 }
-                else
+                else if ([sampleType isKindOfClass:[HKQuantityType class]])
                 {
-                    [collector setReceiver:quantityreceiver];
-                    [collector setDelegate:quantityreceiver];
+                    if ([sampleType.identifier isEqualToString:HKQuantityTypeIdentifierHeartRate])
+                    {
+                        [collector setReceiver:self.heartRateSink];
+                        [collector setDelegate:self.heartRateSink];
+                    }
+                    else
+                    {
+                        [collector setReceiver:quantityreceiver];
+                        [collector setDelegate:quantityreceiver];
+                    }
                 }
                 
                 [collector start];
@@ -724,10 +746,11 @@ static NSString* const kMinorVersion               = @"version";
                  kScheduleOffsetTaskIdKey: @"2-APHHeartAge-7259AC18-D711-47A6-ADBD-6CFCECDED1DF",
                  kScheduleOffsetOffsetKey: @(7)
                  },
-             @{
-                 kScheduleOffsetTaskIdKey: @"3-APHFitnessTest-00000000-1111-1111-1111-F810BE28D995",
-                 kScheduleOffsetOffsetKey: @(7)
-                 },
+#warning UNCOMMENT BELOW!!!!
+//             @{
+//                 kScheduleOffsetTaskIdKey: @"3-APHFitnessTest-00000000-1111-1111-1111-F810BE28D995",
+//                 kScheduleOffsetOffsetKey: @(7)
+//                 },
              @{
                  kScheduleOffsetTaskIdKey: @"2-WellBeingAndRiskPerceptionSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66",
                  kScheduleOffsetOffsetKey: @(1)

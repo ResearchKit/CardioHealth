@@ -34,6 +34,7 @@
 #import "APHFitnessTaskViewController.h"
 #import <CoreLocation/CoreLocation.h>
 #import <AVFoundation/AVFoundation.h>
+#import "APHAppDelegate.h"
 
 static NSInteger const  kRestDuration              = 3.0 * 60.0;
 static NSInteger const  kWalkDuration              = 6.0 * 60.0;
@@ -106,6 +107,19 @@ static NSString* const kFitnessWalkText = @"Walk as far as you can for six minut
     [task.steps[5] setTitle:NSLocalizedString(@"Thank You!", nil)];
     [task.steps[5] setText:NSLocalizedString(@"The results of this activity can be viewed on the dashboard.", nil)];
 
+    APHAppDelegate* delegate = (APHAppDelegate*)[UIApplication sharedApplication].delegate;
+    double interval = [delegate.heartRateSink intervalSinceLastHeartRateUpdate];
+    
+    //  If the interval is a negative number we presume there is no heart rate being monitored.
+    if (interval < 0)
+    {
+        //  Take out the resting step.
+        NSMutableArray* newSteps = [[NSMutableArray alloc] initWithArray:task.steps];
+        [newSteps removeObjectAtIndex:task.steps.count - 2];
+        ORKOrderedTask *orderedTask = [[ORKOrderedTask alloc] initWithIdentifier:kFitnessTestIdentifier steps:[newSteps copy]];
+        task = orderedTask;
+    }
+    
     return  task;
 }
 
