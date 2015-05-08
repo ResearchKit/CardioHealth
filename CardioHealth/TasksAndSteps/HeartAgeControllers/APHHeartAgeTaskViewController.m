@@ -105,8 +105,7 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
     {
         ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:kHeartAgeIntroduction];
         step.title = NSLocalizedString(@"Risk Score and Heart Age", @"Risk Score and Heart Age");
-        step.text = NSLocalizedString(@"You will be asked to enter your blood pressure and laboratory data to calculate your risk score and estimate your 'heart age.'",
-                                      @"You will be asked to enter your blood pressure and laboratory data to calculate your risk score and estimate your 'heart age.'");
+        step.text = NSLocalizedString(@"You will be asked to enter your blood pressure and laboratory data to calculate your risk score and estimate your 'heart age.'", nil);
         
 
         step.detailText = nil;
@@ -120,13 +119,12 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
         NSMutableArray *stepQuestions = [NSMutableArray array];
         
         
-        ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:kHeartAgeFormStepBiographicAndDemographic title:nil text:NSLocalizedString(@"To calculate risk score and heart age, please enter a few details about yourself.",
-                                                                                                                            @"To calculate risk score and heart age, please enter a few details about yourself.")];
+        ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:kHeartAgeFormStepBiographicAndDemographic title:nil text:NSLocalizedString(@"To calculate risk score and heart age, please enter a few details about yourself.", nil)];
         
         step.optional = NO;
         
         {
-            ORKNumericAnswerFormat* format = [ORKNumericAnswerFormat integerAnswerFormatWithUnit:@"years"];
+            ORKNumericAnswerFormat* format = [ORKNumericAnswerFormat integerAnswerFormatWithUnit:NSLocalizedString(@"years", nil)];
 
             format.maximum = @(150);
             format.minimum = @(18);
@@ -141,7 +139,7 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
             ORKHealthKitCharacteristicTypeAnswerFormat *format = [ORKHealthKitCharacteristicTypeAnswerFormat answerFormatWithCharacteristicType:[HKCharacteristicType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierBiologicalSex]];
             
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:kHeartAgeTestDataGender
-                                                                 text:NSLocalizedString(@"Gender", @"Gender")
+                                                                 text:NSLocalizedString(@"Gender", nil)
                                                          answerFormat:format];
             [stepQuestions addObject:item];
         }
@@ -169,7 +167,7 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
             ORKAnswerFormat *format = [ORKTextChoiceAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:choices];
             
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:kHeartAgeTestDataEthnicity
-                                                                   text:NSLocalizedString(@"Ethnicity", @"Ethnicity")
+                                                                   text:NSLocalizedString(@"Ethnicity", nil)
                                                            answerFormat:format];
             [stepQuestions addObject:item];
         }
@@ -180,7 +178,7 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
     }
     
     {
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:kHeartAgeFormStepSmokingHistory title:NSLocalizedString(@"Are you currently smoking cigarettes?", @"Are you currently smoking cigarettes?") answer:[ORKBooleanAnswerFormat new]];
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:kHeartAgeFormStepSmokingHistory title:NSLocalizedString(@"Are you currently smoking cigarettes?",nil) answer:[ORKBooleanAnswerFormat new]];
 
         step.optional = NO;
         
@@ -191,8 +189,7 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
         NSMutableArray *stepQuestions = [NSMutableArray array];
         ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:kHeartAgeFormStepCholesterolHdlSystolic
                                                                 title:nil
-                                                                 text:NSLocalizedString(@"Cholesterol & Glucose",
-                                                                                        @"Cholesterol & Glucose")];
+                                                                 text:NSLocalizedString(@"Cholesterol & Glucose", nil)];
         step.optional = NO;
         
         {
@@ -201,8 +198,7 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
             format.maximum = @(400);
             
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:kHeartAgeTestDataTotalCholesterol
-                                                                 text:NSLocalizedString(@"Total Cholesterol",
-                                                                                        @"Total Cholesterol")
+                                                                 text:NSLocalizedString(@"Total Cholesterol", nil)
                                                          answerFormat:format];
             [stepQuestions addObject:item];
         }
@@ -213,15 +209,14 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
             format.maximum = @(100);
             
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:kHeartAgeTestDataHDL
-                                                                 text:NSLocalizedString(@"HDL Cholesterol", @"HDL Cholesterol")
+                                                                 text:NSLocalizedString(@"HDL Cholesterol", nil)
                                                          answerFormat:format];
             [stepQuestions addObject:item];
         }
         
         {
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"emptyIdentifier"
-                                                                   text:NSLocalizedString(@"The items below are optional. If you do not know the values you may enter 0.",
-                                                                                          @"The items below are optional. If you do not know the values you may enter 0.")
+                                                                   text:NSLocalizedString(@"The items below are optional. If you do not know the values you may enter 0.", nil)
                                                            answerFormat:nil];
             [stepQuestions addObject:item];
         }
@@ -232,7 +227,7 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
             format.maximum = @(1000);
             
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:kHeartAgeTestDataLDL
-                                                                   text:NSLocalizedString(@"LDL Cholesterol (optional)", @"LDL Cholesterol (optional)")
+                                                                   text:NSLocalizedString(@"LDL Cholesterol (optional)", nil)
                                                            answerFormat:format];
             [stepQuestions addObject:item];
         }
@@ -245,8 +240,7 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
             
             
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:kHeartAgeTestBloodGlucose
-                                                                   text:NSLocalizedString(@"Fasting Blood Glucose (optional)",
-                                                                                          @"Fasting Blood Glucose (optional)")
+                                                                   text:NSLocalizedString(@"Fasting Blood Glucose (optional)", nil)
                                                            answerFormat:format];
             [stepQuestions addObject:item];
         }
@@ -261,8 +255,7 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
         NSMutableArray *stepQuestions = [NSMutableArray array];
         ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:kHeartAgeFormStepBlood
                                                               title:nil
-                                                               text:NSLocalizedString(@"Blood pressure (typically shown as systolic over diastolic)",
-                                                                                      @"Blood pressure (typically shown as systolic over diastolic)")];
+                                                               text:NSLocalizedString(@"Blood pressure (typically shown as systolic over diastolic)", nil)];
         step.optional = NO;
         
         {
@@ -271,8 +264,7 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
             format.maximum = @(200);
             
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:kBloodPressureInstruction
-                                                                   text:NSLocalizedString(@"Systolic Blood Pressure",
-                                                                                          @"Systolic Blood Pressure")
+                                                                   text:NSLocalizedString(@"Systolic Blood Pressure", nil)
                                                            answerFormat:format];
             [stepQuestions addObject:item];
         }
@@ -285,8 +277,7 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
             
             
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:kHeartAgeTestDataSystolicBloodPressure
-                                                                   text:NSLocalizedString(@"Diastolic Blood Pressure",
-                                                                                          @"Diastolic Blood Pressure")
+                                                                   text:NSLocalizedString(@"Diastolic Blood Pressure", nil)
                                                            answerFormat:format];
             [stepQuestions addObject:item];
         }
@@ -297,7 +288,7 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
     }
     
     {
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:kHeartAgeTestDataDiabetes title:NSLocalizedString(@"Do you have Diabetes?", @"Do you have Diabetes?") answer:[ORKBooleanAnswerFormat new]];
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:kHeartAgeTestDataDiabetes title:NSLocalizedString(@"Do you have Diabetes?", nil) answer:[ORKBooleanAnswerFormat new]];
         
         step.optional = NO;
         
@@ -305,7 +296,7 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
     }
     
     {
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:kHeartAgeTestDataHypertension title:NSLocalizedString(@"Are you being treated for Hypertension (High Blood Pressure)?", @"Are you being treated for Hypertension (High Blood Pressure)?") answer:[ORKBooleanAnswerFormat new]];
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:kHeartAgeTestDataHypertension title:NSLocalizedString(@"Are you being treated for Hypertension (High Blood Pressure)?", nil) answer:[ORKBooleanAnswerFormat new]];
         
         step.optional = NO;
         
