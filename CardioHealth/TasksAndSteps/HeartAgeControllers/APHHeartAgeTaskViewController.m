@@ -126,7 +126,8 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
         step.optional = NO;
         
         {
-            ORKNumericAnswerFormat *format = [ORKNumericAnswerFormat integerAnswerFormatWithUnit:@"years"];
+            ORKNumericAnswerFormat* format = [ORKNumericAnswerFormat integerAnswerFormatWithUnit:@"years"];
+
             format.maximum = @(150);
             format.minimum = @(18);
     
