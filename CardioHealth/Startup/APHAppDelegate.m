@@ -255,7 +255,8 @@ static NSString* const kMinorVersion               = @"version";
                                                    @(kAPCUserInfoItemTypeWakeUpTime),
                                                    @(kAPCUserInfoItemTypeSleepTime),
                                                    ],
-                                           kTaskReminderStartupDefaultTimeKey:@"9:00 AM"
+                                           kTaskReminderStartupDefaultTimeKey:@"9:00 AM",
+                                           kShareMessageKey : NSLocalizedString(@"Check out My Heart Counts, a research study app about Cardiovascular Disease.  Download it for iPhone at http://apple.co/1Iz7H6L", nil)
                                            }];
     self.initializationOptions = dictionary;
 }
