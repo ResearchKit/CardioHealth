@@ -62,27 +62,6 @@
     return _gender;
 }
 
-#pragma mark - APCLineCharViewDataSource
-
-- (NSInteger)lineGraph:(APCLineGraphView *)__unused graphView numberOfPointsInPlot:(NSInteger)__unused plotIndex
-{
-    return [self.zScores count];
-}
-
-- (NSInteger)numberOfPlotsInLineGraph:(APCLineGraphView *)__unused graphView
-{
-    return 1;
-}
-
-- (CGFloat)lineGraph:(APCLineGraphView *)__unused graphView plot:(NSInteger)__unused plotIndex valueForPointAtIndex:(NSInteger)pointIndex
-{
-    CGFloat value;
-    
-    NSInteger zScore = [self.zScores[pointIndex] integerValue];
-    value = [self computeYForZScore:zScore];
-    
-    return value;
-}
 
 - (double)computeYForZScore:(CGFloat)zScore
 {
@@ -114,6 +93,45 @@
     
     CGFloat percent = (zScore - minZScore)/(maxZScore - minZScore);
     return percent;
+}
+
+- (CGFloat)xValueFromZScore:(NSInteger)zScore
+{
+    CGFloat xValue = zScore*self.standardDeviation + self.mean;
+    
+    return xValue;
+    
+}
+
+- (NSString *)lineGraph:(APCLineGraphView *)graphView titleForXAxisAtIndex:(NSInteger)pointIndex
+{
+    CGFloat distance = [self xValueFromZScore:[self.zScores[pointIndex] integerValue]];
+    
+    NSString *title = [NSString stringWithFormat:@"%0.0f", distance];
+    
+    return title;
+}
+
+#pragma mark - APCLineCharViewDataSource
+
+- (NSInteger)lineGraph:(APCLineGraphView *)__unused graphView numberOfPointsInPlot:(NSInteger)__unused plotIndex
+{
+    return [self.zScores count];
+}
+
+- (NSInteger)numberOfPlotsInLineGraph:(APCLineGraphView *)__unused graphView
+{
+    return 1;
+}
+
+- (CGFloat)lineGraph:(APCLineGraphView *)__unused graphView plot:(NSInteger)__unused plotIndex valueForPointAtIndex:(NSInteger)pointIndex
+{
+    CGFloat value;
+    
+    NSInteger zScore = [self.zScores[pointIndex] integerValue];
+    value = [self computeYForZScore:zScore];
+    
+    return value;
 }
 
 @end
