@@ -114,11 +114,17 @@
 		5A0F996D1AA4AB6600A2A7EB /* consent.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 5A0F996C1AA4AB6600A2A7EB /* consent.pdf */; };
 		5B0432611A305742000DC9ED /* HTMLContent in Resources */ = {isa = PBXBuildFile; fileRef = 5B0432601A305742000DC9ED /* HTMLContent */; };
 		5B04326A1A305D3E000DC9ED /* TermsAndConditions.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B0432691A305D3E000DC9ED /* TermsAndConditions.json */; };
+		5B203DD01B0505AA00528BAF /* APHDashboardWalkTestComparisonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B203DCF1B0505AA00528BAF /* APHDashboardWalkTestComparisonTableViewCell.m */; };
+		5B203DDB1B05076700528BAF /* APHWalkingTestComparison.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B203DDA1B05076700528BAF /* APHWalkingTestComparison.m */; };
+		5B203DDC1B05090100528BAF /* APHDashboardWalkTestComparisonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B203DCF1B0505AA00528BAF /* APHDashboardWalkTestComparisonTableViewCell.m */; };
+		5B203DDD1B05090700528BAF /* APHWalkingTestComparison.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B203DDA1B05076700528BAF /* APHWalkingTestComparison.m */; };
 		5B4633851A15917000E68B82 /* APHDashboardEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B4633841A15917000E68B82 /* APHDashboardEditViewController.m */; };
 		5B5A31341A10A78600552F7D /* WithdrawStudy.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B5A31331A10A78600552F7D /* WithdrawStudy.json */; };
 		5B73CAD01A89BE5200FFE79C /* APHWalkTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B73CACF1A89BE5200FFE79C /* APHWalkTestViewController.m */; };
 		5B73CAD41A89C12400FFE79C /* APHWalkTestDetailsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B73CAD31A89C12400FFE79C /* APHWalkTestDetailsTableViewCell.m */; };
 		5B73CADC1A8A002B00FFE79C /* APHWalkingTestResults.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B73CADB1A8A002B00FFE79C /* APHWalkingTestResults.m */; };
+		5B7D47031B05271800958921 /* WalkingTestStats.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B7D47021B05271800958921 /* WalkingTestStats.json */; };
+		5B7D470C1B052DC700958921 /* WalkingTestStats.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B7D47021B05271800958921 /* WalkingTestStats.json */; };
 		5B827B451A7F837700C685A3 /* APHDashboardWalkTestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B827B441A7F837700C685A3 /* APHDashboardWalkTestTableViewCell.m */; };
 		5B827B6A1A8222AF00C685A3 /* APHTableViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B827B691A8222AF00C685A3 /* APHTableViewItem.m */; };
 		5BB2BAA41A10157B00684CCE /* Learn.json in Resources */ = {isa = PBXBuildFile; fileRef = 5BB2BAA31A10157B00684CCE /* Learn.json */; };
@@ -347,6 +353,10 @@
 		5A0F996C1AA4AB6600A2A7EB /* consent.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = consent.pdf; path = CardioHealth/Resources/consent.pdf; sourceTree = SOURCE_ROOT; };
 		5B0432601A305742000DC9ED /* HTMLContent */ = {isa = PBXFileReference; lastKnownFileType = folder; path = HTMLContent; sourceTree = "<group>"; };
 		5B0432691A305D3E000DC9ED /* TermsAndConditions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TermsAndConditions.json; sourceTree = "<group>"; };
+		5B203DCE1B0505AA00528BAF /* APHDashboardWalkTestComparisonTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHDashboardWalkTestComparisonTableViewCell.h; sourceTree = "<group>"; };
+		5B203DCF1B0505AA00528BAF /* APHDashboardWalkTestComparisonTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHDashboardWalkTestComparisonTableViewCell.m; sourceTree = "<group>"; };
+		5B203DD91B05076700528BAF /* APHWalkingTestComparison.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHWalkingTestComparison.h; sourceTree = "<group>"; };
+		5B203DDA1B05076700528BAF /* APHWalkingTestComparison.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHWalkingTestComparison.m; sourceTree = "<group>"; };
 		5B4633831A15917000E68B82 /* APHDashboardEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHDashboardEditViewController.h; sourceTree = "<group>"; };
 		5B4633841A15917000E68B82 /* APHDashboardEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHDashboardEditViewController.m; sourceTree = "<group>"; };
 		5B5A31331A10A78600552F7D /* WithdrawStudy.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = WithdrawStudy.json; sourceTree = "<group>"; };
@@ -356,6 +366,7 @@
 		5B73CAD31A89C12400FFE79C /* APHWalkTestDetailsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHWalkTestDetailsTableViewCell.m; sourceTree = "<group>"; };
 		5B73CADA1A8A002B00FFE79C /* APHWalkingTestResults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHWalkingTestResults.h; sourceTree = "<group>"; };
 		5B73CADB1A8A002B00FFE79C /* APHWalkingTestResults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHWalkingTestResults.m; sourceTree = "<group>"; };
+		5B7D47021B05271800958921 /* WalkingTestStats.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = WalkingTestStats.json; sourceTree = "<group>"; };
 		5B827B431A7F837700C685A3 /* APHDashboardWalkTestTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHDashboardWalkTestTableViewCell.h; sourceTree = "<group>"; };
 		5B827B441A7F837700C685A3 /* APHDashboardWalkTestTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHDashboardWalkTestTableViewCell.m; sourceTree = "<group>"; };
 		5B827B681A8222AF00C685A3 /* APHTableViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHTableViewItem.h; sourceTree = "<group>"; };
@@ -562,6 +573,8 @@
 			children = (
 				5B73CADA1A8A002B00FFE79C /* APHWalkingTestResults.h */,
 				5B73CADB1A8A002B00FFE79C /* APHWalkingTestResults.m */,
+				5B203DD91B05076700528BAF /* APHWalkingTestComparison.h */,
+				5B203DDA1B05076700528BAF /* APHWalkingTestComparison.m */,
 			);
 			path = Objects;
 			sourceTree = "<group>";
@@ -575,6 +588,8 @@
 				5B73CAD31A89C12400FFE79C /* APHWalkTestDetailsTableViewCell.m */,
 				08569A0D1AE6AC1A00CD62BE /* APHCardioInsightCell.h */,
 				08569A0E1AE6AC1A00CD62BE /* APHCardioInsightCell.m */,
+				5B203DCE1B0505AA00528BAF /* APHDashboardWalkTestComparisonTableViewCell.h */,
+				5B203DCF1B0505AA00528BAF /* APHDashboardWalkTestComparisonTableViewCell.m */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -803,6 +818,7 @@
 				F5165E7919E86581003836CA /* APCParameters.json */,
 				F573809219E45D62008A8354 /* StudyOverview.json */,
 				21B8E3A01A8AAACB00CCDD48 /* APHTasksAndSchedules_NoM7.json */,
+				5B7D47021B05271800958921 /* WalkingTestStats.json */,
 				F55BBDF119D362D0003CA0F9 /* APHTasksAndSchedules.json */,
 			);
 			path = JSONs;
@@ -1116,6 +1132,7 @@
 				085F3E751AAF6A0D003A910A /* cardio_CVhealth_survey.json in Resources */,
 				085F3E761AAF6A0D003A910A /* APHHealthyHeartSummaryStepViewController.xib in Resources */,
 				085F3E771AAF6A0D003A910A /* consent.pdf in Resources */,
+				5B7D470C1B052DC700958921 /* WalkingTestStats.json in Resources */,
 				085F3E781AAF6A0D003A910A /* APHTasksAndSchedules_NoM7.json in Resources */,
 				085F3E791AAF6A0D003A910A /* 10_PotentialBenifits@2x.m4v in Resources */,
 				085F3E7A1AAF6A0D003A910A /* 01_Activities_to_SensorData@3x.m4v in Resources */,
@@ -1165,6 +1182,7 @@
 				7B5BEC9B1A34F0B7007CEA94 /* cardio_CVhealth_survey.json in Resources */,
 				08B972511A1FB4AF00316D49 /* APHHealthyHeartSummaryStepViewController.xib in Resources */,
 				5A0F996D1AA4AB6600A2A7EB /* consent.pdf in Resources */,
+				5B7D47031B05271800958921 /* WalkingTestStats.json in Resources */,
 				21B8E3A11A8AAACB00CCDD48 /* APHTasksAndSchedules_NoM7.json in Resources */,
 				A78115C21A96A08E00CEC822 /* 10_PotentialBenifits@2x.m4v in Resources */,
 				A78115C91A96A08E00CEC822 /* 01_Activities_to_SensorData@3x.m4v in Resources */,
@@ -1248,6 +1266,7 @@
 				085F3E4C1AAF6A0D003A910A /* APHHeartAgeTaskViewController.m in Sources */,
 				085F3E4D1AAF6A0D003A910A /* APHHeartAgeRiskEstimateCell.m in Sources */,
 				085F3E4E1AAF6A0D003A910A /* APHHeartAgeAndRiskFactors.m in Sources */,
+				5B203DDD1B05090700528BAF /* APHWalkingTestComparison.m in Sources */,
 				085F3E4F1AAF6A0D003A910A /* APHIntroPurposeContainedTableTableViewController.m in Sources */,
 				085F3E501AAF6A0D003A910A /* APHHeartAgeTodaysActivitiesCell.m in Sources */,
 				085F3E511AAF6A0D003A910A /* APHHealthyHeartSummaryStepViewController.m in Sources */,
@@ -1276,6 +1295,7 @@
 				08B31A1F1AE75B7900FBF1BB /* APHDailyInsights.m in Sources */,
 				085F3E661AAF6A0D003A910A /* APHInclusionCriteriaViewController.m in Sources */,
 				085F3E671AAF6A0D003A910A /* APHWalkTestDetailsTableViewCell.m in Sources */,
+				5B203DDC1B05090100528BAF /* APHDashboardWalkTestComparisonTableViewCell.m in Sources */,
 				085F3E681AAF6A0D003A910A /* APHSevenDayFitnessAllocationTaskViewController.m in Sources */,
 				085F3E691AAF6A0D003A910A /* APHDashboardViewController.m in Sources */,
 				7B4E38421AC0B296009C5C93 /* APHAppDelegate+APHMigration.m in Sources */,
@@ -1293,6 +1313,7 @@
 				F5481F1419E4820100D84617 /* APHHeartAgeTaskViewController.m in Sources */,
 				08FA98061A108A46002317C8 /* APHHeartAgeRiskEstimateCell.m in Sources */,
 				08D3A10219E4A08C00A3D20D /* APHHeartAgeAndRiskFactors.m in Sources */,
+				5B203DDB1B05076700528BAF /* APHWalkingTestComparison.m in Sources */,
 				7BEA4BE91A65D95400FEAF60 /* APHIntroPurposeContainedTableTableViewController.m in Sources */,
 				08FA97FF1A108680002317C8 /* APHHeartAgeTodaysActivitiesCell.m in Sources */,
 				08B9724F1A1FB47B00316D49 /* APHHealthyHeartSummaryStepViewController.m in Sources */,
@@ -1321,6 +1342,7 @@
 				08B31A1E1AE75B7900FBF1BB /* APHDailyInsights.m in Sources */,
 				F5778E7219F0613D0079F1B2 /* APHInclusionCriteriaViewController.m in Sources */,
 				5B73CAD41A89C12400FFE79C /* APHWalkTestDetailsTableViewCell.m in Sources */,
+				5B203DD01B0505AA00528BAF /* APHDashboardWalkTestComparisonTableViewCell.m in Sources */,
 				08C2328A1A15796E00DB4EF9 /* APHSevenDayFitnessAllocationTaskViewController.m in Sources */,
 				F55BBE6B19D362D0003CA0F9 /* APHDashboardViewController.m in Sources */,
 				7B4E38411AC0B296009C5C93 /* APHAppDelegate+APHMigration.m in Sources */,

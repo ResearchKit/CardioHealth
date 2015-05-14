@@ -32,6 +32,7 @@
 // 
  
 #import <APCAppCore/APCAppCore.h>
+#import "APHWalkingTestComparison.h"
 
 @interface APHTableViewItem : APCTableViewItem
 
@@ -53,6 +54,13 @@ typedef NS_ENUM(NSUInteger, APHWalkingTestRowType) {
 @property (nonatomic) NSInteger peakHeartRate;
 @property (nonatomic) NSInteger finalHeartRate;
 @property (nonatomic, strong) NSDate *activityDate;
+
+@end
+
+@interface APHTableViewDashboardWalkingTestComparisonItem : APCTableViewDashboardItem
+
+@property (nonatomic) NSInteger distanceWalked;
+@property (nonatomic, strong) APHWalkingTestComparison *comparisonObject;
 
 @end
 

@@ -62,6 +62,27 @@
             FinalHearRate : %ld\n\
             Date : %@\n", (long)self.distanceWalked, (long)self.peakHeartRate, (long)self.finalHeartRate, self.activityDate];
 }
+
+@end
+
+@implementation APHTableViewDashboardWalkingTestComparisonItem
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _distanceWalked = 0;
+        _comparisonObject = [APHWalkingTestComparison new];
+    }
+    return self;
+}
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"\
+            DistanceWalked : %ld\n", (long)self.distanceWalked];
+}
+
 @end
 
 @implementation APHTableViewDashboardSevenDayFitnessItem
