@@ -47,6 +47,10 @@
     self.graphView.tintColor = self.comparisonItem.tintColor;
     self.graphView.landscapeMode = YES;
     
+    CGFloat zScore = [self.comparisonItem.comparisonObject zScoreForDistanceWalked:self.comparisonItem.distanceWalked];
+    CGFloat myScore = [self.comparisonItem.comparisonObject distancePercentForZScore:zScore];
+    self.graphView.value = myScore;
+    
     [self setupAppearance];
     
     self.titleLabel.text = NSLocalizedString(@"6-Minute Walk Test Comparison", nil);
