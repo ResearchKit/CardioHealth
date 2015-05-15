@@ -30,16 +30,17 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
 // 
- 
-/* Controllers */
-#import "APHDashboardViewController.h"
-#import "APHDashboardEditViewController.h"
+
 #import "APHAppDelegate.h"
-#import "APHDashboardWalkTestTableViewCell.h"
-#import "APHWalkTestViewController.h"
-#import "APHWalkingTestResults.h"
 #import "APHCardioInsightCell.h"
 #import "APHDailyInsights.h"
+#import "APHDashboardViewController.h"
+#import "APHDashboardEditViewController.h"
+#import "APHDashboardWalkTestTableViewCell.h"
+#import "APHDashboardWalkTestComparisonTableViewCell.h"
+#import "APHWalkTestViewController.h"
+#import "APHWalkingTestResults.h"
+#import "APHWalkingTestComparisonViewController.h"
 
 static NSString*  const kDatasetValueNoDataKey                  = @"datasetValueNoDataKey";
 static NSString*  const kAPCBasicTableViewCellIdentifier        = @"APCBasicTableViewCell";
@@ -50,6 +51,11 @@ static NSString*  const kFitTestpeakHeartRateDataSourceKey      = @"peakHeartRat
 static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRate";
 static CGFloat          kTitleFontSize                          = 17.0f;
 static CGFloat          kDetailFontSize                         = 16.0f;
+
+static CGFloat          kFitnessControlRowHeight                = 255.0f;
+static CGFloat          kWalkingTestRowHeight                   = 141.0f;
+static CGFloat          kWalkingTestComparisonRowHeight         = 270.0f;
+static CGFloat          kSevenDayFitnessRowHeight               = 288.0f;
 
 @interface APHDashboardViewController ()<APCPieGraphViewDatasource>
 
@@ -85,6 +91,7 @@ static CGFloat          kDetailFontSize                         = 16.0f;
                 [_rowItemsOrder addObjectsFromArray:@[
                                                       @(kAPHDashboardItemTypeSevenDayFitness),
                                                       @(kAPHDashboardItemTypeWalkingTest),
+                                                      @(kAPHDashboardItemTypeWalkingTestComparison),
                                                       @(kAPHDashboardItemTypeDailyInsights)
                                                      ]
                 ];
@@ -279,6 +286,37 @@ static CGFloat          kDetailFontSize                         = 16.0f;
                 }
                     break;
                     
+                case kAPHDashboardItemTypeWalkingTestComparison:
+                {
+                    if (self.walkingResults)
+                    {
+                        self.walkingResults = nil;
+                    }
+                    
+                    self.walkingResults = [APHWalkingTestResults new];
+                    
+                    if (self.walkingResults.results.count)
+                    {
+                        APHTableViewDashboardWalkingTestComparisonItem *item = [APHTableViewDashboardWalkingTestComparisonItem new];
+                        APHTableViewDashboardWalkingTestItem *walkingTestItem = [self.walkingResults.results firstObject];
+                        
+                        item.caption    = NSLocalizedString(@"6-Minute Walk Test Comparison", nil);
+                        item.taskId     = kFitnessTestTaskId;
+                        item.identifier = kAPHDashboardWalkTestComparisonTableViewCellIdentifier;
+                        item.tintColor  = [UIColor colorForTaskId:item.taskId];
+                        item.editable   = YES;
+                        item.info       = NSLocalizedString(@"This graph shows a comparison between your latest performance on the 6-Minute Walk Test and the population distribution.  The x-axis shows the distance walked during the test, the y-axis shows the percent of the population that walked each distance.", nil);
+                        item.distanceWalked = walkingTestItem.distanceWalked;
+                        APCTableViewRow* row = [APCTableViewRow new];
+                        
+                        row.item        = item;
+                        row.itemType    = rowType;
+                        
+                        [rowItems addObject:row];
+                    }
+                }
+                    break;
+                    
                 case kAPHDashboardItemTypeDailyInsights:
                 {
                     // Header
@@ -429,6 +467,43 @@ static CGFloat          kDetailFontSize                         = 16.0f;
         walkingTestCell.delegate = self;
         
         walkingTestCell.resizeButton.hidden = (self.walkingResults.results.count == 0);
+        
+    } else if ([dashboardItem isKindOfClass:[APHTableViewDashboardWalkingTestComparisonItem class]]){
+        
+        APHTableViewDashboardWalkingTestComparisonItem *walkingTestComparisonItem = (APHTableViewDashboardWalkingTestComparisonItem *)dashboardItem;
+        
+        APHDashboardWalkTestComparisonTableViewCell *walkingTestComparisonCell = (APHDashboardWalkTestComparisonTableViewCell *)cell;
+        
+        APCNormalDistributionGraphView *graphView = (APCNormalDistributionGraphView *)walkingTestComparisonCell.normalDistributionGraphView;
+        graphView.datasource = walkingTestComparisonItem.comparisonObject;
+        graphView.delegate = self;
+        graphView.tintColor = walkingTestComparisonItem.tintColor;
+        graphView.panGestureRecognizer.delegate = self;
+        graphView.axisTitleFont = [UIFont appRegularFontWithSize:14.0f];
+        
+        CGFloat zScore = [walkingTestComparisonItem.comparisonObject zScoreForDistanceWalked:walkingTestComparisonItem.distanceWalked];
+        CGFloat myScore = [walkingTestComparisonItem.comparisonObject distancePercentForZScore:zScore];
+        graphView.value = myScore;
+        
+        walkingTestComparisonCell.textLabel.text = @"";
+        walkingTestComparisonCell.title = walkingTestComparisonItem.caption;
+        
+        NSString *text = @"You vs Others";
+        
+        NSMutableAttributedString *attirbutedString = [[NSMutableAttributedString alloc] initWithString:text];
+        [attirbutedString addAttribute:NSForegroundColorAttributeName value:[UIColor appTertiaryRedColor] range:[text rangeOfString:@"You"]];
+        [attirbutedString addAttribute:NSForegroundColorAttributeName value:[UIColor appSecondaryColor2] range:[text rangeOfString:@"vs"]];
+        [attirbutedString addAttribute:NSForegroundColorAttributeName value:walkingTestComparisonItem.tintColor range:[text rangeOfString:@"Others"]];
+        
+        walkingTestComparisonCell.subtitleLabel.attributedText = attirbutedString;
+        
+        walkingTestComparisonCell.distanceLabel.text = [NSString stringWithFormat:@"%ld yards", (long)walkingTestComparisonItem.distanceWalked];
+        
+        walkingTestComparisonCell.tintColor = walkingTestComparisonItem.tintColor;
+        walkingTestComparisonCell.delegate = self;
+        
+        [graphView layoutSubviews];
+        
     } else if ([dashboardItem isKindOfClass:[APHTableViewDashboardDailyInsightItem class]]) {
         APHTableViewDashboardDailyInsightItem *dailyInsight = (APHTableViewDashboardDailyInsightItem *)dashboardItem;
         APHCardioInsightCell *dailyInsightCell = (APHCardioInsightCell *)cell;
@@ -453,17 +528,33 @@ static CGFloat          kDetailFontSize                         = 16.0f;
     APCTableViewItem *dashboardItem = [self itemForIndexPath:indexPath];
     
     if ([dashboardItem isKindOfClass:[APHTableViewDashboardFitnessControlItem class]]){
-        height = 255.0f;
+        height = kFitnessControlRowHeight;
     } else if ([dashboardItem isKindOfClass:[APHTableViewDashboardWalkingTestItem class]]) {
-        height = 141.0;
+        height = kWalkingTestRowHeight;
+    } else if ([dashboardItem isKindOfClass:[APHTableViewDashboardWalkingTestComparisonItem class]]) {
+        height = kWalkingTestComparisonRowHeight;
     } else if ([dashboardItem isKindOfClass:[APHTableViewDashboardSevenDayFitnessItem class]]) {
-        height = 288.0;
+        height = kSevenDayFitnessRowHeight;
     }
     
     return height;
 }
 
-- (void)tableView:(UITableView *) __unused tableView willDisplayCell:(UITableViewCell *) __unused cell forRowAtIndexPath:(NSIndexPath *) __unused indexPath {
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [super tableView:tableView willDisplayCell:cell forRowAtIndexPath:indexPath];
+    
+    APCTableViewItem *dashboardItem = [self itemForIndexPath:indexPath];
+    
+    if ([dashboardItem isKindOfClass:[APHTableViewDashboardWalkingTestComparisonItem class]]){        
+        APHDashboardWalkTestComparisonTableViewCell *walkingTestComparisonCell = (APHDashboardWalkTestComparisonTableViewCell *)cell;
+        
+        APCNormalDistributionGraphView *graphView = (APCNormalDistributionGraphView *)walkingTestComparisonCell.normalDistributionGraphView;
+        
+        [graphView setNeedsLayout];
+        [graphView layoutIfNeeded];
+        [graphView refreshGraph];
+    }
 }
 
 #pragma mark - Pie Graph View delegates
@@ -506,6 +597,15 @@ static CGFloat          kDetailFontSize                         = 16.0f;
         
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:walkTestViewController];
         [self.navigationController presentViewController:navController animated:YES completion:nil];
+    } else if ([cell isKindOfClass:[APHDashboardWalkTestComparisonTableViewCell class]]){
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+        
+        APHTableViewDashboardWalkingTestComparisonItem *item = (APHTableViewDashboardWalkingTestComparisonItem *)[self itemForIndexPath:indexPath];
+        
+        APHWalkingTestComparisonViewController *walkTestComparisonViewController = [[UIStoryboard storyboardWithName:@"APHDashboard" bundle:nil] instantiateViewControllerWithIdentifier:@"APHWalkingTestComparisonViewController"];
+        walkTestComparisonViewController.comparisonItem = item;
+        
+        [self.navigationController presentViewController:walkTestComparisonViewController animated:YES completion:nil];
     }
 }
 

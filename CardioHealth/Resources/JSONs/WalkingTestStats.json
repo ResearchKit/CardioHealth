@@ -1,0 +1,10 @@
+{
+    "6MWT_stats_male": {
+        "mean":630.5,
+        "sd":157.5
+    },
+    "6MWT_stats_female": {
+        "mean":564.7,
+        "sd":133.3
+    }
+}
