@@ -295,7 +295,7 @@ static CGFloat          kSevenDayFitnessRowHeight               = 288.0f;
                     
                     self.walkingResults = [APHWalkingTestResults new];
                     
-                    if (self.walkingResults.results.count || 1)
+                    if (self.walkingResults.results.count)
                     {
                         APHTableViewDashboardWalkingTestComparisonItem *item = [APHTableViewDashboardWalkingTestComparisonItem new];
                         APHTableViewDashboardWalkingTestItem *walkingTestItem = [self.walkingResults.results firstObject];
