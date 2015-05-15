@@ -30,17 +30,17 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
 // 
- 
-/* Controllers */
-#import "APHDashboardViewController.h"
-#import "APHDashboardEditViewController.h"
+
 #import "APHAppDelegate.h"
-#import "APHDashboardWalkTestTableViewCell.h"
-#import "APHWalkTestViewController.h"
-#import "APHWalkingTestResults.h"
 #import "APHCardioInsightCell.h"
 #import "APHDailyInsights.h"
+#import "APHDashboardViewController.h"
+#import "APHDashboardEditViewController.h"
+#import "APHDashboardWalkTestTableViewCell.h"
 #import "APHDashboardWalkTestComparisonTableViewCell.h"
+#import "APHWalkTestViewController.h"
+#import "APHWalkingTestResults.h"
+#import "APHWalkingTestComparisonViewController.h"
 
 static NSString*  const kDatasetValueNoDataKey                  = @"datasetValueNoDataKey";
 static NSString*  const kAPCBasicTableViewCellIdentifier        = @"APCBasicTableViewCell";
@@ -54,7 +54,7 @@ static CGFloat          kDetailFontSize                         = 16.0f;
 
 static CGFloat          kFitnessControlRowHeight                = 255.0f;
 static CGFloat          kWalkingTestRowHeight                   = 141.0f;
-static CGFloat          kWalkingTestComparisonRowHeight         = 225.0f;
+static CGFloat          kWalkingTestComparisonRowHeight         = 270.0f;
 static CGFloat          kSevenDayFitnessRowHeight               = 288.0f;
 
 @interface APHDashboardViewController ()<APCPieGraphViewDatasource>
@@ -487,7 +487,17 @@ static CGFloat          kSevenDayFitnessRowHeight               = 288.0f;
         
         walkingTestComparisonCell.textLabel.text = @"";
         walkingTestComparisonCell.title = walkingTestComparisonItem.caption;
-        walkingTestComparisonCell.subTitleLabel.text = walkingTestComparisonItem.detailText;
+        
+        NSString *text = @"You vs Others";
+        
+        NSMutableAttributedString *attirbutedString = [[NSMutableAttributedString alloc] initWithString:text];
+        [attirbutedString addAttribute:NSForegroundColorAttributeName value:[UIColor appTertiaryRedColor] range:[text rangeOfString:@"You"]];
+        [attirbutedString addAttribute:NSForegroundColorAttributeName value:[UIColor appSecondaryColor2] range:[text rangeOfString:@"vs"]];
+        [attirbutedString addAttribute:NSForegroundColorAttributeName value:walkingTestComparisonItem.tintColor range:[text rangeOfString:@"Others"]];
+        
+        walkingTestComparisonCell.subtitleLabel.attributedText = attirbutedString;
+        
+        walkingTestComparisonCell.distanceLabel.text = [NSString stringWithFormat:@"%ld yards", (long)walkingTestComparisonItem.distanceWalked];
         
         walkingTestComparisonCell.tintColor = walkingTestComparisonItem.tintColor;
         walkingTestComparisonCell.delegate = self;
@@ -587,6 +597,15 @@ static CGFloat          kSevenDayFitnessRowHeight               = 288.0f;
         
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:walkTestViewController];
         [self.navigationController presentViewController:navController animated:YES completion:nil];
+    } else if ([cell isKindOfClass:[APHDashboardWalkTestComparisonTableViewCell class]]){
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+        
+        APHTableViewDashboardWalkingTestComparisonItem *item = (APHTableViewDashboardWalkingTestComparisonItem *)[self itemForIndexPath:indexPath];
+        
+        APHWalkingTestComparisonViewController *walkTestComparisonViewController = [[UIStoryboard storyboardWithName:@"APHDashboard" bundle:nil] instantiateViewControllerWithIdentifier:@"APHWalkingTestComparisonViewController"];
+        walkTestComparisonViewController.comparisonItem = item;
+        
+        [self.navigationController presentViewController:walkTestComparisonViewController animated:YES completion:nil];
     }
 }
 

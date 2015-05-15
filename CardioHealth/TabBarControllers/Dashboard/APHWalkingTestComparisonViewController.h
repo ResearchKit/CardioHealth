@@ -1,5 +1,5 @@
 //
-//  APHDashboardWalkTestComparisonTableViewCell.m
+//  APHWalkingTestComparisonViewController.h
 //  MyHeart Counts
 //
 // Copyright (c) 2015, Stanford Medical. All rights reserved.
@@ -31,38 +31,23 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "APHDashboardWalkTestComparisonTableViewCell.h"
+#import <UIKit/UIKit.h>
+#import "APHTableViewItem.h"
 
-NSString *const kAPHDashboardWalkTestComparisonTableViewCellIdentifier = @"APHDashboardWalkTestComparisonTableViewCell";
+@import APCAppCore;
 
-@implementation APHDashboardWalkTestComparisonTableViewCell
+@interface APHWalkingTestComparisonViewController : UIViewController
 
-- (void)awakeFromNib {
-    // Initialization code
-    
-    [super awakeFromNib];
-    
-    self.subtitleLabel.font = [UIFont appRegularFontWithSize:15.0f];
-    
-    self.distanceLabel.font = [UIFont appRegularFontWithSize:15.0f];
-    self.distanceLabel.textColor = [UIColor appSecondaryColor2];
-    
-}
+@property (weak, nonatomic) IBOutlet UIView *tintView;
 
--(void)layoutSubviews
-{
-    [super layoutSubviews];
-    
-    for (UIView *subview in self.subviews) {
-        [subview layoutSubviews];
-    }
-}
+@property (weak, nonatomic) IBOutlet APCNormalDistributionGraphView *graphView;
 
-- (void)setTintColor:(UIColor *)tintColor
-{
-    [super setTintColor:tintColor];
-    
-    self.normalDistributionGraphView.tintColor = tintColor;
-}
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *subtitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *distanceLabel;
+
+@property (weak, nonatomic) IBOutlet UIButton *collapseButton;
+
+@property (strong, nonatomic) APHTableViewDashboardWalkingTestComparisonItem *comparisonItem;
 
 @end

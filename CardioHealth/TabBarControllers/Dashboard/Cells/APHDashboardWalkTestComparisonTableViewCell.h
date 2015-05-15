@@ -35,6 +35,10 @@
 
 FOUNDATION_EXPORT NSString *const kAPHDashboardWalkTestComparisonTableViewCellIdentifier;
 
-@interface APHDashboardWalkTestComparisonTableViewCell : APCDashboardGraphTableViewCell
+@interface APHDashboardWalkTestComparisonTableViewCell : APCDashboardTableViewCell
 
+@property (weak, nonatomic) IBOutlet APCNormalDistributionGraphView *normalDistributionGraphView;
+@property (weak, nonatomic) IBOutlet UILabel *subtitleLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *distanceLabel;
 @end

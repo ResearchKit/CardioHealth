@@ -125,6 +125,8 @@
 		5B73CADC1A8A002B00FFE79C /* APHWalkingTestResults.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B73CADB1A8A002B00FFE79C /* APHWalkingTestResults.m */; };
 		5B7D47031B05271800958921 /* WalkingTestStats.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B7D47021B05271800958921 /* WalkingTestStats.json */; };
 		5B7D470C1B052DC700958921 /* WalkingTestStats.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B7D47021B05271800958921 /* WalkingTestStats.json */; };
+		5B7D47291B05D7E300958921 /* APHWalkingTestComparisonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7D47281B05D7E300958921 /* APHWalkingTestComparisonViewController.m */; };
+		5B7D47361B05DC3A00958921 /* APHWalkingTestComparisonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7D47281B05D7E300958921 /* APHWalkingTestComparisonViewController.m */; };
 		5B827B451A7F837700C685A3 /* APHDashboardWalkTestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B827B441A7F837700C685A3 /* APHDashboardWalkTestTableViewCell.m */; };
 		5B827B6A1A8222AF00C685A3 /* APHTableViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B827B691A8222AF00C685A3 /* APHTableViewItem.m */; };
 		5BB2BAA41A10157B00684CCE /* Learn.json in Resources */ = {isa = PBXBuildFile; fileRef = 5BB2BAA31A10157B00684CCE /* Learn.json */; };
@@ -367,6 +369,8 @@
 		5B73CADA1A8A002B00FFE79C /* APHWalkingTestResults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHWalkingTestResults.h; sourceTree = "<group>"; };
 		5B73CADB1A8A002B00FFE79C /* APHWalkingTestResults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHWalkingTestResults.m; sourceTree = "<group>"; };
 		5B7D47021B05271800958921 /* WalkingTestStats.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = WalkingTestStats.json; sourceTree = "<group>"; };
+		5B7D47271B05D7E300958921 /* APHWalkingTestComparisonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHWalkingTestComparisonViewController.h; sourceTree = "<group>"; };
+		5B7D47281B05D7E300958921 /* APHWalkingTestComparisonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHWalkingTestComparisonViewController.m; sourceTree = "<group>"; };
 		5B827B431A7F837700C685A3 /* APHDashboardWalkTestTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHDashboardWalkTestTableViewCell.h; sourceTree = "<group>"; };
 		5B827B441A7F837700C685A3 /* APHDashboardWalkTestTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHDashboardWalkTestTableViewCell.m; sourceTree = "<group>"; };
 		5B827B681A8222AF00C685A3 /* APHTableViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHTableViewItem.h; sourceTree = "<group>"; };
@@ -858,6 +862,8 @@
 				5B4633841A15917000E68B82 /* APHDashboardEditViewController.m */,
 				5B73CACE1A89BE5200FFE79C /* APHWalkTestViewController.h */,
 				5B73CACF1A89BE5200FFE79C /* APHWalkTestViewController.m */,
+				5B7D47271B05D7E300958921 /* APHWalkingTestComparisonViewController.h */,
+				5B7D47281B05D7E300958921 /* APHWalkingTestComparisonViewController.m */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -1266,6 +1272,7 @@
 				085F3E4C1AAF6A0D003A910A /* APHHeartAgeTaskViewController.m in Sources */,
 				085F3E4D1AAF6A0D003A910A /* APHHeartAgeRiskEstimateCell.m in Sources */,
 				085F3E4E1AAF6A0D003A910A /* APHHeartAgeAndRiskFactors.m in Sources */,
+				5B7D47361B05DC3A00958921 /* APHWalkingTestComparisonViewController.m in Sources */,
 				5B203DDD1B05090700528BAF /* APHWalkingTestComparison.m in Sources */,
 				085F3E4F1AAF6A0D003A910A /* APHIntroPurposeContainedTableTableViewController.m in Sources */,
 				085F3E501AAF6A0D003A910A /* APHHeartAgeTodaysActivitiesCell.m in Sources */,
@@ -1313,6 +1320,7 @@
 				F5481F1419E4820100D84617 /* APHHeartAgeTaskViewController.m in Sources */,
 				08FA98061A108A46002317C8 /* APHHeartAgeRiskEstimateCell.m in Sources */,
 				08D3A10219E4A08C00A3D20D /* APHHeartAgeAndRiskFactors.m in Sources */,
+				5B7D47291B05D7E300958921 /* APHWalkingTestComparisonViewController.m in Sources */,
 				5B203DDB1B05076700528BAF /* APHWalkingTestComparison.m in Sources */,
 				7BEA4BE91A65D95400FEAF60 /* APHIntroPurposeContainedTableTableViewController.m in Sources */,
 				08FA97FF1A108680002317C8 /* APHHeartAgeTodaysActivitiesCell.m in Sources */,

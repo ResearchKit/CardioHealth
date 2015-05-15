@@ -47,6 +47,8 @@ static CGFloat kDetailFontSize = 24.0f;
 - (void)awakeFromNib {
     // Initialization code
     
+    [super awakeFromNib];
+    
     self.textLabel.textColor = [UIColor appSecondaryColor1];
     self.textLabel.font = [UIFont appRegularFontWithSize:kTextFontSize];
     
