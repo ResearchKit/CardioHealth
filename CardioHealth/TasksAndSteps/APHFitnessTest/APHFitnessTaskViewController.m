@@ -33,6 +33,8 @@
  
 #import "APHFitnessTaskViewController.h"
 #import <CoreLocation/CoreLocation.h>
+#import <AVFoundation/AVFoundation.h>
+#import "APHAppDelegate.h"
 
 static NSInteger const  kRestDuration              = 3.0 * 60.0;
 static NSInteger const  kWalkDuration              = 6.0 * 60.0;
@@ -52,16 +54,20 @@ static NSString* const  kConclusionStep            = @"conclusion";
 
 static NSString* const  kHeartRateFileNameComp     = @"HKQuantityTypeIdentifierHeartRate";
 static NSString* const  kLocationFileNameComp      = @"location";
+static NSString* const  kPedometerFileName         = @"pedometer";
 static NSString* const  kFileResultsKey            = @"items";
 static NSString* const  kHeartRateValueKey         = @"value";
 static NSString* const  kCoordinate                 = @"coordinate";
 static NSString* const  kLongitude                 = @"longitude";
 static NSString* const  kLatitude                  = @"latitude";
+static NSString* const  kDistance                  = @"distance";
 
 static NSString* const kCompletedKeyForDashboard   = @"completed";
 static NSString* const kPeakHeartRateForDashboard  = @"peakHeartRate";
 static NSString* const kAvgHeartRateForDashboard   = @"avgHeartRate";
 static NSString* const kLastHeartRateForDashboard  = @"lastHeartRate";
+static NSString* const kPedometerDistance          = @"pedometerDistance";
+static NSString* const kLocationDistance           = @"totalDistance";
 
 static NSString* const kInstructionIntendedDescription = @"This test monitors how far you can walk in six minutes. It will also record your heart rate if you are wearing such a device.";
 
@@ -92,175 +98,438 @@ static NSString* const kFitnessWalkText = @"Walk as far as you can for six minut
     [task.steps[kSecondStep] setTitle:NSLocalizedString(kFitnessTestInstructionTitle, nil)];
     
     [task.steps[kSecondStep] setText:NSLocalizedString(kInstruction2IntendedDescription, kInstruction2IntendedDescription)];
+
+    NSString  *spokenInstructionString = kFitnessWalkText;
+    [task.steps[kThirdStep] setSpokenInstruction:NSLocalizedString(spokenInstructionString, nil)];
+
     [task.steps[kThirdStep] setTitle:NSLocalizedString(kFitnessWalkText, kFitnessWalkText)];
     
     [task.steps[5] setTitle:NSLocalizedString(@"Thank You!", nil)];
     [task.steps[5] setText:NSLocalizedString(@"The results of this activity can be viewed on the dashboard.", nil)];
 
+    APHAppDelegate* delegate = (APHAppDelegate*)[UIApplication sharedApplication].delegate;
+    double interval = [delegate.heartRateSink intervalSinceLastHeartRateUpdate];
+    
+    //  If the interval is a negative number we presume there is no heart rate being monitored.
+    if (interval < 0)
+    {
+        //  Take out the resting step.
+        NSMutableArray* newSteps = [[NSMutableArray alloc] initWithArray:task.steps];
+        [newSteps removeObjectAtIndex:task.steps.count - 2];
+        ORKOrderedTask *orderedTask = [[ORKOrderedTask alloc] initWithIdentifier:kFitnessTestIdentifier steps:[newSteps copy]];
+        task = orderedTask;
+    }
+    
     return  task;
 }
 
 - (void)taskViewController:(ORKTaskViewController *) __unused taskViewController stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     
     if ([stepViewController.step.identifier isEqualToString:kIntroStep] || [stepViewController.step.identifier isEqualToString:kIntroOneStep]) {
-
+        
     } else if ([stepViewController.step.identifier isEqualToString:kConclusionStep]) {
         [[UIView appearance] setTintColor:[UIColor appTertiaryColor1]];
     }
+
+    if ([stepViewController.step isKindOfClass:[ORKCompletionStep class]])
+    {
+        AVSpeechUtterance *utterance = [AVSpeechUtterance
+                                        speechUtteranceWithString:@"You have completed the activity"];
+        utterance.rate = (AVSpeechUtteranceMinimumSpeechRate + AVSpeechUtteranceDefaultSpeechRate)*0.3;
+        AVSpeechSynthesizer *synth = [[AVSpeechSynthesizer alloc] init];
+        [synth speakUtterance:utterance];
+    }
 }
 
-- (void)taskViewController:(ORKTaskViewController *)taskViewController didFinishWithReason:(ORKTaskViewControllerFinishReason)result error:(NSError *)error
+- (void)taskViewController:(ORKTaskViewController *)taskViewController didFinishWithReason:(ORKTaskViewControllerFinishReason)reason error:(NSError *)error
 {
-    if (result == ORKTaskViewControllerFinishReasonCompleted)
+    if (reason == ORKTaskViewControllerFinishReasonCompleted)
     {
         [[UIView appearance] setTintColor:[UIColor appPrimaryColor]];
     }
     
-    [super taskViewController:taskViewController didFinishWithReason:result error:error];
+    [super taskViewController:taskViewController didFinishWithReason:reason error:error];
 }
 
 
 /*********************************************************************************/
 #pragma  mark  -  Helper methods
 /*********************************************************************************/
-
-- (NSString *) createResultSummary {
-    
-    NSMutableDictionary* dashboardDataSource = [NSMutableDictionary new];
-    NSDictionary* distanceResults = nil;
-    NSDictionary* heartRateResults = nil;
+- (NSString*) createResultSummary
+{
+    NSMutableDictionary*    dashboardDataSource = [NSMutableDictionary new];
+    NSDictionary*           distanceResults     = nil;
+    NSDictionary*           heartRateResults    = nil;
+    NSDictionary*           pedometerResults    = nil;
     
     ORKStepResult* stepResult = (ORKStepResult *)[self.result resultForIdentifier:kWalkStep];
     
-    for (ORKFileResult* fileResult in stepResult.results) {
-        NSString* fileString = [fileResult.fileURL lastPathComponent];
-        NSArray* nameComponents = [fileString componentsSeparatedByString:@"_"];
+    for (ORKFileResult* fileResult in stepResult.results)
+    {
+        NSString*   fileString      = [fileResult.fileURL lastPathComponent];
+        NSArray*    nameComponents  = [fileString componentsSeparatedByString:@"_"];
         
-        if ([[nameComponents objectAtIndex:0] isEqualToString:kLocationFileNameComp])
+        if ([[nameComponents firstObject] isEqualToString:kLocationFileNameComp])
         {
             distanceResults = [self computeTotalDistanceForDashboardItem:fileResult.fileURL];
             
-        } else if ([[nameComponents objectAtIndex:0] isEqualToString:kHeartRateFileNameComp])
+            //  Transform location data into displacement data
+            [self startDisplacementSerializer:fileResult.fileURL];
+        }
+        else if ([[nameComponents firstObject] isEqualToString:kHeartRateFileNameComp])
         {
             heartRateResults = [self computeHeartRateForDashboardItem:fileResult.fileURL];
         }
+        else if ([[nameComponents firstObject] isEqualToString:kPedometerFileName])
+        {
+            pedometerResults = [self pedometerData:fileResult.fileURL];
+        }
     }
     
-    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[NSDate date]];
-    NSInteger day = [components day];
-    NSInteger month = [components month];
-    NSDateFormatter *df = [[NSDateFormatter alloc] init];
-    NSString *monthName = [[df monthSymbols] objectAtIndex:(month-1)];
-    NSString *completedDate = [NSString stringWithFormat:@"%@ %ld", monthName, (long)day];
+    NSDateComponents*       components      = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear
+                                                                              fromDate:[NSDate date]];
+    NSInteger               day             = [components day];
+    NSInteger               month           = [components month]; //    Not zero based.
+    NSDateFormatter*        df              = [[NSDateFormatter alloc] init];
+    NSString*               monthName       = [[df monthSymbols] objectAtIndex:(month-1)];
+    NSString*               completedDate   = [NSString stringWithFormat:@"%@ %ld", monthName, (long)day];
     
-
-    [dashboardDataSource setValue:completedDate forKey:kCompletedKeyForDashboard];
-    [dashboardDataSource addEntriesFromDictionary:distanceResults];
-    [dashboardDataSource addEntriesFromDictionary:heartRateResults];
+    if (completedDate)
+    {
+        [dashboardDataSource setValue:completedDate
+                               forKey:kCompletedKeyForDashboard];
+    }
     
-    NSString *jsonString = [self generateJSONFromDictionary:dashboardDataSource];
+    if (distanceResults)
+    {
+        [dashboardDataSource addEntriesFromDictionary:distanceResults];
+    }
+    
+    if (heartRateResults)
+    {
+        [dashboardDataSource addEntriesFromDictionary:heartRateResults];
+    }
+    
+    if (pedometerResults)
+    {
+        [dashboardDataSource addEntriesFromDictionary:pedometerResults];
+    }
+    
+    NSString*       jsonString              = [self generateJSONFromDictionary:dashboardDataSource];
 
-
-    //Intercept the location result if it exists and tear it out.
-
-    NSMutableArray *newResultForFitnessTest = [NSMutableArray new];
+    //   Iterate through the file results and if is NOT the location data do not include it in the new set of results.
+    NSMutableArray* newResultForFitnessTest = [NSMutableArray new];
 
     if (stepResult)
     {
-        for (ORKFileResult* fileResult in stepResult.results) {
-
-
-            if (![fileResult.fileURL.lastPathComponent hasPrefix: kLocationFileNameComp])
+        for (ORKFileResult* fileResult in stepResult.results)
+        {
+            if (![fileResult.fileURL.lastPathComponent hasPrefix:kLocationFileNameComp])
             {
                 [newResultForFitnessTest addObject:fileResult];
             }
         }
     }
 
-    ORKStepResult* newStepResult = (ORKStepResult *)[self.result resultForIdentifier:kWalkStep];
+    ORKStepResult* newStepResult = (ORKStepResult*)[self.result resultForIdentifier:kWalkStep];
 
     newStepResult.results = (NSArray *) newResultForFitnessTest;
-
 
     return jsonString;
 }
 
-- (NSDictionary *) computeTotalDistanceForDashboardItem:(NSURL *)fileURL{
-
-    NSDictionary*   distanceResults     = [self readFileResultsFor:fileURL];
-    NSArray*        locations           = [distanceResults objectForKey:kFileResultsKey];
+- (NSDictionary*)pedometerData:(NSURL*)fileURL
+{
+    NSDictionary*   pedometerItems      = [self readFileResultsFor:fileURL];
+    NSArray*        pedometerResults    = [pedometerItems objectForKey:kFileResultsKey];
+    NSDictionary*   lastResult          = [pedometerResults lastObject];
+    NSNumber*       totalDistance       = [lastResult objectForKey:kDistance];
+    NSDictionary*   distance            = nil;
     
-    
-    CLLocation*     previousCoor        = nil;
-    CLLocationDistance totalDistance    = 0;
-    
-    for (NSDictionary *location in locations) {
-        float               lon = [[[location objectForKey:kCoordinate] objectForKey:kLongitude] floatValue];
-        float               lat = [[[location objectForKey:kCoordinate] objectForKey:kLatitude] floatValue];
-        
-        CLLocation *currentCoor = [[CLLocation alloc] initWithLatitude:lat longitude:lon];
-        
-        if(previousCoor) {
-            totalDistance       += [currentCoor distanceFromLocation:previousCoor];
-            previousCoor        = currentCoor;
-        }
-        
-        previousCoor        = currentCoor;
+    if (totalDistance)
+    {
+        distance = @{kPedometerDistance : totalDistance};
     }
-
-    return @{@"totalDistance" : @(totalDistance)};
+    
+    return distance;
 }
 
-- (NSDictionary *) computeHeartRateForDashboardItem:(NSURL *)fileURL {
-    
+- (NSDictionary*)computeTotalDistanceForDashboardItem:(NSURL*)fileURL
+{
+    NSDictionary*       distanceResults = [self readFileResultsFor:fileURL];
+    CLLocationDistance  totalDistance   = 0;
+    NSArray*            locations       = [distanceResults objectForKey:kFileResultsKey];
+
+    if (locations)
+    {
+        CLLocation* previousCoor = nil;
+        
+        for (NSDictionary *location in locations)
+        {
+            float lon = 0;
+            
+            if ([location objectForKey:kCoordinate])
+            {
+                if ([[location objectForKey:kCoordinate] objectForKey:kLongitude])
+                {
+                    lon = [[[location objectForKey:kCoordinate] objectForKey:kLongitude] floatValue];
+                }
+            }
+            
+            float lat = 0;
+            
+            if ([location objectForKey:kCoordinate])
+            {
+                if ([[location objectForKey:kCoordinate] objectForKey:kLatitude])
+                {
+                    lat = [[[location objectForKey:kCoordinate] objectForKey:kLatitude] floatValue];
+                }
+            }
+            
+            CLLocation *currentCoor = [[CLLocation alloc] initWithLatitude:lat longitude:lon];
+            
+            if(previousCoor)
+            {
+                totalDistance       += [currentCoor distanceFromLocation:previousCoor];
+                previousCoor        = currentCoor;
+            }
+            
+            previousCoor = currentCoor;
+        }
+    }
+
+    return @{kLocationDistance : @(totalDistance)};
+}
+
+- (NSDictionary*)computeHeartRateForDashboardItem:(NSURL*)fileURL
+{
     NSDictionary*   heartRateResults    = [self readFileResultsFor:fileURL];
     NSArray*        heartRates          = [heartRateResults objectForKey:kFileResultsKey];
-
-    // Using KVC operators to retrieve values for peak and average heart rate.
+    id              maxValue            = [NSNull null];
+    id              avgValue            = [NSNull null];
+    id              lastValue           = [NSNull null];
+    
+    if ([heartRates valueForKeyPath:@"@max.value"])
+    {
+        maxValue = [heartRates valueForKeyPath:@"@max.value"];
+    }
+    
+    if ([heartRates valueForKeyPath:@"@avg.value"])
+    {
+        avgValue = [heartRates valueForKeyPath:@"@avg.value"];
+    }
+    
+    if (heartRates)
+    {
+        if ([[heartRates lastObject] objectForKey:kHeartRateValueKey])
+        {
+            lastValue = [[heartRates lastObject] objectForKey:kHeartRateValueKey];
+        }
+    }
+    
     return @{
-             kPeakHeartRateForDashboard : [heartRates valueForKeyPath:@"@max.value"],
-             kAvgHeartRateForDashboard  : [heartRates valueForKeyPath:@"@avg.value"],
-             kLastHeartRateForDashboard : [[heartRates lastObject] objectForKey:kHeartRateValueKey]
+             kPeakHeartRateForDashboard : maxValue,
+             kAvgHeartRateForDashboard  : avgValue,
+             kLastHeartRateForDashboard : lastValue
             };
 }
 
-
-- (NSDictionary *) readFileResultsFor:(NSURL *)fileURL {
-
+- (NSDictionary *) readFileResultsFor:(NSURL *)fileURL
+{
     NSError*        error       = nil;
     NSString*       contents    = [NSString stringWithContentsOfURL:fileURL encoding:NSUTF8StringEncoding error:&error];
     NSDictionary*   results     = nil;
 
-    APCLogError2(error);
-    
-    if (!error) {
+    if (!contents)
+    {
+        if (error)
+        {
+            APCLogError2(error);
+        }
+    }
+    else
+    {
         NSError*    error = nil;
         NSData*     data  = [contents dataUsingEncoding:NSUTF8StringEncoding];
         
         results = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
         
-        APCLogError2(error);
+        if (!results)
+        {
+            if (error)
+            {
+                APCLogError2(error);
+            }
+        }
     }
     
     return results;
 }
 
-- (NSString *)generateJSONFromDictionary:(NSMutableDictionary *)dictionary {
-    
+- (NSString *)generateJSONFromDictionary:(NSMutableDictionary *)dictionary
+{
     NSError*    error       = nil;
     NSData*     jsonData    = [NSJSONSerialization dataWithJSONObject:dictionary
                                                                options:0
                                                                  error:&error];
     NSString* jsonString    = nil;
-    
-    APCLogError2(error);
 
-    if (!error)
+    if (!jsonData)
+    {
+        if (error)
+        {
+            APCLogError2(error);
+        }
+    }
+    else
     {
         jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     }
     
     return jsonString;
 }
+
+- (NSString*)startDisplacementSerializer:(NSURL*)fileURL
+{
+    NSDictionary*           distanceResults     = [self readFileResultsFor:fileURL];
+    NSArray*                locationData        = [distanceResults objectForKey:kFileResultsKey];
+    __weak typeof (self)    weakSelf            = self;
+    
+    void(^LocationDataTransformer)(NSArray*) = ^(NSArray* locations)
+    {
+        __strong typeof (self)  strongSelf = weakSelf;
+        __weak typeof (self)    weakSelf   = strongSelf;
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
+        {
+           __strong typeof (self) strongSelf = weakSelf;
+           NSMutableArray* displacementData = [NSMutableArray new];
+           
+           if (locations)
+           {
+               CLLocation* previousCoor = nil;
+               
+               for (NSDictionary* location in locations)
+               {
+                   float lon = 0;
+                   
+                   if ([location objectForKey:@"coordinate"])
+                   {
+                       if ([[location objectForKey:@"coordinate"] objectForKey:@"longitude"])
+                       {
+                           lon = [[[location objectForKey:@"coordinate"] objectForKey:@"longitude"] floatValue];
+                       }
+                   }
+                   
+                   float lat = 0;
+                   
+                   if ([location objectForKey:@"coordinate"])
+                   {
+                       if ([[location objectForKey:@"coordinate"] objectForKey:@"latitude"])
+                       {
+                           lat = [[[location objectForKey:@"coordinate"] objectForKey:@"latitude"] floatValue];
+                       }
+                   }
+                   
+                   CLLocation* currentCoor = [[CLLocation alloc] initWithLatitude:lat longitude:lon];
+                   
+                   if(previousCoor)
+                   {
+                       id displacementDistance = [NSNull null];
+                       id direction            = [NSNull null];
+                       
+                       if (@([currentCoor distanceFromLocation:previousCoor]))
+                       {
+                           displacementDistance = @([currentCoor distanceFromLocation:previousCoor]);
+                       }
+                       
+                       if (@([currentCoor calculateDirectionFromLocation:previousCoor]))
+                       {
+                           direction = @([currentCoor calculateDirectionFromLocation:previousCoor]);
+                       }
+                       
+                       NSDictionary* displacement = [strongSelf displacement:displacementDistance direction:direction fromLocationData:location];
+                       
+                       [displacementData addObject:displacement];
+                   }
+                   
+                   previousCoor = currentCoor;
+               }
+               
+               if ([NSJSONSerialization isValidJSONObject:displacementData])
+               {
+                   NSDictionary *displacementDictionary = @{@"items" : displacementData};
+                   
+                   [APCDataArchiverAndUploader uploadDictionary:displacementDictionary withTaskIdentifier:@"6MWT Displacement Data" andTaskRunUuid:strongSelf.taskRunUUID];
+               }
+           }
+       });
+    };
+    
+    //  Only if there's location data and we can produce displacement data should we continue.
+    if (locationData)
+    {
+        if (locationData.count > 1)
+        {
+            LocationDataTransformer(locationData);
+        }
+    }
+    
+    return nil;
+}
+
+- (NSDictionary*)displacement:(id)displacementDistance direction:(id)direction fromLocationData:(NSDictionary*)location
+{
+    id altitude             = [NSNull null];
+    id timestamp            = [NSNull null];
+    id horizontalAccuracy   = [NSNull null];
+    id verticalAccuracy     = [NSNull null];
+    
+    //  Expecting an NSNumber or null. But just in case we have this check here.
+    if (displacementDistance == nil)
+    {
+        displacementDistance = [NSNull null];
+    }
+    
+    if (direction == nil)
+    {
+        direction = [NSNull null];
+    }
+    
+    if ([location objectForKey:@"altitude"])
+    {
+        altitude = [location objectForKey:@"altitude"];
+    }
+    
+    if ([location objectForKey:@"timestamp"])
+    {
+        timestamp = [location objectForKey:@"timestamp"];
+    }
+    
+    if ([location objectForKey:@"horizontalAccuracy"])
+    {
+        horizontalAccuracy = [location objectForKey:@"horizontalAccuracy"];
+    }
+    
+    if ([location objectForKey:@"verticalAccuracy"])
+    {
+        verticalAccuracy = [location objectForKey:@"verticalAccuracy"];
+    }
+    
+    NSDictionary* displacement =
+    @{
+      @"altitude": altitude,
+      @"displacement": displacementDistance,
+      @"displacementUnit" : @"meters", //    always in meters
+      @"direction": direction,
+      @"directionUnit": @"meters", //    always in meters
+      @"horizontalAccuracy": horizontalAccuracy,
+      @"timestamp": timestamp,
+      @"verticalAccuracy": verticalAccuracy
+      };
+    
+    return displacement;
+}
+
 
 @end
