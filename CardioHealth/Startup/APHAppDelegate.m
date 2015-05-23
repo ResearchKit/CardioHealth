@@ -774,6 +774,11 @@ static NSString* const kMinorVersion               = @"version";
              ];
 }
 
+- (BOOL)hideEmailOnWelcomeScreen
+{
+    return YES;
+}
+
 /*********************************************************************************/
 #pragma mark - APCOnboardingDelegate Methods
 /*********************************************************************************/
