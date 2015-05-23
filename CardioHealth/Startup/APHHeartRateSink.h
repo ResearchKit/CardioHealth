@@ -48,6 +48,6 @@ typedef NSDate*(^ForegroundLaunchDate)();
 - (instancetype)initWithIdentifier:(NSString*)identifier
                        columnNames:(NSArray*)columnNames
                 operationQueueName:(NSString*)operationQueueName
-                  dataProcessor:(CSVSerializer)transformer
+                  dataProcessor:(APCCSVSerializer)transformer
                    andAppLaunch:(ForegroundLaunchDate)foregroundLaunchDate;
 @end

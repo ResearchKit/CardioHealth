@@ -202,11 +202,11 @@ static NSString* const kMinorVersion               = @"version";
     [APCUtilities setRealApplicationName: @"MyHeart Counts"];
     
     NSDictionary *permissionsDescriptions = @{
-                                              @(kSignUpPermissionsTypeLocation) : NSLocalizedString(@"Using your GPS enables the app to accurately determine distances travelled. Your actual location will never be shared.", @""),
-                                              @(kSignUpPermissionsTypeCoremotion) : NSLocalizedString(@"Using the motion co-processor allows the app to determine your activity, helping the study better understand how activity level may influence disease.", @""),
-                                              @(kSignUpPermissionsTypeMicrophone) : NSLocalizedString(@"Access to microphone is required for your Voice Recording Activity.", @""),
-                                              @(kSignUpPermissionsTypeLocalNotifications) : NSLocalizedString(@"Allowing notifications enables the app to show you reminders.", @""),
-                                              @(kSignUpPermissionsTypeHealthKit) : NSLocalizedString(@"On the next screen, you will be prompted to grant MyHeart Counts access to read and write some of your general and health information, such as height, weight and steps taken so you don't have to enter it again.", @""),
+                                              @(kAPCSignUpPermissionsTypeLocation) : NSLocalizedString(@"Using your GPS enables the app to accurately determine distances travelled. Your actual location will never be shared.", @""),
+                                              @(kAPCSignUpPermissionsTypeCoremotion) : NSLocalizedString(@"Using the motion co-processor allows the app to determine your activity, helping the study better understand how activity level may influence disease.", @""),
+                                              @(kAPCSignUpPermissionsTypeMicrophone) : NSLocalizedString(@"Access to microphone is required for your Voice Recording Activity.", @""),
+                                              @(kAPCSignUpPermissionsTypeLocalNotifications) : NSLocalizedString(@"Allowing notifications enables the app to show you reminders.", @""),
+                                              @(kAPCSignUpPermissionsTypeHealthKit) : NSLocalizedString(@"On the next screen, you will be prompted to grant MyHeart Counts access to read and write some of your general and health information, such as height, weight and steps taken so you don't have to enter it again.", @""),
                                               };
     
     NSMutableDictionary * dictionary = [super defaultInitializationOptions];
@@ -241,9 +241,9 @@ static NSString* const kMinorVersion               = @"version";
                                                    HKQuantityTypeIdentifierHeight
                                                    ],
                                            kAppServicesListRequiredKey           : @[
-                                                   @(kSignUpPermissionsTypeLocation),
-                                                   @(kSignUpPermissionsTypeCoremotion),
-                                                   @(kSignUpPermissionsTypeLocalNotifications)
+                                                   @(kAPCSignUpPermissionsTypeLocation),
+                                                   @(kAPCSignUpPermissionsTypeCoremotion),
+                                                   @(kAPCSignUpPermissionsTypeLocalNotifications)
                                                    ],
                                            kAppServicesDescriptionsKey : permissionsDescriptions,
                                            kAppProfileElementsListKey            : @[
@@ -358,365 +358,365 @@ static NSString* const kMinorVersion               = @"version";
 
 - (void)configureObserverQueries
 {
-    NSDate* (^LaunchDate)() = ^
-    {
-        APCUser*    user        = ((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.currentUser;
-        NSDate*     consentDate = nil;
-        
-        if (user.consentSignatureDate)
-        {
-            consentDate = user.consentSignatureDate;
-        }
-        else
-        {
-            NSFileManager*  fileManager = [NSFileManager defaultManager];
-            NSString*       filePath    = [[self applicationDocumentsDirectory] stringByAppendingPathComponent:@"db.sqlite"];
-            
-            if ([fileManager fileExistsAtPath:filePath])
-            {
-                NSError*        error       = nil;
-                NSDictionary*   attributes  = [fileManager attributesOfItemAtPath:filePath error:&error];
-                
-                if (error)
-                {
-                    APCLogError2(error);
-                    
-                    consentDate = [[NSDate date] startOfDay];
-                }
-                else
-                {
-                    consentDate = [attributes fileCreationDate];
-                }
-            }
-        }
-        
-        return consentDate;
-    };
-    
-    NSString*(^QuantityDataSerializer)(id) = ^NSString*(id dataSample)
-    {
-        HKQuantitySample*   qtySample           = (HKQuantitySample *)dataSample;
-        NSString*           startDateTimeStamp  = [qtySample.startDate toStringInISO8601Format];
-        NSString*           endDateTimeStamp    = [qtySample.endDate toStringInISO8601Format];
-        NSString*           healthKitType       = qtySample.quantityType.identifier;
-        NSString*           quantityValueRep    = [NSString stringWithFormat:@"%@", qtySample.quantity];
-        NSArray*            valueSplit          = [quantityValueRep componentsSeparatedByString:@" "];
-        NSString*           quantityValue       = [valueSplit objectAtIndex:0];
-        NSString*           quantityUnit        = @"";
-        
-        for (int i = 1; i < (int)[valueSplit count]; i++)
-        {
-            quantityUnit = [quantityUnit stringByAppendingString:valueSplit[i]];
-        }
-        
-        NSString*           sourceIdentifier    = qtySample.source.bundleIdentifier;
-        NSString*           quantitySource      = qtySample.source.name;
-        
-        if (quantitySource == nil)
-        {
-            quantitySource = @"not available";
-        }
-        else if ([[[UIDevice currentDevice] name] isEqualToString:quantitySource])
-        {
-            if ([APCDeviceHardware platformString])
-            {
-                quantitySource = [APCDeviceHardware platformString];
-            }
-            else
-            {
-                //  This shouldn't get called.
-                quantitySource = @"iPhone";
-            }
-        }
-        
-        NSString *stringToWrite = [NSString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@\n",
-                                   startDateTimeStamp,
-                                   endDateTimeStamp,
-                                   healthKitType,
-                                   quantityValue,
-                                   quantityUnit,
-                                   quantitySource,
-                                   sourceIdentifier];
-        
-        return stringToWrite;
-    };
-    
-    NSString*(^WorkoutDataSerializer)(id) = ^(id dataSample)
-    {
-        HKWorkout*  sample                      = (HKWorkout*)dataSample;
-        NSString*   startDateTimeStamp          = [sample.startDate toStringInISO8601Format];
-        NSString*   endDateTimeStamp            = [sample.endDate toStringInISO8601Format];
-        NSString*   healthKitType               = sample.sampleType.identifier;
-        NSString*   activityType                = [HKWorkout workoutActivityTypeStringRepresentation:(int)sample.workoutActivityType];
-        double      energyConsumedValue         = [sample.totalEnergyBurned doubleValueForUnit:[HKUnit kilocalorieUnit]];
-        NSString*   energyConsumed              = [NSString stringWithFormat:@"%f", energyConsumedValue];
-        NSString*   energyUnit                  = [HKUnit kilocalorieUnit].description;
-        double      totalDistanceConsumedValue  = [sample.totalDistance doubleValueForUnit:[HKUnit meterUnit]];
-        NSString*   totalDistance               = [NSString stringWithFormat:@"%f", totalDistanceConsumedValue];
-        NSString*   distanceUnit                = [HKUnit meterUnit].description;
-        NSString*   sourceIdentifier            = sample.source.bundleIdentifier;
-        NSString*   quantitySource              = sample.source.name;
-        
-        if (quantitySource == nil)
-        {
-            quantitySource = @"not available";
-        }
-        else if ([[[UIDevice currentDevice] name] isEqualToString:quantitySource])
-        {
-            if ([APCDeviceHardware platformString])
-            {
-                quantitySource = [APCDeviceHardware platformString];
-            }
-            else
-            {
-                //  This shouldn't get called.
-                quantitySource = @"iPhone";
-            }
-        }
-        
-        NSError*    error                       = nil;
-        NSString*   metaData                    = [NSDictionary convertDictionary:sample.metadata ToStringWithReturningError:&error];
-        NSString*   metaDataStringified         = [NSString stringWithFormat:@"\"%@\"", metaData];
-        NSString*   stringToWrite               = [NSString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@\n",
-                                                   startDateTimeStamp,
-                                                   endDateTimeStamp,
-                                                   healthKitType,
-                                                   activityType,
-                                                   totalDistance,
-                                                   distanceUnit,
-                                                   energyConsumed,
-                                                   energyUnit,
-                                                   quantitySource,
-                                                   sourceIdentifier,
-                                                   metaDataStringified];
-        
-        return stringToWrite;
-    };
-    
-    NSString*(^CategoryDataSerializer)(id) = ^NSString*(id dataSample)
-    {
-        HKCategorySample*   catSample       = (HKCategorySample *)dataSample;
-        NSString*           stringToWrite   = nil;
-        
-        if ([catSample.categoryType.identifier isEqualToString:@"HKCategoryTypeIdentifierSleepAnalysis"])
-        {
-            NSString*           startDateTime   = [catSample.startDate toStringInISO8601Format];
-            NSString*           healthKitType   = catSample.sampleType.identifier;
-            NSString*           categoryValue   = nil;
-            
-            if (catSample.value == HKCategoryValueSleepAnalysisAsleep)
-            {
-                categoryValue = @"HKCategoryValueSleepAnalysisAsleep";
-            }
-            else
-            {
-                categoryValue = @"HKCategoryValueSleepAnalysisInBed";
-            }
-            
-            NSString*           quantityUnit        = [[HKUnit secondUnit] unitString];
-            NSString*           sourceIdentifier    = catSample.source.bundleIdentifier;
-            NSString*           quantitySource      = catSample.source.name;
-            
-            if (quantitySource == nil)
-            {
-                quantitySource = @"not available";
-            }
-            else if ([[[UIDevice currentDevice] name] isEqualToString:quantitySource])
-            {
-                if ([APCDeviceHardware platformString])
-                {
-                    quantitySource = [APCDeviceHardware platformString];
-                }
-                else
-                {
-                    //  This shouldn't get called.
-                    quantitySource = @"iPhone";
-                }
-                
-            }
-            
-            // Get the difference in seconds between the start and end date for the sample
-            NSDateComponents* secondsSpentInBedOrAsleep = [[NSCalendar currentCalendar] components:NSCalendarUnitSecond
-                                                                                          fromDate:catSample.startDate
-                                                                                            toDate:catSample.endDate
-                                                                                           options:NSCalendarWrapComponents];
-            NSString*           quantityValue   = [NSString stringWithFormat:@"%ld", (long)secondsSpentInBedOrAsleep.second];
-            
-            stringToWrite = [NSString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@\n",
-                             startDateTime,
-                             healthKitType,
-                             categoryValue,
-                             quantityValue,
-                             quantityUnit,
-                             sourceIdentifier,
-                             quantitySource];
-        }
-        
-        return stringToWrite;
-    };
-    
-    NSArray* dataTypesWithReadPermission = self.initializationOptions[kHKReadPermissionsKey];
-    
-    // Just a note here that we are using n collectors to 1 data sink for quantity sample type data.
-    NSArray*                    quantityColumnNames = @[@"startTime,endTime,type,value,unit,source,sourceIdentifier"];
-    APCPassiveDataSink*         quantityreceiver    = [[APCPassiveDataSink alloc] initWithIdentifier:@"HealthKitDataCollector"
-                                                                                         columnNames:quantityColumnNames
-                                                                                  operationQueueName:@"APCHealthKitQuantity Activity Collector"
-                                                                                    andDataProcessor:QuantityDataSerializer];
-    
-    NSArray*                    workoutColumnNames  = @[@"startTime,endTime,type,workoutType,total distance,unit,energy consumed,unit,source,sourceIdentifier,metadata"];
-    APCPassiveDataSink*         workoutReceiver     = [[APCPassiveDataSink alloc] initWithIdentifier:@"HealthKitWorkoutCollector"
-                                                                                         columnNames:workoutColumnNames
-                                                                                  operationQueueName:@"APCHealthKitWorkout Activity Collector"
-                                                                                    andDataProcessor:WorkoutDataSerializer];
-    NSArray*                    categoryColumnNames = @[@"startTime,type,category value,value,unit,source,sourceIdentifier"];
-    APCPassiveDataSink*         sleepReceiver       = [[APCPassiveDataSink alloc] initWithIdentifier:@"HealthKitSleepCollector"
-                                                                                         columnNames:categoryColumnNames
-                                                                                  operationQueueName:@"APCHealthKitSleep Activity Collector"
-                                                                                    andDataProcessor:CategoryDataSerializer];
-    
-    typeof(self) __weak weakSelf = self;
-    self.heartRateSink = [[APHHeartRateSink alloc] initWithIdentifier:@"HealthKitDataCollector"
-                                                         columnNames:quantityColumnNames
-                                                  operationQueueName:@"APCHealthKitQuantity Activity Collector"
-                                                       dataProcessor:QuantityDataSerializer
-                                                         andAppLaunch:^NSDate*
-    {
-       __typeof(self)   strongSelf = weakSelf;
-       NSDate*          activeDate = [strongSelf applicationBecameActiveDate];
-       
-       return activeDate;
-    }];
-    
-    if (dataTypesWithReadPermission)
-    {
-        for (id dataType in dataTypesWithReadPermission)
-        {
-            HKSampleType* sampleType = nil;
-            
-            if ([dataType isKindOfClass:[NSDictionary class]])
-            {
-                NSDictionary* categoryType = (NSDictionary *) dataType;
-                
-                //Distinguish
-                if (categoryType[kHKWorkoutTypeKey])
-                {
-                    sampleType = [HKObjectType workoutType];
-                }
-                else if (categoryType[kHKCategoryTypeKey])
-                {
-                    sampleType = [HKObjectType categoryTypeForIdentifier:categoryType[kHKCategoryTypeKey]];
-                }
-            }
-            else
-            {
-                sampleType = [HKObjectType quantityTypeForIdentifier:dataType];
-            }
-            
-            if (sampleType)
-            {
-                // This is really important to remember that we are creating as many user defaults as there are healthkit permissions here.
-                NSString*                               uniqueAnchorDateName    = [NSString stringWithFormat:@"APCHealthKit%@AnchorDate", dataType];
-                APCHealthKitBackgroundDataCollector*    collector               = [[APCHealthKitBackgroundDataCollector alloc] initWithIdentifier:sampleType.identifier
-                                                                                                                                       sampleType:sampleType anchorName:uniqueAnchorDateName
-                                                                                                                                 launchDateAnchor:LaunchDate];
-                
-                //If the HKObjectType is a HKWorkoutType then set a different receiver/data sink.
-                if ([sampleType isKindOfClass:[HKWorkoutType class]])
-                {
-                    [collector setReceiver:workoutReceiver];
-                    [collector setDelegate:workoutReceiver];
-                }
-                else if ([sampleType isKindOfClass:[HKCategoryType class]])
-                {
-                    [collector setReceiver:sleepReceiver];
-                    [collector setDelegate:sleepReceiver];
-                }
-                else if ([sampleType isKindOfClass:[HKQuantityType class]])
-                {
-                    if ([sampleType.identifier isEqualToString:HKQuantityTypeIdentifierHeartRate])
-                    {
-                        [collector setReceiver:self.heartRateSink];
-                        [collector setDelegate:self.heartRateSink];
-                    }
-                    else
-                    {
-                        [collector setReceiver:quantityreceiver];
-                        [collector setDelegate:quantityreceiver];
-                    }
-                }
-                
-                [collector start];
-                [self.passiveDataCollector addDataSink:collector];
-            }
-        }
-    }
+//    NSDate* (^LaunchDate)() = ^
+//    {
+//        APCUser*    user        = ((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.currentUser;
+//        NSDate*     consentDate = nil;
+//        
+//        if (user.consentSignatureDate)
+//        {
+//            consentDate = user.consentSignatureDate;
+//        }
+//        else
+//        {
+//            NSFileManager*  fileManager = [NSFileManager defaultManager];
+//            NSString*       filePath    = [[self applicationDocumentsDirectory] stringByAppendingPathComponent:@"db.sqlite"];
+//            
+//            if ([fileManager fileExistsAtPath:filePath])
+//            {
+//                NSError*        error       = nil;
+//                NSDictionary*   attributes  = [fileManager attributesOfItemAtPath:filePath error:&error];
+//                
+//                if (error)
+//                {
+//                    APCLogError2(error);
+//                    
+//                    consentDate = [[NSDate date] startOfDay];
+//                }
+//                else
+//                {
+//                    consentDate = [attributes fileCreationDate];
+//                }
+//            }
+//        }
+//        
+//        return consentDate;
+//    };
+//    
+//    NSString*(^QuantityDataSerializer)(id) = ^NSString*(id dataSample)
+//    {
+//        HKQuantitySample*   qtySample           = (HKQuantitySample *)dataSample;
+//        NSString*           startDateTimeStamp  = [qtySample.startDate toStringInISO8601Format];
+//        NSString*           endDateTimeStamp    = [qtySample.endDate toStringInISO8601Format];
+//        NSString*           healthKitType       = qtySample.quantityType.identifier;
+//        NSString*           quantityValueRep    = [NSString stringWithFormat:@"%@", qtySample.quantity];
+//        NSArray*            valueSplit          = [quantityValueRep componentsSeparatedByString:@" "];
+//        NSString*           quantityValue       = [valueSplit objectAtIndex:0];
+//        NSString*           quantityUnit        = @"";
+//        
+//        for (int i = 1; i < (int)[valueSplit count]; i++)
+//        {
+//            quantityUnit = [quantityUnit stringByAppendingString:valueSplit[i]];
+//        }
+//        
+//        NSString*           sourceIdentifier    = qtySample.source.bundleIdentifier;
+//        NSString*           quantitySource      = qtySample.source.name;
+//        
+//        if (quantitySource == nil)
+//        {
+//            quantitySource = @"not available";
+//        }
+//        else if ([[[UIDevice currentDevice] name] isEqualToString:quantitySource])
+//        {
+//            if ([APCDeviceHardware platformString])
+//            {
+//                quantitySource = [APCDeviceHardware platformString];
+//            }
+//            else
+//            {
+//                //  This shouldn't get called.
+//                quantitySource = @"iPhone";
+//            }
+//        }
+//        
+//        NSString *stringToWrite = [NSString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@\n",
+//                                   startDateTimeStamp,
+//                                   endDateTimeStamp,
+//                                   healthKitType,
+//                                   quantityValue,
+//                                   quantityUnit,
+//                                   quantitySource,
+//                                   sourceIdentifier];
+//        
+//        return stringToWrite;
+//    };
+//    
+//    NSString*(^WorkoutDataSerializer)(id) = ^(id dataSample)
+//    {
+//        HKWorkout*  sample                      = (HKWorkout*)dataSample;
+//        NSString*   startDateTimeStamp          = [sample.startDate toStringInISO8601Format];
+//        NSString*   endDateTimeStamp            = [sample.endDate toStringInISO8601Format];
+//        NSString*   healthKitType               = sample.sampleType.identifier;
+//        NSString*   activityType                = [HKWorkout workoutActivityTypeStringRepresentation:(int)sample.workoutActivityType];
+//        double      energyConsumedValue         = [sample.totalEnergyBurned doubleValueForUnit:[HKUnit kilocalorieUnit]];
+//        NSString*   energyConsumed              = [NSString stringWithFormat:@"%f", energyConsumedValue];
+//        NSString*   energyUnit                  = [HKUnit kilocalorieUnit].description;
+//        double      totalDistanceConsumedValue  = [sample.totalDistance doubleValueForUnit:[HKUnit meterUnit]];
+//        NSString*   totalDistance               = [NSString stringWithFormat:@"%f", totalDistanceConsumedValue];
+//        NSString*   distanceUnit                = [HKUnit meterUnit].description;
+//        NSString*   sourceIdentifier            = sample.source.bundleIdentifier;
+//        NSString*   quantitySource              = sample.source.name;
+//        
+//        if (quantitySource == nil)
+//        {
+//            quantitySource = @"not available";
+//        }
+//        else if ([[[UIDevice currentDevice] name] isEqualToString:quantitySource])
+//        {
+//            if ([APCDeviceHardware platformString])
+//            {
+//                quantitySource = [APCDeviceHardware platformString];
+//            }
+//            else
+//            {
+//                //  This shouldn't get called.
+//                quantitySource = @"iPhone";
+//            }
+//        }
+//        
+//        NSError*    error                       = nil;
+//        NSString*   metaData                    = [NSDictionary convertDictionary:sample.metadata ToStringWithReturningError:&error];
+//        NSString*   metaDataStringified         = [NSString stringWithFormat:@"\"%@\"", metaData];
+//        NSString*   stringToWrite               = [NSString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@\n",
+//                                                   startDateTimeStamp,
+//                                                   endDateTimeStamp,
+//                                                   healthKitType,
+//                                                   activityType,
+//                                                   totalDistance,
+//                                                   distanceUnit,
+//                                                   energyConsumed,
+//                                                   energyUnit,
+//                                                   quantitySource,
+//                                                   sourceIdentifier,
+//                                                   metaDataStringified];
+//        
+//        return stringToWrite;
+//    };
+//    
+//    NSString*(^CategoryDataSerializer)(id) = ^NSString*(id dataSample)
+//    {
+//        HKCategorySample*   catSample       = (HKCategorySample *)dataSample;
+//        NSString*           stringToWrite   = nil;
+//        
+//        if ([catSample.categoryType.identifier isEqualToString:@"HKCategoryTypeIdentifierSleepAnalysis"])
+//        {
+//            NSString*           startDateTime   = [catSample.startDate toStringInISO8601Format];
+//            NSString*           healthKitType   = catSample.sampleType.identifier;
+//            NSString*           categoryValue   = nil;
+//            
+//            if (catSample.value == HKCategoryValueSleepAnalysisAsleep)
+//            {
+//                categoryValue = @"HKCategoryValueSleepAnalysisAsleep";
+//            }
+//            else
+//            {
+//                categoryValue = @"HKCategoryValueSleepAnalysisInBed";
+//            }
+//            
+//            NSString*           quantityUnit        = [[HKUnit secondUnit] unitString];
+//            NSString*           sourceIdentifier    = catSample.source.bundleIdentifier;
+//            NSString*           quantitySource      = catSample.source.name;
+//            
+//            if (quantitySource == nil)
+//            {
+//                quantitySource = @"not available";
+//            }
+//            else if ([[[UIDevice currentDevice] name] isEqualToString:quantitySource])
+//            {
+//                if ([APCDeviceHardware platformString])
+//                {
+//                    quantitySource = [APCDeviceHardware platformString];
+//                }
+//                else
+//                {
+//                    //  This shouldn't get called.
+//                    quantitySource = @"iPhone";
+//                }
+//                
+//            }
+//            
+//            // Get the difference in seconds between the start and end date for the sample
+//            NSDateComponents* secondsSpentInBedOrAsleep = [[NSCalendar currentCalendar] components:NSCalendarUnitSecond
+//                                                                                          fromDate:catSample.startDate
+//                                                                                            toDate:catSample.endDate
+//                                                                                           options:NSCalendarWrapComponents];
+//            NSString*           quantityValue   = [NSString stringWithFormat:@"%ld", (long)secondsSpentInBedOrAsleep.second];
+//            
+//            stringToWrite = [NSString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@\n",
+//                             startDateTime,
+//                             healthKitType,
+//                             categoryValue,
+//                             quantityValue,
+//                             quantityUnit,
+//                             sourceIdentifier,
+//                             quantitySource];
+//        }
+//        
+//        return stringToWrite;
+//    };
+//    
+//    NSArray* dataTypesWithReadPermission = self.initializationOptions[kHKReadPermissionsKey];
+//    
+//    // Just a note here that we are using n collectors to 1 data sink for quantity sample type data.
+//    NSArray*                    quantityColumnNames = @[@"startTime,endTime,type,value,unit,source,sourceIdentifier"];
+//    APCPassiveDataSink*         quantityreceiver    = [[APCPassiveDataSink alloc] initWithIdentifier:@"HealthKitDataCollector"
+//                                                                                         columnNames:quantityColumnNames
+//                                                                                  operationQueueName:@"APCHealthKitQuantity Activity Collector"
+//                                                                                    andDataProcessor:QuantityDataSerializer];
+//    
+//    NSArray*                    workoutColumnNames  = @[@"startTime,endTime,type,workoutType,total distance,unit,energy consumed,unit,source,sourceIdentifier,metadata"];
+//    APCPassiveDataSink*         workoutReceiver     = [[APCPassiveDataSink alloc] initWithIdentifier:@"HealthKitWorkoutCollector"
+//                                                                                         columnNames:workoutColumnNames
+//                                                                                  operationQueueName:@"APCHealthKitWorkout Activity Collector"
+//                                                                                    andDataProcessor:WorkoutDataSerializer];
+//    NSArray*                    categoryColumnNames = @[@"startTime,type,category value,value,unit,source,sourceIdentifier"];
+//    APCPassiveDataSink*         sleepReceiver       = [[APCPassiveDataSink alloc] initWithIdentifier:@"HealthKitSleepCollector"
+//                                                                                         columnNames:categoryColumnNames
+//                                                                                  operationQueueName:@"APCHealthKitSleep Activity Collector"
+//                                                                                    andDataProcessor:CategoryDataSerializer];
+//    
+//    typeof(self) __weak weakSelf = self;
+//    self.heartRateSink = [[APHHeartRateSink alloc] initWithIdentifier:@"HealthKitDataCollector"
+//                                                         columnNames:quantityColumnNames
+//                                                  operationQueueName:@"APCHealthKitQuantity Activity Collector"
+//                                                       dataProcessor:QuantityDataSerializer
+//                                                         andAppLaunch:^NSDate*
+//    {
+//       __typeof(self)   strongSelf = weakSelf;
+//       NSDate*          activeDate = [strongSelf applicationBecameActiveDate];
+//       
+//       return activeDate;
+//    }];
+//    
+//    if (dataTypesWithReadPermission)
+//    {
+//        for (id dataType in dataTypesWithReadPermission)
+//        {
+//            HKSampleType* sampleType = nil;
+//            
+//            if ([dataType isKindOfClass:[NSDictionary class]])
+//            {
+//                NSDictionary* categoryType = (NSDictionary *) dataType;
+//                
+//                //Distinguish
+//                if (categoryType[kHKWorkoutTypeKey])
+//                {
+//                    sampleType = [HKObjectType workoutType];
+//                }
+//                else if (categoryType[kHKCategoryTypeKey])
+//                {
+//                    sampleType = [HKObjectType categoryTypeForIdentifier:categoryType[kHKCategoryTypeKey]];
+//                }
+//            }
+//            else
+//            {
+//                sampleType = [HKObjectType quantityTypeForIdentifier:dataType];
+//            }
+//            
+//            if (sampleType)
+//            {
+//                // This is really important to remember that we are creating as many user defaults as there are healthkit permissions here.
+//                NSString*                               uniqueAnchorDateName    = [NSString stringWithFormat:@"APCHealthKit%@AnchorDate", dataType];
+//                APCHealthKitBackgroundDataCollector*    collector               = [[APCHealthKitBackgroundDataCollector alloc] initWithIdentifier:sampleType.identifier
+//                                                                                                                                       sampleType:sampleType anchorName:uniqueAnchorDateName
+//                                                                                                                                 launchDateAnchor:LaunchDate];
+//                
+//                //If the HKObjectType is a HKWorkoutType then set a different receiver/data sink.
+//                if ([sampleType isKindOfClass:[HKWorkoutType class]])
+//                {
+//                    [collector setReceiver:workoutReceiver];
+//                    [collector setDelegate:workoutReceiver];
+//                }
+//                else if ([sampleType isKindOfClass:[HKCategoryType class]])
+//                {
+//                    [collector setReceiver:sleepReceiver];
+//                    [collector setDelegate:sleepReceiver];
+//                }
+//                else if ([sampleType isKindOfClass:[HKQuantityType class]])
+//                {
+//                    if ([sampleType.identifier isEqualToString:HKQuantityTypeIdentifierHeartRate])
+//                    {
+//                        [collector setReceiver:self.heartRateSink];
+//                        [collector setDelegate:self.heartRateSink];
+//                    }
+//                    else
+//                    {
+//                        [collector setReceiver:quantityreceiver];
+//                        [collector setDelegate:quantityreceiver];
+//                    }
+//                }
+//                
+//                [collector start];
+//                [self.passiveDataCollector addDataSink:collector];
+//            }
+//        }
+//    }
 }
 
 - (void)configureMotionActivityObserver
 {
-    NSString*(^CoreMotionDataSerializer)(id) = ^NSString *(id dataSample)
-    {
-        CMMotionActivity* motionActivitySample  = (CMMotionActivity*)dataSample;
-        NSString* motionActivity                = [CMMotionActivity activityTypeName:motionActivitySample];
-        NSNumber* motionConfidence              = @(motionActivitySample.confidence);
-        NSString* stringToWrite                 = [NSString stringWithFormat:@"%@,%@,%@\n",
-                                                   motionActivitySample.startDate.toStringInISO8601Format,
-                                                   motionActivity,
-                                                   motionConfidence];
-        
-        return stringToWrite;
-    };
-    
-    NSDate* (^LaunchDate)() = ^
-    {
-        APCUser*    user        = ((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.currentUser;
-        NSDate*     consentDate = nil;
-        
-        if (user.consentSignatureDate)
-        {
-            consentDate = user.consentSignatureDate;
-        }
-        else
-        {
-            NSFileManager*  fileManager = [NSFileManager defaultManager];
-            NSString*       filePath    = [[self applicationDocumentsDirectory] stringByAppendingPathComponent:@"db.sqlite"];
-            
-            if ([fileManager fileExistsAtPath:filePath])
-            {
-                NSError*        error       = nil;
-                NSDictionary*   attributes  = [fileManager attributesOfItemAtPath:filePath error:&error];
-                
-                if (error)
-                {
-                    APCLogError2(error);
-                    
-                    consentDate = [[NSDate date] startOfDay];
-                }
-                else
-                {
-                    consentDate = [attributes fileCreationDate];
-                }
-            }
-        }
-        
-        return consentDate;
-    };
-    
-    APCCoreMotionBackgroundDataCollector *motionCollector = [[APCCoreMotionBackgroundDataCollector alloc] initWithIdentifier:@"motionActivityCollector"
-                                                                                                              dateAnchorName:@"APCCoreMotionCollectorAnchorName"
-                                                                                                            launchDateAnchor:LaunchDate];
-    
-    NSArray*            motionColumnNames   = @[@"startTime",@"activityType",@"confidence"];
-    APCPassiveDataSink* receiver            = [[APCPassiveDataSink alloc] initWithIdentifier:@"motionActivityCollector"
-                                                                                 columnNames:motionColumnNames
-                                                                          operationQueueName:@"APCCoreMotion Activity Collector"
-                                                                            andDataProcessor:CoreMotionDataSerializer];
-    
-    [motionCollector setReceiver:receiver];
-    [motionCollector setDelegate:receiver];
-    [motionCollector start];
-    [self.passiveDataCollector addDataSink:motionCollector];
+//    NSString*(^CoreMotionDataSerializer)(id) = ^NSString *(id dataSample)
+//    {
+//        CMMotionActivity* motionActivitySample  = (CMMotionActivity*)dataSample;
+//        NSString* motionActivity                = [CMMotionActivity activityTypeName:motionActivitySample];
+//        NSNumber* motionConfidence              = @(motionActivitySample.confidence);
+//        NSString* stringToWrite                 = [NSString stringWithFormat:@"%@,%@,%@\n",
+//                                                   motionActivitySample.startDate.toStringInISO8601Format,
+//                                                   motionActivity,
+//                                                   motionConfidence];
+//        
+//        return stringToWrite;
+//    };
+//    
+//    NSDate* (^LaunchDate)() = ^
+//    {
+//        APCUser*    user        = ((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.currentUser;
+//        NSDate*     consentDate = nil;
+//        
+//        if (user.consentSignatureDate)
+//        {
+//            consentDate = user.consentSignatureDate;
+//        }
+//        else
+//        {
+//            NSFileManager*  fileManager = [NSFileManager defaultManager];
+//            NSString*       filePath    = [[self applicationDocumentsDirectory] stringByAppendingPathComponent:@"db.sqlite"];
+//            
+//            if ([fileManager fileExistsAtPath:filePath])
+//            {
+//                NSError*        error       = nil;
+//                NSDictionary*   attributes  = [fileManager attributesOfItemAtPath:filePath error:&error];
+//                
+//                if (error)
+//                {
+//                    APCLogError2(error);
+//                    
+//                    consentDate = [[NSDate date] startOfDay];
+//                }
+//                else
+//                {
+//                    consentDate = [attributes fileCreationDate];
+//                }
+//            }
+//        }
+//        
+//        return consentDate;
+//    };
+//    
+//    APCCoreMotionBackgroundDataCollector *motionCollector = [[APCCoreMotionBackgroundDataCollector alloc] initWithIdentifier:@"motionActivityCollector"
+//                                                                                                              dateAnchorName:@"APCCoreMotionCollectorAnchorName"
+//                                                                                                            launchDateAnchor:LaunchDate];
+//    
+//    NSArray*            motionColumnNames   = @[@"startTime",@"activityType",@"confidence"];
+//    APCPassiveDataSink* receiver            = [[APCPassiveDataSink alloc] initWithIdentifier:@"motionActivityCollector"
+//                                                                                 columnNames:motionColumnNames
+//                                                                          operationQueueName:@"APCCoreMotion Activity Collector"
+//                                                                            andDataProcessor:CoreMotionDataSerializer];
+//    
+//    [motionCollector setReceiver:receiver];
+//    [motionCollector setDelegate:receiver];
+//    [motionCollector start];
+//    [self.passiveDataCollector addDataSink:motionCollector];
 }
 
 

@@ -61,17 +61,18 @@
             self.numberOfUpdates    = arrayResult.count - ndx;
         }
     }
-    
-    [super didRecieveUpdatedValuesFromCollector:result];
+#warning TODO NEEDS TO BE UPDATED
+    //[super didRecieveUpdatedValuesFromCollector:result];
 }
 
 - (instancetype)initWithIdentifier:(NSString*)identifier
                        columnNames:(NSArray*)columnNames
                 operationQueueName:(NSString*)operationQueueName
-                     dataProcessor:(CSVSerializer)transformer
+                     dataProcessor:(APCCSVSerializer)transformer
                       andAppLaunch:(ForegroundLaunchDate)foregroundLaunchDate
 {
-    self = [super initWithIdentifier:identifier columnNames:columnNames operationQueueName:operationQueueName andDataProcessor:transformer];
+#warning TODO NEEDS TO BE UPDATED
+    //self = [super initWithIdentifier:identifier columnNames:columnNames operationQueueName:operationQueueName andDataProcessor:transformer];
     
     if (self)
     {
