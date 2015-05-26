@@ -266,9 +266,9 @@ static NSString* const kMinorVersion               = @"version";
     NSDictionary* hkUnits =
   @{
     HKQuantityTypeIdentifierStepCount               : [HKUnit countUnit],
-    HKQuantityTypeIdentifierBodyMass                : [HKUnit poundUnit],
-    HKQuantityTypeIdentifierHeight                  : [HKUnit inchUnit],
-    HKQuantityTypeIdentifierHeartRate               : [[HKUnit countUnit] unitDividedByUnit:[HKUnit minuteUnit]],
+    HKQuantityTypeIdentifierBodyMass                : [HKUnit gramUnitWithMetricPrefix:HKMetricPrefixKilo],
+    HKQuantityTypeIdentifierHeight                  : [HKUnit meterUnit],
+    HKQuantityTypeIdentifierHeartRate               : [[HKUnit countUnit] unitDividedByUnit:[HKUnit secondUnit]],
     HKQuantityTypeIdentifierFlightsClimbed          : [HKUnit countUnit],
     HKQuantityTypeIdentifierDistanceWalkingRunning  : [HKUnit meterUnit],
     HKQuantityTypeIdentifierDistanceCycling         : [HKUnit meterUnit],
