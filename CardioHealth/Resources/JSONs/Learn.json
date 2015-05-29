@@ -24,12 +24,6 @@
                           "icon_image":"eligibility",
                           "tint_color" : "green"
                           },
-                          {
-                          "title":"Spread the Word",
-                          "details":"share",
-                          "icon_image":"share_icon",
-                          "tint_color" : "yellow"
-                          },
                           
                 {
                     "title": "What is Heart Disease?",

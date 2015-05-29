@@ -63,7 +63,6 @@
 		085F3E7C1AAF6A0D003A910A /* WithdrawStudy.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B5A31331A10A78600552F7D /* WithdrawStudy.json */; };
 		085F3E7D1AAF6A0D003A910A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F55BBDFA19D362D0003CA0F9 /* Main.storyboard */; };
 		085F3E7E1AAF6A0D003A910A /* Intro.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 7BD73F7A19E8A20600F5DFF3 /* Intro.mp4 */; };
-		085F3E7F1AAF6A0D003A910A /* cardiovascular-staging.pem in Resources */ = {isa = PBXBuildFile; fileRef = 7B30CF9E1A376B3D00625350 /* cardiovascular-staging.pem */; };
 		085F3E801AAF6A0D003A910A /* cardio_daily_check.json in Resources */ = {isa = PBXBuildFile; fileRef = 74D75D661A9F863B00078A73 /* cardio_daily_check.json */; };
 		085F3E811AAF6A0D003A910A /* cardio_wellbeing_survey.json in Resources */ = {isa = PBXBuildFile; fileRef = 7B5BEC991A34F0B7007CEA94 /* cardio_wellbeing_survey.json */; };
 		085F3E821AAF6A0D003A910A /* TermsAndConditions.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B0432691A305D3E000DC9ED /* TermsAndConditions.json */; };
@@ -78,7 +77,6 @@
 		085F3E8B1AAF6A0D003A910A /* APHOnboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F5778E6119F0613D0079F1B2 /* APHOnboarding.storyboard */; };
 		085F3E8C1AAF6A0D003A910A /* 11_IssuesToConsider1@2x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = A78115B11A96A08E00CEC822 /* 11_IssuesToConsider1@2x.m4v */; };
 		085F3E8D1AAF6A0D003A910A /* 02_SensorData_to_DataGathering@2x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = A78115AE1A96A08E00CEC822 /* 02_SensorData_to_DataGathering@2x.m4v */; };
-		085F3E8E1AAF6A0D003A910A /* cardiovascular.pem in Resources */ = {isa = PBXBuildFile; fileRef = 7B30CF9F1A376B3D00625350 /* cardiovascular.pem */; };
 		085F3E8F1AAF6A0D003A910A /* APHConsentSection.json in Resources */ = {isa = PBXBuildFile; fileRef = 744174EB1A9248D0004A7CC1 /* APHConsentSection.json */; };
 		085F3E901AAF6A0D003A910A /* StudyOverview.json in Resources */ = {isa = PBXBuildFile; fileRef = F573809219E45D62008A8354 /* StudyOverview.json */; };
 		085F3E911AAF6A0D003A910A /* cardio_day_one.json in Resources */ = {isa = PBXBuildFile; fileRef = 3607C3CD1AA7080E0096D3D7 /* cardio_day_one.json */; };
@@ -121,8 +119,6 @@
 		5B73CAD01A89BE5200FFE79C /* APHWalkTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B73CACF1A89BE5200FFE79C /* APHWalkTestViewController.m */; };
 		5B73CAD41A89C12400FFE79C /* APHWalkTestDetailsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B73CAD31A89C12400FFE79C /* APHWalkTestDetailsTableViewCell.m */; };
 		5B73CADC1A8A002B00FFE79C /* APHWalkingTestResults.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B73CADB1A8A002B00FFE79C /* APHWalkingTestResults.m */; };
-		5B7D47031B05271800958921 /* WalkingTestStats.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B7D47021B05271800958921 /* WalkingTestStats.json */; };
-		5B7D470C1B052DC700958921 /* WalkingTestStats.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B7D47021B05271800958921 /* WalkingTestStats.json */; };
 		5B827B451A7F837700C685A3 /* APHDashboardWalkTestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B827B441A7F837700C685A3 /* APHDashboardWalkTestTableViewCell.m */; };
 		5B827B6A1A8222AF00C685A3 /* APHTableViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B827B691A8222AF00C685A3 /* APHTableViewItem.m */; };
 		5BB2BAA41A10157B00684CCE /* Learn.json in Resources */ = {isa = PBXBuildFile; fileRef = 5BB2BAA31A10157B00684CCE /* Learn.json */; };
@@ -136,8 +132,6 @@
 		74EF8E371ABF0139001B47E1 /* BridgeSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 74EF8E2D1ABF0102001B47E1 /* BridgeSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7B09EB161AF96ACD00F72A63 /* APHHeartRateSink.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BAEF5341AF964B000E5B1BA /* APHHeartRateSink.m */; };
 		7B0E172D1A3FBDD70079E536 /* APHCardiovascularHealthSurveyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0E172C1A3FBDD70079E536 /* APHCardiovascularHealthSurveyController.m */; };
-		7B30CFA01A376B3D00625350 /* cardiovascular-staging.pem in Resources */ = {isa = PBXBuildFile; fileRef = 7B30CF9E1A376B3D00625350 /* cardiovascular-staging.pem */; };
-		7B30CFA11A376B3D00625350 /* cardiovascular.pem in Resources */ = {isa = PBXBuildFile; fileRef = 7B30CF9F1A376B3D00625350 /* cardiovascular.pem */; };
 		7B41047E19E5D94F00592B96 /* APHFitnessTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B41045A19E5D94F00592B96 /* APHFitnessTaskViewController.m */; };
 		7B4E38411AC0B296009C5C93 /* APHAppDelegate+APHMigration.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B4E38401AC0B296009C5C93 /* APHAppDelegate+APHMigration.m */; };
 		7B4E38421AC0B296009C5C93 /* APHAppDelegate+APHMigration.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B4E38401AC0B296009C5C93 /* APHAppDelegate+APHMigration.m */; };
@@ -362,7 +356,6 @@
 		5B73CAD31A89C12400FFE79C /* APHWalkTestDetailsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHWalkTestDetailsTableViewCell.m; sourceTree = "<group>"; };
 		5B73CADA1A8A002B00FFE79C /* APHWalkingTestResults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHWalkingTestResults.h; sourceTree = "<group>"; };
 		5B73CADB1A8A002B00FFE79C /* APHWalkingTestResults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHWalkingTestResults.m; sourceTree = "<group>"; };
-		5B7D47021B05271800958921 /* WalkingTestStats.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = WalkingTestStats.json; sourceTree = "<group>"; };
 		5B827B431A7F837700C685A3 /* APHDashboardWalkTestTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHDashboardWalkTestTableViewCell.h; sourceTree = "<group>"; };
 		5B827B441A7F837700C685A3 /* APHDashboardWalkTestTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHDashboardWalkTestTableViewCell.m; sourceTree = "<group>"; };
 		5B827B681A8222AF00C685A3 /* APHTableViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHTableViewItem.h; sourceTree = "<group>"; };
@@ -375,8 +368,6 @@
 		74FED8081ABDFB0B009D970B /* ResearchKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ResearchKit.xcodeproj; path = ../researchkit/ResearchKit.xcodeproj; sourceTree = "<group>"; };
 		7B0E172B1A3FBDD70079E536 /* APHCardiovascularHealthSurveyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHCardiovascularHealthSurveyController.h; sourceTree = "<group>"; };
 		7B0E172C1A3FBDD70079E536 /* APHCardiovascularHealthSurveyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHCardiovascularHealthSurveyController.m; sourceTree = "<group>"; };
-		7B30CF9E1A376B3D00625350 /* cardiovascular-staging.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "cardiovascular-staging.pem"; sourceTree = "<group>"; };
-		7B30CF9F1A376B3D00625350 /* cardiovascular.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cardiovascular.pem; sourceTree = "<group>"; };
 		7B41045919E5D94F00592B96 /* APHFitnessTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHFitnessTaskViewController.h; sourceTree = "<group>"; };
 		7B41045A19E5D94F00592B96 /* APHFitnessTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHFitnessTaskViewController.m; sourceTree = "<group>"; };
 		7B4E383F1AC0B296009C5C93 /* APHAppDelegate+APHMigration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "APHAppDelegate+APHMigration.h"; sourceTree = "<group>"; };
@@ -636,8 +627,6 @@
 		7B30CF9D1A376B3D00625350 /* Certificates */ = {
 			isa = PBXGroup;
 			children = (
-				7B30CF9E1A376B3D00625350 /* cardiovascular-staging.pem */,
-				7B30CF9F1A376B3D00625350 /* cardiovascular.pem */,
 			);
 			path = Certificates;
 			sourceTree = "<group>";
@@ -812,7 +801,6 @@
 				F5165E7919E86581003836CA /* APCParameters.json */,
 				F573809219E45D62008A8354 /* StudyOverview.json */,
 				21B8E3A01A8AAACB00CCDD48 /* APHTasksAndSchedules_NoM7.json */,
-				5B7D47021B05271800958921 /* WalkingTestStats.json */,
 				F55BBDF119D362D0003CA0F9 /* APHTasksAndSchedules.json */,
 			);
 			path = JSONs;
@@ -1126,7 +1114,6 @@
 				085F3E751AAF6A0D003A910A /* cardio_CVhealth_survey.json in Resources */,
 				085F3E761AAF6A0D003A910A /* APHHealthyHeartSummaryStepViewController.xib in Resources */,
 				085F3E771AAF6A0D003A910A /* consent.pdf in Resources */,
-				5B7D470C1B052DC700958921 /* WalkingTestStats.json in Resources */,
 				085F3E781AAF6A0D003A910A /* APHTasksAndSchedules_NoM7.json in Resources */,
 				085F3E791AAF6A0D003A910A /* 10_PotentialBenifits@2x.m4v in Resources */,
 				085F3E7A1AAF6A0D003A910A /* 01_Activities_to_SensorData@3x.m4v in Resources */,
@@ -1134,7 +1121,6 @@
 				085F3E7C1AAF6A0D003A910A /* WithdrawStudy.json in Resources */,
 				085F3E7D1AAF6A0D003A910A /* Main.storyboard in Resources */,
 				085F3E7E1AAF6A0D003A910A /* Intro.mp4 in Resources */,
-				085F3E7F1AAF6A0D003A910A /* cardiovascular-staging.pem in Resources */,
 				085F3E801AAF6A0D003A910A /* cardio_daily_check.json in Resources */,
 				085F3E811AAF6A0D003A910A /* cardio_wellbeing_survey.json in Resources */,
 				085F3E821AAF6A0D003A910A /* TermsAndConditions.json in Resources */,
@@ -1149,7 +1135,6 @@
 				085F3E8B1AAF6A0D003A910A /* APHOnboarding.storyboard in Resources */,
 				085F3E8C1AAF6A0D003A910A /* 11_IssuesToConsider1@2x.m4v in Resources */,
 				085F3E8D1AAF6A0D003A910A /* 02_SensorData_to_DataGathering@2x.m4v in Resources */,
-				085F3E8E1AAF6A0D003A910A /* cardiovascular.pem in Resources */,
 				085F3E8F1AAF6A0D003A910A /* APHConsentSection.json in Resources */,
 				085F3E901AAF6A0D003A910A /* StudyOverview.json in Resources */,
 				085F3E911AAF6A0D003A910A /* cardio_day_one.json in Resources */,
@@ -1176,7 +1161,6 @@
 				7B5BEC9B1A34F0B7007CEA94 /* cardio_CVhealth_survey.json in Resources */,
 				08B972511A1FB4AF00316D49 /* APHHealthyHeartSummaryStepViewController.xib in Resources */,
 				5A0F996D1AA4AB6600A2A7EB /* consent.pdf in Resources */,
-				5B7D47031B05271800958921 /* WalkingTestStats.json in Resources */,
 				21B8E3A11A8AAACB00CCDD48 /* APHTasksAndSchedules_NoM7.json in Resources */,
 				A78115C21A96A08E00CEC822 /* 10_PotentialBenifits@2x.m4v in Resources */,
 				A78115C91A96A08E00CEC822 /* 01_Activities_to_SensorData@3x.m4v in Resources */,
@@ -1184,7 +1168,6 @@
 				5B5A31341A10A78600552F7D /* WithdrawStudy.json in Resources */,
 				F55BBE6719D362D0003CA0F9 /* Main.storyboard in Resources */,
 				7BD73F7B19E8A20600F5DFF3 /* Intro.mp4 in Resources */,
-				7B30CFA01A376B3D00625350 /* cardiovascular-staging.pem in Resources */,
 				74D75D671A9F863B00078A73 /* cardio_daily_check.json in Resources */,
 				7B5BEC9D1A34F0B7007CEA94 /* cardio_wellbeing_survey.json in Resources */,
 				5B04326A1A305D3E000DC9ED /* TermsAndConditions.json in Resources */,
@@ -1199,7 +1182,6 @@
 				F5778E7519F0613D0079F1B2 /* APHOnboarding.storyboard in Resources */,
 				A78115C41A96A08E00CEC822 /* 11_IssuesToConsider1@2x.m4v in Resources */,
 				A78115C11A96A08E00CEC822 /* 02_SensorData_to_DataGathering@2x.m4v in Resources */,
-				7B30CFA11A376B3D00625350 /* cardiovascular.pem in Resources */,
 				744174EC1A9248D0004A7CC1 /* APHConsentSection.json in Resources */,
 				F573809319E45D62008A8354 /* StudyOverview.json in Resources */,
 				3607C3CE1AA7080E0096D3D7 /* cardio_day_one.json in Resources */,
