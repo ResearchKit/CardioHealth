@@ -99,21 +99,6 @@ static NSString*  const kFitnessTestTaskId = @"3-APHFitnessTest-00000000-1111-11
                 }
                     break;
                     
-                case kAPHDashboardItemTypeWalkingTestComparison:
-                {
-                    APHWalkingTestResults* walkingTest = [APHWalkingTestResults new];
-                    
-                    if (walkingTest.results.count)
-                    {
-                        APCTableViewDashboardItem *item = [APCTableViewDashboardItem new];
-                        item.caption = NSLocalizedString(@"6-minute Walking Test Comparison", nil);
-                        item.taskId = kFitnessTestTaskId;
-                        item.tintColor = [UIColor colorForTaskId:item.taskId];
-                        [self.items addObject:item];
-                    }
-                }
-                    break;
-                    
                 case kAPHDashboardItemTypeDailyInsights:
                 {
                     APCTableViewDashboardItem *item = [APCTableViewDashboardItem new];

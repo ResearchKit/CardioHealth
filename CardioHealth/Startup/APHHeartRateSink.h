@@ -45,9 +45,11 @@ typedef NSDate*(^ForegroundLaunchDate)();
 //  If one or less updates then the return value will be negative.
 - (double)intervalSinceLastHeartRateUpdate;
 - (NSInteger)numberOfUpdatesSinceAppLaunch;
-- (instancetype)initWithIdentifier:(NSString*)identifier
-                       columnNames:(NSArray*)columnNames
-                operationQueueName:(NSString*)operationQueueName
-                  dataProcessor:(APCCSVSerializer)transformer
-                   andAppLaunch:(ForegroundLaunchDate)foregroundLaunchDate;
+
+- (instancetype)initWithQuantityIdentifier:(NSString*)identifier
+                               columnNames:(NSArray*)columnNames
+                        operationQueueName:(NSString*)operationQueueName
+                             dataProcessor:(APCQuantityCSVSerializer)transformer
+                         fileProtectionKey:(NSString*)fileProtectionKey
+                              andAppLaunch:(ForegroundLaunchDate)foregroundLaunchDate;
 @end

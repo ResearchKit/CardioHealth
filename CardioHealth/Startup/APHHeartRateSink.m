@@ -61,18 +61,17 @@
             self.numberOfUpdates    = arrayResult.count - ndx;
         }
     }
-#warning TODO NEEDS TO BE UPDATED
-    //[super didRecieveUpdatedValuesFromCollector:result];
+    [super didReceiveUpdatedHealthkitSamplesFromCollector:result withUnit:[HKUnit minuteUnit]];
 }
 
-- (instancetype)initWithIdentifier:(NSString*)identifier
-                       columnNames:(NSArray*)columnNames
-                operationQueueName:(NSString*)operationQueueName
-                     dataProcessor:(APCCSVSerializer)transformer
-                      andAppLaunch:(ForegroundLaunchDate)foregroundLaunchDate
+- (instancetype)initWithQuantityIdentifier:(NSString*)identifier
+                               columnNames:(NSArray*)columnNames
+                        operationQueueName:(NSString*)operationQueueName
+                             dataProcessor:(APCQuantityCSVSerializer)transformer
+                         fileProtectionKey:(NSString*)fileProtectionKey
+                              andAppLaunch:(ForegroundLaunchDate)foregroundLaunchDate
 {
-#warning TODO NEEDS TO BE UPDATED
-    //self = [super initWithIdentifier:identifier columnNames:columnNames operationQueueName:operationQueueName andDataProcessor:transformer];
+    self = [super initWithQuantityIdentifier:identifier columnNames:columnNames operationQueueName:operationQueueName dataProcessor:transformer fileProtectionKey:fileProtectionKey];
     
     if (self)
     {
