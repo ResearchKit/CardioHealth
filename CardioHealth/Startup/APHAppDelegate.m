@@ -605,6 +605,19 @@ static NSString* const kMinorVersion               = @"version";
                                                                                        dataProcessor:CategoryDataSerializer
                                                                                    fileProtectionKey:NSFileProtectionCompleteUnlessOpen];
     
+    typeof(self) __weak weakSelf = self;
+    self.heartRateSink = [[APHHeartRateSink alloc] initWithIdentifier:@"HealthKitDataCollector"
+                                                          columnNames:quantityColumnNames
+                                                   operationQueueName:@"APCHealthKitQuantity Activity Collector"
+                                                        dataProcessor:QuantityDataSerializer
+                                                         andAppLaunch:^NSDate*
+                          {
+                              __typeof(self)   strongSelf = weakSelf;
+                              NSDate*          activeDate = [strongSelf applicationBecameActiveDate];
+                              
+                              return activeDate;
+                          }];
+    
     if (dataTypesWithReadPermission)
     {
         for (id dataType in dataTypesWithReadPermission)
@@ -657,6 +670,7 @@ static NSString* const kMinorVersion               = @"version";
                 }
                 else
                 {
+                    
                     NSDictionary* hkUnitKeysAndValues = [self researcherSpecifiedUnits];
                     
                     collector = [[APCHealthKitBackgroundDataCollector alloc] initWithQuantityTypeIdentifier:sampleType.identifier
