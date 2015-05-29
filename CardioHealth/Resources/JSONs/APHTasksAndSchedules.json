@@ -38,7 +38,7 @@
               "taskTitle" : "Diet Survey",
               "taskID": "4-DietSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66",
               "taskFileName" : "cardio_diet_survey",
-              "taskClassName" : "APCGenericSurveyTaskViewController",
+              "taskClassName" : "APHDietSurveyViewController",
               "taskCompletionTimeString" : "6 Questions"
               },
               

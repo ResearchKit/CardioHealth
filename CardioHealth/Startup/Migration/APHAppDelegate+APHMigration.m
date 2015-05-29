@@ -18,6 +18,11 @@
     return success;
 }
 
+-(BOOL) performMigrationFromThreeToFourWithError:(NSError * __autoreleasing *)__unused error
+{
+        return [self turnOnAllTaskReminders];
+}
+
 - (BOOL)updateTaskScheduleToOnceWithTaskId
 {
 
@@ -134,5 +139,27 @@
     
     [APCSchedule updateSchedulesFromJSON:schedules[@"schedules"]
                                inContext:self.dataSubstrate.persistentContext];
+}
+
+- (BOOL)turnOnAllTaskReminders
+{
+    //turn all task reminders on
+    [self setUpTasksReminder];
+    
+    for (APCTaskReminder *reminder in self.tasksReminder.reminders) {
+        if (![[NSUserDefaults standardUserDefaults]objectForKey:reminder.reminderIdentifier]) {
+            [[NSUserDefaults standardUserDefaults]setObject:reminder.reminderBody forKey:reminder.reminderIdentifier];
+        }
+    }
+    
+    //Enable reminders if notifications permitted
+    if ([[UIApplication sharedApplication] currentUserNotificationSettings].types != UIUserNotificationTypeNone){
+        [self.tasksReminder setReminderOn:@YES];
+    }
+
+    [[NSUserDefaults standardUserDefaults]synchronize];
+    
+    return self.tasksReminder.reminders.count;
+    
 }
 @end
