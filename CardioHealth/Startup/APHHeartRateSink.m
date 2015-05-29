@@ -42,12 +42,12 @@
 
 @implementation APHHeartRateSink
 
-- (void)didRecieveUpdatedValuesFromCollector:(id)result
+- (void)didReceiveUpdatedHealthkitSamplesFromCollector:(id)results withUnit:(HKUnit *)unit
 {
     //  Expecting to get an array of updates.
-    if ([result isKindOfClass:[NSArray class]])
+    if ([results isKindOfClass:[NSArray class]])
     {
-        NSArray*    arrayResult     = (NSArray*)result;
+        NSArray*    arrayResult     = (NSArray*)results;
         NSDate*     targetDate      = [self applicationActiveDate];
         
         NSUInteger  ndx = [arrayResult indexOfObjectPassingTest:^(HKQuantitySample* qtySample, NSUInteger __unused ndx, BOOL* __unused stop)
@@ -61,7 +61,7 @@
             self.numberOfUpdates    = arrayResult.count - ndx;
         }
     }
-    [super didReceiveUpdatedHealthkitSamplesFromCollector:result withUnit:[HKUnit minuteUnit]];
+    [super didReceiveUpdatedHealthkitSamplesFromCollector:results withUnit:unit];
 }
 
 - (instancetype)initWithQuantityIdentifier:(NSString*)identifier

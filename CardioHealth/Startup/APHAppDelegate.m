@@ -606,17 +606,19 @@ static NSString* const kMinorVersion               = @"version";
                                                                                    fileProtectionKey:NSFileProtectionCompleteUnlessOpen];
     
     typeof(self) __weak weakSelf = self;
-    self.heartRateSink = [[APHHeartRateSink alloc] initWithIdentifier:@"HealthKitDataCollector"
-                                                          columnNames:quantityColumnNames
-                                                   operationQueueName:@"APCHealthKitQuantity Activity Collector"
-                                                        dataProcessor:QuantityDataSerializer
-                                                         andAppLaunch:^NSDate*
-                          {
-                              __typeof(self)   strongSelf = weakSelf;
-                              NSDate*          activeDate = [strongSelf applicationBecameActiveDate];
-                              
-                              return activeDate;
-                          }];
+    
+    self.heartRateSink = [[APHHeartRateSink alloc] initWithQuantityIdentifier:@"HealthKitDataCollector"
+                                                                  columnNames:quantityColumnNames
+                                                           operationQueueName:@"APCHealthKitQuantity Activity Collector"
+                                                                dataProcessor:QuantityDataSerializer
+                                                            fileProtectionKey:NSFileProtectionCompleteUnlessOpen
+                                                                 andAppLaunch:^NSDate*
+    {
+        __typeof(self)   strongSelf = weakSelf;
+        NSDate*          activeDate = [strongSelf applicationBecameActiveDate];
+      
+        return activeDate;
+    }];
     
     if (dataTypesWithReadPermission)
     {
@@ -668,9 +670,8 @@ static NSString* const kMinorVersion               = @"version";
                     [collector setReceiver:sleepReceiver];
                     [collector setDelegate:sleepReceiver];
                 }
-                else
+                else if ([sampleType isKindOfClass:[HKQuantityType class]])
                 {
-                    
                     NSDictionary* hkUnitKeysAndValues = [self researcherSpecifiedUnits];
                     
                     collector = [[APCHealthKitBackgroundDataCollector alloc] initWithQuantityTypeIdentifier:sampleType.identifier
@@ -678,8 +679,17 @@ static NSString* const kMinorVersion               = @"version";
                                                                                            launchDateAnchor:LaunchDate
                                                                                                 healthStore:self.dataSubstrate.healthStore
                                                                                                        unit:[hkUnitKeysAndValues objectForKey:sampleType.identifier]];
-                    [collector setReceiver:quantityreceiver];
-                    [collector setDelegate:quantityreceiver];
+                    
+                    if ([sampleType.identifier isEqualToString:HKQuantityTypeIdentifierHeartRate])
+                    {
+                        [collector setReceiver:self.heartRateSink];
+                        [collector setDelegate:self.heartRateSink];
+                    }
+                    else
+                    {
+                        [collector setReceiver:quantityreceiver];
+                        [collector setDelegate:quantityreceiver];
+                    }
                 }
                 
                 [collector start];
