@@ -39,7 +39,9 @@ typedef NS_ENUM(APCTableViewItemType, APHDashboardItemType) {
     kAPHDashboardItemTypeSevenDayFitness,
     kAPHDashboardItemTypeAlerts,
     kAPHDashboardItemTypeInsights,
-    kAPHDashboardItemTypeWalkingTest
+    kAPHDashboardItemTypeWalkingTest,
+    kAPHDashboardItemTypeDailyInsights,
+    kAPHDashboardItemTypeWalkingTestComparison
 };
 
 @interface APHDashboardEditViewController : APCDashboardEditViewController

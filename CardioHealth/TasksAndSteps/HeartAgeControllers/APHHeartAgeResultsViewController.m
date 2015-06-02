@@ -320,7 +320,7 @@ static CGFloat kTitleFontSize = 17.0f;
         else if ([objectId isEqualToString:kEighteenToTwentyInstructions]) {
             APHInstructionsForBelowTwentyTableViewCell *titleSummaryCell = [tableView dequeueReusableCellWithIdentifier:@"eighteenToTwentyInstructions"];
             
-            titleSummaryCell.descriptionLabel.text = NSLocalizedString(@"Due to your current age we have no way to perform any calculations to give you any further information about your risk for ASVCD.", @"Due to your current age we have no way to perform any calculations to give you any further information about your risk for ASVCD.");
+            titleSummaryCell.descriptionLabel.text = NSLocalizedString(@"Due to your current age we have no way to perform any calculations to give you any further information about your risk for ASVCD.\n", nil);
             cell = titleSummaryCell;
         }
     }
@@ -477,7 +477,7 @@ static CGFloat kTitleFontSize = 17.0f;
         [attribString addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0,[attribString length])];
         [attribString addAttribute:NSFontAttributeName value:[UIFont fontWithName: @"Helvetica-Bold" size:kTitleFontSize] range:NSMakeRange(0,[attribString length])];
         
-        NSMutableAttributedString * finalString = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"This is based on data comparing risk factors and the likelihood of developing heart disease or stroke over a lifetime. In the US, approximately 1 in 2 men and 1 in 3 women will develop cardiovascular disease in their life. Having more optimal risk factors is associated with a lower lifetime risk.", nil)];
+        NSMutableAttributedString * finalString = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"This is based on data comparing risk factors and the likelihood of developing heart disease or stroke over a lifetime. In the US, approximately 1 in 2 men and 1 in 3 women will develop cardiovascular disease in their life. Having more optimal risk factors is associated with a lower lifetime risk.\n", nil)];
         
         NSMutableParagraphStyle *paragraphStyle2 = [[NSMutableParagraphStyle alloc] init];
         paragraphStyle2.lineBreakMode = NSLineBreakByWordWrapping;
