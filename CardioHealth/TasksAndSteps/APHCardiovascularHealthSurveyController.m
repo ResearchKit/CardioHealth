@@ -45,9 +45,9 @@ static NSString *const kHeartAgeQuestionIdentifier = @"heart_disease_q";
 
 }
 
-- (void)taskViewController:(ORKTaskViewController *)taskViewController didFinishWithReason:(ORKTaskViewControllerFinishReason)result error:(NSError *)error {
+- (void)taskViewController:(ORKTaskViewController *)taskViewController didFinishWithReason:(ORKTaskViewControllerFinishReason)reason error:(NSError *)error {
     
-    switch (result) {
+    switch (reason) {
         case ORKTaskViewControllerFinishReasonCompleted:
         {
             APCAppDelegate *appDelegate = (APCAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -66,7 +66,7 @@ static NSString *const kHeartAgeQuestionIdentifier = @"heart_disease_q";
             break;
     }
     
-    [super taskViewController:taskViewController didFinishWithReason:result error:error];
+    [super taskViewController:taskViewController didFinishWithReason:reason error:error];
 }
 
 

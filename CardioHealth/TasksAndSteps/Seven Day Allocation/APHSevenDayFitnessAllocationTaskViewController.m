@@ -33,7 +33,6 @@
 
 #import "APHSevenDayFitnessAllocationTaskViewController.h"
 
-
 static NSString *kMainStudyIdentifier = @"com.cardioVascular.sevenDayFitnessAllocation";
 static NSString *kSevenDayFitnessInstructionStep = @"sevenDayFitnessInstructionStep";
 static NSString *kSevenDayFitnessActivityStep = @"sevenDayFitnessActivityStep";
@@ -127,12 +126,10 @@ static NSString *kSevenDayFitnessCompleteStep = @"sevenDayFitnessCompleteStep";
     return stepVC;
 }
 
-- (void)taskViewController:(ORKTaskViewController *)taskViewController didFinishWithReason:(ORKTaskViewControllerFinishReason)result error:(NSError *)error
+- (void)taskViewController:(ORKTaskViewController *)taskViewController didFinishWithReason:(ORKTaskViewControllerFinishReason)reason error:(NSError *)error
 {
     [[UIView appearance] setTintColor:[UIColor appPrimaryColor]];
     
-    [super taskViewController:taskViewController didFinishWithReason:result error:error];
+    [super taskViewController:taskViewController didFinishWithReason:reason error:error];
 }
-
-
 @end
