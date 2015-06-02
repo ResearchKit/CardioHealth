@@ -56,7 +56,7 @@
               "taskFileName" : "cardio_wellbeing_survey",
               "taskClassName" : "APHWellBeingSurveyController",
               "taskCompletionTimeString" : "(One Time) 10 Questions Part 2"
-              }
+              },
               {
               "taskTitle" : "Daily Check-in",
               "taskID": "1-DailyCheckin-be42dc21-4706-478a-a398-10cabb9c7d78",
