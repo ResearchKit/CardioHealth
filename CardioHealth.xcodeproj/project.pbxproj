@@ -8,100 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		08569A0F1AE6AC1A00CD62BE /* APHCardioInsightCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08569A0E1AE6AC1A00CD62BE /* APHCardioInsightCell.m */; };
-		08569A101AE6AC1A00CD62BE /* APHCardioInsightCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08569A0E1AE6AC1A00CD62BE /* APHCardioInsightCell.m */; };
-		08569A361AE6D04800CD62BE /* BridgeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74EF8E2D1ABF0102001B47E1 /* BridgeSDK.framework */; };
-		08569A371AE6D04800CD62BE /* BridgeSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 74EF8E2D1ABF0102001B47E1 /* BridgeSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		08569A3A1AE6D04800CD62BE /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FED81C1ABDFB34009D970B /* ResearchKit.framework */; };
-		08569A3B1AE6D04800CD62BE /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 74FED81C1ABDFB34009D970B /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		08569A3E1AE6D04800CD62BE /* APCAppCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FED8261ABDFB34009D970B /* APCAppCore.framework */; };
-		08569A3F1AE6D04800CD62BE /* APCAppCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 74FED8261ABDFB34009D970B /* APCAppCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		085F3E491AAF6A0D003A910A /* APHHeartAgeSummaryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FA98021A108839002317C8 /* APHHeartAgeSummaryCell.m */; };
-		085F3E4A1AAF6A0D003A910A /* APHDynamicParQQuizTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5F927F1A96739500C44BFC /* APHDynamicParQQuizTask.m */; };
-		085F3E4B1AAF6A0D003A910A /* APHHeartAgeSummaryTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6F91821A996EDB00335E50 /* APHHeartAgeSummaryTitleCell.m */; };
-		085F3E4C1AAF6A0D003A910A /* APHHeartAgeTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5481F0C19E4820100D84617 /* APHHeartAgeTaskViewController.m */; };
-		085F3E4D1AAF6A0D003A910A /* APHHeartAgeRiskEstimateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FA98051A108A46002317C8 /* APHHeartAgeRiskEstimateCell.m */; };
-		085F3E4E1AAF6A0D003A910A /* APHHeartAgeAndRiskFactors.m in Sources */ = {isa = PBXBuildFile; fileRef = 08D3A0FA19E4A08C00A3D20D /* APHHeartAgeAndRiskFactors.m */; };
-		085F3E4F1AAF6A0D003A910A /* APHIntroPurposeContainedTableTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BEA4BE81A65D95400FEAF60 /* APHIntroPurposeContainedTableTableViewController.m */; };
-		085F3E501AAF6A0D003A910A /* APHHeartAgeTodaysActivitiesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FA97FE1A108680002317C8 /* APHHeartAgeTodaysActivitiesCell.m */; };
-		085F3E511AAF6A0D003A910A /* APHHealthyHeartSummaryStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08B9724E1A1FB47B00316D49 /* APHHealthyHeartSummaryStepViewController.m */; };
-		085F3E521AAF6A0D003A910A /* APHDashboardEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B4633841A15917000E68B82 /* APHDashboardEditViewController.m */; };
-		085F3E531AAF6A0D003A910A /* APHAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F55BBDF819D362D0003CA0F9 /* APHAppDelegate.m */; };
-		085F3E541AAF6A0D003A910A /* APHHeartAgeResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BEEFA5E1A003E04004F6C87 /* APHHeartAgeResultsViewController.m */; };
-		085F3E551AAF6A0D003A910A /* APHParQQuizTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5F927C1A9671D500C44BFC /* APHParQQuizTaskViewController.m */; };
-		085F3E561AAF6A0D003A910A /* APHRiskEstimatorWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C43921A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.m */; };
-		085F3E571AAF6A0D003A910A /* APHWalkTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B73CACF1A89BE5200FFE79C /* APHWalkTestViewController.m */; };
-		085F3E581AAF6A0D003A910A /* APHTableViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B827B691A8222AF00C685A3 /* APHTableViewItem.m */; };
-		085F3E591AAF6A0D003A910A /* APHDashboardWalkTestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B827B441A7F837700C685A3 /* APHDashboardWalkTestTableViewCell.m */; };
-		085F3E5A1AAF6A0D003A910A /* APHCardiovascularHealthSurveyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0E172C1A3FBDD70079E536 /* APHCardiovascularHealthSurveyController.m */; };
-		085F3E5B1AAF6A0D003A910A /* APHHeartAgeRecommendationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FA98081A108C33002317C8 /* APHHeartAgeRecommendationCell.m */; };
-		085F3E5C1AAF6A0D003A910A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F5F644FE19D35BA2004CFBB2 /* main.m */; };
-		085F3E5D1AAF6A0D003A910A /* APHHeartAgeLearnMoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B67533F1A01540E005864E6 /* APHHeartAgeLearnMoreViewController.m */; };
-		085F3E5E1AAF6A0D003A910A /* APHHeartAgeTenYearRecommendationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6F91861A99731000335E50 /* APHHeartAgeTenYearRecommendationCell.m */; };
-		085F3E5F1AAF6A0D003A910A /* APHInstructionsForBelowTwentyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6F91891A9A64AD00335E50 /* APHInstructionsForBelowTwentyTableViewCell.m */; };
-		085F3E601AAF6A0D003A910A /* APHFitnessTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B41045A19E5D94F00592B96 /* APHFitnessTaskViewController.m */; };
-		085F3E611AAF6A0D003A910A /* APHIntroCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0865F8B31A65E8C7005770ED /* APHIntroCellTableViewCell.m */; };
-		085F3E621AAF6A0D003A910A /* APHWellBeingSurveyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C43A31A3B98EF001A22F5 /* APHWellBeingSurveyController.m */; };
-		085F3E631AAF6A0D003A910A /* APHHealthyHeartTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08B9724A1A1FB00700316D49 /* APHHealthyHeartTaskViewController.m */; };
-		085F3E641AAF6A0D003A910A /* NSString+CustomMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = F55BBDDB19D362D0003CA0F9 /* NSString+CustomMethods.m */; };
-		085F3E651AAF6A0D003A910A /* APHWalkingTestResults.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B73CADB1A8A002B00FFE79C /* APHWalkingTestResults.m */; };
-		085F3E661AAF6A0D003A910A /* APHInclusionCriteriaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5778E5C19F0613D0079F1B2 /* APHInclusionCriteriaViewController.m */; };
-		085F3E671AAF6A0D003A910A /* APHWalkTestDetailsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B73CAD31A89C12400FFE79C /* APHWalkTestDetailsTableViewCell.m */; };
-		085F3E681AAF6A0D003A910A /* APHSevenDayFitnessAllocationTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08C232821A15796E00DB4EF9 /* APHSevenDayFitnessAllocationTaskViewController.m */; };
-		085F3E691AAF6A0D003A910A /* APHDashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F55BBE0319D362D0003CA0F9 /* APHDashboardViewController.m */; };
-		085F3E6B1AAF6A0D003A910A /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5F6452419D35C41004CFBB2 /* HealthKit.framework */; };
-		085F3E6F1AAF6A0D003A910A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5F6452A19D35C57004CFBB2 /* Security.framework */; };
-		085F3E711AAF6A0D003A910A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5F6452819D35C4F004CFBB2 /* AVFoundation.framework */; };
-		085F3E721AAF6A0D003A910A /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5F6452619D35C49004CFBB2 /* CoreData.framework */; };
-		085F3E741AAF6A0D003A910A /* APCParameters.json in Resources */ = {isa = PBXBuildFile; fileRef = F5165E7919E86581003836CA /* APCParameters.json */; };
-		085F3E751AAF6A0D003A910A /* cardio_CVhealth_survey.json in Resources */ = {isa = PBXBuildFile; fileRef = 7B5BEC971A34F0B7007CEA94 /* cardio_CVhealth_survey.json */; };
-		085F3E761AAF6A0D003A910A /* APHHealthyHeartSummaryStepViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08B972501A1FB4AF00316D49 /* APHHealthyHeartSummaryStepViewController.xib */; };
-		085F3E771AAF6A0D003A910A /* consent.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 5A0F996C1AA4AB6600A2A7EB /* consent.pdf */; };
-		085F3E781AAF6A0D003A910A /* APHTasksAndSchedules_NoM7.json in Resources */ = {isa = PBXBuildFile; fileRef = 21B8E3A01A8AAACB00CCDD48 /* APHTasksAndSchedules_NoM7.json */; };
-		085F3E791AAF6A0D003A910A /* 10_PotentialBenifits@2x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = A78115AF1A96A08E00CEC822 /* 10_PotentialBenifits@2x.m4v */; };
-		085F3E7A1AAF6A0D003A910A /* 01_Activities_to_SensorData@3x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = A78115B71A96A08E00CEC822 /* 01_Activities_to_SensorData@3x.m4v */; };
-		085F3E7B1AAF6A0D003A910A /* 02_SensorData_to_DataGathering@3x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = A78115B81A96A08E00CEC822 /* 02_SensorData_to_DataGathering@3x.m4v */; };
-		085F3E7C1AAF6A0D003A910A /* WithdrawStudy.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B5A31331A10A78600552F7D /* WithdrawStudy.json */; };
-		085F3E7D1AAF6A0D003A910A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F55BBDFA19D362D0003CA0F9 /* Main.storyboard */; };
-		085F3E7E1AAF6A0D003A910A /* Intro.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 7BD73F7A19E8A20600F5DFF3 /* Intro.mp4 */; };
-		085F3E801AAF6A0D003A910A /* cardio_daily_check.json in Resources */ = {isa = PBXBuildFile; fileRef = 74D75D661A9F863B00078A73 /* cardio_daily_check.json */; };
-		085F3E811AAF6A0D003A910A /* cardio_wellbeing_survey.json in Resources */ = {isa = PBXBuildFile; fileRef = 7B5BEC991A34F0B7007CEA94 /* cardio_wellbeing_survey.json */; };
-		085F3E821AAF6A0D003A910A /* TermsAndConditions.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B0432691A305D3E000DC9ED /* TermsAndConditions.json */; };
-		085F3E831AAF6A0D003A910A /* APHDashboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F55BBE0119D362D0003CA0F9 /* APHDashboard.storyboard */; };
-		085F3E841AAF6A0D003A910A /* 12_IssuesToConside2@3x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = A78115BD1A96A08E00CEC822 /* 12_IssuesToConside2@3x.m4v */; };
-		085F3E851AAF6A0D003A910A /* APHTasksAndSchedules.json in Resources */ = {isa = PBXBuildFile; fileRef = F55BBDF119D362D0003CA0F9 /* APHTasksAndSchedules.json */; };
-		085F3E861AAF6A0D003A910A /* 10_PotentialBenifits@3x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = A78115B91A96A08E00CEC822 /* 10_PotentialBenifits@3x.m4v */; };
-		085F3E871AAF6A0D003A910A /* 12_IssuesToConside2@2x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = A78115B31A96A08E00CEC822 /* 12_IssuesToConside2@2x.m4v */; };
-		085F3E881AAF6A0D003A910A /* 11_IssuesToConsider1@3x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = A78115BB1A96A08E00CEC822 /* 11_IssuesToConsider1@3x.m4v */; };
-		085F3E891AAF6A0D003A910A /* APHHeartAgeSummary.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08FA97FA1A10630F002317C8 /* APHHeartAgeSummary.storyboard */; };
-		085F3E8A1AAF6A0D003A910A /* HTMLContent in Resources */ = {isa = PBXBuildFile; fileRef = 5B0432601A305742000DC9ED /* HTMLContent */; };
-		085F3E8B1AAF6A0D003A910A /* APHOnboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F5778E6119F0613D0079F1B2 /* APHOnboarding.storyboard */; };
-		085F3E8C1AAF6A0D003A910A /* 11_IssuesToConsider1@2x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = A78115B11A96A08E00CEC822 /* 11_IssuesToConsider1@2x.m4v */; };
-		085F3E8D1AAF6A0D003A910A /* 02_SensorData_to_DataGathering@2x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = A78115AE1A96A08E00CEC822 /* 02_SensorData_to_DataGathering@2x.m4v */; };
-		085F3E8F1AAF6A0D003A910A /* APHConsentSection.json in Resources */ = {isa = PBXBuildFile; fileRef = 744174EB1A9248D0004A7CC1 /* APHConsentSection.json */; };
-		085F3E901AAF6A0D003A910A /* StudyOverview.json in Resources */ = {isa = PBXBuildFile; fileRef = F573809219E45D62008A8354 /* StudyOverview.json */; };
-		085F3E911AAF6A0D003A910A /* cardio_day_one.json in Resources */ = {isa = PBXBuildFile; fileRef = 3607C3CD1AA7080E0096D3D7 /* cardio_day_one.json */; };
-		085F3E921AAF6A0D003A910A /* 13_RiskToPrivacy@2x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = A78115B41A96A08E00CEC822 /* 13_RiskToPrivacy@2x.m4v */; };
-		085F3E931AAF6A0D003A910A /* APHRiskEstimatorWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B5C43931A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.xib */; };
-		085F3E941AAF6A0D003A910A /* 00_Blank_to_Activities@3x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = A78115B61A96A08E00CEC822 /* 00_Blank_to_Activities@3x.m4v */; };
-		085F3E951AAF6A0D003A910A /* Learn.json in Resources */ = {isa = PBXBuildFile; fileRef = 5BB2BAA31A10157B00684CCE /* Learn.json */; };
-		085F3E961AAF6A0D003A910A /* cardio_diet_survey.json in Resources */ = {isa = PBXBuildFile; fileRef = 7B5BEC981A34F0B7007CEA94 /* cardio_diet_survey.json */; };
-		085F3E971AAF6A0D003A910A /* cardio_activitysleep_survey.json in Resources */ = {isa = PBXBuildFile; fileRef = 7B5BEC961A34F0B7007CEA94 /* cardio_activitysleep_survey.json */; };
-		085F3E981AAF6A0D003A910A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F55BBDF919D362D0003CA0F9 /* LaunchScreen.xib */; };
-		085F3E991AAF6A0D003A910A /* APHHeartAgeLearnMoreViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BEA4BE51A65C10300FEAF60 /* APHHeartAgeLearnMoreViewController.storyboard */; };
-		085F3E9A1AAF6A0D003A910A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F5F6450919D35BA2004CFBB2 /* Images.xcassets */; };
-		085F3E9B1AAF6A0D003A910A /* 00_Blank_to_Activities@2x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = A78115AC1A96A08E00CEC822 /* 00_Blank_to_Activities@2x.m4v */; };
-		085F3E9C1AAF6A0D003A910A /* 13_RiskToPrivacy@3x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = A78115BE1A96A08E00CEC822 /* 13_RiskToPrivacy@3x.m4v */; };
-		085F3E9D1AAF6A0D003A910A /* 01_Activities_to_SensorData@2x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = A78115AD1A96A08E00CEC822 /* 01_Activities_to_SensorData@2x.m4v */; };
 		0865F8B41A65E8C7005770ED /* APHIntroCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0865F8B31A65E8C7005770ED /* APHIntroCellTableViewCell.m */; };
 		08B31A1E1AE75B7900FBF1BB /* APHDailyInsights.m in Sources */ = {isa = PBXBuildFile; fileRef = 08B31A1D1AE75B7900FBF1BB /* APHDailyInsights.m */; };
-		08B31A1F1AE75B7900FBF1BB /* APHDailyInsights.m in Sources */ = {isa = PBXBuildFile; fileRef = 08B31A1D1AE75B7900FBF1BB /* APHDailyInsights.m */; };
 		08B9724B1A1FB00700316D49 /* APHHealthyHeartTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08B9724A1A1FB00700316D49 /* APHHealthyHeartTaskViewController.m */; };
 		08B9724F1A1FB47B00316D49 /* APHHealthyHeartSummaryStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08B9724E1A1FB47B00316D49 /* APHHealthyHeartSummaryStepViewController.m */; };
 		08B972511A1FB4AF00316D49 /* APHHealthyHeartSummaryStepViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08B972501A1FB4AF00316D49 /* APHHealthyHeartSummaryStepViewController.xib */; };
 		08C2328A1A15796E00DB4EF9 /* APHSevenDayFitnessAllocationTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08C232821A15796E00DB4EF9 /* APHSevenDayFitnessAllocationTaskViewController.m */; };
 		08D3A10219E4A08C00A3D20D /* APHHeartAgeAndRiskFactors.m in Sources */ = {isa = PBXBuildFile; fileRef = 08D3A0FA19E4A08C00A3D20D /* APHHeartAgeAndRiskFactors.m */; };
 		08EAED9B1AEAEF2F007C0373 /* APHDietSurveyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08EAED9A1AEAEF2F007C0373 /* APHDietSurveyViewController.m */; };
-		08EAED9C1AEAEF2F007C0373 /* APHDietSurveyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08EAED9A1AEAEF2F007C0373 /* APHDietSurveyViewController.m */; };
 		08FA97FB1A10630F002317C8 /* APHHeartAgeSummary.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08FA97FA1A10630F002317C8 /* APHHeartAgeSummary.storyboard */; };
 		08FA97FF1A108680002317C8 /* APHHeartAgeTodaysActivitiesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FA97FE1A108680002317C8 /* APHHeartAgeTodaysActivitiesCell.m */; };
 		08FA98031A108839002317C8 /* APHHeartAgeSummaryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FA98021A108839002317C8 /* APHHeartAgeSummaryCell.m */; };
@@ -113,7 +27,6 @@
 		5B0432611A305742000DC9ED /* HTMLContent in Resources */ = {isa = PBXBuildFile; fileRef = 5B0432601A305742000DC9ED /* HTMLContent */; };
 		5B04326A1A305D3E000DC9ED /* TermsAndConditions.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B0432691A305D3E000DC9ED /* TermsAndConditions.json */; };
 		5B203DDB1B05076700528BAF /* APHWalkingTestComparison.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B203DDA1B05076700528BAF /* APHWalkingTestComparison.m */; };
-		5B203DDD1B05090700528BAF /* APHWalkingTestComparison.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B203DDA1B05076700528BAF /* APHWalkingTestComparison.m */; };
 		5B4633851A15917000E68B82 /* APHDashboardEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B4633841A15917000E68B82 /* APHDashboardEditViewController.m */; };
 		5B5A31341A10A78600552F7D /* WithdrawStudy.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B5A31331A10A78600552F7D /* WithdrawStudy.json */; };
 		5B73CAD01A89BE5200FFE79C /* APHWalkTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B73CACF1A89BE5200FFE79C /* APHWalkTestViewController.m */; };
@@ -130,11 +43,9 @@
 		74D75D671A9F863B00078A73 /* cardio_daily_check.json in Resources */ = {isa = PBXBuildFile; fileRef = 74D75D661A9F863B00078A73 /* cardio_daily_check.json */; };
 		74EF8E361ABF0139001B47E1 /* BridgeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74EF8E2D1ABF0102001B47E1 /* BridgeSDK.framework */; };
 		74EF8E371ABF0139001B47E1 /* BridgeSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 74EF8E2D1ABF0102001B47E1 /* BridgeSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		7B09EB161AF96ACD00F72A63 /* APHHeartRateSink.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BAEF5341AF964B000E5B1BA /* APHHeartRateSink.m */; };
 		7B0E172D1A3FBDD70079E536 /* APHCardiovascularHealthSurveyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0E172C1A3FBDD70079E536 /* APHCardiovascularHealthSurveyController.m */; };
 		7B41047E19E5D94F00592B96 /* APHFitnessTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B41045A19E5D94F00592B96 /* APHFitnessTaskViewController.m */; };
 		7B4E38411AC0B296009C5C93 /* APHAppDelegate+APHMigration.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B4E38401AC0B296009C5C93 /* APHAppDelegate+APHMigration.m */; };
-		7B4E38421AC0B296009C5C93 /* APHAppDelegate+APHMigration.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B4E38401AC0B296009C5C93 /* APHAppDelegate+APHMigration.m */; };
 		7B5BEC9A1A34F0B7007CEA94 /* cardio_activitysleep_survey.json in Resources */ = {isa = PBXBuildFile; fileRef = 7B5BEC961A34F0B7007CEA94 /* cardio_activitysleep_survey.json */; };
 		7B5BEC9B1A34F0B7007CEA94 /* cardio_CVhealth_survey.json in Resources */ = {isa = PBXBuildFile; fileRef = 7B5BEC971A34F0B7007CEA94 /* cardio_CVhealth_survey.json */; };
 		7B5BEC9C1A34F0B7007CEA94 /* cardio_diet_survey.json in Resources */ = {isa = PBXBuildFile; fileRef = 7B5BEC981A34F0B7007CEA94 /* cardio_diet_survey.json */; };
@@ -142,8 +53,6 @@
 		7B5C43941A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C43921A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.m */; };
 		7B5C43951A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B5C43931A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.xib */; };
 		7B5C43A41A3B98EF001A22F5 /* APHWellBeingSurveyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C43A31A3B98EF001A22F5 /* APHWellBeingSurveyController.m */; };
-		7B5F927D1A9671D500C44BFC /* APHParQQuizTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5F927C1A9671D500C44BFC /* APHParQQuizTaskViewController.m */; };
-		7B5F92801A96739500C44BFC /* APHDynamicParQQuizTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5F927F1A96739500C44BFC /* APHDynamicParQQuizTask.m */; };
 		7B6753411A01540E005864E6 /* APHHeartAgeLearnMoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B67533F1A01540E005864E6 /* APHHeartAgeLearnMoreViewController.m */; };
 		7B6F91831A996EDB00335E50 /* APHHeartAgeSummaryTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6F91821A996EDB00335E50 /* APHHeartAgeSummaryTitleCell.m */; };
 		7B6F91871A99731000335E50 /* APHHeartAgeTenYearRecommendationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6F91861A99731000335E50 /* APHHeartAgeTenYearRecommendationCell.m */; };
@@ -188,27 +97,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		08569A381AE6D04800CD62BE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 74EF8E221ABF0101001B47E1 /* BridgeSDK.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 80855F4F19BE258C006601C7;
-			remoteInfo = BridgeSDK;
-		};
-		08569A3C1AE6D04800CD62BE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 74FED8081ABDFB0B009D970B /* ResearchKit.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = B183A4731A8535D100C76870;
-			remoteInfo = ResearchKit;
-		};
-		08569A401AE6D04800CD62BE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 74FED7FF1ABDFAFF009D970B /* APCAppCore.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = F5179B2819D09128001DCCB7;
-			remoteInfo = APCAppCore;
-		};
 		7492803E1ABDFBA000CB37E5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 74FED7FF1ABDFAFF009D970B /* APCAppCore.xcodeproj */;
@@ -295,26 +183,11 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		08569A421AE6D04900CD62BE /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				08569A3B1AE6D04800CD62BE /* ResearchKit.framework in Embed Frameworks */,
-				08569A371AE6D04800CD62BE /* BridgeSDK.framework in Embed Frameworks */,
-				08569A3F1AE6D04800CD62BE /* APCAppCore.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		08569A0D1AE6AC1A00CD62BE /* APHCardioInsightCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHCardioInsightCell.h; sourceTree = "<group>"; };
 		08569A0E1AE6AC1A00CD62BE /* APHCardioInsightCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHCardioInsightCell.m; sourceTree = "<group>"; };
-		085F3EA81AAF6A0D003A910A /* CardioHealth_YML.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CardioHealth_YML.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		085F3EA91AAF6A0D003A910A /* CardioHealth-YML-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "CardioHealth-YML-Info.plist"; path = "/Users/farhan.ahmed/Projects/iOS/Apple/applecardiology/CardioHealth-YML-Info.plist"; sourceTree = "<absolute>"; };
 		0865F8B21A65E8C7005770ED /* APHIntroCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHIntroCellTableViewCell.h; sourceTree = "<group>"; };
 		0865F8B31A65E8C7005770ED /* APHIntroCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHIntroCellTableViewCell.m; sourceTree = "<group>"; };
 		08B31A1C1AE75B7900FBF1BB /* APHDailyInsights.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHDailyInsights.h; sourceTree = "<group>"; };
@@ -381,10 +254,6 @@
 		7B5C43931A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = APHRiskEstimatorWebViewController.xib; sourceTree = "<group>"; };
 		7B5C43A21A3B98EF001A22F5 /* APHWellBeingSurveyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHWellBeingSurveyController.h; sourceTree = "<group>"; };
 		7B5C43A31A3B98EF001A22F5 /* APHWellBeingSurveyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHWellBeingSurveyController.m; sourceTree = "<group>"; };
-		7B5F927B1A9671D500C44BFC /* APHParQQuizTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHParQQuizTaskViewController.h; sourceTree = "<group>"; };
-		7B5F927C1A9671D500C44BFC /* APHParQQuizTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHParQQuizTaskViewController.m; sourceTree = "<group>"; };
-		7B5F927E1A96739500C44BFC /* APHDynamicParQQuizTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHDynamicParQQuizTask.h; sourceTree = "<group>"; };
-		7B5F927F1A96739500C44BFC /* APHDynamicParQQuizTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHDynamicParQQuizTask.m; sourceTree = "<group>"; };
 		7B67533E1A01540E005864E6 /* APHHeartAgeLearnMoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHHeartAgeLearnMoreViewController.h; sourceTree = "<group>"; };
 		7B67533F1A01540E005864E6 /* APHHeartAgeLearnMoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHHeartAgeLearnMoreViewController.m; sourceTree = "<group>"; };
 		7B6F91811A996EDB00335E50 /* APHHeartAgeSummaryTitleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHHeartAgeSummaryTitleCell.h; sourceTree = "<group>"; };
@@ -447,20 +316,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		085F3E6A1AAF6A0D003A910A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				08569A3E1AE6D04800CD62BE /* APCAppCore.framework in Frameworks */,
-				085F3E6B1AAF6A0D003A910A /* HealthKit.framework in Frameworks */,
-				08569A361AE6D04800CD62BE /* BridgeSDK.framework in Frameworks */,
-				08569A3A1AE6D04800CD62BE /* ResearchKit.framework in Frameworks */,
-				085F3E6F1AAF6A0D003A910A /* Security.framework in Frameworks */,
-				085F3E711AAF6A0D003A910A /* AVFoundation.framework in Frameworks */,
-				085F3E721AAF6A0D003A910A /* CoreData.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		F5F644F619D35BA2004CFBB2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -671,17 +526,6 @@
 			name = "Well-Being and Risk Perception Survey";
 			sourceTree = "<group>";
 		};
-		7B5F92791A9671AF00C44BFC /* Par-Q Quiz */ = {
-			isa = PBXGroup;
-			children = (
-				7B5F927B1A9671D500C44BFC /* APHParQQuizTaskViewController.h */,
-				7B5F927C1A9671D500C44BFC /* APHParQQuizTaskViewController.m */,
-				7B5F927E1A96739500C44BFC /* APHDynamicParQQuizTask.h */,
-				7B5F927F1A96739500C44BFC /* APHDynamicParQQuizTask.m */,
-			);
-			name = "Par-Q Quiz";
-			sourceTree = "<group>";
-		};
 		7B67533C1A0153DB005864E6 /* Intro */ = {
 			isa = PBXGroup;
 			children = (
@@ -847,7 +691,6 @@
 		F55BBE2219D362D0003CA0F9 /* TasksAndSteps */ = {
 			isa = PBXGroup;
 			children = (
-				7B5F92791A9671AF00C44BFC /* Par-Q Quiz */,
 				7B0E17291A3FBDAB0079E536 /* Cardiovascular Health Survey */,
 				7B5C43A01A3B989C001A22F5 /* Well-Being and Risk Perception Survey */,
 				7B41045519E5D94F00592B96 /* APHFitnessTest */,
@@ -891,7 +734,6 @@
 			isa = PBXGroup;
 			children = (
 				F5F644F919D35BA2004CFBB2 /* CardioHealth.app */,
-				085F3EA81AAF6A0D003A910A /* CardioHealth_YML.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -914,7 +756,6 @@
 		F5F644FC19D35BA2004CFBB2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				085F3EA91AAF6A0D003A910A /* CardioHealth-YML-Info.plist */,
 				F5F6454219D35CDF004CFBB2 /* CardioHealth.entitlements */,
 				F5F644FD19D35BA2004CFBB2 /* Info.plist */,
 				F5F644FE19D35BA2004CFBB2 /* main.m */,
@@ -944,28 +785,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		085F3E451AAF6A0D003A910A /* CardioHealth - YML */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 085F3EA31AAF6A0D003A910A /* Build configuration list for PBXNativeTarget "CardioHealth - YML" */;
-			buildPhases = (
-				085F3E481AAF6A0D003A910A /* Sources */,
-				085F3E6A1AAF6A0D003A910A /* Frameworks */,
-				085F3E731AAF6A0D003A910A /* Resources */,
-				085F3EA21AAF6A0D003A910A /* ShellScript */,
-				08569A421AE6D04900CD62BE /* Embed Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				08569A391AE6D04800CD62BE /* PBXTargetDependency */,
-				08569A3D1AE6D04800CD62BE /* PBXTargetDependency */,
-				08569A411AE6D04800CD62BE /* PBXTargetDependency */,
-			);
-			name = "CardioHealth - YML";
-			productName = CardioHealth;
-			productReference = 085F3EA81AAF6A0D003A910A /* CardioHealth_YML.app */;
-			productType = "com.apple.product-type.application";
-		};
 		F5F644F819D35BA2004CFBB2 /* CardioHealth */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F5F6451C19D35BA2004CFBB2 /* Build configuration list for PBXNativeTarget "CardioHealth" */;
@@ -999,17 +818,8 @@
 				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = "Apple, Inc.";
 				TargetAttributes = {
-					085F3E451AAF6A0D003A910A = {
-						DevelopmentTeam = NL3PRC58UN;
-						SystemCapabilities = {
-							com.apple.DataProtection = {
-								enabled = 1;
-							};
-						};
-					};
 					F5F644F819D35BA2004CFBB2 = {
 						CreatedOnToolsVersion = 6.0.1;
-						DevelopmentTeam = NL3PRC58UN;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1055,7 +865,6 @@
 			projectRoot = "";
 			targets = (
 				F5F644F819D35BA2004CFBB2 /* CardioHealth */,
-				085F3E451AAF6A0D003A910A /* CardioHealth - YML */,
 			);
 		};
 /* End PBXProject section */
@@ -1106,53 +915,6 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
-		085F3E731AAF6A0D003A910A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				085F3E741AAF6A0D003A910A /* APCParameters.json in Resources */,
-				085F3E751AAF6A0D003A910A /* cardio_CVhealth_survey.json in Resources */,
-				085F3E761AAF6A0D003A910A /* APHHealthyHeartSummaryStepViewController.xib in Resources */,
-				085F3E771AAF6A0D003A910A /* consent.pdf in Resources */,
-				085F3E781AAF6A0D003A910A /* APHTasksAndSchedules_NoM7.json in Resources */,
-				085F3E791AAF6A0D003A910A /* 10_PotentialBenifits@2x.m4v in Resources */,
-				085F3E7A1AAF6A0D003A910A /* 01_Activities_to_SensorData@3x.m4v in Resources */,
-				085F3E7B1AAF6A0D003A910A /* 02_SensorData_to_DataGathering@3x.m4v in Resources */,
-				085F3E7C1AAF6A0D003A910A /* WithdrawStudy.json in Resources */,
-				085F3E7D1AAF6A0D003A910A /* Main.storyboard in Resources */,
-				085F3E7E1AAF6A0D003A910A /* Intro.mp4 in Resources */,
-				085F3E801AAF6A0D003A910A /* cardio_daily_check.json in Resources */,
-				085F3E811AAF6A0D003A910A /* cardio_wellbeing_survey.json in Resources */,
-				085F3E821AAF6A0D003A910A /* TermsAndConditions.json in Resources */,
-				085F3E831AAF6A0D003A910A /* APHDashboard.storyboard in Resources */,
-				085F3E841AAF6A0D003A910A /* 12_IssuesToConside2@3x.m4v in Resources */,
-				085F3E851AAF6A0D003A910A /* APHTasksAndSchedules.json in Resources */,
-				085F3E861AAF6A0D003A910A /* 10_PotentialBenifits@3x.m4v in Resources */,
-				085F3E871AAF6A0D003A910A /* 12_IssuesToConside2@2x.m4v in Resources */,
-				085F3E881AAF6A0D003A910A /* 11_IssuesToConsider1@3x.m4v in Resources */,
-				085F3E891AAF6A0D003A910A /* APHHeartAgeSummary.storyboard in Resources */,
-				085F3E8A1AAF6A0D003A910A /* HTMLContent in Resources */,
-				085F3E8B1AAF6A0D003A910A /* APHOnboarding.storyboard in Resources */,
-				085F3E8C1AAF6A0D003A910A /* 11_IssuesToConsider1@2x.m4v in Resources */,
-				085F3E8D1AAF6A0D003A910A /* 02_SensorData_to_DataGathering@2x.m4v in Resources */,
-				085F3E8F1AAF6A0D003A910A /* APHConsentSection.json in Resources */,
-				085F3E901AAF6A0D003A910A /* StudyOverview.json in Resources */,
-				085F3E911AAF6A0D003A910A /* cardio_day_one.json in Resources */,
-				085F3E921AAF6A0D003A910A /* 13_RiskToPrivacy@2x.m4v in Resources */,
-				085F3E931AAF6A0D003A910A /* APHRiskEstimatorWebViewController.xib in Resources */,
-				085F3E941AAF6A0D003A910A /* 00_Blank_to_Activities@3x.m4v in Resources */,
-				085F3E951AAF6A0D003A910A /* Learn.json in Resources */,
-				085F3E961AAF6A0D003A910A /* cardio_diet_survey.json in Resources */,
-				085F3E971AAF6A0D003A910A /* cardio_activitysleep_survey.json in Resources */,
-				085F3E981AAF6A0D003A910A /* LaunchScreen.xib in Resources */,
-				085F3E991AAF6A0D003A910A /* APHHeartAgeLearnMoreViewController.storyboard in Resources */,
-				085F3E9A1AAF6A0D003A910A /* Images.xcassets in Resources */,
-				085F3E9B1AAF6A0D003A910A /* 00_Blank_to_Activities@2x.m4v in Resources */,
-				085F3E9C1AAF6A0D003A910A /* 13_RiskToPrivacy@3x.m4v in Resources */,
-				085F3E9D1AAF6A0D003A910A /* 01_Activities_to_SensorData@2x.m4v in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		F5F644F719D35BA2004CFBB2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1203,19 +965,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		085F3EA21AAF6A0D003A910A /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "${SRCROOT}/AppCore/APCAppCore/APCAppCore/Resources/get_debug_ip_address.sh\n";
-		};
 		F53F27B61A2D380D00A1D725 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1232,58 +981,11 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		085F3E481AAF6A0D003A910A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				085F3E491AAF6A0D003A910A /* APHHeartAgeSummaryCell.m in Sources */,
-				085F3E4A1AAF6A0D003A910A /* APHDynamicParQQuizTask.m in Sources */,
-				085F3E4B1AAF6A0D003A910A /* APHHeartAgeSummaryTitleCell.m in Sources */,
-				085F3E4C1AAF6A0D003A910A /* APHHeartAgeTaskViewController.m in Sources */,
-				085F3E4D1AAF6A0D003A910A /* APHHeartAgeRiskEstimateCell.m in Sources */,
-				085F3E4E1AAF6A0D003A910A /* APHHeartAgeAndRiskFactors.m in Sources */,
-				5B203DDD1B05090700528BAF /* APHWalkingTestComparison.m in Sources */,
-				085F3E4F1AAF6A0D003A910A /* APHIntroPurposeContainedTableTableViewController.m in Sources */,
-				085F3E501AAF6A0D003A910A /* APHHeartAgeTodaysActivitiesCell.m in Sources */,
-				085F3E511AAF6A0D003A910A /* APHHealthyHeartSummaryStepViewController.m in Sources */,
-				085F3E521AAF6A0D003A910A /* APHDashboardEditViewController.m in Sources */,
-				085F3E531AAF6A0D003A910A /* APHAppDelegate.m in Sources */,
-				085F3E541AAF6A0D003A910A /* APHHeartAgeResultsViewController.m in Sources */,
-				085F3E551AAF6A0D003A910A /* APHParQQuizTaskViewController.m in Sources */,
-				085F3E561AAF6A0D003A910A /* APHRiskEstimatorWebViewController.m in Sources */,
-				085F3E571AAF6A0D003A910A /* APHWalkTestViewController.m in Sources */,
-				085F3E581AAF6A0D003A910A /* APHTableViewItem.m in Sources */,
-				085F3E591AAF6A0D003A910A /* APHDashboardWalkTestTableViewCell.m in Sources */,
-				08569A101AE6AC1A00CD62BE /* APHCardioInsightCell.m in Sources */,
-				085F3E5A1AAF6A0D003A910A /* APHCardiovascularHealthSurveyController.m in Sources */,
-				085F3E5B1AAF6A0D003A910A /* APHHeartAgeRecommendationCell.m in Sources */,
-				085F3E5C1AAF6A0D003A910A /* main.m in Sources */,
-				085F3E5D1AAF6A0D003A910A /* APHHeartAgeLearnMoreViewController.m in Sources */,
-				085F3E5E1AAF6A0D003A910A /* APHHeartAgeTenYearRecommendationCell.m in Sources */,
-				085F3E5F1AAF6A0D003A910A /* APHInstructionsForBelowTwentyTableViewCell.m in Sources */,
-				085F3E601AAF6A0D003A910A /* APHFitnessTaskViewController.m in Sources */,
-				085F3E611AAF6A0D003A910A /* APHIntroCellTableViewCell.m in Sources */,
-				085F3E621AAF6A0D003A910A /* APHWellBeingSurveyController.m in Sources */,
-				085F3E631AAF6A0D003A910A /* APHHealthyHeartTaskViewController.m in Sources */,
-				08EAED9C1AEAEF2F007C0373 /* APHDietSurveyViewController.m in Sources */,
-				085F3E641AAF6A0D003A910A /* NSString+CustomMethods.m in Sources */,
-				085F3E651AAF6A0D003A910A /* APHWalkingTestResults.m in Sources */,
-				08B31A1F1AE75B7900FBF1BB /* APHDailyInsights.m in Sources */,
-				085F3E661AAF6A0D003A910A /* APHInclusionCriteriaViewController.m in Sources */,
-				085F3E671AAF6A0D003A910A /* APHWalkTestDetailsTableViewCell.m in Sources */,
-				085F3E681AAF6A0D003A910A /* APHSevenDayFitnessAllocationTaskViewController.m in Sources */,
-				085F3E691AAF6A0D003A910A /* APHDashboardViewController.m in Sources */,
-				7B4E38421AC0B296009C5C93 /* APHAppDelegate+APHMigration.m in Sources */,
-				7B09EB161AF96ACD00F72A63 /* APHHeartRateSink.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		F5F644F519D35BA2004CFBB2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				08FA98031A108839002317C8 /* APHHeartAgeSummaryCell.m in Sources */,
-				7B5F92801A96739500C44BFC /* APHDynamicParQQuizTask.m in Sources */,
 				7B6F91831A996EDB00335E50 /* APHHeartAgeSummaryTitleCell.m in Sources */,
 				F5481F1419E4820100D84617 /* APHHeartAgeTaskViewController.m in Sources */,
 				08FA98061A108A46002317C8 /* APHHeartAgeRiskEstimateCell.m in Sources */,
@@ -1295,7 +997,6 @@
 				5B4633851A15917000E68B82 /* APHDashboardEditViewController.m in Sources */,
 				F55BBE6519D362D0003CA0F9 /* APHAppDelegate.m in Sources */,
 				7BEEFA601A003E04004F6C87 /* APHHeartAgeResultsViewController.m in Sources */,
-				7B5F927D1A9671D500C44BFC /* APHParQQuizTaskViewController.m in Sources */,
 				7B5C43941A3B7BA1001A22F5 /* APHRiskEstimatorWebViewController.m in Sources */,
 				5B73CAD01A89BE5200FFE79C /* APHWalkTestViewController.m in Sources */,
 				5B827B6A1A8222AF00C685A3 /* APHTableViewItem.m in Sources */,
@@ -1327,21 +1028,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		08569A391AE6D04800CD62BE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = BridgeSDK;
-			targetProxy = 08569A381AE6D04800CD62BE /* PBXContainerItemProxy */;
-		};
-		08569A3D1AE6D04800CD62BE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = ResearchKit;
-			targetProxy = 08569A3C1AE6D04800CD62BE /* PBXContainerItemProxy */;
-		};
-		08569A411AE6D04800CD62BE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = APCAppCore;
-			targetProxy = 08569A401AE6D04800CD62BE /* PBXContainerItemProxy */;
-		};
 		7492803F1ABDFBA000CB37E5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = APCAppCore;
@@ -1365,92 +1051,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		085F3EA41AAF6A0D003A910A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = CardioHealth/CardioHealth.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/AppCore/APCAppCore/BridgeSDK",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
-				INFOPLIST_FILE = "CardioHealth-YML-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = CardioHealth_YML;
-				PROVISIONING_PROFILE = "";
-			};
-			name = Debug;
-		};
-		085F3EA51AAF6A0D003A910A /* DebugAndSendToDataVerificationServer */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = CardioHealth/CardioHealth.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/AppCore/APCAppCore/BridgeSDK",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
-				INFOPLIST_FILE = "CardioHealth-YML-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = CardioHealth_YML;
-				PROVISIONING_PROFILE = "";
-			};
-			name = DebugAndSendToDataVerificationServer;
-		};
-		085F3EA61AAF6A0D003A910A /* Development */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = CardioHealth/CardioHealth.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/AppCore/APCAppCore/BridgeSDK",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"$(inherited)",
-					"DEVELOPMENT=1",
-				);
-				INFOPLIST_FILE = "CardioHealth-YML-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = CardioHealth_YML;
-				PROVISIONING_PROFILE = "";
-			};
-			name = Development;
-		};
-		085F3EA71AAF6A0D003A910A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = CardioHealth/CardioHealth.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/AppCore/APCAppCore/BridgeSDK",
-				);
-				INFOPLIST_FILE = "CardioHealth-YML-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = CardioHealth_YML;
-				PROVISIONING_PROFILE = "";
-			};
-			name = Release;
-		};
 		36DBC4FC1A7FD9FF00720345 /* DebugAndSendToDataVerificationServer */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1715,17 +1315,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		085F3EA31AAF6A0D003A910A /* Build configuration list for PBXNativeTarget "CardioHealth - YML" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				085F3EA41AAF6A0D003A910A /* Debug */,
-				085F3EA51AAF6A0D003A910A /* DebugAndSendToDataVerificationServer */,
-				085F3EA61AAF6A0D003A910A /* Development */,
-				085F3EA71AAF6A0D003A910A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		F5F644F419D35BA2004CFBB2 /* Build configuration list for PBXProject "CardioHealth" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
