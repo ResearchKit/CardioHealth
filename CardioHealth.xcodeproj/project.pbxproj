@@ -35,7 +35,6 @@
 		749280341ABDFB8900CB37E5 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FED81C1ABDFB34009D970B /* ResearchKit.framework */; };
 		749280371ABDFB9100CB37E5 /* APCAppCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FED8261ABDFB34009D970B /* APCAppCore.framework */; };
 		749280391ABDFB9900CB37E5 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 74FED81C1ABDFB34009D970B /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		7492803C1ABDFBA000CB37E5 /* APCAppCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FED8261ABDFB34009D970B /* APCAppCore.framework */; };
 		7492803D1ABDFBA000CB37E5 /* APCAppCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 74FED8261ABDFB34009D970B /* APCAppCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		74D75D671A9F863B00078A73 /* cardio_daily_check.json in Resources */ = {isa = PBXBuildFile; fileRef = 74D75D661A9F863B00078A73 /* cardio_daily_check.json */; };
 		74EF8E361ABF0139001B47E1 /* BridgeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74EF8E2D1ABF0102001B47E1 /* BridgeSDK.framework */; };
@@ -318,7 +317,6 @@
 				749280371ABDFB9100CB37E5 /* APCAppCore.framework in Frameworks */,
 				F573809119E45CA4008A8354 /* HealthKit.framework in Frameworks */,
 				F5F6452B19D35C57004CFBB2 /* Security.framework in Frameworks */,
-				7492803C1ABDFBA000CB37E5 /* APCAppCore.framework in Frameworks */,
 				F5F6452919D35C4F004CFBB2 /* AVFoundation.framework in Frameworks */,
 				74EF8E361ABF0139001B47E1 /* BridgeSDK.framework in Frameworks */,
 				F5F6452719D35C49004CFBB2 /* CoreData.framework in Frameworks */,
@@ -429,7 +427,7 @@
 			isa = PBXGroup;
 			children = (
 				74FED81C1ABDFB34009D970B /* ResearchKit.framework */,
-				B1509AFD1AC363D10090F0B0 /* OpenResearchKitTests.xctest */,
+				B1509AFD1AC363D10090F0B0 /* ResearchKitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -789,7 +787,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = APH;
-				LastUpgradeCheck = 0600;
+				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = "Apple, Inc.";
 				TargetAttributes = {
 					F5F644F819D35BA2004CFBB2 = {
@@ -879,10 +877,10 @@
 			remoteRef = 74FED8271ABDFB34009D970B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		B1509AFD1AC363D10090F0B0 /* OpenResearchKitTests.xctest */ = {
+		B1509AFD1AC363D10090F0B0 /* ResearchKitTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = OpenResearchKitTests.xctest;
+			path = ResearchKitTests.xctest;
 			remoteRef = B1509AFC1AC363D10090F0B0 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
