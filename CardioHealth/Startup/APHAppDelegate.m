@@ -288,9 +288,8 @@ static NSString* const kDatabaseName               = @"db.sqlite";
             [self.tasksReminder setReminderOn:@YES];
         }
         
-        [[NSUserDefaults standardUserDefaults]synchronize];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     }
-
 }
 
 - (void) setUpAppAppearance

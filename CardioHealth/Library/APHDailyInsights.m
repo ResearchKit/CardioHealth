@@ -61,12 +61,10 @@ NSString *const kDailyInsightIconKey       = @"insightIconKey";
 NSString *const kDailyInsightCaptionKey    = @"insightCaptionKey";
 NSString *const kDailyInsightSubCaptionKey = @"insightSubCaptionKey";
 
-NSString *const kRaw = @"raw";
-
 NSString *const kAPHDailyInsightDataCollectionIsCompleteNotification = @"APHDailyInsightDataCollectionIsCompleteNotification";
+NSInteger const kNumberOfDaysForLookup                               = -90; // Going back 90 days from current date.
 
-NSAttributedString *const kResultsNotFound          = nil;
-NSInteger           const kNumberOfDaysForLookup    = -90; // Going back 90 days from current date.
+static NSAttributedString *kResultsNotFound = nil;
 
 typedef NS_ENUM(NSUInteger, APHDailyInsightIdentifiers)
 {
@@ -274,14 +272,14 @@ typedef NS_ENUM(NSUInteger, APHDailyInsightIdentifiers)
 {
     NSDictionary *latestResults = nil;
     NSSortDescriptor *sortByDateDesending = [[NSSortDescriptor alloc] initWithKey:kDatasetDateKey ascending:NO];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K in SELF", kRaw];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K in SELF", kDatasetRawDataKey];
     
     NSArray *rawData = [dataset filteredArrayUsingPredicate:predicate];
     
     rawData = [rawData sortedArrayUsingDescriptors:@[sortByDateDesending]];
     
     if (rawData.count > 0) {
-        latestResults = [rawData firstObject][kRaw];
+        latestResults = [rawData firstObject][kDatasetRawDataKey];
     }
     
     return latestResults;
