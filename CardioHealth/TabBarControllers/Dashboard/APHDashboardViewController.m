@@ -504,7 +504,7 @@ static CGFloat          kSevenDayFitnessRowHeight               = 288.0f;
         NSString* distanceWalkedString = [lengthFormatter unitStringFromValue:(double)walkingTestComparisonItem.distanceWalked
                                                                unit:NSLengthFormatterUnitYard];
         
-        walkingTestComparisonCell.distanceLabel.text = [NSString stringWithFormat:@"%@", distanceWalkedString];
+        walkingTestComparisonCell.distanceLabel.text = distanceWalkedString;
         
         walkingTestComparisonCell.tintColor = walkingTestComparisonItem.tintColor;
         walkingTestComparisonCell.delegate = self;

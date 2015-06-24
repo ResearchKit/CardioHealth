@@ -59,7 +59,7 @@
     NSString* distanceWalkedString = [lengthFormatter unitStringFromValue:(double)self.comparisonItem.distanceWalked
                                                            unit:NSLengthFormatterUnitYard];
     
-    self.distanceLabel.text = [NSString stringWithFormat:@"%@", distanceWalkedString];
+    self.distanceLabel.text = distanceWalkedString;
 }
 
 - (void)viewDidAppear:(BOOL)animated
