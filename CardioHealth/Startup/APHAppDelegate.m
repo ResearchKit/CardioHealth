@@ -66,6 +66,8 @@ static NSString* const kCFBundleShortVersionString = @"CFBundleShortVersionStrin
 
 static NSString* const kShortVersionStringKey      = @"shortVersionString";
 static NSString* const kMinorVersion               = @"version";
+static NSString* const kDatabaseName               = @"db.sqlite";
+
 
 @interface APHAppDelegate ()
 
@@ -116,7 +118,7 @@ static NSString* const kMinorVersion               = @"version";
             if (sampleType)
             {
                 [self.dataSubstrate.healthStore enableBackgroundDeliveryForType:sampleType
-                                                                      frequency:HKUpdateFrequencyImmediate
+                                                                      frequency:HKUpdateFrequencyHourly
                                                                  withCompletion:^(BOOL success, NSError *error)
                  {
                      if (!success)
@@ -258,13 +260,16 @@ static NSString* const kMinorVersion               = @"version";
                                            kTaskReminderStartupDefaultTimeKey:@"9:00 AM",
                                            kShareMessageKey : NSLocalizedString(@"Check out My Heart Counts, a research study app about Cardiovascular Disease.  Download it for iPhone at http://apple.co/1Iz7H6L", nil)
                                            }];
+    
     self.initializationOptions = dictionary;
 }
 
--(void)setUpTasksReminder{
-    
-    APCTaskReminder *sevenDaySurveyReminder = [[APCTaskReminder alloc]initWithTaskID:kSevenDaySurveyIdentifier reminderBody:NSLocalizedString(@"Activity and Sleep Assessment", nil)];
-    APCTaskReminder *dailyCheckinReminder = [[APCTaskReminder alloc]initWithTaskID:kDailyCheckinSurveyIdentifier reminderBody:NSLocalizedString(@"Daily Check-in", nil)];
+- (void)setUpTasksReminder
+{
+    APCTaskReminder *sevenDaySurveyReminder = [[APCTaskReminder alloc]initWithTaskID:kSevenDaySurveyIdentifier
+                                                                        reminderBody:NSLocalizedString(@"Activity and Sleep Assessment", nil)];
+    APCTaskReminder *dailyCheckinReminder = [[APCTaskReminder alloc]initWithTaskID:kDailyCheckinSurveyIdentifier
+                                                                      reminderBody:NSLocalizedString(@"Daily Check-in", nil)];
     
     [self.tasksReminder.reminders removeAllObjects];
     [self.tasksReminder manageTaskReminder:sevenDaySurveyReminder];
@@ -273,15 +278,18 @@ static NSString* const kMinorVersion               = @"version";
     if ([self doesPersisteStoreExist] == NO)
     {
         APCLogEvent(@"This app is being launched for the first time. Turn all reminders on");
-        for (APCTaskReminder *reminder in self.tasksReminder.reminders) {
+        for (APCTaskReminder *reminder in self.tasksReminder.reminders)
+        {
             [[NSUserDefaults standardUserDefaults]setObject:reminder.reminderBody forKey:reminder.reminderIdentifier];
         }
         
-        if ([[UIApplication sharedApplication] currentUserNotificationSettings].types != UIUserNotificationTypeNone){
+        if ([[UIApplication sharedApplication] currentUserNotificationSettings].types != UIUserNotificationTypeNone)
+        {
             [self.tasksReminder setReminderOn:@YES];
         }
+        
         [[NSUserDefaults standardUserDefaults]synchronize];
-}
+    }
 
 }
 
@@ -370,7 +378,7 @@ static NSString* const kMinorVersion               = @"version";
         else
         {
             NSFileManager*  fileManager = [NSFileManager defaultManager];
-            NSString*       filePath    = [[self applicationDocumentsDirectory] stringByAppendingPathComponent:@"db.sqlite"];
+            NSString*       filePath    = [[self applicationDocumentsDirectory] stringByAppendingPathComponent:kDatabaseName];
             
             if ([fileManager fileExistsAtPath:filePath])
             {
@@ -498,7 +506,7 @@ static NSString* const kMinorVersion               = @"version";
         HKCategorySample*   catSample       = (HKCategorySample *)dataSample;
         NSString*           stringToWrite   = nil;
         
-        if ([catSample.categoryType.identifier isEqualToString:@"HKCategoryTypeIdentifierSleepAnalysis"])
+        if ([catSample.categoryType.identifier isEqualToString:HKCategoryTypeIdentifierSleepAnalysis])
         {
             NSString*           startDateTime   = [catSample.startDate toStringInISO8601Format];
             NSString*           healthKitType   = catSample.sampleType.identifier;

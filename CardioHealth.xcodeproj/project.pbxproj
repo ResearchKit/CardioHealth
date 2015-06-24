@@ -60,6 +60,7 @@
 		7B6F91831A996EDB00335E50 /* APHHeartAgeSummaryTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6F91821A996EDB00335E50 /* APHHeartAgeSummaryTitleCell.m */; };
 		7B6F91871A99731000335E50 /* APHHeartAgeTenYearRecommendationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6F91861A99731000335E50 /* APHHeartAgeTenYearRecommendationCell.m */; };
 		7B6F918A1A9A64AD00335E50 /* APHInstructionsForBelowTwentyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6F91891A9A64AD00335E50 /* APHInstructionsForBelowTwentyTableViewCell.m */; };
+		7B716EAB1B3A250D000ACBA7 /* APHDailyInsight.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B716EAA1B3A250D000ACBA7 /* APHDailyInsight.m */; };
 		7BAEF5351AF964B000E5B1BA /* APHHeartRateSink.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BAEF5341AF964B000E5B1BA /* APHHeartRateSink.m */; };
 		7BD73F7B19E8A20600F5DFF3 /* Intro.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 7BD73F7A19E8A20600F5DFF3 /* Intro.mp4 */; };
 		7BEA4BE61A65C10300FEAF60 /* APHHeartAgeLearnMoreViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BEA4BE51A65C10300FEAF60 /* APHHeartAgeLearnMoreViewController.storyboard */; };
@@ -270,6 +271,8 @@
 		7B6F91861A99731000335E50 /* APHHeartAgeTenYearRecommendationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHHeartAgeTenYearRecommendationCell.m; sourceTree = "<group>"; };
 		7B6F91881A9A64AD00335E50 /* APHInstructionsForBelowTwentyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHInstructionsForBelowTwentyTableViewCell.h; sourceTree = "<group>"; };
 		7B6F91891A9A64AD00335E50 /* APHInstructionsForBelowTwentyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHInstructionsForBelowTwentyTableViewCell.m; sourceTree = "<group>"; };
+		7B716EA91B3A250D000ACBA7 /* APHDailyInsight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHDailyInsight.h; sourceTree = "<group>"; };
+		7B716EAA1B3A250D000ACBA7 /* APHDailyInsight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHDailyInsight.m; sourceTree = "<group>"; };
 		7BAEF5331AF964B000E5B1BA /* APHHeartRateSink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHHeartRateSink.h; sourceTree = "<group>"; };
 		7BAEF5341AF964B000E5B1BA /* APHHeartRateSink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHHeartRateSink.m; sourceTree = "<group>"; };
 		7BD73F7A19E8A20600F5DFF3 /* Intro.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Intro.mp4; sourceTree = "<group>"; };
@@ -346,6 +349,8 @@
 			children = (
 				08B31A1C1AE75B7900FBF1BB /* APHDailyInsights.h */,
 				08B31A1D1AE75B7900FBF1BB /* APHDailyInsights.m */,
+				7B716EA91B3A250D000ACBA7 /* APHDailyInsight.h */,
+				7B716EAA1B3A250D000ACBA7 /* APHDailyInsight.m */,
 			);
 			name = "Daily Insights";
 			sourceTree = "<group>";
@@ -1020,6 +1025,7 @@
 				08C2328A1A15796E00DB4EF9 /* APHSevenDayFitnessAllocationTaskViewController.m in Sources */,
 				F55BBE6B19D362D0003CA0F9 /* APHDashboardViewController.m in Sources */,
 				7B4E38411AC0B296009C5C93 /* APHAppDelegate+APHMigration.m in Sources */,
+				7B716EAB1B3A250D000ACBA7 /* APHDailyInsight.m in Sources */,
 				7BAEF5351AF964B000E5B1BA /* APHHeartRateSink.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

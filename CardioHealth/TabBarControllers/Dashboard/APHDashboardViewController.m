@@ -41,6 +41,7 @@
 #import "APHWalkTestViewController.h"
 #import "APHWalkingTestResults.h"
 #import "APHWalkingTestComparisonViewController.h"
+#import "APHDailyInsight.h"
 
 static NSString*  const kDatasetValueNoDataKey                  = @"datasetValueNoDataKey";
 static NSString*  const kAPCBasicTableViewCellIdentifier        = @"APCBasicTableViewCell";
@@ -49,6 +50,7 @@ static NSString*  const kFitnessTestTaskId                      = @"3-APHFitness
 static NSString*  const kAPCTaskAttributeUpdatedAt              = @"updatedAt";
 static NSString*  const kFitTestpeakHeartRateDataSourceKey      = @"peakHeartRate";
 static NSString*  const kFitTestlastHeartRateDataSourceKey      = @"lastHeartRate";
+static NSString*  const kDashBoardStoryBoardKey                 = @"APHDashboard";
 static CGFloat          kTitleFontSize                          = 17.0f;
 static CGFloat          kDetailFontSize                         = 16.0f;
 
@@ -335,16 +337,25 @@ static CGFloat          kSevenDayFitnessRowHeight               = 288.0f;
                     
                     // Insight Items
                     {
-                        for (NSDictionary *dailyInsight in self.dailyInsights.collectedDailyInsights) {
+                        for (APHDailyInsight *dailyInsight in self.dailyInsights.collectedDailyInsights) {
+                            
+                            //    NSDictionary *insight = @{
+                            //                              kDailyInsightCaptionKey: smokingInsight,
+                            //                              kDailyInsightIconKey: [UIImage imageNamed:@"insight_smoking"],
+                            //                              kDailyInsightSubCaptionKey: NSLocalizedString(@"Optimal: No Smoking", nil)
+                            //                             };
+                            
+                            
+                            
                             APHTableViewDashboardDailyInsightItem *item = [APHTableViewDashboardDailyInsightItem new];
                             
                             item.identifier = kAPHDashboardDailyInsightCellIdentifier;
                             item.tintColor = [UIColor appTertiaryGreenColor];
                             item.editable = NO;
                             
-                            item.insightAttributedTitle = dailyInsight[kDailyInsightCaptionKey];
-                            item.insightSubtitle = dailyInsight[kDailyInsightSubCaptionKey];
-                            item.insightImage = dailyInsight[kDailyInsightIconKey];
+                            item.insightAttributedTitle = dailyInsight.dailyInsightCaption;
+                            item.insightSubtitle = dailyInsight.dailyInsightSubCaption;
+                            item.insightImage = [UIImage imageNamed:dailyInsight.iconName];
                             
                             item.info = NSLocalizedString(@"Put something for Daily Insights", nil);
                             
@@ -488,7 +499,7 @@ static CGFloat          kSevenDayFitnessRowHeight               = 288.0f;
         walkingTestComparisonCell.textLabel.text = @"";
         walkingTestComparisonCell.title = walkingTestComparisonItem.caption;
         
-        NSString *text = @"You vs Others";
+        NSString *text = NSLocalizedString(@"You vs Others", nil);
         
         NSMutableAttributedString *attirbutedString = [[NSMutableAttributedString alloc] initWithString:text];
         [attirbutedString addAttribute:NSForegroundColorAttributeName value:[UIColor appTertiaryRedColor] range:[text rangeOfString:@"You"]];
@@ -497,7 +508,11 @@ static CGFloat          kSevenDayFitnessRowHeight               = 288.0f;
         
         walkingTestComparisonCell.subtitleLabel.attributedText = attirbutedString;
         
-        walkingTestComparisonCell.distanceLabel.text = [NSString stringWithFormat:@"%ld yards", (long)walkingTestComparisonItem.distanceWalked];
+        NSLengthFormatter* lengthFormatter = [NSLengthFormatter new];
+        NSString* distanceWalkedString = [lengthFormatter unitStringFromValue:(double)walkingTestComparisonItem.distanceWalked
+                                                               unit:NSLengthFormatterUnitYard];
+        
+        walkingTestComparisonCell.distanceLabel.text = [NSString stringWithFormat:@"%@", distanceWalkedString];
         
         walkingTestComparisonCell.tintColor = walkingTestComparisonItem.tintColor;
         walkingTestComparisonCell.delegate = self;
@@ -602,7 +617,7 @@ static CGFloat          kSevenDayFitnessRowHeight               = 288.0f;
         
         APHTableViewDashboardWalkingTestComparisonItem *item = (APHTableViewDashboardWalkingTestComparisonItem *)[self itemForIndexPath:indexPath];
         
-        APHWalkingTestComparisonViewController *walkTestComparisonViewController = [[UIStoryboard storyboardWithName:@"APHDashboard" bundle:nil] instantiateViewControllerWithIdentifier:@"APHWalkingTestComparisonViewController"];
+        APHWalkingTestComparisonViewController *walkTestComparisonViewController = [[UIStoryboard storyboardWithName:kDashBoardStoryBoardKey bundle:nil] instantiateViewControllerWithIdentifier:@"APHWalkingTestComparisonViewController"];
         walkTestComparisonViewController.comparisonItem = item;
         
         [self.navigationController presentViewController:walkTestComparisonViewController animated:YES completion:nil];

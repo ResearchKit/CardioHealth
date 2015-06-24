@@ -32,6 +32,7 @@
 //
 
 #import "APHDailyInsights.h"
+#import "APHDailyInsight.h"
 
 NSString *const kHeartAgeTaskId   = @"2-APHHeartAge-7259AC18-D711-47A6-ADBD-6CFCECDED1DF";
 NSString *const kDietSurveyTaskId = @"4-DietSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66";
@@ -60,10 +61,12 @@ NSString *const kDailyInsightIconKey       = @"insightIconKey";
 NSString *const kDailyInsightCaptionKey    = @"insightCaptionKey";
 NSString *const kDailyInsightSubCaptionKey = @"insightSubCaptionKey";
 
+NSString *const kRaw = @"raw";
+
 NSString *const kAPHDailyInsightDataCollectionIsCompleteNotification = @"APHDailyInsightDataCollectionIsCompleteNotification";
 
-static NSAttributedString *kResultsNotFound = nil;
-static NSInteger kNumberOfDaysForLookup = -90; // Going back 90 days from current date.
+NSAttributedString *const kResultsNotFound          = nil;
+NSInteger           const kNumberOfDaysForLookup    = -90; // Going back 90 days from current date.
 
 typedef NS_ENUM(NSUInteger, APHDailyInsightIdentifiers)
 {
@@ -85,8 +88,8 @@ typedef NS_ENUM(NSUInteger, APHDailyInsightIdentifiers)
 @property (nonatomic, strong) UIColor *dailyInsightNeedsImprovementColor;
 @property (nonatomic, strong) UIColor *dailyInsightBadColor;
 
-@property (nonatomic, strong) NSDictionary *heartAgeResults;
-@property (nonatomic, strong) NSDictionary *dietSurveyResults;
+@property (nonatomic, copy) NSDictionary *heartAgeResults;
+@property (nonatomic, copy) NSDictionary *dietSurveyResults;
 
 @property (nonatomic, strong) NSOperationQueue *dailyInsightQueue;
 
@@ -271,14 +274,14 @@ typedef NS_ENUM(NSUInteger, APHDailyInsightIdentifiers)
 {
     NSDictionary *latestResults = nil;
     NSSortDescriptor *sortByDateDesending = [[NSSortDescriptor alloc] initWithKey:kDatasetDateKey ascending:NO];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K in SELF", @"raw"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K in SELF", kRaw];
     
     NSArray *rawData = [dataset filteredArrayUsingPredicate:predicate];
     
     rawData = [rawData sortedArrayUsingDescriptors:@[sortByDateDesending]];
     
     if (rawData.count > 0) {
-        latestResults = [rawData firstObject][@"raw"];
+        latestResults = [rawData firstObject][kRaw];
     }
     
     return latestResults;
@@ -302,11 +305,15 @@ typedef NS_ENUM(NSUInteger, APHDailyInsightIdentifiers)
     
     APCLogDebug(@"Smoking insight.");
     
-    NSDictionary *insight = @{
-                              kDailyInsightCaptionKey: smokingInsight,
-                              kDailyInsightIconKey: [UIImage imageNamed:@"insight_smoking"],
-                              kDailyInsightSubCaptionKey: NSLocalizedString(@"Optimal: No Smoking", nil)
-                             };
+    APHDailyInsight* insight = [[APHDailyInsight alloc] initWithCaption:smokingInsight
+                                                             subCaption:NSLocalizedString(@"Optimal: No Smoking", nil)
+                                                               iconName:@"insight_smoking"];
+    
+//    NSDictionary *insight = @{
+//                              kDailyInsightCaptionKey: smokingInsight,
+//                              kDailyInsightIconKey: [UIImage imageNamed:@"insight_smoking"],
+//                              kDailyInsightSubCaptionKey: NSLocalizedString(@"Optimal: No Smoking", nil)
+//                             };
     
     [self.collectedInsights addObject:insight];
 }
@@ -325,25 +332,26 @@ typedef NS_ENUM(NSUInteger, APHDailyInsightIdentifiers)
         NSString *weightCaption = [NSString stringWithFormat:@"%@ pounds (BMI %@)",
                                    [formatter stringFromNumber:@(self.weightInPounds)],
                                    [formatter stringFromNumber:@(bmi)]];
+        
+        UIColor *insightColor   = [UIColor blackColor];
+        
         if ((bmi >= 18.5) && (bmi <= 25.0)) {
-            weightInsight = [self attributedStringFromString:NSLocalizedString(weightCaption, nil)
-                                                   withColor:self.dailyInsightGoodColor];
+            insightColor = self.dailyInsightGoodColor;
         } else if ((bmi > 25.0) && (bmi <= 30)) {
-            weightInsight = [self attributedStringFromString:NSLocalizedString(weightCaption, nil)
-                                                   withColor:self.dailyInsightNeedsImprovementColor];
+            insightColor = self.dailyInsightNeedsImprovementColor;
         } else if ((bmi < 18.5) || (bmi > 30)) {
-            weightInsight = [self attributedStringFromString:NSLocalizedString(weightCaption, nil)
-                                                   withColor:self.dailyInsightBadColor];
+            insightColor = self.dailyInsightBadColor;
         }
+        
+        weightInsight = [self attributedStringFromString:NSLocalizedString(weightCaption, nil)
+                                               withColor:insightColor];
     }
     
     APCLogDebug(@"Weight insight.");
     
-    NSDictionary *insight = @{
-                              kDailyInsightCaptionKey: weightInsight,
-                              kDailyInsightIconKey: [UIImage imageNamed:@"insight_bmi"],
-                              kDailyInsightSubCaptionKey: NSLocalizedString(@"Optimal: BMI of 18.5 to 24.9", nil)
-                              };
+    APHDailyInsight* insight = [[APHDailyInsight alloc] initWithCaption:weightInsight
+                                                             subCaption:NSLocalizedString(@"Optimal: BMI of 18.5 to 24.9", nil)
+                                                               iconName:@"insight_bmi"];
     
     [self.collectedInsights addObject:insight];
 }
@@ -369,11 +377,9 @@ typedef NS_ENUM(NSUInteger, APHDailyInsightIdentifiers)
     
     APCLogDebug(@"Activity insight.");
     
-    NSDictionary *insight = @{
-                              kDailyInsightCaptionKey: activityInsight,
-                              kDailyInsightIconKey: [UIImage imageNamed:@"insight_activity"],
-                              kDailyInsightSubCaptionKey: NSLocalizedString(@"Optimal: 150 moderate or 75 vigorous per week", nil)
-                              };
+    APHDailyInsight* insight = [[APHDailyInsight alloc] initWithCaption:activityInsight
+                                                             subCaption:NSLocalizedString(@"Optimal: 150 moderate or 75 vigorous per week", nil)
+                                                               iconName:@"insight_activity"];
     
     [self.collectedInsights addObject:insight];
 }
@@ -449,11 +455,9 @@ typedef NS_ENUM(NSUInteger, APHDailyInsightIdentifiers)
     
     APCLogDebug(@"Diet insight.");
     
-    NSDictionary *insight = @{
-                              kDailyInsightCaptionKey: dietInsight,
-                              kDailyInsightIconKey: [UIImage imageNamed:@"insight_diet"],
-                              kDailyInsightSubCaptionKey: NSLocalizedString(@"Optimal: 4 or 5 healthy diet components", nil)
-                              };
+    APHDailyInsight* insight = [[APHDailyInsight alloc] initWithCaption:dietInsight
+                                                             subCaption:NSLocalizedString(@"Optimal: 4 or 5 healthy diet components", nil)
+                                                               iconName:@"insight_diet"];
     
     [self.collectedInsights addObject:insight];
 }
@@ -488,11 +492,9 @@ typedef NS_ENUM(NSUInteger, APHDailyInsightIdentifiers)
     
     APCLogDebug(@"Blood Pressure insight.");
     
-    NSDictionary *insight = @{
-                              kDailyInsightCaptionKey: bloodPressureInsight,
-                              kDailyInsightIconKey: [UIImage imageNamed:@"insight_blood_pressure"],
-                              kDailyInsightSubCaptionKey: NSLocalizedString(@"Optimal: less than 120/80 mm Hg", nil)
-                              };
+    APHDailyInsight* insight = [[APHDailyInsight alloc] initWithCaption:bloodPressureInsight
+                                                             subCaption:NSLocalizedString(@"Optimal: less than 120/80 mm Hg", nil)
+                                                               iconName:@"insight_blood_pressure"];
     
     [self.collectedInsights addObject:insight];
 }
@@ -520,11 +522,9 @@ typedef NS_ENUM(NSUInteger, APHDailyInsightIdentifiers)
     
     APCLogDebug(@"Cholesterol insight.");
     
-    NSDictionary *insight = @{
-                              kDailyInsightCaptionKey: cholesterolInsight,
-                              kDailyInsightIconKey: [UIImage imageNamed:@"insight_cholesterol"],
-                              kDailyInsightSubCaptionKey: NSLocalizedString(@"Optimal: Less than 200 mg/dL", nil)
-                              };
+    APHDailyInsight* insight = [[APHDailyInsight alloc] initWithCaption:cholesterolInsight
+                                                             subCaption:NSLocalizedString(@"Optimal: Less than 200 mg/dL", nil)
+                                                               iconName:@"insight_cholesterol"];
     
     [self.collectedInsights addObject:insight];
 }
@@ -555,12 +555,10 @@ typedef NS_ENUM(NSUInteger, APHDailyInsightIdentifiers)
     
     APCLogDebug(@"Blood Sugar insight.");
     
-    NSDictionary *insight = @{
-                              kDailyInsightCaptionKey: bloodSugarInsight,
-                              kDailyInsightIconKey: [UIImage imageNamed:@"insight_sugars"],
-                              kDailyInsightSubCaptionKey: NSLocalizedString(@"Optimal: Less than 100 mg/dL", nil)
-                              };
-    
+    APHDailyInsight* insight = [[APHDailyInsight alloc] initWithCaption:bloodSugarInsight
+                                                             subCaption:NSLocalizedString(@"Optimal: Less than 100 mg/dL", nil)
+                                                               iconName:@"insight_sugars"];
+
     [self.collectedInsights addObject:insight];
 }
 

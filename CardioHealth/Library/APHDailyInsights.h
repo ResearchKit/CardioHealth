@@ -49,7 +49,7 @@ typedef NS_ENUM(NSUInteger, APHInsightIdentifiers)
 
 @interface APHDailyInsights : NSObject
 
-@property (nonatomic, strong) NSArray *collectedDailyInsights;
+@property (nonatomic, copy) NSArray *collectedDailyInsights;
 
 - (instancetype)initInsight;
 - (void)gatherInsights;
