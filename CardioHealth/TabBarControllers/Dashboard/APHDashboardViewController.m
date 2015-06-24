@@ -337,16 +337,8 @@ static CGFloat          kSevenDayFitnessRowHeight               = 288.0f;
                     
                     // Insight Items
                     {
-                        for (APHDailyInsight *dailyInsight in self.dailyInsights.collectedDailyInsights) {
-                            
-                            //    NSDictionary *insight = @{
-                            //                              kDailyInsightCaptionKey: smokingInsight,
-                            //                              kDailyInsightIconKey: [UIImage imageNamed:@"insight_smoking"],
-                            //                              kDailyInsightSubCaptionKey: NSLocalizedString(@"Optimal: No Smoking", nil)
-                            //                             };
-                            
-                            
-                            
+                        for (APHDailyInsight *dailyInsight in self.dailyInsights.collectedDailyInsights)
+                        {
                             APHTableViewDashboardDailyInsightItem *item = [APHTableViewDashboardDailyInsightItem new];
                             
                             item.identifier = kAPHDashboardDailyInsightCellIdentifier;

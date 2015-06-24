@@ -309,12 +309,6 @@ typedef NS_ENUM(NSUInteger, APHDailyInsightIdentifiers)
                                                              subCaption:NSLocalizedString(@"Optimal: No Smoking", nil)
                                                                iconName:@"insight_smoking"];
     
-//    NSDictionary *insight = @{
-//                              kDailyInsightCaptionKey: smokingInsight,
-//                              kDailyInsightIconKey: [UIImage imageNamed:@"insight_smoking"],
-//                              kDailyInsightSubCaptionKey: NSLocalizedString(@"Optimal: No Smoking", nil)
-//                             };
-    
     [self.collectedInsights addObject:insight];
 }
 

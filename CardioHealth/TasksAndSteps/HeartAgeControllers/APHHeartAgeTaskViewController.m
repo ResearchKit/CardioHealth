@@ -390,24 +390,6 @@ static NSString *kHeartDiseaseInstructionsDetail = @"You have indicated that you
     
 }
 
-//- (NSString *)createResultSummary
-//{
-//    NSError *error = nil;
-//    NSString *heartAgeData = nil;
-//    
-//    if (self.heartAgeSummaryResults) {
-//        NSData *heartAgeSummary = [NSJSONSerialization dataWithJSONObject:self.heartAgeSummaryResults options:0 error:&error];
-//        
-//        if (heartAgeSummary) {
-//            heartAgeData = [[NSString alloc] initWithData:heartAgeSummary encoding:NSUTF8StringEncoding];
-//        } else {
-//            APCLogError2(error);
-//        }
-//    }
-//    
-//    return heartAgeData;
-//}
-
 - (NSString *)createResultSummary
 {
     NSError *error = nil;
