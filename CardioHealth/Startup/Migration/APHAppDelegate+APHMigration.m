@@ -162,8 +162,6 @@ static NSString* const kFitnessTestSurveyId = @"3-APHFitnessTest-00000000-1111-1
     {
         [self.tasksReminder setReminderOn:@YES];
     }
-
-    [[NSUserDefaults standardUserDefaults] synchronize];
     
     return self.tasksReminder.reminders.count;
 }

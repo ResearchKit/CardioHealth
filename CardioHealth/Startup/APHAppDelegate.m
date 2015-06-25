@@ -194,7 +194,6 @@ static NSString* const kDatabaseName               = @"db.sqlite";
     if (!migrationError)
     {
         [defaults setInteger:currentVersion forKey:kPreviousVersion];
-        [defaults synchronize];
     }
 }
 
@@ -287,8 +286,6 @@ static NSString* const kDatabaseName               = @"db.sqlite";
         {
             [self.tasksReminder setReminderOn:@YES];
         }
-        
-        [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
 
