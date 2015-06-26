@@ -1,5 +1,5 @@
 //
-//  APHDailyInsights.h
+//  APHDailyInsight.h
 //  MyHeart Counts
 //
 // Copyright (c) 2015, Stanford Medical. All rights reserved.
@@ -31,27 +31,14 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-@import APCAppCore;
+#import <Foundation/Foundation.h>
 
-extern NSString *const kAPHDailyInsightDataCollectionIsCompleteNotification;
+@interface APHDailyInsight : NSObject
 
-extern NSString *const kDailyInsightIconKey;
-extern NSString *const kDailyInsightCaptionKey;
-extern NSString *const kDailyInsightSubCaptionKey;
+@property (nonatomic, strong) NSAttributedString* dailyInsightCaption;
+@property (nonatomic, strong) NSString* dailyInsightSubCaption;
+@property (nonatomic, strong) NSString* iconName; 
 
-typedef NS_ENUM(NSUInteger, APHInsightIdentifiers)
-{
-    APHInsightIdentifierHeartAgeData = 0,
-    APHInsightIdentifierDiet,
-    APHInsightIdentifierActivity,
-    APHInsightIdentifierWeight
-};
-
-@interface APHDailyInsights : NSObject
-
-@property (nonatomic, copy) NSArray *collectedDailyInsights;
-
-- (instancetype)initInsight;
-- (void)gatherInsights;
+- (instancetype)initWithCaption:(NSAttributedString*)caption subCaption:(NSString*)subCaption iconName:(NSString*)iconName;
 
 @end

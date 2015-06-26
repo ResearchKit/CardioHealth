@@ -2,8 +2,8 @@
     "documentProperties" :
     {
         "htmlDocument" : "cardio_fullconsent",
-        "investigatorShortDescription": "Stanford",
-        "investigatorLongDescription": "Stanford",
+        "investigatorShortDescription": "investigator",
+        "investigatorLongDescription": "investigator",
         "htmlContent": "15sharing_rsch"
     },
     "sections":

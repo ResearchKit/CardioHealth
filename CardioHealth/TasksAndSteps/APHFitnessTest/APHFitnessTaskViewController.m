@@ -134,7 +134,7 @@ static NSString* const kFitnessWalkText = @"Walk as far as you can for six minut
     if ([stepViewController.step isKindOfClass:[ORKCompletionStep class]])
     {
         AVSpeechUtterance *utterance = [AVSpeechUtterance
-                                        speechUtteranceWithString:@"You have completed the activity"];
+                                        speechUtteranceWithString:NSLocalizedString(@"You have completed the activity", nil)];
         utterance.rate = (AVSpeechUtteranceMinimumSpeechRate + AVSpeechUtteranceDefaultSpeechRate)*0.3;
         AVSpeechSynthesizer *synth = [[AVSpeechSynthesizer alloc] init];
         [synth speakUtterance:utterance];
@@ -171,8 +171,6 @@ static NSString* const kFitnessWalkText = @"Walk as far as you can for six minut
         
         if ([[nameComponents firstObject] isEqualToString:kLocationFileNameComp])
         {
-            distanceResults = [self computeTotalDistanceForDashboardItem:fileResult.fileURL];
-            
             //  Transform location data into displacement data
             [self startDisplacementSerializer:fileResult.fileURL];
         }
@@ -252,53 +250,6 @@ static NSString* const kFitnessWalkText = @"Walk as far as you can for six minut
     }
     
     return distance;
-}
-
-- (NSDictionary*)computeTotalDistanceForDashboardItem:(NSURL*)fileURL
-{
-    NSDictionary*       distanceResults = [self readFileResultsFor:fileURL];
-    CLLocationDistance  totalDistance   = 0;
-    NSArray*            locations       = [distanceResults objectForKey:kFileResultsKey];
-
-    if (locations)
-    {
-        CLLocation* previousCoor = nil;
-        
-        for (NSDictionary *location in locations)
-        {
-            float lon = 0;
-            
-            if ([location objectForKey:kCoordinate])
-            {
-                if ([[location objectForKey:kCoordinate] objectForKey:kLongitude])
-                {
-                    lon = [[[location objectForKey:kCoordinate] objectForKey:kLongitude] floatValue];
-                }
-            }
-            
-            float lat = 0;
-            
-            if ([location objectForKey:kCoordinate])
-            {
-                if ([[location objectForKey:kCoordinate] objectForKey:kLatitude])
-                {
-                    lat = [[[location objectForKey:kCoordinate] objectForKey:kLatitude] floatValue];
-                }
-            }
-            
-            CLLocation *currentCoor = [[CLLocation alloc] initWithLatitude:lat longitude:lon];
-            
-            if(previousCoor)
-            {
-                totalDistance       += [currentCoor distanceFromLocation:previousCoor];
-                previousCoor        = currentCoor;
-            }
-            
-            previousCoor = currentCoor;
-        }
-    }
-
-    return @{kLocationDistance : @(totalDistance)};
 }
 
 - (NSDictionary*)computeHeartRateForDashboardItem:(NSURL*)fileURL
@@ -413,21 +364,21 @@ static NSString* const kFitnessWalkText = @"Walk as far as you can for six minut
                {
                    float lon = 0;
                    
-                   if ([location objectForKey:@"coordinate"])
+                   if ([location objectForKey:kCoordinate])
                    {
-                       if ([[location objectForKey:@"coordinate"] objectForKey:@"longitude"])
+                       if ([[location objectForKey:kCoordinate] objectForKey:kLongitude])
                        {
-                           lon = [[[location objectForKey:@"coordinate"] objectForKey:@"longitude"] floatValue];
+                           lon = [[[location objectForKey:kCoordinate] objectForKey:kLongitude] floatValue];
                        }
                    }
                    
                    float lat = 0;
                    
-                   if ([location objectForKey:@"coordinate"])
+                   if ([location objectForKey:kCoordinate])
                    {
-                       if ([[location objectForKey:@"coordinate"] objectForKey:@"latitude"])
+                       if ([[location objectForKey:kCoordinate] objectForKey:kLatitude])
                        {
-                           lat = [[[location objectForKey:@"coordinate"] objectForKey:@"latitude"] floatValue];
+                           lat = [[[location objectForKey:kCoordinate] objectForKey:kLatitude] floatValue];
                        }
                    }
                    
@@ -480,11 +431,6 @@ static NSString* const kFitnessWalkText = @"Walk as far as you can for six minut
 
 - (NSDictionary*)displacement:(id)displacementDistance direction:(id)direction fromLocationData:(NSDictionary*)location
 {
-    id altitude             = [NSNull null];
-    id timestamp            = [NSNull null];
-    id horizontalAccuracy   = [NSNull null];
-    id verticalAccuracy     = [NSNull null];
-    
     //  Expecting an NSNumber or null. But just in case we have this check here.
     if (displacementDistance == nil)
     {
@@ -496,25 +442,10 @@ static NSString* const kFitnessWalkText = @"Walk as far as you can for six minut
         direction = [NSNull null];
     }
     
-    if ([location objectForKey:@"altitude"])
-    {
-        altitude = [location objectForKey:@"altitude"];
-    }
-    
-    if ([location objectForKey:@"timestamp"])
-    {
-        timestamp = [location objectForKey:@"timestamp"];
-    }
-    
-    if ([location objectForKey:@"horizontalAccuracy"])
-    {
-        horizontalAccuracy = [location objectForKey:@"horizontalAccuracy"];
-    }
-    
-    if ([location objectForKey:@"verticalAccuracy"])
-    {
-        verticalAccuracy = [location objectForKey:@"verticalAccuracy"];
-    }
+    id altitude             = [location objectForKey:@"altitude"]           ? : [NSNull null];
+    id timestamp            = [location objectForKey:@"timestamp"]          ? : [NSNull null];
+    id horizontalAccuracy   = [location objectForKey:@"horizontalAccuracy"] ? : [NSNull null];
+    id verticalAccuracy     = [location objectForKey:@"verticalAccuracy"]   ? : [NSNull null];
     
     NSDictionary* displacement =
     @{

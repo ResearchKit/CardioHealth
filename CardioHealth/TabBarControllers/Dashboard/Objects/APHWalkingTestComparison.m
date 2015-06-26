@@ -37,8 +37,6 @@
 
 @property (nonatomic) CGFloat mean;
 @property (nonatomic) CGFloat standardDeviation;
-
-@property (nonatomic) HKBiologicalSex gender;
 @property (nonatomic) NSArray *zScores;
 
 @end
@@ -68,7 +66,9 @@
         
         NSDictionary *stats;
         
-        if ([self gender] == HKBiologicalSexFemale) {
+        HKBiologicalSex gender = ((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.currentUser.biologicalSex;
+        
+        if (gender == HKBiologicalSexFemale) {
             stats = jsonDictionary[@"6MWT_stats_female"];
         } else {
             stats = jsonDictionary[@"6MWT_stats_male"];
@@ -80,13 +80,6 @@
         }
     }
 }
-
--(HKBiologicalSex)gender
-{
-    _gender = ((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.currentUser.biologicalSex;
-    return _gender;
-}
-
 
 - (double)computeYForZScore:(CGFloat)zScore
 {

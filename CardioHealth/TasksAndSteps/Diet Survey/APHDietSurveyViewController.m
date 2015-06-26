@@ -57,7 +57,7 @@ NSString *const kDietSurveyStepIdentifierSodium      = @"sodium";
 - (NSString *)createResultSummary
 {
     NSError *error = nil;
-    NSString *dietSurveyData = nil;
+    NSString *dietSurveySummary = nil;
     NSMutableDictionary *dietSurveyResults = [NSMutableDictionary new];
     
     for (ORKStepResult *survey in self.result.results) {
@@ -100,15 +100,15 @@ NSString *const kDietSurveyStepIdentifierSodium      = @"sodium";
          }];
     }
     
-    NSData *dietSurveySummary = [NSJSONSerialization dataWithJSONObject:dietSurveyResults options:0 error:&error];
+    NSData *dietSurveyData = [NSJSONSerialization dataWithJSONObject:dietSurveyResults options:0 error:&error];
     
-    if (dietSurveySummary) {
-        dietSurveyData = [[NSString alloc] initWithData:dietSurveySummary encoding:NSUTF8StringEncoding];
+    if (dietSurveyData) {
+        dietSurveySummary = [[NSString alloc] initWithData:dietSurveySummary encoding:NSUTF8StringEncoding];
     } else {
         APCLogError2(error);
     }
     
-    return dietSurveyData;
+    return dietSurveySummary;
 }
 
 @end

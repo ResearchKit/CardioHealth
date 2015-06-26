@@ -55,7 +55,11 @@
     
     self.titleLabel.text = NSLocalizedString(@"6-Minute Walk Test Comparison", nil);
     
-    self.distanceLabel.text = [NSString stringWithFormat:@"%ld yards", (long)self.comparisonItem.distanceWalked];
+    NSLengthFormatter* lengthFormatter = [NSLengthFormatter new];
+    NSString* distanceWalkedString = [lengthFormatter unitStringFromValue:(double)self.comparisonItem.distanceWalked
+                                                           unit:NSLengthFormatterUnitYard];
+    
+    self.distanceLabel.text = distanceWalkedString;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -70,7 +74,7 @@
     self.titleLabel.font = [UIFont appRegularFontWithSize:24.0f];
     self.titleLabel.textColor = self.comparisonItem.tintColor;
     
-    NSString *text = @"You vs Others";
+    NSString *text = NSLocalizedString(@"You vs Others", nil);
     
     NSMutableAttributedString *attirbutedString = [[NSMutableAttributedString alloc] initWithString:text];
     [attirbutedString addAttribute:NSForegroundColorAttributeName value:[UIColor appTertiaryRedColor] range:[text rangeOfString:@"You"]];

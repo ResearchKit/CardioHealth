@@ -7,6 +7,9 @@
 
 #import "APHAppDelegate+APHMigration.h"
 
+static NSString* const kHeartAgeTaskId      = @"2-APHHeartAge-7259AC18-D711-47A6-ADBD-6CFCECDED1DF";
+static NSString* const kFitnessTestSurveyId = @"3-APHFitnessTest-00000000-1111-1111-1111-F810BE28D995";
+
 @implementation APHAppDelegate (APHMigration)
 
 - (BOOL) performMigrationFromOneToTwoWithError:(NSError *__autoreleasing *)error{
@@ -25,9 +28,8 @@
 
 - (BOOL)updateTaskScheduleToOnceWithTaskId
 {
-
-    [self findScheduledTaskAndClean: @[@"2-APHHeartAge-7259AC18-D711-47A6-ADBD-6CFCECDED1DF",
-                                       @"3-APHFitnessTest-00000000-1111-1111-1111-F810BE28D995"]];
+    [self findScheduledTaskAndClean: @[kHeartAgeTaskId,
+                                       kFitnessTestSurveyId]];
     
     return YES;
 }
@@ -126,13 +128,13 @@
                                             @{
                                                 @"expire"         : @"P89D",
                                                 @"scheduleType"   : @"once",
-                                                @"taskID"         : @"2-APHHeartAge-7259AC18-D711-47A6-ADBD-6CFCECDED1DF"
+                                                @"taskID"         : kHeartAgeTaskId
                                                 },
                                             
                                             @{
                                                 @"expire"         : @"P89D",
                                                 @"scheduleType"   : @"once",
-                                                @"taskID"         : @"3-APHFitnessTest-00000000-1111-1111-1111-F810BE28D995"
+                                                @"taskID"         : kFitnessTestSurveyId
                                                 },
                                             ]
                                     };
@@ -146,20 +148,21 @@
     //turn all task reminders on
     [self setUpTasksReminder];
     
-    for (APCTaskReminder *reminder in self.tasksReminder.reminders) {
-        if (![[NSUserDefaults standardUserDefaults]objectForKey:reminder.reminderIdentifier]) {
-            [[NSUserDefaults standardUserDefaults]setObject:reminder.reminderBody forKey:reminder.reminderIdentifier];
+    for (APCTaskReminder *reminder in self.tasksReminder.reminders)
+    {
+        if (![[NSUserDefaults standardUserDefaults] objectForKey:reminder.reminderIdentifier])
+        {
+            [[NSUserDefaults standardUserDefaults] setObject:reminder.reminderBody
+                                                      forKey:reminder.reminderIdentifier];
         }
     }
     
     //Enable reminders if notifications permitted
-    if ([[UIApplication sharedApplication] currentUserNotificationSettings].types != UIUserNotificationTypeNone){
+    if ([[UIApplication sharedApplication] currentUserNotificationSettings].types != UIUserNotificationTypeNone)
+    {
         [self.tasksReminder setReminderOn:@YES];
     }
-
-    [[NSUserDefaults standardUserDefaults]synchronize];
     
     return self.tasksReminder.reminders.count;
-    
 }
 @end
