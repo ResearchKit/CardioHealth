@@ -33,7 +33,6 @@
  
 @import APCAppCore;
 #import "APHAppDelegate.h"
-#import "APHAppDelegate+APHMigration.h"
 #import "APHHeartRateSink.h"
 
 /*********************************************************************************/
@@ -66,8 +65,6 @@ static NSString* const kCFBundleShortVersionString = @"CFBundleShortVersionStrin
 
 static NSString* const kShortVersionStringKey      = @"shortVersionString";
 static NSString* const kMinorVersion               = @"version";
-static NSString* const kDatabaseName               = @"db.sqlite";
-
 
 @interface APHAppDelegate ()
 
@@ -156,58 +153,17 @@ static NSString* const kDatabaseName               = @"db.sqlite";
 #pragma mark - App Specific Code
 /*********************************************************************************/
 
-- (void)performMigrationAfterDataSubstrateFrom:(NSInteger) __unused previousVersion currentVersion:(NSInteger) currentVersion
-{
-    NSDictionary*   infoDictionary      = [[NSBundle mainBundle] infoDictionary];
-    NSString*       majorVersion        = [infoDictionary objectForKey:kCFBundleShortVersionString];
-    NSString*       minorVersion        = [infoDictionary objectForKey:kCFBundleVersion];
-    NSUserDefaults* defaults            = [NSUserDefaults standardUserDefaults];
-    NSError*        migrationError      = nil;
-    
-    if ([self doesPersisteStoreExist] == NO)
-    {
-        APCLogEvent(@"This application is being launched for the first time. We know this because there is no persistent store.");
-    }
-    else if ( [defaults integerForKey:kPreviousVersion] == 0)
-    {
-        APCLogEvent(@"The entire data model version %d", kTheEntireDataModelOfTheApp);
-        if ([self performMigrationFromOneToTwoWithError:&migrationError]) {
-            
-            APCLogEvent(@"Migration from version 1 to 2 has failed.");
-        }
-    }
-    else if ([[defaults objectForKey:kPreviousVersion] isEqual: @3])
-    {
-        APCLogEvent(@"The entire data model version %d", kTheEntireDataModelOfTheApp);
-        if (![self performMigrationFromThreeToFourWithError:&migrationError])
-        {
-            APCLogEvent(@"Migration from version %@ to %@ has failed.", [defaults objectForKey:kPreviousVersion], @(kTheEntireDataModelOfTheApp));
-        }
-    }
-    
-    [defaults setObject:majorVersion
-                 forKey:kShortVersionStringKey];
-    
-    [defaults setObject:minorVersion
-                 forKey:kMinorVersion];
-    
-    if (!migrationError)
-    {
-        [defaults setInteger:currentVersion forKey:kPreviousVersion];
-    }
-}
-
 - (void) setUpInitializationOptions
 {
     self.disableSignatureInConsent = YES;
     [APCUtilities setRealApplicationName: @"MyHeart Counts"];
     
     NSDictionary *permissionsDescriptions = @{
-                                              @(kSignUpPermissionsTypeLocation) : NSLocalizedString(@"Using your GPS enables the app to accurately determine distances travelled. Your actual location will never be shared.", @""),
-                                              @(kSignUpPermissionsTypeCoremotion) : NSLocalizedString(@"Using the motion co-processor allows the app to determine your activity, helping the study better understand how activity level may influence disease.", @""),
-                                              @(kSignUpPermissionsTypeMicrophone) : NSLocalizedString(@"Access to microphone is required for your Voice Recording Activity.", @""),
-                                              @(kSignUpPermissionsTypeLocalNotifications) : NSLocalizedString(@"Allowing notifications enables the app to show you reminders.", @""),
-                                              @(kSignUpPermissionsTypeHealthKit) : NSLocalizedString(@"On the next screen, you will be prompted to grant MyHeart Counts access to read and write some of your general and health information, such as height, weight and steps taken so you don't have to enter it again.", @""),
+                                              @(kAPCSignUpPermissionsTypeLocation) : NSLocalizedString(@"Using your GPS enables the app to accurately determine distances travelled. Your actual location will never be shared.", @""),
+                                              @(kAPCSignUpPermissionsTypeCoremotion) : NSLocalizedString(@"Using the motion co-processor allows the app to determine your activity, helping the study better understand how activity level may influence disease.", @""),
+                                              @(kAPCSignUpPermissionsTypeMicrophone) : NSLocalizedString(@"Access to microphone is required for your Voice Recording Activity.", @""),
+                                              @(kAPCSignUpPermissionsTypeLocalNotifications) : NSLocalizedString(@"Allowing notifications enables the app to show you reminders.", @""),
+                                              @(kAPCSignUpPermissionsTypeHealthKit) : NSLocalizedString(@"On the next screen, you will be prompted to grant MyHeart Counts access to read and write some of your general and health information, such as height, weight and steps taken so you don't have to enter it again.", @""),
                                               };
     
     NSMutableDictionary * dictionary = [super defaultInitializationOptions];
@@ -242,9 +198,9 @@ static NSString* const kDatabaseName               = @"db.sqlite";
                                                    HKQuantityTypeIdentifierHeight
                                                    ],
                                            kAppServicesListRequiredKey           : @[
-                                                   @(kSignUpPermissionsTypeLocation),
-                                                   @(kSignUpPermissionsTypeCoremotion),
-                                                   @(kSignUpPermissionsTypeLocalNotifications)
+                                                   @(kAPCSignUpPermissionsTypeLocation),
+                                                   @(kAPCSignUpPermissionsTypeCoremotion),
+                                                   @(kAPCSignUpPermissionsTypeLocalNotifications)
                                                    ],
                                            kAppServicesDescriptionsKey : permissionsDescriptions,
                                            kAppProfileElementsListKey            : @[
