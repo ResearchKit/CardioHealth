@@ -360,6 +360,50 @@ static NSString* const kDatabaseName               = @"db.sqlite";
     }
 }
 
+/*********************************************************************************/
+#pragma mark - Helper Method for Datasubstrate Delegate Methods
+/*********************************************************************************/
+
+static NSDate *determineConsentDate(id object)
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString      *filePath    = [[object applicationDocumentsDirectory] stringByAppendingPathComponent:@"db.sqlite"];
+    NSDate        *consentDate = nil;
+    
+    if ([fileManager fileExistsAtPath:filePath]) {
+        NSError      *error      = nil;
+        NSDictionary *attributes = [fileManager attributesOfItemAtPath:filePath error:&error];
+        
+        if (error != nil) {
+            APCLogError2(error);
+            consentDate = [[NSDate date] startOfDay];
+        } else {
+            consentDate = [attributes fileCreationDate];
+        }
+    }
+    return consentDate;
+}
+
+- (NSDictionary*)researcherSpecifiedUnits
+{
+    NSDictionary* hkUnits =
+    @{
+      HKQuantityTypeIdentifierStepCount               : [HKUnit countUnit],
+      HKQuantityTypeIdentifierBodyMass                : [HKUnit gramUnitWithMetricPrefix:HKMetricPrefixKilo],
+      HKQuantityTypeIdentifierHeight                  : [HKUnit meterUnit],
+      HKQuantityTypeIdentifierHeartRate               : [[HKUnit countUnit] unitDividedByUnit:[HKUnit secondUnit]],
+      HKQuantityTypeIdentifierFlightsClimbed          : [HKUnit countUnit],
+      HKQuantityTypeIdentifierDistanceWalkingRunning  : [HKUnit meterUnit],
+      HKQuantityTypeIdentifierDistanceCycling         : [HKUnit meterUnit],
+      HKQuantityTypeIdentifierBloodPressureSystolic   : [HKUnit millimeterOfMercuryUnit],
+      HKQuantityTypeIdentifierBloodGlucose            : [[HKUnit gramUnitWithMetricPrefix:HKMetricPrefixMilli] unitDividedByUnit:[HKUnit literUnitWithMetricPrefix:HKMetricPrefixDeci]],
+      HKQuantityTypeIdentifierBloodPressureDiastolic  : [HKUnit millimeterOfMercuryUnit],
+      HKQuantityTypeIdentifierOxygenSaturation        : [HKUnit percentUnit]
+      };
+    
+    return hkUnits;
+}
+
 - (void)configureObserverQueries
 {
     NSDate* (^LaunchDate)() = ^
@@ -373,65 +417,38 @@ static NSString* const kDatabaseName               = @"db.sqlite";
         }
         else
         {
-            NSFileManager*  fileManager = [NSFileManager defaultManager];
-            NSString*       filePath    = [[self applicationDocumentsDirectory] stringByAppendingPathComponent:kDatabaseName];
-            
-            if ([fileManager fileExistsAtPath:filePath])
-            {
-                NSError*        error       = nil;
-                NSDictionary*   attributes  = [fileManager attributesOfItemAtPath:filePath error:&error];
-                
-                if (error)
-                {
-                    APCLogError2(error);
-                    
-                    consentDate = [[NSDate date] startOfDay];
-                }
-                else
-                {
-                    consentDate = [attributes fileCreationDate];
-                }
-            }
+            consentDate = determineConsentDate(self);
         }
-        
         return consentDate;
     };
     
-    NSString*(^QuantityDataSerializer)(id) = ^NSString*(id dataSample)
+    NSString *(^determineQuantitySource)(NSString *) = ^(NSString  *source)
+    {
+        NSString  *answer = nil;
+        if (source == nil) {
+            answer = @"not available";
+        } else if ([UIDevice.currentDevice.name isEqualToString:source] == YES) {
+            if ([APCDeviceHardware platformString] != nil) {
+                answer = [APCDeviceHardware platformString];
+            } else {
+                answer = @"iPhone";    //    theoretically should not happen
+            }
+        }
+        return answer;
+    };
+    
+    NSString*(^QuantityDataSerializer)(id, HKUnit*) = ^NSString*(id dataSample, HKUnit* unit)
     {
         HKQuantitySample*   qtySample           = (HKQuantitySample *)dataSample;
         NSString*           startDateTimeStamp  = [qtySample.startDate toStringInISO8601Format];
         NSString*           endDateTimeStamp    = [qtySample.endDate toStringInISO8601Format];
         NSString*           healthKitType       = qtySample.quantityType.identifier;
-        NSString*           quantityValueRep    = [NSString stringWithFormat:@"%@", qtySample.quantity];
-        NSArray*            valueSplit          = [quantityValueRep componentsSeparatedByString:@" "];
-        NSString*           quantityValue       = [valueSplit objectAtIndex:0];
-        NSString*           quantityUnit        = @"";
-        
-        for (int i = 1; i < (int)[valueSplit count]; i++)
-        {
-            quantityUnit = [quantityUnit stringByAppendingString:valueSplit[i]];
-        }
-        
+        NSNumber*           quantityValue       = @([qtySample.quantity doubleValueForUnit:unit]);
+        NSString*           quantityUnit        = unit.unitString;
         NSString*           sourceIdentifier    = qtySample.source.bundleIdentifier;
         NSString*           quantitySource      = qtySample.source.name;
         
-        if (quantitySource == nil)
-        {
-            quantitySource = @"not available";
-        }
-        else if ([[[UIDevice currentDevice] name] isEqualToString:quantitySource])
-        {
-            if ([APCDeviceHardware platformString])
-            {
-                quantitySource = [APCDeviceHardware platformString];
-            }
-            else
-            {
-                //  This shouldn't get called.
-                quantitySource = @"iPhone";
-            }
-        }
+        quantitySource = determineQuantitySource(quantitySource);
         
         NSString *stringToWrite = [NSString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@\n",
                                    startDateTimeStamp,
@@ -451,7 +468,7 @@ static NSString* const kDatabaseName               = @"db.sqlite";
         NSString*   startDateTimeStamp          = [sample.startDate toStringInISO8601Format];
         NSString*   endDateTimeStamp            = [sample.endDate toStringInISO8601Format];
         NSString*   healthKitType               = sample.sampleType.identifier;
-        NSString*   activityType                = [HKWorkout workoutActivityTypeStringRepresentation:(int)sample.workoutActivityType];
+        NSString*   activityType                = [HKWorkout apc_workoutActivityTypeStringRepresentation:(int)sample.workoutActivityType];
         double      energyConsumedValue         = [sample.totalEnergyBurned doubleValueForUnit:[HKUnit kilocalorieUnit]];
         NSString*   energyConsumed              = [NSString stringWithFormat:@"%f", energyConsumedValue];
         NSString*   energyUnit                  = [HKUnit kilocalorieUnit].description;
@@ -461,25 +478,21 @@ static NSString* const kDatabaseName               = @"db.sqlite";
         NSString*   sourceIdentifier            = sample.source.bundleIdentifier;
         NSString*   quantitySource              = sample.source.name;
         
-        if (quantitySource == nil)
-        {
-            quantitySource = @"not available";
-        }
-        else if ([[[UIDevice currentDevice] name] isEqualToString:quantitySource])
-        {
-            if ([APCDeviceHardware platformString])
-            {
-                quantitySource = [APCDeviceHardware platformString];
-            }
-            else
-            {
-                //  This shouldn't get called.
-                quantitySource = @"iPhone";
-            }
-        }
+        quantitySource = determineQuantitySource(quantitySource);
         
         NSError*    error                       = nil;
-        NSString*   metaData                    = [NSDictionary convertDictionary:sample.metadata ToStringWithReturningError:&error];
+        NSString*   metaData                    = [NSDictionary apc_stringFromDictionary:sample.metadata error:&error];
+        
+        if (!metaData)
+        {
+            if (error)
+            {
+                APCLogError2(error);
+            }
+            
+            metaData = @"";
+        }
+        
         NSString*   metaDataStringified         = [NSString stringWithFormat:@"\"%@\"", metaData];
         NSString*   stringToWrite               = [NSString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@\n",
                                                    startDateTimeStamp,
@@ -521,23 +534,7 @@ static NSString* const kDatabaseName               = @"db.sqlite";
             NSString*           sourceIdentifier    = catSample.source.bundleIdentifier;
             NSString*           quantitySource      = catSample.source.name;
             
-            if (quantitySource == nil)
-            {
-                quantitySource = @"not available";
-            }
-            else if ([[[UIDevice currentDevice] name] isEqualToString:quantitySource])
-            {
-                if ([APCDeviceHardware platformString])
-                {
-                    quantitySource = [APCDeviceHardware platformString];
-                }
-                else
-                {
-                    //  This shouldn't get called.
-                    quantitySource = @"iPhone";
-                }
-                
-            }
+            quantitySource = determineQuantitySource(quantitySource);
             
             // Get the difference in seconds between the start and end date for the sample
             NSDateComponents* secondsSpentInBedOrAsleep = [[NSCalendar currentCalendar] components:NSCalendarUnitSecond
@@ -561,36 +558,45 @@ static NSString* const kDatabaseName               = @"db.sqlite";
     
     NSArray* dataTypesWithReadPermission = self.initializationOptions[kHKReadPermissionsKey];
     
+    if (!self.passiveDataCollector)
+    {
+        self.passiveDataCollector = [[APCPassiveDataCollector alloc] init];
+    }
+    
     // Just a note here that we are using n collectors to 1 data sink for quantity sample type data.
     NSArray*                    quantityColumnNames = @[@"startTime,endTime,type,value,unit,source,sourceIdentifier"];
-    APCPassiveDataSink*         quantityreceiver    = [[APCPassiveDataSink alloc] initWithIdentifier:@"HealthKitDataCollector"
-                                                                                         columnNames:quantityColumnNames
-                                                                                  operationQueueName:@"APCHealthKitQuantity Activity Collector"
-                                                                                    andDataProcessor:QuantityDataSerializer];
-    
+    APCPassiveDataSink*         quantityreceiver    =[[APCPassiveDataSink alloc] initWithQuantityIdentifier:@"HealthKitDataCollector"
+                                                                                                columnNames:quantityColumnNames
+                                                                                         operationQueueName:@"APCHealthKitQuantity Activity Collector"
+                                                                                              dataProcessor:QuantityDataSerializer
+                                                                                          fileProtectionKey:NSFileProtectionCompleteUnlessOpen];
     NSArray*                    workoutColumnNames  = @[@"startTime,endTime,type,workoutType,total distance,unit,energy consumed,unit,source,sourceIdentifier,metadata"];
     APCPassiveDataSink*         workoutReceiver     = [[APCPassiveDataSink alloc] initWithIdentifier:@"HealthKitWorkoutCollector"
                                                                                          columnNames:workoutColumnNames
                                                                                   operationQueueName:@"APCHealthKitWorkout Activity Collector"
-                                                                                    andDataProcessor:WorkoutDataSerializer];
+                                                                                       dataProcessor:WorkoutDataSerializer
+                                                                                   fileProtectionKey:NSFileProtectionCompleteUnlessOpen];
     NSArray*                    categoryColumnNames = @[@"startTime,type,category value,value,unit,source,sourceIdentifier"];
     APCPassiveDataSink*         sleepReceiver       = [[APCPassiveDataSink alloc] initWithIdentifier:@"HealthKitSleepCollector"
                                                                                          columnNames:categoryColumnNames
                                                                                   operationQueueName:@"APCHealthKitSleep Activity Collector"
-                                                                                    andDataProcessor:CategoryDataSerializer];
+                                                                                       dataProcessor:CategoryDataSerializer
+                                                                                   fileProtectionKey:NSFileProtectionCompleteUnlessOpen];
     
     typeof(self) __weak weakSelf = self;
-    self.heartRateSink = [[APHHeartRateSink alloc] initWithIdentifier:@"HealthKitDataCollector"
-                                                         columnNames:quantityColumnNames
-                                                  operationQueueName:@"APCHealthKitQuantity Activity Collector"
-                                                       dataProcessor:QuantityDataSerializer
-                                                         andAppLaunch:^NSDate*
-    {
-       __typeof(self)   strongSelf = weakSelf;
-       NSDate*          activeDate = [strongSelf applicationBecameActiveDate];
-       
-       return activeDate;
-    }];
+    
+    self.heartRateSink = [[APHHeartRateSink alloc] initWithQuantityIdentifier:@"HealthKitDataCollector"
+                                                                  columnNames:quantityColumnNames
+                                                           operationQueueName:@"APCHealthKitQuantity Activity Collector"
+                                                                dataProcessor:QuantityDataSerializer
+                                                            fileProtectionKey:NSFileProtectionCompleteUnlessOpen
+                                                                 andAppLaunch:^NSDate*
+                          {
+                              __typeof(self)   strongSelf = weakSelf;
+                              NSDate*          activeDate = [strongSelf applicationBecameActiveDate];
+                              
+                              return activeDate;
+                          }];
     
     if (dataTypesWithReadPermission)
     {
@@ -621,23 +627,37 @@ static NSString* const kDatabaseName               = @"db.sqlite";
             {
                 // This is really important to remember that we are creating as many user defaults as there are healthkit permissions here.
                 NSString*                               uniqueAnchorDateName    = [NSString stringWithFormat:@"APCHealthKit%@AnchorDate", dataType];
-                APCHealthKitBackgroundDataCollector*    collector               = [[APCHealthKitBackgroundDataCollector alloc] initWithIdentifier:sampleType.identifier
-                                                                                                                                       sampleType:sampleType anchorName:uniqueAnchorDateName
-                                                                                                                                 launchDateAnchor:LaunchDate];
+                APCHealthKitBackgroundDataCollector*    collector               = nil;
                 
                 //If the HKObjectType is a HKWorkoutType then set a different receiver/data sink.
                 if ([sampleType isKindOfClass:[HKWorkoutType class]])
                 {
+                    collector = [[APCHealthKitBackgroundDataCollector alloc] initWithIdentifier:sampleType.identifier
+                                                                                     sampleType:sampleType anchorName:uniqueAnchorDateName
+                                                                               launchDateAnchor:LaunchDate
+                                                                                    healthStore:self.dataSubstrate.healthStore];
                     [collector setReceiver:workoutReceiver];
                     [collector setDelegate:workoutReceiver];
                 }
                 else if ([sampleType isKindOfClass:[HKCategoryType class]])
                 {
+                    collector = [[APCHealthKitBackgroundDataCollector alloc] initWithIdentifier:sampleType.identifier
+                                                                                     sampleType:sampleType anchorName:uniqueAnchorDateName
+                                                                               launchDateAnchor:LaunchDate
+                                                                                    healthStore:self.dataSubstrate.healthStore];
                     [collector setReceiver:sleepReceiver];
                     [collector setDelegate:sleepReceiver];
                 }
                 else if ([sampleType isKindOfClass:[HKQuantityType class]])
                 {
+                    NSDictionary* hkUnitKeysAndValues = [self researcherSpecifiedUnits];
+                    
+                    collector = [[APCHealthKitBackgroundDataCollector alloc] initWithQuantityTypeIdentifier:sampleType.identifier
+                                                                                                 sampleType:sampleType anchorName:uniqueAnchorDateName
+                                                                                           launchDateAnchor:LaunchDate
+                                                                                                healthStore:self.dataSubstrate.healthStore
+                                                                                                       unit:[hkUnitKeysAndValues objectForKey:sampleType.identifier]];
+                    
                     if ([sampleType.identifier isEqualToString:HKQuantityTypeIdentifierHeartRate])
                     {
                         [collector setReceiver:self.heartRateSink];
@@ -683,27 +703,8 @@ static NSString* const kDatabaseName               = @"db.sqlite";
 }
         else
         {
-            NSFileManager*  fileManager = [NSFileManager defaultManager];
-            NSString*       filePath    = [[self applicationDocumentsDirectory] stringByAppendingPathComponent:@"db.sqlite"];
-
-            if ([fileManager fileExistsAtPath:filePath])
-            {
-                NSError*        error       = nil;
-                NSDictionary*   attributes  = [fileManager attributesOfItemAtPath:filePath error:&error];
-                
-                if (error)
-                {
-                    APCLogError2(error);
-                    
-                    consentDate = [[NSDate date] startOfDay];
-                }
-                else
-{
-                    consentDate = [attributes fileCreationDate];
-                }
-            }
+            consentDate = determineConsentDate(self);
         }
-        
         return consentDate;
     };
     
@@ -715,14 +716,14 @@ static NSString* const kDatabaseName               = @"db.sqlite";
     APCPassiveDataSink* receiver            = [[APCPassiveDataSink alloc] initWithIdentifier:@"motionActivityCollector"
                                                                                  columnNames:motionColumnNames
                                                                           operationQueueName:@"APCCoreMotion Activity Collector"
-                                                                            andDataProcessor:CoreMotionDataSerializer];
+                                                                               dataProcessor:CoreMotionDataSerializer
+                                                                           fileProtectionKey:NSFileProtectionCompleteUntilFirstUserAuthentication];
     
     [motionCollector setReceiver:receiver];
     [motionCollector setDelegate:receiver];
     [motionCollector start];
     [self.passiveDataCollector addDataSink:motionCollector];
 }
-
     
 - (NSDate*)checkSevenDayFitnessStartDate
 {
