@@ -384,7 +384,7 @@ static NSDate *determineConsentDate(id object)
         NSString  *answer = nil;
         if (source == nil) {
             answer = @"not available";
-        } else if ([UIDevice.currentDevice.name isEqualToString:source] == YES) {
+        } else if ([UIDevice.currentDevice.name isEqualToString:source] != NO) {
             if ([APCDeviceHardware platformString] != nil) {
                 answer = [APCDeviceHardware platformString];
             } else {
@@ -522,7 +522,7 @@ static NSDate *determineConsentDate(id object)
     
     // Just a note here that we are using n collectors to 1 data sink for quantity sample type data.
     NSArray*                    quantityColumnNames = @[@"startTime,endTime,type,value,unit,source,sourceIdentifier"];
-    APCPassiveDataSink*         quantityreceiver    =[[APCPassiveDataSink alloc] initWithQuantityIdentifier:@"HealthKitDataCollector"
+    APCPassiveDataSink*         quantityreceiver    = [[APCPassiveDataSink alloc] initWithQuantityIdentifier:@"HealthKitDataCollector"
                                                                                                 columnNames:quantityColumnNames
                                                                                          operationQueueName:@"APCHealthKitQuantity Activity Collector"
                                                                                               dataProcessor:QuantityDataSerializer
