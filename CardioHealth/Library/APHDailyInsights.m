@@ -60,6 +60,7 @@ NSString *const kDietSurveyFishKey        = @"fish";
 NSString *const kDailyInsightIconKey       = @"insightIconKey";
 NSString *const kDailyInsightCaptionKey    = @"insightCaptionKey";
 NSString *const kDailyInsightSubCaptionKey = @"insightSubCaptionKey";
+NSString *const kDatasetRawDataKey          = @"datasetRawData";
 
 NSString *const kAPHDailyInsightDataCollectionIsCompleteNotification = @"APHDailyInsightDataCollectionIsCompleteNotification";
 NSInteger const kNumberOfDaysForLookup                               = -90; // Going back 90 days from current date.
