@@ -42,12 +42,12 @@
 
 @implementation APHHeartRateSink
 
-- (void)didRecieveUpdatedValuesFromCollector:(id)result
+- (void)didReceiveUpdatedHealthkitSamplesFromCollector:(id)results withUnit:(HKUnit *)unit
 {
     //  Expecting to get an array of updates.
-    if ([result isKindOfClass:[NSArray class]])
+    if ([results isKindOfClass:[NSArray class]])
     {
-        NSArray*    arrayResult     = (NSArray*)result;
+        NSArray*    arrayResult     = (NSArray*)results;
         NSDate*     targetDate      = [self applicationActiveDate];
         
         NSUInteger  ndx = [arrayResult indexOfObjectPassingTest:^(HKQuantitySample* qtySample, NSUInteger __unused ndx, BOOL* __unused stop)
@@ -61,17 +61,17 @@
             self.numberOfUpdates    = arrayResult.count - ndx;
         }
     }
-    
-    [super didRecieveUpdatedValuesFromCollector:result];
+    [super didReceiveUpdatedHealthkitSamplesFromCollector:results withUnit:unit];
 }
 
-- (instancetype)initWithIdentifier:(NSString*)identifier
-                       columnNames:(NSArray*)columnNames
-                operationQueueName:(NSString*)operationQueueName
-                     dataProcessor:(CSVSerializer)transformer
-                      andAppLaunch:(ForegroundLaunchDate)foregroundLaunchDate
+- (instancetype)initWithQuantityIdentifier:(NSString*)identifier
+                               columnNames:(NSArray*)columnNames
+                        operationQueueName:(NSString*)operationQueueName
+                             dataProcessor:(APCQuantityCSVSerializer)transformer
+                         fileProtectionKey:(NSString*)fileProtectionKey
+                              andAppLaunch:(ForegroundLaunchDate)foregroundLaunchDate
 {
-    self = [super initWithIdentifier:identifier columnNames:columnNames operationQueueName:operationQueueName andDataProcessor:transformer];
+    self = [super initWithQuantityIdentifier:identifier columnNames:columnNames operationQueueName:operationQueueName dataProcessor:transformer fileProtectionKey:fileProtectionKey];
     
     if (self)
     {
