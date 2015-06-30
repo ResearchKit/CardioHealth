@@ -181,14 +181,6 @@ static NSString* const kFitnessWalkText = @"Walk as far as you can for six minut
             pedometerResults = [self pedometerData:fileResult.fileURL];
         }
     }
-    
-//    NSDateComponents*       components      = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear
-//                                                                              fromDate:[NSDate date]];
-//    NSInteger               day             = [components day];
-//    NSInteger               month           = [components month]; //    Not zero based.
-//    NSDateFormatter*        df              = [[NSDateFormatter alloc] init];
-//    NSString*               monthName       = [[df monthSymbols] objectAtIndex:(month-1)];
-//    NSString*               completedDate   = [NSString stringWithFormat:@"%@ %ld", monthName, (long)day];
 
     NSDateFormatter *format = [[NSDateFormatter alloc] init];
     [format setDateStyle:NSDateFormatterMediumStyle];
