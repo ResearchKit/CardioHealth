@@ -2,13 +2,13 @@
     "identifier": "day_one",
     "type": "Survey",
     "name": "DayOne",
-    "questions": [
+    "elements": [
                   
                   
                   {
                       "identifier": "welcome",
                       "prompt": "Welcome and congratulations on being an integral part of the MyHeart Counts study of cardiovascular health. Your heart counts!",
-                      "detail" : "Are you ready to start following your physical activity and sleep for the next 7 days? You should do your usual amount of activity during this time.",
+                      "promptDetail" : "Are you ready to start following your physical activity and sleep for the next 7 days? You should do your usual amount of activity during this time.",
                       "guid": "832fff30-3d2e-41c2-9a36-17b72887819a",
                       "type": "SurveyQuestion",
                       "constraints": {
@@ -29,7 +29,7 @@
                    {
                   "identifier": "device",
                   "prompt": "Which of the following devices do you plan to have on you during the next 7 days to help monitor your regular physical activity and sleep through your iPhone’s Health app?",
-                  "detail" : "Select all that apply.",
+                  "promptDetail" : "Select all that apply.",
                   "guid": "854fff30-3d2e-41c2-9a36-76b72887819a",
                   "type": "SurveyQuestion",
                   "constraints": {
@@ -62,7 +62,7 @@
                    {
                   "identifier": "labwork",
                   "prompt": "After 7 days, you will be asked to calculate your heart risk score, which requires entering your cholesterol blood values and blood pressure. Will you have those data in the next 7 days? ",
-                  "detail" : "",
+                  "promptDetail" : "",
                   "guid": "854fff35-3d2e-41c2-9a36-76b22887819a",
                   "type": "SurveyQuestion",
                   "constraints": {

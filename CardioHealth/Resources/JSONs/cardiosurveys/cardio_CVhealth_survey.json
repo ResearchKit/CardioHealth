@@ -1,7 +1,7 @@
 {
    "name": "Cardiovascular_Health_Survey1",
     "identifier": "risk_factors",
-    "questions": 
+    "elements": 
     [
      
       {
@@ -15,13 +15,13 @@
           [
             {
               "label": "Father or brother",
-              "detail": "Heart attack or coronary artery disease before age 55",
+              "promptDetail": "Heart attack or coronary artery disease before age 55",
               "value": 1,
               "type": "SurveyQuestionOption"
             },
             {
               "label": "Mother or sister",
-              "detail": "Heart attack or coronary artery disease before age 65",
+              "promptDetail": "Heart attack or coronary artery disease before age 65",
               "value": 2,
               "type": "SurveyQuestionOption"
             },
