@@ -10,7 +10,7 @@
                   {
                       "identifier": "phone_on_user",
                       "prompt": "In the last 24 hours, how often did you have your phone or wearable device with you?",
-                      "detail" : "Keeping your phone or device on you will help to better understand your daily activity, which will help the study.",
+                      "promptDetail" : "Keeping your phone or device on you will help to better understand your daily activity, which will help the study.",
                       "guid": "854fff30-3d2e-41c2-9a36-17b72887819a",
                       "type": "SurveyQuestion",
                       "constraints": {
@@ -49,7 +49,7 @@
                   {
                   "identifier": "activity1_option",
                   "prompt": "Did you perform any physical activities yesterday that you think were not recorded by your phone \n or wearable device?",
-                  "detail" : "Some activities, such as weight lifting, may not be fully recorded by activity sensors.",
+                  "promptDetail" : "Some activities, such as weight lifting, may not be fully recorded by activity sensors.",
                   "uiHint": "checkbox",
                   "guid": "854cff00-3b2f-41c2-9b88-17b72287819a",
                   "type": "SurveyQuestion",
@@ -72,7 +72,7 @@
                   {
                   "identifier": "activity1_type",
                   "prompt": "Which activity did you do that may have been improperly recorded?",
-                  "detail" : "",
+                  "promptDetail" : "",
                   "guid": "854fff30-3d2e-41c2-9a36-17b72887819a",
                   "type": "SurveyQuestion",
                   "constraints": {
@@ -168,7 +168,7 @@
                   {
                   "identifier": "activity2_option",
                   "prompt": "Did you perform any additional physical activities yesterday that you think were not recorded by your phone \n or wearable device?",
-                  "detail" : "",
+                  "promptDetail" : "",
                   "uiHint": "checkbox",
                   "guid": "854cff00-3b2f-41c2-9b88-17b72287819a",
                   "type": "SurveyQuestion",
@@ -191,7 +191,7 @@
                   {
                   "identifier": "activity2_type",
                   "prompt": "Which activity did you do that may have been improperly recorded?",
-                  "detail" : "",
+                  "promptDetail" : "",
                   "guid": "854fff30-3d2e-41c2-9a36-17b72887819a",
                   "type": "SurveyQuestion",
                   "constraints": {
@@ -299,7 +299,7 @@
                   "guid":"db8d54db-c00e-4203-af71-2701253aa9e9",
                   "identifier":"sleep_time",
                   "prompt":"How many hours of sleep did you get last night?",
-                  "detail":"Use the below scroll to indicate how long, in hours and minutes, you think you slept last night.",
+                  "promptDetail":"Use the below scroll to indicate how long, in hours and minutes, you think you slept last night.",
                   "constraints":{
                   "rules":[
                   
