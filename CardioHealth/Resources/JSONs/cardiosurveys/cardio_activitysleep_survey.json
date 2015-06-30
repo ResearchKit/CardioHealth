@@ -2,7 +2,7 @@
     "name": "General Blood Pressure Survey",
     "type": "Survey",
     "identifier": "ActivitySleep",
-    "questions": [
+    "elements": [
                   {
                   "guid": "1992b80e-912c-4b05-b29b-5c35f02688b4",
                   "identifier": "work",

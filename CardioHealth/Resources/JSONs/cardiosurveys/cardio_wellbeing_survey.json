@@ -1,7 +1,7 @@
 {
     "name":"Well-Being_And_Risk_Perception",
     "identifier":"satisfied",
-    "questions":
+    "elements":
     [
         {
             "guid": "854afd00-3d2b-41c2-9b36-17c72287819b",
