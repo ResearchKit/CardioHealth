@@ -50,7 +50,7 @@ static NSString *kSevenDayFitnessCompleteStep = @"sevenDayFitnessCompleteStep";
     [super viewDidLoad];
     
     self.showsProgressInNavigationBar = NO;
-
+    self.canGenerateResult = NO;
 }
 
 - (void) viewWillAppear:(BOOL)animated {
