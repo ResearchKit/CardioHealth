@@ -54,15 +54,18 @@ static NSString* const  kDayOneCheckinSurveyIdentifier                  = @"4-Da
 /*********************************************************************************/
 #pragma mark - Initializations Options
 /*********************************************************************************/
+
+static NSString* const  kMotionActivityCollector   = @"motionActivityCollector";
+static NSString* const  kHealthKitWorkoutCollector = @"HealthKitWorkoutCollector";
+static NSString* const  kHealthKitDataCollector    = @"HealthKitDataCollector";
+static NSString* const  kHealthKitSleepCollector   = @"HealthKitSleepCollector";
 static NSString* const  kStudyIdentifier           = @"studyname";
 static NSString* const  kAppPrefix                 = @"studyname";
 static NSString* const  kVideoShownKey             = @"VideoShown";
 static NSString* const  kConsentPropertiesFileName = @"APHConsentSection";
-
 static NSString* const kPreviousVersion            = @"previousVersion";
 static NSString* const kCFBundleVersion            = @"CFBundleVersion";
 static NSString* const kCFBundleShortVersionString = @"CFBundleShortVersionString";
-
 static NSString* const kShortVersionStringKey      = @"shortVersionString";
 static NSString* const kMinorVersion               = @"version";
 
@@ -522,19 +525,19 @@ static NSDate *determineConsentDate(id object)
     
     // Just a note here that we are using n collectors to 1 data sink for quantity sample type data.
     NSArray*                    quantityColumnNames = @[@"startTime,endTime,type,value,unit,source,sourceIdentifier"];
-    APCPassiveDataSink*         quantityreceiver    = [[APCPassiveDataSink alloc] initWithQuantityIdentifier:@"HealthKitDataCollector"
+    APCPassiveDataSink*         quantityreceiver    = [[APCPassiveDataSink alloc] initWithQuantityIdentifier:kHealthKitDataCollector
                                                                                                 columnNames:quantityColumnNames
                                                                                          operationQueueName:@"APCHealthKitQuantity Activity Collector"
                                                                                               dataProcessor:QuantityDataSerializer
                                                                                           fileProtectionKey:NSFileProtectionCompleteUnlessOpen];
     NSArray*                    workoutColumnNames  = @[@"startTime,endTime,type,workoutType,total distance,unit,energy consumed,unit,source,sourceIdentifier,metadata"];
-    APCPassiveDataSink*         workoutReceiver     = [[APCPassiveDataSink alloc] initWithIdentifier:@"HealthKitWorkoutCollector"
+    APCPassiveDataSink*         workoutReceiver     = [[APCPassiveDataSink alloc] initWithIdentifier:kHealthKitWorkoutCollector
                                                                                          columnNames:workoutColumnNames
                                                                                   operationQueueName:@"APCHealthKitWorkout Activity Collector"
                                                                                        dataProcessor:WorkoutDataSerializer
                                                                                    fileProtectionKey:NSFileProtectionCompleteUnlessOpen];
     NSArray*                    categoryColumnNames = @[@"startTime,type,category value,value,unit,source,sourceIdentifier"];
-    APCPassiveDataSink*         sleepReceiver       = [[APCPassiveDataSink alloc] initWithIdentifier:@"HealthKitSleepCollector"
+    APCPassiveDataSink*         sleepReceiver       = [[APCPassiveDataSink alloc] initWithIdentifier:kHealthKitSleepCollector
                                                                                          columnNames:categoryColumnNames
                                                                                   operationQueueName:@"APCHealthKitSleep Activity Collector"
                                                                                        dataProcessor:CategoryDataSerializer
@@ -665,7 +668,7 @@ static NSDate *determineConsentDate(id object)
         return consentDate;
     };
     
-    APCCoreMotionBackgroundDataCollector *motionCollector = [[APCCoreMotionBackgroundDataCollector alloc] initWithIdentifier:@"motionActivityCollector"
+    APCCoreMotionBackgroundDataCollector *motionCollector = [[APCCoreMotionBackgroundDataCollector alloc] initWithIdentifier:kMotionActivityCollector
                                                                                                               dateAnchorName:@"APCCoreMotionCollectorAnchorName"
                                                                                                             launchDateAnchor:LaunchDate];
     

@@ -125,9 +125,7 @@ static NSString* const kFitnessWalkText = @"Walk as far as you can for six minut
 
 - (void)taskViewController:(ORKTaskViewController *) __unused taskViewController stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     
-    if ([stepViewController.step.identifier isEqualToString:kIntroStep] || [stepViewController.step.identifier isEqualToString:kIntroOneStep]) {
-        
-    } else if ([stepViewController.step.identifier isEqualToString:kConclusionStep]) {
+    if ([stepViewController.step.identifier isEqualToString:kConclusionStep]) {
         [[UIView appearance] setTintColor:[UIColor appTertiaryColor1]];
     }
 
@@ -183,14 +181,14 @@ static NSString* const kFitnessWalkText = @"Walk as far as you can for six minut
             pedometerResults = [self pedometerData:fileResult.fileURL];
         }
     }
+
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];
+    [format setDateStyle:NSDateFormatterMediumStyle];
+    [format setDateFormat:@"MMM dd"];
     
-    NSDateComponents*       components      = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear
-                                                                              fromDate:[NSDate date]];
-    NSInteger               day             = [components day];
-    NSInteger               month           = [components month]; //    Not zero based.
-    NSDateFormatter*        df              = [[NSDateFormatter alloc] init];
-    NSString*               monthName       = [[df monthSymbols] objectAtIndex:(month-1)];
-    NSString*               completedDate   = [NSString stringWithFormat:@"%@ %ld", monthName, (long)day];
+    NSDate *now = [NSDate date];
+    
+    NSString *completedDate = [format stringFromDate:now];
     
     if (completedDate)
     {

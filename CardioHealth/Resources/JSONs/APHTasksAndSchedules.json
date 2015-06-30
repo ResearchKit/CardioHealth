@@ -21,7 +21,7 @@
                                        "taskClassName": "APHFitnessTaskViewController",
                                        "taskCompletionTimeString" : "6-9 Minutes"
                                        }]
-                  },
+                  },                  
                   {
                   "scheduleType"    : "recurring",
                   "scheduleString"  : "0 5 * * *",
