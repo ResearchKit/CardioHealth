@@ -32,7 +32,6 @@
 		5B73CAD01A89BE5200FFE79C /* APHWalkTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B73CACF1A89BE5200FFE79C /* APHWalkTestViewController.m */; };
 		5B73CAD41A89C12400FFE79C /* APHWalkTestDetailsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B73CAD31A89C12400FFE79C /* APHWalkTestDetailsTableViewCell.m */; };
 		5B73CADC1A8A002B00FFE79C /* APHWalkingTestResults.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B73CADB1A8A002B00FFE79C /* APHWalkingTestResults.m */; };
-		5B7D47031B05271800958921 /* WalkingTestStats.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B7D47021B05271800958921 /* WalkingTestStats.json */; };
 		5B7D47291B05D7E300958921 /* APHWalkingTestComparisonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7D47281B05D7E300958921 /* APHWalkingTestComparisonViewController.m */; };
 		5B827B451A7F837700C685A3 /* APHDashboardWalkTestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B827B441A7F837700C685A3 /* APHDashboardWalkTestTableViewCell.m */; };
 		5B827B6A1A8222AF00C685A3 /* APHTableViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B827B691A8222AF00C685A3 /* APHTableViewItem.m */; };
@@ -47,7 +46,6 @@
 		74EF8E371ABF0139001B47E1 /* BridgeSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 74EF8E2D1ABF0102001B47E1 /* BridgeSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7B0E172D1A3FBDD70079E536 /* APHCardiovascularHealthSurveyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0E172C1A3FBDD70079E536 /* APHCardiovascularHealthSurveyController.m */; };
 		7B41047E19E5D94F00592B96 /* APHFitnessTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B41045A19E5D94F00592B96 /* APHFitnessTaskViewController.m */; };
-		7B4E38411AC0B296009C5C93 /* APHAppDelegate+APHMigration.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B4E38401AC0B296009C5C93 /* APHAppDelegate+APHMigration.m */; };
 		7B5BEC9A1A34F0B7007CEA94 /* cardio_activitysleep_survey.json in Resources */ = {isa = PBXBuildFile; fileRef = 7B5BEC961A34F0B7007CEA94 /* cardio_activitysleep_survey.json */; };
 		7B5BEC9B1A34F0B7007CEA94 /* cardio_CVhealth_survey.json in Resources */ = {isa = PBXBuildFile; fileRef = 7B5BEC971A34F0B7007CEA94 /* cardio_CVhealth_survey.json */; };
 		7B5BEC9C1A34F0B7007CEA94 /* cardio_diet_survey.json in Resources */ = {isa = PBXBuildFile; fileRef = 7B5BEC981A34F0B7007CEA94 /* cardio_diet_survey.json */; };
@@ -114,13 +112,6 @@
 			remoteGlobalIDString = B183A4731A8535D100C76870;
 			remoteInfo = OpenResearchKit;
 		};
-		7496F77E1ADB3ED600D428FC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 74FED8081ABDFB0B009D970B /* ResearchKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 86CC8E9A1AC09332001CCD89;
-			remoteInfo = ResearchKitTests;
-		};
 		74EF8E2C1ABF0102001B47E1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 74EF8E221ABF0101001B47E1 /* BridgeSDK.xcodeproj */;
@@ -169,6 +160,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = F5179B3419D09128001DCCB7;
 			remoteInfo = APCAppCoreTests;
+		};
+		7B5AE9F11B41C94B0068EBA7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 74FED8081ABDFB0B009D970B /* ResearchKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 86CC8E9A1AC09332001CCD89;
+			remoteInfo = ResearchKitTests;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -250,8 +248,6 @@
 		7B0E172C1A3FBDD70079E536 /* APHCardiovascularHealthSurveyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHCardiovascularHealthSurveyController.m; sourceTree = "<group>"; };
 		7B41045919E5D94F00592B96 /* APHFitnessTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APHFitnessTaskViewController.h; sourceTree = "<group>"; };
 		7B41045A19E5D94F00592B96 /* APHFitnessTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APHFitnessTaskViewController.m; sourceTree = "<group>"; };
-		7B4E383F1AC0B296009C5C93 /* APHAppDelegate+APHMigration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "APHAppDelegate+APHMigration.h"; sourceTree = "<group>"; };
-		7B4E38401AC0B296009C5C93 /* APHAppDelegate+APHMigration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "APHAppDelegate+APHMigration.m"; sourceTree = "<group>"; };
 		7B5BEC961A34F0B7007CEA94 /* cardio_activitysleep_survey.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cardio_activitysleep_survey.json; sourceTree = "<group>"; };
 		7B5BEC971A34F0B7007CEA94 /* cardio_CVhealth_survey.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cardio_CVhealth_survey.json; sourceTree = "<group>"; };
 		7B5BEC981A34F0B7007CEA94 /* cardio_diet_survey.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cardio_diet_survey.json; sourceTree = "<group>"; };
@@ -468,7 +464,7 @@
 			isa = PBXGroup;
 			children = (
 				74FED81C1ABDFB34009D970B /* ResearchKit.framework */,
-				B1509AFD1AC363D10090F0B0 /* ResearchKitTests.xctest */,
+				7B5AE9F21B41C94B0068EBA7 /* ResearchKitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -510,8 +506,6 @@
 		7B4E383E1AC0B296009C5C93 /* Migration */ = {
 			isa = PBXGroup;
 			children = (
-				7B4E383F1AC0B296009C5C93 /* APHAppDelegate+APHMigration.h */,
-				7B4E38401AC0B296009C5C93 /* APHAppDelegate+APHMigration.m */,
 			);
 			path = Migration;
 			sourceTree = "<group>";
@@ -884,13 +878,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		7496F77F1ADB3ED600D428FC /* ResearchKitTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = ResearchKitTests.xctest;
-			remoteRef = 7496F77E1ADB3ED600D428FC /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		74EF8E2D1ABF0102001B47E1 /* BridgeSDK.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -926,11 +913,11 @@
 			remoteRef = 74FED8271ABDFB34009D970B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		B1509AFD1AC363D10090F0B0 /* ResearchKitTests.xctest */ = {
+		7B5AE9F21B41C94B0068EBA7 /* ResearchKitTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = ResearchKitTests.xctest;
-			remoteRef = B1509AFC1AC363D10090F0B0 /* PBXContainerItemProxy */;
+			remoteRef = 7B5AE9F11B41C94B0068EBA7 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -1026,7 +1013,6 @@
 				5B203DD01B0505AA00528BAF /* APHDashboardWalkTestComparisonTableViewCell.m in Sources */,
 				08C2328A1A15796E00DB4EF9 /* APHSevenDayFitnessAllocationTaskViewController.m in Sources */,
 				F55BBE6B19D362D0003CA0F9 /* APHDashboardViewController.m in Sources */,
-				7B4E38411AC0B296009C5C93 /* APHAppDelegate+APHMigration.m in Sources */,
 				7B716EAB1B3A250D000ACBA7 /* APHDailyInsight.m in Sources */,
 				7BAEF5351AF964B000E5B1BA /* APHHeartRateSink.m in Sources */,
 			);
@@ -1058,136 +1044,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		36DBC4FC1A7FD9FF00720345 /* DebugAndSendToDataVerificationServer */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-					"USE_DATA_VERIFICATION_CLIENT=1",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = YES;
-				OTHER_CFLAGS = (
-					"-Wall",
-					"-Wextra",
-				);
-				SDKROOT = iphoneos;
-			};
-			name = DebugAndSendToDataVerificationServer;
-		};
-		36DBC4FD1A7FD9FF00720345 /* DebugAndSendToDataVerificationServer */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = CardioHealth/CardioHealth.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
-				INFOPLIST_FILE = CardioHealth/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-			};
-			name = DebugAndSendToDataVerificationServer;
-		};
-		F58767F819E4A49D00254897 /* Development */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = YES;
-				OTHER_CFLAGS = (
-					"-Wall",
-					"-Wextra",
-				);
-				SDKROOT = iphoneos;
-			};
-			name = Development;
-		};
-		F58767F919E4A49D00254897 /* Development */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = CardioHealth/CardioHealth.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"$(inherited)",
-					"DEVELOPMENT=1",
-				);
-				INFOPLIST_FILE = CardioHealth/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-			};
-			name = Development;
-		};
 		F5F6451A19D35BA2004CFBB2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1314,8 +1170,6 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F5F6451A19D35BA2004CFBB2 /* Debug */,
-				36DBC4FC1A7FD9FF00720345 /* DebugAndSendToDataVerificationServer */,
-				F58767F819E4A49D00254897 /* Development */,
 				F5F6451B19D35BA2004CFBB2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -1325,8 +1179,6 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F5F6451D19D35BA2004CFBB2 /* Debug */,
-				36DBC4FD1A7FD9FF00720345 /* DebugAndSendToDataVerificationServer */,
-				F58767F919E4A49D00254897 /* Development */,
 				F5F6451E19D35BA2004CFBB2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
