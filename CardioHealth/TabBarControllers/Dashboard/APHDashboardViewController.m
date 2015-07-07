@@ -307,7 +307,7 @@ static CGFloat          kSevenDayFitnessRowHeight               = 288.0f;
                         item.identifier = kAPHDashboardWalkTestComparisonTableViewCellIdentifier;
                         item.tintColor  = [UIColor colorForTaskId:item.taskId];
                         item.editable   = YES;
-                        item.info       = NSLocalizedString(@"This graph shows a comparison between your latest performance on the 6-Minute Walk Test and the population distribution.  The x-axis shows the distance walked during the test, the y-axis shows the percent of the population that walked each distance.", nil);
+                        item.info       = NSLocalizedString(@"This graph shows a comparison of your latest performance in the 6-Minute Walk Test and that of other study participants of your gender. The x-axis shows the distance walked during the test, the y-axis shows the percent of the population that walked each distance. The red line represents your performance", nil);
                         item.distanceWalked = walkingTestItem.distanceWalked;
                         APCTableViewRow* row = [APCTableViewRow new];
                         

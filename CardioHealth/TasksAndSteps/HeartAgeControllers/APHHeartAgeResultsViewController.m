@@ -320,7 +320,7 @@ static CGFloat kTitleFontSize = 17.0f;
         else if ([objectId isEqualToString:kEighteenToTwentyInstructions]) {
             APHInstructionsForBelowTwentyTableViewCell *titleSummaryCell = [tableView dequeueReusableCellWithIdentifier:@"eighteenToTwentyInstructions"];
             
-            titleSummaryCell.descriptionLabel.text = NSLocalizedString(@"Due to your current age we have no way to perform any calculations to give you any further information about your risk for ASVCD.", nil);
+            titleSummaryCell.descriptionLabel.text = NSLocalizedString(@"Due to your current age we have no way to perform any calculations to give you any further information about your risk for ASVCD.\n", nil);
             cell = titleSummaryCell;
         }
     }
