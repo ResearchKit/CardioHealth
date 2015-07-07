@@ -30,8 +30,7 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
 // 
- 
-@import APCAppCore;
+
 #import "APHAppDelegate.h"
 #import "APHHeartRateSink.h"
 
@@ -691,40 +690,6 @@ static NSDate *determineConsentDate(id object)
     NSDate*             fitnessStartDate    = [defaults objectForKey:kSevenDayFitnessStartDateKey];
     
     return fitnessStartDate;
-}
-
-- (NSArray *)offsetForTaskSchedules
-{
-    return @[
-             @{
-                 kScheduleOffsetTaskIdKey: @"1-DailyCheckin-be42dc21-4706-478a-a398-10cabb9c7d78",
-                 kScheduleOffsetOffsetKey: @(1)
-                 },
-             @{
-                 kScheduleOffsetTaskIdKey: @"3-CardioVascularHealthSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66",
-                 kScheduleOffsetOffsetKey: @(1)
-                 },
-             @{
-                 kScheduleOffsetTaskIdKey: @"4-DietSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66",
-                 kScheduleOffsetOffsetKey: @(1)
-                 },
-             @{
-                 kScheduleOffsetTaskIdKey: @"2-APHHeartAge-7259AC18-D711-47A6-ADBD-6CFCECDED1DF",
-                 kScheduleOffsetOffsetKey: @(7)
-                 },
-             @{
-                 kScheduleOffsetTaskIdKey: @"3-APHFitnessTest-00000000-1111-1111-1111-F810BE28D995",
-                 kScheduleOffsetOffsetKey: @(7)
-                 },
-             @{
-                 kScheduleOffsetTaskIdKey: @"2-WellBeingAndRiskPerceptionSurvey-1E174061-5B02-11E4-8ED6-0800200C9A66",
-                 kScheduleOffsetOffsetKey: @(1)
-                 },
-             @{
-                 kScheduleOffsetTaskIdKey: @"5-WellBeingAndRiskPerceptionSurvey-1E174061-5B02-11E4-8ED6-0800200C0000",
-                 kScheduleOffsetOffsetKey: @(7)
-                 }
-             ];
 }
 
 - (NSArray *)allSetTextBlocks
