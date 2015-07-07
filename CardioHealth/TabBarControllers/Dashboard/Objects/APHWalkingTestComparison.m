@@ -121,7 +121,7 @@
     
 }
 
-- (NSString *)lineGraph:(APCLineGraphView *)graphView titleForXAxisAtIndex:(NSInteger)pointIndex
+- (NSString *)lineGraph:(APCLineGraphView *) __unused graphView titleForXAxisAtIndex:(NSInteger)pointIndex
 {
     CGFloat distance = [self xValueFromZScore:[self.zScores[pointIndex] integerValue]];
     
