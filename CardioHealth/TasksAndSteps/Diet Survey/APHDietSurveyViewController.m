@@ -103,7 +103,7 @@ NSString *const kDietSurveyStepIdentifierSodium      = @"sodium";
     NSData *dietSurveyData = [NSJSONSerialization dataWithJSONObject:dietSurveyResults options:0 error:&error];
     
     if (dietSurveyData) {
-        dietSurveySummary = [[NSString alloc] initWithData:dietSurveySummary encoding:NSUTF8StringEncoding];
+        dietSurveySummary = [[NSString alloc] initWithData:dietSurveyData encoding:NSUTF8StringEncoding];
     } else {
         APCLogError2(error);
     }
