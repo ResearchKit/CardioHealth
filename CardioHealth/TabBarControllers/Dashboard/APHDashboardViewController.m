@@ -186,8 +186,8 @@ static CGFloat          kSevenDayFitnessRowHeight               = 288.0f;
     {
         NSMutableArray *rowItems = [NSMutableArray new];
         
-        NSUInteger allScheduledTasks = ((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.countOfAllScheduledTasksForToday;
-        NSUInteger completedScheduledTasks = ((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.countOfCompletedScheduledTasksForToday;
+        NSUInteger allScheduledTasks = ((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.countOfTotalRequiredTasksForToday;
+        NSUInteger completedScheduledTasks = ((APCAppDelegate *)[UIApplication sharedApplication].delegate).dataSubstrate.countOfTotalCompletedTasksForToday;
                 
         {
             APCTableViewDashboardProgressItem *item = [APCTableViewDashboardProgressItem new];
@@ -307,7 +307,7 @@ static CGFloat          kSevenDayFitnessRowHeight               = 288.0f;
                         item.identifier = kAPHDashboardWalkTestComparisonTableViewCellIdentifier;
                         item.tintColor  = [UIColor colorForTaskId:item.taskId];
                         item.editable   = YES;
-                        item.info       = NSLocalizedString(@"This graph shows a comparison between your latest performance on the 6-Minute Walk Test and the population distribution.  The x-axis shows the distance walked during the test, the y-axis shows the percent of the population that walked each distance.", nil);
+                        item.info       = NSLocalizedString(@"This graph shows a comparison of your latest performance in the 6-Minute Walk Test and that of other study participants of your gender. The x-axis shows the distance walked during the test, the y-axis shows the percent of the population that walked each distance. The red line represents your performance", nil);
                         item.distanceWalked = walkingTestItem.distanceWalked;
                         APCTableViewRow* row = [APCTableViewRow new];
                         
@@ -379,149 +379,152 @@ static CGFloat          kSevenDayFitnessRowHeight               = 288.0f;
 {
     UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
     
-    APCTableViewDashboardItem *dashboardItem = (APCTableViewDashboardItem *)[self itemForIndexPath:indexPath];
-    
-    if ([dashboardItem isKindOfClass:[APHTableViewDashboardFitnessControlItem class]]){
+    if (self.items.count > 0)
+    {
+        APCTableViewDashboardItem *dashboardItem = (APCTableViewDashboardItem *)[self itemForIndexPath:indexPath];
+        
+        if ([dashboardItem isKindOfClass:[APHTableViewDashboardFitnessControlItem class]]){
 
-        
-    } else if ([dashboardItem isKindOfClass:[APHTableViewDashboardSevenDayFitnessItem class]]){
-        
-        
-        APHTableViewDashboardSevenDayFitnessItem *fitnessItem = (APHTableViewDashboardSevenDayFitnessItem *)dashboardItem;
-        self.currentPieGraphIndexPath = indexPath;
-        APCDashboardPieGraphTableViewCell *pieGraphCell = (APCDashboardPieGraphTableViewCell *)cell;
-        
-        pieGraphCell.pieGraphView.datasource = self;
-        pieGraphCell.textLabel.text = @"";
-        pieGraphCell.subTitleLabel.text = fitnessItem.numberOfDaysString;
-        
-        pieGraphCell.subTitleLabel2.alpha = 0;
-        
-        [UIView animateWithDuration:0.2 animations:^{
-            pieGraphCell.subTitleLabel2.text = fitnessItem.activeMinutesString;
-            pieGraphCell.subTitleLabel2.alpha = 1;
-        }];
-        
-        NSMutableAttributedString *attirbutedDistanceString = nil;
-        
-        if (fitnessItem.activeMinutesString != nil && ![fitnessItem.activeMinutesString isEqualToString:@""]) {
-            attirbutedDistanceString = [[NSMutableAttributedString alloc] initWithString:fitnessItem.activeMinutesString];
-            [attirbutedDistanceString addAttribute:NSFontAttributeName value:[UIFont appMediumFontWithSize:kTitleFontSize] range:NSMakeRange(0, (fitnessItem.activeMinutesString.length - @" Active Minutes".length))];
-            [attirbutedDistanceString addAttribute:NSFontAttributeName value:[UIFont appRegularFontWithSize:kDetailFontSize] range: [fitnessItem.activeMinutesString rangeOfString:@" Active Minutes"]];
-        }
-
-        /*
-         Total number of steps.  This "nil" check keeps it blank until
-         we hear back from HealthKit (in -statsCollectionQuery, below).
-         */
-        NSMutableAttributedString *attributedTotalStepsString = nil;
-
-        if (self.totalStepsValue != nil)
-        {
-            NSString *explanation         = @" Steps Today";
-            NSString *nonAttributedString = [NSString stringWithFormat: @"%@%@", self.totalStepsValue, explanation];
-            attributedTotalStepsString    = [[NSMutableAttributedString alloc] initWithString: nonAttributedString];
-
-            [attributedTotalStepsString addAttribute: NSFontAttributeName
-                                               value: [UIFont appMediumFontWithSize:kTitleFontSize]
-                                               range: NSMakeRange (0, nonAttributedString.length)];
-
-            [attributedTotalStepsString addAttribute: NSFontAttributeName
-                                               value: [UIFont appRegularFontWithSize:kDetailFontSize]
-                                               range: [nonAttributedString rangeOfString: explanation]];
-        }
-
-
-        pieGraphCell.subTitleLabel3.attributedText = attributedTotalStepsString;
-        
-        pieGraphCell.subTitleLabel2.attributedText = attirbutedDistanceString;
-        
-        pieGraphCell.title = fitnessItem.caption;
-        pieGraphCell.tintColor = fitnessItem.tintColor;
-        pieGraphCell.pieGraphView.shouldAnimateLegend = NO;
-        
-        if (!self.pieGraphDataExists) {
             
-            [pieGraphCell.pieGraphView setNeedsLayout];
+        } else if ([dashboardItem isKindOfClass:[APHTableViewDashboardSevenDayFitnessItem class]]){
             
-            [self statsCollectionQueryForStep];
-            self.pieGraphDataExists = YES;
-        }
+            
+            APHTableViewDashboardSevenDayFitnessItem *fitnessItem = (APHTableViewDashboardSevenDayFitnessItem *)dashboardItem;
+            self.currentPieGraphIndexPath = indexPath;
+            APCDashboardPieGraphTableViewCell *pieGraphCell = (APCDashboardPieGraphTableViewCell *)cell;
+            
+            pieGraphCell.pieGraphView.datasource = self;
+            pieGraphCell.textLabel.text = @"";
+            pieGraphCell.subTitleLabel.text = fitnessItem.numberOfDaysString;
+            
+            pieGraphCell.subTitleLabel2.alpha = 0;
+            
+            [UIView animateWithDuration:0.2 animations:^{
+                pieGraphCell.subTitleLabel2.text = fitnessItem.activeMinutesString;
+                pieGraphCell.subTitleLabel2.alpha = 1;
+            }];
+            
+            NSMutableAttributedString *attirbutedDistanceString = nil;
+            
+            if (fitnessItem.activeMinutesString != nil && ![fitnessItem.activeMinutesString isEqualToString:@""]) {
+                attirbutedDistanceString = [[NSMutableAttributedString alloc] initWithString:fitnessItem.activeMinutesString];
+                [attirbutedDistanceString addAttribute:NSFontAttributeName value:[UIFont appMediumFontWithSize:kTitleFontSize] range:NSMakeRange(0, (fitnessItem.activeMinutesString.length - @" Active Minutes".length))];
+                [attirbutedDistanceString addAttribute:NSFontAttributeName value:[UIFont appRegularFontWithSize:kDetailFontSize] range: [fitnessItem.activeMinutesString rangeOfString:@" Active Minutes"]];
+            }
 
-        pieGraphCell.delegate = self;
-    
-        
-    } else if ([dashboardItem isKindOfClass:[APHTableViewDashboardWalkingTestItem class]]){
-        APHTableViewDashboardWalkingTestItem *walkingTestItem = (APHTableViewDashboardWalkingTestItem *)dashboardItem;
-        
-        APHDashboardWalkTestTableViewCell *walkingTestCell = (APHDashboardWalkTestTableViewCell *)cell;
-        
-        walkingTestCell.textLabel.text = @"";
-        walkingTestCell.title = walkingTestItem.caption;
-        walkingTestCell.distanceLabel.text = [NSString stringWithFormat:@"Distance Walked: %ld yd", (long)walkingTestItem.distanceWalked];
+            /*
+             Total number of steps.  This "nil" check keeps it blank until
+             we hear back from HealthKit (in -statsCollectionQuery, below).
+             */
+            NSMutableAttributedString *attributedTotalStepsString = nil;
 
-        walkingTestCell.peakHeartRateLabel.text = (walkingTestItem.peakHeartRate != 0) ? [NSString stringWithFormat:@"Peak Heart Rate: %ld bpm", (long)walkingTestItem.peakHeartRate] : @"Peak Heart Rate: N/A";
+            if (self.totalStepsValue != nil)
+            {
+                NSString *explanation         = @" Steps Today";
+                NSString *nonAttributedString = [NSString stringWithFormat: @"%@%@", self.totalStepsValue, explanation];
+                attributedTotalStepsString    = [[NSMutableAttributedString alloc] initWithString: nonAttributedString];
+
+                [attributedTotalStepsString addAttribute: NSFontAttributeName
+                                                   value: [UIFont appMediumFontWithSize:kTitleFontSize]
+                                                   range: NSMakeRange (0, nonAttributedString.length)];
+
+                [attributedTotalStepsString addAttribute: NSFontAttributeName
+                                                   value: [UIFont appRegularFontWithSize:kDetailFontSize]
+                                                   range: [nonAttributedString rangeOfString: explanation]];
+            }
+
+
+            pieGraphCell.subTitleLabel3.attributedText = attributedTotalStepsString;
+            
+            pieGraphCell.subTitleLabel2.attributedText = attirbutedDistanceString;
+            
+            pieGraphCell.title = fitnessItem.caption;
+            pieGraphCell.tintColor = fitnessItem.tintColor;
+            pieGraphCell.pieGraphView.shouldAnimateLegend = NO;
+            
+            if (!self.pieGraphDataExists) {
+                
+                [pieGraphCell.pieGraphView setNeedsLayout];
+                
+                [self statsCollectionQueryForStep];
+                self.pieGraphDataExists = YES;
+            }
+
+            pieGraphCell.delegate = self;
         
-        walkingTestCell.finalHeartRateLabel.text = (walkingTestItem.finalHeartRate != 0) ? [NSString stringWithFormat:@"Final Heart Rate: %ld bpm", (long)walkingTestItem.finalHeartRate] : @"Final Heart Rate: N/A";
-        
-        self.dateFormatter.dateFormat = @"MMM. d";
-        walkingTestCell.lastPerformedDateLabel.text = (walkingTestItem.activityDate) ?  [NSString stringWithFormat:@"Last performed %@", [self.dateFormatter stringFromDate:walkingTestItem.activityDate]] : @"Last performed - N/A";
-        walkingTestCell.tintColor = walkingTestItem.tintColor;
-        walkingTestCell.delegate = self;
-        
-        walkingTestCell.resizeButton.hidden = (self.walkingResults.results.count == 0);
-        
-    } else if ([dashboardItem isKindOfClass:[APHTableViewDashboardWalkingTestComparisonItem class]]){
-        
-        APHTableViewDashboardWalkingTestComparisonItem *walkingTestComparisonItem = (APHTableViewDashboardWalkingTestComparisonItem *)dashboardItem;
-        
-        APHDashboardWalkTestComparisonTableViewCell *walkingTestComparisonCell = (APHDashboardWalkTestComparisonTableViewCell *)cell;
-        
-        APCNormalDistributionGraphView *graphView = (APCNormalDistributionGraphView *)walkingTestComparisonCell.normalDistributionGraphView;
-        graphView.datasource = walkingTestComparisonItem.comparisonObject;
-        graphView.delegate = self;
-        graphView.tintColor = walkingTestComparisonItem.tintColor;
-        graphView.panGestureRecognizer.delegate = self;
-        graphView.axisTitleFont = [UIFont appRegularFontWithSize:14.0f];
-        
-        CGFloat zScore = [walkingTestComparisonItem.comparisonObject zScoreForDistanceWalked:walkingTestComparisonItem.distanceWalked];
-        CGFloat myScore = [walkingTestComparisonItem.comparisonObject distancePercentForZScore:zScore];
-        graphView.value = myScore;
-        
-        walkingTestComparisonCell.textLabel.text = @"";
-        walkingTestComparisonCell.title = walkingTestComparisonItem.caption;
-        
-        NSString *text = NSLocalizedString(@"You vs Others", nil);
-        
-        NSMutableAttributedString *attirbutedString = [[NSMutableAttributedString alloc] initWithString:text];
-        [attirbutedString addAttribute:NSForegroundColorAttributeName value:[UIColor appTertiaryRedColor] range:[text rangeOfString:@"You"]];
-        [attirbutedString addAttribute:NSForegroundColorAttributeName value:[UIColor appSecondaryColor2] range:[text rangeOfString:@"vs"]];
-        [attirbutedString addAttribute:NSForegroundColorAttributeName value:walkingTestComparisonItem.tintColor range:[text rangeOfString:@"Others"]];
-        
-        walkingTestComparisonCell.subtitleLabel.attributedText = attirbutedString;
-        
-        NSLengthFormatter* lengthFormatter = [NSLengthFormatter new];
-        NSString* distanceWalkedString = [lengthFormatter unitStringFromValue:(double)walkingTestComparisonItem.distanceWalked
-                                                               unit:NSLengthFormatterUnitYard];
-        
-        walkingTestComparisonCell.distanceLabel.text = distanceWalkedString;
-        
-        walkingTestComparisonCell.tintColor = walkingTestComparisonItem.tintColor;
-        walkingTestComparisonCell.delegate = self;
-        
-        [graphView layoutSubviews];
-        
-    } else if ([dashboardItem isKindOfClass:[APHTableViewDashboardDailyInsightItem class]]) {
-        APHTableViewDashboardDailyInsightItem *dailyInsight = (APHTableViewDashboardDailyInsightItem *)dashboardItem;
-        APHCardioInsightCell *dailyInsightCell = (APHCardioInsightCell *)cell;
-        
-        dailyInsightCell.tintColor = dailyInsight.tintColor;
-        dailyInsightCell.delegate = self;
-        
-        if ([dashboardItem.identifier isEqualToString:kAPHDashboardDailyInsightCellIdentifier]) {
-            dailyInsightCell.cellAttributedTitle = dailyInsight.insightAttributedTitle;
-            dailyInsightCell.cellSubtitle = dailyInsight.insightSubtitle;
-            dailyInsightCell.cellImage = dailyInsight.insightImage;
+            
+        } else if ([dashboardItem isKindOfClass:[APHTableViewDashboardWalkingTestItem class]]){
+            APHTableViewDashboardWalkingTestItem *walkingTestItem = (APHTableViewDashboardWalkingTestItem *)dashboardItem;
+            
+            APHDashboardWalkTestTableViewCell *walkingTestCell = (APHDashboardWalkTestTableViewCell *)cell;
+            
+            walkingTestCell.textLabel.text = @"";
+            walkingTestCell.title = walkingTestItem.caption;
+            walkingTestCell.distanceLabel.text = [NSString stringWithFormat:@"Distance Walked: %ld yd", (long)walkingTestItem.distanceWalked];
+
+            walkingTestCell.peakHeartRateLabel.text = (walkingTestItem.peakHeartRate != 0) ? [NSString stringWithFormat:@"Peak Heart Rate: %ld bpm", (long)walkingTestItem.peakHeartRate] : @"Peak Heart Rate: N/A";
+            
+            walkingTestCell.finalHeartRateLabel.text = (walkingTestItem.finalHeartRate != 0) ? [NSString stringWithFormat:@"Final Heart Rate: %ld bpm", (long)walkingTestItem.finalHeartRate] : @"Final Heart Rate: N/A";
+            
+            self.dateFormatter.dateFormat = @"MMM. d";
+            walkingTestCell.lastPerformedDateLabel.text = (walkingTestItem.activityDate) ?  [NSString stringWithFormat:@"Last performed %@", [self.dateFormatter stringFromDate:walkingTestItem.activityDate]] : @"Last performed - N/A";
+            walkingTestCell.tintColor = walkingTestItem.tintColor;
+            walkingTestCell.delegate = self;
+            
+            walkingTestCell.resizeButton.hidden = (self.walkingResults.results.count == 0);
+            
+        } else if ([dashboardItem isKindOfClass:[APHTableViewDashboardWalkingTestComparisonItem class]]){
+            
+            APHTableViewDashboardWalkingTestComparisonItem *walkingTestComparisonItem = (APHTableViewDashboardWalkingTestComparisonItem *)dashboardItem;
+            
+            APHDashboardWalkTestComparisonTableViewCell *walkingTestComparisonCell = (APHDashboardWalkTestComparisonTableViewCell *)cell;
+            
+            APCNormalDistributionGraphView *graphView = (APCNormalDistributionGraphView *)walkingTestComparisonCell.normalDistributionGraphView;
+            graphView.datasource = walkingTestComparisonItem.comparisonObject;
+            graphView.delegate = self;
+            graphView.tintColor = walkingTestComparisonItem.tintColor;
+            graphView.panGestureRecognizer.delegate = self;
+            graphView.axisTitleFont = [UIFont appRegularFontWithSize:14.0f];
+            
+            CGFloat zScore = [walkingTestComparisonItem.comparisonObject zScoreForDistanceWalked:walkingTestComparisonItem.distanceWalked];
+            CGFloat myScore = [walkingTestComparisonItem.comparisonObject distancePercentForZScore:zScore];
+            graphView.value = myScore;
+            
+            walkingTestComparisonCell.textLabel.text = @"";
+            walkingTestComparisonCell.title = walkingTestComparisonItem.caption;
+            
+            NSString *text = NSLocalizedString(@"You vs Others", nil);
+            
+            NSMutableAttributedString *attirbutedString = [[NSMutableAttributedString alloc] initWithString:text];
+            [attirbutedString addAttribute:NSForegroundColorAttributeName value:[UIColor appTertiaryRedColor] range:[text rangeOfString:@"You"]];
+            [attirbutedString addAttribute:NSForegroundColorAttributeName value:[UIColor appSecondaryColor2] range:[text rangeOfString:@"vs"]];
+            [attirbutedString addAttribute:NSForegroundColorAttributeName value:walkingTestComparisonItem.tintColor range:[text rangeOfString:@"Others"]];
+            
+            walkingTestComparisonCell.subtitleLabel.attributedText = attirbutedString;
+            
+            NSLengthFormatter* lengthFormatter = [NSLengthFormatter new];
+            NSString* distanceWalkedString = [lengthFormatter unitStringFromValue:(double)walkingTestComparisonItem.distanceWalked
+                                                                   unit:NSLengthFormatterUnitYard];
+            
+            walkingTestComparisonCell.distanceLabel.text = distanceWalkedString;
+            
+            walkingTestComparisonCell.tintColor = walkingTestComparisonItem.tintColor;
+            walkingTestComparisonCell.delegate = self;
+            
+            [graphView layoutSubviews];
+            
+        } else if ([dashboardItem isKindOfClass:[APHTableViewDashboardDailyInsightItem class]]) {
+            APHTableViewDashboardDailyInsightItem *dailyInsight = (APHTableViewDashboardDailyInsightItem *)dashboardItem;
+            APHCardioInsightCell *dailyInsightCell = (APHCardioInsightCell *)cell;
+            
+            dailyInsightCell.tintColor = dailyInsight.tintColor;
+            dailyInsightCell.delegate = self;
+            
+            if ([dashboardItem.identifier isEqualToString:kAPHDashboardDailyInsightCellIdentifier]) {
+                dailyInsightCell.cellAttributedTitle = dailyInsight.insightAttributedTitle;
+                dailyInsightCell.cellSubtitle = dailyInsight.insightSubtitle;
+                dailyInsightCell.cellImage = dailyInsight.insightImage;
+            }
         }
     }
     
@@ -530,18 +533,23 @@ static CGFloat          kSevenDayFitnessRowHeight               = 288.0f;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat height = [super tableView:tableView heightForRowAtIndexPath:indexPath];
+    CGFloat height = 64.0;
     
-    APCTableViewItem *dashboardItem = [self itemForIndexPath:indexPath];
-    
-    if ([dashboardItem isKindOfClass:[APHTableViewDashboardFitnessControlItem class]]){
-        height = kFitnessControlRowHeight;
-    } else if ([dashboardItem isKindOfClass:[APHTableViewDashboardWalkingTestItem class]]) {
-        height = kWalkingTestRowHeight;
-    } else if ([dashboardItem isKindOfClass:[APHTableViewDashboardWalkingTestComparisonItem class]]) {
-        height = kWalkingTestComparisonRowHeight;
-    } else if ([dashboardItem isKindOfClass:[APHTableViewDashboardSevenDayFitnessItem class]]) {
-        height = kSevenDayFitnessRowHeight;
+    if (self.items.count > 0)
+    {
+        height = [super tableView:tableView heightForRowAtIndexPath:indexPath];
+        
+        APCTableViewItem *dashboardItem = [self itemForIndexPath:indexPath];
+        
+        if ([dashboardItem isKindOfClass:[APHTableViewDashboardFitnessControlItem class]]){
+            height = kFitnessControlRowHeight;
+        } else if ([dashboardItem isKindOfClass:[APHTableViewDashboardWalkingTestItem class]]) {
+            height = kWalkingTestRowHeight;
+        } else if ([dashboardItem isKindOfClass:[APHTableViewDashboardWalkingTestComparisonItem class]]) {
+            height = kWalkingTestComparisonRowHeight;
+        } else if ([dashboardItem isKindOfClass:[APHTableViewDashboardSevenDayFitnessItem class]]) {
+            height = kSevenDayFitnessRowHeight;
+        }
     }
     
     return height;
@@ -549,18 +557,21 @@ static CGFloat          kSevenDayFitnessRowHeight               = 288.0f;
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [super tableView:tableView willDisplayCell:cell forRowAtIndexPath:indexPath];
-    
-    APCTableViewItem *dashboardItem = [self itemForIndexPath:indexPath];
-    
-    if ([dashboardItem isKindOfClass:[APHTableViewDashboardWalkingTestComparisonItem class]]){        
-        APHDashboardWalkTestComparisonTableViewCell *walkingTestComparisonCell = (APHDashboardWalkTestComparisonTableViewCell *)cell;
+    if (self.items.count > 0)
+    {
+        [super tableView:tableView willDisplayCell:cell forRowAtIndexPath:indexPath];
         
-        APCNormalDistributionGraphView *graphView = (APCNormalDistributionGraphView *)walkingTestComparisonCell.normalDistributionGraphView;
+        APCTableViewItem *dashboardItem = [self itemForIndexPath:indexPath];
         
-        [graphView setNeedsLayout];
-        [graphView layoutIfNeeded];
-        [graphView refreshGraph];
+        if ([dashboardItem isKindOfClass:[APHTableViewDashboardWalkingTestComparisonItem class]]){        
+            APHDashboardWalkTestComparisonTableViewCell *walkingTestComparisonCell = (APHDashboardWalkTestComparisonTableViewCell *)cell;
+            
+            APCNormalDistributionGraphView *graphView = (APCNormalDistributionGraphView *)walkingTestComparisonCell.normalDistributionGraphView;
+            
+            [graphView setNeedsLayout];
+            [graphView layoutIfNeeded];
+            [graphView refreshGraph];
+        }
     }
 }
 

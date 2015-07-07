@@ -467,19 +467,15 @@ typedef NS_ENUM(NSUInteger, APHDailyInsightIdentifiers)
                                           systolicValue.integerValue, diastolicValue.integerValue];
         NSString *bloodPressureCaption = NSLocalizedString(bloodPressureReading, nil);
         
-        NSRange systolicRangeNeedsImprovement = NSMakeRange(120, 19);
-        NSRange diastolicRangeNeedsImprovement = NSMakeRange(80, 9);
-        
         if ((systolicValue.integerValue < 120) && (diastolicValue.integerValue < 80)) {
             bloodPressureInsight = [self attributedStringFromString:bloodPressureCaption
                                                           withColor:self.dailyInsightGoodColor];
-        } else if ((NSLocationInRange(systolicValue.integerValue, systolicRangeNeedsImprovement))
-                   && (NSLocationInRange(diastolicValue.integerValue, diastolicRangeNeedsImprovement))) {
-            bloodPressureInsight = [self attributedStringFromString:bloodPressureCaption
-                                                          withColor:self.dailyInsightNeedsImprovementColor];
         } else if ((systolicValue.integerValue >= 140) && (diastolicValue.integerValue >= 90)) {
             bloodPressureInsight = [self attributedStringFromString:bloodPressureCaption
                                                           withColor:self.dailyInsightBadColor];
+        } else {
+            bloodPressureInsight = [self attributedStringFromString:bloodPressureCaption
+                                                          withColor:self.dailyInsightNeedsImprovementColor];
         }
     }
     
